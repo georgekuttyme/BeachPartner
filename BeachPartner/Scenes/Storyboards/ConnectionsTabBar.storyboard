@@ -209,9 +209,6 @@
                                                             <state key="normal" title="NOTES">
                                                                 <color key="titleColor" red="0.2413429537" green="0.57256523660000003" blue="0.69856745249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
-                                                            <connections>
-                                                                <segue destination="vhm-Lk-Ffs" kind="show" id="KBa-ZY-KES"/>
-                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q2P-Mh-2HH">
                                                             <rect key="frame" x="2" y="200" width="171" height="27"/>
@@ -592,7 +589,7 @@
         <!--Notes View Controller-->
         <scene sceneID="Fpi-ty-lKn">
             <objects>
-                <viewController id="vhm-Lk-Ffs" customClass="NotesViewController" customModule="BeachPartner" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="NotesViewController" storyboardIdentifier="NotesViewController" id="vhm-Lk-Ffs" customClass="NotesViewController" customModule="BeachPartner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" ambiguous="YES" id="SXo-K2-Lcu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -639,7 +636,7 @@
                                 </constraints>
                                 <color key="sectionIndexBackgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NotesCell" rowHeight="220" id="lb1-sI-pON" customClass="NotesCell" customModule="BeachPartner" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NotesCell" rowHeight="220" id="lb1-sI-pON" customClass="NotesCell" customModule="BeachPartner" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="343" height="220"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lb1-sI-pON" id="cpp-ca-yUJ">
@@ -761,7 +758,4 @@
         <image name="menudot" width="16" height="16"/>
         <image name="tick - notes" width="500" height="500"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="KbT-D8-4av"/>
-    </inferredMetricsTieBreakers>
 </document>

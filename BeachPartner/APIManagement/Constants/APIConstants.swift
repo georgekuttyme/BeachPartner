@@ -30,10 +30,10 @@ class BaseUrl {
     }
 }
 struct ApiMethods {
-    static let CREATE_NOTE   =   "notes/"
-    static let GETALL_NOTE_FROM   =  "notes/from/"
-    static let DELETE_NOTE     =   "notes/"
-    static let UPDATE_NOTE     =   "notes/"
+    static let CreateNote   =   "/notes"
+    static let GetAllNoteFrom   =  "/notes/from"
+    static let DeleteNote     =   "/notes"
+    static let UpdateNote     =   "/notes"
     static let device_UUID = UIDevice.current.identifierForVendor!.uuidString
     static let LoginFb = "/authenticate-with-token"
     static let Registation    = "/register"

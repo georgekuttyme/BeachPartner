@@ -397,18 +397,21 @@ final class APIClient{
     
     
     
-    
-    public func inPutRawData(url:String,params:String,sucess:@escaping sucessClosure,failure:@escaping failureClosure){
-        
+    public func inPutRawData(url:String,params:[String:Any],sucess:@escaping sucessClosure,failure:@escaping failureClosure){
+        let token = UserDefaults.standard.string(forKey: "bP_token") ?? ""
+        print(token,"tokkkkkkkkken")
+        var headers: HTTPHeaders = [:]
         do{
             print("inside do")
-            let headers = [
-                "Content-Type": "application/json",
+            headers = [
+                "Accept": "application/json",
+                "Content-Type" :"application/json ; charset=utf-8",
+                "Authorization" : "Bearer " + token,
                 "Cache-Control": "no-cache",
-                ]
+            ]
             let parameters = params
             
-            let postData = parameters.data(using: String.Encoding.utf8)
+            let postData = try JSONSerialization.data(withJSONObject: parameters)
             //            request.HTTPBody = data
             
             //            let postData = try JSONSerialization.data(withJSONObject: parameters)
@@ -451,12 +454,9 @@ final class APIClient{
         }catch {
             print(error)
         }
-        
-        
-        //            }.responseString { (jsonString) in
-        //                APIManager.printOnDebug(response: jsonString)
-        //        }
+
     }
+    
     
     
     
@@ -797,6 +797,70 @@ final class APIClient{
         }
         )
     }
+    public func inDelete(url:String,params:[String:String],sucess:@escaping sucessClosure, failure:@escaping failureClosure){
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        print("####### API Request ....url :", url, "\n #### parameters :", params)
+        let cookieJar = HTTPCookieStorage.shared
+        for cookie in cookieJar.cookies! {
+            print(cookie.name+"="+cookie.value)
+        }
+        let token = UserDefaults.standard.string(forKey: "bP_token") ?? ""
+        
+        var headders: HTTPHeaders = [:]
+        if( token != ""){
+            headders = [
+                "Content-Type" :"application/json ; charset=utf-8",
+                "Authorization" : "Bearer " + token
+            ]
+        }
+        else{
+            headders = [
+                "Content-Type" :"application/json; charset=utf-8"
+            ]
+        }
+        do{
+            let parameters = params
+            let postData = try JSONSerialization.data(withJSONObject: parameters, options: [])
+            let request = NSMutableURLRequest(url: NSURL(string: url)! as URL,
+                                              cachePolicy: .useProtocolCachePolicy,
+                                              timeoutInterval: 10.0)
+            request.httpMethod = "DELETE"
+            request.allHTTPHeaderFields = headders
+            request.httpBody = postData as Data
+            
+            
+            //            print ("request : ", postData.str)
+            let session = URLSession.shared
+            let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+                if (error != nil) {
+                    print(error)
+                } else {
+                    let httpResponse = response as? HTTPURLResponse
+                    print(httpResponse , data)
+                    
+                    let responseString = String(data: data!, encoding: .utf8) ?? ""
+                    print("responseString = ",responseString)
+                    
+                    do {
+                        let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String:Any]
+                        print("responses :: ", json)
+                        sucess(json as NSDictionary?)
+                        return
+                    } catch let error as NSError {
+                        print(error)
+                        failure(error)
+                        return
+                    }
+                }
+            })
+            
+            dataTask.resume()
+            
+        }catch {
+            print(error)
+        }
+        
+    }
     
     
     
@@ -832,14 +896,15 @@ extension APIClient{
         }
     }
     
-    //    public func inGet(method:String, params:[String:String],sucess:@escaping sucessClosure,failure:@escaping failureClosure){
-    //
-    //        self.inGet(url: BaseUrl.makeUrl(forProduction: false)+method, params: params, sucess: { (response) in
-    //            sucess(response)
-    //        }) { (error) in
-    //            failure(error)
-    //        }
-    //    }
+    
+        public func inDelete(method:String, params:[String:String],sucess:@escaping sucessClosure,failure:@escaping failureClosure){
+    
+            self.inDelete(url: BaseUrl.makeUrl(forProduction: false)+method, params: params, sucess: { (response) in
+                sucess(response)
+            }) { (error) in
+                failure(error)
+            }
+        }
     
     public func inPut(method:String, params:[String:String],sucess:@escaping sucessClosure,failure:@escaping failureClosure){
         
@@ -858,8 +923,8 @@ extension APIClient{
         }
     }
     
-    public func inPutRawData(method:String, params:String,sucess:@escaping sucessClosure,failure:@escaping failureClosure){
-        
+    public func inPutRawData(method:String, params:[String:Any],sucess:@escaping sucessClosure,failure:@escaping failureClosure){
+        print(method,"^^^^^^^method put for upload")
         inPutRawData(url: BaseUrl.makeUrl(forProduction: false)+method, params: params, sucess: { (response) in
             sucess(response)
         }) { (error) in

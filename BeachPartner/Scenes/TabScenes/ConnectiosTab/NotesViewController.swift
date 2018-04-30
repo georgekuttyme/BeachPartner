@@ -13,7 +13,7 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
     let dropDown = DropDown()
     private var arrayImage = [AnyHashable]()
     private var i: Int = 0
-    
+    var index : Int = 0
     var noOfCells = 0
     var isExpanded = false
     var count: Int = 0
@@ -56,11 +56,16 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
         self.noOfCells = self.noOfCells + 1
         self.notesTableview.reloadData()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        noteButton()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.hideKeyboardWhenTappedAround() 
+        self.hideKeyboardWhenTappedAround()
+        noteButton()
         self.dropDown.anchorView = self.menuBtn
         self.dropDown.dataSource =  ["My Profile","About Us","Feedback","Settings", "Help","Logout"]
         self.dropDown.bottomOffset = CGPoint(x: 20, y:45)
@@ -112,14 +117,72 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
         
         
     }
-    func notesClicked(){
-        
+ 
+    func noteButton(){
+        let id1 = Int(UserDefaults.standard.string(forKey: "bP_userId") ?? "")
+        print(index,"index userid ")
+        let id2 = index
+        APIManager.callServer.getNotes(fromUserId: id1!, toUserId:id2 , sucessResult: {(responseModel) in
+            guard let loginModel = responseModel as? GetNoteRespModel else{
+                print("Rep model does not match")
+                return
+            }
+            print("FADSGDHDFHDFGHJDGHd",loginModel.fromUser_?.fromUserId)
+        }, errorResult: { (error) in
+            //                stopLoading()
+            guard let errorString  = error else {
+                return
+            }
+            self.alert(message: errorString)
+        })
+    
     }
+    func createNoteClicked(){
+        let id1 = index
+        APIManager.callServer.postNote(note: "This is a test note send to the user",toUserId:id1,sucessResult: {(responseModel) in
+            guard let loginModel = responseModel as? UpdateNoteRespModel else{
+                print("=====@@@@@")
+                return
+            }
+    
+            print("&&&&&&&@@@@@@@@@@@@@@@@@@@@@@@ post",loginModel.id)
+        }, errorResult: { (error) in
+            //                stopLoading()
+            guard let errorString  = error else {
+                return
+            }
+            self.alert(message: errorString)
+        })
+    
+    }
+    func noteButtonToched(){
+        let id1 = "hi testing!!!"
+        let id2 = 10
+        APIManager.callServer.updateNote(note: id1, toUserId:id2 , sucessResult: {(responseModel) in
+            guard let loginModel = responseModel as? UpdateNoteRespModel else{
+                print("resp model@@@@@@@@@")
+                return
+            }
+            print("&&&&&&&@@@@@@@@@@@ +++++++++UPdate",loginModel.id)
+        }, errorResult: { (error) in
+            //                stopLoading()
+            guard let errorString  = error else {
+                return
+            }
+            self.alert(message: errorString)
+        })
     
     
+    }
+    func removeNote(){
+        
     }
 
     
+    }
+
+
+
 
     
     

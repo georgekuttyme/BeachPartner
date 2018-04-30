@@ -11,20 +11,14 @@ import UIKit
 class AthleteViewController: UIViewController,UICollectionViewDataSource , UICollectionViewDelegate  {
     var blockStatus = "Block"
     @IBOutlet weak var collectionView: UICollectionView!
-//    private var arrayImage = [AnyHashable]()
     var count: Int = 0
     private var i: Int = 0
     var connectedUsers = [ConnectedUserModel]()
-    
-//    let name = ["Alivia Orvieto","Marti McLaurin","Liz Held","Alivia Orvieto","Marti McLaurin","Liz Held","Alivia Orvieto","Marti McLaurin","Liz Held","Alivia Orvieto"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.getConnections()
-//        self.blockUser(_id: 16)
-        
-        // Do any additional setup after loading the view.
     }
     
     override func didReceiveMemoryWarning() {
@@ -76,6 +70,8 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
         cell?.blockBtn.addTarget(self, action: #selector(blockBtnPressed(sender:)), for: .touchUpInside)
         cell?.messageBtn.tag = indexPath.row+100000
         cell?.messageBtn.addTarget(self, action: #selector(msgBtnPressed), for: .touchUpInside)
+        cell?.notesBtn.tag = indexPath.row+300000
+        cell?.notesBtn.addTarget(self, action: #selector(noteBtnPressed), for: .touchUpInside)
         //        cell?.expandBtn.addTarget(self, action:  #selector(btnPressed(_:)), for: .touchUpInside)
         return cell!
     }
@@ -208,6 +204,16 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
             self.alert(message: errorString)
         })
     }
+    
+    @objc func noteBtnPressed(sender: UIButton!){
+        let connectedUser = self.connectedUsers[sender.tag-300000]
+        let index = sender.tag-300000
+        let storyboard = UIStoryboard(name: "ConnectionsTabBar", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "NotesViewController") as! NotesViewController
+        vc.index = index
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     
     @objc func msgBtnPressed(sender: UIButton!) {
        let connectedUser = self.connectedUsers[sender.tag-100000]

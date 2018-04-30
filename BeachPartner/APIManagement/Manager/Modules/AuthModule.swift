@@ -798,6 +798,169 @@ extension APIManager{
             return
         }
     }
+    // create Note in connnections
+    public func getNotes(fromUserId:Int,toUserId:Int,sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure) {
+        let fromUserId = fromUserId
+        let toUserId = toUserId
+        let params = [String:String]()
+        
+        APIGetClient.doGetRequest.inGetReqForArray(method:ApiMethods.GetAllNoteFrom + "/\(fromUserId)" + "/to/" + "\(toUserId)" , params: params, sucess: { (response) in
+            
+            APIManager.printOnDebug(response: " Resppp1111 : \(response)")
+            
+            
+            let jsonDict = response!;
+            print(jsonDict)
+            do {
+                
+                let accRespModel = try GetNoteRespModelArray(jsonDict)
+                sucessResult(accRespModel)
+                return
+            } catch {
+                print("Catched")
+                errorResult(error.localizedDescription)
+                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                return
+            }
+            
+        }) { (error) in
+            self.busyOff()
+            errorResult(error?.localizedDescription)
+            APIManager.printOnDebug(response: "error:\(error?.localizedDescription)")
+            return
+        }
+    }
+    // Click action of new note
+    public func postNote(note:String,toUserId:Int,sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure){
+        let params = [
+            "toUserId":toUserId,
+            "note":note,
+            ] as [String : Any]
+        print(params)
+        APIClient.doRequest.inPostReq(method:ApiMethods.CreateNote, params: params, sucess: { (response) in
+            
+            //            APIManager.printOnDebug(response: "\(response)")
+            
+            let jsonDict = response! as! JSONDictionary
+            
+            do {
+                
+                let loginModel = try GetNoteRespModel(jsonDict)
+                sucessResult(loginModel)
+                return
+            } catch {
+                print("Catched")
+                errorResult(error.localizedDescription)
+                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                return
+            }
+            
+        }) { (error) in
+            self.busyOff()
+            errorResult(error?.localizedDescription)
+            APIManager.printOnDebug(response: "error:\(error?.localizedDescription)")
+            return
+        }
+    }
+    
+    public func removeNote(sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure){
+        let params = [
+            "noteId":""
+            ] as [String : Any]
+        print(params)
+        APIClient.doRequest.inPost(method:ApiMethods.CreateNote, params: params as! [String : String], sucess: { (response) in
+            
+            //            APIManager.printOnDebug(response: "\(response)")
+            
+            let jsonDict = response! as! JSONDictionary
+            
+            do {
+                
+                let loginModel = try GetNoteRespModel(jsonDict)
+                sucessResult(loginModel)
+                return
+            } catch {
+                print("Catched")
+                errorResult(error.localizedDescription)
+                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                return
+            }
+            
+        }) { (error) in
+            self.busyOff()
+            errorResult(error?.localizedDescription)
+            APIManager.printOnDebug(response: "error:\(error?.localizedDescription)")
+            return
+        }
+    }
+    public func createNote(toUserId:Int,sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure){
+        let params = [
+            "toUserId":toUserId,
+            "note":" ",
+            ] as [String : Any]
+        print(params)
+        APIClient.doRequest.inPostReq(method:ApiMethods.CreateNote, params: params, sucess: { (response) in
+            
+            //            APIManager.printOnDebug(response: "\(response)")
+            
+            let jsonDict = response! as! JSONDictionary
+            
+            do {
+                
+                let loginModel = try GetNoteRespModel(jsonDict)
+                sucessResult(loginModel)
+                return
+            } catch {
+                print("Catched")
+                errorResult(error.localizedDescription)
+                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                return
+            }
+            
+        }) { (error) in
+            self.busyOff()
+            errorResult(error?.localizedDescription)
+            APIManager.printOnDebug(response: "error:\(error?.localizedDescription)")
+            return
+        }
+    }
+    
+    public func updateNote(note:String,toUserId:Int,sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure){
+        
+        let params = [
+            "note": note,
+            "toUserId": toUserId,
+            ] as [String : Any]
+        print(params)
+        let noteId = 41
+        APIClient.doRequest.inPutRawData(method:ApiMethods.UpdateNote  + "/\(noteId)" , params: params , sucess: { (response) in
+            self.busyOff()
+            
+            //            APIManager.printOnDebug(response: "\(response)")
+            
+            
+            let jsonDict = response! as! JSONDictionary
+            
+            do {
+                
+                let loginModel = try AccountRespModel(jsonDict)
+                sucessResult(loginModel)
+                return
+            } catch {
+                errorResult(error.localizedDescription)
+                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                return
+            }
+            
+            
+            
+        }) { (error) in
+            self.busyOff()
+            errorResult(error?.localizedDescription)
+            APIManager.printOnDebug(response: "error:\(error?.localizedDescription)")
+            return
+        }
+    }
     
     
     

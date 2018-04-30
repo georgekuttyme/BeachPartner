@@ -121,6 +121,8 @@
 		845B7908208B4A5200DF1F1F /* AthleteProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845B7907208B4A5200DF1F1F /* AthleteProfileTableViewController.swift */; };
 		845BD6A32089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BD6A22089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift */; };
 		D69A1981207388F100497B7C /* HighFiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69A1980207388F100497B7C /* HighFiveViewController.swift */; };
+		FF560C0A2096F7FB00D3BA80 /* GetNoteRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF560C092096F7FB00D3BA80 /* GetNoteRespModel.swift */; };
+		FF560C0C2096F83300D3BA80 /* UpdateNoteRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF560C0B2096F83300D3BA80 /* UpdateNoteRespModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -244,6 +246,8 @@
 		8464C58F2084ACDA001FC8E5 /* BeachPartner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BeachPartner.entitlements; sourceTree = "<group>"; };
 		A4E87914ED5BC1C1ECF86DA1 /* Pods_BeachPartner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeachPartner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D69A1980207388F100497B7C /* HighFiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighFiveViewController.swift; sourceTree = "<group>"; };
+		FF560C092096F7FB00D3BA80 /* GetNoteRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNoteRespModel.swift; sourceTree = "<group>"; };
+		FF560C0B2096F83300D3BA80 /* UpdateNoteRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNoteRespModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -583,6 +587,8 @@
 				844F704F2090BC01004F3005 /* noteResponseModel.swift */,
 				3BBDA13C2072F9DF007CE1F3 /* ConnectedUserModel.swift */,
 				5E0543AA2081C0C3002744D8 /* SubscriptionUserModel.swift */,
+				FF560C0B2096F83300D3BA80 /* UpdateNoteRespModel.swift */,
+				FF560C092096F7FB00D3BA80 /* GetNoteRespModel.swift */,
 				5EF9047520867D4000D6E952 /* SearchUserModel.swift */,
 				845BD6A22089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift */,
 			);
@@ -1057,6 +1063,7 @@
 				3B0DEE84206CA66B00686609 /* FilterViewController.swift in Sources */,
 				3B0DEE95206D099500686609 /* UIVideoView.swift in Sources */,
 				3B6027A420497364006B108A /* SignUpViewController.swift in Sources */,
+				FF560C0A2096F7FB00D3BA80 /* GetNoteRespModel.swift in Sources */,
 				3B6899E920491B550075128E /* WLMPoolData.swift in Sources */,
 				3B0DEE99206D09DA00686609 /* Extensions.swift in Sources */,
 				3BBDA13F20736145007CE1F3 /* RegResponseModel.swift in Sources */,
@@ -1090,6 +1097,7 @@
 				3B4D21C4206617B300E14541 /* ForgotPasswordViewController.swift in Sources */,
 				3B5D9969206EA46E001ED515 /* EventDetailsViewController.swift in Sources */,
 				3B49C38B2068DDE5007186E8 /* UITextField+Empty.swift in Sources */,
+				FF560C0C2096F83300D3BA80 /* UpdateNoteRespModel.swift in Sources */,
 				3B0DEE0F206BDA9200686609 /* MyteamCell.swift in Sources */,
 				3B689A10204926340075128E /* TabBarController.swift in Sources */,
 				3B5D9964206E44C6001ED515 /* InviteParentViewController.swift in Sources */,
