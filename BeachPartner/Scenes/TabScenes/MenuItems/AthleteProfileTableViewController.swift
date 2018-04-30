@@ -1141,14 +1141,19 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.firstNameTxtFld.text = accResponseModel.firstName
         self.lastNameTxtFld.text = accResponseModel.lastName
         self.genderBtn.setTitle(accResponseModel.gender, for: .normal)
-        let date = NSDate(timeIntervalSince1970: TimeInterval(accResponseModel.dob))
+        let date = NSDate(timeIntervalSince1970: TimeInterval(accResponseModel.dob/1000))
         let dayTimePeriodFormatter = DateFormatter()
         dayTimePeriodFormatter.dateFormat = "yyyy-MM-dd"
         let dateString = dayTimePeriodFormatter.string(from: date as Date)
-        print(dateString)
+        if accResponseModel.dob > 0 {
+          self.birthDateTxtFld.text = dateString
+        }
+        else{
+            self.birthDateTxtFld.text = ""
+        }
         
 //        self.birthDateTxtFld.text = String(accResponseModel.dob)
-        self.birthDateTxtFld.text = "1970-02-20"
+        
 //        self.cityTxtFld.text = accResponseModel.city
         self.heightBtn.setTitle(accResponseModel.city, for: .normal)
         self.phoneTxtFld.text = accResponseModel.phoneNumber

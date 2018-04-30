@@ -28,7 +28,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
         super.viewDidLoad()
 
         let loggedIn = UserDefaults.standard.string(forKey: "isLoggedIn") ?? "0"
-        if loggedIn == "1" {
+        if loggedIn == "0" {
             let userID = UserDefaults.standard.string(forKey: "bP_token") ?? ""
             if userID == "" {
                 self.performSegue(withIdentifier: "tandcsegue", sender: self)

@@ -54,8 +54,6 @@ class BeachPartnerViewController: UIViewController {
                 }))
                 
                 self.present(refreshAlert, animated: true, completion: nil)
-                
-                
 //                self.timoutLogoutAction()
             }
             else if (item == "Settings"){
@@ -67,31 +65,22 @@ class BeachPartnerViewController: UIViewController {
                 self.navigationController?.isNavigationBarHidden = false
                 self.navigationController?.pushViewController(controller, animated: true)
             }
-            else if( item == "Feedback") {
-                
-                UIApplication.shared.openURL(URL(string: "https://www.beachpartner.com/feedback.html")!)
-            }
-            else if( item == "About Us") {
-                
-                UIApplication.shared.openURL(URL(string: "https://www.beachpartner.com/about_us.html")!)
-            }
             else if (item == "Help"){
                 let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "HelpViewController") as! HelpViewController
                 self.present(vc, animated: true, completion: nil)
             }
             else {
-                 let storyboard : UIStoryboard = UIStoryboard(name: "TabBar", bundle: nil)
-                let controller = storyboard.instantiateViewController(withIdentifier: "CommmonWebViewController") as! CommmonWebViewController
-                controller.contentType = item
-                
+                let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "CommmonWebViewController") as! CommmonWebViewController
+                vc.titleText = item
+                self.tabBarController?.tabBar.isHidden = false
+                self.navigationController!.navigationBar.topItem!.title = ""
                 self.navigationController?.isNavigationBarHidden = false
-                self.navigationController?.pushViewController(controller, animated: true)
+                self.present(vc, animated: true, completion: nil)
             }
-            
         }
         self.dropDown.selectRow(0)
-        
     }
     
     @objc func openMenu() {
@@ -99,7 +88,6 @@ class BeachPartnerViewController: UIViewController {
     }
     func addSubview(subView:UIView, toView parentView:UIView) {
         parentView.addSubview(subView)
-        
         var viewBindingsDict = [String: AnyObject]()
         viewBindingsDict["subView"] = subView
         parentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[subView]|",

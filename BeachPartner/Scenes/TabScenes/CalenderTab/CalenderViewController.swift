@@ -86,14 +86,6 @@ class CalenderViewController: UIViewController {
                 let vc = storyboard.instantiateViewController(withIdentifier: "HelpViewController") as! HelpViewController
                 self.present(vc, animated: true, completion: nil)
             }
-            else if( item == "Feedback") {
-                
-                UIApplication.shared.openURL(URL(string: "https://www.beachpartner.com/feedback.html")!)
-            }
-            else if( item == "About Us") {
-                
-                UIApplication.shared.openURL(URL(string: "https://www.beachpartner.com/about_us.html")!)
-            }
             else if (item == "Settings"){
                 let storyboard : UIStoryboard = UIStoryboard(name: "TabBar", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier: "ComponentSettings") as! SettingsViewController
@@ -103,13 +95,14 @@ class CalenderViewController: UIViewController {
                 self.navigationController?.isNavigationBarHidden = false
                 self.navigationController?.pushViewController(controller, animated: true)
             }
-          
             else {
-                let storyboard : UIStoryboard = UIStoryboard(name: "TabBar", bundle: nil)
-                let controller = storyboard.instantiateViewController(withIdentifier: "CommmonWebViewController") as! CommmonWebViewController
-                controller.contentType = item
+                let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "CommmonWebViewController") as! CommmonWebViewController
+                vc.titleText = item
+                self.tabBarController?.tabBar.isHidden = false
+                self.navigationController!.navigationBar.topItem!.title = ""
                 self.navigationController?.isNavigationBarHidden = false
-                self.navigationController?.pushViewController(controller, animated: true)
+                self.present(vc, animated: true, completion: nil)
             }
             
         }

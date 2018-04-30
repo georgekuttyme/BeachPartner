@@ -109,11 +109,11 @@
 		5E0543AB2081C0C3002744D8 /* SubscriptionUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0543AA2081C0C3002744D8 /* SubscriptionUserModel.swift */; };
 		5E1648812095837500983043 /* PasswordResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E16487F2095837500983043 /* PasswordResetViewController.swift */; };
 		5E1648832095F1A400983043 /* ConnectedUsersCountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1648822095F1A400983043 /* ConnectedUsersCountModel.swift */; };
-		5EAD2670208CCEF000CC23D9 /* CommmonWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAD266F208CCEF000CC23D9 /* CommmonWebViewController.swift */; };
 		5EF313AB20947BD2007DA661 /* ProfileUpdateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF313AA20947BD2007DA661 /* ProfileUpdateModel.swift */; };
 		5EF313AD209506F4007DA661 /* ForgotPassModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF313AC209506F3007DA661 /* ForgotPassModel.swift */; };
 		5EF9047620867D4000D6E952 /* SearchUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF9047520867D4000D6E952 /* SearchUserModel.swift */; };
 		5EFA2E48207E6D4F00212B45 /* ChatUsersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFA2E47207E6D4F00212B45 /* ChatUsersListViewController.swift */; };
+		5EFAFE232097609100256B1B /* CommmonWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFAFE222097609100256B1B /* CommmonWebViewController.swift */; };
 		83DBB7AF05BDAD7316DD54BD /* Pods_BeachPartner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4E87914ED5BC1C1ECF86DA1 /* Pods_BeachPartner.framework */; };
 		8427705F2093594B0056CBF6 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8427705E2093594B0056CBF6 /* HelpViewController.swift */; };
 		843F356C2084F8CE00E268D6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843F356B2084F8CE00E268D6 /* GoogleService-Info.plist */; };
@@ -232,11 +232,11 @@
 		5E0543AA2081C0C3002744D8 /* SubscriptionUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionUserModel.swift; sourceTree = "<group>"; };
 		5E16487F2095837500983043 /* PasswordResetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordResetViewController.swift; sourceTree = "<group>"; };
 		5E1648822095F1A400983043 /* ConnectedUsersCountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedUsersCountModel.swift; sourceTree = "<group>"; };
-		5EAD266F208CCEF000CC23D9 /* CommmonWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommmonWebViewController.swift; sourceTree = "<group>"; };
 		5EF313AA20947BD2007DA661 /* ProfileUpdateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUpdateModel.swift; sourceTree = "<group>"; };
 		5EF313AC209506F3007DA661 /* ForgotPassModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPassModel.swift; sourceTree = "<group>"; };
 		5EF9047520867D4000D6E952 /* SearchUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserModel.swift; sourceTree = "<group>"; };
 		5EFA2E47207E6D4F00212B45 /* ChatUsersListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatUsersListViewController.swift; sourceTree = "<group>"; };
+		5EFAFE222097609100256B1B /* CommmonWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommmonWebViewController.swift; sourceTree = "<group>"; };
 		6C906053FF45337829E56422 /* Pods-BeachPartner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeachPartner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeachPartner/Pods-BeachPartner.debug.xcconfig"; sourceTree = "<group>"; };
 		8427705E2093594B0056CBF6 /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		843F356B2084F8CE00E268D6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -781,8 +781,8 @@
 				3B60278920494F84006B108A /* MenuItems */,
 				3B689A1520493CFC0075128E /* HomeTab */,
 				3B6898A4204881710075128E /* BPfinder */,
+				5EFAFE222097609100256B1B /* CommmonWebViewController.swift */,
 				3B689A0F204926340075128E /* TabBarController.swift */,
-				5EAD266F208CCEF000CC23D9 /* CommmonWebViewController.swift */,
 			);
 			path = TabScenes;
 			sourceTree = "<group>";
@@ -1084,7 +1084,6 @@
 				3B689A1220492E0E0075128E /* BPfinderViewController.swift in Sources */,
 				3B60279C20497044006B108A /* LoginViewController.swift in Sources */,
 				3B89E60B2072BD9C008DAFE0 /* CenterViewFlowLayout.swift in Sources */,
-				5EAD2670208CCEF000CC23D9 /* CommmonWebViewController.swift in Sources */,
 				3BAD58752068CCC60076DFD8 /* AuthModule.swift in Sources */,
 				3B1B705D2065617300C3FB57 /* MyCalViewController.swift in Sources */,
 				3BC8F909205AE6450086333E /* PopUpParentDelegate.swift in Sources */,
@@ -1104,6 +1103,7 @@
 				3B6899E720491B550075128E /* WLMAssetBuffer.swift in Sources */,
 				3B49C3892068DC87007186E8 /* String+Validation.swift in Sources */,
 				3BF0B1BB205BC1000043CFB2 /* ConnectionsViewController.swift in Sources */,
+				5EFAFE232097609100256B1B /* CommmonWebViewController.swift in Sources */,
 				3BBDA13D2072F9DF007CE1F3 /* ConnectedUserModel.swift in Sources */,
 				3B6899EB20491B550075128E /* WLMPoolMemory.swift in Sources */,
 				3BC8F90D205AE7010086333E /* PopUpFailledViewController.swift in Sources */,
