@@ -32,7 +32,7 @@ class CommmonWebViewController: UIViewController,UIWebViewDelegate {
         else{
              contentType = "https://www.beachpartner.com/feedback.html"
         }
-        ActivityIndicatorView.show("Loading...")
+    //    ActivityIndicatorView.show("Loading...")
         cmnWebview.delegate = self
         cmnWebview.scrollView.bounces = false
         cmnWebview.loadRequest(URLRequest(url: NSURL(string:contentType )! as URL))

@@ -69,13 +69,13 @@ class PasswordResetViewController: UIViewController,UITextFieldDelegate {
         
         if keyTxtFld.isEmpty() {
             keyTxtFld.shake()
-            keyTxtFld.errorText = "Please enter a valid key"
+            keyTxtFld.errorText = "Please enter a valid code"
             keyTxtFld.showError()
             
         }
         else if (keyTxtFld.text?.count) != 6 {
             keyTxtFld.shake()
-            keyTxtFld.errorText = "Please enter a valid key"
+            keyTxtFld.errorText = "Please enter a valid code"
             keyTxtFld.showError()
         }
         else{
@@ -168,7 +168,7 @@ class PasswordResetViewController: UIViewController,UITextFieldDelegate {
                 else{
                     DispatchQueue.main.async {
                         self.keyTxtFld.shake()
-                        self.keyTxtFld.errorText = "Invalid reset key"
+                        self.keyTxtFld.errorText = "Invalid reset code"
                         self.keyTxtFld.showError()
                         }
                     }
