@@ -364,7 +364,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
               self.lblUserCount.text = "\(connectedUserModel.count)"
             }
             else{
-                self.lblUserCount.text = ""
+                self.lblUserCount.text = "No likes"
             }
             
         }, errorResult: { (error) in

@@ -294,6 +294,9 @@ class RegisterViewController: UIViewController {
                 self.view.makeToast("Please choose State", duration: 3.0, position: .center)
                 return
             }
+            else{
+                UserDefaults.standard.set(self.state , forKey: "location")
+            }
             
             //success
             ActivityIndicatorView.show("Loading...")
@@ -468,8 +471,8 @@ class RegisterViewController: UIViewController {
         stateList.append("Virginia");
         stateList.append("Washington");
         stateList.append("West Virginia");
-        stateList.append("Wisconsin WI");
-        stateList.append("Wyoming WY");
+        stateList.append("Wisconsin");
+        stateList.append("Wyoming");
     }
     func dropdownList() {
         

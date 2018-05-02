@@ -99,7 +99,7 @@ extension CardView {
             self.imageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
         }
          self.muteButton.isHidden = true
-        self.nameLabel.text = data.firstName //+ "," + " " + String(data.age ?? 0)
+        self.nameLabel.text = data.firstName + "," + " " + String(data.age )
         self.placeLabel?.text = data.userType
     }
     
@@ -123,8 +123,10 @@ extension CardView {
             self.imageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
         }
         self.muteButton.isHidden = true
-        self.nameLabel.text = data.firstName // + "," + " " + String(data.age ?? 0)
+        let ageValue = getAgeValue(dob: data.doblong)
+        self.nameLabel.text = data.firstName  + "," + " " + "\(ageValue)"
         self.placeLabel?.text = data.userType
+        
     }
     
     func showVideo() {
@@ -137,6 +139,21 @@ extension CardView {
         self.imageView.isHidden = false
         self.videoDisplayView.isHidden = true
     }
+    
+    func getAgeValue(dob:Double) -> String
+    {
+        let date = Date(timeIntervalSince1970: TimeInterval(dob/1000))
+        let dayTimePeriodFormatter = DateFormatter()
+        dayTimePeriodFormatter.dateFormat = "yyyy-MM-dd"
+        let dateString = dayTimePeriodFormatter.string(from: date as Date)
+        let originDate = dayTimePeriodFormatter.date(from: dateString)
+        let calendar: NSCalendar! = NSCalendar(calendarIdentifier: .gregorian)
+        let now = Date()
+        let calcYrDiff = calendar.components(.year, from: originDate!, to: now, options: [])
+        let yrDifference = calcYrDiff.year
+        return String(yrDifference ?? 0)
+    }
+    
 }
 
 

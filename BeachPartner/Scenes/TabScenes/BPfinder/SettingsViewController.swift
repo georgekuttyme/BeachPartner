@@ -241,6 +241,8 @@ class SettingsViewController: UIViewController {
         
         
     }
+
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -296,8 +298,8 @@ class SettingsViewController: UIViewController {
         stateList.append("Virginia");
         stateList.append("Washington");
         stateList.append("West Virginia");
-        stateList.append("Wisconsin WI");
-        stateList.append("Wyoming WY");
+        stateList.append("Wisconsin");
+        stateList.append("Wyoming");
     }
 
     

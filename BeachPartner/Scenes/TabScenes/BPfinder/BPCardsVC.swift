@@ -25,6 +25,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     @IBOutlet weak var topsView: UIView!
     @IBOutlet weak var blueBpListHeight: NSLayoutConstraint!
     @IBOutlet weak var btnUndo: UIButton!
+    @IBOutlet weak var btnLoc: UIButton!
     @IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var lblNotAvailable: UILabel!
     @IBOutlet weak var lblNotAviltopSpace: NSLayoutConstraint!
@@ -39,6 +40,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     var connectedUsers = [ConnectedUserModel]()
     var subscribedUsers = [SubscriptionUserModel]()
    var subscribedBlueBpUsers = [SearchUserModel]()
+    var swipeAction = [ConnectedUserModel]()
     var searchUsers = [SearchUserModel]()
     var SwipeCardArray:[Any] = []
     
@@ -78,10 +80,31 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         self.imgProfile.isHidden = true
         self.lblNotAvailable.isHidden = true
         self.cardView.revertAction()
+        APIManager.callServer.undoSwipeAction(userId:"\(self.swipeAction[0].id)",sucessResult: { (responseModel) in
+            
+            guard let connectedUserModelValue = responseModel as? ConnectedUserModel else{
+                return
+            }
+            print(connectedUserModelValue)
+            
+        }, errorResult: { (error) in
+            
+        })
+        
+         print(self.swipeAction)
         
     }
+    @IBAction func btnLocClicked(_ sender: Any) {
+        UserDefaults.standard.set("1", forKey: "LocationSettings")
+        let storyboard : UIStoryboard = UIStoryboard(name: "TabBar", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "ComponentSettings") as! SettingsViewController
+        controller.SettingsType = "location"
+        self.tabBarController?.tabBar.isHidden = false
+        self.navigationController!.navigationBar.topItem!.title = ""
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
     @IBAction func HiFiBtnClicked(_ sender: Any) {
-        
         self.cardView.swipe(.up)
     }
     
@@ -380,6 +403,13 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     func didSwipeToUp(user_Id:String){
         APIManager.callServer.requestHiFi(userId:user_Id,sucessResult: { (responseModel) in
             
+            guard let connectedUserModelValue = responseModel as? ConnectedUserModel else{
+                return
+            }
+            print(connectedUserModelValue)
+            self.swipeAction = [connectedUserModelValue]
+            print(self.swipeAction)
+            
         }, errorResult: { (error) in
            
         })
@@ -389,7 +419,12 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     }
     func didSwipeToRight(user_Id:String){
         APIManager.callServer.requestFriendship(userId:user_Id,sucessResult: { (responseModel) in
-            
+            guard let connectedUserModelValue = responseModel as? ConnectedUserModel else{
+                return
+            }
+            print(connectedUserModelValue)
+            self.swipeAction = [connectedUserModelValue]
+            print(self.swipeAction)
             
         }, errorResult: { (error) in
             
@@ -399,7 +434,12 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     }
     func didSwipeToLeft(user_Id:String){
         APIManager.callServer.rejectFriendship(userId:user_Id,sucessResult: { (responseModel) in
-            
+            guard let connectedUserModelValue = responseModel as? ConnectedUserModel else{
+                return
+            }
+            print(connectedUserModelValue)
+            self.swipeAction = [connectedUserModelValue]
+            print(self.swipeAction)
         }, errorResult: { (error) in
             
         })
@@ -442,9 +482,17 @@ extension BPCardsVC :KolodaViewDelegate {
         curentCardIndex = index
         self.imgProfile.isHidden = true
         self.lblNotAvailable.isHidden = true
-        self.lblNotAvailable.text = "No cards available"
+        if selectedType == "Likes" || selectedType == "Hifi" {
+            if selectedType == "Likes"{
+               self.lblNotAvailable.text = "No Like cards available"
+            }
+            else{
+                 self.lblNotAvailable.text = "No Hifi cards available"
+            }
+        }else{
+          self.lblNotAvailable.text = "No cards available"
+        }
         self.lblNotAviltopSpace.constant = 0
-
     }
     func koloda(_ koloda: KolodaView, draggedCardWithPercentage finishPercentage: CGFloat, in direction: SwipeResultDirection) {
         
@@ -456,7 +504,8 @@ extension BPCardsVC :KolodaViewDelegate {
                 self.videoView.play()
             }
         }
-        
+       
+       self.lblNotAvailable.alpha = (100 - finishPercentage)/100
     }
     func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection)
     {
@@ -511,6 +560,7 @@ extension BPCardsVC :KolodaViewDelegate {
             }
             else{
                 view.showVideo()
+                self.lblNotAvailable.alpha = 1.0
                 self.lblNotAvailable.isHidden = false
                 self.lblNotAvailable.text = "No video available for this profile"
                  self.lblNotAviltopSpace.constant = -75

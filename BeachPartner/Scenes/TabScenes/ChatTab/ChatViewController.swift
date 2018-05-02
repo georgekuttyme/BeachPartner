@@ -69,7 +69,7 @@ class ChatViewController: JSQMessagesViewController {
         return ChatID
         }
         let bP_userId =  Int( UserDefaults.standard.string(forKey: "bP_userId") ?? "")
-        let chatUserId = connectedUserModel[0].id
+        let chatUserId = connectedUserModel[0].connectedUser?.userId ?? 0
        
         if bP_userId!<chatUserId {
             ChatID = UserDefaults.standard.string(forKey: "bP_userId")!+"-"+String(chatUserId)
@@ -147,7 +147,7 @@ class ChatViewController: JSQMessagesViewController {
         }
         else{
              receiver_name = String((connectedUserModel[0].connectedUser?.firstName)!)
-             receiver_id = String((connectedUserModel[0].id))
+             receiver_id = String((connectedUserModel[0].connectedUser?.userId ?? 0))
              profileImg = String ((connectedUserModel[0].connectedUser?.imageUrl)!)
         }
         

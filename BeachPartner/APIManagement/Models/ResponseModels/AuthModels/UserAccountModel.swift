@@ -95,10 +95,10 @@ struct AccountRespModel:SafeMappable {
         var programsOffered: String = ""
         var shareAthlets: String = ""
         var topFinishes: String = ""
-        var totalPoints: Int = 0
+        var totalPoints: String = ""
         var tournamentLevelInterest: String = ""
         var toursPlayedIn: String = ""
-        var usaVolleyballRanking: Int = 0
+        var usaVolleyballRanking: String = ""
         var willingToTravel: String = ""
         var yearsRunning: String = ""
         

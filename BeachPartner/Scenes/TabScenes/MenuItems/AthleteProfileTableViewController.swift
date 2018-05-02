@@ -14,7 +14,7 @@ import AVKit
 import MobileCoreServices
 import Floaty
 
-class AthleteProfileTableViewController: UITableViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class AthleteProfileTableViewController: UITableViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate {
     
     @IBOutlet weak var videoDisplayView: UIView!
     
@@ -179,11 +179,13 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.editUserImageBtn.isHidden = true
         self.editUserImageBtn.isUserInteractionEnabled = false
         editclicked = false
+        self.addToplistBtn.isHidden = true
+        self.delTop1.isHidden = true
+        self.delTop2.isHidden = true
+        self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
         self.editVideoBtn.isHidden = true
         self.editVideoBtn.isUserInteractionEnabled = false
         self.tableView.reloadData()
-        
-        
     }
     
     
@@ -218,9 +220,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     var topFinishesCount = 0
     var showtopFinish1 = false
     var showtopfinish2 = false
-    @IBAction func addTopFinishes(_ sender: Any) {
-        
-        
+    @IBAction func addTopFinishes(_ sender: Any) {        
         if self.topFinishesCount == 0{
             self.tableCell_TopFinishesinLastYear1.isHidden = false
             self.topFinishesCount = self.topFinishesCount + 1
@@ -355,63 +355,6 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
                 // present the view controller
                 self.present(activityViewController, animated: true, completion: nil)
                 
-                //                if(self.userData.videoUrl != "" ){
-                //
-                //                    let url = NSURL(string:self.userData.videoUrl)
-                //
-                //                        //Show activity indicator
-                //
-                //                        DispatchQueue.global(qos: .background).async {
-                //                            if let urlData = NSData(contentsOf: url as! URL){
-                //                                let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-                //                                let filePath="\(documentsPath)/tempFile.mov"
-                //                                DispatchQueue.main.async {
-                //                                    urlData.write(toFile: filePath, atomically: true)
-                //
-                //                                    //Hide activity indicator
-                //
-                //                                    let activityVC = UIActivityViewController(activityItems: [NSURL(fileURLWithPath: filePath)], applicationActivities: nil)
-                //                                    activityVC.excludedActivityTypes = [.addToReadingList, .assignToContact]
-                //                                    self.present(activityVC, animated: true, completion: nil)
-                //                                }
-                //                            }
-                //                    }
-                //
-                ////                    let urlData = NSData(contentsOf: NSURL(string:self.userData.videoUrl)! as URL)
-                //
-                ////                    if ((urlData) != nil){
-                ////
-                ////                        print(urlData)
-                ////
-                ////
-                ////                        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-                ////                        let docDirectory = paths[0]
-                ////                        let filePath = "\(docDirectory)/tmpVideo.mov"
-                ////                        urlData?.write(toFile: filePath, atomically: true)
-                ////                        // file saved
-                ////
-                ////                        let videoLink = NSURL(fileURLWithPath: filePath)
-                ////
-                ////
-                ////                        let objectsToShare = [videoLink] //comment!, imageData!, myWebsite!]
-                ////                        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-                ////
-                ////                        activityVC.setValue("Video", forKey: "subject")
-                ////
-                ////
-                ////                        //New Excluded Activities Code
-                ////                        if #available(iOS 9.0, *) {
-                ////                            activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.addToReadingList, UIActivityType.assignToContact, UIActivityType.copyToPasteboard, UIActivityType.mail, UIActivityType.message, UIActivityType.openInIBooks, UIActivityType.postToTencentWeibo, UIActivityType.postToVimeo, UIActivityType.postToWeibo, UIActivityType.print]
-                ////                        } else {
-                ////                            // Fallback on earlier versions
-                ////                            activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.addToReadingList, UIActivityType.assignToContact, UIActivityType.copyToPasteboard, UIActivityType.mail, UIActivityType.message, UIActivityType.postToTencentWeibo, UIActivityType.postToVimeo, UIActivityType.postToWeibo, UIActivityType.print ]
-                ////                        }
-                ////
-                ////
-                ////                        self.present(activityVC, animated: true, completion: nil)
-                ////
-                ////                    }
-                //                }
             }
         }
         
@@ -537,6 +480,27 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         }
         self.willingnessToTravelBtn.setTitle("Please Select", for: UIControlState.normal)
         self.willingnessToTraveldropDown.selectRow(0)
+        
+        self.firstNameTxtFld.delegate = self
+        self.lastNameTxtFld.delegate = self
+        self.phoneTxtFld.delegate = self
+        self.toursPlayedTxtFld.delegate = self
+        self.cbvaPlayerNumberTxtFld.delegate = self
+        self.cbvaFirstNameTxtFld.delegate = self
+        self.cbvaLastNameTxtFld.delegate = self
+        self.highSchoolAttendedTxtFld.delegate = self
+        self.indoorClubPlayedAtTxtFld.delegate = self
+        self.collegeClubTxtFld.delegate = self
+        self.collegeBeachTxtfld.delegate = self
+        self.collegeBeachTxtfld.delegate = self
+        self.collegeIndoorTxtFld.delegate = self
+        self.pointsTxtFld.delegate = self
+        self.rankingTxtFld.delegate = self
+        self.topFinishesTxtfld.delegate = self
+        self.topFinishesoneTxtFld.delegate = self
+        self.topFinishestwoTxtFld.delegate = self
+        
+        
     }
     
     @IBAction func stateBtnAction(_ sender: Any) {
@@ -607,6 +571,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             self.editUserImageBtn.isHidden = false
             self.editUserImageBtn.isUserInteractionEnabled = true
             editclicked = true
+            self.editProfileTxtBtn.setTitle("Save profile", for: UIControlState.normal)
             self.editVideoBtn.isHidden = false
             self.editVideoBtn.isUserInteractionEnabled = true
             self.addToplistBtn.isUserInteractionEnabled = true
@@ -623,6 +588,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             self.editUserImageBtn.isHidden = true
             self.editUserImageBtn.isUserInteractionEnabled = false
             editclicked = false
+            self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
             self.editVideoBtn.isHidden = true
             self.editVideoBtn.isUserInteractionEnabled = false
             self.addToplistBtn.isUserInteractionEnabled = false
@@ -718,23 +684,41 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         }
         else{
             self.userData.city = (self.stateBtn.titleLabel?.text)!
+            self.userData.location = (self.stateBtn.titleLabel?.text)!
+            UserDefaults.standard.set((self.stateBtn.titleLabel?.text)! , forKey: "location")
             currentValidation += 1
         }
         
         if phoneTxtFld.isEmpty() {
             phoneTxtFld.shake()
-            phoneTxtFld.errorText = "Empty!"
+            phoneTxtFld.errorText = "Please enter a valid mobile number "
             phoneTxtFld.showError()
-        }else{
-            phoneTxtFld.hideError()
-            self.userData.phoneNumber = phoneTxtFld.text!
-            currentValidation += 1
+        }
+        else {
+            
+            if (phoneTxtFld.text?.count)! == 10  {
+                if phoneTxtFld.text == "0000000000"{
+                    phoneTxtFld.shake()
+                    phoneTxtFld.errorText = "Please enter a valid mobile number"
+                    phoneTxtFld.showError()
+                }
+                else{
+                    phoneTxtFld.hideError()
+                    self.userData.phoneNumber = phoneTxtFld.text!
+                    currentValidation += 1
+                }
+                
+            }else{
+                phoneTxtFld.shake()
+                phoneTxtFld.errorText = "Please enter a valid mobile number"
+                phoneTxtFld.showError()
+            }
         }
         
         self.userData.userProfile?.experience = (experienceBtn.titleLabel?.text) ?? ""
         self.userData.userProfile?.courtSidePreference = (courtSidePreferenceBtn.titleLabel?.text) ?? ""
         self.userData.userProfile?.position = (positionBtn.titleLabel?.text) ?? ""
-        self.userData.userProfile?.height = (heightBtn.titleLabel?.text) ?? ""
+        self.userData.userProfile?.height = String((heightBtn.titleLabel?.text) ?? "")
 //        self.userData.userProfile?.height = Int(heightTxtFld.text! )!
         self.userData.userProfile?.tournamentLevelInterest = (tournamentLevelInterestBtn.titleLabel?.text) ?? ""
         self.userData.userProfile?.toursPlayedIn = toursPlayedTxtFld.text!
@@ -748,40 +732,21 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.userData.userProfile?.collageClub = collegeClubTxtFld.text!
         self.userData.userProfile?.collegeBeach = collegeBeachTxtfld.text!
         self.userData.userProfile?.collegeIndoor = collegeIndoorTxtFld.text!
-        self.userData.userProfile?.totalPoints = Int(pointsTxtFld.text! )!
-        self.userData.userProfile?.usaVolleyballRanking = Int(rankingTxtFld.text! )!
-        let topfinishesVal = "\(topFinishesTxtfld.text ?? ""),\(topFinishesoneTxtFld.text ?? "") ,\(topFinishestwoTxtFld.text ?? "")"
-        print("topfinishesVal :: " + topfinishesVal)
+        self.userData.userProfile?.totalPoints = pointsTxtFld.text!
+        self.userData.userProfile?.usaVolleyballRanking = rankingTxtFld.text!
+        var topfinishesVal = String()
+        
+        if topFinishesTxtfld.text != ""  {
+            topfinishesVal = "\(self.topFinishesTxtfld.text ?? "")"+","
+        }
+        if topFinishesoneTxtFld.text != ""  {
+            topfinishesVal = "\(topfinishesVal)" + self.topFinishesoneTxtFld.text! + ","
+        }
+        if topFinishestwoTxtFld.text != ""  {
+            
+           topfinishesVal = "\(topfinishesVal)" + self.topFinishestwoTxtFld.text!
+        }
         self.userData.userProfile?.topFinishes = topfinishesVal
-        
-        //        "cbvaFirstName": userData.userProfile?.cbvaFirstName,
-        //        "cbvaLastName": userData.userProfile?.cbvaLastName,
-        //        "cbvaPlayerNumber": userData.userProfile?.cbvaPlayerNumber,
-        //        "collage": userData.userProfile?.collage,
-        //        "collageClub": userData.userProfile?.collageClub,
-        //        "collegeBeach": userData.userProfile?.collegeBeach,
-        //        "collegeIndoor": userData.userProfile?.collegeIndoor,
-        //        "courtSidePreference": userData.userProfile?.courtSidePreference,
-        //        "description": userData.userProfile?.description,
-        //        "division": userData.userProfile?.division,
-        //        "experience": userData.userProfile?.experience,
-        //        "fundingStatus": userData.userProfile?.fundingStatus,
-        //        "height": userData.userProfile?.height,
-        //        "highSchoolAttended": userData.userProfile?.highSchoolAttended,
-        //        "highestTourRatingEarned": userData.userProfile?.highestTourRatingEarned,
-        //        "indoorClubPlayed": userData.userProfile?.indoorClubPlayed,
-        //        "numOfAthlets": userData.userProfile?.numOfAthlets,
-        //        "position": userData.userProfile?.position,
-        //        "programsOffered": userData.userProfile?.programsOffered,
-        //        "shareAthlets": userData.userProfile?.shareAthlets,
-        //        "topFinishes": userData.userProfile?.topFinishes,
-        //        "totalPoints": userData.userProfile?.totalPoints,
-        //        "tournamentLevelInterest": userData.userProfile?.tournamentLevelInterest,
-        //        "toursPlayedIn": userData.userProfile?.toursPlayedIn,
-        //        "usaVolleyballRanking": userData.userProfile?.usaVolleyballRanking,
-        //        "willingToTravel": userData.userProfile?.willingToTravel,
-        //        "yearsRunning": userData.userProfile?.yearsRunning
-        
         if sucessValidation == currentValidation {
             
             self.updateUserInfo()
@@ -1038,6 +1003,60 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         return cell
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if  textField == firstNameTxtFld {
+            lastNameTxtFld.becomeFirstResponder()
+        }
+        else if  textField == lastNameTxtFld {
+            textField.resignFirstResponder()
+        }
+        else if  textField == phoneTxtFld {
+            textField.resignFirstResponder()
+        }
+        if  textField == toursPlayedTxtFld {
+            textField.resignFirstResponder()
+        }
+        else if textField == cbvaPlayerNumberTxtFld {
+            cbvaFirstNameTxtFld.becomeFirstResponder()
+        }
+        else if textField == cbvaFirstNameTxtFld{
+            cbvaLastNameTxtFld.becomeFirstResponder()
+        }
+        else if textField == cbvaLastNameTxtFld{
+            textField.resignFirstResponder()
+        }
+        else if textField == highSchoolAttendedTxtFld{
+            indoorClubPlayedAtTxtFld.becomeFirstResponder()
+        }
+        else if textField == indoorClubPlayedAtTxtFld{
+            collegeClubTxtFld.becomeFirstResponder()
+        }
+        else if textField == collegeClubTxtFld{
+            collegeBeachTxtfld.becomeFirstResponder()
+        }
+        else if textField == collegeBeachTxtfld{
+            collegeIndoorTxtFld.becomeFirstResponder()
+        }
+        else if textField == collegeIndoorTxtFld{
+            pointsTxtFld.becomeFirstResponder()
+        }
+        else if textField == pointsTxtFld{
+            rankingTxtFld.becomeFirstResponder()
+        }
+        else if textField == rankingTxtFld{
+            topFinishesTxtfld.becomeFirstResponder()
+        }else if textField == topFinishesTxtfld {
+            topFinishesoneTxtFld.becomeFirstResponder()
+        }else if textField == topFinishesoneTxtFld{
+            topFinishestwoTxtFld.resignFirstResponder()
+        }
+        else if textField == topFinishestwoTxtFld{
+            textField.resignFirstResponder()
+        }
+        return true;
+    }
+    
     
     @objc func datePickerValueChanged(sender: UIDatePicker){
         
@@ -1066,9 +1085,22 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             if(accRespModel.id != 0){
                 
                 UserDefaults.standard.set(accRespModel.id, forKey: "bP_userProfileId")
-                //                self.view.makeToast("User profile updated sucessfully ! ", duration: 3.0, position: .center)
                 self.alert(message: "User profile updated successfully! ")
                 ActivityIndicatorView.hiding()
+                DispatchQueue.main.async {
+                let image = UIImage(named: "edit_btn_1x") as UIImage?
+                self.editProfileBtn.setImage(image, for: .normal)
+                self.editUserImageBtn.isHidden = true
+                self.editUserImageBtn.isUserInteractionEnabled = false
+                self.editclicked = false
+                self.addToplistBtn.isHidden = true
+                self.delTop1.isHidden = true
+                self.delTop2.isHidden = true
+                self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
+                self.editVideoBtn.isHidden = true
+                self.editVideoBtn.isUserInteractionEnabled = false
+                self.tableView.reloadData()
+                }
             }else{
                 
                 ActivityIndicatorView.hiding()
@@ -1153,9 +1185,8 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         }
         
 //        self.birthDateTxtFld.text = String(accResponseModel.dob)
-        
 //        self.cityTxtFld.text = accResponseModel.city
-        self.heightBtn.setTitle(accResponseModel.city, for: .normal)
+        self.stateBtn.setTitle(accResponseModel.city, for: .normal)
         self.phoneTxtFld.text = accResponseModel.phoneNumber
         self.experienceBtn.setTitle(accResponseModel.userProfile?.experience, for: .normal)
         self.courtSidePreferenceBtn.setTitle(accResponseModel.userProfile?.courtSidePreference, for: .normal)
@@ -1174,13 +1205,15 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.collegeClubTxtFld.text = accResponseModel.userProfile?.collageClub
         self.collegeBeachTxtfld.text = accResponseModel.userProfile?.collegeBeach
         self.collegeIndoorTxtFld.text = accResponseModel.userProfile?.collegeIndoor
-        self.pointsTxtFld.text = String(accResponseModel.userProfile?.totalPoints ?? 0)
-        self.rankingTxtFld.text = String(accResponseModel.userProfile?.usaVolleyballRanking ?? 0 )
-        
+        self.pointsTxtFld.text = accResponseModel.userProfile?.totalPoints
+        self.rankingTxtFld.text = accResponseModel.userProfile?.usaVolleyballRanking
+        UserDefaults.standard.set(accResponseModel.city , forKey: "location")
+
         if(accResponseModel.userProfile?.topFinishes != ""){
             
             let toplist = accResponseModel.userProfile?.topFinishes.components(separatedBy: ",")
             //            print("top list count :", toplist?.count ?? 0, toplist![0])
+
             
             if(toplist?.count == 3){
                 self.topFinishesoneTxtFld.text = toplist![1]
@@ -1435,8 +1468,8 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         stateList.append("Virginia");
         stateList.append("Washington");
         stateList.append("West Virginia");
-        stateList.append("Wisconsin WI");
-        stateList.append("Wyoming WY");
+        stateList.append("Wisconsin");
+        stateList.append("Wyoming");
     }
 }
 

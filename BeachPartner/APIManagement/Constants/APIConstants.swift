@@ -58,6 +58,7 @@ struct ApiMethods {
     static let fcmMessages  = "/messages"
     static let sendFriendRequest  = "/users/request-friendship/"
     static let rejectFriendRequest  = "/users/reject-friendship/"
+    static let undoSwipeAction  =  "/users/undo-request/"
     static let sendHiFiRequest  = "/users/hifi/"
     static let updateAllUserDetails = "/users/update-all"
     

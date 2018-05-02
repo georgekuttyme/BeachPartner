@@ -39,6 +39,7 @@ struct SearchUserModel:SafeMappable {
      var authToken: Int = 0
     var city: String = ""
     var age: Int = 0
+    var doblong: Double = 0
     var deviceId: String = ""
     var email: String = ""
     var dob: String = ""
@@ -65,6 +66,7 @@ struct SearchUserModel:SafeMappable {
         city <- map.property("city")
         age <- map.property("age")
         dob <- map.property("dob")
+        doblong <- map.property("dob")
         deviceId <- map.property("deviceId")
         email <- map.property("email")
         firstName <- map.property("firstName")

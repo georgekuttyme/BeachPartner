@@ -57,19 +57,21 @@ class BPfinderViewController: UIViewController, UICollectionViewDelegate,UIColle
     
     override func viewDidAppear(_ animated: Bool) {
         
-        let newViewController =  self.storyboard?.instantiateViewController(withIdentifier: "ComponentSettings")as! SettingsViewController
-        newViewController.SettingsType = "SearchSettings"
-        newViewController.bpDelegate = self
-        self.currentViewController = newViewController
-        self.currentViewController!.view.translatesAutoresizingMaskIntoConstraints = false
-        self.addChildViewController(self.currentViewController!)
-        self.addSubview(subView: self.currentViewController!.view, toView: self.containerView)
-        
+        let locationSettings = UserDefaults.standard.string(forKey: "LocationSettings") ?? "0"
+        if locationSettings == "0" {
+            UserDefaults.standard.set("0", forKey: "LocationSettings")
+            let newViewController =  self.storyboard?.instantiateViewController(withIdentifier: "ComponentSettings")as! SettingsViewController
+            newViewController.SettingsType = "SearchSettings"
+            newViewController.bpDelegate = self
+            self.currentViewController = newViewController
+            self.currentViewController!.view.translatesAutoresizingMaskIntoConstraints = false
+            self.addChildViewController(self.currentViewController!)
+            self.addSubview(subView: self.currentViewController!.view, toView: self.containerView)
+        }
+        UserDefaults.standard.set("0", forKey: "LocationSettings")
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
         self.dropDown.anchorView = self.menuBtn // UIView or UIBarButtonItem
         // The list of items to display. Can be changed dynamically
 //        self.dropDown.direction = .bottom

@@ -250,6 +250,36 @@ extension APIManager{
         inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z"
         let resultString = inputFormatter.string(from: showDate!)
         
+        let userProfile :[String:String] = [
+                                            "cbvaFirstName": ((userData.userProfile?.cbvaFirstName) ?? "")!,
+                                             "cbvaLastName": ((userData.userProfile?.cbvaLastName) ?? "")!,
+                                             "cbvaPlayerNumber": ((userData.userProfile?.cbvaPlayerNumber) ?? "")!,
+                                             "collage": ((userData.userProfile?.collage) ?? "")!,
+                                             "collageClub": ((userData.userProfile?.collageClub) ?? "")!,
+                                             "collegeBeach": ((userData.userProfile?.collegeBeach) ?? "")!,
+                                             "collegeIndoor": ((userData.userProfile?.collegeIndoor) ?? "")!,
+                                             "courtSidePreference": ((userData.userProfile?.courtSidePreference) ?? "")!,
+                                             "description": ((userData.userProfile?.description) ?? "")!,
+                                             "division": ((userData.userProfile?.division) ?? "")!,
+                                             "experience": ((userData.userProfile?.experience) ?? "")!,
+                                             "fundingStatus": ((userData.userProfile?.fundingStatus) ?? "")!,
+                                             "height": ((userData.userProfile?.height) ?? "")!,
+                                             "highSchoolAttended": ((userData.userProfile?.highSchoolAttended) ?? "")!,
+                                             "highestTourRatingEarned": ((userData.userProfile?.highestTourRatingEarned) ?? "")!,
+                                             "indoorClubPlayed": ((userData.userProfile?.indoorClubPlayed) ?? "")!,
+                                             "numOfAthlets": ((userData.userProfile?.numOfAthlets) ?? "")!,
+                                             "position": ((userData.userProfile?.position) ?? "")!,
+                                             "programsOffered": ((userData.userProfile?.programsOffered) ?? "")!,
+                                             "shareAthlets": ((userData.userProfile?.shareAthlets) ?? "")!,
+                                             "topFinishes": ((userData.userProfile?.topFinishes) ?? "")!,
+                                             "totalPoints": ((userData.userProfile?.totalPoints ) ?? "")!,
+                                             "tournamentLevelInterest": ((userData.userProfile?.tournamentLevelInterest) ?? "")!,
+                                             "toursPlayedIn": ((userData.userProfile?.toursPlayedIn) ?? "")!,
+                                             "usaVolleyballRanking": ((userData.userProfile?.usaVolleyballRanking) ?? "")!,
+                                             "willingToTravel": ((userData.userProfile?.willingToTravel) ?? "")!,
+                                             "yearsRunning": ((userData.userProfile?.yearsRunning) ?? "")!
+        ]
+        
         let params: [String: [String:String]] = [
             "userInputDto": [
                 "authToken": userData.authToken,
@@ -268,35 +298,7 @@ extension APIManager{
                 "userType": userData.userType,
                 "videoUrl": userData.videoUrl
             ],
-            "userProfileDto": [
-                "cbvaFirstName": (userData.userProfile?.cbvaFirstName)! ,
-                "cbvaLastName": (userData.userProfile?.cbvaLastName)!,
-                "cbvaPlayerNumber": (userData.userProfile?.cbvaPlayerNumber)!,
-                "collage": (userData.userProfile?.collage)!,
-                "collageClub": (userData.userProfile?.collageClub)!,
-                "collegeBeach": (userData.userProfile?.collegeBeach)!,
-                "collegeIndoor": (userData.userProfile?.collegeIndoor)!,
-                "courtSidePreference": (userData.userProfile?.courtSidePreference)!,
-                "description": (userData.userProfile?.description)!,
-                "division": (userData.userProfile?.division)!,
-                "experience": (userData.userProfile?.experience)!,
-                "fundingStatus": (userData.userProfile?.fundingStatus)!,
-                "height": String(describing: userData.userProfile?.height),
-                "highSchoolAttended": (userData.userProfile?.highSchoolAttended)!,
-                "highestTourRatingEarned": (userData.userProfile?.highestTourRatingEarned)!,
-                "indoorClubPlayed": (userData.userProfile?.indoorClubPlayed)!,
-                "numOfAthlets": (userData.userProfile?.numOfAthlets)!,
-                "position": (userData.userProfile?.position)!,
-                "programsOffered": (userData.userProfile?.programsOffered)!,
-                "shareAthlets": (userData.userProfile?.shareAthlets)!,
-                "topFinishes": (userData.userProfile?.topFinishes)!,
-                "totalPoints": String(describing: userData.userProfile?.totalPoints),
-                "tournamentLevelInterest": (userData.userProfile?.tournamentLevelInterest)!,
-                "toursPlayedIn": (userData.userProfile?.toursPlayedIn)!,
-                "usaVolleyballRanking": String(describing: userData.userProfile?.usaVolleyballRanking),
-                "willingToTravel": (userData.userProfile?.willingToTravel)!,
-                "yearsRunning": (userData.userProfile?.yearsRunning)!
-            ]
+            "userProfileDto": userProfile
         ]
         
         
@@ -574,7 +576,17 @@ extension APIManager{
         let params = ["":""]
         APIClient.doRequest.inPost(method:ApiMethods.sendHiFiRequest + "\(userId)", params: params , sucess: { (response) in
             let jsonDict = response! as! JSONDictionary
-            print(jsonDict)
+            do {
+                let accRespModel = try ConnectedUserModel(jsonDict)
+                sucessResult(accRespModel)
+                return
+            } catch {
+                print("Catched")
+                errorResult(error.localizedDescription)
+                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                return
+            }
+            
             
         }) { (error) in
             self.busyOff()
@@ -588,7 +600,16 @@ extension APIManager{
         let params = ["":""]
         APIClient.doRequest.inPost(method:ApiMethods.sendFriendRequest + "\(userId)", params: params , sucess: { (response) in
             let jsonDict = response! as! JSONDictionary
-            print(jsonDict)
+            do {
+                let accRespModel = try ConnectedUserModel(jsonDict)
+                sucessResult(accRespModel)
+                return
+            } catch {
+                print("Catched")
+                errorResult(error.localizedDescription)
+                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                return
+            }
         }) { (error) in
             self.busyOff()
             errorResult(error?.localizedDescription)
@@ -601,7 +622,16 @@ extension APIManager{
         let params = ["":""]
         APIClient.doRequest.inPost(method:ApiMethods.rejectFriendRequest + "\(userId)", params: params , sucess: { (response) in
             let jsonDict = response! as! JSONDictionary
-            print(jsonDict)
+            do {
+                let accRespModel = try ConnectedUserModel(jsonDict)
+                sucessResult(accRespModel)
+                return
+            } catch {
+                print("Catched")
+                errorResult(error.localizedDescription)
+                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                return
+            }
             
         }) { (error) in
             self.busyOff()
@@ -611,6 +641,32 @@ extension APIManager{
         }
         
  }
+ 
+    public func undoSwipeAction(userId:String, sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure){
+        let params = ["":""]
+        APIClient.doRequest.inPost(method:ApiMethods.undoSwipeAction + "\(userId)", params: params , sucess: { (response) in
+            let jsonDict = response! as! JSONDictionary
+            do {
+                let accRespModel = try ConnectedUserModel(jsonDict)
+                sucessResult(accRespModel)
+                return
+            } catch {
+                print("Catched")
+                errorResult(error.localizedDescription)
+                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                return
+            }
+            
+        }) { (error) in
+            self.busyOff()
+            errorResult(error?.localizedDescription)
+            APIManager.printOnDebug(response: "error:\(String(describing: error?.localizedDescription))")
+            return
+        }
+        
+    }
+    
+    
     
     
     func getCookie(name:String)-> String{
