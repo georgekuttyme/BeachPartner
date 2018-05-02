@@ -152,6 +152,8 @@ class CoachViewController: UIViewController,UICollectionViewDataSource , UIColle
         cell?.blockBtn.addTarget(self, action: #selector(blockBtnPressed), for: .touchUpInside)
         cell?.messageBtn.tag = indexPath.row+100000
         cell?.messageBtn.addTarget(self, action: #selector(msgBtnPressed), for: .touchUpInside)
+        cell?.notesBtn.tag = indexPath.row+300000
+        cell?.notesBtn.addTarget(self, action: #selector(noteBtnPressed), for: .touchUpInside)
         
         return cell!
     }
@@ -210,6 +212,16 @@ class CoachViewController: UIViewController,UICollectionViewDataSource , UIColle
             ActivityIndicatorView.hiding()
             self.alert(message: errorString)
         })
+    }
+    
+    @objc func noteBtnPressed(sender: UIButton!){
+        let connectedUser = self.connectedUsers[sender.tag-300000]
+        let index = sender.tag-300000
+        let storyboard = UIStoryboard(name: "ConnectionsTabBar", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "NotesViewController") as! NotesViewController
+        vc.index = index
+        vc.connectedUserModel = connectedUser
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func msgBtnPressed(sender: UIButton!) {

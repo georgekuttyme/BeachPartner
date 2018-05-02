@@ -15,6 +15,7 @@ class NotesCell: UITableViewCell {
     @IBOutlet weak var clockImage: UIImageView!
     @IBOutlet weak var deleteNotesBtn: UIButton!
     @IBOutlet weak var saveBtn: UIButton!
+    @IBOutlet weak var noteTextView: UITextView!
     
     
 }

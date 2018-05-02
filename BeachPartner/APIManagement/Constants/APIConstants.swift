@@ -30,7 +30,7 @@ class BaseUrl {
     }
 }
 struct ApiMethods {
-    static let CreateNote   =   "/notes"
+    static let CreateNote   =   "/notes/"
     static let GetAllNoteFrom   =  "/notes/from"
     static let DeleteNote     =   "/notes"
     static let UpdateNote     =   "/notes"

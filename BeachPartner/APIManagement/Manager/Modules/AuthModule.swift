@@ -919,12 +919,10 @@ extension APIManager{
         }
     }
     
-    public func removeNote(sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure){
-        let params = [
-            "noteId":""
-            ] as [String : Any]
-        print(params)
-        APIClient.doRequest.inPost(method:ApiMethods.CreateNote, params: params as! [String : String], sucess: { (response) in
+    public func removeNote(withNoteId noteId:Int, sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure){
+
+        let params = [String:String]()
+        APIClient.doRequest.inDelete(method:ApiMethods.DeleteNote + "/\(noteId)", params: params, sucess: { (response) in
             
             //            APIManager.printOnDebug(response: "\(response)")
             
@@ -981,14 +979,13 @@ extension APIManager{
         }
     }
     
-    public func updateNote(note:String,toUserId:Int,sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure){
+    public func updateNote(noteId: Int,note:String,toUserId:Int,sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure){
         
         let params = [
             "note": note,
             "toUserId": toUserId,
             ] as [String : Any]
-        print(params)
-        let noteId = 41
+        
         APIClient.doRequest.inPutRawData(method:ApiMethods.UpdateNote  + "/\(noteId)" , params: params , sucess: { (response) in
             self.busyOff()
             
@@ -999,7 +996,7 @@ extension APIManager{
             
             do {
                 
-                let loginModel = try AccountRespModel(jsonDict)
+                let loginModel = try GetNoteRespModel(jsonDict)//GetNoteRespModel
                 sucessResult(loginModel)
                 return
             } catch {
