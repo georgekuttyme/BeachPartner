@@ -17,55 +17,88 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
     var noOfCells = 0
     var isExpanded = false
     var count: Int = 0
-       @IBOutlet weak var menuBtn: UIBarButtonItem!
     
-      @IBOutlet weak var addBtn: UIButton!
-     @IBOutlet weak var notesTableview: UITableView!
+    var connectedUserModel: ConnectedUserModel?
+    var notes = [GetNoteRespModel]()
+//    let dateFormatter = DateFormatter()
+
+    @IBOutlet weak var noNotesLabel: UILabel!
+    
+    @IBOutlet weak var menuBtn: UIBarButtonItem!
+    @IBOutlet weak var addBtn: UIButton!
+    @IBOutlet weak var notesTableview: UITableView!
     @IBAction func menuBtnClicked(_ sender: UIBarButtonItem) {
         dropDown.show()
     }
     
-//      let time = [""]
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.noOfCells
+//        return self.noOfCells
+        return notes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "NotesCell", for: indexPath) as? NotesCell
+        cell?.selectionStyle = .none
+        
+        let note = notes[indexPath.row]
+
+//        let createdDate = Date(timeIntervalSince1970: TimeInterval(note.createdDate/1000))
+//        let dateString = dateFormatter.string(from: createdDate)
+//        print(dateString)
+        
         cell?.timeLabel.text = "Just Now"
+        cell?.noteTextView.text = note.note
+        
+        cell?.deleteNotesBtn.tag = indexPath.row+200000
         cell?.deleteNotesBtn.addTarget(self, action:#selector(deleteBtnClicked(sender:)), for: UIControlEvents.touchUpInside)
         
-        //then make a action method :
+        cell?.saveBtn.tag = indexPath.row+300000
+        cell?.saveBtn.addTarget(self, action:#selector(saveBtnClicked(sender:)), for: UIControlEvents.touchUpInside)
         
-       
         return cell!
     }
     
     
     @objc func deleteBtnClicked(sender:UIButton!) {
-        self.noOfCells = self.noOfCells - 1
-        self.notesTableview.reloadData()
-    }
-    func numberOfSections(in tableView: UITableView) -> Int {
+
+        let index = sender.tag-200000
+        let note = notes[index]
         
+        deleteNote(withId: note.noteId)
+    }
+    
+    @objc func saveBtnClicked(sender:UIButton!) {
+        
+        let index = sender.tag-300000
+        let note = notes[index]
+        
+        let indexPath = IndexPath(row: index, section: 0)
+        let cell = notesTableview.cellForRow(at: indexPath) as! NotesCell
+        
+        guard let updatedNote = cell.noteTextView.text, updatedNote.count > 0 else { return }
+        
+        updateNote(withId: note.noteId, noteString: updatedNote)
+    }
+    
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     @IBAction func addBtnClicked(_ sender: UIBarButtonItem) {
-        self.noOfCells = self.noOfCells + 1
-        self.notesTableview.reloadData()
+        didTapAddNoteButton()
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        noteButton()
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        loadNotes()
+        
+        //        dateFormatter.dateFormat = "yyyy-MM-dd"
         self.hideKeyboardWhenTappedAround()
-        noteButton()
+//        noteButton()
         self.dropDown.anchorView = self.menuBtn
         self.dropDown.dataSource =  ["My Profile","About Us","Feedback","Settings", "Help","Logout"]
         self.dropDown.bottomOffset = CGPoint(x: 20, y:45)
@@ -107,73 +140,108 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
             }
         }
         self.dropDown.selectRow(0)
-        
-        
-        
     }
- 
-    func noteButton(){
-        let id1 = Int(UserDefaults.standard.string(forKey: "bP_userId") ?? "")
-        print(index,"index userid ")
-        let id2 = index
-        APIManager.callServer.getNotes(fromUserId: id1!, toUserId:id2 , sucessResult: {(responseModel) in
-            guard let loginModel = responseModel as? GetNoteRespModel else{
+    
+    private func loadNotes() {
+        
+        guard let fromId =  Int(UserDefaults.standard.string(forKey: "bP_userId") ?? ""), let toId = connectedUserModel?.connectedUser?.userId else { return }
+        
+        ActivityIndicatorView.show("Loading...")
+        APIManager.callServer.getNotes(fromUserId: fromId, toUserId: toId, sucessResult: { (responseModel) in
+            ActivityIndicatorView.hiding()
+            guard let notesModel = responseModel as? GetNoteRespModelArray else {
                 print("Rep model does not match")
                 return
             }
-            print("FADSGDHDFHDFGHJDGHd",loginModel.fromUser_?.fromUserId)
+            self.notes = notesModel.getNoteRespModel
+            
+            DispatchQueue.main.async {
+                
+                if self.notes.count == 0 {
+                    self.notesTableview.isHidden = true
+                    self.noNotesLabel.isHidden = false
+                }
+                else {
+                    self.notesTableview.isHidden = false
+                    self.noNotesLabel.isHidden = true
+                }
+                self.notesTableview.reloadData()
+            }
         }, errorResult: { (error) in
-            //                stopLoading()
+            ActivityIndicatorView.hiding()
             guard let errorString  = error else {
                 return
             }
             self.alert(message: errorString)
         })
-    
     }
-    func createNoteClicked(){
-        let id1 = index
-        APIManager.callServer.postNote(note: "This is a test note send to the user",toUserId:id1,sucessResult: {(responseModel) in
-            guard let loginModel = responseModel as? UpdateNoteRespModel else{
-                print("=====@@@@@")
-                return
-            }
     
-            print("&&&&&&&@@@@@@@@@@@@@@@@@@@@@@@ post",loginModel.id)
-        }, errorResult: { (error) in
-            //                stopLoading()
-            guard let errorString  = error else {
-                return
-            }
-            self.alert(message: errorString)
-        })
-    
-    }
-    func noteButtonToched(){
-        let id1 = "hi testing!!!"
-        let id2 = 10
-        APIManager.callServer.updateNote(note: id1, toUserId:id2 , sucessResult: {(responseModel) in
-            guard let loginModel = responseModel as? UpdateNoteRespModel else{
+    private func updateNote(withId noteId: Int, noteString: String) {
+        
+        guard let userId = connectedUserModel?.connectedUser?.userId else { return }
+        
+        ActivityIndicatorView.show("Loading...")
+        APIManager.callServer.updateNote(noteId: noteId, note: noteString, toUserId: userId, sucessResult: { (responseModel) in
+            ActivityIndicatorView.hiding()
+            guard let noteModel = responseModel as? GetNoteRespModel else {
                 print("resp model@@@@@@@@@")
                 return
             }
-            print("&&&&&&&@@@@@@@@@@@ +++++++++UPdate",loginModel.id)
+            self.loadNotes()
+            
         }, errorResult: { (error) in
-            //                stopLoading()
+            ActivityIndicatorView.hiding()
             guard let errorString  = error else {
                 return
             }
             self.alert(message: errorString)
         })
-    
-    
     }
-    func removeNote(){
-        
-    }
+    
 
-    
+    private func deleteNote(withId noteId: Int) {
+        
+        ActivityIndicatorView.show("Loading...")
+        APIManager.callServer.removeNote(withNoteId: noteId, sucessResult: { (responseModel) in
+            ActivityIndicatorView.hiding()
+            guard let notesModel = responseModel as? GetNoteRespModel else {
+                print("Rep model does not match")
+                return
+            }
+            
+            self.loadNotes()
+            
+        }, errorResult: { (error) in
+            ActivityIndicatorView.hiding()
+            guard let errorString  = error else {
+                return
+            }
+            self.alert(message: errorString)
+        })
     }
+    
+    private func didTapAddNoteButton() {
+        guard let connectedUserId = connectedUserModel?.connectedUser?.userId else { return }
+        
+        ActivityIndicatorView.show("Loading...")
+        APIManager.callServer.postNote(note: " ", toUserId: connectedUserId, sucessResult: { (responseModel) in
+            ActivityIndicatorView.hiding()
+
+            guard let noteModel = responseModel as? GetNoteRespModel else { return }
+            
+            self.loadNotes()
+            
+        }, errorResult: { (error) in
+            
+            ActivityIndicatorView.hiding()
+            guard let errorString  = error else {
+                return
+            }
+            self.alert(message: errorString)
+        })
+    }
+    
+}
 
 
 

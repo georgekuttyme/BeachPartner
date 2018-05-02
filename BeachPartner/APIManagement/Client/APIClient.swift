@@ -191,10 +191,23 @@ final class APIClient{
         }
         
         
-        let headders: HTTPHeaders = [
-            "Accept": "application/json, text/plain, */*",
-            "Content-Type" :"application/json ; charset=utf-8"
-        ]
+        let token = UserDefaults.standard.string(forKey: "bP_token") ?? ""
+        
+        var headders: HTTPHeaders = [:]
+        
+        if( token != ""){
+            headders = [
+                "Accept": "application/json, text/plain, */*",
+                "Content-Type" :"application/json; charset=utf-8",
+                "Authorization" : "Bearer " + token
+            ]
+        }
+        else{
+            headders = [
+                "Accept": "application/json, text/plain, */*",
+                "Content-Type" :"application/json; charset=utf-8"
+            ]
+        }
         
         let postRequest = self.sessionManager.request(url, method: .post, parameters: params as [String:Any], encoding: JSONEncoding.default, headers:headders
         )

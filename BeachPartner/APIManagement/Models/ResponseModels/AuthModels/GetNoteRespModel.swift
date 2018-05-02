@@ -32,12 +32,16 @@ struct GetNoteRespModelArray: SafeMappable {
 }
 struct GetNoteRespModel : SafeMappable {
     
-    var createdDate : String = ""
+    var createdDate : Int = 0
+    var noteId: Int = 0
+    var note: String = ""
     var loginType : String = ""
     var fromUser_:fromUser?
     var toUser_:toUser?
     init(_ map: [String : Any]) throws {
         createdDate <- map.property("createdDate")
+        noteId <- map.property("id")
+        note <- map.property("note")
         fromUser_ <- map.relation("fromUser")
         toUser_ <- map.relation("toUser")
     }

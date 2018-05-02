@@ -211,6 +211,7 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
         let storyboard = UIStoryboard(name: "ConnectionsTabBar", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "NotesViewController") as! NotesViewController
         vc.index = index
+        vc.connectedUserModel = connectedUser
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
