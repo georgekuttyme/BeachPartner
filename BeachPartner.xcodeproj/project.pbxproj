@@ -117,6 +117,7 @@
 		83DBB7AF05BDAD7316DD54BD /* Pods_BeachPartner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4E87914ED5BC1C1ECF86DA1 /* Pods_BeachPartner.framework */; };
 		8427705F2093594B0056CBF6 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8427705E2093594B0056CBF6 /* HelpViewController.swift */; };
 		843F356C2084F8CE00E268D6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843F356B2084F8CE00E268D6 /* GoogleService-Info.plist */; };
+		844984212099A0E100B8FD37 /* MutualLikesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844984202099A0E100B8FD37 /* MutualLikesViewController.swift */; };
 		844F70502090BC01004F3005 /* noteResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844F704F2090BC01004F3005 /* noteResponseModel.swift */; };
 		845B7908208B4A5200DF1F1F /* AthleteProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845B7907208B4A5200DF1F1F /* AthleteProfileTableViewController.swift */; };
 		845BD6A32089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BD6A22089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift */; };
@@ -240,6 +241,7 @@
 		6C906053FF45337829E56422 /* Pods-BeachPartner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeachPartner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeachPartner/Pods-BeachPartner.debug.xcconfig"; sourceTree = "<group>"; };
 		8427705E2093594B0056CBF6 /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		843F356B2084F8CE00E268D6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		844984202099A0E100B8FD37 /* MutualLikesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutualLikesViewController.swift; sourceTree = "<group>"; };
 		844F704F2090BC01004F3005 /* noteResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noteResponseModel.swift; sourceTree = "<group>"; };
 		845B7907208B4A5200DF1F1F /* AthleteProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AthleteProfileTableViewController.swift; sourceTree = "<group>"; };
 		845BD6A22089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllEventsBetweenResponseModel.swift; sourceTree = "<group>"; };
@@ -783,6 +785,7 @@
 				3B6898A4204881710075128E /* BPfinder */,
 				5EFAFE222097609100256B1B /* CommmonWebViewController.swift */,
 				3B689A0F204926340075128E /* TabBarController.swift */,
+				844984202099A0E100B8FD37 /* MutualLikesViewController.swift */,
 			);
 			path = TabScenes;
 			sourceTree = "<group>";
@@ -1058,6 +1061,7 @@
 				3B0DEE8F206D095500686609 /* CardOverlayView.swift in Sources */,
 				3BE40F56203EAEC100EA7DFC /* AppDelegate.swift in Sources */,
 				3BC8F907205AE5090086333E /* PopUpThanksViewController.swift in Sources */,
+				844984212099A0E100B8FD37 /* MutualLikesViewController.swift in Sources */,
 				3B6027A22049707E006B108A /* TermsAndConditionVC.swift in Sources */,
 				3B49C3932068EE15007186E8 /* InvitePartnerViewController.swift in Sources */,
 				3B0DEE84206CA66B00686609 /* FilterViewController.swift in Sources */,

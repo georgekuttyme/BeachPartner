@@ -166,6 +166,9 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     let willingnessToTraveldropDown = DropDown()
     let heightdropDown = DropDown()
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        tableView.setContentOffset(CGPoint(x : 0, y: 500), animated : true)
+    }
     
     @IBAction func saveClicked(_ sender: Any) {
         let image = UIImage(named: "edit_btn_1x") as UIImage?

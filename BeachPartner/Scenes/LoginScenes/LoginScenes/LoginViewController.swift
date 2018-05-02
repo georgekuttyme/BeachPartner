@@ -726,7 +726,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
                         
                     }else{
                         //                    self.errorLabel.textColor = UIColor.red
-                        self.errorlabel.text = "Invalid username/password."
+                        self.errorlabel.text = "Your account is not activated."
                         self.passwordField.text = ""
                         //                    self.passwordField.shake()
                         stopLoading()
