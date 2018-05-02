@@ -707,7 +707,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
                         return
                     }
                     
-                                    
+                    
                     if(loginModel.idToken != ""){
 
                         print("loginModel.idToken :", loginModel.idToken)
@@ -725,9 +725,14 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
                         
                         
                     }else{
+                        if(loginModel.details == "Bad credentials"){
+                            self.errorlabel.text = "Invalid username/password."
+                            self.passwordField.text = ""
+                        }
+                        else{
+                          self.errorlabel.text = "Your account is not activated."
+                        }
                         //                    self.errorLabel.textColor = UIColor.red
-                        self.errorlabel.text = "Your account is not activated."
-                        self.passwordField.text = ""
                         //                    self.passwordField.shake()
                         stopLoading()
                     }

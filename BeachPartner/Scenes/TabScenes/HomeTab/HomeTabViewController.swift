@@ -111,7 +111,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     }
     
     @IBAction func btnLikesClicked(_ sender: Any) {
-        if lblUserCount.text != ""{
+        if lblUserCount.text != "No"{
             self.getAllConnectedUsers()
         }
     }

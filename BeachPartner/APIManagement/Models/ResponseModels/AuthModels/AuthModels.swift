@@ -12,13 +12,13 @@ import Tailor
 struct LoginRespModel:SafeMappable {
 
      var idToken: String = ""
-
+    var details: String = ""
     init(_ map: [String : Any]) throws {
         //        print("mapp :",map)
         
 
         idToken  <- map.property("idToken")
-
+        details  <- map.property("detail")
         
     }
 }
