@@ -45,6 +45,11 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         //        dropDown.show()
     }
     
+    @IBOutlet weak var tournamentStackView: UIStackView!
+    @IBOutlet weak var messageContainerView: UIView!
+    
+    
+    
     var selectedTabViewController:Int!
     var getAllEventsUsers = [GetAllEventsBetweenResponseModel]()
     var subscribedBlueBpUsers = [SearchUserModel]()
@@ -77,6 +82,17 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "HelpViewController") as! HelpViewController
             self.present(vc, animated: true, completion: nil)
+        }
+        
+        if UserDefaults.standard.string(forKey: "userType") == "Athlete" {
+            tournamentStackView.isHidden = false
+        }
+        else {
+            tournamentStackView.isHidden = true
+            
+            if let bgImage = UIImage(named: "BP - Cal_Events") {
+                messageContainerView.backgroundColor = UIColor(patternImage: bgImage)
+            }
         }
     }
     

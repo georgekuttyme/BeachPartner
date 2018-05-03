@@ -34,7 +34,8 @@ class BeachPartnerViewController: UIViewController {
         self.dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             print("Selected item:",item," at index:",index)
             if(item == "My Profile"){
-                self.performSegue(withIdentifier: "editprofilesegue", sender: self)
+                let identifier = UserDefaults.standard.string(forKey: "userType") == "Athlete" ? "editprofilesegue" : "editCoachProfileSegue"
+                self.performSegue(withIdentifier: identifier, sender: self)
                 self.tabBarController?.tabBar.isHidden = false
                 self.navigationController!.navigationBar.topItem!.title = ""
                 self.navigationController?.isNavigationBarHidden = false
