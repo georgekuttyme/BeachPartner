@@ -41,6 +41,8 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     var selectedIndex:Int!
     var curentCardIndex:Int!
     var selectedType:String!
+    var searchCardSatus:String!
+    var topFinishers:String!
     var connectedUsers = [ConnectedUserModel]()
     var subscribedUsers = [SubscriptionUserModel]()
    var subscribedBlueBpUsers = [SearchUserModel]()
@@ -49,15 +51,55 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     var SwipeCardArray:[Any] = []
     
     @IBAction func topfinishesClicked(_ sender: Any) {
-
-        UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: {
-            self.topThreeBtn.isHidden = false
-            self.topTwoBtn.isHidden = false
-            self.toponeBtn.isHidden = false
-            self.badgeImage.isHidden = true
-            self.topthreefinishesBtn.isHidden = true
-        })
-
+     
+        if SwipeCardArray.count > 0 {
+            print(topFinishers)
+            UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                
+                if(self.topFinishers != ""){
+                    var toplist = self.topFinishers.components(separatedBy: ",")
+                    if(toplist.count == 3){
+                        let firstFinish = toplist[2]
+                        if firstFinish == " " || firstFinish == "," || firstFinish == "" {
+                           self.topThreeBtn.isHidden = true
+                        }
+                        else{
+                            self.topThreeBtn.isHidden = false
+                            self.topThreeBtn.setTitle(firstFinish, for: UIControlState.normal)
+                        }
+                        toplist.removeLast()
+                    }
+                     if(toplist.count == 2){
+                        
+                        let firstFinish = toplist[1]
+                        if firstFinish == " " || firstFinish == "," || firstFinish == "" {
+                            self.topTwoBtn.isHidden = true
+                        }
+                        else{
+                            self.topTwoBtn.isHidden = false
+                            self.topTwoBtn.setTitle(firstFinish, for: UIControlState.normal)
+                        }
+                        toplist.removeLast()
+                    }
+                     if(toplist.count == 1){
+                        
+                        let firstFinish = toplist[0]
+                        if firstFinish == " " || firstFinish == ","  || firstFinish == "" {
+                            self.toponeBtn.isHidden = true
+                            self.badgeImage.isHidden = false
+                            self.topthreefinishesBtn.isHidden = false
+                        }
+                        else{
+                            self.toponeBtn.isHidden = false
+                            self.toponeBtn.setTitle(firstFinish, for: UIControlState.normal)
+                            self.badgeImage.isHidden = true
+                            self.topthreefinishesBtn.isHidden = true
+                        }
+                        toplist.removeLast()
+                    }
+                }
+            })
+        }
     }
     
     @IBAction func topfinishesCollapseClicked(_ sender: Any) {
@@ -83,6 +125,8 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         self.btnUndo.setImage(UIImage(named:"grayback"), for: UIControlState.normal)
         self.imgProfile.isHidden = true
         self.lblNotAvailable.isHidden = true
+        self.btnPlaybtn.isHidden = true
+        self.lblSwipeGameMsg.isHidden = true
         self.cardView.revertAction()
         APIManager.callServer.undoSwipeAction(userId:"\(self.swipeAction[0].id)",sucessResult: { (responseModel) in
             
@@ -113,7 +157,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     }
     
     @IBAction func btnPlaySwipeGame(_ sender: Any) {
-        
+        self.view .removeFromSuperview()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -146,6 +190,8 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         if collectionView == self.topUserListCollectionView {
             self.selectedIndex = indexPath.row
             self.selectedType = "BlueBp-New"
+            self.btnPlaybtn.isHidden = true
+            self.lblSwipeGameMsg.isHidden = true
             self.generateSwipeAarray()
             self.btnUndo.isEnabled = false
             self.btnUndo.setImage(UIImage(named:"grayback"), for: UIControlState.normal)
@@ -216,6 +262,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         
         if selectedType == "Likes" {
             SwipeCardArray = self.connectedUsers
+            searchCardSatus = selectedType
             self.cardView.dataSource = self
             self.cardView.delegate = self
             if SwipeCardArray.count == 0{
@@ -225,6 +272,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         }
         else if selectedType == "Search"{
             SwipeCardArray = self.searchUsers
+            searchCardSatus = selectedType
             self.cardView.dataSource = self
             self.cardView.delegate = self
             if SwipeCardArray.count == 0{
@@ -239,17 +287,20 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             {
                 SwipeCardArray.append(self.connectedUsers[i])
             }
+             searchCardSatus = selectedType
             self.cardView.dataSource = self
             self.cardView.delegate = self
             if SwipeCardArray.count == 0{
                 self.imgProfile.isHidden = false
                 self.lblNotAvailable.isHidden = false
             }
+            
         }
         else if selectedType == "BlueBp"{
             SwipeCardArray.insert(self.searchUsers[selectedIndex], at: 0)
             self.searchUsers .remove(at: selectedIndex)
 //            self.getUsersSwipeCard()
+             searchCardSatus = selectedType
             self.cardView.reloadData()
             if self.SwipeCardArray.count == 0{
                 self.imgProfile.isHidden = false
@@ -258,6 +309,11 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         }
        else if selectedType == "BlueBp-New"{
             
+            if self.SwipeCardArray.count > 0 {
+                if searchCardSatus == "Search"{
+                    searchCardSatus = "search-remain"
+                }
+            }
            self.SwipeCardArray.removeAll()
             self.SwipeCardArray.insert(self.subscribedBlueBpUsers[selectedIndex], at: 0)
             self.cardView.reloadData()
@@ -445,11 +501,12 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             print(connectedUserModelValue)
             self.swipeAction = [connectedUserModelValue]
             print(self.swipeAction)
-            
+        
+        
         }, errorResult: { (error) in
            
         })
-        
+    
         self.btnUndo.setImage(UIImage(named:"back"), for: UIControlState.normal)
         self.btnUndo.isEnabled = true
     }
@@ -506,6 +563,7 @@ extension BPCardsVC :KolodaViewDelegate {
                 }
             self.didPressDownArrow ? view.moveDown.setImage(UIImage(named:"arrow-up"), for: UIControlState.normal) : view.moveDown.setImage(UIImage(named:"arrow-down"), for: UIControlState.normal)
         }
+            topFinishers = data.userMoreProfileDetails?.topFinishes ?? ""
       }
         else{
             let  data = SwipeCardArray[index] as! ConnectedUserModel
@@ -517,8 +575,8 @@ extension BPCardsVC :KolodaViewDelegate {
                 }
                 self.didPressDownArrow ? view.moveDown.setImage(UIImage(named:"arrow-up"), for: UIControlState.normal) : view.moveDown.setImage(UIImage(named:"arrow-down"), for: UIControlState.normal)
             }
+             topFinishers = data.connectedUser?.userMoreProfileDetails?.topFinishes ?? ""
         }
-        
         curentCardIndex = index
         self.imgProfile.isHidden = true
         self.lblNotAvailable.isHidden = true
@@ -617,6 +675,12 @@ extension BPCardsVC :KolodaViewDelegate {
         self.imgProfile.isHidden = false
         self.lblNotAvailable.isHidden = false
          self.lblNotAvailable.alpha = 1.0
+        self.btnPlaybtn.isHidden = false
+        self.lblSwipeGameMsg.isHidden = false
+        self.lblSwipeGameMsg.text = "Start Swipe Game"
+        if searchCardSatus == "search-remain" {
+           self.lblSwipeGameMsg.text = "Resume Swipe Game"
+        }
     }
     
 }

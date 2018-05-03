@@ -15,6 +15,7 @@ class BaseUrl {
     static let developmentUrl =  "http://beachpartner.com:8080/api"
     static let productionUrl  = "http://beachpartner.com:8080/api"
     static let fcmbaseUrl = "https://beachpartner-6cd7a.firebaseio.com"
+     static let fcmMessageUrl = "https://fcm.googleapis.com"
     //http://34.215.18.181:8080/api
     class func makeUrl(forProduction:Bool) -> String {
         if forProduction {
@@ -60,6 +61,7 @@ struct ApiMethods {
     static let rejectFriendRequest  = "/users/reject-friendship/"
     static let undoSwipeAction  =  "/users/undo-request/"
     static let sendHiFiRequest  = "/users/hifi/"
+    static let sendPushnotification = "/fcm/send"
     static let updateAllUserDetails = "/users/update-all"
     
     //    static let Login   = "/secure/Authentication/authenticate"

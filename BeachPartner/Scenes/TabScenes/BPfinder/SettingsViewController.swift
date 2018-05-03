@@ -314,7 +314,12 @@ class SettingsViewController: UIViewController {
             self.searchUsers = searchUserModelArray.searchUserModel
             print(self.searchUsers)
             ActivityIndicatorView.hiding()
-            self.bpDelegate?.playButtonPressed(searchList: self.searchUsers)
+            if self.searchUsers.count > 0{
+                self.bpDelegate?.playButtonPressed(searchList: self.searchUsers)
+            }
+            else{
+                self.alert(message: "No users found with this criteria. Please change the search parameters and play again")
+            }
             
         }, errorResult: { (error) in
             guard let errorString  = error else {

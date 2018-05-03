@@ -192,7 +192,13 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
             }
             
             DispatchQueue.main.async {
-                self.collectionView.reloadData()
+                if self.connectedUsers.count > 0 {
+                    self.collectionView.isHidden = false
+                   self.collectionView.reloadData()
+                }
+                else{
+                   self.collectionView.isHidden = true
+                }
                 ActivityIndicatorView.hiding()
             }
         }, errorResult: { (error) in

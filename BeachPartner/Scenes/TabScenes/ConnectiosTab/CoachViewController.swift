@@ -201,7 +201,13 @@ class CoachViewController: UIViewController,UICollectionViewDataSource , UIColle
                 self.connectedUsers.append(user)
             }
             
-            self.collectionView.reloadData()
+            if self.connectedUsers.count > 0 {
+                self.collectionView.isHidden = false
+                self.collectionView.reloadData()
+            }
+            else{
+                self.collectionView.isHidden = true
+            }
             ActivityIndicatorView.hiding()
             
         }, errorResult: { (error) in

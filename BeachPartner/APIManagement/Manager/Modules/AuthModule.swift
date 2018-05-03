@@ -665,6 +665,41 @@ extension APIManager{
     }
     
     
+    public func setPushNotification(recipients:String,icon:String,title:String,body:String, sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure){
+        
+        let params: [String: Any] = [
+            "data": [
+                "body": body,
+                "title": title,
+                "icon": icon,
+            ],
+            "to": recipients
+        ]
+        
+        APIClient.doRequest.inPostPushNotification(method:ApiMethods.sendPushnotification , params: params , sucess: { (response) in
+            let jsonDict = response! as! JSONDictionary
+            do {
+                print(jsonDict)
+              //  let accRespModel = try JSONDictionary(jsonDict)
+              //  sucessResult(jsonDict)
+                return
+            } catch {
+                print("Catched")
+                errorResult(error.localizedDescription)
+                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                return
+            }
+            
+        }) { (error) in
+            self.busyOff()
+            errorResult(error?.localizedDescription)
+            APIManager.printOnDebug(response: "error:\(String(describing: error?.localizedDescription))")
+            return
+        }
+        
+    }
+    
+    
     
     
     func getCookie(name:String)-> String{

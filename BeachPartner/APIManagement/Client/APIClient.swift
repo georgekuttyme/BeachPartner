@@ -253,6 +253,88 @@ final class APIClient{
     
     
     
+    public func inPostSentPushnotification(url:String,params:[String:Any],sucess:@escaping sucessClosure, failure:@escaping failureClosure){
+        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
+        print("####### API Request ....url :", url, "\n #### parameters :", params)
+        
+        //        let cookie = HTTPCookieStorage.shared.cookies
+        let cookieJar = HTTPCookieStorage.shared
+        //        print("\n ####### Request cookie...elements : ", cookieJar.cookies?.count as Any , "\n")
+        
+        for cookie in cookieJar.cookies! {
+            print(cookie.name+"="+cookie.value)
+        }
+        
+        let token = API.FCM_AUTH_TOKEN
+        var headders: HTTPHeaders = [:]
+        
+        
+        if( token != ""){
+            headders = [
+                "Accept": "application/json, text/plain, */*",
+                "Content-Type" :"application/json ; charset=utf-8",
+                "Authorization" : "key=" + token
+            ]
+        }
+        else{
+            headders = [
+                "Accept": "application/json, text/plain, */*",
+                "Content-Type" :"application/json; charset=utf-8"
+            ]
+        }
+        
+        //        headders: HTTPHeaders = [
+        //            "Accept": "application/json, text/plain, */*",
+        //            "Content-Type" :"application/json ; charset=utf-8"
+        //        ]
+        
+        
+        let postRequest = self.sessionManager.request(url, method: .post, parameters: params as [String:Any], encoding: JSONEncoding.default, headers:headders
+        )
+        
+        //""
+        
+        print("####### API response String :", postRequest.responseString,"\n")
+        
+        
+        postRequest.responseJSON { (responseObject) in
+            
+            
+            print("####### API response :", responseObject,"\n")
+            
+            let cookieJar = HTTPCookieStorage.shared
+            
+            //            print("# Cookie data count :", cookieJar.cookies?.count as Any)
+            
+            for cookie in cookieJar.cookies! {
+                print(cookie.name+"="+cookie.value)
+            }
+            print("_________________________________________________\n\n\n")
+            
+            
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            switch  responseObject.result {
+            case .success:
+                
+                let json = responseObject.result.value
+                
+                sucess(json as! NSDictionary?)
+                return
+            case .failure:
+                let error = responseObject.result.error
+                failure(error)
+                return
+            }
+            }.responseString { (jsonString) in
+                APIManager.printOnDebug(response: jsonString)
+        }
+    }
+    
+    
+    
+    
     
     // MARK: - PUT Request
     
@@ -903,6 +985,15 @@ extension APIClient{
     public func inPost(method:String, params:[String:String],sucess:@escaping sucessClosure,failure:@escaping failureClosure){
         
         self.inPost(url: BaseUrl.makeUrl(forProduction: false)+method, params: params, sucess: { (response) in
+            sucess(response)
+        }) { (error) in
+            failure(error)
+        }
+    }
+    
+    public func inPostPushNotification(method:String, params:[String:Any],sucess:@escaping sucessClosure,failure:@escaping failureClosure){
+        
+        self.inPostSentPushnotification(url: BaseUrl.fcmMessageUrl + method, params: params, sucess: { (response) in
             sucess(response)
         }) { (error) in
             failure(error)

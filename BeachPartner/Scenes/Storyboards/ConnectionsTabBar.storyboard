@@ -143,7 +143,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0tb-TW-jt8">
+                            <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0tb-TW-jt8">
                                 <rect key="frame" x="7" y="150" width="361" height="517"/>
                                 <color key="backgroundColor" red="0.65805597829999996" green="0.66457138400000004" blue="0.66457138400000004" alpha="0.31782427229999999" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.074509803920000006" green="0.086274509799999996" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -368,7 +368,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Dlm-wM-fR1">
+                            <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Dlm-wM-fR1">
                                 <rect key="frame" x="7" y="150" width="361" height="517"/>
                                 <color key="backgroundColor" red="0.65805597829999996" green="0.66457138400000004" blue="0.66457138400000004" alpha="0.31782427229999999" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.074509803920000006" green="0.086274509799999996" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

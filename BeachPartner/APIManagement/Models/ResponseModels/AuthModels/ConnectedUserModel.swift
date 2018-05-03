@@ -46,6 +46,7 @@ struct ConnectedUserModel:SafeMappable {
         var authToken: Int = 0
         var city: String = ""
         var age: Int = 0
+        var fcmToken: String = ""
         var createdDate: String = ""
         var deviceId: String = ""
         var email: String = ""
@@ -63,6 +64,7 @@ struct ConnectedUserModel:SafeMappable {
         var userId: Int = 0
         var userType: String = ""
         var isBlocked: Bool = false
+        var userMoreProfileDetails: userMoreDetails?
         
         init() {
             
@@ -73,6 +75,7 @@ struct ConnectedUserModel:SafeMappable {
             activated <- map.property("activated")
             age <- map.property("age")
             authToken  <- map.property("authToken")
+            city <- map.property("fcmToken")
             city <- map.property("city")
             createdDate <- map.property("createdDate")
             deviceId  <- map.property("deviceId")
@@ -93,6 +96,67 @@ struct ConnectedUserModel:SafeMappable {
             videoUrl <- map.property("videoUrl")
             userId  <- map.property("id")
             userType <- map.property("userType")
+            userMoreProfileDetails = map.relation("userProfile")
+        }
+        
+        struct userMoreDetails:SafeMappable {
+            
+            var cbvaFirstName:  String = ""
+            var cbvaLastName: String = ""
+            var cbvaPlayerNumber: String = ""
+            var collage: String = ""
+            var collageClub: String = ""
+            var collegeBeach: String = ""
+            var collegeIndoor: String = ""
+            var courtSidePreference: String = ""
+            var description: String = ""
+            var division: String = ""
+            var experience: String = ""
+            var fundingStatus: String = ""
+            var height: String = ""
+            var highSchoolAttended: String = ""
+            var highestTourRatingEarned: String = ""
+            var indoorClubPlayed: String = ""
+            var numOfAthlets: String = ""
+            var position: String = ""
+            var programsOffered: String = ""
+            var topFinishes: String = ""
+            var totalPoints: String = ""
+            var toursPlayedIn: String = ""
+            var usaVolleyballRanking: String = ""
+            var willingToTravel: String = ""
+            var yearsRunning: String = ""
+            
+            init() {
+                
+            }
+            init(_ map: [String : Any]) throws {
+                cbvaFirstName <- map.property("cbvaFirstName")
+                cbvaLastName <- map.property("cbvaLastName")
+                cbvaPlayerNumber  <- map.property("cbvaPlayerNumber")
+                collage <- map.property("collage")
+                collageClub <- map.property("collageClub")
+                collegeBeach <- map.property("collegeBeach")
+                collegeIndoor <- map.property("collegeIndoor")
+                courtSidePreference <- map.property("courtSidePreference")
+                description <- map.property("description")
+                division <- map.property("division")
+                experience <- map.property("experience")
+                fundingStatus <- map.property("fundingStatus")
+                height <- map.property("height")
+                highSchoolAttended <- map.property("highSchoolAttended")
+                highestTourRatingEarned <- map.property("highestTourRatingEarned")
+                indoorClubPlayed <- map.property("indoorClubPlayed")
+                numOfAthlets <- map.property("numOfAthlets")
+                position <- map.property("position")
+                programsOffered <- map.property("programsOffered")
+                topFinishes <- map.property("topFinishes")
+                totalPoints <- map.property("totalPoints")
+                toursPlayedIn <- map.property("toursPlayedIn")
+                usaVolleyballRanking <- map.property("usaVolleyballRanking")
+                willingToTravel <- map.property("willingToTravel")
+                yearsRunning <- map.property("yearsRunning")
+            }
         }
     }
 }

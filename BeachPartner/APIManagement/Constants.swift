@@ -23,6 +23,8 @@ struct API{
     static let INSTAGRAM_ACCESS_TOKEN = ""
     static let INSTAGRAM_SCOPE = "basic" /* add whatever scope you need https://www.instagram.com/developer/authorization/ */
     
+    static let FCM_AUTH_TOKEN = "AAAA_n1CZM0:APA91bEzOCp33DEXluIkYPsfheiCk7PINyo0MaxDkk7AfX-uG6PUO1CCggbEnN3IR1sljAm05WY-BGDeyeAOM7l1ciFdFnAV5z5DrnkBaYKQusqJPcvzbyKX-84t1b5SvpXPp75NjJI9"
+    
     //   http://34.215.18.181:8080/swagger/index.html#/
     
     

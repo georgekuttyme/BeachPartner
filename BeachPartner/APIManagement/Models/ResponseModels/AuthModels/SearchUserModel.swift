@@ -38,6 +38,7 @@ struct SearchUserModel:SafeMappable {
      var activated: Int = 0
      var authToken: Int = 0
     var city: String = ""
+     var fcmToken: String = ""
     var age: Int = 0
     var doblong: Double = 0
     var deviceId: String = ""
@@ -56,6 +57,7 @@ struct SearchUserModel:SafeMappable {
     var userType: String = ""
     
     var connectedUser: SearchUser?
+    var userMoreProfileDetails: userMoreDetails?
     
     init(_ map: [String : Any]) throws {
 
@@ -63,6 +65,7 @@ struct SearchUserModel:SafeMappable {
         firstName <- map.property("firstName")
         activated <- map.property("activated")
         authToken <- map.property("authToken")
+        fcmToken <- map.property("fcmToken")
         city <- map.property("city")
         age <- map.property("age")
         dob <- map.property("dob")
@@ -80,8 +83,8 @@ struct SearchUserModel:SafeMappable {
         phoneNumber <- map.property("phoneNumber")
         videoUrl <- map.property("videoUrl")
         userType <- map.property("userType")
-        
         connectedUser = map.relation("createdBy")
+        userMoreProfileDetails = map.relation("userProfile")
     }
     
     struct SearchUser:SafeMappable {
@@ -129,4 +132,66 @@ struct SearchUserModel:SafeMappable {
             videoUrl <- map.property("videoUrl")
         }
     }
+    
+    struct userMoreDetails:SafeMappable {
+        
+        var cbvaFirstName:  String = ""
+        var cbvaLastName: String = ""
+        var cbvaPlayerNumber: String = ""
+        var collage: String = ""
+        var collageClub: String = ""
+        var collegeBeach: String = ""
+        var collegeIndoor: String = ""
+        var courtSidePreference: String = ""
+        var description: String = ""
+        var division: String = ""
+        var experience: String = ""
+        var fundingStatus: String = ""
+        var height: String = ""
+        var highSchoolAttended: String = ""
+        var highestTourRatingEarned: String = ""
+        var indoorClubPlayed: String = ""
+        var numOfAthlets: String = ""
+        var position: String = ""
+        var programsOffered: String = ""
+        var topFinishes: String = ""
+        var totalPoints: String = ""
+        var toursPlayedIn: String = ""
+        var usaVolleyballRanking: String = ""
+        var willingToTravel: String = ""
+        var yearsRunning: String = ""
+        
+        init() {
+            
+        }
+        init(_ map: [String : Any]) throws {
+            cbvaFirstName <- map.property("cbvaFirstName")
+            cbvaLastName <- map.property("cbvaLastName")
+            cbvaPlayerNumber  <- map.property("cbvaPlayerNumber")
+            collage <- map.property("collage")
+            collageClub <- map.property("collageClub")
+            collegeBeach <- map.property("collegeBeach")
+            collegeIndoor <- map.property("collegeIndoor")
+            courtSidePreference <- map.property("courtSidePreference")
+            description <- map.property("description")
+            division <- map.property("division")
+            experience <- map.property("experience")
+            fundingStatus <- map.property("fundingStatus")
+            height <- map.property("height")
+            highSchoolAttended <- map.property("highSchoolAttended")
+            highestTourRatingEarned <- map.property("highestTourRatingEarned")
+            indoorClubPlayed <- map.property("indoorClubPlayed")
+            numOfAthlets <- map.property("numOfAthlets")
+            position <- map.property("position")
+            programsOffered <- map.property("programsOffered")
+            topFinishes <- map.property("topFinishes")
+            totalPoints <- map.property("totalPoints")
+            toursPlayedIn <- map.property("toursPlayedIn")
+            usaVolleyballRanking <- map.property("usaVolleyballRanking")
+            willingToTravel <- map.property("willingToTravel")
+            yearsRunning <- map.property("yearsRunning")
+        }
+    }
+    
+    
 }
