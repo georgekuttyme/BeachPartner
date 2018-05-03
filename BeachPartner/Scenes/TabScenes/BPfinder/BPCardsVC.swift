@@ -29,6 +29,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     @IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var lblNotAvailable: UILabel!
     @IBOutlet weak var lblNotAviltopSpace: NSLayoutConstraint!
+    @IBOutlet weak var mainStackViewTopConstraint: NSLayoutConstraint!
     
      var userData = AccountRespModel()
     let videoView = UIVideoView()
@@ -185,6 +186,18 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         self.generateSwipeAarray()
         
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if selectedType == "BlueBp"{
+            mainStackViewTopConstraint.constant = 64
+        }
+        else {
+            mainStackViewTopConstraint.constant = 0
+        }
+    }
+    
     func generateSwipeAarray() {
         
         if selectedType == "Likes" {
@@ -361,6 +374,10 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             else{
                 self.blueBpListHeight.constant = 61
             }
+            
+//            DispatchQueue.main.async {
+//                self.view.layoutIfNeeded()
+//            }
             
         }, errorResult: { (error) in
             guard let errorString  = error else {
