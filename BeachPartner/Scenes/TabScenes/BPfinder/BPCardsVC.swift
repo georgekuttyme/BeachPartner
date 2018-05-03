@@ -501,7 +501,9 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             print(connectedUserModelValue)
             self.swipeAction = [connectedUserModelValue]
             print(self.swipeAction)
-        
+            if self.selectedType == "BlueBp"{
+                 self.getUsersListforBlueBp()
+            }
         
         }, errorResult: { (error) in
            
@@ -517,6 +519,10 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             }
             print(connectedUserModelValue)
             self.swipeAction = [connectedUserModelValue]
+            if self.selectedType == "BlueBp"{
+                self.getUsersListforBlueBp()
+            }
+            
             if (self.swipeAction[0].status == "Active") {
               /*  let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "MutualLikesViewController") as! MutualLikesViewController
@@ -537,6 +543,9 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             print(connectedUserModelValue)
             self.swipeAction = [connectedUserModelValue]
             print(self.swipeAction)
+            if self.selectedType == "BlueBp"{
+                self.getUsersListforBlueBp()
+            }
         }, errorResult: { (error) in
             
         })
@@ -680,6 +689,10 @@ extension BPCardsVC :KolodaViewDelegate {
         self.lblSwipeGameMsg.text = "Start Swipe Game"
         if searchCardSatus == "search-remain" {
            self.lblSwipeGameMsg.text = "Resume Swipe Game"
+        }
+
+        if selectedType == "BlueBp" {
+           self.lblNotAvailable.isHidden = true
         }
     }
     
