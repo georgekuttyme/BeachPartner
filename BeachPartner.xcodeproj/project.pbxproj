@@ -121,6 +121,7 @@
 		844F70502090BC01004F3005 /* noteResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844F704F2090BC01004F3005 /* noteResponseModel.swift */; };
 		845B7908208B4A5200DF1F1F /* AthleteProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845B7907208B4A5200DF1F1F /* AthleteProfileTableViewController.swift */; };
 		845BD6A32089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BD6A22089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift */; };
+		8DA417C0209B77F60078F814 /* CoachProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA417BF209B77F60078F814 /* CoachProfileTableViewController.swift */; };
 		D69A1981207388F100497B7C /* HighFiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69A1980207388F100497B7C /* HighFiveViewController.swift */; };
 		FF560C0A2096F7FB00D3BA80 /* GetNoteRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF560C092096F7FB00D3BA80 /* GetNoteRespModel.swift */; };
 		FF560C0C2096F83300D3BA80 /* UpdateNoteRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF560C0B2096F83300D3BA80 /* UpdateNoteRespModel.swift */; };
@@ -246,6 +247,7 @@
 		845B7907208B4A5200DF1F1F /* AthleteProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AthleteProfileTableViewController.swift; sourceTree = "<group>"; };
 		845BD6A22089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllEventsBetweenResponseModel.swift; sourceTree = "<group>"; };
 		8464C58F2084ACDA001FC8E5 /* BeachPartner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BeachPartner.entitlements; sourceTree = "<group>"; };
+		8DA417BF209B77F60078F814 /* CoachProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachProfileTableViewController.swift; sourceTree = "<group>"; };
 		A4E87914ED5BC1C1ECF86DA1 /* Pods_BeachPartner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeachPartner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D69A1980207388F100497B7C /* HighFiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighFiveViewController.swift; sourceTree = "<group>"; };
 		FF560C092096F7FB00D3BA80 /* GetNoteRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNoteRespModel.swift; sourceTree = "<group>"; };
@@ -355,6 +357,7 @@
 			children = (
 				3B6898A5204881910075128E /* ProfileViewController.swift */,
 				845B7907208B4A5200DF1F1F /* AthleteProfileTableViewController.swift */,
+				8DA417BF209B77F60078F814 /* CoachProfileTableViewController.swift */,
 			);
 			path = MenuItems;
 			sourceTree = "<group>";
@@ -1068,6 +1071,7 @@
 				3B0DEE95206D099500686609 /* UIVideoView.swift in Sources */,
 				3B6027A420497364006B108A /* SignUpViewController.swift in Sources */,
 				FF560C0A2096F7FB00D3BA80 /* GetNoteRespModel.swift in Sources */,
+				8DA417C0209B77F60078F814 /* CoachProfileTableViewController.swift in Sources */,
 				3B6899E920491B550075128E /* WLMPoolData.swift in Sources */,
 				3B0DEE99206D09DA00686609 /* Extensions.swift in Sources */,
 				3BBDA13F20736145007CE1F3 /* RegResponseModel.swift in Sources */,
