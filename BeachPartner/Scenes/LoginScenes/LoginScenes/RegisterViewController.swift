@@ -371,53 +371,79 @@ class RegisterViewController: UIViewController {
     
     
     func datePickerTapped() {
-        let currentDate = Date()
+//        let currentDate = Date()
         var dateComponents = DateComponents()
         dateComponents.month = -3
-        let threeMonthAgo = Calendar.current.date(byAdding: dateComponents, to: currentDate)
-        let todayDate = Calendar.current.date(byAdding: .month, value: 0, to: Date())
+//        let threeMonthAgo = Calendar.current.date(byAdding: dateComponents, to: currentDate)
+//        let todayDate = Calendar.current.date(byAdding: .month, value: 0, to: Date())
         let datePicker = DatePickerDialog(textColor: UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0),
 //                                          textColor: .blue,
                                           buttonColor: UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0),
 //                                          buttonColor: .blue,
                                           font: UIFont.boldSystemFont(ofSize: 17),
                                           showCancelButton: true)
+
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
         
-//        yyyy-MM-dd'T'HH:mm:ss.SSS
-        
-        datePicker.show("Date of Birth",
-                        doneButtonTitle: "Done",
-                        cancelButtonTitle: "Cancel",
-//                        doneButton.addTarget(self, action: "doneButton:", forControlEvents: UIControlEvents.TouchUpInside)
-//                        minimumDate: threeMonthAgo,
-                        maximumDate: todayDate,
-                        datePickerMode: .date) { (date) in
-                            if let dt = date {
-                                let formatter = DateFormatter()
-                                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
-                                if case dt.description = "" {
-                                    self.birthDate.shake()
-                                    self.birthDate.errorText = "Select date of birth"
-                                    self.birthDate.showError()
-                                }
-                                self.dob = formatter.string(from: dt)
-                                let formatter1 = DateFormatter()
-                                formatter1.dateFormat = "yyyy-MM-dd"
-                                self.dob = formatter1.string(from: dt)
-                                let now = Date()
-                                let birthday: Date = dt
-                                let calendar = Calendar.current
-                                let ageComponents = calendar.dateComponents([.year], from: birthday, to: now)
-                                let age = ageComponents.year!
-                                self.birthDate.text = formatter1.string(from: dt)
-//                                if age > 17 {
-//                                   self.birthDate.text = formatter1.string(from: dt)
-//                                }
-//                                else{
-//                                   NotificationCenter.default.post(name: NSNotification.Name(rawValue: "minorPopUp"), object: nil)
-//                                }
-                            }
+        var defaultDate = Date()
+        if self.dob != "" {
+            if let date = formatter.date(from: self.dob) {
+                defaultDate = date
+            }
         }
+
+        datePicker.show("Date of Birth", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", defaultDate: defaultDate, minimumDate: nil, maximumDate: Date(), datePickerMode: .date) { (date) in
+            
+            if let dt = date {
+                if case dt.description = "" {
+                    self.birthDate.shake()
+                    self.birthDate.errorText = "Select date of birth"
+                    self.birthDate.showError()
+                }
+                self.dob = formatter.string(from: dt)
+//                let now = Date()
+//                let birthday: Date = dt
+//                let calendar = Calendar.current
+//                let ageComponents = calendar.dateComponents([.year], from: birthday, to: now)
+//                let age = ageComponents.year!
+                self.birthDate.text = formatter.string(from: dt)
+            }
+        }
+
+//        datePicker.show("Date of Birth",
+//                        doneButtonTitle: "Done",
+//                        cancelButtonTitle: "Cancel",
+////                        doneButton.addTarget(self, action: "doneButton:", forControlEvents: UIControlEvents.TouchUpInside)
+////                        minimumDate: threeMonthAgo,
+//                        maximumDate: todayDate,
+//                        datePickerMode: .date) { (date) in
+//                            if let dt = date {
+////                                let formatter = DateFormatter()
+////                                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+//                                if case dt.description = "" {
+//                                    self.birthDate.shake()
+//                                    self.birthDate.errorText = "Select date of birth"
+//                                    self.birthDate.showError()
+//                                }
+////                                self.dob = formatter.string(from: dt)
+//                                let formatter1 = DateFormatter()
+//                                formatter1.dateFormat = "yyyy-MM-dd"
+//                                self.dob = formatter1.string(from: dt)
+//                                let now = Date()
+//                                let birthday: Date = dt
+//                                let calendar = Calendar.current
+//                                let ageComponents = calendar.dateComponents([.year], from: birthday, to: now)
+//                                let age = ageComponents.year!
+//                                self.birthDate.text = formatter1.string(from: dt)
+////                                if age > 17 {
+////                                   self.birthDate.text = formatter1.string(from: dt)
+////                                }
+////                                else{
+////                                   NotificationCenter.default.post(name: NSNotification.Name(rawValue: "minorPopUp"), object: nil)
+////                                }
+//                            }
+//        }
     }
     
 

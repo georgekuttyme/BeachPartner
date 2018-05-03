@@ -144,6 +144,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userName: UILabel!
     
+    var activeTextField: UITextField?
     var userData = AccountRespModel()
     var videoUrl = ""
     var imageUrl = ""
@@ -165,6 +166,8 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     let highestTourRatingEarneddropDown = DropDown()
     let willingnessToTraveldropDown = DropDown()
     let heightdropDown = DropDown()
+    
+    let datePicker = UIDatePicker()
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
@@ -219,6 +222,18 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.delTop1.isUserInteractionEnabled = false
         self.delTop2.isUserInteractionEnabled = false
         self.tableView.reloadData()
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
     
     var topFinishesCount = 0
@@ -303,7 +318,6 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         
         
         //MARK: Date of Birth
-        let datePicker = UIDatePicker()
         datePicker.datePickerMode = UIDatePickerMode.date
         datePicker.addTarget(self, action: #selector(self.datePickerValueChanged(sender:)), for: UIControlEvents.valueChanged)
         birthDateTxtFld.inputView = datePicker
@@ -445,7 +459,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         
         //MARK: Height DropDown
         self.heightdropDown.anchorView = self.heightBtn
-        self.heightdropDown.dataSource = ["Please Select"," 4' 10\""," 4' 11\""," 5' 0\""," 5' 1\""," 5' 2\""," 5' 3\""," 5' 4\""," 5' 5\""," 5' 6\""," 5' 7\""," 5' 8\""," 5' 9\""," 6' 0\""," 6' 1\""," 6' 2\""," 6' 3\""," 6' 4\""," 6' 5\""," 6' 6\""," 6' 7\""," 6' 8\""," 6' 9\""," 6' 10\""," 6' 11\""," 7' 0\""]
+        self.heightdropDown.dataSource = ["Please Select"," 4' 10\""," 4' 11\""," 5' 0\""," 5' 1\""," 5' 2\""," 5' 3\""," 5' 4\""," 5' 5\""," 5' 6\""," 5' 7\""," 5' 8\""," 5' 9\""," 5' 10\""," 5' 11\""," 6' 0\""," 6' 1\""," 6' 2\""," 6' 3\""," 6' 4\""," 6' 5\""," 6' 6\""," 6' 7\""," 6' 8\""," 6' 9\""," 6' 10\""," 6' 11\""," 7' 0\""]
         self.heightdropDown.bottomOffset = CGPoint(x:10, y:10)
         self.heightdropDown.width = 300
         self.heightdropDown.selectionAction = { [unowned self] (index: Int, item: String) in
@@ -1061,6 +1075,60 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         return true;
     }
     
+//    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+//        let pointInTable:CGPoint = textField.superview!.convert(textField.frame.origin, to: tableView)
+//        var contentOffset:CGPoint = tableView.contentOffset
+//        contentOffset.y  = pointInTable.y
+//        print(pointInTable.y)
+//        if let accessoryView = textField.inputAccessoryView {
+//            contentOffset.y -= accessoryView.frame.size.height
+//        }
+//        tableView.contentOffset = contentOffset
+//        return true;
+//    }
+//
+//    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+//        textField.resignFirstResponder()
+//        if (textField.superview?.superview is UITableViewCell) {
+//            let buttonPosition = textField.convert(CGPoint.zero, to: tableView)
+//            let indexPath: IndexPath? = tableView.indexPathForRow(at: buttonPosition)
+//            if let aPath = indexPath {
+//                tableView.scrollToRow(at: aPath, at: .middle, animated: true)
+//            }
+//        }
+//        return true
+//    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            let contentInsets = UIEdgeInsets(top: self.tableView.contentInset.top, left: 0, bottom: keyboardSize.height, right: 0)
+            self.tableView.contentInset = contentInsets
+            
+            // If active text field is hidden by keyboard, scroll it so it's visible
+            // Your app might not need or want this behavior.
+            var aRect: CGRect = self.view.frame
+            aRect.size.height -= keyboardSize.height
+            var activeTextFieldRect: CGRect?
+            var activeTextFieldOrigin: CGPoint?
+            
+            if self.activeTextField != nil {
+                activeTextFieldRect = self.activeTextField?.superview?.superview?.frame
+                activeTextFieldOrigin = activeTextFieldRect?.origin
+                self.tableView.scrollRectToVisible(activeTextFieldRect!, animated:true)
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        let contentInsets = UIEdgeInsets(top: self.tableView.contentInset.top, left: 0, bottom: 0, right: 0)
+        self.tableView.contentInset = contentInsets
+        self.activeTextField = nil
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        self.activeTextField = textField
+        return true
+    }
     
     @objc func datePickerValueChanged(sender: UIDatePicker){
         
@@ -1177,10 +1245,13 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.firstNameTxtFld.text = accResponseModel.firstName
         self.lastNameTxtFld.text = accResponseModel.lastName
         self.genderBtn.setTitle(accResponseModel.gender, for: .normal)
+        
         let date = NSDate(timeIntervalSince1970: TimeInterval(accResponseModel.dob/1000))
         let dayTimePeriodFormatter = DateFormatter()
         dayTimePeriodFormatter.dateFormat = "yyyy-MM-dd"
         let dateString = dayTimePeriodFormatter.string(from: date as Date)
+        
+        datePicker.date = date as Date
         if accResponseModel.dob > 0 {
           self.birthDateTxtFld.text = dateString
         }
