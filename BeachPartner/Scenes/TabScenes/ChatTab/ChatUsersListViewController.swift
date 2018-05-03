@@ -25,6 +25,7 @@ class ChatUsersListViewController: UIViewController,UITableViewDelegate,UITableV
     private lazy var channelRef: DatabaseReference = Database.database().reference().child("messages")
     private var channelRefHandle: DatabaseHandle?
     var recentChatList = [[String:String]]()
+    var activeUsers = [ConnectedUserModel]()
     
     @IBOutlet weak var tblChatList: UITableView!
     
@@ -47,12 +48,12 @@ class ChatUsersListViewController: UIViewController,UITableViewDelegate,UITableV
         })
         self.view.addSubview(floaty)
         ActivityIndicatorView.show("Loading...")
-        self.observeChannels()
          self.tblChatList.delegate = self
         self.tblChatList.dataSource = self
     }
     override func viewWillAppear(_ animated: Bool) {
         self.title = "Messages"
+         self.getBlockedConnections()
     }
     
     private func observeChannels() {
@@ -71,13 +72,57 @@ class ChatUsersListViewController: UIViewController,UITableViewDelegate,UITableV
                  latestMsgDic.updateValue(channelData[channelData.keys[index]]!["text"] as! String, forKey: "text")
                 latestMsgDic.updateValue(channelData[channelData.keys[index]]!["profileImg"] as? String ?? "", forKey: "profileImg")
                 latestMsgDic.updateValue(channelData[channelData.keys[index]]!["date"] as! String, forKey: "date")
-               self.recentChatList.insert(latestMsgDic, at: 0)
-                self.tblChatList .reloadData()
+                
+                let senderId = channelData[channelData.keys[index]]!["sender_id"] as! String
+                let receiverId = channelData[channelData.keys[index]]!["receiver_id"] as! String
+                var isActiveUser = Bool ()
+                
+                for connectedUser in self.activeUsers {
+                    let userId = String(connectedUser.connectedUser?.userId ?? 0)
+                    if userId == senderId || userId == receiverId {
+                        isActiveUser = true
+                       break
+                    }
+                    else {
+                        isActiveUser = false
+                    }
+                }
+
+                if isActiveUser {
+                    self.recentChatList.insert(latestMsgDic, at: 0)
+                    self.tblChatList .reloadData()
+                }
                 
             }
             ActivityIndicatorView.hiding()
         })
     }
+    
+    func getBlockedConnections() {
+        
+        APIManager.callServer.getUserConnectionList(status:"status=Active&showReceived=false",sucessResult: { (responseModel) in
+            
+            guard let connectedUserModelArray = responseModel as? ConnectedUserModelArray else {
+                return
+            }
+            for connectedUser in connectedUserModelArray.connectedUserModel {
+                self.activeUsers.append(connectedUser)
+            }
+            DispatchQueue.main.async {
+                print(self.activeUsers)
+                self.recentChatList.removeAll()
+                self.observeChannels()
+            }
+        }, errorResult: { (error) in
+            //                stopLoading()
+            guard let errorString  = error else {
+                return
+            }
+            ActivityIndicatorView.hiding()
+            self.alert(message: errorString)
+        })
+    }
+    
     
     // MARK: - RecentChatList property's
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -102,6 +147,7 @@ class ChatUsersListViewController: UIViewController,UITableViewDelegate,UITableV
         }
         
         cell.timeLbl.isHidden = true
+        cell.statusImage.isHidden = true
         if let imageUrl = URL(string: (self.recentChatList[indexPath.row]["profileImg"])!) {
             cell.profileImage.sd_setIndicatorStyle(.whiteLarge)
             cell.profileImage.sd_setShowActivityIndicatorView(true)
@@ -121,7 +167,6 @@ class ChatUsersListViewController: UIViewController,UITableViewDelegate,UITableV
         secondViewController.recentChatDic = self.recentChatList[indexPath.row]
         secondViewController.chatType = "recentChat"
         self.navigationController?.pushViewController(secondViewController, animated: true)
-
     }
     
     override func didReceiveMemoryWarning() {

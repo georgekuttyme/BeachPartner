@@ -167,7 +167,8 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     let heightdropDown = DropDown()
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        tableView.setContentOffset(CGPoint(x : 0, y: 500), animated : true)
+        
+      //  tableView.contentSize = CGSize(width: self.view.frame.size.width, height: 1700)
     }
     
     @IBAction func saveClicked(_ sender: Any) {
@@ -378,7 +379,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         
         //MARK: Experience DropDown
         self.experiencedropDown.anchorView = self.experienceBtn
-        self.experiencedropDown.dataSource = ["Newbie (New to the Game)","1-2 years (Some Indoor/Beach Experience Services)","2-3 years (Beach Club/Tournament Experience)","3-4 years (Experienced Tournament Playe)r","5+ years (Multiple Top Finishes/Ranked player)"]
+        self.experiencedropDown.dataSource = ["Please Select","“Newbie” [New to the Game]","1-2 years [Some Indoor/Beach Experience]","2-3 years [Beach Club/Tournament Experience]","3-4 years [Experienced Tournament Player]","More than 4 years"]
         self.experiencedropDown.bottomOffset = CGPoint(x:10, y:10)
         self.experiencedropDown.width = 300
         self.experiencedropDown.selectionAction = { [unowned self] (index: Int, item: String) in
@@ -390,7 +391,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         
         //MARK: CourtSidePreference DropDown
         self.courtSidePreferencedropDown.anchorView = self.courtSidePreferenceBtn
-        self.courtSidePreferencedropDown.dataSource = ["Left Side","Right Side","No Preference"]
+        self.courtSidePreferencedropDown.dataSource = ["Please Select","Left Side","Right Side","No Preference"]
         self.courtSidePreferencedropDown.bottomOffset = CGPoint(x:10, y:10)
         self.courtSidePreferencedropDown.width = 300
         self.courtSidePreferencedropDown.selectionAction = { [unowned self] (index: Int, item: String) in
@@ -404,7 +405,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         
         //MARK: Position DropDown
         self.positiondropDown.anchorView = self.positionBtn
-        self.positiondropDown.dataSource = ["Primary Blocker","Primary Defender","Split Block/Defense"]
+        self.positiondropDown.dataSource = ["Please Select","Primary Blocker","Primary Defender","Split Block/Defense"]
         self.positiondropDown.bottomOffset = CGPoint(x:10, y:10)
         self.positiondropDown.width = 300
         self.positiondropDown.selectionAction = { [unowned self] (index: Int, item: String) in
@@ -418,7 +419,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         
         //MARK: TournamentLevelInterest DropDown
         self.tournamentLevelInterestdropDown.anchorView = self.tournamentLevelInterestBtn
-        self.tournamentLevelInterestdropDown.dataSource = ["Novice/Social","Unrated","B","A","AA","AAA","Pro"]
+        self.tournamentLevelInterestdropDown.dataSource = ["Please Select","Novice/Social","Unrated","B","A","AA","AAA","Pro"]
         self.tournamentLevelInterestdropDown.bottomOffset = CGPoint(x:10, y:10)
         self.tournamentLevelInterestdropDown.width = 200
         self.tournamentLevelInterestdropDown.selectionAction = { [unowned self] (index: Int, item: String) in
@@ -431,7 +432,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         
         //MARK: HighestTourRatingEarned DropDown
         self.highestTourRatingEarneddropDown.anchorView = self.highestTourRatingEarnedBtn
-        self.highestTourRatingEarneddropDown.dataSource = ["PRO","Open or AAA","AA","A","BB","B","C or Novice","Unrated"]
+        self.highestTourRatingEarneddropDown.dataSource = ["Please Select","PRO","Open Or AAA","AA","A","BB","B","C Or Novice","Unrated"]
         self.highestTourRatingEarneddropDown.bottomOffset = CGPoint(x:10, y:10)
         self.highestTourRatingEarneddropDown.width = 200
         self.highestTourRatingEarneddropDown.selectionAction = { [unowned self] (index: Int, item: String) in
@@ -444,7 +445,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         
         //MARK: Height DropDown
         self.heightdropDown.anchorView = self.heightBtn
-        self.heightdropDown.dataSource = [" 4' 10\""," 4' 11\""," 5' 0\""," 5' 1\""," 5' 2\""," 5' 3\""," 5' 4\""," 5' 5\""," 5' 6\""," 5' 7\""," 5' 8\""," 5' 9\""," 6' 0\""," 6' 1\""," 6' 2\""," 6' 3\""," 6' 4\""," 6' 5\""," 6' 6\""," 6' 7\""," 6' 8\""," 6' 9\""," 6' 10\""," 6' 11\""," 7' 0\""]
+        self.heightdropDown.dataSource = ["Please Select"," 4' 10\""," 4' 11\""," 5' 0\""," 5' 1\""," 5' 2\""," 5' 3\""," 5' 4\""," 5' 5\""," 5' 6\""," 5' 7\""," 5' 8\""," 5' 9\""," 6' 0\""," 6' 1\""," 6' 2\""," 6' 3\""," 6' 4\""," 6' 5\""," 6' 6\""," 6' 7\""," 6' 8\""," 6' 9\""," 6' 10\""," 6' 11\""," 7' 0\""]
         self.heightdropDown.bottomOffset = CGPoint(x:10, y:10)
         self.heightdropDown.width = 300
         self.heightdropDown.selectionAction = { [unowned self] (index: Int, item: String) in
@@ -473,7 +474,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
 
         //MARK: HighestTourRatingEarned DropDown
         self.willingnessToTraveldropDown.anchorView = self.willingnessToTravelBtn
-        self.willingnessToTraveldropDown.dataSource = ["Not Willing","Up to 25 miles","Up to 50 miles","Up to 100 miles","Up to 250 miles","Up to 500 miles","Nationwide","International"]
+        self.willingnessToTraveldropDown.dataSource = ["Please Select","Not Willing","Up to 25 miles","Up to 50 miles","Up to 100 miles","Up to 250 miles","Up to 500 miles","Nationwide","International"]
         self.willingnessToTraveldropDown.bottomOffset = CGPoint(x:10, y:10)
         self.willingnessToTraveldropDown.width = 300
         self.willingnessToTraveldropDown.selectionAction = { [unowned self] (index: Int, item: String) in

@@ -218,11 +218,16 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
     
     @objc func msgBtnPressed(sender: UIButton!) {
        let connectedUser = self.connectedUsers[sender.tag-100000]
-        let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
-        let secondViewController = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
-         secondViewController.connectedUserModel = [connectedUser]
-        secondViewController.chatType = "Connections"
-        self.navigationController?.pushViewController(secondViewController, animated: true)
+        if connectedUser.connectedUser?.isBlocked  == false {
+            let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
+            let secondViewController = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
+            secondViewController.connectedUserModel = [connectedUser]
+            secondViewController.chatType = "Connections"
+            self.navigationController?.pushViewController(secondViewController, animated: true)
+        }
+        else{
+            
+        }
     }
     
     @objc func blockBtnPressed(sender: UIButton!) {

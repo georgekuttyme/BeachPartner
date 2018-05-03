@@ -49,6 +49,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     var getAllEventsUsers = [GetAllEventsBetweenResponseModel]()
     var subscribedBlueBpUsers = [SearchUserModel]()
     var connectedUsers = [ConnectedUserModel]()
+    var activeUsers = [ConnectedUserModel]()
     var recentChatList = [[String:String]]()
     
     var date = ["04/01/2018","04/01/2018","04/01/2018","04/01/2018","04/01/2018","04/01/2018","04/01/2018"]
@@ -69,7 +70,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         self.tabBarController?.delegate = self
         self.getUsersListforBlueBp()
         self.getNewUsersList()
-        self.observeChannels()
+        self.getBlockedConnections()
         let loggedIn = UserDefaults.standard.string(forKey: "isFirstLoggedIn") ?? "1"
         if loggedIn != "0" {
             UserDefaults.standard.set("0", forKey: "isFirstLoggedIn")
@@ -410,8 +411,31 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         })
     }
     
-    
-    
+    func getBlockedConnections() {
+        
+        APIManager.callServer.getUserConnectionList(status:"status=Active&showReceived=false",sucessResult: { (responseModel) in
+            
+            guard let connectedUserModelArray = responseModel as? ConnectedUserModelArray else {
+                return
+            }
+            for connectedUser in connectedUserModelArray.connectedUserModel {
+                self.activeUsers.append(connectedUser)
+            }
+            DispatchQueue.main.async {
+                print(self.activeUsers)
+                self.recentChatList.removeAll()
+                self.observeChannels()
+            }
+        }, errorResult: { (error) in
+            //                stopLoading()
+            guard let errorString  = error else {
+                return
+            }
+            ActivityIndicatorView.hiding()
+            self.alert(message: errorString)
+        })
+    }
+
     func observeChannels() {
         channelRefHandle = channelRef.observe(.childAdded, with: { (snapshot) -> Void in // 1
             let channelData = snapshot.value as! Dictionary<String, AnyObject> // 2
@@ -428,12 +452,30 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
                 latestMsgDic.updateValue(channelData[channelData.keys[index]]!["text"] as! String, forKey: "text")
                 latestMsgDic.updateValue(channelData[channelData.keys[index]]!["profileImg"] as? String ?? "", forKey: "profileImg")
                 latestMsgDic.updateValue(channelData[channelData.keys[index]]!["date"] as! String, forKey: "date")
-                self.recentChatList.insert(latestMsgDic, at: 0)
-                if self.recentChatList.count == 0{
-                    self.msgLabel.isHidden = false
-                }else{
-                    self.msgLabel.isHidden = true
-                    self.messagesCollectionView.reloadData()
+                
+                let senderId = channelData[channelData.keys[index]]!["sender_id"] as! String
+                let receiverId = channelData[channelData.keys[index]]!["receiver_id"] as! String
+                var isActiveUser = Bool ()
+                
+                for connectedUser in self.activeUsers {
+                    let userId = String(connectedUser.connectedUser?.userId ?? 0)
+                    if userId == senderId || userId == receiverId {
+                        isActiveUser = true
+                        break
+                    }
+                    else {
+                        isActiveUser = false
+                    }
+                }
+                
+                if isActiveUser {
+                    self.recentChatList.insert(latestMsgDic, at: 0)
+                    if self.recentChatList.count == 0{
+                        self.msgLabel.isHidden = false
+                    }else{
+                        self.msgLabel.isHidden = true
+                        self.messagesCollectionView.reloadData()
+                    }
                 }
             }
             ActivityIndicatorView.hiding()

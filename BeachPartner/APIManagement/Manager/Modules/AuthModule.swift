@@ -304,9 +304,7 @@ extension APIManager{
         
         let userId = UserDefaults.standard.string(forKey: "bP_userId") ?? ""
         let trimmeduserId = userId.trimmingCharacters(in: .whitespaces)
-        
-            print(params)
-        
+                
             APIClient.doRequest.inPutWithJsonData(method:ApiMethods.updateAllUserDetails  + "/\(trimmeduserId)" , params: params, sucess: { (response) in
             self.busyOff()
             

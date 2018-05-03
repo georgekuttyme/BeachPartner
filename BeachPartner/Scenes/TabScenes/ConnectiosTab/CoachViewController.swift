@@ -140,7 +140,7 @@ class CoachViewController: UIViewController,UICollectionViewDataSource , UIColle
         //        if(cell?.profileImgView.image == nil){
         //            cell?.profileImgView.image = UIImage(named: "image_" + val)
         //        }
-        
+
         
         cell?.profileImgView.layer.cornerRadius = (cell?.profileImgView.frame.size.height)! / 2
         cell?.profileImgView.layer.masksToBounds = true
@@ -226,11 +226,16 @@ class CoachViewController: UIViewController,UICollectionViewDataSource , UIColle
     
     @objc func msgBtnPressed(sender: UIButton!) {
         let connectedUser = self.connectedUsers[sender.tag-100000]
+         if connectedUser.connectedUser?.isBlocked  == false {
         let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
         let secondViewController = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
         secondViewController.connectedUserModel = [connectedUser]
          secondViewController.chatType = "Connections"
         self.navigationController?.pushViewController(secondViewController, animated: true)
+         }
+        else{
+            
+        }
     }
     
     @objc func blockBtnPressed(sender: UIButton!){
