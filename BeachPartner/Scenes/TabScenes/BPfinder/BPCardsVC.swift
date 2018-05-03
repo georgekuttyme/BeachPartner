@@ -441,12 +441,11 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             }
             print(connectedUserModelValue)
             self.swipeAction = [connectedUserModelValue]
-            print(self.swipeAction)
-        
-            let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "MutualLikesViewController") as! MutualLikesViewController
-            self.present(vc, animated: true, completion: nil)
-            
+            if (self.swipeAction[0].status == "Active") {
+              /*  let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "MutualLikesViewController") as! MutualLikesViewController
+                self.present(vc, animated: true, completion: nil) */
+            }
             
         }, errorResult: { (error) in
             
