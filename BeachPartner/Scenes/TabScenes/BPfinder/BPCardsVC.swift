@@ -28,8 +28,11 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     @IBOutlet weak var btnLoc: UIButton!
     @IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var lblNotAvailable: UILabel!
+    @IBOutlet weak var btnPlaybtn: UIButton!
+    @IBOutlet weak var lblSwipeGameMsg: UILabel!
     @IBOutlet weak var lblNotAviltopSpace: NSLayoutConstraint!
     @IBOutlet weak var mainStackViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var scrlViewHeight: NSLayoutConstraint!
     
      var userData = AccountRespModel()
     let videoView = UIVideoView()
@@ -109,6 +112,9 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         self.cardView.swipe(.up)
     }
     
+    @IBAction func btnPlaySwipeGame(_ sender: Any) {
+        
+    }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
@@ -141,6 +147,8 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             self.selectedIndex = indexPath.row
             self.selectedType = "BlueBp-New"
             self.generateSwipeAarray()
+            self.btnUndo.isEnabled = false
+            self.btnUndo.setImage(UIImage(named:"grayback"), for: UIControlState.normal)
            // self.cardView.reloadData()  //uncomment
         }
  }
@@ -192,9 +200,15 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         
         if selectedType == "BlueBp"{
             mainStackViewTopConstraint.constant = 64
+            scrlViewHeight.constant = UIScreen.main.bounds.size.height - 150
+             self.cardView.reloadData()
         }
         else {
             mainStackViewTopConstraint.constant = 0
+            scrlViewHeight.constant = UIScreen.main.bounds.size.height - 110
+            if selectedType == "Search"{
+                scrlViewHeight.constant = UIScreen.main.bounds.size.height - 150
+            }
         }
     }
     
@@ -235,22 +249,26 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         else if selectedType == "BlueBp"{
             SwipeCardArray.insert(self.searchUsers[selectedIndex], at: 0)
             self.searchUsers .remove(at: selectedIndex)
-            self.getUsersSwipeCard()
+//            self.getUsersSwipeCard()
+            self.cardView.reloadData()
+            if self.SwipeCardArray.count == 0{
+                self.imgProfile.isHidden = false
+                self.lblNotAvailable.isHidden = false
+            }
         }
        else if selectedType == "BlueBp-New"{
             
-            if self.SwipeCardArray.count>0 {
-                self.SwipeCardArray.remove(at: 0)
-            }
+           self.SwipeCardArray.removeAll()
             self.SwipeCardArray.insert(self.subscribedBlueBpUsers[selectedIndex], at: 0)
             self.cardView.reloadData()
             if SwipeCardArray.count == 0{
                 self.imgProfile.isHidden = false
                 self.lblNotAvailable.isHidden = false
             }
-            isFirstBlueBpCard = true;
-          //  self.cardView.dataSource = self
-          //  self.cardView.delegate = self
+            isFirstBlueBpCard = true
+            self.cardView.dataSource = self
+            self.cardView.delegate = self
+            self.cardView.resetCurrentCardIndex()
         }
         
     }
@@ -370,6 +388,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             
             if self.subscribedBlueBpUsers.count == 0 && self.selectedType == "Search" {
                 self.blueBpListHeight.constant = 0
+                self.scrlViewHeight.constant = UIScreen.main.bounds.size.height - 110
             }
             else{
                 self.blueBpListHeight.constant = 61
@@ -388,7 +407,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     }
     
     
-    func getUsersSwipeCard()  {
+/*    func getUsersSwipeCard()  {
         
         let endPoint = self.getEnPointForSearch()
         APIManager.callServer.getSearchList(endpoint:endPoint ,sucessResult: { (responseModel) in
@@ -415,7 +434,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             self.alert(message: errorString)
         })
     }
-
+*/
     
     func didSwipeToUp(user_Id:String){
         APIManager.callServer.requestHiFi(userId:user_Id,sucessResult: { (responseModel) in
@@ -597,7 +616,7 @@ extension BPCardsVC :KolodaViewDelegate {
     func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
         self.imgProfile.isHidden = false
         self.lblNotAvailable.isHidden = false
-      //  cardView.resetCurrentCardIndex()
+         self.lblNotAvailable.alpha = 1.0
     }
     
 }
@@ -611,8 +630,15 @@ extension BPCardsVC: KolodaViewDataSource {
         
         let view = CardView.instantiateFromNib()
         if selectedType == "Search" || selectedType == "BlueBp" || selectedType == "BlueBp-New"{
-            let  data = SwipeCardArray[index] as! SearchUserModel
-            if index == 0{
+            var  data : SearchUserModel
+            if  selectedType == "BlueBp-New"{
+                data = SwipeCardArray[0] as! SearchUserModel
+            }
+            else{
+                data = SwipeCardArray[index] as! SearchUserModel
+            }
+            
+        if index == 0{
                 if let videoUrl = URL(string: data.videoUrl) {
                     self.videoView.load(videoUrl)
                     self.videoView.isMuted = true

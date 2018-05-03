@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
-            timestampString = "547009914.884299"
+            timestampString = "547054936.854594"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "444"
-            endingLineNumber = "444"
-            landmarkName = "didSwipeToRight(user_Id:)"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
+            landmarkName = "btnPlaySwipeGame(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

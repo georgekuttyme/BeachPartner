@@ -66,7 +66,7 @@ class HighFiveViewController: UIViewController,UITableViewDelegate,UITableViewDa
     
     func getHifiList(){
         ActivityIndicatorView.show("Loading...")
-        APIManager.callServer.getUserConnectionList(status:"status=Hifi&showReceived=false",sucessResult: { (responseModel) in
+        APIManager.callServer.getUserConnectionList(status:"status=Hifi&showReceived=true",sucessResult: { (responseModel) in
             
             guard let connectedUserModelArray = responseModel as? ConnectedUserModelArray else{
                 return
