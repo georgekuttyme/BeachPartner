@@ -891,12 +891,16 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         let dateString = dayTimePeriodFormatter.string(from: date as Date)
         
         datePicker.date = date as Date
-        if accResponseModel.dob > 0 {
-            self.birthDateTxtFld.text = dateString
-        }
-        else{
-            self.birthDateTxtFld.text = ""
-        }
+        self.birthDateTxtFld.text = dateString
+        
+//        if accResponseModel.dob > 0 {
+//            self.birthDateTxtFld.text = dateString
+//        }
+//        else{
+//            self.birthDateTxtFld.text = ""
+//        }
+        
+        
         
         //        self.birthDateTxtFld.text = String(accResponseModel.dob)
         //        self.cityTxtFld.text = accResponseModel.city
@@ -1060,21 +1064,13 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
                     if let tempImgPath = urlOfImage {
                         
                         self.imageUrl = tempImgPath.absoluteString!
-                        
-                        
-                        
                     }
                     
                     let image = info[UIImagePickerControllerOriginalImage]
                     self.userImageView.image = image as! UIImage
-                    print("video url : ",self.videoUrl)
-//                    self.loadVideoOnPlayer(videoUrlVal: self.videoUrl)
-                    //                    }
-                    //
-                    //                    else{
-                    //                        self.alert(message: "The selected image exceeds the permissible file size. Please select another image.", title: "Faild To Select")
-                    //                    }
+                    self.backgroundImageView.image = image as! UIImage
                     
+                    print("video url : ",self.videoUrl)
                 }
             }
         }
@@ -1086,10 +1082,10 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         print(">>>>>",self.movieData)
         print(self.userImageView.image)
         print("%%%%%%")
-        if( self.movieData != nil && self.userImageView.image != nil){
+        if(self.userImageView.image != nil){
             
             print("testttttttt !!! ")
-            self.uploadProfilePicAndVideo(profilePic: self.userImageView.image!, profileVideo: self.movieData!)
+            self.uploadProfilePicAndVideo(profilePic: self.userImageView.image!, profileVideo: nil)
             
         }
         else{
@@ -1100,7 +1096,9 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         
     }
     
-    func uploadProfilePicAndVideo(profilePic:UIImage, profileVideo:NSData){
+    func uploadProfilePicAndVideo(profilePic:UIImage, profileVideo:NSData?){
+        
+        let profileVideo = NSData()
         
         APIManager.callServer(withBusy: BusyScreen(isShow: true, text: "Preparing video ...")).updateAtheleteProfilePicAndVideo(userimage: profilePic, videoData: profileVideo, sucessResult: { (responseModel) in
             

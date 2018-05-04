@@ -58,6 +58,16 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
                 
                 if(self.topFinishers != ""){
                     var toplist = self.topFinishers.components(separatedBy: ",")
+                    
+                    toplist = toplist.filter { $0 != "" }
+                    
+                    if toplist.count == 0 {
+                        self.toponeBtn.isHidden = false
+                        self.toponeBtn.setTitle("No notable finishes", for: UIControlState.normal)
+                        self.badgeImage.isHidden = true
+                        self.topthreefinishesBtn.isHidden = true
+                    }
+                    
                     if(toplist.count == 3){
                         let firstFinish = toplist[2]
                         if firstFinish == " " || firstFinish == "," || firstFinish == "" {
@@ -98,12 +108,22 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
                         toplist.removeLast()
                     }
                 }
+                else {
+                    self.toponeBtn.isHidden = false
+                    self.toponeBtn.setTitle("No notable finishes", for: UIControlState.normal)
+                    self.badgeImage.isHidden = true
+                    self.topthreefinishesBtn.isHidden = true
+                }
             })
         }
     }
     
     @IBAction func topfinishesCollapseClicked(_ sender: Any) {
     
+       resetTopFinishView()
+    }
+    
+    private func resetTopFinishView() {
         UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: {
             self.topThreeBtn.isHidden = true
             self.topTwoBtn.isHidden = true
@@ -261,6 +281,11 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     
     func generateSwipeAarray() {
         
+        resetTopFinishView()
+        if didPressDownArrow == true {
+            moveCardView()
+        }
+        
         if selectedType == "Likes" {
             SwipeCardArray = self.connectedUsers
             searchCardSatus = selectedType
@@ -330,10 +355,9 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         
     }
     
-    @objc func moveDownScroll(sender:UIButton) {
-        
-        UIView.animate(withDuration: 1, animations: {
-             // 200 or any value you like.
+    private func moveCardView() {
+        UIView.animate(withDuration: 0.5, animations: {
+            // 200 or any value you like.
             if !self.didPressDownArrow {
                 self.didPressDownArrow = true
                 let point = CGPoint(x: 0, y: 300) // 200 or any value you like.
@@ -365,6 +389,12 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
 //            self.cardView.reloadData()
             
         }, completion: nil)
+    }
+    
+    
+    @objc func moveDownScroll(sender:UIButton) {
+        
+       moveCardView()
     }
     
     func getEnPointForSearch() -> String {
@@ -499,7 +529,18 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     }
 */
     
-    func didSwipeToUp(user_Id:String){
+    func didSwipeToUp(user_Id:String, fcmId: String) {
+
+        let loggedInUser = UserDefaults.standard.value(forKey: "bP_userName")
+        let message =  "\(loggedInUser) sent you high five"
+        
+        APIManager.callServer.setPushNotification(recipients: fcmId, icon: "", title: "Beach Partner", body: message, sucessResult: { (response) in
+            
+            print(response)
+        }, errorResult: { (error) in
+            print(error)
+        })
+        
         APIManager.callServer.requestHiFi(userId:user_Id,sucessResult: { (responseModel) in
             
             guard let connectedUserModelValue = responseModel as? ConnectedUserModel else{
@@ -624,17 +665,19 @@ extension BPCardsVC :KolodaViewDelegate {
     func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection)
     {
         var idString:String
+        var fcmId:String
         if selectedType == "Search" || selectedType == "BlueBp" || selectedType == "BlueBp-New"{
             let  data = SwipeCardArray[index] as! SearchUserModel
             idString = String(data.id)
+            fcmId = data.fcmToken
         }
         else {
             let  data = SwipeCardArray[index] as! ConnectedUserModel
             idString = String(data.connectedUser!.userId as Int!)
+            fcmId = data.connectedUser?.fcmToken ?? ""
         }
-        
         if direction == .up{
-        self.didSwipeToUp(user_Id:idString)
+        self.didSwipeToUp(user_Id: idString, fcmId: fcmId)
         }
         else if direction == .right {
             self.didSwipeToRight(user_Id:idString)

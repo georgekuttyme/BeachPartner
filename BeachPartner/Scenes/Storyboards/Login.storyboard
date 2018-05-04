@@ -209,20 +209,20 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="220" height="155"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" verticalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="fGN-tV-7Px">
-                                                        <rect key="frame" x="0.0" y="0.0" width="220" height="125.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="220" height="125"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="8e6-qA-3eq">
-                                                        <rect key="frame" x="0.0" y="125.5" width="220" height="29.5"/>
+                                                        <rect key="frame" x="0.0" y="125" width="220" height="30"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NBa-tA-Dge">
-                                                                <rect key="frame" x="0.0" y="0.0" width="152.5" height="29.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="152.5" height="30"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="0.7540667808219178" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5bg-3i-aNp">
-                                                                <rect key="frame" x="152.5" y="0.0" width="67.5" height="29.5"/>
+                                                                <rect key="frame" x="152.5" y="0.0" width="67.5" height="30"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                 <state key="normal" title="   Sign Up">
                                                                     <color key="titleColor" red="0.12549019610000001" green="0.18823529410000001" blue="0.78162211500555556" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -708,7 +708,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="obb-R0-I6R">
-                                        <rect key="frame" x="30" y="40" width="315" height="638"/>
+                                        <rect key="frame" x="30" y="40" width="315" height="619"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Beachlogo" translatesAutoresizingMaskIntoConstraints="NO" id="61d-zX-W6F">
                                                 <rect key="frame" x="122.5" y="0.0" width="70" height="70"/>
@@ -744,7 +744,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="WLi-bl-64l">
-                                                <rect key="frame" x="24" y="522" width="267" height="116"/>
+                                                <rect key="frame" x="24" y="522" width="267" height="97"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gsN-4X-wip">
                                                         <rect key="frame" x="0.0" y="0.0" width="267" height="36"/>
@@ -765,23 +765,23 @@
                                                         </connections>
                                                     </button>
                                                     <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jkh-6B-m3r">
-                                                        <rect key="frame" x="0.0" y="36" width="267" height="80"/>
+                                                        <rect key="frame" x="0.0" y="36" width="267" height="61"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="To1-sG-Gi2">
                                                                 <rect key="frame" x="0.0" y="0.0" width="267" height="50"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </view>
                                                             <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" ambiguous="YES" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="cN9-fg-ekG">
-                                                                <rect key="frame" x="0.0" y="50" width="267" height="30"/>
+                                                                <rect key="frame" x="0.0" y="50" width="267" height="11"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="        Already have an account?" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QJX-ld-tbV">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="196" height="30"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="196" height="11"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <color key="textColor" white="1" alpha="0.80792487157534243" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ai-eT-u9e">
-                                                                        <rect key="frame" x="196" y="0.0" width="71" height="30"/>
+                                                                        <rect key="frame" x="196" y="0.0" width="71" height="11"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="MfP-js-x1C"/>
                                                                         </constraints>
@@ -1606,7 +1606,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thanks for registering. To complete registration, please check your inbox (upto 10 minutes) and click on the link" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zgo-1w-aEc">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To complete registration, please check your email and click on the activation link." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zgo-1w-aEc">
                                         <rect key="frame" x="17" y="211" width="256" height="57"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="256" id="224-1f-jcX"/>
@@ -1702,13 +1702,12 @@
                                         <color key="textColor" red="0.12549019610000001" green="0.18823529410000001" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1zr-eQ-EGJ">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please check your spam folder. If you haven't received any email even after 10 minutes, please contact kara@beachpartner.com  " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1zr-eQ-EGJ">
                                         <rect key="frame" x="17" y="211" width="256" height="57"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="256" id="EUW-ET-ppE"/>
                                             <constraint firstAttribute="height" constant="57" id="ntw-v9-M7C"/>
                                         </constraints>
-                                        <string key="text">Please check your spam folder: email may take as long as 10 minutes to arrive. If after 10 minutes you have not received you email, please contact us so we can help you.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
