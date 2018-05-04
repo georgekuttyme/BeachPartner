@@ -250,6 +250,8 @@ extension APIManager{
         inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z"
         let resultString = inputFormatter.string(from: showDate!)
         
+        let fcmToken = UserDefaults.standard.string(forKey: "FCM_TOKEN")
+        
         let userProfile :[String:String] = [
                                             "cbvaFirstName": ((userData.userProfile?.cbvaFirstName) ?? "")!,
                                              "cbvaLastName": ((userData.userProfile?.cbvaLastName) ?? "")!,
@@ -287,7 +289,7 @@ extension APIManager{
                 "deviceId": userData.deviceId,
                 "dob": resultString,
                 "email": userData.email,
-                "fcmToken": "string",
+                "fcmToken": fcmToken ?? "",
                 "firstName": userData.firstName,
                 "gender": userData.gender,
                 "imageUrl": userData.imageUrl,
@@ -296,7 +298,8 @@ extension APIManager{
                 "location": userData.location,
                 "phoneNumber": userData.phoneNumber,
                 "userType": userData.userType,
-                "videoUrl": userData.videoUrl
+                "videoUrl": userData.videoUrl,
+                "parentUserId": ""
             ],
             "userProfileDto": userProfile
         ]

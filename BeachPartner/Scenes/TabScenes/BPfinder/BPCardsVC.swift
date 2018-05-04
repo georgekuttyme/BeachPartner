@@ -158,6 +158,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     
     @IBAction func btnPlaySwipeGame(_ sender: Any) {
         self.view .removeFromSuperview()
+        self.tabBarController?.selectedIndex = 2        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -353,9 +354,15 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
                 self.bpscrollview.isScrollEnabled=false
             }
             
+            if let view:CardView = self.cardView.viewForCard(at: 0) as? CardView {
+                
+                self.didPressDownArrow ? view.moveDown.setImage(UIImage(named:"arrow-up"), for: UIControlState.normal) : view.moveDown.setImage(UIImage(named:"arrow-down"), for: UIControlState.normal)
+            }
+            
+            
 //            let range: CountableRange<Int> = self.curentCardIndex..<self.curentCardIndex+1
 //            self.cardView.reloadCardsInIndexRange(range)
-            self.cardView.reloadData()
+//            self.cardView.reloadData()
             
         }, completion: nil)
     }

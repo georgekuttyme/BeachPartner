@@ -87,8 +87,33 @@ class SettingsViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     var result: [String] = [String]()
-    var maleIsSelected: Bool = false
-    var womenIsSelected: Bool = false
+    
+    var maleIsSelected: Bool = false {
+        didSet{
+            if maleIsSelected {
+                menBtn.setTitleColor(UIColor.white, for: UIControlState.normal)
+                menBtn.backgroundColor = UIColor.init(red: 29/255, green: 46/255, blue: 123/255, alpha: 1)
+            }
+            else {
+                menBtn.backgroundColor = UIColor.lightGray
+                menBtn.setTitleColor(UIColor.black, for: UIControlState.normal)
+            }
+        }
+    }
+    
+    var womenIsSelected: Bool = false {
+        didSet{
+            if womenIsSelected {
+                womenBtn.setTitleColor(UIColor.white, for: UIControlState.normal)
+                womenBtn.backgroundColor = UIColor.init(red: 29/255, green: 46/255, blue: 123/255, alpha: 1)
+            }
+            else {
+                womenBtn.backgroundColor = UIColor.lightGray
+                womenBtn.setTitleColor(UIColor.black, for: UIControlState.normal)
+            }
+        }
+    }
+
     weak var bpDelegate: BpFinderDelegate?
     override func viewDidLoad() {
         
@@ -148,27 +173,28 @@ class SettingsViewController: UIViewController {
             else{
                self.selectLoc.setTitle("Choose State", for: UIControlState.normal)
             }
-            
-            let gender = UserDefaults.standard.string(forKey: "gender")
-            if (gender != nil){
-                self.showMeLbl.text = gender
-                if gender == "Male"{
-                    self.menBtnClicked(self.menBtn)
-                    womenBtn.backgroundColor = UIColor.lightGray
-                    womenBtn.setTitleColor(UIColor.black, for: UIControlState.normal)
-                }
-                else if gender == "Female"{
-                  self.womenBtnClicked(self.womenBtn)
-                    menBtn.backgroundColor = UIColor.lightGray
-                    menBtn.setTitleColor(UIColor.black, for: UIControlState.normal)
-                }
-                else {
-                    menBtn.setTitleColor(UIColor.white, for: UIControlState.normal)
-                    menBtn.backgroundColor = UIColor.init(red: 29/255, green: 46/255, blue: 123/255, alpha: 1)
-                    womenBtn.setTitleColor(UIColor.white, for: UIControlState.normal)
-                    womenBtn.backgroundColor = UIColor.init(red: 29/255, green: 46/255, blue: 123/255, alpha: 1)
-                }
+        
+        
+        maleIsSelected = false
+        womenIsSelected = false
+        if let gender = UserDefaults.standard.string(forKey: "gender") {
+            self.showMeLbl.text = gender
+            if gender == "Male"{
+                maleIsSelected = true
             }
+            else if gender == "Female"{
+                womenIsSelected = true
+            }
+            else {
+                maleIsSelected = true
+                womenIsSelected = true
+            }
+        }
+        else {
+            maleIsSelected = true
+            womenIsSelected = true
+            showMeLbl.text="Both"
+        }
             let includeCoaches = UserDefaults.standard.string(forKey: "includeCoaches")
             if (includeCoaches != nil){
                 if(includeCoaches == "1" ){
@@ -187,59 +213,39 @@ class SettingsViewController: UIViewController {
     }
     @IBAction func menBtnClicked(_ menButton: UIButton) {
         maleIsSelected = !maleIsSelected
-        if maleIsSelected && womenIsSelected==false {
-            showMeLbl.text="Male"
-            menButton.backgroundColor = UIColor.init(red: 29/255, green: 46/255, blue: 123/255, alpha: 1)
-            menBtn.setTitleColor(UIColor.white, for: UIControlState.normal)
-        }
-        else if maleIsSelected && womenIsSelected{
+        
+        if maleIsSelected && womenIsSelected {
             showMeLbl.text="Both"
-            menButton.backgroundColor = UIColor.init(red: 29/255, green: 46/255, blue: 123/255, alpha: 1)
-            menBtn.setTitleColor(UIColor.white, for: UIControlState.normal)
-            
+        }
+        else if !maleIsSelected && !womenIsSelected {
+            womenIsSelected = true
+            showMeLbl.text="Female"
+        }
+        else if maleIsSelected {
+            showMeLbl.text="Male"
         }
         else {
-            // maleIsSelected = !maleIsSelected
-            womenBtn.backgroundColor = UIColor.init(red: 29/255, green: 46/255, blue: 123/255, alpha: 1)
-            womenBtn.setTitleColor(UIColor.white, for: UIControlState.normal)
-            showMeLbl.text="Female"
-            menButton.backgroundColor = UIColor.lightGray
-            menBtn.setTitleColor(UIColor.black, for: UIControlState.normal)
-            
+             showMeLbl.text="Female"
         }
-        //showMeLbl.text = result.joined(separator: "Both")
-        
-        
     }
     
     @IBAction func womenBtnClicked(_ sender: UIButton) {
         
         womenIsSelected = !womenIsSelected
-        if womenIsSelected && maleIsSelected == false{
-            showMeLbl.text="Female"
-            sender.backgroundColor = UIColor.init(red: 29/255, green: 46/255, blue: 123/255, alpha: 1)
-            womenBtn.setTitleColor(UIColor.white, for: UIControlState.normal)
-            
-        }
-        else if maleIsSelected && womenIsSelected{
+        
+        if maleIsSelected && womenIsSelected {
             showMeLbl.text="Both"
-            sender.backgroundColor = UIColor.init(red: 29/255, green: 46/255, blue: 123/255, alpha: 1)
-            womenBtn.setTitleColor(UIColor.white, for: UIControlState.normal)
+        }
+        else if !maleIsSelected && !womenIsSelected {
+            maleIsSelected = true
+            showMeLbl.text="Male"
+        }
+        else if maleIsSelected {
+            showMeLbl.text="Male"
         }
         else {
-            // womenIsSelected = !womenIsSelected
-            showMeLbl.text="Male"
-            menBtn.backgroundColor = UIColor.init(red: 29/255, green: 46/255, blue: 123/255, alpha: 1)
-            menBtn.setTitleColor(UIColor.white, for: UIControlState.normal)
-            sender.backgroundColor = UIColor.lightGray
-            womenBtn.setTitleColor(UIColor.black, for: UIControlState.normal)
-            
+            showMeLbl.text="Female"
         }
-        
-        // showMeLbl.text = result.joined(separator: "Both")
-        
-        
-        
     }
 
     
@@ -329,7 +335,6 @@ class SettingsViewController: UIViewController {
             self.alert(message: errorString)
         })
     }
-    
 }
 
 
@@ -340,9 +345,9 @@ extension SettingsViewController: RangeSeekSliderDelegate {
     func rangeSeekSlider(_ slider: RangeSeekSlider, didChange minValue: CGFloat, maxValue: CGFloat) {
         if slider === rangeSlider {
 //            print("Standard slider updated. Min Value: \(minValue) Max Value: \(maxValue)")
-            minAge = String(Int(minValue))
-            maxAge = String(Int(maxValue))
-            ageLabel.text = String(Int(minValue)) + " - " + String(Int(maxValue))
+            minAge = String(Int(round(minValue)))
+            maxAge = String(Int(round(maxValue)))
+            ageLabel.text = minAge + " - " + maxAge
         }
     }
     

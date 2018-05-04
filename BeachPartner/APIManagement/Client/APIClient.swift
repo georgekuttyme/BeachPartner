@@ -421,6 +421,7 @@ final class APIClient{
     public func inPutJsonData(url:String,params:[String:[String:String]],sucess:@escaping sucessClosure,failure:@escaping failureClosure){
         
         do{
+            print("####### API Request ....url :", url, "\n #### parameters :", params)
             
             let token = UserDefaults.standard.string(forKey: "bP_token") ?? ""
             var headders: HTTPHeaders = [:]
