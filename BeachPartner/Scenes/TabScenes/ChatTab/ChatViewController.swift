@@ -44,11 +44,11 @@ class ChatViewController: JSQMessagesViewController {
             
             if  let data        = snapshot.value as? [String: String],
                 let id          = data["sender_id"],
-                let name        = data["sender_name"],
+              //  let name        = data["sender_name"],
                 let text        = data["text"],
                 !text.isEmpty
             {
-                if let message = JSQMessage(senderId: id, displayName: name, text: text)
+                if let message = JSQMessage(senderId: id, displayName: "", text: text)
                 {
                     self?.messages.append(message)
                     self?.finishReceivingMessage()
