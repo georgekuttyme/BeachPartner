@@ -9,10 +9,9 @@
 import UIKit
 
 class MutualLikesViewController: UIViewController {
-
+   
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
 
@@ -21,10 +20,20 @@ class MutualLikesViewController: UIViewController {
         dismiss(animated: true, completion: nil)
         
     }
+    @IBAction func sendMsgBtnClicked(_ sender: Any) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "send-Message"), object: nil)
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func findTournamentBtnclicked(_ sender: Any) {
+//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "find-Tournament"), object: nil)
+    }
+    @IBAction func keepSwiping(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
 }

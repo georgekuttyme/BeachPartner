@@ -47,6 +47,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     var subscribedUsers = [SubscriptionUserModel]()
    var subscribedBlueBpUsers = [SearchUserModel]()
     var swipeAction = [ConnectedUserModel]()
+    var likedPersonInfo = [ConnectedUserModel]()
     var searchUsers = [SearchUserModel]()
     var SwipeCardArray:[Any] = []
     
@@ -260,8 +261,20 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         self.getUserInfo()
         self.generateSwipeAarray()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(sendMsg(notification:)), name:NSNotification.Name(rawValue: "send-Message"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(findTournament(notification:)), name:NSNotification.Name(rawValue: "find-Tournament"), object: nil)
+
     }
-    
+
+    @objc func sendMsg(notification: NSNotification){
+        print("bsajdhjhdk",self.likedPersonInfo)
+        let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
+        let secondViewController = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
+        secondViewController.connectedUserModel = self.likedPersonInfo
+        secondViewController.chatType = "Connections"
+        self.navigationController?.pushViewController(secondViewController, animated: true)
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -572,9 +585,10 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             }
             
             if (self.swipeAction[0].status == "Active") {
-              /*  let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
+                self.likedPersonInfo = [connectedUserModelValue]
+                let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "MutualLikesViewController") as! MutualLikesViewController
-                self.present(vc, animated: true, completion: nil) */
+                self.present(vc, animated: true, completion: nil)
             }
             
         }, errorResult: { (error) in
