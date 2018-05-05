@@ -245,8 +245,14 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             self.tableCell_TopFinishesinLastYear1.isHidden = false
             self.topFinishesCount = self.topFinishesCount + 1
             self.showtopFinish1 = true
-        }else if (self.topFinishesCount == 1 && self.tableCell_TopFinishesinLastYear2.isHidden){
+            if self.showtopfinish2 == true {
+                self.topFinishesCount = self.topFinishesCount + 1
+                self.topFinishesAddBtn.isHidden = true
+                self.showtopfinish2 = true
+            }
+        }else if (self.topFinishesCount == 1 ){ //&& self.tableCell_TopFinishesinLastYear2.isHidden
             self.tableCell_TopFinishesinLastYear2.isHidden = false
+            self.topFinishesCount = self.topFinishesCount + 1
             self.topFinishesAddBtn.isHidden = true
             self.showtopfinish2 = true
         }
@@ -258,8 +264,11 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.tableCell_TopFinishesinLastYear1.isHidden = true
         self.topFinishesAddBtn.isHidden = false
         self.topFinishesoneTxtFld.text = ""
-        if(self.topFinishesCount > 0 ){
+        if(self.topFinishesCount == 1 ){
             self.topFinishesCount = self.topFinishesCount - 1
+        }
+        else if(self.topFinishesCount == 2 ){
+             self.topFinishesCount = self.topFinishesCount - 2
         }
         self.showtopFinish1 = false
         self.tableView.reloadData()
@@ -269,7 +278,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.tableCell_TopFinishesinLastYear2.isHidden = true
         self.topFinishesAddBtn.isHidden = false
         self.topFinishestwoTxtFld.text = ""
-        if(self.topFinishesCount > 0 ){
+        if(self.topFinishesCount > 1 ){
             self.topFinishesCount = self.topFinishesCount - 1
         }
         self.showtopfinish2 = false
@@ -307,8 +316,8 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         
         
         //MARK: Hide Cells
-        //        self.tableCell_TopFinishesinLastYear1.isHidden = true
-        //        self.tableCell_TopFinishesinLastYear2.isHidden = true
+       // self.tableCell_TopFinishesinLastYear1.isHidden = true
+       // self.tableCell_TopFinishesinLastYear2.isHidden = true
         
         self.addToplistBtn.isUserInteractionEnabled = false
         self.delTop1.isUserInteractionEnabled = false
@@ -771,7 +780,6 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             self.updateUserInfo()
             
         }
-        
     }
     
     @IBAction func editVIdeoBtnClicked(_ sender: Any) {
@@ -1285,29 +1293,37 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.rankingTxtFld.text = accResponseModel.userProfile?.usaVolleyballRanking
         UserDefaults.standard.set(accResponseModel.city , forKey: "location")
 
+        self.tableCell_TopFinishesinLastYear1.isHidden = false
+        self.tableCell_TopFinishesinLastYear2.isHidden = false
+        
         if(accResponseModel.userProfile?.topFinishes != ""){
             
             let toplist = accResponseModel.userProfile?.topFinishes.components(separatedBy: ",")
             //            print("top list count :", toplist?.count ?? 0, toplist![0])
 
-            
             if(toplist?.count == 3){
                 self.topFinishesoneTxtFld.text = toplist![1]
                 self.topFinishestwoTxtFld.text = toplist![2]
                 self.topFinishesTxtfld.text = toplist![0]
                 self.showtopFinish1 = true
                 self.showtopfinish2 = true
+                self.topFinishesAddBtn.isHidden = true
             }
             if(toplist?.count == 2){
                 self.topFinishesoneTxtFld.text = toplist![1]
                 self.topFinishesTxtfld.text = toplist![0]
                 self.showtopFinish1 = true
                 self.showtopfinish2 = false
+                self.topFinishesAddBtn.isHidden = false
+                self.tableCell_TopFinishesinLastYear2.isHidden = true
             }
             if(toplist?.count == 1){
                 self.showtopFinish1 = false
                 self.showtopfinish2 = false
+                 self.topFinishesAddBtn.isHidden = false
                 self.topFinishesTxtfld.text = toplist![0]
+                self.tableCell_TopFinishesinLastYear1.isHidden = true
+                self.tableCell_TopFinishesinLastYear2.isHidden = true
             }
         }
         self.tableView.reloadData()
