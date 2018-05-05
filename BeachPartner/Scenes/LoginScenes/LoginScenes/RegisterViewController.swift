@@ -752,6 +752,24 @@ extension RegisterViewController: UITextFieldDelegate {
        
         return true;
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+    {
+        if textField == mobileTxt
+        {
+            if textField.text?.count == 10 && string != ""
+            {
+                return false
+            }
+            else{
+                return true
+            }
+        }
+        else{
+            return true
+        }
+    }
+    
 }
 
 

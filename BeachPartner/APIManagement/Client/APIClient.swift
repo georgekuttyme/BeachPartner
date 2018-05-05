@@ -851,14 +851,13 @@ final class APIClient{
                
                 
                 if let imageData = UIImageJPEGRepresentation(image, 0.6) {
-                    if (imageData != nil) {
+                    if (imageData.count > 0) {
                         multipartFormData.append(imageData, withName: "profileImg", fileName: "profilePic.png", mimeType:  "image/png")
                     }
                 }
                 
                 //                let data = NSData(videodata) as Data?
-                if (moviedata != nil) {
-                    
+                if (moviedata.count > 0) {
                     multipartFormData.append(moviedata, withName: "profileVideo", fileName: "profileVideo.mp4", mimeType:  "video/mp4")
                 }
                 

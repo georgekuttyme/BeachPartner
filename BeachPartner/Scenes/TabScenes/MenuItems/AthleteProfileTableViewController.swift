@@ -177,6 +177,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     @IBAction func saveClicked(_ sender: Any) {
         let image = UIImage(named: "edit_btn_1x") as UIImage?
         editProfileBtn.setImage(image, for: .normal)
+        self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
         self.saveData()
     }
     
@@ -1384,6 +1385,12 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
                             
                             self.loadVideoOnPlayer(videoUrlVal: self.videoUrl)
                             
+                            if( self.movieData != nil){
+                                self.uploadProfileVideo(profileVideo: self.movieData!)
+                            }
+                            else{
+                                print("not null  !!! ")
+                            }
                         }
                     }
                         
@@ -1406,7 +1413,10 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
                     let image = info[UIImagePickerControllerOriginalImage]
                     self.userImageView.image = image as! UIImage
                     print("video url : ",self.videoUrl)
-                    self.loadVideoOnPlayer(videoUrlVal: self.videoUrl)
+                 //   self.loadVideoOnPlayer(videoUrlVal: self.videoUrl)
+                    if(self.userImageView.image != nil){
+                        self.uploadProfilePic(profilePic: self.userImageView.image!)
+                    }
                     
                     //                    }
                     //
@@ -1418,35 +1428,12 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             }
         }
         
-
-        
-   /*     if( self.movieData == nil && (self.videoUrl != "" || self.videoUrl != "nil") ){
-            do {
-                let filePathUrl = URL(string: self.videoUrl)
-                self.movieData = try NSData(contentsOf: filePathUrl!, options: NSData.ReadingOptions.alwaysMapped)
-                print(">>>>>",self.movieData)
-            } catch _ {
-                self.movieData = nil
-                return
-            }
-        } */
-        
-        if( self.movieData != nil && self.userImageView.image != nil){
-            
-            print("testttttttt !!! ")
-            self.uploadProfilePicAndVideo(profilePic: self.userImageView.image!, profileVideo: self.movieData!)
-            
-        }
-        else{
-            print("not null  !!! ")
-        }
-        
         finishAndUpdate()
         
     }
     
-    func uploadProfilePicAndVideo(profilePic:UIImage, profileVideo:NSData){
-        
+    func uploadProfileVideo(profileVideo:NSData){
+        let profilePic = UIImage()
         APIManager.callServer(withBusy: BusyScreen(isShow: true, text: "Preparing video ...")).updateAtheleteProfilePicAndVideo(userimage: profilePic, videoData: profileVideo, sucessResult: { (responseModel) in
             
             guard let updationResult = responseModel as? UpdateProfileImageVideoModel else{
@@ -1454,24 +1441,24 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             }
             
             if(updationResult != nil){
-                
                 print("profileImgUrl",updationResult.profileImgUrl)
                 print("profileVideoUrl",updationResult.profileVideoUrl)
                 
                 self.userData.videoUrl = updationResult.profileVideoUrl
-                self.userData.imageUrl = updationResult.profileImgUrl
+             //   self.userData.imageUrl = updationResult.profileImgUrl
             }
-            
+             self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
             
         }) { (error) in
             self.alert(message: error!, title: "Faild To Update")
+              self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
         }
     }
     
     
-/*    func uploadProfilePic(profilePic:UIImage){
-        
-        APIManager.callServer(withBusy: BusyScreen(isShow: true, text: "Preparing video ...")).updateAtheleteProfilePic(userimage: profilePic, sucessResult: { (responseModel) in
+    func uploadProfilePic(profilePic:UIImage){
+         let profileVideo = NSData()
+        APIManager.callServer(withBusy: BusyScreen(isShow: true, text: "Preparing Image ...")).updateAtheleteProfilePicAndVideo(userimage: profilePic, videoData: profileVideo, sucessResult: { (responseModel) in
             guard let updationResult = responseModel as? UpdateProfileImageVideoModel else{
                 return
             }
@@ -1479,12 +1466,12 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             if(updationResult != nil){
                 self.userData.imageUrl = updationResult.profileImgUrl
             }
-            
+              self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
         }) { (error) in
             self.alert(message: error!, title: "Faild To Update")
+             self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
         }
     }
-   */
     
     
     fileprivate func finishAndUpdate() {
@@ -1509,6 +1496,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             self.editUserImageBtn.isUserInteractionEnabled = false
             self.editVideoBtn.isHidden = true
             self.editVideoBtn.isUserInteractionEnabled = false
+            self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
         })
     }
     func loadLocations(){
