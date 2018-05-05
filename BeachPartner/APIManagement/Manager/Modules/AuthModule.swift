@@ -370,6 +370,42 @@ extension APIManager{
         
     }
     
+ /*   func updateAtheleteProfilePic(userimage:UIImage, sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure){
+        
+        let userId = UserDefaults.standard.string(forKey: "bP_userId") ?? ""
+        
+        let params = ["userId":userId]
+        
+        busyOn()
+        APIClient.doRequest.inPostForImageUpload(method:ApiMethods.AddProfileVideoImage, params: params, image: userimage, videoDataVal: videoData, sucess: { (response) in
+            self.busyOff()
+            APIManager.printOnDebug(response: "\(response)")
+            
+            if(response != nil){
+                let jsonDict = response! as! JSONDictionary
+                do {
+                    let accountRespModel = try UpdateProfileImageVideoModel(jsonDict)
+                    sucessResult(accountRespModel)
+                    return
+                } catch {
+                    errorResult(error.localizedDescription)
+                    APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                    return
+                }
+            }
+            
+        }) { (error) in
+            self.busyOff()
+            errorResult(error?.localizedDescription)
+            APIManager.printOnDebug(response: "error:\(error?.localizedDescription)")
+            return
+        }
+        
+    }
+
+ */
+    
+    
     public func getUserConnectionList(status:String, sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure){
         let params = [String:String]()
         

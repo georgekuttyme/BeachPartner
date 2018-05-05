@@ -848,13 +848,15 @@ final class APIClient{
         
         _ = sessionManager.upload(
             multipartFormData: { multipartFormData in
+               
+                
                 if let imageData = UIImageJPEGRepresentation(image, 0.6) {
-                    multipartFormData.append(imageData, withName: "profileImg", fileName: "profilePic.png", mimeType:  "image/png")
+                    if (imageData != nil) {
+                        multipartFormData.append(imageData, withName: "profileImg", fileName: "profilePic.png", mimeType:  "image/png")
+                    }
                 }
                 
                 //                let data = NSData(videodata) as Data?
-                
-                
                 if (moviedata != nil) {
                     
                     multipartFormData.append(moviedata, withName: "profileVideo", fileName: "profileVideo.mp4", mimeType:  "video/mp4")

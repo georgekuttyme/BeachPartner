@@ -1397,22 +1397,17 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
                 else if stringType == kUTTypeImage as String {
                     
                     let urlOfImage = info[UIImagePickerControllerMediaURL] as? NSURL
-                    
-                    
                     //                    if(self.sizePerMB(url: urlOfImage! as URL) <= 4.0){
                     
                     if let tempImgPath = urlOfImage {
                         
                         self.imageUrl = tempImgPath.absoluteString!
-                        
-                        
-                        
                     }
-                    
                     let image = info[UIImagePickerControllerOriginalImage]
                     self.userImageView.image = image as! UIImage
                     print("video url : ",self.videoUrl)
                     self.loadVideoOnPlayer(videoUrlVal: self.videoUrl)
+                    
                     //                    }
                     //
                     //                    else{
@@ -1423,13 +1418,19 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             }
         }
         
+
         
+   /*     if( self.movieData == nil && (self.videoUrl != "" || self.videoUrl != "nil") ){
+            do {
+                let filePathUrl = URL(string: self.videoUrl)
+                self.movieData = try NSData(contentsOf: filePathUrl!, options: NSData.ReadingOptions.alwaysMapped)
+                print(">>>>>",self.movieData)
+            } catch _ {
+                self.movieData = nil
+                return
+            }
+        } */
         
-        print("####")
-        
-        print(">>>>>",self.movieData)
-        print(self.userImageView.image)
-        print("%%%%%%")
         if( self.movieData != nil && self.userImageView.image != nil){
             
             print("testttttttt !!! ")
@@ -1458,7 +1459,6 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
                 print("profileVideoUrl",updationResult.profileVideoUrl)
                 
                 self.userData.videoUrl = updationResult.profileVideoUrl
-                //                self.userData.videoUrl = "http://seqato.com/bp/videos/1.mp4"
                 self.userData.imageUrl = updationResult.profileImgUrl
             }
             
@@ -1468,6 +1468,23 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         }
     }
     
+    
+/*    func uploadProfilePic(profilePic:UIImage){
+        
+        APIManager.callServer(withBusy: BusyScreen(isShow: true, text: "Preparing video ...")).updateAtheleteProfilePic(userimage: profilePic, sucessResult: { (responseModel) in
+            guard let updationResult = responseModel as? UpdateProfileImageVideoModel else{
+                return
+            }
+            
+            if(updationResult != nil){
+                self.userData.imageUrl = updationResult.profileImgUrl
+            }
+            
+        }) { (error) in
+            self.alert(message: error!, title: "Faild To Update")
+        }
+    }
+   */
     
     
     fileprivate func finishAndUpdate() {

@@ -532,10 +532,10 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     func didSwipeToUp(user_Id:String, fcmId: String) {
 
         let loggedInUser = UserDefaults.standard.value(forKey: "bP_userName")
-        let message =  "\(loggedInUser) sent you high five"
+        let message =  "\(loggedInUser ?? "") sent you High Five"
         
         APIManager.callServer.setPushNotification(recipients: fcmId, icon: "", title: "Beach Partner", body: message, sucessResult: { (response) in
-            
+
             print(response)
         }, errorResult: { (error) in
             print(error)
@@ -647,6 +647,7 @@ extension BPCardsVC :KolodaViewDelegate {
         }else{
           self.lblNotAvailable.text = "No cards available"
         }
+        self.lblNotAvailable.textColor = UIColor.gray
         self.lblNotAviltopSpace.constant = 0
     }
     func koloda(_ koloda: KolodaView, draggedCardWithPercentage finishPercentage: CGFloat, in direction: SwipeResultDirection) {
@@ -716,10 +717,11 @@ extension BPCardsVC :KolodaViewDelegate {
                  view.showVideo()
             }
             else{
-                view.showVideo()
+           //     view.showVideo()
                 self.lblNotAvailable.alpha = 1.0
                 self.lblNotAvailable.isHidden = false
                 self.lblNotAvailable.text = "No video available for this profile"
+                 self.lblNotAvailable.textColor = UIColor.white
                  self.lblNotAviltopSpace.constant = -75
             }
            

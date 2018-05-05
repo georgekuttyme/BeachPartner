@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/AppDelegate/AppDelegate.swift"
-            timestampString = "547078328.708147"
+            timestampString = "547203788.675333"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "75"
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/AppDelegate/AppDelegate.swift"
-            timestampString = "547078328.708261"
+            timestampString = "547203788.675604"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "113"
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/AppDelegate/AppDelegate.swift"
-            timestampString = "547078328.708407"
+            timestampString = "547203788.675772"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "131"
@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/AppDelegate/AppDelegate.swift"
-            timestampString = "547078328.708485"
+            timestampString = "547203788.67593"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "156"
@@ -90,12 +90,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/AppDelegate/AppDelegate.swift"
-            timestampString = "547078328.7085479"
+            timestampString = "547203788.676083"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "167"
             endingLineNumber = "167"
             landmarkName = "application(received:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/Scenes/TabScenes/MenuItems/AthleteProfileTableViewController.swift"
+            timestampString = "547208463.764545"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1399"
+            endingLineNumber = "1399"
+            landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
