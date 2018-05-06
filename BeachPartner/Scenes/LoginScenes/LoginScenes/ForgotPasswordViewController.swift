@@ -59,7 +59,11 @@ class ForgotPasswordViewController: UIViewController,UITextFieldDelegate {
         emailField.placeholder = ""
         return true
     }
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        self.view.endEditing(true)
+        return true
+    }
         func makeForgotPasswordRequest(){
             
         guard let email = emailField.text else {

@@ -149,8 +149,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate : UNUserNotificationCenterDelegate {
     
     // Receive displayed notifications for iOS 10 devices.
-    
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+       
+        completionHandler([.alert, .badge, .sound])
+        
         let userInfo = notification.request.content.userInfo
         // Print message ID.
         print("Message ID: \(userInfo["gcm.message_id"]!)")
@@ -159,11 +161,33 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         
     }
     
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        // Print message ID.
+        
+//        if let messageID = userInfo[gcmMessageIDKey] {
+//            print("Message ID: \(messageID)")
+//        }
+        
+        // Print full message.
+        print(userInfo)
+        
+        completionHandler()
+        
+    }
 }
 
 extension AppDelegate : MessagingDelegate {
+    
+    func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
+        print("Firebase registration token: (fcmToken)")
+    }
+
     // Receive data message on iOS 10 devices.
      func application(received remoteMessage: MessagingRemoteMessage) {
         print("%@", remoteMessage.appData)
     }
+    
 }
