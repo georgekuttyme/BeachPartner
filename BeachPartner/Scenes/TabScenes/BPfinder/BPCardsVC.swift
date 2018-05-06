@@ -692,8 +692,7 @@ extension BPCardsVC :KolodaViewDelegate {
             fcmId = data.connectedUser?.fcmToken ?? ""
         }
         if direction == .up{
-          //  fcmId
-        self.didSwipeToUp(user_Id: idString, fcmId: "e9gxQnqYnRk:APA91bGpP-xQcNuSi-btaVCzLdBLCB_8iJG5uYw-Dpals6BqIvwOeCIzlq8be9a9_75WUMYQqZye5hmz8UeA3lKFWhB0E16OV_23NmdO5RMDFUWB0Kc1ymF5sShJVAY1mlBNIBdYBQf4")
+        self.didSwipeToUp(user_Id: idString, fcmId: fcmId)
         }
         else if direction == .right {
             self.didSwipeToRight(user_Id:idString)
