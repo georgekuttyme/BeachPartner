@@ -326,6 +326,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="ageLbl" destination="3Ba-K6-1bi" id="KZ0-vl-CIc"/>
+                                            <outlet property="bgView" destination="Fgy-HM-d05" id="iw7-SD-nZA"/>
                                             <outlet property="blockBtn" destination="Re2-uZ-3QH" id="wkz-6x-Ian"/>
                                             <outlet property="btnMsgHeight" destination="YFW-9N-eL4" id="uav-2T-igi"/>
                                             <outlet property="connScrollView" destination="2yd-2L-rsb" id="ydu-ej-iyX"/>

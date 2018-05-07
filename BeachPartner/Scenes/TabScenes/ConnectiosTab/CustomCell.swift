@@ -20,7 +20,8 @@ class CustomCell: UICollectionViewCell {
     @IBOutlet weak var notesBtn: UIButton!
     @IBOutlet weak var btnMsgHeight: NSLayoutConstraint!
     
-     @IBOutlet weak var connScrollView: UIScrollView!
+    @IBOutlet weak var connScrollView: UIScrollView!
+    @IBOutlet weak var bgView: UIView!
     
     @IBAction func expandBtnClicked(_ sender: Any) {
  

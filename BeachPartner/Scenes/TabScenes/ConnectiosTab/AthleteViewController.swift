@@ -68,6 +68,10 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
         cell?.blockBtn.setTitle(blockButtonTitle, for: .normal)
         cell?.blockBtn.tag = indexPath.row+200000
         cell?.blockBtn.addTarget(self, action: #selector(blockBtnPressed(sender:)), for: .touchUpInside)
+        
+        let cellBgColor = (connectedUser?.isBlocked)! ? UIColor(white: 1.0, alpha: 0.4) : UIColor.white
+        cell?.bgView.backgroundColor = cellBgColor
+        
         cell?.messageBtn.tag = indexPath.row+100000
         cell?.messageBtn.addTarget(self, action: #selector(msgBtnPressed), for: .touchUpInside)
         cell?.notesBtn.tag = indexPath.row+300000
@@ -240,12 +244,36 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
         
         let connectedUser = self.connectedUsers[sender.tag-200000]
         let index = sender.tag-200000
-
+        
+        var message = ""
+        var actionTitle = ""
+        
+        let userName = connectedUser.connectedUser?.firstName ?? "this user"
+        
         if (connectedUser.connectedUser?.isBlocked)! {
-            unBlockUser(connectedUser: connectedUser, atIndex: index)
+            message = "Do you want to UnBlock \(userName)?"
+            actionTitle = "UnBlock"
         }
         else {
-            blockUser(connectedUser: connectedUser, atIndex: index)
+            message = "Do you want to Block \(userName)?"
+            actionTitle = "Block"
         }
+        
+        let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        let actionButton = UIAlertAction(title: actionTitle, style: .default) { (action) in
+            
+            if (connectedUser.connectedUser?.isBlocked)! {
+                self.unBlockUser(connectedUser: connectedUser, atIndex: index)
+            }
+            else {
+                self.blockUser(connectedUser: connectedUser, atIndex: index)
+            }
+        }
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+//            self.collectionView.reloadData()
+        }
+        alert.addAction(actionButton)
+        alert.addAction(cancelButton)
+        present(alert, animated: true, completion: nil)
     }
 }
