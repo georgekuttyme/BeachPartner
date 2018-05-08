@@ -112,7 +112,7 @@ class HighFiveViewController: UIViewController,UITableViewDelegate,UITableViewDa
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.title = "High Five"
+        self.navigationItem.title = "High Five"
         self.getHifiList()
     }
     override func viewDidAppear(_ animated: Bool) {
