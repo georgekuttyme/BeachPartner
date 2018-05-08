@@ -55,67 +55,69 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
      
         if SwipeCardArray.count > 0 {
             print(topFinishers)
-            UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: {
+//            UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: {
+//
+//
+//            })
+            if(self.topFinishers != ""){
+                var toplist = self.topFinishers.components(separatedBy: ",")
                 
-                if(self.topFinishers != ""){
-                    var toplist = self.topFinishers.components(separatedBy: ",")
-                    
-                    toplist = toplist.filter { $0 != "" }
-                    
-                    if toplist.count == 0 {
-                        self.toponeBtn.isHidden = false
-                        self.toponeBtn.setTitle("No notable finishes", for: UIControlState.normal)
-                        self.badgeImage.isHidden = true
-                        self.topthreefinishesBtn.isHidden = true
-                    }
-                    
-                    if(toplist.count == 3){
-                        let firstFinish = toplist[2]
-                        if firstFinish == " " || firstFinish == "," || firstFinish == "" {
-                           self.topThreeBtn.isHidden = true
-                        }
-                        else{
-                            self.topThreeBtn.isHidden = false
-                            self.topThreeBtn.setTitle(firstFinish, for: UIControlState.normal)
-                        }
-                        toplist.removeLast()
-                    }
-                     if(toplist.count == 2){
-                        
-                        let firstFinish = toplist[1]
-                        if firstFinish == " " || firstFinish == "," || firstFinish == "" {
-                            self.topTwoBtn.isHidden = true
-                        }
-                        else{
-                            self.topTwoBtn.isHidden = false
-                            self.topTwoBtn.setTitle(firstFinish, for: UIControlState.normal)
-                        }
-                        toplist.removeLast()
-                    }
-                     if(toplist.count == 1){
-                        
-                        let firstFinish = toplist[0]
-                        if firstFinish == " " || firstFinish == ","  || firstFinish == "" {
-                            self.toponeBtn.isHidden = true
-                            self.badgeImage.isHidden = false
-                            self.topthreefinishesBtn.isHidden = false
-                        }
-                        else{
-                            self.toponeBtn.isHidden = false
-                            self.toponeBtn.setTitle(firstFinish, for: UIControlState.normal)
-                            self.badgeImage.isHidden = true
-                            self.topthreefinishesBtn.isHidden = true
-                        }
-                        toplist.removeLast()
-                    }
-                }
-                else {
+                toplist = toplist.filter { $0 != "" }
+                
+                if toplist.count == 0 {
                     self.toponeBtn.isHidden = false
                     self.toponeBtn.setTitle("No notable finishes", for: UIControlState.normal)
                     self.badgeImage.isHidden = true
                     self.topthreefinishesBtn.isHidden = true
                 }
-            })
+                
+                if(toplist.count == 3){
+                    let firstFinish = toplist[2]
+                    if firstFinish == " " || firstFinish == "," || firstFinish == "" {
+                        self.topThreeBtn.isHidden = true
+                    }
+                    else{
+                        self.topThreeBtn.isHidden = false
+                        self.topThreeBtn.setTitle(firstFinish, for: UIControlState.normal)
+                    }
+                    toplist.removeLast()
+                }
+                if(toplist.count == 2){
+                    
+                    let firstFinish = toplist[1]
+                    if firstFinish == " " || firstFinish == "," || firstFinish == "" {
+                        self.topTwoBtn.isHidden = true
+                    }
+                    else{
+                        self.topTwoBtn.isHidden = false
+                        self.topTwoBtn.setTitle(firstFinish, for: UIControlState.normal)
+                    }
+                    toplist.removeLast()
+                }
+                if(toplist.count == 1){
+                    
+                    let firstFinish = toplist[0]
+                    if firstFinish == " " || firstFinish == ","  || firstFinish == "" {
+                        self.toponeBtn.isHidden = true
+                        self.badgeImage.isHidden = false
+                        self.topthreefinishesBtn.isHidden = false
+                    }
+                    else{
+                        self.toponeBtn.isHidden = false
+                        self.toponeBtn.setTitle(firstFinish, for: UIControlState.normal)
+                        self.badgeImage.isHidden = true
+                        self.topthreefinishesBtn.isHidden = true
+                    }
+                    toplist.removeLast()
+                }
+            }
+            else {
+                self.toponeBtn.isHidden = false
+                self.toponeBtn.setTitle("No notable finishes", for: UIControlState.normal)
+                self.badgeImage.isHidden = true
+                self.topthreefinishesBtn.isHidden = true
+            }
+            
         }
     }
     
@@ -125,13 +127,13 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     }
     
     private func resetTopFinishView() {
-        UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: {
-            self.topThreeBtn.isHidden = true
-            self.topTwoBtn.isHidden = true
-            self.toponeBtn.isHidden = true
-            self.badgeImage.isHidden = false
-            self.topthreefinishesBtn.isHidden = false
-        })
+//        UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: {
+//        })
+        self.topThreeBtn.isHidden = true
+        self.topTwoBtn.isHidden = true
+        self.toponeBtn.isHidden = true
+        self.badgeImage.isHidden = false
+        self.topthreefinishesBtn.isHidden = false
     
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -578,6 +580,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
                 self.likedPersonInfo = [connectedUserModelValue]
                 let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "MutualLikesViewController") as! MutualLikesViewController
+//                vc.modalPresentationStyle = .overCurrentContext
                 self.present(vc, animated: true, completion: nil)
             }
             

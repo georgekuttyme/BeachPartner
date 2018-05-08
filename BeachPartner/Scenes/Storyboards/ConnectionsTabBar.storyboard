@@ -555,6 +555,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="ageLbl" destination="F4U-pD-Bv8" id="bQk-Dz-qS2"/>
+                                            <outlet property="bgView" destination="u36-9w-hc7" id="rX2-ok-p2g"/>
                                             <outlet property="blockBtn" destination="g0B-nQ-arU" id="Rkp-tM-ql3"/>
                                             <outlet property="connScrollView" destination="96S-KL-2NX" id="X2o-f3-1SO"/>
                                             <outlet property="expandBtn" destination="Znm-jy-cRS" id="h8A-Zu-HgD"/>

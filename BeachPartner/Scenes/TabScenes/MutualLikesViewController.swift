@@ -21,8 +21,9 @@ class MutualLikesViewController: UIViewController {
         
     }
     @IBAction func sendMsgBtnClicked(_ sender: Any) {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "send-Message"), object: nil)
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: false) {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "send-Message"), object: nil)
+        }
     }
     
     @IBAction func findTournamentBtnclicked(_ sender: Any) {

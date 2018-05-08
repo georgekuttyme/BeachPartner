@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DropDown
 import Floaty
 
 class HighfiveCell: UITableViewCell {
@@ -24,10 +25,68 @@ class HighFiveViewController: UIViewController,UITableViewDelegate,UITableViewDa
     var selectedTabViewController:Int!
     weak var currentViewController: UIViewController?
     @IBOutlet weak var tblHighFiveList: UITableView!
+    @IBOutlet weak var menuBtn: UIBarButtonItem!
+    
+    let dropDown = DropDown()
+
+    @IBAction func didTapMenuButton(_ sender: Any) {
+        dropDown.show()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.dropDown.anchorView = self.menuBtn // UIView or UIBarButtonItem
+        // The list of items to display. Can be changed dynamically
+        //        self.dropDown.direction = .bottom
+        self.dropDown.dataSource = ["My Profile","About Us","Feedback","Settings", "Help","Logout"]
+        
+        self.dropDown.bottomOffset = CGPoint(x: 20, y:45)
+        self.dropDown.width = 150
+        //        self.dropDown.selectionBackgroundColor = UIColor.lightGray
+        self.dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+            print("Selected item:",item," at index:",index)
+            if(item == "My Profile"){
+                let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "profilevc1") as! CoachProfileTableViewController
+                let vc1 = storyboard.instantiateViewController(withIdentifier: "profilevc") as! AthleteProfileTableViewController
+                let identifier = UserDefaults.standard.string(forKey: "userType") == "Athlete" ? vc1 : vc
+                self.navigationController?.pushViewController(identifier, animated: true)
+                self.tabBarController?.tabBar.isHidden = false
+                self.navigationController!.navigationBar.topItem!.title = ""
+                self.navigationController?.isNavigationBarHidden = false
+            }
+                
+            else if(item == "Logout"){
+                self.timoutLogoutAction()
+            }
+            else if (item == "Settings"){
+                let storyboard : UIStoryboard = UIStoryboard(name: "TabBar", bundle: nil)
+                let controller = storyboard.instantiateViewController(withIdentifier: "ComponentSettings") as! SettingsViewController
+                controller.SettingsType = "profileSettings"
+                self.tabBarController?.tabBar.isHidden = false
+                self.navigationController!.navigationBar.topItem!.title = ""
+                self.navigationController?.isNavigationBarHidden = false
+                self.navigationController?.pushViewController(controller, animated: true)
+            }
+            else if (item == "Help"){
+                let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "HelpViewController") as! HelpViewController
+                self.present(vc, animated: true, completion: nil)
+            }
+            else {
+                let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "CommmonWebViewController") as! CommmonWebViewController
+                vc.titleText = item
+                self.tabBarController?.tabBar.isHidden = false
+                self.navigationController!.navigationBar.topItem!.title = ""
+                self.navigationController?.isNavigationBarHidden = false
+                self.present(vc, animated: true, completion: nil)
+            }
+        }
+        self.dropDown.selectRow(0)
+        
+        
         let floaty = Floaty()
         floaty.size = 45
         floaty.paddingY = 55
@@ -49,7 +108,11 @@ class HighFiveViewController: UIViewController,UITableViewDelegate,UITableViewDa
 
         // Do any additional setup after loading the view.
     }
+    
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.title = "High Five"
         self.getHifiList()
     }
     override func viewDidAppear(_ animated: Bool) {

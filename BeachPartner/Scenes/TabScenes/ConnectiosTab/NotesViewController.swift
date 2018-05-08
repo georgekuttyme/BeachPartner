@@ -18,6 +18,8 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
     var isExpanded = false
     var count: Int = 0
     
+    var activeTextField: UITextView?
+    
     var connectedUserModel: ConnectedUserModel?
     var notes = [GetNoteRespModel]()
 //    let dateFormatter = DateFormatter()
@@ -149,6 +151,52 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
         self.dropDown.selectRow(0)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            let contentInsets = UIEdgeInsets(top: self.notesTableview.contentInset.top, left: 0, bottom: keyboardSize.height, right: 0)
+            self.notesTableview.contentInset = contentInsets
+            
+            // If active text field is hidden by keyboard, scroll it so it's visible
+            // Your app might not need or want this behavior.
+            var aRect: CGRect = self.view.frame
+            aRect.size.height -= keyboardSize.height
+            
+            print(aRect)
+            
+            var activeTextFieldRect: CGRect?
+            var activeTextFieldOrigin: CGPoint?
+            
+            if self.activeTextField != nil {
+                activeTextFieldRect = self.activeTextField?.superview?.superview?.frame
+                activeTextFieldOrigin = activeTextFieldRect?.origin
+                self.notesTableview.scrollRectToVisible(activeTextFieldRect!, animated:true)
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        let contentInsets = UIEdgeInsets(top: self.notesTableview.contentInset.top, left: 0, bottom: 0, right: 0)
+        self.notesTableview.contentInset = contentInsets
+        self.activeTextField = nil
+    }
+    
+    
+    
     private func loadNotes() {
         
         guard let fromId =  Int(UserDefaults.standard.string(forKey: "bP_userId") ?? ""), let toId = connectedUserModel?.connectedUser?.userId else { return }
@@ -253,6 +301,10 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
         return newText.count <= 128
     }
     
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        self.activeTextField = textView
+        return true
+    }
 }
 
 
