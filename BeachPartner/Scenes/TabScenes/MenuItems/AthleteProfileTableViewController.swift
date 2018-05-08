@@ -240,6 +240,13 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
     
+    override func didMove(toParentViewController parent: UIViewController?) {
+        
+        if parent == nil {
+            //"Back pressed"
+        }
+    }
+    
     var topFinishesCount = 0
     var showtopFinish1 = false
     var showtopfinish2 = false
@@ -767,15 +774,14 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.userData.userProfile?.usaVolleyballRanking = rankingTxtFld.text!
         var topfinishesVal = String()
         
-        if topFinishesTxtfld.text != ""  {
+        if let trimmedString = topFinishesTxtfld.text?.trimmingCharacters(in: .whitespaces), trimmedString.count > 0 {
             topfinishesVal = "\(self.topFinishesTxtfld.text ?? "")"+","
         }
-        if topFinishesoneTxtFld.text != ""  {
+        if let trimmedString = topFinishesoneTxtFld.text?.trimmingCharacters(in: .whitespaces), trimmedString.count > 0 {
             topfinishesVal = "\(topfinishesVal)" + self.topFinishesoneTxtFld.text! + ","
         }
-        if topFinishestwoTxtFld.text != ""  {
-            
-           topfinishesVal = "\(topfinishesVal)" + self.topFinishestwoTxtFld.text!
+        if let trimmedString = topFinishestwoTxtFld.text?.trimmingCharacters(in: .whitespaces), trimmedString.count > 0 {
+            topfinishesVal = "\(topfinishesVal)" + self.topFinishestwoTxtFld.text!
         }
         self.userData.userProfile?.topFinishes = topfinishesVal
         if sucessValidation == currentValidation {
@@ -1183,6 +1189,8 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
                 self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
                 self.editVideoBtn.isHidden = true
                 self.editVideoBtn.isUserInteractionEnabled = false
+                    self.loadDataToUi(accResponseModel: accRespModel)
+                    
                 self.tableView.reloadData()
                 }
             }else{
@@ -1301,9 +1309,10 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         
         if(accResponseModel.userProfile?.topFinishes != ""){
             
-            let toplist = accResponseModel.userProfile?.topFinishes.components(separatedBy: ",")
+            var toplist = accResponseModel.userProfile?.topFinishes.components(separatedBy: ",")
             //            print("top list count :", toplist?.count ?? 0, toplist![0])
 
+            toplist = toplist?.filter{ $0 != "" }
             if(toplist?.count == 3){
                 self.topFinishesoneTxtFld.text = toplist![1]
                 self.topFinishestwoTxtFld.text = toplist![2]

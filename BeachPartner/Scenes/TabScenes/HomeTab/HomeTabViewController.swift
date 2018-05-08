@@ -97,8 +97,15 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     }
     
     override func viewWillAppear(_ animated: Bool) {
-       self.navigationController!.navigationBar.topItem!.title = "Beach Partner"
+        self.navigationController!.navigationBar.topItem!.title = "Beach Partner"
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(tapOnPush(notification:)), name:NSNotification.Name(rawValue: "foreground-pushNotification"), object: nil)
     }
+    
+    @objc func tapOnPush(notification: NSNotification) {
+        self.tabBarController?.selectedIndex = 5
+    }
+    
     
     func getAllUserEventsList(){
         APIManager.callServer.getAllEventBetweenDetails(sucessResult: {(response) in
