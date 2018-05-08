@@ -34,6 +34,8 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
                 self.performSegue(withIdentifier: "tandcsegue", sender: self)
                 //      UIApplication.shared.openURL(URL(string: "http://beachpartner.com")!)
             }
+            emailField.text = UserDefaults.standard.string(forKey: "email") ?? ""
+            passwordField.text = UserDefaults.standard.string(forKey: "password") ?? ""
         passwordField.delegate = self
         emailField.delegate = self
         
@@ -93,6 +95,8 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
                 }
                 if(fbloginresult.grantedPermissions.contains("email"))
                 {
+                    UserDefaults.standard.set("", forKey: "email")
+                    UserDefaults.standard.set("", forKey: "password")
                     self.loginFb()
                 }
             }
@@ -558,25 +562,26 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
         
         func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
             
-            if textField == emailField {
-                if let text = textField.text {
-                    if (textField as? UITextField) != nil {
-                        if(text.count > 3 ) {
-                            if (text + string).isValidEmailAddress() {
-                                emailField.errorText = ""
-                                emailField.hideError()
-                            }else{
-                                emailField.errorText = "Invalid email"
-                                emailField.showError()
-                            }
-                        }else {
-                            emailField.errorText = ""
-                            emailField.hideError()
-                        }
-                    }
-                }
-                return true
-            }else if textField == passwordField {
+//            if textField == emailField {
+//                if let text = textField.text {
+//                    if (textField as? UITextField) != nil {
+//                        if(text.count > 3 ) {
+//                            if (text + string).isValidEmailAddress() {
+//                                emailField.errorText = ""
+//                                emailField.hideError()
+//                            }else{
+//                                emailField.errorText = "Invalid email"
+//                                emailField.showError()
+//                            }
+//                        }else {
+//                            emailField.errorText = ""
+//                            emailField.hideError()
+//                        }
+//                    }
+//                }
+//                return true
+//            }else
+                if textField == passwordField {
                 let currentCharacterCount = textField.text?.characters.count ?? 0
                 if (range.length + range.location > currentCharacterCount){
                     return false
@@ -706,8 +711,8 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
                         stopLoading()
                         return
                     }
-                    
-                    
+                    UserDefaults.standard.set(self.emailField.text, forKey: "email")
+                    UserDefaults.standard.set(self.passwordField.text, forKey: "password")
                     if(loginModel.idToken != ""){
 
                         print("loginModel.idToken :", loginModel.idToken)
@@ -770,7 +775,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
                     
                     UserDefaults.standard.set(accRespModel.id, forKey: "bP_userId")
                     UserDefaults.standard.set(accRespModel.firstName, forKey: "bP_userName")
-                    UserDefaults.standard.set(accRespModel.email, forKey: "email")
+//                    UserDefaults.standard.set(accRespModel.email, forKey: "email")
                     
                     // Basic Info
                  /*   arrayBasicInfoDetails.append(accRespModel.firstName)
