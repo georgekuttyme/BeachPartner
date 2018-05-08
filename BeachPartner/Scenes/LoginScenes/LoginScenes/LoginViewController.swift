@@ -752,7 +752,6 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
             }
         }
         
-        
         func getUserInfo(){
 //            startLoading()
             APIManager.callServer.getAccountDetails(sucessResult: { (responseModel) in
