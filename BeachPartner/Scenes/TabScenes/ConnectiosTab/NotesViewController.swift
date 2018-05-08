@@ -8,7 +8,7 @@
 
 import UIKit
 import DropDown
-class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDelegate{
+class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UITextViewDelegate{
     
     let dropDown = DropDown()
     private var arrayImage = [AnyHashable]()
@@ -49,8 +49,10 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
 //        print(dateString)
         
         cell?.timeLabel.text = "Just Now"
-        cell?.noteTextView.text = note.note
         
+        cell?.noteTextView.text = note.note
+        cell?.noteTextView.delegate = self
+
         cell?.deleteNotesBtn.tag = indexPath.row+200000
         cell?.deleteNotesBtn.addTarget(self, action:#selector(deleteBtnClicked(sender:)), for: UIControlEvents.touchUpInside)
         
@@ -244,6 +246,11 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
             }
             self.alert(message: errorString)
         })
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
+        return newText.count <= 128
     }
     
 }

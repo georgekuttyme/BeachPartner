@@ -267,12 +267,12 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     }
 
     @objc func sendMsg(notification: NSNotification){
-        print("bsajdhjhdk",self.likedPersonInfo)
         let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
-        let secondViewController = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
-        secondViewController.connectedUserModel = self.likedPersonInfo
-        secondViewController.chatType = "Connections"
-        self.navigationController?.pushViewController(secondViewController, animated: true)
+        let navController = storyboard.instantiateViewController(withIdentifier: "ChatViewNavigation") as! UINavigationController
+        let innerViewController = navController.topViewController as! ChatViewController
+        innerViewController.connectedUserModel = self.likedPersonInfo
+        innerViewController.chatType = "Connections"
+        self.present(navController, animated: true, completion: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -543,16 +543,6 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
 */
     
     func didSwipeToUp(user_Id:String, fcmId: String) {
-
-        let loggedInUser = UserDefaults.standard.value(forKey: "bP_userName")
-        let message =  "\(loggedInUser ?? "") sent you High Five"
-        
-        APIManager.callServer.setPushNotification(recipients: fcmId, icon: "", title: "Beach Partner", body: message, sucessResult: { (response) in
-
-            print(response)
-        }, errorResult: { (error) in
-            print(error)
-        })
         
         APIManager.callServer.requestHiFi(userId:user_Id,sucessResult: { (responseModel) in
             
