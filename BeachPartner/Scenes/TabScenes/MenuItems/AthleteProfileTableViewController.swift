@@ -209,6 +209,9 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         
     }
     override func viewWillAppear(_ animated: Bool) {
+        
+          self.navigationController!.navigationBar.topItem!.title = "My Profile"
+        
         self.addToplistBtn.isHidden = true
         self.delTop1.isHidden = true
         self.delTop2.isHidden = true

@@ -97,7 +97,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+       self.navigationController!.navigationBar.topItem!.title = "Beach Partner"
     }
     
     func getAllUserEventsList(){

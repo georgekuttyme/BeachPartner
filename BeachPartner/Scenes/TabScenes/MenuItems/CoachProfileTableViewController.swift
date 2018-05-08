@@ -145,7 +145,9 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
     }
     
     override func viewWillAppear(_ animated: Bool) {
-
+        
+        self.navigationController!.navigationBar.topItem!.title = "My Profile"
+        
         let image = UIImage(named: "edit_btn_1x") as UIImage?
         editProfileBtn.setImage(image, for: .normal)
         self.editUserImageBtn.isHidden = true
