@@ -19,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
      
+        let barButtonItemAppearance = UIBarButtonItem.appearance()
+        barButtonItemAppearance.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.clear], for: .normal)
+        
         UINavigationBar.appearance().tintColor = UIColor.white
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
         FirebaseApp.configure()
@@ -128,13 +131,36 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         
     }
     
+//    // iOS10+, called when received response (default open, dismiss or custom action) for a notification
+//    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+//        let userInfo = response.notification.request.content.userInfo
+//        NSLog("[UserNotificationCenter] applicationState: \(applicationStateString) didReceiveResponse: \(userInfo)")
+//        //TODO: Handle background notification
+//        completionHandler()
+//    }
+    
     // iOS10+, called when received response (default open, dismiss or custom action) for a notification
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
+        
         NSLog("[UserNotificationCenter] applicationState: \(applicationStateString) didReceiveResponse: \(userInfo)")
+        
+        if let aps = userInfo["aps"] as? NSDictionary {
+            if let category = aps["category"] as? String {
+                print(category,"")
+                if category == "HIFI"{
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "foreground-pushNotification"), object: nil)
+                    print("&&&&&&&&")
+                }
+            }
+        }
+        
+        
         //TODO: Handle background notification
+        
         completionHandler()
     }
+    
 }
 
 // MARK: -- Notifications
