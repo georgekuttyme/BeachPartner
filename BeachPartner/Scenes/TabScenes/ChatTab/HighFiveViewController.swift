@@ -36,7 +36,7 @@ class HighFiveViewController: UIViewController,UITableViewDelegate,UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.dropDown.anchorView = self.menuBtn // UIView or UIBarButtonItem
+     /*   self.dropDown.anchorView = self.menuBtn // UIView or UIBarButtonItem
         // The list of items to display. Can be changed dynamically
         //        self.dropDown.direction = .bottom
         self.dropDown.dataSource = ["My Profile","About Us","Feedback","Settings", "Help","Logout"]
@@ -85,7 +85,7 @@ class HighFiveViewController: UIViewController,UITableViewDelegate,UITableViewDa
             }
         }
         self.dropDown.selectRow(0)
-        
+        */
         
         let floaty = Floaty()
         floaty.size = 45
