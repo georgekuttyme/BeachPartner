@@ -1240,7 +1240,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
                 
                 self.loadDataToUi(accResponseModel: accRespModel)
                 
-                ActivityIndicatorView.hiding()
+                Timer.scheduledTimer(timeInterval: 7, target: self, selector: #selector(self.runTimedCode), userInfo: nil, repeats: true)
             }else{
                 
                 ActivityIndicatorView.hiding()
@@ -1256,6 +1256,10 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             self.alert(message: errorString)
         })
         
+    }
+    @objc func runTimedCode(){
+        print("^^^&&*(()))")
+        ActivityIndicatorView.hiding()
     }
     
     func loadDataToUi( accResponseModel : AccountRespModel){

@@ -729,6 +729,10 @@ extension BPCardsVC :KolodaViewDelegate {
                 self.lblNotAvailable.isHidden = false
                 self.lblNotAvailable.text = "No video available for this profile"
                  self.lblNotAvailable.textColor = UIColor.white
+                lblNotAvailable.layer.shadowColor = UIColor.gray as! CGColor;          lblNotAvailable.layer.shadowOpacity = 1.0
+                lblNotAvailable.layer.shadowRadius = 3.0
+                lblNotAvailable.layer.shadowOffset = CGSize(width: 4, height: 4)
+                lblNotAvailable.layer.masksToBounds = false
                  self.lblNotAviltopSpace.constant = -75
             }
            

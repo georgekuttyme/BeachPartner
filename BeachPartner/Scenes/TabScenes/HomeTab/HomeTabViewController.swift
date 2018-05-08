@@ -103,7 +103,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     }
     
     @objc func tapOnPush(notification: NSNotification) {
-        self.tabBarController?.selectedIndex = 5
+        self.tabBarController?.selectedIndex = 4
     }
     
     
