@@ -21,11 +21,11 @@ class CoachViewController: UIViewController,UICollectionViewDataSource , UIColle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        self.getConnections()
-
         // Do any additional setup after loading the view.
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.getConnections()
     }
     
     override func didReceiveMemoryWarning() {

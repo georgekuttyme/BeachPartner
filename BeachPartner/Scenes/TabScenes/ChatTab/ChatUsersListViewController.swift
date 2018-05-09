@@ -132,9 +132,9 @@ class ChatUsersListViewController: UIViewController,UITableViewDelegate,UITableV
                 latestMsgDic.updateValue(channelData[channelData.keys[index]]!["receiver_id"] as! String, forKey: "receiver_id")
                  latestMsgDic.updateValue(channelData[channelData.keys[index]]!["receiver_name"] as! String, forKey: "receiver_name")
                  latestMsgDic.updateValue(channelData[channelData.keys[index]]!["sender_id"] as! String, forKey: "sender_id")
-                latestMsgDic.updateValue(channelData[channelData.keys[index]]!["sender_name"] as? String ?? "", forKey: "sender_name")
+//                latestMsgDic.updateValue(channelData[channelData.keys[index]]!["sender_name"] as? String ?? "", forKey: "sender_name")
                  latestMsgDic.updateValue(channelData[channelData.keys[index]]!["text"] as! String, forKey: "text")
-                latestMsgDic.updateValue(channelData[channelData.keys[index]]!["profileImg"] as? String ?? "", forKey: "profileImg")
+//                latestMsgDic.updateValue(channelData[channelData.keys[index]]!["profileImg"] as? String ?? "", forKey: "profileImg")
                 latestMsgDic.updateValue(channelData[channelData.keys[index]]!["date"] as! String, forKey: "date")
                 
                 let senderId = channelData[channelData.keys[index]]!["sender_id"] as! String
@@ -144,6 +144,8 @@ class ChatUsersListViewController: UIViewController,UITableViewDelegate,UITableV
                 for connectedUser in self.activeUsers {
                     let userId = String(connectedUser.connectedUser?.userId ?? 0)
                     if userId == senderId || userId == receiverId {
+                        latestMsgDic.updateValue(connectedUser.connectedUser?.firstName ?? "", forKey: "sender_name")
+                        latestMsgDic.updateValue(connectedUser.connectedUser?.imageUrl ?? "", forKey: "profileImg")
                         isActiveUser = true
                        break
                     }
@@ -165,15 +167,15 @@ class ChatUsersListViewController: UIViewController,UITableViewDelegate,UITableV
     func getBlockedConnections() {
         
         APIManager.callServer.getUserConnectionList(status:"status=Active&showReceived=false",sucessResult: { (responseModel) in
-            
             guard let connectedUserModelArray = responseModel as? ConnectedUserModelArray else {
                 return
             }
+
             for connectedUser in connectedUserModelArray.connectedUserModel {
                 self.activeUsers.append(connectedUser)
             }
+            print("activeUsers--->            ", self.activeUsers,"          ___________________")
             DispatchQueue.main.async {
-                print(self.activeUsers)
                 self.recentChatList.removeAll()
                 self.observeChannels()
             }

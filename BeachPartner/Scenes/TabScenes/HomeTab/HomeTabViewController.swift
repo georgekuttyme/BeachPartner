@@ -223,7 +223,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             //            cell.messageUserProfille.image = imageSrc[n % 3]
             
             if let imageUrl = URL(string: (self.recentChatList[indexPath.row]["profileImg"])!) {
-            
+            print("hdgh  ",self.recentChatList)
                 cell.messageUserProfille.sd_setIndicatorStyle(.whiteLarge)
                 cell.messageUserProfille.sd_setShowActivityIndicatorView(true)
                  cell.messageUserProfille.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
@@ -472,9 +472,9 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
                 latestMsgDic.updateValue(channelData[channelData.keys[index]]!["receiver_id"] as! String, forKey: "receiver_id")
                 latestMsgDic.updateValue(channelData[channelData.keys[index]]!["receiver_name"] as! String, forKey: "receiver_name")
                 latestMsgDic.updateValue(channelData[channelData.keys[index]]!["sender_id"] as! String, forKey: "sender_id")
-                latestMsgDic.updateValue(channelData[channelData.keys[index]]!["sender_name"] as? String ?? "", forKey: "sender_name")
+//                latestMsgDic.updateValue(channelData[channelData.keys[index]]!["sender_name"] as? String ?? "", forKey: "sender_name")
                 latestMsgDic.updateValue(channelData[channelData.keys[index]]!["text"] as! String, forKey: "text")
-                latestMsgDic.updateValue(channelData[channelData.keys[index]]!["profileImg"] as? String ?? "", forKey: "profileImg")
+//                latestMsgDic.updateValue(channelData[channelData.keys[index]]!["profileImg"] as? String ?? "", forKey: "profileImg")
                 latestMsgDic.updateValue(channelData[channelData.keys[index]]!["date"] as! String, forKey: "date")
                 
                 let senderId = channelData[channelData.keys[index]]!["sender_id"] as! String
@@ -484,6 +484,8 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
                 for connectedUser in self.activeUsers {
                     let userId = String(connectedUser.connectedUser?.userId ?? 0)
                     if userId == senderId || userId == receiverId {
+                        latestMsgDic.updateValue(connectedUser.connectedUser?.firstName ?? "", forKey: "sender_name")
+                        latestMsgDic.updateValue(connectedUser.connectedUser?.imageUrl ?? "", forKey: "profileImg")
                         isActiveUser = true
                         break
                     }
