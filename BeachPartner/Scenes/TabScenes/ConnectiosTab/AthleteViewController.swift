@@ -54,7 +54,8 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
         }
         cell?.profileImgView.layer.cornerRadius = (cell?.profileImgView.frame.size.width)!/2
         cell?.profileImgView.clipsToBounds = true
-        cell?.profileImgView.layer.borderColor = UIColor.green.cgColor
+//        cell?.profileImgView.layer.borderColor = UIColor.green.cgColor
+        cell?.profileImgView.layer.borderColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0).cgColor
         cell?.profileImgView.layer.borderWidth = 1.5
         
         //        if(cell?.profileImgView.image == nil){
