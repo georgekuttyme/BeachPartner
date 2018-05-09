@@ -37,7 +37,7 @@ class ChatUsersListViewController: UIViewController,UITableViewDelegate,UITableV
         self.navigationItem.setHidesBackButton(true, animated:false);
         self.title = "Messages"
         
-        let menuButtonImage = UIImage(named:"menudot")
+     /*   let menuButtonImage = UIImage(named:"menudot")
         let menuButton = UIBarButtonItem(image: menuButtonImage, style: .plain, target: self, action: #selector(didTapMenuButton))
         self.navigationItem.rightBarButtonItem = menuButton
         
@@ -90,7 +90,7 @@ class ChatUsersListViewController: UIViewController,UITableViewDelegate,UITableV
             }
         }
         self.dropDown.selectRow(0)
-        
+        */
         
         let floaty = Floaty()
         floaty.size = 45
