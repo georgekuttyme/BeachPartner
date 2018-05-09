@@ -144,10 +144,13 @@ class ChatUsersListViewController: UIViewController,UITableViewDelegate,UITableV
                 for connectedUser in self.activeUsers {
                     let userId = String(connectedUser.connectedUser?.userId ?? 0)
                     if userId == senderId || userId == receiverId {
-                        latestMsgDic.updateValue(connectedUser.connectedUser?.firstName ?? "", forKey: "sender_name")
-                        latestMsgDic.updateValue(connectedUser.connectedUser?.imageUrl ?? "", forKey: "profileImg")
-                        isActiveUser = true
-                       break
+                        if bP_userId == senderId || bP_userId == receiverId {
+                            latestMsgDic.updateValue(connectedUser.connectedUser?.firstName ?? "", forKey: "sender_name")
+                            latestMsgDic.updateValue(connectedUser.connectedUser?.imageUrl ?? "", forKey: "profileImg")
+                            isActiveUser = true
+                            break
+                        }
+    
                     }
                     else {
                         isActiveUser = false
