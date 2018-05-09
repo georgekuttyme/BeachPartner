@@ -168,6 +168,8 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     let heightdropDown = DropDown()
     
     let datePicker = UIDatePicker()
+    let dateformatter = DateFormatter()
+    
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
@@ -247,40 +249,42 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         }
     }
     
-    var topFinishesCount = 0
     var showtopFinish1 = false
     var showtopfinish2 = false
+
     @IBAction func addTopFinishes(_ sender: Any) {        
-        if self.topFinishesCount == 0{
-            self.tableCell_TopFinishesinLastYear1.isHidden = false
-            self.topFinishesCount = self.topFinishesCount + 1
-            self.showtopFinish1 = true
-            if self.showtopfinish2 == true {
-                self.topFinishesCount = self.topFinishesCount + 1
-                self.topFinishesAddBtn.isHidden = true
-                self.showtopfinish2 = true
-            }
-        }else if (self.topFinishesCount == 1 ){ //&& self.tableCell_TopFinishesinLastYear2.isHidden
+        
+        if self.showtopFinish1 == true {
             self.tableCell_TopFinishesinLastYear2.isHidden = false
-            self.topFinishesCount = self.topFinishesCount + 1
             self.topFinishesAddBtn.isHidden = true
             self.showtopfinish2 = true
         }
+        else {
+            self.tableCell_TopFinishesinLastYear1.isHidden = false
+            self.topFinishesAddBtn.isHidden = false
+            self.showtopFinish1 = true
+        }
+
         self.tableView.reloadData()
     }
     
     @IBAction func delTopFinisheOne(_ sender: Any) {
         
-        self.tableCell_TopFinishesinLastYear1.isHidden = true
-        self.topFinishesAddBtn.isHidden = false
-        self.topFinishesoneTxtFld.text = ""
-        if(self.topFinishesCount == 1 ){
-            self.topFinishesCount = self.topFinishesCount - 1
+        if self.showtopfinish2 == true {
+            self.topFinishesoneTxtFld.text = self.topFinishestwoTxtFld.text
+            
+            self.tableCell_TopFinishesinLastYear2.isHidden = true
+            self.topFinishesAddBtn.isHidden = false
+            self.topFinishestwoTxtFld.text = ""
+            self.showtopfinish2 = false
         }
-        else if(self.topFinishesCount == 2 ){
-             self.topFinishesCount = self.topFinishesCount - 2
+        else {
+            self.tableCell_TopFinishesinLastYear1.isHidden = true
+            self.topFinishesAddBtn.isHidden = false
+            self.topFinishesoneTxtFld.text = ""
+            self.showtopFinish1 = false
         }
-        self.showtopFinish1 = false
+
         self.tableView.reloadData()
     }
     
@@ -288,10 +292,8 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.tableCell_TopFinishesinLastYear2.isHidden = true
         self.topFinishesAddBtn.isHidden = false
         self.topFinishestwoTxtFld.text = ""
-        if(self.topFinishesCount > 1 ){
-            self.topFinishesCount = self.topFinishesCount - 1
-        }
         self.showtopfinish2 = false
+
         self.tableView.reloadData()
     }
     
@@ -606,6 +608,9 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         let image = UIImage(named: "edit_btn_active_1x") as UIImage?
         editProfileBtn.setImage(image, for: .normal)
         if (self.editUserImageBtn.isHidden) {
+            
+            self.topFinishesAddBtn.isHidden = showtopfinish2
+            
             self.editUserImageBtn.isHidden = false
             self.editUserImageBtn.isUserInteractionEnabled = true
             editclicked = true
@@ -618,6 +623,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             self.tableView.reloadData()
         }
         else {
+            self.topFinishesAddBtn.isHidden = true
             self.addToplistBtn.isHidden = true
             self.delTop1.isHidden = true
             self.delTop2.isHidden = true
@@ -694,7 +700,12 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             birthDateTxtFld.showError()
         }else{
             birthDateTxtFld.hideError()
-            self.userData.inputDob = birthDateTxtFld.text!
+
+            let date = dateformatter.date(from: birthDateTxtFld.text!)
+            dateformatter.dateFormat = "yyyy-MM-dd"
+            let dateForSave = dateformatter.string(from: date!)
+
+            self.userData.inputDob = dateForSave
             currentValidation += 1
         }
         
@@ -775,17 +786,17 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         var topfinishesVal = String()
         
         if let trimmedString = topFinishesTxtfld.text?.trimmingCharacters(in: .whitespaces), trimmedString.count > 0 {
-            topfinishesVal = "\(self.topFinishesTxtfld.text ?? "")"+","
+            topfinishesVal = "\(self.topFinishesTxtfld.text ?? "")"
         }
         if let trimmedString = topFinishesoneTxtFld.text?.trimmingCharacters(in: .whitespaces), trimmedString.count > 0 {
-            topfinishesVal = "\(topfinishesVal)" + self.topFinishesoneTxtFld.text! + ","
+            topfinishesVal = "\(topfinishesVal)" + "," + self.topFinishesoneTxtFld.text!
         }
         if let trimmedString = topFinishestwoTxtFld.text?.trimmingCharacters(in: .whitespaces), trimmedString.count > 0 {
-            topfinishesVal = "\(topfinishesVal)" + self.topFinishestwoTxtFld.text!
+            topfinishesVal = "\(topfinishesVal)" + "," + self.topFinishestwoTxtFld.text!
         }
         self.userData.userProfile?.topFinishes = topfinishesVal
         if sucessValidation == currentValidation {
-            
+
             self.updateUserInfo()
             
         }
@@ -1151,7 +1162,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     @objc func datePickerValueChanged(sender: UIDatePicker){
         
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateFormat = "MM-dd-yyyy"
         
         //        formatter.dateStyle = DateFormatter.Style.medium
         //        formatter.timeStyle = DateFormatter.Style.none
@@ -1240,7 +1251,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
                 
                 self.loadDataToUi(accResponseModel: accRespModel)
                 
-                Timer.scheduledTimer(timeInterval: 7, target: self, selector: #selector(self.runTimedCode), userInfo: nil, repeats: true)
+                Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(self.runTimedCode), userInfo: nil, repeats: false)
             }else{
                 
                 ActivityIndicatorView.hiding()
@@ -1263,6 +1274,12 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     }
     
     func loadDataToUi( accResponseModel : AccountRespModel){
+        
+        self.topFinishesAddBtn.isHidden = true
+        topFinishesTxtfld.text = ""
+        topFinishesoneTxtFld.text = ""
+        topFinishestwoTxtFld.text = ""
+        
         self.userName.text = accResponseModel.firstName
 //        + " " + accResponseModel.lastName
         self.userTypeLbl.text = accResponseModel.userType
@@ -1271,9 +1288,9 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.genderBtn.setTitle(accResponseModel.gender, for: .normal)
         
         let date = NSDate(timeIntervalSince1970: TimeInterval(accResponseModel.dob/1000))
-        let dayTimePeriodFormatter = DateFormatter()
-        dayTimePeriodFormatter.dateFormat = "yyyy-MM-dd"
-        let dateString = dayTimePeriodFormatter.string(from: date as Date)
+//        let dayTimePeriodFormatter = DateFormatter()
+        dateformatter.dateFormat = "MM-dd-yyyy"
+        let dateString = dateformatter.string(from: date as Date)
         
         datePicker.date = date as Date
         if accResponseModel.dob > 0 {
@@ -1317,26 +1334,24 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             //            print("top list count :", toplist?.count ?? 0, toplist![0])
 
             toplist = toplist?.filter{ $0 != "" }
+            
             if(toplist?.count == 3){
                 self.topFinishesoneTxtFld.text = toplist![1]
                 self.topFinishestwoTxtFld.text = toplist![2]
                 self.topFinishesTxtfld.text = toplist![0]
                 self.showtopFinish1 = true
                 self.showtopfinish2 = true
-                self.topFinishesAddBtn.isHidden = true
             }
             if(toplist?.count == 2){
                 self.topFinishesoneTxtFld.text = toplist![1]
                 self.topFinishesTxtfld.text = toplist![0]
                 self.showtopFinish1 = true
                 self.showtopfinish2 = false
-                self.topFinishesAddBtn.isHidden = false
                 self.tableCell_TopFinishesinLastYear2.isHidden = true
             }
             if(toplist?.count == 1){
                 self.showtopFinish1 = false
                 self.showtopfinish2 = false
-                 self.topFinishesAddBtn.isHidden = false
                 self.topFinishesTxtfld.text = toplist![0]
                 self.tableCell_TopFinishesinLastYear1.isHidden = true
                 self.tableCell_TopFinishesinLastYear2.isHidden = true
@@ -1601,8 +1616,9 @@ extension UITextField {
     }
     func disableTextFld() {
         self.layer.borderWidth = 0
+        self.layer.borderColor = UIColor(rgb: 0xECECEF).cgColor
         self.isUserInteractionEnabled = false
-        self.backgroundColor = UIColor(rgb: 0xD8D8D8)
+        self.backgroundColor = UIColor(rgb: 0xECECEF)
     }
 }
 extension UIButton{
@@ -1616,7 +1632,7 @@ extension UIButton{
     func disableBtn() {
         self.layer.borderWidth = 0
         self.isUserInteractionEnabled = false
-        self.backgroundColor = UIColor(rgb: 0xD8D8D8)
+        self.backgroundColor = UIColor(rgb: 0xECECEF)
         self.borderColor = UIColor(rgb: 0x9C9C9C)
     }
 }
