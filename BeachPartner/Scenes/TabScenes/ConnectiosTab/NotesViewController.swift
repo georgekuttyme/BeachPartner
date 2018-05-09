@@ -17,23 +17,29 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
     var noOfCells = 0
     var isExpanded = false
     var count: Int = 0
-    
     var activeTextField: UITextView?
     
     var connectedUserModel: ConnectedUserModel?
     var notes = [GetNoteRespModel]()
 //    let dateFormatter = DateFormatter()
 
-    @IBOutlet weak var noNotesLabel: UILabel!
+    var button1 : UIBarButtonItem!
     
+    @IBOutlet weak var noNotesLabel: UILabel!
     @IBOutlet weak var menuBtn: UIBarButtonItem!
     @IBOutlet weak var addBtn: UIButton!
     @IBOutlet weak var notesTableview: UITableView!
-    @IBAction func menuBtnClicked(_ sender: UIBarButtonItem) {
-        dropDown.show()
+    
+   
+    
+    func rightBarBtn(){
+        button1 = UIBarButtonItem(image: UIImage(named: "menudot"), style: .plain, target: self, action: #selector(action))
+        self.navigationItem.rightBarButtonItem  = button1
     }
-    
-    
+   
+    @objc func action() {
+         dropDown.show()
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        return self.noOfCells
         return notes.count
@@ -54,6 +60,7 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
         
         cell?.noteTextView.text = note.note
         cell?.noteTextView.delegate = self
+      
 
         cell?.deleteNotesBtn.tag = indexPath.row+200000
         cell?.deleteNotesBtn.addTarget(self, action:#selector(deleteBtnClicked(sender:)), for: UIControlEvents.touchUpInside)
@@ -63,8 +70,7 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
         
         return cell!
     }
-    
-    
+
     @objc func deleteBtnClicked(sender:UIButton!) {
 
         let index = sender.tag-200000
@@ -86,7 +92,6 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
         updateNote(withId: note.noteId, noteString: updatedNote)
     }
     
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -95,15 +100,19 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
         didTapAddNoteButton()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        
+        self.navigationItem.title = "Connections"
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadNotes()
         
-        //        dateFormatter.dateFormat = "yyyy-MM-dd"
+        rightBarBtn()
+        loadNotes()
+       
         self.hideKeyboardWhenTappedAround()
-//        noteButton()
-        self.dropDown.anchorView = self.menuBtn
+        self.dropDown.anchorView = self.button1
         self.dropDown.dataSource =  ["My Profile","About Us","Feedback","Settings", "Help","Logout"]
         self.dropDown.bottomOffset = CGPoint(x: 20, y:45)
         self.dropDown.width = 150
@@ -120,7 +129,7 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
                 self.navigationController!.navigationBar.topItem!.title = ""
                 self.navigationController?.isNavigationBarHidden = false
             }
-
+                
             else if(item == "Logout"){
                 self.timoutLogoutAction()
             }
@@ -151,50 +160,29 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
         self.dropDown.selectRow(0)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    //MARK: to enable textview when editing
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        moveTextView(_textView: textView, moveDistance: -150, up: true)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    func textViewDidEndEditing(_ textView: UITextView) {
+        moveTextView(_textView: textView, moveDistance: -150, up: false)
     }
     
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+    func textviewShouldReturn(_ textView: UITextView){
+        textView.resignFirstResponder()
+        
     }
-    
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            let contentInsets = UIEdgeInsets(top: self.notesTableview.contentInset.top, left: 0, bottom: keyboardSize.height, right: 0)
-            self.notesTableview.contentInset = contentInsets
-            
-            // If active text field is hidden by keyboard, scroll it so it's visible
-            // Your app might not need or want this behavior.
-            var aRect: CGRect = self.view.frame
-            aRect.size.height -= keyboardSize.height
-            
-            print(aRect)
-            
-            var activeTextFieldRect: CGRect?
-            var activeTextFieldOrigin: CGPoint?
-            
-            if self.activeTextField != nil {
-                activeTextFieldRect = self.activeTextField?.superview?.superview?.frame
-                activeTextFieldOrigin = activeTextFieldRect?.origin
-                self.notesTableview.scrollRectToVisible(activeTextFieldRect!, animated:true)
-            }
-        }
+    func moveTextView(_textView: UITextView, moveDistance: Int, up:Bool){
+        let moveDuration = 0.3
+        let movement: CGFloat = CGFloat(up ? moveDistance : -moveDistance)
+        UIView.beginAnimations("animateTextView", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(moveDuration)
+        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+        UIView.commitAnimations()
     }
-    
-    @objc func keyboardWillHide(notification: NSNotification) {
-        let contentInsets = UIEdgeInsets(top: self.notesTableview.contentInset.top, left: 0, bottom: 0, right: 0)
-        self.notesTableview.contentInset = contentInsets
-        self.activeTextField = nil
-    }
-    
     
     
     private func loadNotes() {
@@ -264,6 +252,11 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
                 return
             }
             
+            var refreshAlert = UIAlertController(title: "", message: "Note Deleted Successfully", preferredStyle: UIAlertControllerStyle.alert)
+            refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                print("Handle Ok logic here")
+            }))
+            self.present(refreshAlert, animated: true, completion: nil)
             self.loadNotes()
             
         }, errorResult: { (error) in
@@ -285,6 +278,18 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
             guard let noteModel = responseModel as? GetNoteRespModel else { return }
             
             self.loadNotes()
+            
+            var refreshAlert = UIAlertController(title: "", message: "Note Created", preferredStyle: UIAlertControllerStyle.alert)
+            refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+
+            let lastIndex = self.notesTableview.numberOfRows(inSection: 0) - 1
+            let indexPath = IndexPath(row: lastIndex, section: 0)
+                let cell = self.notesTableview.cellForRow(at: indexPath) as! NotesCell
+                print("Handle Ok logic here")
+                cell.noteTextView.becomeFirstResponder()
+             
+            }))
+            self.present(refreshAlert, animated: true, completion: nil)
             
         }, errorResult: { (error) in
             
