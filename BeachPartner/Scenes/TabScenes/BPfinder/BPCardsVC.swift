@@ -270,11 +270,11 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
 
     @objc func sendMsg(notification: NSNotification){
         let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
-        let navController = storyboard.instantiateViewController(withIdentifier: "ChatViewNavigation") as! UINavigationController
-        let innerViewController = navController.topViewController as! ChatViewController
-        innerViewController.connectedUserModel = self.likedPersonInfo
-        innerViewController.chatType = "Connections"
-        self.present(navController, animated: true, completion: nil)
+        let chatController = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
+        chatController.connectedUserModel = self.likedPersonInfo
+        chatController.chatType = "Connections"
+        let navigationController = UINavigationController(rootViewController: chatController)
+        self.present(navigationController, animated: true, completion: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -729,7 +729,8 @@ extension BPCardsVC :KolodaViewDelegate {
                 self.lblNotAvailable.isHidden = false
                 self.lblNotAvailable.text = "No video available for this profile"
                  self.lblNotAvailable.textColor = UIColor.white
-                lblNotAvailable.layer.shadowColor = UIColor.gray as! CGColor;          lblNotAvailable.layer.shadowOpacity = 1.0
+                lblNotAvailable.layer.shadowColor = UIColor.gray.cgColor
+                lblNotAvailable.layer.shadowOpacity = 1.0
                 lblNotAvailable.layer.shadowRadius = 3.0
                 lblNotAvailable.layer.shadowOffset = CGSize(width: 4, height: 4)
                 lblNotAvailable.layer.masksToBounds = false

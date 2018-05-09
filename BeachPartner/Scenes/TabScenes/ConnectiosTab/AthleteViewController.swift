@@ -230,11 +230,11 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
        let connectedUser = self.connectedUsers[sender.tag-100000]
         if connectedUser.connectedUser?.isBlocked  == false {
             let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
-            let navController = storyboard.instantiateViewController(withIdentifier: "ChatViewNavigation") as! UINavigationController
-            let innerViewController = navController.topViewController as! ChatViewController
-            innerViewController.connectedUserModel = [connectedUser]
-            innerViewController.chatType = "Connections"
-            self.present(navController, animated: true, completion: nil)
+            let chatController = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
+            chatController.connectedUserModel = [connectedUser]
+            chatController.chatType = "Connections"
+            let navigationController = UINavigationController(rootViewController: chatController)
+            self.present(navigationController, animated: true, completion: nil)
         }
     }
     

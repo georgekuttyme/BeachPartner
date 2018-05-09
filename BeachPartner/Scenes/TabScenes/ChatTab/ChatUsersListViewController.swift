@@ -227,11 +227,11 @@ class ChatUsersListViewController: UIViewController,UITableViewDelegate,UITableV
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
-        let navController = storyboard.instantiateViewController(withIdentifier: "ChatViewNavigation") as! UINavigationController
-        let innerViewController = navController.topViewController as! ChatViewController
-        innerViewController.recentChatDic = self.recentChatList[indexPath.row]
-        innerViewController.chatType = "recentChat"
-        self.present(navController, animated: true, completion: nil)
+        let chatController = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
+        chatController.recentChatDic = self.recentChatList[indexPath.row]
+        chatController.chatType = "recentChat"
+        let navigationController = UINavigationController(rootViewController: chatController)
+        self.present(navigationController, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {

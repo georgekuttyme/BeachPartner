@@ -24,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UINavigationBar.appearance().tintColor = UIColor.white
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
+        UINavigationBar.appearance().barTintColor = UIColor(red: 32.0/255.0, green: 48.0/255.0, blue: 127.0/255.0, alpha: 1.0)
+
         FirebaseApp.configure()
         application.registerForRemoteNotifications()
         Messaging.messaging().delegate = self
