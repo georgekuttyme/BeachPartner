@@ -122,7 +122,7 @@ extension APIManager{
             "deviceId": ApiMethods.device_UUID,
             "deviceToken": "",
             "fcmToken": fcmToken,
-            
+            "deviceType": "iOS"
         ]
 
         APIClient.doRequest.inPost(method:ApiMethods.Login, params: params as! [String : String], sucess: { (response) in
@@ -883,49 +883,7 @@ extension APIManager{
         
     }
     
-    public func getAllEventBetweenDetails(sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure){
-        let params = [String:String]()
-        
-        let todayDate = Calendar.current.date(byAdding: .month, value: 0, to: Date())
-        let futureDate = Calendar.current.date(byAdding: .month, value: 5, to: Date())
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy"
-        let currentDate : String = dateFormatter.string(from: todayDate!)
-        let dateAfterFiveMonth : String = dateFormatter.string(from: futureDate!)
-        print("Result: ",currentDate)
-        
-        let fromDate = currentDate
-        let toDate = dateAfterFiveMonth
-        let userId = UserDefaults.standard.string(forKey: "bP_userId") ?? ""
-        let type = "fromDate="+"\(fromDate)"+"&toDate="+"\(toDate)"+"&userId="+"\(userId)"
-        //        let type = "subscriptionType="+"\(type)"
-        
-        APIGetClient.doGetRequest.inGetReqForArr(method:ApiMethods.GetAllUserEventsBetween + "?\(type)"  , params: params, sucess: { (response) in
-            
-            APIManager.printOnDebug(response: " Resppp1111 : \(response)")
-            
-            
-            let jsonDict = response! as! NSArray
-            
-            do {
-                
-                let accRespModel = try GetAllEventsBetweenResponseModelArray(jsonDict)
-                sucessResult(accRespModel)
-                return
-            } catch {
-                print("Catched")
-                errorResult(error.localizedDescription)
-                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
-                return
-            }
-            
-        }) { (error) in
-            self.busyOff()
-            errorResult(error?.localizedDescription)
-            APIManager.printOnDebug(response: "error:\(error?.localizedDescription)")
-            return
-        }
-    }
+    
     // create Note in connnections
     public func getNotes(fromUserId:Int,toUserId:Int,sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure) {
         let fromUserId = fromUserId
@@ -1088,8 +1046,83 @@ extension APIManager{
     }
     
     
+    // MARK:- Events
+    public func getAllEvents(sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure) {
+        let params = [String:String]()
+        
+        
+        APIGetClient.doGetRequest.inGetReqForArray(method: ApiMethods.GetAllEvents, params: params, sucess: { (response) in
+            APIManager.printOnDebug(response: " Resppp1111 : \(response)")
+            
+            let jsonDict = response!
+            
+            do {
+                
+                let accRespModel = try GetEventsRespModelArray(jsonDict)
+                sucessResult(accRespModel)
+                return
+            } catch {
+                print("Catched")
+                errorResult(error.localizedDescription)
+                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                return
+            }
+            
+        }) { (error) in
+            
+            self.busyOff()
+            errorResult(error?.localizedDescription)
+            APIManager.printOnDebug(response: "error:\(error?.localizedDescription)")
+            return
+        }
+    }
     
     
+    
+    
+    public func getAllEventBetweenDetails(sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure){
+        let params = [String:String]()
+        
+        let todayDate = Calendar.current.date(byAdding: .month, value: 0, to: Date())
+        let futureDate = Calendar.current.date(byAdding: .month, value: 5, to: Date())
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        let currentDate : String = dateFormatter.string(from: todayDate!)
+        let dateAfterFiveMonth : String = dateFormatter.string(from: futureDate!)
+        print("Result: ",currentDate)
+        
+        let fromDate = currentDate
+        let toDate = dateAfterFiveMonth
+        let userId = UserDefaults.standard.string(forKey: "bP_userId") ?? ""
+        let type = "fromDate="+"\(fromDate)"+"&toDate="+"\(toDate)"+"&userId="+"\(userId)"
+        //        let type = "subscriptionType="+"\(type)"
+        
+        APIGetClient.doGetRequest.inGetReqForArr(method:ApiMethods.GetAllUserEventsBetween + "?\(type)"  , params: params, sucess: { (response) in
+            
+            APIManager.printOnDebug(response: " Resppp1111 : \(response)")
+            
+            
+            let jsonDict = response! as! NSArray
+            
+            do {
+                
+                let accRespModel = try GetAllEventsBetweenResponseModelArray(jsonDict)
+                sucessResult(accRespModel)
+                return
+            } catch {
+                print("Catched")
+                errorResult(error.localizedDescription)
+                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                return
+            }
+            
+        }) { (error) in
+            self.busyOff()
+            errorResult(error?.localizedDescription)
+            APIManager.printOnDebug(response: "error:\(error?.localizedDescription)")
+            return
+        }
+    }
 }
 
 

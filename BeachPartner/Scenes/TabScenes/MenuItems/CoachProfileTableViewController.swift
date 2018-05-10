@@ -113,7 +113,8 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
     let shareAthletesDropDown = DropDown()
     
     let datePicker = UIDatePicker()
-    
+    let dateformatter = DateFormatter()
+    let date_formatter1 = DateFormatter()
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
         //  tableView.contentSize = CGSize(width: self.view.frame.size.width, height: 1700)
@@ -151,7 +152,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         self.editUserImageBtn.isUserInteractionEnabled = false
         editclicked = false
         self.tableView.reloadData()
-        
+         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.clear], for: .normal)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
@@ -171,6 +172,8 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         self.getUserInfo()
         self.hideKeyboardWhenTappedAround()
         loadLocations()
+        dateformatter.dateFormat = "MM-dd-yyyy"
+        date_formatter1.dateFormat = "yyyy-MM-dd"
         //
         //        let floaty = Floaty()
         //        floaty.addItem("I got a handler", icon: UIImage(named: "chat")!, handler: { item in
@@ -414,7 +417,11 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
             birthDateTxtFld.showError()
         }else{
             birthDateTxtFld.hideError()
-            self.userData.inputDob = birthDateTxtFld.text!
+            let date = dateformatter.date(from: birthDateTxtFld.text!)
+            date_formatter1.dateFormat = "yyyy-MM-dd"
+            let dateForSave = date_formatter1.string(from: date!)
+            self.userData.inputDob = dateForSave
+//            self.userData.inputDob = birthDateTxtFld.text!
             currentValidation += 1
         }
         
@@ -569,6 +576,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         imagePickerController.navigationBar.titleTextAttributes = [
             NSAttributedStringKey.foregroundColor : UIColor.white
         ] // Title color
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.white], for: .normal)
         present(imagePickerController, animated: true, completion: {
             // Done presenting.
         })
@@ -772,7 +780,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
     @objc func datePickerValueChanged(sender: UIDatePicker){
         
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateFormat = "MM-dd-yyyy"
         
         //        formatter.dateStyle = DateFormatter.Style.medium
         //        formatter.timeStyle = DateFormatter.Style.none
@@ -887,10 +895,8 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         self.genderBtn.setTitle(accResponseModel.gender, for: .normal)
         
         let date = NSDate(timeIntervalSince1970: TimeInterval(accResponseModel.dob/1000))
-        let dayTimePeriodFormatter = DateFormatter()
-        dayTimePeriodFormatter.dateFormat = "yyyy-MM-dd"
-        let dateString = dayTimePeriodFormatter.string(from: date as Date)
-        
+        dateformatter.dateFormat = "MM-dd-yyyy"
+        let dateString = dateformatter.string(from: date as Date)
         datePicker.date = date as Date
         self.birthDateTxtFld.text = dateString
         
@@ -1003,7 +1009,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
     // MARK: - UIImagePickerControllerDelegate
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        
+         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.clear], for: .normal)
         var videoUrlValue: NSURL? = nil
         
         //        self.videoUrl = ""
@@ -1141,6 +1147,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
     
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.clear], for: .normal)
         dismiss(animated: true, completion: {
             // Done cancel dismiss of image picker.
             self.editUserImageBtn.isHidden = true
