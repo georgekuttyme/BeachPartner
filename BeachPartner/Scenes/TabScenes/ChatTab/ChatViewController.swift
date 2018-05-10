@@ -72,8 +72,10 @@ class ChatViewController: JSQMessagesViewController {
         return ChatID
         }
         let bP_userId =  Int( UserDefaults.standard.string(forKey: "bP_userId") ?? "")
-        let chatUserId = connectedUserModel[0].connectedUser?.userId ?? 0
-       
+        
+//        let chatUserId = connectedUserModel[0].connectedUser?.userId ?? 0
+        let connectedUserModelOfFirstElement = connectedUserModel.first
+        let chatUserId = connectedUserModelOfFirstElement?.connectedUser?.userId ?? 0
         if bP_userId!<chatUserId {
             ChatID = UserDefaults.standard.string(forKey: "bP_userId")!+"-"+String(chatUserId)
         }
@@ -104,7 +106,8 @@ class ChatViewController: JSQMessagesViewController {
             }
         }
          else{
-        title = "Messages with " + (connectedUserModel[0].connectedUser?.firstName)!
+            let connectedUserModelOfFirstElement = connectedUserModel.first
+            title = "Messages with " + (connectedUserModelOfFirstElement?.connectedUser?.firstName)!
         }
     }
     
@@ -149,9 +152,10 @@ class ChatViewController: JSQMessagesViewController {
             profileImg = self.recentChatDic["profileImg"]!
         }
         else{
-             receiver_name = String((connectedUserModel[0].connectedUser?.firstName)!)
-             receiver_id = String((connectedUserModel[0].connectedUser?.userId ?? 0))
-             profileImg = String ((connectedUserModel[0].connectedUser?.imageUrl)!)
+             let connectedUserModelOfFirstElement = connectedUserModel.first
+            receiver_name = String((connectedUserModelOfFirstElement?.connectedUser?.firstName)!)
+            receiver_id = String((connectedUserModelOfFirstElement?.connectedUser?.userId ?? 0))
+            profileImg = String ((connectedUserModelOfFirstElement?.connectedUser?.imageUrl)!)
         }
         
         let chatDate:String = String (describing: date!)

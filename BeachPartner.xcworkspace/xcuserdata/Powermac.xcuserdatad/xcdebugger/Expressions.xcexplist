@@ -3,10 +3,29 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "APIManager.undoSwipeAction(userId:sucessResult:errorResult:):AuthModule.swift">
+      </ContextState>
+      <ContextState
+         contextName = "BPCardsVC.undoBtnCLicked(_:):BPCardsVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.swipeAction[0].id">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "HomeTabViewController.collectionView(_:cellForItemAt:):HomeTabViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "self.recentChatList">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AthleteProfileTableViewController.saveData():AthleteProfileTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "birthDateTxtFld.text">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

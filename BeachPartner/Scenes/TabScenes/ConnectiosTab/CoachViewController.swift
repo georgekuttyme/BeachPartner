@@ -152,7 +152,7 @@ class CoachViewController: UIViewController,UICollectionViewDataSource , UIColle
         cell?.blockBtn.tag = indexPath.row+200000
         cell?.blockBtn.addTarget(self, action: #selector(blockBtnPressed), for: .touchUpInside)
         
-        let cellBgColor = (connectedUser?.isBlocked)! ? UIColor(white: 1.0, alpha: 0.4) : UIColor.white
+        let cellBgColor = (connectedUser?.isBlocked)! ? UIColor.lightGray : UIColor.white
         cell?.bgView.backgroundColor = cellBgColor
         
         cell?.messageBtn.tag = indexPath.row+100000

@@ -41,7 +41,8 @@ class RegisterViewController: UIViewController {
     
     var gender = ""
     var userType = "Athlete"
-    
+    let dateformatter = DateFormatter()
+    let date_formatter1 = DateFormatter()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.firstName.delegate = self
@@ -56,7 +57,8 @@ class RegisterViewController: UIViewController {
         self.maleBtn.tag = 10
         self.maleBtn.backgroundColor = UIColor.white
         self.female.backgroundColor = UIColor.white
-        
+        dateformatter.dateFormat = "MM-dd-yyyy"
+        date_formatter1.dateFormat = "yyyy-MM-dd"
 //        self.maleBtn.titleColor(for: .normal) = UIColor.black
 //        self.female.backgroundColor = UIColor.white
         self.female.tag = 20
@@ -297,11 +299,15 @@ class RegisterViewController: UIViewController {
             else{
                 UserDefaults.standard.set(self.state , forKey: "location")
             }
+            let date = dateformatter.date(from: self.dob)
+            date_formatter1.dateFormat = "yyyy-MM-dd"
+            let dateForSave = date_formatter1.string(from: date!)
+            
             
             //success
             ActivityIndicatorView.show("Loading...")
             
-            APIManager.callServer.forRegistration(email: emailTxt.text!, password: paswordTxt.text!, location: self.state, deviceId: ApiMethods.device_UUID, dob: self.dob, firstName: firstName.text!, gender: self.gender, lastName: lastName.text!, mobileNo: mobileTxt.text!, userType: userType, sucessResult: { (responseModel) in
+            APIManager.callServer.forRegistration(email: emailTxt.text!, password: paswordTxt.text!, location: self.state, deviceId: ApiMethods.device_UUID, dob: dateForSave, firstName: firstName.text!, gender: self.gender, lastName: lastName.text!, mobileNo: mobileTxt.text!, userType: userType, sucessResult: { (responseModel) in
                 
                 guard let loginModel = responseModel as? LoginRespModel else {
                     return
@@ -384,7 +390,8 @@ class RegisterViewController: UIViewController {
                                           showCancelButton: true)
 
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateFormat = "MM-dd-yyyy"
+        
         
         var defaultDate = Date()
         if self.dob != "" {

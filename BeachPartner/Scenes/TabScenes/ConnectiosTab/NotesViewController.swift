@@ -279,7 +279,7 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
             
             self.loadNotes()
             
-            var refreshAlert = UIAlertController(title: "", message: "Note Created", preferredStyle: UIAlertControllerStyle.alert)
+            let refreshAlert = UIAlertController(title: "", message: "Note Created", preferredStyle: UIAlertControllerStyle.alert)
             refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
 
             let lastIndex = self.notesTableview.numberOfRows(inSection: 0) - 1
