@@ -213,8 +213,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     }
     override func viewWillAppear(_ animated: Bool) {
         
-          self.navigationController!.navigationBar.topItem!.title = "My Profile"
-        
+        self.navigationController!.navigationBar.topItem!.title = "My Profile"
         self.addToplistBtn.isHidden = true
         self.delTop1.isHidden = true
         self.delTop2.isHidden = true
@@ -230,7 +229,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.delTop2.isUserInteractionEnabled = false
         self.tableView.reloadData()
         
-        
+         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.clear], for: .normal)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
@@ -918,6 +917,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         imagePickerController.navigationBar.titleTextAttributes = [
             NSAttributedStringKey.foregroundColor : UIColor.white
         ] // Title color
+         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.white], for: .normal)
         present(imagePickerController, animated: true, completion: {
             // Done presenting.
         })
@@ -1407,6 +1407,8 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     // MARK: - UIImagePickerControllerDelegate
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.clear], for: .normal)
+      
         
         var videoUrlValue: NSURL? = nil
         
@@ -1554,6 +1556,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+          UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.clear], for: .normal)
         dismiss(animated: true, completion: {
             // Done cancel dismiss of image picker.
             self.editUserImageBtn.isHidden = true
