@@ -123,6 +123,7 @@
 		845BD6A32089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BD6A22089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift */; };
 		8DA417C0209B77F60078F814 /* CoachProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA417BF209B77F60078F814 /* CoachProfileTableViewController.swift */; };
 		D69A1981207388F100497B7C /* HighFiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69A1980207388F100497B7C /* HighFiveViewController.swift */; };
+		FF3FB96420A4546600B34CA0 /* GetEventRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3FB96320A4546600B34CA0 /* GetEventRespModel.swift */; };
 		FF560C0A2096F7FB00D3BA80 /* GetNoteRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF560C092096F7FB00D3BA80 /* GetNoteRespModel.swift */; };
 		FF560C0C2096F83300D3BA80 /* UpdateNoteRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF560C0B2096F83300D3BA80 /* UpdateNoteRespModel.swift */; };
 /* End PBXBuildFile section */
@@ -250,6 +251,7 @@
 		8DA417BF209B77F60078F814 /* CoachProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachProfileTableViewController.swift; sourceTree = "<group>"; };
 		A4E87914ED5BC1C1ECF86DA1 /* Pods_BeachPartner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeachPartner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D69A1980207388F100497B7C /* HighFiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighFiveViewController.swift; sourceTree = "<group>"; };
+		FF3FB96320A4546600B34CA0 /* GetEventRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventRespModel.swift; sourceTree = "<group>"; };
 		FF560C092096F7FB00D3BA80 /* GetNoteRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNoteRespModel.swift; sourceTree = "<group>"; };
 		FF560C0B2096F83300D3BA80 /* UpdateNoteRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNoteRespModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -596,6 +598,7 @@
 				FF560C092096F7FB00D3BA80 /* GetNoteRespModel.swift */,
 				5EF9047520867D4000D6E952 /* SearchUserModel.swift */,
 				845BD6A22089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift */,
+				FF3FB96320A4546600B34CA0 /* GetEventRespModel.swift */,
 			);
 			path = AuthModels;
 			sourceTree = "<group>";
@@ -1067,6 +1070,7 @@
 				844984212099A0E100B8FD37 /* MutualLikesViewController.swift in Sources */,
 				3B6027A22049707E006B108A /* TermsAndConditionVC.swift in Sources */,
 				3B49C3932068EE15007186E8 /* InvitePartnerViewController.swift in Sources */,
+				FF3FB96420A4546600B34CA0 /* GetEventRespModel.swift in Sources */,
 				3B0DEE84206CA66B00686609 /* FilterViewController.swift in Sources */,
 				3B0DEE95206D099500686609 /* UIVideoView.swift in Sources */,
 				3B6027A420497364006B108A /* SignUpViewController.swift in Sources */,
