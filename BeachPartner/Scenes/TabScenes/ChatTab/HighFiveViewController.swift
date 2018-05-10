@@ -28,22 +28,35 @@ class HighFiveViewController: UIViewController,UITableViewDelegate,UITableViewDa
     @IBOutlet weak var menuBtn: UIBarButtonItem!
     
     let dropDown = DropDown()
-
+    var button1 : UIBarButtonItem!
+    
     @IBAction func didTapMenuButton(_ sender: Any) {
         dropDown.show()
     }
     
+    func rightBarBtn(){
+        button1 = UIBarButtonItem(image: UIImage(named: "menudot"), style: .plain, target: self, action: #selector(action))
+        self.navigationItem.rightBarButtonItem  = button1
+    }
+    
+    @objc func action() {
+        dropDown.show()
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-     /*   self.dropDown.anchorView = self.menuBtn // UIView or UIBarButtonItem
-        // The list of items to display. Can be changed dynamically
-        //        self.dropDown.direction = .bottom
-        self.dropDown.dataSource = ["My Profile","About Us","Feedback","Settings", "Help","Logout"]
+        rightBarBtn()
         
+        
+        self.hideKeyboardWhenTappedAround()
+        self.dropDown.anchorView = self.button1
+        self.dropDown.dataSource =  ["My Profile","About Us","Feedback","Settings", "Help","Logout"]
         self.dropDown.bottomOffset = CGPoint(x: 20, y:45)
         self.dropDown.width = 150
-        //        self.dropDown.selectionBackgroundColor = UIColor.lightGray
+        
         self.dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             print("Selected item:",item," at index:",index)
             if(item == "My Profile"){
@@ -56,7 +69,6 @@ class HighFiveViewController: UIViewController,UITableViewDelegate,UITableViewDa
                 self.navigationController!.navigationBar.topItem!.title = ""
                 self.navigationController?.isNavigationBarHidden = false
             }
-                
             else if(item == "Logout"){
                 self.timoutLogoutAction()
             }
@@ -85,8 +97,7 @@ class HighFiveViewController: UIViewController,UITableViewDelegate,UITableViewDa
             }
         }
         self.dropDown.selectRow(0)
-        */
-        
+
         let floaty = Floaty()
         floaty.size = 45
         floaty.paddingY = 55

@@ -308,6 +308,9 @@ class SettingsViewController: UIViewController {
         stateList.append("Wyoming");
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationItem.title = "Settings"
+    }
     
     func getUsersSwipeCard(endPoint:String)  {
         

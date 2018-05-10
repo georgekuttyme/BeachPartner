@@ -29,13 +29,72 @@ class ChatUsersListViewController: UIViewController,UITableViewDelegate,UITableV
     var activeUsers = [ConnectedUserModel]()
     
     let dropDown = DropDown()
+     var button1 : UIBarButtonItem!
     
     @IBOutlet weak var tblChatList: UITableView!
+    
+    func rightBarBtn(){
+        button1 = UIBarButtonItem(image: UIImage(named: "menudot"), style: .plain, target: self, action: #selector(action))
+        self.navigationItem.rightBarButtonItem  = button1
+    }
+    
+    @objc func action() {
+        dropDown.show()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.setHidesBackButton(true, animated:false);
         self.title = "Messages"
+        
+         rightBarBtn()
+        
+        self.hideKeyboardWhenTappedAround()
+        self.dropDown.anchorView = self.button1
+        self.dropDown.dataSource =  ["My Profile","About Us","Feedback","Settings", "Help","Logout"]
+        self.dropDown.bottomOffset = CGPoint(x: 20, y:45)
+        self.dropDown.width = 150
+        
+        self.dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+            print("Selected item:",item," at index:",index)
+            if(item == "My Profile"){
+                let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "profilevc1") as! CoachProfileTableViewController
+                let vc1 = storyboard.instantiateViewController(withIdentifier: "profilevc") as! AthleteProfileTableViewController
+                let identifier = UserDefaults.standard.string(forKey: "userType") == "Athlete" ? vc1 : vc
+                self.navigationController?.pushViewController(identifier, animated: true)
+                self.tabBarController?.tabBar.isHidden = false
+                self.navigationController!.navigationBar.topItem!.title = ""
+                self.navigationController?.isNavigationBarHidden = false
+            }
+            else if(item == "Logout"){
+                self.timoutLogoutAction()
+            }
+            else if (item == "Settings"){
+                let storyboard : UIStoryboard = UIStoryboard(name: "TabBar", bundle: nil)
+                let controller = storyboard.instantiateViewController(withIdentifier: "ComponentSettings") as! SettingsViewController
+                controller.SettingsType = "profileSettings"
+                self.tabBarController?.tabBar.isHidden = false
+                self.navigationController!.navigationBar.topItem!.title = ""
+                self.navigationController?.isNavigationBarHidden = false
+                self.navigationController?.pushViewController(controller, animated: true)
+            }
+            else if (item == "Help"){
+                let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "HelpViewController") as! HelpViewController
+                self.present(vc, animated: true, completion: nil)
+            }
+            else {
+                let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "CommmonWebViewController") as! CommmonWebViewController
+                vc.titleText = item
+                self.tabBarController?.tabBar.isHidden = false
+                self.navigationController!.navigationBar.topItem!.title = ""
+                self.navigationController?.isNavigationBarHidden = false
+                self.present(vc, animated: true, completion: nil)
+            }
+        }
+        self.dropDown.selectRow(0)
         
      /*   let menuButtonImage = UIImage(named:"menudot")
         let menuButton = UIBarButtonItem(image: menuButtonImage, style: .plain, target: self, action: #selector(didTapMenuButton))
