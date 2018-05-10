@@ -187,6 +187,7 @@ class UIVideoView: UIView {
     internal func commonInit(){
         self.layer.cornerRadius = 25.0
         _player = AVPlayer()
+        self.loopVideo(videoPlayer: _player!)
         self.clipsToBounds = true
     }
     override func layoutSubviews() {
@@ -194,6 +195,13 @@ class UIVideoView: UIView {
         self._playerRefreshCoverView.frame = self.bounds
         self._activityIndicator.center = self.center
     }
+    func loopVideo(videoPlayer: AVPlayer) {
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil, queue: nil) { notification in
+            videoPlayer.seek(to: kCMTimeZero)
+            videoPlayer.play()
+        }
+    }
+
 }
 extension UIVideoView {
     

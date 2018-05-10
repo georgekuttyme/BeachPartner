@@ -153,16 +153,20 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         self.cardView.revertAction()
         
         let firstElement = self.swipeAction.first
-        APIManager.callServer.undoSwipeAction(userId:"\(firstElement?.id)",sucessResult: { (responseModel) in
-            
-            guard let connectedUserModelValue = responseModel as? ConnectedUserModel else{
-                return
-            }
-            print(connectedUserModelValue)
-            
-        }, errorResult: { (error) in
-            
-        })
+        guard let undoId = firstElement?.id else {
+            return
+        }
+            APIManager.callServer.undoSwipeAction(userId:"\(undoId)",sucessResult: { (responseModel) in
+                
+                guard let connectedUserModelValue = responseModel as? ConnectedUserModel else{
+                    return
+                }
+                print(connectedUserModelValue)
+                
+            }, errorResult: { (error) in
+                
+            })
+      
         
          print(self.swipeAction)
         

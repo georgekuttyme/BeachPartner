@@ -176,7 +176,8 @@ class ChatUsersListViewController: UIViewController,UITableViewDelegate,UITableV
     
     override func viewWillAppear(_ animated: Bool) {
         self.title = "Messages"
-         self.getBlockedConnections()
+        self.getBlockedConnections()
+        
     }
     
     private func observeChannels() {
@@ -241,6 +242,7 @@ class ChatUsersListViewController: UIViewController,UITableViewDelegate,UITableV
                 self.recentChatList.removeAll()
                 self.observeChannels()
             }
+            
         }, errorResult: { (error) in
             //                stopLoading()
             guard let errorString  = error else {
