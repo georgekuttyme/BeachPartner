@@ -62,8 +62,9 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
     
     @IBOutlet weak var tableCell_ShareAthletes: UITableViewCell!
     
+    @IBOutlet var blurImageView: UIVisualEffectView!
     
-    
+    @IBOutlet var fullImage_View: UIView!
     
     
     @IBOutlet weak var firstNameTxtFld:  FloatingText!
@@ -85,10 +86,6 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
     @IBOutlet weak var fundedBtn: UIButton!
     @IBOutlet weak var shareAthletesBtn: UIButton!
     
-    
-    
-    
-
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var saveBtn: UIButton!
 
@@ -170,6 +167,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
     override func viewDidLoad() {
         
         super.viewDidLoad()
+
         self.getUserInfo()
         self.hideKeyboardWhenTappedAround()
         loadLocations()
@@ -525,6 +523,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
                 self.imagePickerController.allowsEditing = false
                 //   self.imagePickerController.showsCameraControls = true
                 self.showImagePicker(sourceType: UIImagePickerControllerSourceType.camera)
+                
             } else {
                 print("Camera not available.")
             }
