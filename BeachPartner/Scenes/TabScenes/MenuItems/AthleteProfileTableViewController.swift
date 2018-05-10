@@ -734,7 +734,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         else{
             self.userData.city = (self.stateBtn.titleLabel?.text)!
             self.userData.location = (self.stateBtn.titleLabel?.text)!
-            UserDefaults.standard.set((self.stateBtn.titleLabel?.text)! , forKey: "location")
+//            UserDefaults.standard.set((self.stateBtn.titleLabel?.text)! , forKey: "location")
             currentValidation += 1
         }
         
@@ -1323,7 +1323,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.collegeIndoorTxtFld.text = accResponseModel.userProfile?.collegeIndoor
         self.pointsTxtFld.text = accResponseModel.userProfile?.totalPoints
         self.rankingTxtFld.text = accResponseModel.userProfile?.usaVolleyballRanking
-        UserDefaults.standard.set(accResponseModel.city , forKey: "location")
+//        UserDefaults.standard.set(accResponseModel.city , forKey: "location")
 
         self.tableCell_TopFinishesinLastYear1.isHidden = false
         self.tableCell_TopFinishesinLastYear2.isHidden = false
