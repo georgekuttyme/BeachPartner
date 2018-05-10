@@ -169,6 +169,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     
     let datePicker = UIDatePicker()
     let dateformatter = DateFormatter()
+    let date_formatter1 = DateFormatter()
     
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -303,6 +304,8 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.getUserInfo()
         self.hideKeyboardWhenTappedAround()
         loadLocations()
+        dateformatter.dateFormat = "MM-dd-yyyy"
+        date_formatter1.dateFormat = "yyyy-MM-dd"
         //
         //        let floaty = Floaty()
         //        floaty.addItem("I got a handler", icon: UIImage(named: "chat")!, handler: { item in
@@ -369,31 +372,51 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
                 //        let image = UIImage(named: "Image")
                 
                 // set up activity view controller
-                let imageToShare = [ self.userImageView.image! ]
-                let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
-                activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+                 if(self.userImageView.image != nil){
+                    let imageToShare = [ self.userImageView.image! ]
+                    let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
+                    activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+                    
+                    // exclude some activity types from the list (optional)
+                    //        activityViewController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
+                    
+                    // present the view controller
+                    self.present(activityViewController, animated: true, completion: nil)
+                }else {
+                    
+                    let refreshAlert = UIAlertController(title: "", message: "Please Upload a image before sharing", preferredStyle: UIAlertControllerStyle.alert)
+                    refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                    }))
+                    self.present(refreshAlert, animated: true, completion: nil)
                 
-                // exclude some activity types from the list (optional)
-                //        activityViewController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
-                
-                // present the view controller
-                self.present(activityViewController, animated: true, completion: nil)
+                   
+                }
             }
             else if(item == "Profile Video"){
                 print("video url :",self.userData.videoUrl)
+                if self.userData.videoUrl == "" {
+                        let refreshAlert = UIAlertController(title: "", message: "Please Upload a video before sharing", preferredStyle: UIAlertControllerStyle.alert)
+                    refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                    }))
+                    self.present(refreshAlert, animated: true, completion: nil)
+                }
+                else {
+                    let text = "Hey view/download my Beach Partner video at : " + self.userData.videoUrl
+                    
+                    // set up activity view controller
+                    let textToShare = [ text ]
+                    let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+                    activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+                    
+                    // exclude some activity types from the list (optional)
+                    //                activityViewController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
+                    
+                    // present the view controller
+                    self.present(activityViewController, animated: true, completion: nil)
+                }
                 
-                let text = "Hey view/download my Beach Partner video at : " + self.userData.videoUrl
                 
-                // set up activity view controller
-                let textToShare = [ text ]
-                let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
-                activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-                
-                // exclude some activity types from the list (optional)
-                //                activityViewController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
-                
-                // present the view controller
-                self.present(activityViewController, animated: true, completion: nil)
+               
                 
             }
         }
@@ -700,11 +723,9 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             birthDateTxtFld.showError()
         }else{
             birthDateTxtFld.hideError()
-
             let date = dateformatter.date(from: birthDateTxtFld.text!)
-            dateformatter.dateFormat = "yyyy-MM-dd"
-            let dateForSave = dateformatter.string(from: date!)
-
+            date_formatter1.dateFormat = "yyyy-MM-dd"
+            let dateForSave = date_formatter1.string(from: date!)
             self.userData.inputDob = dateForSave
             currentValidation += 1
         }
@@ -836,8 +857,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     }
     
     @IBAction func shareImageButton(_ sender: UIButton) {
-        
-        shareDataDropDown.show()
+            shareDataDropDown.show()
     }
     
     
@@ -1293,12 +1313,9 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         let dateString = dateformatter.string(from: date as Date)
         
         datePicker.date = date as Date
-        if accResponseModel.dob > 0 {
+        
           self.birthDateTxtFld.text = dateString
-        }
-        else{
-            self.birthDateTxtFld.text = ""
-        }
+      
         
 //        self.birthDateTxtFld.text = String(accResponseModel.dob)
 //        self.cityTxtFld.text = accResponseModel.city

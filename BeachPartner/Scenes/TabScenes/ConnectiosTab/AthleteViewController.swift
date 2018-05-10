@@ -59,7 +59,7 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
         cell?.profileImgView.layer.borderWidth = 1.5
         
         //        if(cell?.profileImgView.image == nil){
-        //            cell?.profileImgView.image = UIImage(named: "image_" + val)
+        //            cell?.profileImgView.image = UIImage(named: "image_" + val)(white: 1.0, alpha: 0.4)
         //        }
         
         
@@ -72,9 +72,9 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
         cell?.blockBtn.tag = indexPath.row+200000
         cell?.blockBtn.addTarget(self, action: #selector(blockBtnPressed(sender:)), for: .touchUpInside)
         
-        let cellBgColor = (connectedUser?.isBlocked)! ? UIColor(white: 1.0, alpha: 0.4) : UIColor.white
+        let cellBgColor = (connectedUser?.isBlocked)! ? UIColor.lightGray: UIColor.white
         cell?.bgView.backgroundColor = cellBgColor
-        
+    
         cell?.messageBtn.tag = indexPath.row+100000
         cell?.messageBtn.addTarget(self, action: #selector(msgBtnPressed), for: .touchUpInside)
         cell?.notesBtn.tag = indexPath.row+300000

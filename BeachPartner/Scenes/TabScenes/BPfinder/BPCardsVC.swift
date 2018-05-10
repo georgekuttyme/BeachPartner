@@ -151,7 +151,9 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         self.btnPlaybtn.isHidden = true
         self.lblSwipeGameMsg.isHidden = true
         self.cardView.revertAction()
-        APIManager.callServer.undoSwipeAction(userId:"\(self.swipeAction[0].id)",sucessResult: { (responseModel) in
+        
+        let firstElement = self.swipeAction.first
+        APIManager.callServer.undoSwipeAction(userId:"\(firstElement?.id)",sucessResult: { (responseModel) in
             
             guard let connectedUserModelValue = responseModel as? ConnectedUserModel else{
                 return
