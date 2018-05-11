@@ -768,44 +768,36 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
                 
                 if(accRespModel.id != 0){
                     UserDefaults.standard.set(accRespModel.userType, forKey: "userType")
-                    print("&&&&&&", accRespModel.userProfile?.cbvaFirstName)
-//                    stopLoading()AccountRespModel
-                    //                        UserDefaults.standard.set(true, forKey: "Key") //Bool
-                    //                        UserDefaults.standard.set(1, forKey: "Key")  //Integer
+                    print("&&&&&&", accRespModel.userProfile ?? " ")
+//                    if accRespModel.userProfile == nil{
+//                        UserDefaults.standard.set("true", forKey: "NewUser")
+//                        let alert = UIAlertController(title: "Update Profile", message: "Please take a moment to complete your profile", preferredStyle: .alert)
+//                        let actionButton = UIAlertAction(title: "Later", style: .default) { (action) in
+//                            
+//                            let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
+//                            let secondViewController = storyboard.instantiateViewController(withIdentifier: "tabbarcontroller") as! TabBarController
+//                            self.present(secondViewController, animated: true, completion: nil)
+//                        }
+//                        let cancelButton = UIAlertAction(title: "Now", style: .cancel) { (action) in
+//                            let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
+//                            let vc = storyboard.instantiateViewController(withIdentifier: "profilevc1") as! CoachProfileTableViewController
+//                            let vc1 = storyboard.instantiateViewController(withIdentifier: "profilevc") as! AthleteProfileTableViewController
+//                            let identifier = UserDefaults.standard.string(forKey: "userType") == "Athlete" ? vc1 : vc
+//                            self.navigationController?.pushViewController(identifier, animated: true)
+//                            self.tabBarController?.tabBar.isHidden = false
+//                            self.navigationController!.navigationBar.topItem!.title = ""
+//                            self.navigationController?.isNavigationBarHidden = false
+//                        }
+//                        alert.addAction(actionButton)
+//                        alert.addAction(cancelButton)
+//                        self.present(alert, animated: true, completion: nil)
+//                    }
+//                    else {
+//                        UserDefaults.standard.set("false", forKey: "NewUser")
+//                    }
                     
                     UserDefaults.standard.set(accRespModel.id, forKey: "bP_userId")
                     UserDefaults.standard.set(accRespModel.firstName, forKey: "bP_userName")
-//                    UserDefaults.standard.set(accRespModel.email, forKey: "email")
-                    
-                    // Basic Info
-                 /*   arrayBasicInfoDetails.append(accRespModel.firstName)
-                    arrayBasicInfoDetails.append(accRespModel.lastName)
-                    arrayBasicInfoDetails.append(accRespModel.gender)
-                    arrayBasicInfoDetails.append("April 16, 2018")
-                    arrayBasicInfoDetails.append(accRespModel.city)
-                    arrayBasicInfoDetails.append(accRespModel.phoneNumber)
-
-                    // more Info
-                    arrayMoreInfoDetails.append((accRespModel.userProfile?.experience)!)
-                    arrayMoreInfoDetails.append((accRespModel.userProfile?.courtSidePreference)!)
-                    arrayMoreInfoDetails.append((accRespModel.userProfile?.position)!)
-                    arrayMoreInfoDetails.append((accRespModel.userProfile?.height)!)
-                    arrayMoreInfoDetails.append((accRespModel.userProfile?.tournamentLevelInterest)!)
-                    arrayMoreInfoDetails.append((accRespModel.userProfile?.toursPlayed)!)
-                    arrayMoreInfoDetails.append((accRespModel.userProfile?.heightTourRatingEarned)!)
-                    arrayMoreInfoDetails.append((accRespModel.userProfile?.cbvaPlayerNumber)!)
-                    arrayMoreInfoDetails.append((accRespModel.userProfile?.cbvaFirstName)!)
-                    arrayMoreInfoDetails.append((accRespModel.userProfile?.cbvaLastName)!)
-                    arrayMoreInfoDetails.append((accRespModel.userProfile?.willingnessToTravel)!)
-                    arrayMoreInfoDetails.append((accRespModel.userProfile?.highSchoolAttended)!)
-                    arrayMoreInfoDetails.append((accRespModel.userProfile?.indoorClubPlayedAt)!)
-                    arrayMoreInfoDetails.append((accRespModel.userProfile?.collegeClub)!)
-                    arrayMoreInfoDetails.append((accRespModel.userProfile?.collegeBeach)!)
-                    arrayMoreInfoDetails.append((accRespModel.userProfile?.collegeIndoor)!)
-                    arrayMoreInfoDetails.append((accRespModel.userProfile?.Points)!)
-                    arrayMoreInfoDetails.append((accRespModel.userProfile?.Ranking)!) */
-                    
-                    
                     
                     let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
                     let secondViewController = storyboard.instantiateViewController(withIdentifier: "tabbarcontroller") as! TabBarController

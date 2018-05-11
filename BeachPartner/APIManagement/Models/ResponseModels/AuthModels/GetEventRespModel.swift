@@ -52,6 +52,7 @@ struct GetEventRespModel : SafeMappable {
     var createdDate: Int = 0
     var lastModifiedDate: Int = 0
     var status: String = ""
+    var activeDates = [String]()
 //    var createdBy:
 //    var lastModifiedBy
     
