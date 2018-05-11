@@ -116,7 +116,6 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
     let dateformatter = DateFormatter()
     let date_formatter1 = DateFormatter()
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
         //  tableView.contentSize = CGSize(width: self.view.frame.size.width, height: 1700)
     }
     
@@ -603,9 +602,8 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
                     let myView = UIView(frame: CGRect(x: 10, y: 63, width: screenSize.width-20, height: 1))
                     myView.backgroundColor = UIColor.lightGray
                     cell.addSubview(myView)
-                    
-                    
                 }
+                
                 return super.tableView(tableView, heightForRowAt: indexPath)
             }
         }
@@ -617,6 +615,12 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
                 
                 if (cell == self.tableCell_videoView || cell == self.tableCell_basicMore || cell == self.tableCell_SaveCancel)
                 {
+                }
+                else if(cell == self.tableCell_ShareAthletes){
+                    let screenSize: CGRect = UIScreen.main.bounds
+                    let myView = UIView(frame: CGRect(x: 10, y: 93, width: screenSize.width-20, height: 1))
+                    myView.backgroundColor = UIColor.lightGray
+                    cell.addSubview(myView)
                 }
                 else{
                     let screenSize: CGRect = UIScreen.main.bounds
@@ -631,7 +635,6 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         }
     }
     
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         if (self.editclicked){
@@ -640,7 +643,6 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
             genderBtn.enableBtn()
             birthDateTxtFld.enableTextFld()
             stateBtn.enableBtn()
-            //            cityTxtFld.enableTextFld()
             phoneTxtFld.enableTextFld()
 
            
@@ -663,9 +665,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
             genderBtn.disableBtn()
             birthDateTxtFld.disableTextFld()
             stateBtn.disableBtn()
-            //            cityTxtFld.disableTextFld()
             phoneTxtFld.disableTextFld()
-
             collegeTxtFld.disableTextFld()
             descriptionTxtFld.disableTextFld()
             numberOfYearsTxtFld.disableTextFld()
@@ -695,7 +695,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
             lastNameTxtFld.becomeFirstResponder()
         }
         else if  textField == lastNameTxtFld {
-            textField.resignFirstResponder()
+            genderBtn.resignFirstResponder()
         }
         else if  textField == phoneTxtFld {
             textField.resignFirstResponder()
@@ -710,7 +710,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
             numberOfAthletesTxtFld.becomeFirstResponder()
         }
         else if textField == numberOfAthletesTxtFld{
-            programsOffered.resignFirstResponder()
+            programsOffered.becomeFirstResponder()
         }
         else if textField == programsOffered{
             divisionTxtFld.becomeFirstResponder()

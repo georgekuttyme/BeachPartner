@@ -1639,6 +1639,7 @@ extension UITextField {
         self.layer.borderColor = UIColor(rgb: 0xECECEF).cgColor
         self.isUserInteractionEnabled = false
         self.backgroundColor = UIColor(rgb: 0xECECEF)
+//
     }
 }
 extension UIButton{
@@ -1653,7 +1654,7 @@ extension UIButton{
         self.layer.borderWidth = 0
         self.isUserInteractionEnabled = false
         self.backgroundColor = UIColor(rgb: 0xECECEF)
-        self.borderColor = UIColor(rgb: 0x9C9C9C)
+        self.borderColor = UIColor(rgb: 0xECECEF)
     }
 }
 

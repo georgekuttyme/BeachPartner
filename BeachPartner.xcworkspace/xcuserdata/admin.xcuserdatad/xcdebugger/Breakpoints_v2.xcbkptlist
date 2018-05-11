@@ -127,7 +127,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "256"
             endingLineNumber = "256"
-            landmarkName = "inPut(url:params:sucess:failure:)"
+            landmarkName = "inPostSentPushnotification(url:params:sucess:failure:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -143,7 +143,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "281"
             endingLineNumber = "281"
-            landmarkName = "inPut(url:params:sucess:failure:)"
+            landmarkName = "inPostSentPushnotification(url:params:sucess:failure:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -159,7 +159,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "263"
             endingLineNumber = "263"
-            landmarkName = "inPut(url:params:sucess:failure:)"
+            landmarkName = "inPostSentPushnotification(url:params:sucess:failure:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -175,7 +175,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "289"
             endingLineNumber = "289"
-            landmarkName = "inPut(url:params:sucess:failure:)"
+            landmarkName = "inPostSentPushnotification(url:params:sucess:failure:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -191,7 +191,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "316"
             endingLineNumber = "316"
-            landmarkName = "inPut(url:params:sucess:failure:)"
+            landmarkName = "inPostSentPushnotification(url:params:sucess:failure:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -207,7 +207,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "313"
             endingLineNumber = "313"
-            landmarkName = "inPut(url:params:sucess:failure:)"
+            landmarkName = "inPostSentPushnotification(url:params:sucess:failure:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -223,7 +223,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "307"
             endingLineNumber = "307"
-            landmarkName = "inPut(url:params:sucess:failure:)"
+            landmarkName = "inPostSentPushnotification(url:params:sucess:failure:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -239,7 +239,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "301"
             endingLineNumber = "301"
-            landmarkName = "inPut(url:params:sucess:failure:)"
+            landmarkName = "inPostSentPushnotification(url:params:sucess:failure:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -250,7 +250,7 @@
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/admin/Desktop/New%20Project/bp-ios/BeachPartner/APIManagement/Client/APIClient.swift"
-                  timestampString = "547650006.1434"
+                  timestampString = "547730390.162918"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "302"
@@ -265,7 +265,7 @@
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/admin/Desktop/New%20Project/bp-ios/BeachPartner/APIManagement/Client/APIClient.swift"
-                  timestampString = "547650006.146522"
+                  timestampString = "547730390.16716"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "305"
@@ -287,7 +287,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "302"
             endingLineNumber = "302"
-            landmarkName = "inPut(url:params:sucess:failure:)"
+            landmarkName = "inPostSentPushnotification(url:params:sucess:failure:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -298,7 +298,7 @@
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/admin/Desktop/New%20Project/bp-ios/BeachPartner/APIManagement/Client/APIClient.swift"
-                  timestampString = "547650006.153684"
+                  timestampString = "547730390.176972"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "302"
@@ -313,7 +313,7 @@
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/admin/Desktop/New%20Project/bp-ios/BeachPartner/APIManagement/Client/APIClient.swift"
-                  timestampString = "547650006.156775"
+                  timestampString = "547730390.182066"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "305"
@@ -346,7 +346,7 @@
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/admin/Desktop/New%20Project/bp-ios/BeachPartner/Scenes/TabScenes/ConnectiosTab/AthleteViewController.swift"
-                  timestampString = "547650006.163684"
+                  timestampString = "547730390.191471"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "133"
@@ -361,7 +361,7 @@
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/admin/Desktop/New%20Project/bp-ios/BeachPartner/Scenes/TabScenes/ConnectiosTab/AthleteViewController.swift"
-                  timestampString = "547650006.166783"
+                  timestampString = "547730390.196092"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "135"
@@ -447,7 +447,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "752"
             endingLineNumber = "752"
-            landmarkName = "inPostForImageUpload(url:params:image:videodata:sucess:failure:)"
+            landmarkName = "inPostForString(url:params:sucess:failure:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -527,7 +527,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "330"
             endingLineNumber = "330"
-            landmarkName = "inPutJsonData(url:params:sucess:failure:)"
+            landmarkName = "inPostSentPushnotification(url:params:sucess:failure:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -538,7 +538,7 @@
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/admin/Desktop/New%20Project/bp-ios/BeachPartner/APIManagement/Client/APIClient.swift"
-                  timestampString = "547650006.230307"
+                  timestampString = "547730390.268451"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "330"
@@ -553,7 +553,7 @@
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/admin/Desktop/New%20Project/bp-ios/BeachPartner/APIManagement/Client/APIClient.swift"
-                  timestampString = "547650006.2334321"
+                  timestampString = "547730390.2725461"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "331"
@@ -575,7 +575,87 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "366"
             endingLineNumber = "366"
-            landmarkName = "inPutJsonData(url:params:sucess:failure:)"
+            landmarkName = "inPut(url:params:sucess:failure:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/APIManagement/Manager/Modules/AuthModule.swift"
+            timestampString = "547717682.694073"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "forLogin(email:password:rememberMe:sucessResult:errorResult:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachPartner.APIManager.forLogin(email: Swift.String, password: Swift.String, rememberMe: Swift.String, sucessResult: (Swift.Optional&lt;Tailor.SafeMappable&gt;) -&gt; (), errorResult: (Swift.Optional&lt;Swift.String&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "BeachPartner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/Desktop/New%20Project/bp-ios/BeachPartner/APIManagement/Manager/Modules/AuthModule.swift"
+                  timestampString = "547730390.303525"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "128"
+                  endingLineNumber = "128"
+                  offsetFromSymbolStart = "1724">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__ObjC.NSDictionary&gt;) -&gt; () in BeachPartner.APIManager.forLogin(email: Swift.String, password: Swift.String, rememberMe: Swift.String, sucessResult: (Swift.Optional&lt;Tailor.SafeMappable&gt;) -&gt; (), errorResult: (Swift.Optional&lt;Swift.String&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "BeachPartner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/Desktop/New%20Project/bp-ios/BeachPartner/APIManagement/Manager/Modules/AuthModule.swift"
+                  timestampString = "547730390.307681"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "133"
+                  endingLineNumber = "133"
+                  offsetFromSymbolStart = "48">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/APIManagement/Client/APIClient.swift"
+            timestampString = "547717568.465643"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "inPost(url:params:sucess:failure:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/Scenes/TabScenes/MenuItems/AthleteProfileTableViewController.swift"
+            timestampString = "547731084.865941"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1637"
+            endingLineNumber = "1637"
+            landmarkName = "disableTextFld()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
