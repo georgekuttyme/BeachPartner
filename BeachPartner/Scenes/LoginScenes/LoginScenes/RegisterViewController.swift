@@ -41,6 +41,7 @@ class RegisterViewController: UIViewController {
     
     var gender = ""
     var userType = "Athlete"
+    var maxDate = Date()
     let dateformatter = DateFormatter()
     let date_formatter1 = DateFormatter()
     override func viewDidLoad() {
@@ -377,11 +378,20 @@ class RegisterViewController: UIViewController {
     
     
     func datePickerTapped() {
-//        let currentDate = Date()
+        
+        let currentDate = Date()
+        var dateComponent = DateComponents()
         var dateComponents = DateComponents()
-        dateComponents.month = -3
-//        let threeMonthAgo = Calendar.current.date(byAdding: dateComponents, to: currentDate)
-//        let todayDate = Calendar.current.date(byAdding: .month, value: 0, to: Date())
+        dateComponents.year = -5
+        let fiveYearAgo = Calendar.current.date(byAdding: dateComponents, to: currentDate)
+        dateComponent.year = -18
+        let eighteenYearAgo = Calendar.current.date(byAdding: dateComponent, to: currentDate)
+        if userType == "Athlete"{
+            maxDate = fiveYearAgo!
+        }
+        else {
+            maxDate = eighteenYearAgo!
+        }
         let datePicker = DatePickerDialog(textColor: UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0),
 //                                          textColor: .blue,
                                           buttonColor: UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0),
@@ -400,7 +410,7 @@ class RegisterViewController: UIViewController {
             }
         }
 
-        datePicker.show("Date of Birth", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", defaultDate: defaultDate, minimumDate: nil, maximumDate: Date(), datePickerMode: .date) { (date) in
+        datePicker.show("Date of Birth", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", defaultDate: defaultDate, minimumDate: nil, maximumDate: maxDate, datePickerMode: .date) { (date) in
             
             if let dt = date {
                 if case dt.description = "" {

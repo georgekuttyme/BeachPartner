@@ -100,7 +100,7 @@ class HighFiveViewController: UIViewController,UITableViewDelegate,UITableViewDa
 
         let floaty = Floaty()
         floaty.size = 45
-        floaty.paddingY = 55
+        floaty.paddingY = 85
         floaty.buttonColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0)
         floaty.plusColor = UIColor.white
         
@@ -117,7 +117,7 @@ class HighFiveViewController: UIViewController,UITableViewDelegate,UITableViewDa
         selectedTabViewController = 4
         isCallHifiview = true
 
-        // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view. 55
     }
     
     override func viewWillAppear(_ animated: Bool) {
