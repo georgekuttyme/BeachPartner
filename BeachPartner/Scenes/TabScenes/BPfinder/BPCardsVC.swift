@@ -33,8 +33,8 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     @IBOutlet weak var lblNotAviltopSpace: NSLayoutConstraint!
     @IBOutlet weak var mainStackViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var scrlViewHeight: NSLayoutConstraint!
-    
-     var userData = AccountRespModel()
+    @IBOutlet weak var cardHeight: NSLayoutConstraint!
+    var userData = AccountRespModel()
     let videoView = UIVideoView()
     var didPressDownArrow :Bool!
     var isFirstBlueBpCard :Bool!
@@ -297,6 +297,22 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             scrlViewHeight.constant = UIScreen.main.bounds.size.height - 110
             if selectedType == "Search"{
                 scrlViewHeight.constant = UIScreen.main.bounds.size.height - 150
+            }
+        }
+        
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            let screenSize = UIScreen.main.bounds.size;
+            if screenSize.height == 812.0{
+                cardHeight.constant = -220
+                if selectedType == "BlueBp"{
+                    mainStackViewTopConstraint.constant = 84
+                }
+                else  if selectedType == "Search"{
+                  mainStackViewTopConstraint.constant = 0
+                }
+                else {
+                    mainStackViewTopConstraint.constant = 20
+                }
             }
         }
     }

@@ -146,12 +146,12 @@ class SettingsViewController: UIViewController {
     func customView() {
    
         if SettingsType == "SearchSettings" {
-            topSpace.constant = 40
+            topSpace.constant = 8
             saveBtnStack.isHidden = true
             playBtnStack.isHidden = false
         }
         else{
-            topSpace.constant = 80
+            topSpace.constant = 90
             saveBtnStack.isHidden = false
             playBtnStack.isHidden = true
         }
