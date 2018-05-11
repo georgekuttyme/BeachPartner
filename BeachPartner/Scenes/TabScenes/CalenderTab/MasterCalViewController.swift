@@ -11,71 +11,47 @@ import FSCalendar
 
 class MasterCalViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate   {
     
-    @IBOutlet weak var MasterCalTableVIew: UITableView!
-    @IBOutlet weak var calendar: FSCalendar!
-    
-//    var subeventsArray = [Int]()
-    
-    var eventDateArray = [Date]()
-    
-    var subeventsArray = [String: Int]()
-    
-//    [(date: String, noOfEvents: Int)]()
-    
-    var noOfEvents = 0
-    
-    
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return noOfEvents
+    enum EventStatus: String {
+        case Active = "Active"
+        case Deleted = "Deleted"
+        case New = "New"
     }
     
-        fileprivate let gregorian: NSCalendar! = NSCalendar(calendarIdentifier:NSCalendar.Identifier.gregorian)
+    // MARK:-
+    @IBOutlet weak var masterCalTableVIew: UITableView!
+    @IBOutlet weak var calendar: FSCalendar!
+    @IBOutlet weak var tableHeaderLabel: UILabel!
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    // MARK:-
+    var eventListArray = [GetEventRespModel]()
+    var eventListToShow = [GetEventRespModel]()
+    var eventDateArray = [String]()
+    
+    fileprivate let formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
+    
+    fileprivate let gregorian: NSCalendar! = NSCalendar(calendarIdentifier:NSCalendar.Identifier.gregorian)
+
+    
+    // MARK:- Initialization
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        let cellIdentifier = "caltablecell"
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? CalanderTableViewCell  else {
-            fatalError("The dequeued cell is not an instance of ManagSenderTableViewCell.")
-        }
-         let n = Int(arc4random_uniform(5))
-        
-        if(n == 2){
-        cell.colorView.backgroundColor = .red
-        }
-        else if(n == 4){
-            cell.colorView.backgroundColor = .gray
-        }
-        if(n == 5){
-            cell.colorView.backgroundColor = .green
-        }
-        if(n == 1){
-            cell.colorView.backgroundColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0)
-//            cell.colorView.backgroundColor = .blue
-        }
-//        if(n == 3){
-//            cell.colorView.backgroundColor = UIColor.cyan
-//        }
-        
-        return cell
-        
-        
-        
+        tableHeaderLabel.text = titleForEventTable(date: Date())
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("Count :: ",self.subeventsArray.count)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.subeventsArray.removeAll()
-        // Do any additional setup after loading the view.
-        
+        super.viewWillAppear(animated)
         
         getAllEvents()
     }
+    
+    
+    // MARK:- Methods
     
     private func getAllEvents() {
         
@@ -88,21 +64,33 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
                 return
             }
             
+            self.eventListArray.removeAll()
+            self.eventDateArray.removeAll()
             for event in eventsArrayModel.getEventsRespModel {
                 
                 let startDate = Date(timeIntervalSince1970: TimeInterval(event.eventStartDate/1000))
                 let endDate = Date(timeIntervalSince1970: TimeInterval(event.eventEndDate/1000))
                 print(startDate)
                 print(endDate)
-                
-                
-                let dates = self.generateDatesArrayBetweenTwoDates(startDate: startDate, endDate: endDate)
+                print("---------------------------------------------------")
+
+                let dates = self.generateDateArrayBetweenTwoDates(startDate: startDate, endDate: endDate)
                 self.eventDateArray.append(contentsOf: dates)
                 
-                print("---------------------------------------------------")
+                var eventObject = event
+                eventObject.activeDates = dates
+                self.eventListArray.append(eventObject)
             }
 
             self.calendar.reloadData()
+            
+
+            if let date = self.calendar.selectedDate {
+                self.calendar(self.calendar, didSelect: date, at: .current)
+            }
+            else {
+                self.calendar(self.calendar, didSelect: Date(), at: .current)
+            }
             
         }) { (error) in
             
@@ -114,133 +102,109 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    
-
-    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
-        print("change page to \(self.formatter.string(from: calendar.currentPage))")
-       
+    private func titleForEventTable(date: Date) -> String {
+        //Eg: Events for 16th November
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "LLLL"
+        let nameOfMonth = dateFormatter.string(from: date)
+        let day = daySuffix(from: date)
+        return "Events for " + day + " " + nameOfMonth
     }
     
+    func daySuffix(from date: Date) -> String {
+        let calendar = Calendar.current
+        let dayOfMonth = calendar.component(.day, from: date)
+        switch dayOfMonth {
+        case 1, 21, 31: return "\(dayOfMonth)" + "st"
+        case 2, 22: return "\(dayOfMonth)" + "nd"
+        case 3, 23: return "\(dayOfMonth)" + "rd"
+        default: return "\(dayOfMonth)" + "th"
+        }
+    }
+    
+    
+    // MARK:- Tableview data source & Delegates
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return eventListToShow.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cellIdentifier = "caltablecell"
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? CalanderTableViewCell  else {
+            fatalError("The dequeued cell is not an instance of ManagSenderTableViewCell.")
+        }
+        cell.selectionStyle = .none
+        
+        let event = eventListToShow[indexPath.row]
+        cell.eventNameLbl.text = event.eventName
+
+        cell.colorView.backgroundColor = .clear
+        
+//        if event.status == EventStatus.Active.rawValue {
+//            cell.colorView.backgroundColor = .red
+//        }
+//        else if event.status == EventStatus.Deleted.rawValue {
+//            cell.colorView.backgroundColor = .red
+//        }
+//        else { //New
+//            cell.colorView.backgroundColor = .red
+//        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
+        let eventDetailsVC = storyBoard.instantiateViewController(withIdentifier: "EventDetailsView") as! EventDetailsViewController
+        eventDetailsVC.event = eventListToShow[indexPath.row]
+        self.navigationController?.pushViewController(eventDetailsVC, animated: true)
+    }
+    
+
+    // MARK:- FSCalendar Data source & Delegates
+    
+    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
+        print("change page to \(self.formatter.string(from: calendar.currentPage))")
+    }
     
     func calendar(_ calendar: FSCalendar, subtitleFor date: Date) -> String? {
 
-        let filterResult = eventDateArray.filter { (eventDate) -> Bool in
-            let order = Calendar.current.compare(eventDate, to: date, toGranularity: .day)
-            if order == .orderedSame {
-                return true
-            }
-            return false
-        }
+        let selectedDate = formatter.string(from: date)
+        let count = eventDateArray.filter { $0 == selectedDate}.count
         
-        let count = filterResult.count
         if count > 0 { return "\(count)" }
         return nil
-        
-        
-        
-        
-//        if filterResult.count > 0 {
-//            return "\(filterResult.count)"
-//        }
-        
-        
-        
-//        let count = eventDateArray.filter{$0 == date}.count
-//
-//        print(count)
-        
-        
-        
-        
-//        let order = Calendar.current.compare(date, to: date, toGranularity: .day)
-//        return order == .orderedSame
-//
-//        if count > 0 { return "\(count)" }
-//        return nil
-        
-        
-//        if date
-
-
-        //        guard self.lunar else {
-//            return nil
-//        }
-//        let date = Date()
-//        let formatterDte = DateFormatter()
-//        formatterDte.dateFormat = "dd.MM.yyyy"
-//        let dateVal = formatterDte.string(from: date)
-//
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "dd"
-//
-//        let dayval = formatter.string(from: date)
-//        let subtitleVal = Int(dayval)! % 5
-//
-////         print ("dayval", dayval)
-////         print ("subtitleVal", subtitleVal )
-//
-//
-//        if(subtitleVal == 0 || subtitleVal == 1){
-//            print("Day : ", dayval, " events:", 0)
-//            self.subeventsArray[dateVal] = 0
-//            return ""
-//        }else{
-//            print("Day : ", dayval, " events:", subtitleVal)
-//            self.subeventsArray[dateVal] = subtitleVal
-//        return String(subtitleVal)
-//        }
-        
     }
-    
-    fileprivate let formatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd"
-        return formatter
-    }()
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         
-//        for element in self.subeventsArray {
-//            print(element, "\n")
-//        }
-//
-//        print("calendar did select date \(self.formatter.string(from: date))")
-//        if monthPosition == .previous || monthPosition == .next {
-//            calendar.setCurrentPage(date, animated: true)
-//        }
-////        let formatter = DateFormatter()
-////        formatter.dateFormat = "dd"
-////
-////        let dayval = formatter.string(from: date)
-//
-//        let formatterDte = DateFormatter()
-//        formatterDte.dateFormat = "dd.MM.yyyy"
-//        let dateVal = formatterDte.string(from: date)
-//
-//        self.noOfEvents = self.subeventsArray[dateVal]!
-//
-//        self.MasterCalTableVIew.reloadData()
-////        print("selected date :")
+        tableHeaderLabel.text = titleForEventTable(date: date)
+        
+        eventListToShow = eventListArray.filter { (event) -> Bool in
+            let selectedDate = formatter.string(from: date)
+            return Bool(event.activeDates.contains(selectedDate))
+        }
+        
+        masterCalTableVIew.reloadData()
     }
     
     
-    //MARK:- Helper Methods
-    func generateDatesArrayBetweenTwoDates(startDate: Date , endDate:Date) ->[Date]
-    {
-        var datesArray: [Date] =  [Date]()
+    // MARK:- Helper Methods
+    
+    func generateDateArrayBetweenTwoDates(startDate: Date , endDate:Date) ->[String] {
+        
+        var datesArray: [String] =  [String]()
         var startDate = startDate
         let calendar = Calendar.current
         
-        let fmt = DateFormatter()
-        fmt.dateFormat = "yyyy-MM-dd"
-        
         while startDate <= endDate {
-            datesArray.append(startDate)
+            datesArray.append(formatter.string(from: startDate))
             startDate = calendar.date(byAdding: .day, value: 1, to: startDate)!
         }
         return datesArray
     }
-    
-    
-    
 }

@@ -625,6 +625,8 @@
 			isa = PBXGroup;
 			children = (
 				3BC8F913205B91A50086333E /* CalenderViewController.swift */,
+				3B66B5092062309100CC4FB4 /* MasterCalViewController.swift */,
+				3B1B705C2065617300C3FB57 /* MyCalViewController.swift */,
 				3B5D9968206EA46E001ED515 /* EventDetailsViewController.swift */,
 				3B66B50B206242F600CC4FB4 /* CalanderTableViewCell.swift */,
 				3B49C3922068EE15007186E8 /* InvitePartnerViewController.swift */,
@@ -632,8 +634,6 @@
 				3B0DEE83206CA66A00686609 /* FilterViewController.swift */,
 				3B49C3942068EE19007186E8 /* InvitePartnerCell.swift */,
 				3B0DEE0E206BDA9100686609 /* MyteamCell.swift */,
-				3B66B5092062309100CC4FB4 /* MasterCalViewController.swift */,
-				3B1B705C2065617300C3FB57 /* MyCalViewController.swift */,
 			);
 			path = CalenderTab;
 			sourceTree = "<group>";
