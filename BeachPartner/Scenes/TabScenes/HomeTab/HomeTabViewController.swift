@@ -47,8 +47,9 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     
     @IBOutlet weak var tournamentStackView: UIStackView!
     @IBOutlet weak var messageContainerView: UIView!
-    
-    
+    @IBOutlet var upcomingTournamentsNext: UIButton!
+    @IBOutlet var messagesNext: UIButton!
+    @IBOutlet var tournamentRequestsNext: UIButton!
     
     var selectedTabViewController:Int!
     var getAllEventsUsers = [GetAllEventsBetweenResponseModel]()
@@ -128,10 +129,12 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     
     @IBAction func tournamentRequestsSentBtnClicked(_ sender: UIButton) {
         self.tournamentRequestsLbl.text = "     Tournament Requests Sent"
+        tornamentRequestLabel.text = "No tournament Requests Sent"
     }
     
     @IBAction func tournamentRequestsReceivedBtnClicked(_ sender: UIButton) {
         self.tournamentRequestsLbl.text = "     Tournament Requests Received"
+        tornamentRequestLabel.text = "No tournament Requests Received"
     }
     
     @IBAction func btnLikesClicked(_ sender: Any) {
@@ -140,6 +143,14 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         }
     }
     
+    @IBAction func UpcomingTournamentsNextBtnClicked(_ sender: Any) {
+    }
+    
+    @IBAction func messagesNextBtnClicked(_ sender: Any) {
+    }
+    
+    @IBAction func tournamentRequestsNextBtnClicked(_ sender: Any) {
+    }
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController){
         
         if  tabBarController.selectedIndex == 0 {
