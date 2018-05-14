@@ -88,8 +88,8 @@ class RegisterViewController: UIViewController {
         self.statedropDown.selectRow(0)
 
     }
-    
 
+    
     @IBAction func stateBtnAction(_ sender: Any) {
         statedropDown.show()
     }
@@ -100,7 +100,6 @@ class RegisterViewController: UIViewController {
         self.birthDate.text = self.dob
     }
   
-    
     @objc func validateInputs(notification: NSNotification) {
         
         print("Child method is called")
@@ -326,8 +325,6 @@ class RegisterViewController: UIViewController {
                 self.alert(message: errorString)
             })
             
-            
-            
         }else{
             //failed
         }
@@ -359,23 +356,23 @@ class RegisterViewController: UIViewController {
         default:
             return
         }
-   
     }
     
     @IBAction func atheleteClicked(_ sender: Any) {
         userType = "Athlete"
         print("atheleteClicked")
-      
+        self.dob = " "
+        self.birthDate.text = " "
         self.coachRadioBtn.toggleCheckState()
     }
     
     @IBAction func coachClicked(_ sender: Any) {
         userType = "Coach"
         print("CoachClicked",userType)
+        self.dob = " "
+        self.birthDate.text = " "
         self.atheleteRadioBtn.toggleCheckState()
-        //        self.atheleteRadioBtn.toggleCheckState()
     }
-    
     
     func datePickerTapped() {
         
@@ -401,7 +398,6 @@ class RegisterViewController: UIViewController {
 
         let formatter = DateFormatter()
         formatter.dateFormat = "MM-dd-yyyy"
-        
         
         var defaultDate = Date()
         if self.dob != "" {

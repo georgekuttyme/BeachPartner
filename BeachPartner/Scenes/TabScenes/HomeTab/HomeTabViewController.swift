@@ -144,13 +144,28 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     }
     
     @IBAction func UpcomingTournamentsNextBtnClicked(_ sender: Any) {
+        
+
     }
     
     @IBAction func messagesNextBtnClicked(_ sender: Any) {
+
+        let visibleItems: NSArray = self.messagesCollectionView.indexPathsForVisibleItems as NSArray
+        if visibleItems.count == 0 {
+            return
+        }
+        let currentItem: IndexPath = visibleItems.lastObject as! IndexPath
+        let nextItem: IndexPath = IndexPath(item: currentItem.item + 1, section: 0)
+        if nextItem.row < recentChatList.count {
+            self.messagesCollectionView.scrollToItem(at: nextItem, at: .left, animated: true)
+
+        }
     }
     
     @IBAction func tournamentRequestsNextBtnClicked(_ sender: Any) {
+
     }
+    
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController){
         
         if  tabBarController.selectedIndex == 0 {
@@ -162,7 +177,6 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
                 self.addSubview(subView: self.currentViewController!.view, toView: self.view)
             }
         }
-
         selectedTabViewController = tabBarController.selectedIndex
     }
     
