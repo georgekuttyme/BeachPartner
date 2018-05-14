@@ -111,18 +111,6 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
         return "Events for " + day + " " + nameOfMonth
     }
     
-    func daySuffix(from date: Date) -> String {
-        let calendar = Calendar.current
-        let dayOfMonth = calendar.component(.day, from: date)
-        switch dayOfMonth {
-        case 1, 21, 31: return "\(dayOfMonth)" + "st"
-        case 2, 22: return "\(dayOfMonth)" + "nd"
-        case 3, 23: return "\(dayOfMonth)" + "rd"
-        default: return "\(dayOfMonth)" + "th"
-        }
-    }
-    
-    
     // MARK:- Tableview data source & Delegates
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -206,5 +194,16 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
             startDate = calendar.date(byAdding: .day, value: 1, to: startDate)!
         }
         return datesArray
+    }
+    
+    func daySuffix(from date: Date) -> String {
+        let calendar = Calendar.current
+        let dayOfMonth = calendar.component(.day, from: date)
+        switch dayOfMonth {
+        case 1, 21, 31: return "\(dayOfMonth)" + "st"
+        case 2, 22: return "\(dayOfMonth)" + "nd"
+        case 3, 23: return "\(dayOfMonth)" + "rd"
+        default: return "\(dayOfMonth)" + "th"
+        }
     }
 }

@@ -10,34 +10,37 @@ import UIKit
 import XLPagerTabStrip
 import DropDown
 class InviteParentViewController: ButtonBarPagerTabStripViewController {
-
-//    let purpleInspireColor = UIColor(red:0.13, green:0.03, blue:0.25, alpha:1.0)
+    
+    
+    var event: GetEventRespModel?
+    
+    //    let purpleInspireColor = UIColor(red:0.13, green:0.03, blue:0.25, alpha:1.0)
     let dropDown = DropDown()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-     /*   settings.style.buttonBarBackgroundColor = UIColor(rgb: 0x20307F)
-        settings.style.buttonBarItemBackgroundColor = UIColor(rgb: 0x20307F)
-        settings.style.selectedBarBackgroundColor = UIColor(rgb: 0x20307F)
         
-        settings.style.buttonBarItemFont = .boldSystemFont(ofSize: 14)
-        settings.style.selectedBarHeight = 2.0
-        settings.style.buttonBarMinimumLineSpacing = 0
-        
-        settings.style.buttonBarItemTitleColor = .white
-        settings.style.buttonBarItemsShouldFillAvailiableWidth = true
-       
-        settings.style.buttonBarLeftContentInset = 0
-        settings.style.buttonBarRightContentInset = 0
-       
-        changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
-            guard changeCurrentIndex == true else { return }
-            oldCell?.label.textColor = .white
-            newCell?.label.textColor = .white
-            
-        }
- */
+        /*   settings.style.buttonBarBackgroundColor = UIColor(rgb: 0x20307F)
+         settings.style.buttonBarItemBackgroundColor = UIColor(rgb: 0x20307F)
+         settings.style.selectedBarBackgroundColor = UIColor(rgb: 0x20307F)
+         
+         settings.style.buttonBarItemFont = .boldSystemFont(ofSize: 14)
+         settings.style.selectedBarHeight = 2.0
+         settings.style.buttonBarMinimumLineSpacing = 0
+         
+         settings.style.buttonBarItemTitleColor = .white
+         settings.style.buttonBarItemsShouldFillAvailiableWidth = true
+         
+         settings.style.buttonBarLeftContentInset = 0
+         settings.style.buttonBarRightContentInset = 0
+         
+         changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
+         guard changeCurrentIndex == true else { return }
+         oldCell?.label.textColor = .white
+         newCell?.label.textColor = .white
+         
+         }
+         */
         
         let menuButton = UIButton(type: UIButtonType.system)
         menuButton.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
@@ -102,11 +105,11 @@ class InviteParentViewController: ButtonBarPagerTabStripViewController {
         buttonBarView.backgroundColor = UIColor(rgb: 0x20307F)
         settings.style.buttonBarItemBackgroundColor = UIColor(rgb: 0x20307F)
         settings.style.buttonBarItemFont = .systemFont(ofSize: 14)
-
+        
         
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -114,7 +117,8 @@ class InviteParentViewController: ButtonBarPagerTabStripViewController {
     
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        let child_1 = UIStoryboard(name: "CalenderTab", bundle: nil).instantiateViewController(withIdentifier: "invitePartner")
+        let child_1 = UIStoryboard(name: "CalenderTab", bundle: nil).instantiateViewController(withIdentifier: "invitePartner") as! InvitePartnerViewController
+        child_1.event = self.event
         let child_2 = UIStoryboard(name: "TabBar", bundle: nil).instantiateViewController(withIdentifier: "partnerFinder")
         return [child_1, child_2]
     }
@@ -122,15 +126,15 @@ class InviteParentViewController: ButtonBarPagerTabStripViewController {
     @objc func openMenu() {
         dropDown.show()
     }
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

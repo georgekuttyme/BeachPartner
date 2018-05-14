@@ -74,4 +74,15 @@ class EventDetailsViewController: BeachPartnerViewController {
         let date = Date(timeIntervalSince1970: TimeInterval(interval/1000))
         return formatter.string(from: date)
     }
+    
+     // MARK: - Navigation
+     
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        if segue.identifier == "InvitePartnerSegue" {
+            let target = segue.destination as! InviteParentViewController
+            target.event = self.event
+        }
+     }
+    
 }

@@ -123,6 +123,8 @@
 		845BD6A32089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BD6A22089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift */; };
 		8DA417C0209B77F60078F814 /* CoachProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA417BF209B77F60078F814 /* CoachProfileTableViewController.swift */; };
 		D69A1981207388F100497B7C /* HighFiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69A1980207388F100497B7C /* HighFiveViewController.swift */; };
+		FF38234420A9CC4200F403BF /* EventInvitationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38234320A9CC4200F403BF /* EventInvitationListViewController.swift */; };
+		FF38234620A9CD7400F403BF /* EventInvitationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38234520A9CD7400F403BF /* EventInvitationCell.swift */; };
 		FF3FB96420A4546600B34CA0 /* GetEventRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3FB96320A4546600B34CA0 /* GetEventRespModel.swift */; };
 		FF560C0A2096F7FB00D3BA80 /* GetNoteRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF560C092096F7FB00D3BA80 /* GetNoteRespModel.swift */; };
 		FF560C0C2096F83300D3BA80 /* UpdateNoteRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF560C0B2096F83300D3BA80 /* UpdateNoteRespModel.swift */; };
@@ -251,6 +253,8 @@
 		8DA417BF209B77F60078F814 /* CoachProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachProfileTableViewController.swift; sourceTree = "<group>"; };
 		A4E87914ED5BC1C1ECF86DA1 /* Pods_BeachPartner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeachPartner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D69A1980207388F100497B7C /* HighFiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighFiveViewController.swift; sourceTree = "<group>"; };
+		FF38234320A9CC4200F403BF /* EventInvitationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInvitationListViewController.swift; sourceTree = "<group>"; };
+		FF38234520A9CD7400F403BF /* EventInvitationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInvitationCell.swift; sourceTree = "<group>"; };
 		FF3FB96320A4546600B34CA0 /* GetEventRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventRespModel.swift; sourceTree = "<group>"; };
 		FF560C092096F7FB00D3BA80 /* GetNoteRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNoteRespModel.swift; sourceTree = "<group>"; };
 		FF560C0B2096F83300D3BA80 /* UpdateNoteRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNoteRespModel.swift; sourceTree = "<group>"; };
@@ -628,6 +632,8 @@
 				3B66B5092062309100CC4FB4 /* MasterCalViewController.swift */,
 				3B1B705C2065617300C3FB57 /* MyCalViewController.swift */,
 				3B5D9968206EA46E001ED515 /* EventDetailsViewController.swift */,
+				FF38234320A9CC4200F403BF /* EventInvitationListViewController.swift */,
+				FF38234520A9CD7400F403BF /* EventInvitationCell.swift */,
 				3B66B50B206242F600CC4FB4 /* CalanderTableViewCell.swift */,
 				3B49C3922068EE15007186E8 /* InvitePartnerViewController.swift */,
 				3B5D9963206E44C6001ED515 /* InviteParentViewController.swift */,
@@ -1062,6 +1068,7 @@
 				3B6899EE20491B550075128E /* WLMAssetPoolExtensions.swift in Sources */,
 				3B0DEE98206D09DA00686609 /* WLMPlayer+NSObject+safeObserver.swift in Sources */,
 				D69A1981207388F100497B7C /* HighFiveViewController.swift in Sources */,
+				FF38234420A9CC4200F403BF /* EventInvitationListViewController.swift in Sources */,
 				3B1B705B206378CC00C3FB57 /* TournamentRequestsCollectionViewCell.swift in Sources */,
 				3BE40F58203EAEC100EA7DFC /* ViewController.swift in Sources */,
 				3B0DEE8F206D095500686609 /* CardOverlayView.swift in Sources */,
@@ -1108,6 +1115,7 @@
 				3B4D21C4206617B300E14541 /* ForgotPasswordViewController.swift in Sources */,
 				3B5D9969206EA46E001ED515 /* EventDetailsViewController.swift in Sources */,
 				3B49C38B2068DDE5007186E8 /* UITextField+Empty.swift in Sources */,
+				FF38234620A9CD7400F403BF /* EventInvitationCell.swift in Sources */,
 				FF560C0C2096F83300D3BA80 /* UpdateNoteRespModel.swift in Sources */,
 				3B0DEE0F206BDA9200686609 /* MyteamCell.swift in Sources */,
 				3B689A10204926340075128E /* TabBarController.swift in Sources */,
