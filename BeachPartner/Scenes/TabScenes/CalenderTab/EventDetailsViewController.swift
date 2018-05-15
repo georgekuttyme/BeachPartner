@@ -10,6 +10,7 @@ import UIKit
 
 class EventDetailsViewController: BeachPartnerViewController {
 
+    @IBOutlet weak var generalEventDetailsLabel: UILabel!
     @IBOutlet weak var eventNameLabel: UILabel!
     @IBOutlet weak var eventLocationLabel: UILabel!
     @IBOutlet weak var eventVenueLabel: UILabel!
@@ -23,12 +24,16 @@ class EventDetailsViewController: BeachPartnerViewController {
     @IBOutlet weak var athleteActionView: UIView!
     @IBOutlet weak var coachActionView: UIView!
     
+    @IBOutlet weak var invitePartnerButton: UIButton!
+    @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
+    
     
     var event: GetEventRespModel?
     
     fileprivate let formatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "MMM dd yyyy"//Feb 10 2018
+        formatter.dateFormat = "MMM dd, yyyy"//Feb 10 2018
         return formatter
     }()
     
@@ -44,6 +49,10 @@ class EventDetailsViewController: BeachPartnerViewController {
     private func setupUI() {
         eventNameLabel.adjustsFontSizeToFitWidth = true
         
+        registerButton.isEnabled = false
+        registerButton.alpha = 0.6
+        
+        
         if UserDefaults.standard.string(forKey: "userType") == "Athlete" {
             coachActionView.isHidden = true
         }
@@ -54,6 +63,15 @@ class EventDetailsViewController: BeachPartnerViewController {
     
     private func setupData() {
         guard let event = event else { return }
+        
+        if event.registerType == "Organizer" {
+            generalEventDetailsLabel.text = event.userMessage
+        }
+        else if event.registerType == "Invitee" {
+            generalEventDetailsLabel.text = event.userMessage
+            
+            invitePartnerButton.setTitle("View Invitation", for: .normal)
+        }
         
         eventNameLabel.text = event.eventName
         eventLocationLabel.text = event.eventLocation
@@ -66,6 +84,22 @@ class EventDetailsViewController: BeachPartnerViewController {
         regEndDateLabel.text = dateStringFromTimeInterval(interval: event.eventRegistrationEndDate)
     }
     
+    @IBAction func didTapInvitePartnerButton(_ sender: UIButton) {
+        
+        let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
+        
+        if event?.registerType == "Invitee" {
+            let viewController = storyBoard.instantiateViewController(withIdentifier: "InvitationListView") as! EventInvitationListViewController
+            viewController.event = self.event
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
+        else {
+            let viewController = storyBoard.instantiateViewController(withIdentifier: "InviteParentView") as! InviteParentViewController
+            viewController.event = self.event
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
+    }
+    
     @IBAction func didTapBackButton(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -74,15 +108,5 @@ class EventDetailsViewController: BeachPartnerViewController {
         let date = Date(timeIntervalSince1970: TimeInterval(interval/1000))
         return formatter.string(from: date)
     }
-    
-     // MARK: - Navigation
-     
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-        if segue.identifier == "InvitePartnerSegue" {
-            let target = segue.destination as! InviteParentViewController
-            target.event = self.event
-        }
-     }
     
 }

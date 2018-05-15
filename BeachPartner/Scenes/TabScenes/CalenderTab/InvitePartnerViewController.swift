@@ -60,7 +60,7 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
         //        self.findPartnerView.isHidden = true
         
       
-        myTeamHeaderButton.addTarget(self, action: #selector(touched(sender:)), for: .touchUpInside)
+        myTeamHeaderButton.addTarget(self, action: #selector(didTapMyTeamHeaderButton(sender:)), for: .touchUpInside)
         
         getConnectionsList()
     }
@@ -119,40 +119,51 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
         partnerTableVIew.reloadData()
     }
     
-    @objc func touched(sender: UIButton) {
+    @objc func didTapMyTeamHeaderButton(sender: UIButton) {
         
-        
-        if myteamHeight.constant == 0 {
+        if myteamHeight.constant == 1 {
             
             UIView.animate(withDuration: 0.5, animations: {
                 self.myteamHeight.constant = (UIScreen.main.bounds.height/2) - 80
             })
+            bottomview.isHidden = false
         }
         else {
             UIView.animate(withDuration: 0.5, animations: {
-                self.myteamHeight.constant = 0
+                self.myteamHeight.constant = 1
             })
+            bottomview.isHidden = true
         }
-//        print("AADFGSDGsdgnjdksnglnsdAGNjnjDLSKNGJKDJKGbDKbgkJDGK534264573@%@#$^#$&#$%&$#^#*#%^*#%^*#%*#^%*")
     }
-    
-    
-    @IBAction func didTapMyTeamHeaderButton(_ sender: UIButton) {
+
+    @IBAction func didTapInviteFriendButton(_ sender: UIButton) {
         
-        if myteamHeight.constant == 0 {
-            
-            UIView.animate(withDuration: 0.5, animations: {
-                self.myteamHeight.constant = (UIScreen.main.bounds.height/2) - 80
-            })
+        guard let eventId = event?.masterEventId else { return }
+        if myTeam.count == 0 { return }
+        
+        var partnerList = [Int]()
+        for member in myTeam {
+            if let userid = member.connectedUser?.userId {
+                partnerList.append(userid)
+            }
         }
-        else {
-            UIView.animate(withDuration: 0.5, animations: {
-                self.myteamHeight.constant = 0
-            })
+        
+        
+        ActivityIndicatorView.show("Loading")
+        APIManager.callServer.registerEvent(eventId: eventId, registerType: "Invitee", partners: partnerList, sucessResult: { (response) in
+            ActivityIndicatorView.hiding()
+            self.navigationController?.popViewController(animated: true)
+            
+        }) { (error) in
+            
+            ActivityIndicatorView.hiding()
+            guard let errorString  = error else {
+                return
+            }
+            self.alert(message: errorString)
+            print(error)
         }
     }
-    
-    
     
     // MARK:- Tableview Datasource & Delegates
     

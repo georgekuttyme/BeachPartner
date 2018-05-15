@@ -48,6 +48,10 @@ struct ApiMethods {
     static let ResetNewPassword = "/account/reset-password/finish"
     static let GetUserEvents    = "/events/user"
     static let GetAllUserEventsBetween = "/events/user/between"
+    static let RegisterEvent = "/events/user/register"
+    static let EventInvitations = "/events/user/invitations/"
+    static let InvitationResponse = "/events/user/invitationResponse"
+    
     static let GetBlockedUser = "/users/block-user"
     static let UnBlockUser = "/users/unblock-user"
     static let AddProfileVideoImage = "/storage/uploadProfileData"

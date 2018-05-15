@@ -129,6 +129,16 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
         let event = eventListToShow[indexPath.row]
         cell.eventNameLbl.text = event.eventName
 
+        if event.registerType == "Organizer" {
+            cell.invitationTypeImage.image = UIImage(named:"sent")
+        }
+        else if event.registerType == "Invitee" {
+            cell.invitationTypeImage.image = UIImage(named:"received")
+        }
+        else {
+            cell.invitationTypeImage.image = nil
+        }
+        
         cell.colorView.backgroundColor = .clear
         
 //        if event.status == EventStatus.Active.rawValue {

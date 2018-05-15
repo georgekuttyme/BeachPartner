@@ -1078,7 +1078,99 @@ extension APIManager{
     }
     
     
+    public func registerEvent(eventId: Int, registerType: String, partners: [Int], sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure) {
+        
+        let params: [String: Any] = [
+            "eventId": eventId,
+            "registerType": registerType,
+            "userIds": partners
+        ]
+        
+        APIClient.doRequest.inPostReq(method: ApiMethods.RegisterEvent, params: params, sucess: { (response) in
+            
+            APIManager.printOnDebug(response: " Resppp1111 : \(String(describing: response))")
+            
+            sucessResult(nil)
+            
+//            let jsonDict = response!
+//
+//            do {
+//                let accRespModel = try GetEventsRespModelArray(jsonDict as! [String : Any])
+//                sucessResult(accRespModel)
+//                return
+//            } catch {
+//                print("Catched")
+//                errorResult(error.localizedDescription)
+//                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+//                return
+//            }
+        }) { (error) in
+            self.busyOff()
+            errorResult(error?.localizedDescription)
+            APIManager.printOnDebug(response: "error:\(String(describing: error?.localizedDescription))")
+            return
+        }
+    }
     
+    public func getAllEventInvitations(eventId: Int, calendarType: String, sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure) {
+        let params = [String:String]()
+        
+        APIGetClient.doGetRequest.inGet(method: ApiMethods.EventInvitations + "\(eventId)?calendarType=\(calendarType)", params: params, sucess: { (response) in
+            
+            let jsonDict = response! as! [String : Any]
+            
+            do {
+                let accRespModel = try GetEventInvitationRespModel(jsonDict)
+                sucessResult(accRespModel)
+                return
+            } catch {
+                print("Catched")
+                errorResult(error.localizedDescription)
+                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                return
+            }
+            
+        }) { (error) in
+            print("Catched")
+            errorResult(error?.localizedDescription)
+            APIManager.printOnDebug(response: "error:\(String(describing: error?.localizedDescription))")
+            return
+        }
+    }
+    
+    public func respondToInvitation(eventId: Int, organiserId: Int, action: String, sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure) {
+     
+        let params: [String: Any] = [
+            "eventId": eventId,
+            "orgUserId": organiserId,
+            "responseType": action
+        ]
+        
+        APIClient.doRequest.inPostReq(method: ApiMethods.InvitationResponse, params: params, sucess: { (response) in
+            
+            APIManager.printOnDebug(response: " Resppp1111 : \(String(describing: response))")
+            
+            sucessResult(nil)
+            
+            //            let jsonDict = response!
+            //
+            //            do {
+            //                let accRespModel = try GetEventsRespModelArray(jsonDict as! [String : Any])
+            //                sucessResult(accRespModel)
+            //                return
+            //            } catch {
+            //                print("Catched")
+            //                errorResult(error.localizedDescription)
+            //                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+            //                return
+            //            }
+        }) { (error) in
+            self.busyOff()
+            errorResult(error?.localizedDescription)
+            APIManager.printOnDebug(response: "error:\(String(describing: error?.localizedDescription))")
+            return
+        }
+    }
     
     public func getAllEventBetweenDetails(sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure){
         let params = [String:String]()

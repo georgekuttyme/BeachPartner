@@ -12,6 +12,7 @@ class CalanderTableViewCell: UITableViewCell {
 
     @IBOutlet weak var eventNameLbl: UILabel!
     @IBOutlet weak var colorView: UIView!
+    @IBOutlet weak var invitationTypeImage: UIImageView!
     
 
     override func prepareForReuse() {

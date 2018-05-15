@@ -128,6 +128,7 @@
 		FF3FB96420A4546600B34CA0 /* GetEventRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3FB96320A4546600B34CA0 /* GetEventRespModel.swift */; };
 		FF560C0A2096F7FB00D3BA80 /* GetNoteRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF560C092096F7FB00D3BA80 /* GetNoteRespModel.swift */; };
 		FF560C0C2096F83300D3BA80 /* UpdateNoteRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF560C0B2096F83300D3BA80 /* UpdateNoteRespModel.swift */; };
+		FFCE759220AAFBF2007C0CFD /* GetEventInvitationRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCE759120AAFBF2007C0CFD /* GetEventInvitationRespModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -258,6 +259,7 @@
 		FF3FB96320A4546600B34CA0 /* GetEventRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventRespModel.swift; sourceTree = "<group>"; };
 		FF560C092096F7FB00D3BA80 /* GetNoteRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNoteRespModel.swift; sourceTree = "<group>"; };
 		FF560C0B2096F83300D3BA80 /* UpdateNoteRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNoteRespModel.swift; sourceTree = "<group>"; };
+		FFCE759120AAFBF2007C0CFD /* GetEventInvitationRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventInvitationRespModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -603,6 +605,7 @@
 				5EF9047520867D4000D6E952 /* SearchUserModel.swift */,
 				845BD6A22089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift */,
 				FF3FB96320A4546600B34CA0 /* GetEventRespModel.swift */,
+				FFCE759120AAFBF2007C0CFD /* GetEventInvitationRespModel.swift */,
 			);
 			path = AuthModels;
 			sourceTree = "<group>";
@@ -1036,6 +1039,7 @@
 				3BAD58732068CC930076DFD8 /* APIGetClient.swift in Sources */,
 				3B0DEE0D206B655100686609 /* GradientView.swift in Sources */,
 				3B49C3912068EDFA007186E8 /* NotesViewController.swift in Sources */,
+				FFCE759220AAFBF2007C0CFD /* GetEventInvitationRespModel.swift in Sources */,
 				3B5D9961206E368E001ED515 /* RangeSeekSliderDelegate.swift in Sources */,
 				3B49C3872068D7CC007186E8 /* ActivityIndicatorView.swift in Sources */,
 				5EFA2E48207E6D4F00212B45 /* ChatUsersListViewController.swift in Sources */,
