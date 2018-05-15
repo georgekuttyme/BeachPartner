@@ -15,10 +15,17 @@ class RegisterViewController: UIViewController {
     var dob = ""
     var state = ""
     var flag = Bool()
+    
+    
+    let rightButton  = UIButton(type: .custom)
+    var iconClick = true
+    var activeTextField: UITextField?
+    
     @IBOutlet weak var firstName: FloatingText!
     @IBOutlet weak var lastName: FloatingText!
     @IBOutlet weak var birthDate: FloatingText!
 
+    @IBOutlet var registrationScrollView: UIScrollView!
     @IBOutlet weak var atheleteRadioBtn: M13Checkbox!
 
     @IBOutlet weak var coachRadioBtn: M13Checkbox!
@@ -46,6 +53,14 @@ class RegisterViewController: UIViewController {
     let date_formatter1 = DateFormatter()
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        rightButton.setImage(UIImage(named: "hidepwd"), for: .normal)
+        rightButton.frame = CGRect(x:0, y:0, width:40, height:30)
+        paswordTxt.rightViewMode = .always
+        paswordTxt.rightView = rightButton
+        rightButton.addTarget(self, action:#selector(self.showhidepwdclicked) , for: .touchUpInside)
+        
+        
         self.firstName.delegate = self
         self.lastName.delegate = self
         self.birthDate.delegate = self
@@ -68,7 +83,6 @@ class RegisterViewController: UIViewController {
 //        self.maleBtn.backgroundColor = UIColor.clear
         loadLocations()
         self.hideKeyboardWhenTappedAround()
-        
         self.coachRadioBtn.checkState = .unchecked
         self.atheleteRadioBtn.checkState = .unchecked
         self.atheleteRadioBtn.toggleCheckState()
@@ -84,11 +98,23 @@ class RegisterViewController: UIViewController {
             self.statebtn.setTitle(item, for: UIControlState.normal)
             self.statebtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
         }
-        self.statebtn.setTitle("Select your State", for: UIControlState.normal)
+        self.statebtn.setTitle("State", for: UIControlState.normal)
         self.statedropDown.selectRow(0)
 
     }
-
+    
+    @objc func showhidepwdclicked() {
+        if(iconClick == true) {
+            self.paswordTxt.isSecureTextEntry = false
+            rightButton.setImage(UIImage(named: "showpwd"), for: .normal)
+            iconClick = false
+        } else {
+            self.paswordTxt.isSecureTextEntry = true
+            rightButton.setImage(UIImage(named: "hidepwd"), for: .normal)
+            iconClick = true
+        }
+        
+    }
     
     @IBAction func stateBtnAction(_ sender: Any) {
         statedropDown.show()
@@ -166,19 +192,6 @@ class RegisterViewController: UIViewController {
             currentValidation += 1
         }
         
-        
-//
-//        if(maleBtn.backgroundColor == UIColor(red: 32.0/255, green: 48.0/255, blue: 127.0/255, alpha: 1.0) || female.backgroundColor == UIColor(red: 32.0/255, green: 48.0/255, blue: 127.0/255, alpha: 1.0)){
-//            currentValidation += 1
-//            flag = true
-//        }
-//        else {
-//            if(currentValidation > 2 ){
-//                flag = false
-//                self.view.makeToast("Please select the gender", duration: 3.0, position: .center)
-//            }
-//        }
-        
         if emailTxt.isEmpty() {
             emailTxt.shake()
             emailTxt.errorText = "Email cannot be blank"
@@ -251,15 +264,6 @@ class RegisterViewController: UIViewController {
             
         }
         
-//        if cityTxt.isEmpty() {
-//            cityTxt.shake()
-//            cityTxt.errorText = "Please enter your location"
-//            cityTxt.showError()
-//        }else{
-//            cityTxt.hideError()
-//            currentValidation += 1
-//        }
-        
         if mobileTxt.isEmpty() {
             mobileTxt.shake()
             mobileTxt.errorText = "Please enter a valid mobile number "
@@ -284,6 +288,7 @@ class RegisterViewController: UIViewController {
                     mobileTxt.showError()
                 }
         }
+       
         
         if sucessValidation == currentValidation {
         
@@ -335,6 +340,9 @@ class RegisterViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    
+    
     @IBAction func pressedButton(_ sender: UIButton) {
         
         if sender.backgroundColor == UIColor(red: 32.0/255, green: 48.0/255, blue: 127.0/255, alpha: 1.0) {
@@ -358,19 +366,20 @@ class RegisterViewController: UIViewController {
         }
     }
     
+
     @IBAction func atheleteClicked(_ sender: Any) {
         userType = "Athlete"
         print("atheleteClicked")
-        self.dob = " "
-        self.birthDate.text = " "
+        self.dob = ""
+        self.birthDate.text = ""
         self.coachRadioBtn.toggleCheckState()
     }
     
     @IBAction func coachClicked(_ sender: Any) {
         userType = "Coach"
         print("CoachClicked",userType)
-        self.dob = " "
-        self.birthDate.text = " "
+        self.dob = ""
+        self.birthDate.text = ""
         self.atheleteRadioBtn.toggleCheckState()
     }
     
@@ -415,48 +424,10 @@ class RegisterViewController: UIViewController {
                     self.birthDate.showError()
                 }
                 self.dob = formatter.string(from: dt)
-//                let now = Date()
-//                let birthday: Date = dt
-//                let calendar = Calendar.current
-//                let ageComponents = calendar.dateComponents([.year], from: birthday, to: now)
-//                let age = ageComponents.year!
                 self.birthDate.text = formatter.string(from: dt)
             }
         }
 
-//        datePicker.show("Date of Birth",
-//                        doneButtonTitle: "Done",
-//                        cancelButtonTitle: "Cancel",
-////                        doneButton.addTarget(self, action: "doneButton:", forControlEvents: UIControlEvents.TouchUpInside)
-////                        minimumDate: threeMonthAgo,
-//                        maximumDate: todayDate,
-//                        datePickerMode: .date) { (date) in
-//                            if let dt = date {
-////                                let formatter = DateFormatter()
-////                                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
-//                                if case dt.description = "" {
-//                                    self.birthDate.shake()
-//                                    self.birthDate.errorText = "Select date of birth"
-//                                    self.birthDate.showError()
-//                                }
-////                                self.dob = formatter.string(from: dt)
-//                                let formatter1 = DateFormatter()
-//                                formatter1.dateFormat = "yyyy-MM-dd"
-//                                self.dob = formatter1.string(from: dt)
-//                                let now = Date()
-//                                let birthday: Date = dt
-//                                let calendar = Calendar.current
-//                                let ageComponents = calendar.dateComponents([.year], from: birthday, to: now)
-//                                let age = ageComponents.year!
-//                                self.birthDate.text = formatter1.string(from: dt)
-////                                if age > 17 {
-////                                   self.birthDate.text = formatter1.string(from: dt)
-////                                }
-////                                else{
-////                                   NotificationCenter.default.post(name: NSNotification.Name(rawValue: "minorPopUp"), object: nil)
-////                                }
-//                            }
-//        }
     }
     
 
@@ -516,36 +487,47 @@ class RegisterViewController: UIViewController {
     func dropdownList() {
         
     }
-//    public func numberOfComponents(in pickerView: UIPickerView) -> Int{
-//        return 1
-//
-//    }
-//
-//    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
-//
-//        return list.count
-//
-//    }
-//
-//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//
-//        self.view.endEditing(true)
-//        return list[row]
-//
-//    }
-//
-//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//
-//        self.cityTxt.text = self.stateList[row]
-//        self.cityList.isHidden = true
 
-//    }
     
 }
 
 
 
 extension RegisterViewController: UITextFieldDelegate {
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            let contentInsets = UIEdgeInsets(top: self.registrationScrollView.contentInset.top, left: 0, bottom: keyboardSize.height, right: 0)
+            self.registrationScrollView.contentInset = contentInsets
+            
+            // If active text field is hidden by keyboard, scroll it so it's visible
+            // Your app might not need or want this behavior.
+            var aRect: CGRect = self.view.frame
+            aRect.size.height -= keyboardSize.height
+            var activeTextFieldRect: CGRect?
+            var activeTextFieldOrigin: CGPoint?
+            
+            if self.activeTextField != nil {
+                activeTextFieldRect = self.activeTextField?.superview?.superview?.frame
+                activeTextFieldOrigin = activeTextFieldRect?.origin
+                self.registrationScrollView.scrollRectToVisible(activeTextFieldRect!, animated:true)
+            }
+        }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+    }
+    @objc func keyboardWillHide(notification: NSNotification) {
+        let contentInsets = UIEdgeInsets(top: self.registrationScrollView.contentInset.top, left: 0, bottom: 0, right: 0)
+        self.registrationScrollView.contentInset = contentInsets
+        self.activeTextField = nil
+    }
+    
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == self.birthDate {
@@ -566,7 +548,7 @@ extension RegisterViewController: UITextFieldDelegate {
 //            return true
 //        }
       
-        
+        self.activeTextField = textField
         return true
     }
     @available(iOS 10.0, *)

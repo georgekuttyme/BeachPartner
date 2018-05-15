@@ -18,6 +18,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     
     @IBOutlet weak var videoDisplayView: UIView!
     
+    @IBOutlet var noVideoLbl: UILabel!
     @IBOutlet weak var videoView:UIVideoView? {
         
         willSet{
@@ -229,7 +230,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.delTop2.isUserInteractionEnabled = false
         self.tableView.reloadData()
         
-         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.clear], for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.clear], for: .normal)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
@@ -305,23 +306,9 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         loadLocations()
         dateformatter.dateFormat = "MM-dd-yyyy"
         date_formatter1.dateFormat = "yyyy-MM-dd"
-        //
-        //        let floaty = Floaty()
-        //        floaty.addItem("I got a handler", icon: UIImage(named: "chat")!, handler: { item in
-        //            let alert = UIAlertController(title: "Hey", message: "I'm hungry...", preferredStyle: .alert)
-        //            alert.addAction(UIAlertAction(title: "Me too", style: .default, handler: nil))
-        //            self.present(alert, animated: true, completion: nil)
-        ////            alert.close()
-        //        })
-        //        self.shareBtnView.addSubview(floaty)
-        //
-        //        let floaty = Floaty()
-        //        floaty.addItem("Hello, World!", icon: UIImage(named: "chat")!)
-        //        self.shareBtnView.addSubview(floaty)
-        
+
         
         tableCell_SaveCancel.isHidden = true
-        
         
         self.editUserImageBtn.isHidden = true
         self.editUserImageBtn.isUserInteractionEnabled = false
@@ -400,6 +387,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
                     self.present(refreshAlert, animated: true, completion: nil)
                 }
                 else {
+                   
                     let text = "Hey view/download my Beach Partner video at : " + self.userData.videoUrl
                     
                     // set up activity view controller
@@ -1266,6 +1254,10 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
                 }
                 
                 self.videoUrl = accRespModel.videoUrl
+                if self.videoUrl == ""
+                {
+                    self.noVideoLbl.text = "No Video Available"
+                }
                 
                 self.loadVideoOnPlayer(videoUrlVal: accRespModel.videoUrl)
                 
@@ -1452,6 +1444,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
                             self.loadVideoOnPlayer(videoUrlVal: self.videoUrl)
                             
                             if( self.movieData != nil){
+                                self.noVideoLbl.isHidden = true
                                 self.uploadProfileVideo(profileVideo: self.movieData!)
                             }
                             else{
