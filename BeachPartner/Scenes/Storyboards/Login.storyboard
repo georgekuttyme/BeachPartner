@@ -2440,6 +2440,7 @@ To the extent that the website and the information and services on the website a
                         <outlet property="maleBtn" destination="Oi5-AX-mUz" id="2qb-aK-20R"/>
                         <outlet property="mobileTxt" destination="mfG-dv-O4f" id="AY6-V4-oov"/>
                         <outlet property="paswordTxt" destination="CbO-B7-ibI" id="lft-Tx-jbi"/>
+                        <outlet property="registrationScrollView" destination="jTC-Cj-9pP" id="0gs-Jq-rgg"/>
                         <outlet property="statebtn" destination="J1E-cG-saX" id="pDm-pW-Cz3"/>
                     </connections>
                 </viewController>
