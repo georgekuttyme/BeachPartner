@@ -305,10 +305,19 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             if screenSize.height == 812.0{
                 cardHeight.constant = -220
                 if selectedType == "BlueBp"{
+                    cardHeight.constant = -200
                     mainStackViewTopConstraint.constant = 84
                 }
                 else  if selectedType == "Search"{
-                  mainStackViewTopConstraint.constant = 0
+                    mainStackViewTopConstraint.constant = 0
+                }
+                else if selectedType == "Likes"{
+                    cardHeight.constant = -190
+                    mainStackViewTopConstraint.constant = 20
+                }
+                else if selectedType == "Hifi" {
+                    cardHeight.constant = -190
+                    mainStackViewTopConstraint.constant = 20
                 }
                 else {
                     mainStackViewTopConstraint.constant = 20
