@@ -10,6 +10,7 @@ import UIKit
 
 class EventDetailsViewController: BeachPartnerViewController {
 
+    @IBOutlet weak var generalEventDetailsView: UIView!
     @IBOutlet weak var generalEventDetailsLabel: UILabel!
     @IBOutlet weak var eventNameLabel: UILabel!
     @IBOutlet weak var eventLocationLabel: UILabel!
@@ -31,6 +32,10 @@ class EventDetailsViewController: BeachPartnerViewController {
     
     var event: GetEventRespModel?
     
+    var eventId: Int?
+    var isFromHomeTab = false
+    var eventInvitation: GetEventInvitationRespModel?
+    
     fileprivate let formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd, yyyy"//Feb 10 2018
@@ -43,19 +48,36 @@ class EventDetailsViewController: BeachPartnerViewController {
         super.viewDidLoad()
         
         setupUI()
-        setupData()
+        setupDataFromEvent()
+        
+        if isFromHomeTab {
+            getAllInvitations()
+        }
     }
 
     private func setupUI() {
         eventNameLabel.adjustsFontSizeToFitWidth = true
         
-        if event?.status == "Active" && event?.registerType == "Organizer" {
+        if event?.eventStaus == "Active" && event?.registerType == "Organizer" {
             registerButton.isEnabled = true
             registerButton.alpha = 1.0
+            
+            invitePartnerButton.isEnabled = false
+            invitePartnerButton.alpha = 0.6
         }
         else {
             registerButton.isEnabled = false
             registerButton.alpha = 0.6
+            
+            invitePartnerButton.isEnabled = true
+            invitePartnerButton.alpha = 1.0
+        }
+        
+        if event?.registerType == "Organizer" || event?.registerType == "Invitee" {
+            generalEventDetailsView.isHidden = false
+        }
+        else {
+            generalEventDetailsView.isHidden = true
         }
         
         if UserDefaults.standard.string(forKey: "userType") == "Athlete" {
@@ -66,7 +88,7 @@ class EventDetailsViewController: BeachPartnerViewController {
         }
     }
     
-    private func setupData() {
+    private func setupDataFromEvent() {
         guard let event = event else { return }
         
         if event.registerType == "Organizer" {
@@ -89,6 +111,67 @@ class EventDetailsViewController: BeachPartnerViewController {
         regEndDateLabel.text = dateStringFromTimeInterval(interval: event.eventRegistrationEndDate)
     }
     
+    private func setupDataFromEventInvitation() {
+        guard let eventInvitation = eventInvitation else { return }
+        
+        self.backButton.setTitle("View Partners", for: .normal)
+        
+        
+        
+//        if eventInvitation.invitations?.first?.eventStatus == "Active" {
+//
+//        }
+        
+        
+        
+//        if event.registerType == "Organizer" {
+//            generalEventDetailsLabel.text = event.userMessage
+//        }
+//        else if event.registerType == "Invitee" {
+//            generalEventDetailsLabel.text = event.userMessage
+//
+//            invitePartnerButton.setTitle("View Invitation", for: .normal)
+//        }
+        
+        eventNameLabel.text = eventInvitation.eventName
+        eventLocationLabel.text = eventInvitation.eventLocation
+        eventVenueLabel.text = eventInvitation.eventVenue
+        eventAdminLabel.text = eventInvitation.eventAdmin
+        
+        eventStartDateLabel.text = dateStringFromTimeInterval(interval: eventInvitation.eventStartDate)
+        eventEndDateLabel.text = dateStringFromTimeInterval(interval: eventInvitation.eventEndDate)
+//        regStartDateLabel.text = dateStringFromTimeInterval(interval: eventInvitation.eventRegistrationStartDate)
+//        regEndDateLabel.text = dateStringFromTimeInterval(interval: eventInvitation.eventRegistrationEndDate)
+        
+        regStartDateLabel.text = ""
+        regEndDateLabel.text = ""
+    }
+    
+    
+    private func getAllInvitations() {
+        
+        guard let eventId = eventId else { return }
+        
+        ActivityIndicatorView.show("Loading")
+        APIManager.callServer.getAllEventInvitations(eventId: eventId, calendarType: "mastercalendar", sucessResult: { (responseModel) in
+            ActivityIndicatorView.hiding()
+            
+            guard let eventInvitationModel = responseModel as? GetEventInvitationRespModel else {
+                print("Rep model does not match")
+                return
+            }
+            self.eventInvitation = eventInvitationModel
+            self.setupDataFromEventInvitation()
+            
+        }) { (error) in
+            ActivityIndicatorView.hiding()
+            guard let errorString  = error else {
+                return
+            }
+            self.alert(message: errorString)
+        }
+    }
+    
     @IBAction func didTapInvitePartnerButton(_ sender: UIButton) {
         
         let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
@@ -107,7 +190,19 @@ class EventDetailsViewController: BeachPartnerViewController {
     }
     
     @IBAction func didTapBackButton(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        
+        if isFromHomeTab {
+            guard let partners = eventInvitation?.invitations?.first?.partners else { return }
+            
+            let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
+            let viewController = storyBoard.instantiateViewController(withIdentifier: "PartnerListView") as! PartnerListViewController
+            viewController.partners = partners
+            viewController.modalTransitionStyle = .crossDissolve
+            self.present(viewController, animated: true, completion: nil)
+        }
+        else {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     private func dateStringFromTimeInterval(interval: Int) -> String {

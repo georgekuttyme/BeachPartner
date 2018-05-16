@@ -124,6 +124,8 @@
 		8D4B786520ABFE430025F7F7 /* GetAllUserEventsRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4B786420ABFE430025F7F7 /* GetAllUserEventsRespModel.swift */; };
 		8DA417C0209B77F60078F814 /* CoachProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA417BF209B77F60078F814 /* CoachProfileTableViewController.swift */; };
 		D69A1981207388F100497B7C /* HighFiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69A1980207388F100497B7C /* HighFiveViewController.swift */; };
+		FF07524120AC77D70015866D /* PartnerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF07524020AC77D70015866D /* PartnerListViewController.swift */; };
+		FF07524320AC79460015866D /* PartnerListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF07524220AC79450015866D /* PartnerListCell.swift */; };
 		FF38234420A9CC4200F403BF /* EventInvitationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38234320A9CC4200F403BF /* EventInvitationListViewController.swift */; };
 		FF38234620A9CD7400F403BF /* EventInvitationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38234520A9CD7400F403BF /* EventInvitationCell.swift */; };
 		FF3FB96420A4546600B34CA0 /* GetEventRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3FB96320A4546600B34CA0 /* GetEventRespModel.swift */; };
@@ -257,6 +259,8 @@
 		8DA417BF209B77F60078F814 /* CoachProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachProfileTableViewController.swift; sourceTree = "<group>"; };
 		A4E87914ED5BC1C1ECF86DA1 /* Pods_BeachPartner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeachPartner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D69A1980207388F100497B7C /* HighFiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighFiveViewController.swift; sourceTree = "<group>"; };
+		FF07524020AC77D70015866D /* PartnerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerListViewController.swift; sourceTree = "<group>"; };
+		FF07524220AC79450015866D /* PartnerListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerListCell.swift; sourceTree = "<group>"; };
 		FF38234320A9CC4200F403BF /* EventInvitationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInvitationListViewController.swift; sourceTree = "<group>"; };
 		FF38234520A9CD7400F403BF /* EventInvitationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInvitationCell.swift; sourceTree = "<group>"; };
 		FF3FB96320A4546600B34CA0 /* GetEventRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventRespModel.swift; sourceTree = "<group>"; };
@@ -642,6 +646,7 @@
 				3B1B705C2065617300C3FB57 /* MyCalViewController.swift */,
 				3B5D9968206EA46E001ED515 /* EventDetailsViewController.swift */,
 				FF38234320A9CC4200F403BF /* EventInvitationListViewController.swift */,
+				FF07524020AC77D70015866D /* PartnerListViewController.swift */,
 				FF38234520A9CD7400F403BF /* EventInvitationCell.swift */,
 				3B66B50B206242F600CC4FB4 /* CalanderTableViewCell.swift */,
 				3B49C3922068EE15007186E8 /* InvitePartnerViewController.swift */,
@@ -649,6 +654,7 @@
 				3B0DEE83206CA66A00686609 /* FilterViewController.swift */,
 				3B49C3942068EE19007186E8 /* InvitePartnerCell.swift */,
 				3B0DEE0E206BDA9100686609 /* MyteamCell.swift */,
+				FF07524220AC79450015866D /* PartnerListCell.swift */,
 			);
 			path = CalenderTab;
 			sourceTree = "<group>";
@@ -1065,6 +1071,7 @@
 				FF4EDC3F20AC077200BC3ACD /* GetTournamentRequestRespModel.swift in Sources */,
 				3B60279A20496FEA006B108A /* FloatingText.swift in Sources */,
 				3B1B70552062F88600C3FB57 /* AthleteViewController.swift in Sources */,
+				FF07524120AC77D70015866D /* PartnerListViewController.swift in Sources */,
 				3B6898A6204881910075128E /* ProfileViewController.swift in Sources */,
 				3B689A1B20493DA20075128E /* UpcomingTournamentCollectionViewCell.swift in Sources */,
 				5E1648812095837500983043 /* PasswordResetViewController.swift in Sources */,
@@ -1090,6 +1097,7 @@
 				8D4B786520ABFE430025F7F7 /* GetAllUserEventsRespModel.swift in Sources */,
 				3B49C3932068EE15007186E8 /* InvitePartnerViewController.swift in Sources */,
 				FF3FB96420A4546600B34CA0 /* GetEventRespModel.swift in Sources */,
+				FF07524320AC79460015866D /* PartnerListCell.swift in Sources */,
 				3B0DEE84206CA66B00686609 /* FilterViewController.swift in Sources */,
 				3B0DEE95206D099500686609 /* UIVideoView.swift in Sources */,
 				3B6027A420497364006B108A /* SignUpViewController.swift in Sources */,
