@@ -243,8 +243,13 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         super.viewDidLayoutSubviews()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationItem.title = "Beach Partner"
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         videoView.gravityMode = .resizeAspectFill
         videoView._player?.isMuted=true
         videoView._player?.volume = 0

@@ -112,6 +112,15 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
         loadNotes()
        
         self.hideKeyboardWhenTappedAround()
+       
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        setDropDwonMenu();
+    }
+    
+    
+    func setDropDwonMenu()  {
+        
         self.dropDown.anchorView = self.button1
         self.dropDown.dataSource =  ["My Profile","About Us","Feedback","Settings", "Help","Logout"]
         self.dropDown.bottomOffset = CGPoint(x: 20, y:45)
@@ -160,20 +169,22 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
         self.dropDown.selectRow(0)
     }
     
+    
     //MARK: to enable textview when editing
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        moveTextView(_textView: textView, moveDistance: -100, up: true)
+//        moveTextView(_textView: textView, moveDistance: -100, up: true)
         
     }
     func textViewDidEndEditing(_ textView: UITextView) {
-        moveTextView(_textView: textView, moveDistance: -100, up: false)
+//        moveTextView(_textView: textView, moveDistance: -100, up: false)
     }
     
     func textviewShouldReturn(_ textView: UITextView){
         textView.resignFirstResponder()
         
     }
+  
     func moveTextView(_textView: UITextView, moveDistance: Int, up:Bool){
         let moveDuration = 0.3
         let movement: CGFloat = CGFloat(up ? moveDistance : -moveDistance)
@@ -284,9 +295,13 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
 
             let lastIndex = self.notesTableview.numberOfRows(inSection: 0) - 1
             let indexPath = IndexPath(row: lastIndex, section: 0)
-                let cell = self.notesTableview.cellForRow(at: indexPath) as! NotesCell
+                let cell = self.notesTableview.cellForRow(at: indexPath) as? NotesCell
                 print("Handle Ok logic here")
-                cell.noteTextView.becomeFirstResponder()
+                if(cell != nil)
+                {
+                    cell?.noteTextView.becomeFirstResponder()
+                }
+                
              
             }))
             self.present(refreshAlert, animated: true, completion: nil)
@@ -308,6 +323,14 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
     
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         self.activeTextField = textView
+        let pointInTable:CGPoint = textView.superview!.convert(textView.frame.origin, to: notesTableview)
+        var contentOffset:CGPoint = notesTableview.contentOffset
+        contentOffset.y  = pointInTable.y - 150
+        if let accessoryView = textView.inputAccessoryView {
+            contentOffset.y -= accessoryView.frame.size.height
+        }
+        notesTableview.contentOffset = contentOffset
+        
         return true
     }
 }
