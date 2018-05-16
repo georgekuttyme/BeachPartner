@@ -29,8 +29,8 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
 
         let loggedIn = UserDefaults.standard.string(forKey: "isLoggedIn") ?? "0"
         if loggedIn == "0" {
-            let userID = UserDefaults.standard.string(forKey: "bP_token") ?? ""
-            if userID == "" {
+            let acceptTermsAndCondition = UserDefaults.standard.string(forKey: "isAcceptTermsAndCondition") ?? "0"
+            if acceptTermsAndCondition == "0" {
                 self.performSegue(withIdentifier: "tandcsegue", sender: self)
                 //      UIApplication.shared.openURL(URL(string: "http://beachpartner.com")!)
             }
@@ -765,7 +765,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
 //                    stopLoading()
                     return
                 }
-                
+                UserDefaults.standard.set(accRespModel.location , forKey: "locationInitial")
                 if(accRespModel.id != 0){
                     UserDefaults.standard.set(accRespModel.userType, forKey: "userType")
                     print("&&&&&&", accRespModel.userProfile ?? " ")

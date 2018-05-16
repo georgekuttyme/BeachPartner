@@ -9,10 +9,7 @@
 import UIKit
 import M13Checkbox
 
-class TermsAndConditionVC: UIViewController {
-
-   // @IBOutlet weak var contentLabel: UILabel!
-    
+class TermsAndConditionVC: UIViewController,UIWebViewDelegate {
     
     @IBAction func continueClicked(_ sender: Any) {
      
@@ -27,18 +24,30 @@ class TermsAndConditionVC: UIViewController {
             self.iagreeLbl.shake()
         }
     }
+    
      @IBOutlet weak var iagreeLbl: UILabel!
      @IBOutlet weak var continueBtn: UIButton!
     @IBOutlet weak var checkBox: M13Checkbox!
+    @IBOutlet weak var webView: UIWebView!
+    var contentType = String()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        contentType = "https://www.beachpartner.com/terms.html"
+        webView.delegate = self
+        webView.scrollView.bounces = false
+        webView.loadRequest(URLRequest(url: NSURL(string:contentType )! as URL))
+        
+        
         self.checkBox.boxType = .square
         
         // The tint color when in the selected state.
-        self.checkBox.tintColor = .blue
+        self.checkBox.tintColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0)
         
         // The tint color when in the unselected state.
-        self.checkBox.secondaryTintColor = .blue
+        self.checkBox.secondaryTintColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0)
         
         // The color of the checkmark when the animation is a "fill" style animation.
         self.checkBox.secondaryCheckmarkTintColor = .red
@@ -57,15 +66,5 @@ class TermsAndConditionVC: UIViewController {
         super.didReceiveMemoryWarning()
     }
 
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
