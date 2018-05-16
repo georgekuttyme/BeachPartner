@@ -138,7 +138,8 @@ class SettingsViewController: UIViewController {
             print("Selected item:",item," at index:",index)
             self.selectLoc.setTitle(item , for: UIControlState.normal)
         }
-        self.selectLoc.setTitle("Choose State", for: UIControlState.normal)
+        let loc = UserDefaults.standard.string(forKey: "locationInitial")
+        self.selectLoc.setTitle(loc, for: UIControlState.normal)
         customView()
     }
     
@@ -166,12 +167,13 @@ class SettingsViewController: UIViewController {
                 rangeSlider.selectedMaxValue = CGFloat(NSString(string: maxValue!).floatValue)
                 ageLabel.text = minValue! + " - " + maxValue!
             }
-            let location = UserDefaults.standard.string(forKey: "location") ?? "Choose State"
+            let location = UserDefaults.standard.string(forKey: "location") ?? ""
             if (location.count>0){
                 self.selectLoc.setTitle(location, for: UIControlState.normal)
             }
             else{
-               self.selectLoc.setTitle("Choose State", for: UIControlState.normal)
+               let loc = UserDefaults.standard.string(forKey: "locationInitial")
+               self.selectLoc.setTitle(loc, for: UIControlState.normal)
             }
         
         

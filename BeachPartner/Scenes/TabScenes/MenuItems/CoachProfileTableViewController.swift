@@ -949,7 +949,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
 //        self.collegeIndoorTxtFld.text = accResponseModel.userProfile?.collegeIndoor
 //        self.pointsTxtFld.text = accResponseModel.userProfile?.totalPoints
 //        self.rankingTxtFld.text = accResponseModel.userProfile?.usaVolleyballRanking
-//        UserDefaults.standard.set(accResponseModel.city , forKey: "location")
+//        UserDefaults.standard.set(accResponseModel.city , forKey: "locationInitial")
         
 //        if(accResponseModel.userProfile?.topFinishes != ""){
 //

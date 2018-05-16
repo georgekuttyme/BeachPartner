@@ -1332,7 +1332,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.collegeIndoorTxtFld.text = accResponseModel.userProfile?.collegeIndoor
         self.pointsTxtFld.text = accResponseModel.userProfile?.totalPoints
         self.rankingTxtFld.text = accResponseModel.userProfile?.usaVolleyballRanking
-//        UserDefaults.standard.set(accResponseModel.city , forKey: "location")
+//        UserDefaults.standard.set(accResponseModel.city , forKey: "locationInitial")
 
         self.tableCell_TopFinishesinLastYear1.isHidden = false
         self.tableCell_TopFinishesinLastYear2.isHidden = false

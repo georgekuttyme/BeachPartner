@@ -163,11 +163,11 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
     //MARK: to enable textview when editing
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        moveTextView(_textView: textView, moveDistance: -150, up: true)
+        moveTextView(_textView: textView, moveDistance: -100, up: true)
         
     }
     func textViewDidEndEditing(_ textView: UITextView) {
-        moveTextView(_textView: textView, moveDistance: -150, up: false)
+        moveTextView(_textView: textView, moveDistance: -100, up: false)
     }
     
     func textviewShouldReturn(_ textView: UITextView){
