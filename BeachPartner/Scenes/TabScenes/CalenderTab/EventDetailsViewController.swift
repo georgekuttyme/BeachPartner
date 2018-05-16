@@ -49,9 +49,14 @@ class EventDetailsViewController: BeachPartnerViewController {
     private func setupUI() {
         eventNameLabel.adjustsFontSizeToFitWidth = true
         
-        registerButton.isEnabled = false
-        registerButton.alpha = 0.6
-        
+        if event?.status == "Active" && event?.registerType == "Organizer" {
+            registerButton.isEnabled = true
+            registerButton.alpha = 1.0
+        }
+        else {
+            registerButton.isEnabled = false
+            registerButton.alpha = 0.6
+        }
         
         if UserDefaults.standard.string(forKey: "userType") == "Athlete" {
             coachActionView.isHidden = true
@@ -87,10 +92,11 @@ class EventDetailsViewController: BeachPartnerViewController {
     @IBAction func didTapInvitePartnerButton(_ sender: UIButton) {
         
         let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
-        
         if event?.registerType == "Invitee" {
+            
+            guard let eventId = self.event?.masterEventId else { return }
             let viewController = storyBoard.instantiateViewController(withIdentifier: "InvitationListView") as! EventInvitationListViewController
-            viewController.event = self.event
+            viewController.eventId = eventId
             self.navigationController?.pushViewController(viewController, animated: true)
         }
         else {

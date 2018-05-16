@@ -127,6 +127,7 @@
 		FF38234420A9CC4200F403BF /* EventInvitationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38234320A9CC4200F403BF /* EventInvitationListViewController.swift */; };
 		FF38234620A9CD7400F403BF /* EventInvitationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38234520A9CD7400F403BF /* EventInvitationCell.swift */; };
 		FF3FB96420A4546600B34CA0 /* GetEventRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3FB96320A4546600B34CA0 /* GetEventRespModel.swift */; };
+		FF4EDC3F20AC077200BC3ACD /* GetTournamentRequestRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4EDC3E20AC077200BC3ACD /* GetTournamentRequestRespModel.swift */; };
 		FF560C0A2096F7FB00D3BA80 /* GetNoteRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF560C092096F7FB00D3BA80 /* GetNoteRespModel.swift */; };
 		FF560C0C2096F83300D3BA80 /* UpdateNoteRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF560C0B2096F83300D3BA80 /* UpdateNoteRespModel.swift */; };
 		FFCE759220AAFBF2007C0CFD /* GetEventInvitationRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCE759120AAFBF2007C0CFD /* GetEventInvitationRespModel.swift */; };
@@ -259,6 +260,7 @@
 		FF38234320A9CC4200F403BF /* EventInvitationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInvitationListViewController.swift; sourceTree = "<group>"; };
 		FF38234520A9CD7400F403BF /* EventInvitationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInvitationCell.swift; sourceTree = "<group>"; };
 		FF3FB96320A4546600B34CA0 /* GetEventRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventRespModel.swift; sourceTree = "<group>"; };
+		FF4EDC3E20AC077200BC3ACD /* GetTournamentRequestRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTournamentRequestRespModel.swift; sourceTree = "<group>"; };
 		FF560C092096F7FB00D3BA80 /* GetNoteRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNoteRespModel.swift; sourceTree = "<group>"; };
 		FF560C0B2096F83300D3BA80 /* UpdateNoteRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNoteRespModel.swift; sourceTree = "<group>"; };
 		FFCE759120AAFBF2007C0CFD /* GetEventInvitationRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventInvitationRespModel.swift; sourceTree = "<group>"; };
@@ -608,6 +610,7 @@
 				845BD6A22089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift */,
 				FF3FB96320A4546600B34CA0 /* GetEventRespModel.swift */,
 				FFCE759120AAFBF2007C0CFD /* GetEventInvitationRespModel.swift */,
+				FF4EDC3E20AC077200BC3ACD /* GetTournamentRequestRespModel.swift */,
 				8D4B786420ABFE430025F7F7 /* GetAllUserEventsRespModel.swift */,
 			);
 			path = AuthModels;
@@ -1059,6 +1062,7 @@
 				3B5D9962206E368E001ED515 /* TapticEngine.swift in Sources */,
 				3BC8F90B205AE6870086333E /* PopUpThanksDelegate.swift in Sources */,
 				5EF313AB20947BD2007DA661 /* ProfileUpdateModel.swift in Sources */,
+				FF4EDC3F20AC077200BC3ACD /* GetTournamentRequestRespModel.swift in Sources */,
 				3B60279A20496FEA006B108A /* FloatingText.swift in Sources */,
 				3B1B70552062F88600C3FB57 /* AthleteViewController.swift in Sources */,
 				3B6898A6204881910075128E /* ProfileViewController.swift in Sources */,

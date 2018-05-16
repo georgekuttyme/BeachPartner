@@ -9,8 +9,9 @@
 import UIKit
 
 class TournamentRequestsCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var partnerImage: UIImageView!
-    @IBOutlet weak var partnerName: UILabel!
-    @IBOutlet weak var partnerImageView: UIView!
-    
+
+    @IBOutlet weak var eventStartDateLabel: UILabel!
+    @IBOutlet weak var eventLocationLabel: UILabel!
+    @IBOutlet weak var eventNameLabel: UILabel!
+    @IBOutlet weak var invitationCountLabel: UILabel!
 }

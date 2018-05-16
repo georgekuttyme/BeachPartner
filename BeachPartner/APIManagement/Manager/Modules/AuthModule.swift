@@ -1167,6 +1167,32 @@ extension APIManager{
         }
     }
     
+    public func getAllEventInvitations(sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure) {
+        let params = [String:String]()
+        
+        APIGetClient.doGetRequest.inGet(method: ApiMethods.EventInvitations, params: params, sucess: { (response) in
+            
+            let jsonDict = response! as! [String : Any]
+            
+            do {
+                let accRespModel = try GetTournamentRequestRespModel(jsonDict)
+                sucessResult(accRespModel)
+                return
+            } catch {
+                print("Catched")
+                errorResult(error.localizedDescription)
+                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                return
+            }
+            
+        }) { (error) in
+            print("Catched")
+            errorResult(error?.localizedDescription)
+            APIManager.printOnDebug(response: "error:\(String(describing: error?.localizedDescription))")
+            return
+        }
+    }
+    
     public func respondToInvitation(eventId: Int, organiserId: Int, action: String, sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure) {
      
         let params: [String: Any] = [

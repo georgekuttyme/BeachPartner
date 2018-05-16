@@ -17,6 +17,7 @@ class EventInvitationListViewController: UIViewController, UITableViewDataSource
     
     var event: GetEventRespModel?
     var eventInvitation: GetEventInvitationRespModel?
+    var eventId: Int = 0
     
     fileprivate let formatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -27,7 +28,6 @@ class EventInvitationListViewController: UIViewController, UITableViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupDate()
         getAllInvitations()
     }
 
@@ -37,19 +37,17 @@ class EventInvitationListViewController: UIViewController, UITableViewDataSource
         self.navigationItem.title = "Invitations"
     }
     
-    private func setupDate() {
-        guard let event = event else { return }
-        
+    private func setupData() {
+        guard let event = eventInvitation else { return }
+
         eventNameLabel.text = event.eventName
         eventStartDateLabel.text = dateStringFromTimeInterval(interval: event.eventStartDate)
         eventEndDateLabel.text = dateStringFromTimeInterval(interval: event.eventEndDate)
     }
     
     private func getAllInvitations() {
-        guard let eventId = event?.masterEventId else { return }
         
         ActivityIndicatorView.show("Loading")
-        
         APIManager.callServer.getAllEventInvitations(eventId: eventId, calendarType: "mastercalendar", sucessResult: { (responseModel) in
             ActivityIndicatorView.hiding()
             
@@ -58,6 +56,7 @@ class EventInvitationListViewController: UIViewController, UITableViewDataSource
                 return
             }
             self.eventInvitation = eventInvitationModel
+            self.setupData()
             
             self.tableView.reloadData()
             
