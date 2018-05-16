@@ -44,10 +44,10 @@ class TermsAndConditionVC: UIViewController,UIWebViewDelegate {
         self.checkBox.boxType = .square
         
         // The tint color when in the selected state.
-        self.checkBox.tintColor = .blue
+        self.checkBox.tintColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0)
         
         // The tint color when in the unselected state.
-        self.checkBox.secondaryTintColor = .blue
+        self.checkBox.secondaryTintColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0)
         
         // The color of the checkmark when the animation is a "fill" style animation.
         self.checkBox.secondaryCheckmarkTintColor = .red
