@@ -134,6 +134,8 @@ class EventInvitationListViewController: UIViewController, UITableViewDataSource
         cell?.profileImage.layer.borderColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0).cgColor
         cell?.profileImage.layer.borderWidth = 1.5
         
+        cell?.viewDetailsButton.addTarget(self, action: #selector(didTapDetailButton(sender:)), for: .touchUpInside)
+        cell?.viewDetailsButton.tag = indexPath.row + 20000
         
         return cell!
     }
@@ -154,6 +156,18 @@ class EventInvitationListViewController: UIViewController, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
+    }
+    
+    @objc func didTapDetailButton(sender: UIButton) {
+        
+        let index =  sender.tag - 20000
+        guard let partners = eventInvitation?.invitations?[index].partners else { return }
+        
+        let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
+        let viewController = storyBoard.instantiateViewController(withIdentifier: "PartnerListView") as! PartnerListViewController
+        viewController.partners = partners
+        viewController.modalTransitionStyle = .crossDissolve
+        self.present(viewController, animated: true, completion: nil)
     }
     
 

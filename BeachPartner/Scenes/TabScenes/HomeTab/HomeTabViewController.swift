@@ -454,24 +454,24 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         }
         if collectionView == self.tournamentRequestsCollectionView {
         
-            var eventId = 0
-
             if tournamentRequestSentViewActive == true {
-                if let id = tournamentRequestList?.requestsSent[indexPath.row].eventId {
-                    eventId = id
-                }
+                guard let eventId = tournamentRequestList?.requestsSent[indexPath.row].eventId else { return }
+                
+                let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
+                let eventDetailsVC = storyBoard.instantiateViewController(withIdentifier: "EventDetailsView") as! EventDetailsViewController
+                eventDetailsVC.eventId = eventId
+                eventDetailsVC.isFromHomeTab = true
+                self.navigationController?.pushViewController(eventDetailsVC, animated: true)
             }
             else {
-                if let id = tournamentRequestList?.requestsReceived[indexPath.row].eventId {
-                    eventId = id
-                }
+                guard let eventId = tournamentRequestList?.requestsReceived[indexPath.row].eventId else { return }
+                
+                let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
+                let viewController = storyBoard.instantiateViewController(withIdentifier: "InvitationListView") as! EventInvitationListViewController
+                viewController.eventId = eventId
+                self.navigationController?.pushViewController(viewController, animated: true)
             }
-            let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
-            let viewController = storyBoard.instantiateViewController(withIdentifier: "InvitationListView") as! EventInvitationListViewController
-            viewController.eventId = eventId
-            self.navigationController?.pushViewController(viewController, animated: true)
         }
-        
     }
     
     func cycleFromViewController(oldViewController: UIViewController, toViewController newViewController: UIViewController) {
