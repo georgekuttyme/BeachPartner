@@ -1077,6 +1077,35 @@ extension APIManager{
         }
     }
     
+    public func getAllUserEvents(sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure) {
+        let params = [String:String]()
+        
+        let userId = UserDefaults.standard.string(forKey: "bP_userId") ?? ""
+        APIGetClient.doGetRequest.inGetReqForArray(method: ApiMethods.GetUserEvents + "/\(userId)" , params: params, sucess: { (response) in
+            APIManager.printOnDebug(response:"getAllUserEvents  --> : \(response)")
+            
+            let jsonDict = response!
+            
+            do {
+                
+                let accRespModel = try GetAllUserEventsRespModelArray(jsonDict)
+                sucessResult(accRespModel)
+                return
+            } catch {
+                print("Catched")
+                errorResult(error.localizedDescription)
+                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                return
+            }
+            
+        }) { (error) in
+            
+            self.busyOff()
+            errorResult(error?.localizedDescription)
+            APIManager.printOnDebug(response: "error:\(error?.localizedDescription)")
+            return
+        }
+    }
     
     public func registerEvent(eventId: Int, registerType: String, partners: [Int], sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure) {
         

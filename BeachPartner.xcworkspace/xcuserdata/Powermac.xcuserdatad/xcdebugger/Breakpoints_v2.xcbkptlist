@@ -106,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/APIManagement/Manager/Modules/AuthModule.swift"
-            timestampString = "547653525.094667"
+            timestampString = "548140781.992299"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1004"
@@ -159,8 +159,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "441"
             endingLineNumber = "441"
-            landmarkName = "getEnPointForSearch()"
-            landmarkType = "7">
+            landmarkName = "BPCardsVC"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -442,7 +442,7 @@
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/bp-ios/BeachPartner/Scenes/TabScenes/MenuItems/CoachProfileTableViewController.swift"
-                  timestampString = "547746931.434211"
+                  timestampString = "548140784.548524"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "795"
@@ -457,7 +457,7 @@
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/bp-ios/BeachPartner/Scenes/TabScenes/MenuItems/CoachProfileTableViewController.swift"
-                  timestampString = "547746931.438125"
+                  timestampString = "548140784.55334"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "797"
@@ -522,7 +522,7 @@
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/bp-ios/BeachPartner/Scenes/TabScenes/MenuItems/CoachProfileTableViewController.swift"
-                  timestampString = "547746931.4594311"
+                  timestampString = "548140784.581331"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "482"
@@ -537,7 +537,7 @@
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/bp-ios/BeachPartner/Scenes/TabScenes/MenuItems/CoachProfileTableViewController.swift"
-                  timestampString = "547746931.463365"
+                  timestampString = "548140784.58609"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "482"
@@ -591,38 +591,38 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "592"
             endingLineNumber = "592"
-            landmarkName = "didSwipeToRight(user_Id:)"
+            landmarkName = "didSwipeToUp(user_Id:fcmId:)"
             landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "BeachPartner.BPCardsVC.didSwipeToRight(user_Id: Swift.String) -&gt; ()"
+                  symbolName = "closure #1 (Swift.Optional&lt;Tailor.SafeMappable&gt;) -&gt; () in BeachPartner.BPCardsVC.didSwipeToUp(user_Id: Swift.String, fcmId: Swift.String) -&gt; ()"
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/bp-ios/BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
-                  timestampString = "547746931.486077"
+                  timestampString = "548140784.618829"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "592"
-                  endingLineNumber = "592"
-                  offsetFromSymbolStart = "29">
+                  startingLineNumber = "593"
+                  endingLineNumber = "593"
+                  offsetFromSymbolStart = "24829">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Tailor.SafeMappable&gt;) -&gt; () in BeachPartner.BPCardsVC.didSwipeToRight(user_Id: Swift.String) -&gt; ()"
+                  symbolName = "closure #2 (Swift.Optional&lt;Swift.String&gt;) -&gt; () in BeachPartner.BPCardsVC.didSwipeToUp(user_Id: Swift.String, fcmId: Swift.String) -&gt; ()"
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/bp-ios/BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
-                  timestampString = "547746931.489944"
+                  timestampString = "548140784.622089"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "593"
-                  endingLineNumber = "593"
-                  offsetFromSymbolStart = "32">
+                  startingLineNumber = "595"
+                  endingLineNumber = "595"
+                  offsetFromSymbolStart = "33">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -666,7 +666,7 @@
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/bp-ios/BeachPartner/Scenes/TabScenes/MutualLikesViewController.swift"
-                  timestampString = "547746931.507511"
+                  timestampString = "548140784.64068"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "24"
@@ -681,7 +681,7 @@
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/bp-ios/BeachPartner/Scenes/TabScenes/MutualLikesViewController.swift"
-                  timestampString = "547746931.511121"
+                  timestampString = "548140784.644266"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "25"
@@ -922,7 +922,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/APIManagement/Manager/Modules/AuthModule.swift"
-            timestampString = "547653525.0971709"
+            timestampString = "548140781.9936399"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "682"
@@ -954,12 +954,12 @@
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/bp-ios/BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
-                  timestampString = "547746931.622821"
+                  timestampString = "548140784.778466"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "159"
                   endingLineNumber = "159"
-                  offsetFromSymbolStart = "10942">
+                  offsetFromSymbolStart = "10998">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -969,7 +969,7 @@
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/bp-ios/BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
-                  timestampString = "547746931.62721"
+                  timestampString = "548140784.783227"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "161"
@@ -1018,12 +1018,12 @@
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/bp-ios/BeachPartner/Scenes/TabScenes/ChatTab/ChatUsersListViewController.swift"
-                  timestampString = "547746931.642204"
+                  timestampString = "548140784.797007"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "246"
                   endingLineNumber = "246"
-                  offsetFromSymbolStart = "14454">
+                  offsetFromSymbolStart = "14528">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -1033,7 +1033,7 @@
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/bp-ios/BeachPartner/Scenes/TabScenes/ChatTab/ChatUsersListViewController.swift"
-                  timestampString = "547746931.645721"
+                  timestampString = "548140784.8002729"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "248"

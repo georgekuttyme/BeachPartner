@@ -121,6 +121,7 @@
 		844F70502090BC01004F3005 /* noteResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844F704F2090BC01004F3005 /* noteResponseModel.swift */; };
 		845B7908208B4A5200DF1F1F /* AthleteProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845B7907208B4A5200DF1F1F /* AthleteProfileTableViewController.swift */; };
 		845BD6A32089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BD6A22089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift */; };
+		8D4B786320ABF5700025F7F7 /* GetAllUserInvitationsForEventModelArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4B786220ABF5700025F7F7 /* GetAllUserInvitationsForEventModelArray.swift */; };
 		8DA417C0209B77F60078F814 /* CoachProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA417BF209B77F60078F814 /* CoachProfileTableViewController.swift */; };
 		D69A1981207388F100497B7C /* HighFiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69A1980207388F100497B7C /* HighFiveViewController.swift */; };
 		FF38234420A9CC4200F403BF /* EventInvitationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38234320A9CC4200F403BF /* EventInvitationListViewController.swift */; };
@@ -251,6 +252,7 @@
 		845B7907208B4A5200DF1F1F /* AthleteProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AthleteProfileTableViewController.swift; sourceTree = "<group>"; };
 		845BD6A22089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllEventsBetweenResponseModel.swift; sourceTree = "<group>"; };
 		8464C58F2084ACDA001FC8E5 /* BeachPartner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BeachPartner.entitlements; sourceTree = "<group>"; };
+		8D4B786220ABF5700025F7F7 /* GetAllUserInvitationsForEventModelArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllUserInvitationsForEventModelArray.swift; sourceTree = "<group>"; };
 		8DA417BF209B77F60078F814 /* CoachProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachProfileTableViewController.swift; sourceTree = "<group>"; };
 		A4E87914ED5BC1C1ECF86DA1 /* Pods_BeachPartner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeachPartner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D69A1980207388F100497B7C /* HighFiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighFiveViewController.swift; sourceTree = "<group>"; };
@@ -606,6 +608,7 @@
 				845BD6A22089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift */,
 				FF3FB96320A4546600B34CA0 /* GetEventRespModel.swift */,
 				FFCE759120AAFBF2007C0CFD /* GetEventInvitationRespModel.swift */,
+				8D4B786220ABF5700025F7F7 /* GetAllUserInvitationsForEventModelArray.swift */,
 			);
 			path = AuthModels;
 			sourceTree = "<group>";
@@ -1056,6 +1059,7 @@
 				3B5D9962206E368E001ED515 /* TapticEngine.swift in Sources */,
 				3BC8F90B205AE6870086333E /* PopUpThanksDelegate.swift in Sources */,
 				5EF313AB20947BD2007DA661 /* ProfileUpdateModel.swift in Sources */,
+				8D4B786320ABF5700025F7F7 /* GetAllUserInvitationsForEventModelArray.swift in Sources */,
 				3B60279A20496FEA006B108A /* FloatingText.swift in Sources */,
 				3B1B70552062F88600C3FB57 /* AthleteViewController.swift in Sources */,
 				3B6898A6204881910075128E /* ProfileViewController.swift in Sources */,

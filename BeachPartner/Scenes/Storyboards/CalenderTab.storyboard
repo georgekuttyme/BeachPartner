@@ -373,9 +373,18 @@
                                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gl9-T5-gHn" customClass="FSCalendar">
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="281"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="303" id="wPb-Iw-Y4e"/>
+                                                        </constraints>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="borderDefaultColor">
                                                                 <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="subtitleDefaultColor">
+                                                                <color key="value" red="0.98039215690000003" green="0.39607843139999999" blue="0.01176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="subtitleTodayColor">
+                                                                <color key="value" red="0.33725490200000002" green="0.84313725490000002" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
@@ -396,7 +405,7 @@
                                                         <color key="backgroundColor" red="0.12549019610000001" green="0.18823529410000001" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstItem="P1N-bg-nqB" firstAttribute="top" secondItem="MhK-yZ-9DA" secondAttribute="top" id="2sP-V1-l24"/>
-                                                            <constraint firstAttribute="trailing" secondItem="P1N-bg-nqB" secondAttribute="trailing" constant="-31" id="4Dt-H8-JKz"/>
+                                                            <constraint firstAttribute="trailing" secondItem="P1N-bg-nqB" secondAttribute="trailing" id="4Dt-H8-JKz"/>
                                                             <constraint firstAttribute="height" constant="18" id="5tZ-6k-Ouk"/>
                                                             <constraint firstItem="P1N-bg-nqB" firstAttribute="leading" secondItem="MhK-yZ-9DA" secondAttribute="leading" constant="31" id="R1x-g9-H7M"/>
                                                             <constraint firstAttribute="bottom" secondItem="P1N-bg-nqB" secondAttribute="bottom" id="sYF-tQ-4Fg"/>
@@ -411,7 +420,6 @@
                                                     <constraint firstItem="MhK-yZ-9DA" firstAttribute="top" secondItem="Gl9-T5-gHn" secondAttribute="bottom" id="TTd-FV-Pe0"/>
                                                     <constraint firstAttribute="bottom" secondItem="MhK-yZ-9DA" secondAttribute="bottom" id="ats-ah-vWh"/>
                                                     <constraint firstAttribute="trailing" secondItem="MhK-yZ-9DA" secondAttribute="trailing" id="dfV-T5-7aL"/>
-                                                    <constraint firstItem="MhK-yZ-9DA" firstAttribute="top" secondItem="Gl9-T5-gHn" secondAttribute="bottom" id="yr0-1r-UZn"/>
                                                 </constraints>
                                             </stackView>
                                         </subviews>
@@ -453,10 +461,7 @@
                                                                                 </view>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AVP Indoor Volleyball Wheaton" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mmT-0D-8lG">
                                                                                     <rect key="frame" x="22" y="0.0" width="249" height="80"/>
-                                                                                    <constraints>
-                                                                                        <constraint firstAttribute="width" constant="378" id="4hM-FW-EI8"/>
-                                                                                    </constraints>
-                                                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                                     <color key="textColor" red="0.209707163" green="0.2117834716" blue="0.2117834716" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
@@ -466,7 +471,6 @@
                                                                                 <constraint firstItem="ViV-CA-STL" firstAttribute="leading" secondItem="zo1-gV-MpR" secondAttribute="leading" id="EEt-si-jsJ"/>
                                                                                 <constraint firstItem="ViV-CA-STL" firstAttribute="top" secondItem="zo1-gV-MpR" secondAttribute="top" constant="5" id="cyz-q6-Dj3"/>
                                                                                 <constraint firstAttribute="bottom" secondItem="mmT-0D-8lG" secondAttribute="bottom" id="jar-ol-0Ej"/>
-                                                                                <constraint firstAttribute="trailing" secondItem="mmT-0D-8lG" secondAttribute="trailing" id="p6S-wG-FVV"/>
                                                                             </constraints>
                                                                         </stackView>
                                                                     </subviews>
@@ -528,6 +532,8 @@
                     <navigationItem key="navigationItem" id="lXU-oG-Rsj"/>
                     <connections>
                         <outlet property="MyCalTableVIew" destination="cqG-p8-0uY" id="4EA-Iy-rHF"/>
+                        <outlet property="calendar" destination="Gl9-T5-gHn" id="UI3-Ye-ZRN"/>
+                        <outlet property="tableHeaderLabel" destination="P1N-bg-nqB" id="Yn5-eU-iTy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qdh-O4-3ki" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -539,11 +545,11 @@
             <objects>
                 <viewController storyboardIdentifier="EventDetailsView" title="Event Details" id="yLg-8Z-5vR" customClass="EventDetailsViewController" customModule="BeachPartner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="inH-bA-ZDI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="786"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="850"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tMN-jp-UsV">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="742"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="806"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="FGo-X4-j8U">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="651"/>
@@ -1769,7 +1775,7 @@
         <image name="start_date v2" width="429" height="125"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="QCL-TN-Cw7"/>
+        <segue reference="S8Y-ed-Dl0"/>
         <segue reference="c8u-gq-7eI"/>
         <segue reference="LIp-gz-T4M"/>
     </inferredMetricsTieBreakers>
