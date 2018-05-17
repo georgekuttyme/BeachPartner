@@ -41,6 +41,10 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Temp
+        let token = UserDefaults.standard.string(forKey: "bP_token")
+        print(token)
+        
         tableHeaderLabel.text = titleForEventTable(date: Date())
     }
     
@@ -157,9 +161,21 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
-        let eventDetailsVC = storyBoard.instantiateViewController(withIdentifier: "EventDetailsView") as! EventDetailsViewController
-        eventDetailsVC.event = eventListToShow[indexPath.row]
-        self.navigationController?.pushViewController(eventDetailsVC, animated: true)
+        
+        if eventListToShow[indexPath.row].registerType == "Invitee" && eventListToShow[indexPath.row].invitationStatus != "Accepted" {
+            let eventId = eventListToShow[indexPath.row].id
+            
+            let viewController = storyBoard.instantiateViewController(withIdentifier: "InvitationListView") as! EventInvitationListViewController
+            viewController.eventId = eventId
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
+        else {
+            let eventDetailsVC = storyBoard.instantiateViewController(withIdentifier: "EventDetailsView") as! EventDetailsViewController
+            let event = eventListToShow[indexPath.row]
+            print(event)
+            eventDetailsVC.event = event
+            self.navigationController?.pushViewController(eventDetailsVC, animated: true)
+        }
     }
     
 

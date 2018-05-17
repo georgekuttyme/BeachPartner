@@ -9,10 +9,19 @@
 import UIKit
 import XLPagerTabStrip
 import DropDown
+
+protocol InviteParentViewControllerDelegate {
+    
+    func successfullyInvitedPartners(sender: UIViewController)
+}
+
 class InviteParentViewController: ButtonBarPagerTabStripViewController {
     
     
     var event: GetEventRespModel?
+    var eventInvitation: GetEventInvitationRespModel?
+
+    var delegate1: InviteParentViewControllerDelegate?
     
     //    let purpleInspireColor = UIColor(red:0.13, green:0.03, blue:0.25, alpha:1.0)
     let dropDown = DropDown()
@@ -119,6 +128,9 @@ class InviteParentViewController: ButtonBarPagerTabStripViewController {
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         let child_1 = UIStoryboard(name: "CalenderTab", bundle: nil).instantiateViewController(withIdentifier: "invitePartner") as! InvitePartnerViewController
         child_1.event = self.event
+        child_1.eventInvitation = self.eventInvitation
+        child_1.delgate = self
+        
         let child_2 = UIStoryboard(name: "TabBar", bundle: nil).instantiateViewController(withIdentifier: "partnerFinder")
         return [child_1, child_2]
     }
@@ -127,14 +139,13 @@ class InviteParentViewController: ButtonBarPagerTabStripViewController {
         dropDown.show()
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }
+
+extension InviteParentViewController: InvitePartnerViewControllerDelegate {
+    
+    func successfullyInvitedPartners(sender: UIViewController) {
+        self.navigationController?.popViewController(animated: false)
+        delegate1?.successfullyInvitedPartners(sender: self)
+    }
+}
+

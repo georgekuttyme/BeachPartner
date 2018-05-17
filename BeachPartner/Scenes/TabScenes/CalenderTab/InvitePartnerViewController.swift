@@ -10,6 +10,12 @@ import UIKit
 import DropDown
 import XLPagerTabStrip
 
+protocol InvitePartnerViewControllerDelegate {
+    
+    func successfullyInvitedPartners(sender: UIViewController)
+}
+
+
 class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,IndicatorInfoProvider {
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -17,6 +23,14 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
     }
     
     var event: GetEventRespModel?
+    var eventInvitation: GetEventInvitationRespModel?
+
+    var delgate:InvitePartnerViewControllerDelegate?
+    
+    var eventId: Int?
+    var eventStartDate: Int?
+    
+    
 
     var connectedUsers = [ConnectedUserModel]()
     var myTeam = [ConnectedUserModel]()
@@ -57,9 +71,16 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
         super.viewDidLoad()
         
         self.bottomview.isHidden = true
-        //        self.findPartnerView.isHidden = true
         
-      
+        if let event = event {
+            eventId = event.id
+            eventStartDate = event.eventStartDate
+        }
+        if let eventInvitation = eventInvitation {
+            eventId = eventInvitation.eventId
+            eventStartDate = eventInvitation.eventStartDate
+        }
+
         myTeamHeaderButton.addTarget(self, action: #selector(didTapMyTeamHeaderButton(sender:)), for: .touchUpInside)
         
         getConnectionsList()
@@ -67,9 +88,10 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
     
     private func getConnectionsList() {
         
-        guard let event = event else { return }
-        let eventStartDate = Date(timeIntervalSince1970: TimeInterval(event.eventStartDate/1000))
-        let eventDate = formatter.string(from: eventStartDate)
+        guard let eventStartDate = eventStartDate  else { return }
+        
+        let date = Date(timeIntervalSince1970: TimeInterval(eventStartDate/1000))
+        let eventDate = formatter.string(from: date)
         
         ActivityIndicatorView.show("Loading...")
         APIManager.callServer.getUserConnectionList(status:"status=Active&filterDate=\(eventDate)",sucessResult: { (responseModel) in
@@ -123,22 +145,31 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
         
         if myteamHeight.constant == 1 {
             
-            UIView.animate(withDuration: 0.5, animations: {
-                self.myteamHeight.constant = (UIScreen.main.bounds.height/2) - 80
+            UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseIn, animations: {
+                self.myteamHeight.constant = (UIScreen.main.bounds.height/2) - 100
+                self.bottomview.isHidden = false
+                self.view.layoutIfNeeded()
+            }, completion: { (complete) in
+                
             })
-            bottomview.isHidden = false
         }
         else {
-            UIView.animate(withDuration: 0.5, animations: {
+            UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseIn, animations: {
                 self.myteamHeight.constant = 1
+                self.bottomview.isHidden = true
+                self.view.layoutIfNeeded()
+            }, completion: { (complete) in
             })
-            bottomview.isHidden = true
         }
     }
 
     @IBAction func didTapInviteFriendButton(_ sender: UIButton) {
         
-        guard let eventId = event?.masterEventId else { return }
+//        delgate?.successfullyInvitedPartners(sender: self)
+//        return
+        
+        
+        guard let eventId = eventId else { return }
         if myTeam.count == 0 { return }
         
         var partnerList = [Int]()
@@ -152,8 +183,7 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
         ActivityIndicatorView.show("Loading")
         APIManager.callServer.registerEvent(eventId: eventId, registerType: "Invitee", partners: partnerList, sucessResult: { (response) in
             ActivityIndicatorView.hiding()
-            self.navigationController?.popViewController(animated: true)
-            
+            self.delgate?.successfullyInvitedPartners(sender: self)
         }) { (error) in
             
             ActivityIndicatorView.hiding()

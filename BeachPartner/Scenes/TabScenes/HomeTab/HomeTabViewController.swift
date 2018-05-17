@@ -150,7 +150,6 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             
         }) { (error) in
             
-            
         }
     }
     
@@ -669,5 +668,12 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     }
 }
 
+
+extension HomeTabViewController: EventInvitationListViewControllerDelegate {
+    
+    func refreshInvitationList() {
+        self.getAllTournamentRequests()
+    }
+}
 
 
