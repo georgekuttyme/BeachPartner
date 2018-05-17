@@ -14,12 +14,11 @@ class TermsAndConditionVC: UIViewController,UIWebViewDelegate {
     @IBAction func continueClicked(_ sender: Any) {
      
         if(self.checkBox.checkState == .checked){
+        UserDefaults.standard.set("1", forKey: "isAcceptTermsAndCondition")
         navigationController?.popViewController(animated: true)
-        
         dismiss(animated: true, completion: nil)
         }
         else{
-            
             self.checkBox.shake()
             self.iagreeLbl.shake()
         }

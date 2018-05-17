@@ -24,7 +24,8 @@ class ChatViewController: JSQMessagesViewController {
     lazy var incomingBubble: JSQMessagesBubbleImage = {
         return JSQMessagesBubbleImageFactory()!.incomingMessagesBubbleImage(with: UIColor(red: 155/255, green: 164/255, blue: 204/255, alpha: 1))
     }()
-    
+
+   
 // MARK: - View Property's
     override func viewDidLoad() {
         self.tabBarController?.tabBar.isHidden = true
@@ -106,8 +107,9 @@ class ChatViewController: JSQMessagesViewController {
             }
         }
          else{
+            print("\n\n\n\n///////",connectedUserModel.first)
             let connectedUserModelOfFirstElement = connectedUserModel.first
-            title = "Messages with " + (connectedUserModelOfFirstElement?.connectedUser?.firstName)!
+            title = "Messages with " + (connectedUserModelOfFirstElement?.connectedUser?.firstName ?? "" ) 
         }
     }
     
@@ -153,7 +155,7 @@ class ChatViewController: JSQMessagesViewController {
         }
         else{
              let connectedUserModelOfFirstElement = connectedUserModel.first
-            receiver_name = String((connectedUserModelOfFirstElement?.connectedUser?.firstName)!)
+            receiver_name = String((connectedUserModelOfFirstElement?.connectedUser?.firstName ?? ""))
             receiver_id = String((connectedUserModelOfFirstElement?.connectedUser?.userId ?? 0))
             profileImg = String ((connectedUserModelOfFirstElement?.connectedUser?.imageUrl)!)
         }

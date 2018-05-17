@@ -51,7 +51,7 @@ class SettingsViewController: UIViewController {
             if(gender == "Both"){
                 gender = ""
             }
-            
+            print(">>>>",self.minAge,"  ->  ",self.maxAge,"<<<<")
             paramString = paramString+"&minAge="+"\(self.minAge)"+"&maxAge="+"\(self.maxAge)"+"&gender="+"\(gender ?? "" )"
             
             if self.selectLoc.titleLabel?.text != "Choose State"{

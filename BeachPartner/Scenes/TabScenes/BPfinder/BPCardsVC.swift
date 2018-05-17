@@ -50,6 +50,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     var likedPersonInfo = [ConnectedUserModel]()
     var searchUsers = [SearchUserModel]()
     var SwipeCardArray:[Any] = []
+    var currentIndex : Int = 0
     
     @IBAction func topfinishesClicked(_ sender: Any) {
      
@@ -144,6 +145,10 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     }
     
     @IBAction func undoBtnCLicked(_ sender: Any) {
+        print(self.currentIndex)
+        if let view:CardView = (self.cardView.viewForCard(at: self.currentIndex) as? CardView) {
+            view.pauseVideo()
+        }
         self.btnUndo.isEnabled = false
         self.btnUndo.setImage(UIImage(named:"grayback"), for: UIControlState.normal)
         self.imgProfile.isHidden = true
@@ -245,7 +250,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationItem.title = "Beach Partner"
+        //self.navigationItem.title = "Beach Partner"
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -281,6 +286,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     }
 
     @objc func sendMsg(notification: NSNotification){
+        print("\n\n\n ???????",self.likedPersonInfo)
         let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
         let chatController = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
         chatController.connectedUserModel = self.likedPersonInfo
@@ -488,7 +494,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     }
     
     func getUserInfo(){
-                
+        ActivityIndicatorView.show("Loading...")
         APIManager.callServer.getAccountDetails(sucessResult: { (responseModel) in
 
             guard let accRespModel = responseModel as? AccountRespModel else{
@@ -507,6 +513,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             }else{
                 
             }
+            ActivityIndicatorView.hiding()
             
         }, errorResult: { (error) in
             //                stopLoading()
@@ -518,8 +525,6 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         })
         
     }
-
-    
     
     func getUsersListforBlueBp()  {
           let endPoint="includeCoach=true&subscriptionType=BlueBP&hideConnectedUser=true&hideLikedUser=true&hideRejectedConnections=true&hideBlockedUsers=true"
@@ -745,6 +750,7 @@ extension BPCardsVC :KolodaViewDelegate {
         }
     }
     func koloda(_ koloda: KolodaView, didSelectCardAt index: Int) {
+        self.currentIndex = index
         if let view:CardView = koloda.viewForCard(at: index) as? CardView {
           
             var videoString:String
@@ -762,16 +768,17 @@ extension BPCardsVC :KolodaViewDelegate {
             }
             else{
            //     view.showVideo()
-                self.lblNotAvailable.alpha = 1.0
-                self.lblNotAvailable.isHidden = false
-                self.lblNotAvailable.text = "No video available for this profile"
-                 self.lblNotAvailable.textColor = UIColor.white
-                lblNotAvailable.layer.shadowColor = UIColor.gray.cgColor
-                lblNotAvailable.layer.shadowOpacity = 1.0
-                lblNotAvailable.layer.shadowRadius = 3.0
-                lblNotAvailable.layer.shadowOffset = CGSize(width: 4, height: 4)
-                lblNotAvailable.layer.masksToBounds = false
-                 self.lblNotAviltopSpace.constant = -75
+                view.showLabel()
+//                self.lblNotAvailable.alpha = 1.0
+//                self.lblNotAvailable.isHidden = false
+//                self.lblNotAvailable.text = "No video available for this profile"
+//                self.lblNotAvailable.textColor = UIColor.white
+//                lblNotAvailable.layer.shadowColor = UIColor.gray.cgColor
+//                lblNotAvailable.layer.shadowOpacity = 1.0
+//                lblNotAvailable.layer.shadowRadius = 3.0
+//                lblNotAvailable.layer.shadowOffset = CGSize(width: 4, height: 4)
+//                lblNotAvailable.layer.masksToBounds = false
+//                 self.lblNotAviltopSpace.constant = -75
             }
            
         }
@@ -858,5 +865,9 @@ extension UIScrollView {
         contentSize.height = subviews.sorted(by: { $0.frame.maxY < $1.frame.maxY }).last?.frame.maxY ?? contentSize.height
     }
 }
-
+extension BPCardsVC: UIGestureRecognizerDelegate {
+    @objc func handleTap(_ gesture: UITapGestureRecognizer){
+        print("doubletapped")
+    }
+}
 

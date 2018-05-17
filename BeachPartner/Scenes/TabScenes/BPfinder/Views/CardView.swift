@@ -9,6 +9,7 @@
 import UIKit
 import SDWebImage
 class CardView: UIView {
+    @IBOutlet weak var toastLabel: UILabel!
     @IBOutlet weak var muteButton: UIButton!
      @IBOutlet weak var moveDown: UIButton!
     
@@ -64,7 +65,9 @@ class CardView: UIView {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
+        toastLabel.isHidden = true
         // border radius
+        
         self.layer.cornerRadius = 25.0
         self.layer.borderColor = UIColor.lightGray.cgColor
         self.layer.borderWidth = 1.5
@@ -130,9 +133,16 @@ extension CardView {
     }
     
     func showVideo() {
+        toastLabel.isHidden = true
         self.imageView.isHidden = true
         self.videoDisplayView.isHidden = false
         self.videoView?.play()
+    }
+    func pauseVideo(){
+        toastLabel.isHidden = true
+        self.imageView.isHidden = false
+        self.videoDisplayView.isHidden = true
+        self.videoView?.pause()
     }
     
     func hideVideo() {
@@ -152,6 +162,18 @@ extension CardView {
         let calcYrDiff = calendar.components(.year, from: originDate!, to: now, options: [])
         let yrDifference = calcYrDiff.year
         return String(yrDifference ?? 0)
+    }
+    func showLabel(){
+        toastLabel.isHidden = false
+        self.toastLabel.alpha = 1.0
+        self.toastLabel.isHidden = false
+        self.toastLabel.text = "No video available for this profile"
+        self.toastLabel.textColor = UIColor.white
+        toastLabel.layer.shadowColor = UIColor.gray.cgColor
+        toastLabel.layer.shadowOpacity = 1.0
+        toastLabel.layer.shadowRadius = 3.0
+        toastLabel.layer.shadowOffset = CGSize(width: 4, height: 4)
+        toastLabel.layer.masksToBounds = false
     }
     
 }

@@ -106,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/APIManagement/Manager/Modules/AuthModule.swift"
-            timestampString = "548159684.965692"
+            timestampString = "548239409.871043"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1004"
@@ -122,7 +122,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/Scenes/TabScenes/ConnectiosTab/NotesViewController.swift"
-            timestampString = "548179888.371806"
+            timestampString = "548225767.819892"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "271"
@@ -138,7 +138,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/Scenes/TabScenes/ConnectiosTab/NotesViewController.swift"
-            timestampString = "548179888.372507"
+            timestampString = "548225767.821155"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "271"
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
-            timestampString = "548179888.3728991"
+            timestampString = "548265093.106943"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "446"
-            endingLineNumber = "446"
+            startingLineNumber = "452"
+            endingLineNumber = "452"
             landmarkName = "BPCardsVC"
             landmarkType = "3">
          </BreakpointContent>
@@ -170,45 +170,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
-            timestampString = "548179888.37297"
+            timestampString = "548265093.1082391"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "559"
-            endingLineNumber = "559"
+            startingLineNumber = "564"
+            endingLineNumber = "564"
             landmarkName = "BPCardsVC"
             landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
-            timestampString = "548179888.373034"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "353"
-            endingLineNumber = "353"
-            landmarkName = "generateSwipeAarray()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
-            timestampString = "548179888.373098"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "359"
-            endingLineNumber = "359"
-            landmarkName = "generateSwipeAarray()"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -218,13 +186,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/Scenes/TabScenes/HomeTab/HomeTabViewController.swift"
-            timestampString = "547740026.5707901"
+            timestampString = "548231538.198369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "162"
             endingLineNumber = "162"
-            landmarkName = "tournamentRequestsSentBtnClicked(_:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -234,13 +202,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/Scenes/TabScenes/HomeTab/HomeTabViewController.swift"
-            timestampString = "547740026.571399"
+            timestampString = "548231538.198931"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "166"
             endingLineNumber = "166"
-            landmarkName = "tournamentRequestsSentBtnClicked(_:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -250,7 +218,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/Scenes/TabScenes/MenuItems/AthleteProfileTableViewController.swift"
-            timestampString = "548159684.966767"
+            timestampString = "548265093.109177"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1155"
@@ -282,13 +250,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/Scenes/TabScenes/HomeTab/HomeTabViewController.swift"
-            timestampString = "547740026.5718139"
+            timestampString = "548231538.199314"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "45"
             endingLineNumber = "45"
-            landmarkName = "menuBtnClicked(_:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -346,13 +314,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/Scenes/TabScenes/HomeTab/HomeTabViewController.swift"
-            timestampString = "547740026.572224"
+            timestampString = "548231538.199692"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "165"
             endingLineNumber = "165"
-            landmarkName = "tournamentRequestsSentBtnClicked(_:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -409,13 +377,13 @@
                   symbolName = "BeachPartner.CoachProfileTableViewController.updateUserInfo() -&gt; ()"
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/untitled%20folder%202/bp-ios/BeachPartner/Scenes/TabScenes/MenuItems/CoachProfileTableViewController.swift"
-                  timestampString = "548179889.086521"
+                  urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/BP-Repo/bp-ios/BeachPartner/Scenes/TabScenes/MenuItems/CoachProfileTableViewController.swift"
+                  timestampString = "548265093.791579"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "795"
                   endingLineNumber = "795"
-                  offsetFromSymbolStart = "106">
+                  offsetFromSymbolStart = "108">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -424,31 +392,15 @@
                   symbolName = "closure #1 (Swift.Optional&lt;Tailor.SafeMappable&gt;) -&gt; () in BeachPartner.CoachProfileTableViewController.updateUserInfo() -&gt; ()"
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/untitled%20folder%202/bp-ios/BeachPartner/Scenes/TabScenes/MenuItems/CoachProfileTableViewController.swift"
-                  timestampString = "548179889.089653"
+                  urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/BP-Repo/bp-ios/BeachPartner/Scenes/TabScenes/MenuItems/CoachProfileTableViewController.swift"
+                  timestampString = "548265093.795678"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "797"
                   endingLineNumber = "797"
-                  offsetFromSymbolStart = "32">
+                  offsetFromSymbolStart = "48">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BeachPartner/Scenes/TabScenes/MenuItems/AthleteProfileTableViewController.swift"
-            timestampString = "548159684.967472"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "671"
-            endingLineNumber = "671"
-            landmarkName = "editProfileTxtBtnClicked(_:)"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -489,13 +441,13 @@
                   symbolName = "BeachPartner.CoachProfileTableViewController.saveData() -&gt; ()"
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/untitled%20folder%202/bp-ios/BeachPartner/Scenes/TabScenes/MenuItems/CoachProfileTableViewController.swift"
-                  timestampString = "548179889.110732"
+                  urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/BP-Repo/bp-ios/BeachPartner/Scenes/TabScenes/MenuItems/CoachProfileTableViewController.swift"
+                  timestampString = "548265093.811141"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "482"
                   endingLineNumber = "482"
-                  offsetFromSymbolStart = "17920">
+                  offsetFromSymbolStart = "14756">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -504,13 +456,13 @@
                   symbolName = "implicit closure #1 : @autoclosure () throws -&gt; Swift.String in BeachPartner.CoachProfileTableViewController.saveData() -&gt; ()"
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/untitled%20folder%202/bp-ios/BeachPartner/Scenes/TabScenes/MenuItems/CoachProfileTableViewController.swift"
-                  timestampString = "548179889.113958"
+                  urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/BP-Repo/bp-ios/BeachPartner/Scenes/TabScenes/MenuItems/CoachProfileTableViewController.swift"
+                  timestampString = "548265093.81454"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "482"
                   endingLineNumber = "482"
-                  offsetFromSymbolStart = "4">
+                  offsetFromSymbolStart = "12">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -554,11 +506,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
-            timestampString = "548179888.373718"
+            timestampString = "548265093.109751"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "597"
-            endingLineNumber = "597"
+            startingLineNumber = "602"
+            endingLineNumber = "602"
             landmarkName = "didSwipeToUp(user_Id:fcmId:)"
             landmarkType = "7">
             <Locations>
@@ -569,13 +521,13 @@
                   symbolName = "closure #1 (Swift.Optional&lt;Tailor.SafeMappable&gt;) -&gt; () in BeachPartner.BPCardsVC.didSwipeToUp(user_Id: Swift.String, fcmId: Swift.String) -&gt; ()"
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/untitled%20folder%202/bp-ios/BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
-                  timestampString = "548179889.135167"
+                  urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/BP-Repo/bp-ios/BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
+                  timestampString = "548265093.840619"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "598"
-                  endingLineNumber = "598"
-                  offsetFromSymbolStart = "24829">
+                  startingLineNumber = "603"
+                  endingLineNumber = "603"
+                  offsetFromSymbolStart = "14752">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -584,61 +536,13 @@
                   symbolName = "closure #2 (Swift.Optional&lt;Swift.String&gt;) -&gt; () in BeachPartner.BPCardsVC.didSwipeToUp(user_Id: Swift.String, fcmId: Swift.String) -&gt; ()"
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/untitled%20folder%202/bp-ios/BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
-                  timestampString = "548179889.1385601"
+                  urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/BP-Repo/bp-ios/BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
+                  timestampString = "548265093.844987"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "600"
-                  endingLineNumber = "600"
-                  offsetFromSymbolStart = "33">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BeachPartner/Scenes/TabScenes/MutualLikesViewController.swift"
-            timestampString = "547223205.871985"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "sendMsgBtnClicked(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "BeachPartner.MutualLikesViewController.sendMsgBtnClicked(Any) -&gt; ()"
-                  moduleName = "BeachPartner"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/untitled%20folder%202/bp-ios/BeachPartner/Scenes/TabScenes/MutualLikesViewController.swift"
-                  timestampString = "548179889.146414"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "24"
-                  endingLineNumber = "24"
-                  offsetFromSymbolStart = "16">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in BeachPartner.MutualLikesViewController.sendMsgBtnClicked(Any) -&gt; ()"
-                  moduleName = "BeachPartner"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/untitled%20folder%202/bp-ios/BeachPartner/Scenes/TabScenes/MutualLikesViewController.swift"
-                  timestampString = "548179889.150413"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "25"
-                  endingLineNumber = "25"
-                  offsetFromSymbolStart = "4">
+                  startingLineNumber = "605"
+                  endingLineNumber = "605"
+                  offsetFromSymbolStart = "32">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -730,93 +634,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/Scenes/TabScenes/MenuItems/AthleteProfileTableViewController.swift"
-            timestampString = "548159684.9681571"
+            timestampString = "548265093.11078"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1190"
             endingLineNumber = "1190"
             landmarkName = "updateUserInfo()"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
-            timestampString = "548179888.37404"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
-            landmarkName = "undoBtnCLicked(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BeachPartner/APIManagement/Manager/Modules/AuthModule.swift"
-            timestampString = "548159684.968248"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "682"
-            endingLineNumber = "682"
-            landmarkName = "undoSwipeAction(userId:sucessResult:errorResult:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
-            timestampString = "548179888.374228"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
-            landmarkName = "undoBtnCLicked(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "BeachPartner.BPCardsVC.undoBtnCLicked(Any) -&gt; ()"
-                  moduleName = "BeachPartner"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/untitled%20folder%202/bp-ios/BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
-                  timestampString = "548179889.209941"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "159"
-                  endingLineNumber = "159"
-                  offsetFromSymbolStart = "10998">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Tailor.SafeMappable&gt;) -&gt; () in BeachPartner.BPCardsVC.undoBtnCLicked(Any) -&gt; ()"
-                  moduleName = "BeachPartner"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/untitled%20folder%202/bp-ios/BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
-                  timestampString = "548179889.213225"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "161"
-                  endingLineNumber = "161"
-                  offsetFromSymbolStart = "28">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -857,13 +681,13 @@
                   symbolName = "closure #1 (Swift.Optional&lt;Tailor.SafeMappable&gt;) -&gt; () in BeachPartner.ChatUsersListViewController.getBlockedConnections() -&gt; ()"
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/untitled%20folder%202/bp-ios/BeachPartner/Scenes/TabScenes/ChatTab/ChatUsersListViewController.swift"
-                  timestampString = "548179889.226475"
+                  urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/BP-Repo/bp-ios/BeachPartner/Scenes/TabScenes/ChatTab/ChatUsersListViewController.swift"
+                  timestampString = "548265093.898647"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "246"
                   endingLineNumber = "246"
-                  offsetFromSymbolStart = "14528">
+                  offsetFromSymbolStart = "8796">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -872,13 +696,13 @@
                   symbolName = "closure #2 (Swift.Optional&lt;Swift.String&gt;) -&gt; () in BeachPartner.ChatUsersListViewController.getBlockedConnections() -&gt; ()"
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/untitled%20folder%202/bp-ios/BeachPartner/Scenes/TabScenes/ChatTab/ChatUsersListViewController.swift"
-                  timestampString = "548179889.229972"
+                  urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/BP-Repo/bp-ios/BeachPartner/Scenes/TabScenes/ChatTab/ChatUsersListViewController.swift"
+                  timestampString = "548265093.902017"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "248"
                   endingLineNumber = "248"
-                  offsetFromSymbolStart = "42">
+                  offsetFromSymbolStart = "40">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -890,7 +714,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/Scenes/TabScenes/ConnectiosTab/NotesViewController.swift"
-            timestampString = "548179888.374411"
+            timestampString = "548225767.82292"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "324"
@@ -921,24 +745,8 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Pods/DropDown/DropDown/src/DropDown.swift"
-            timestampString = "548176565.0480191"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "813"
-            endingLineNumber = "813"
-            landmarkName = "show(beforeTransform:anchorPoint:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "BeachPartner/Scenes/TabScenes/ConnectiosTab/NotesViewController.swift"
-            timestampString = "548179888.3750629"
+            timestampString = "548225767.823711"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "296"
@@ -954,12 +762,380 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/Scenes/TabScenes/ConnectiosTab/NotesViewController.swift"
-            timestampString = "548179888.375421"
+            timestampString = "548225767.8242559"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "298"
             endingLineNumber = "298"
             landmarkName = "didTapAddNoteButton()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/Scenes/TabScenes/ChatTab/ChatViewController.swift"
+            timestampString = "548231538.200712"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "configUser()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/Scenes/TabScenes/ChatTab/ChatViewController.swift"
+            timestampString = "548231538.2007819"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "configUser()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/BpFinderDelegate.swift"
+            timestampString = "548251122.611171"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
+            landmarkName = "BpFinderDelegate"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/Resources/VideoPlayer/UIVideoView.swift"
+            timestampString = "548265093.1111799"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "310"
+            endingLineNumber = "310"
+            landmarkName = "isPlaybackBufferFullDidChanged()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
+            timestampString = "548265093.111289"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "498"
+            endingLineNumber = "498"
+            landmarkName = "getUserInfo()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachPartner.BPCardsVC.getUserInfo() -&gt; ()"
+                  moduleName = "BeachPartner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/BP-Repo/bp-ios/BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
+                  timestampString = "548265093.999139"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "498"
+                  endingLineNumber = "498"
+                  offsetFromSymbolStart = "92">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Tailor.SafeMappable&gt;) -&gt; () in BeachPartner.BPCardsVC.getUserInfo() -&gt; ()"
+                  moduleName = "BeachPartner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/BP-Repo/bp-ios/BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
+                  timestampString = "548265094.002754"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "500"
+                  endingLineNumber = "500"
+                  offsetFromSymbolStart = "48">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
+            timestampString = "548265093.1121579"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "505"
+            endingLineNumber = "505"
+            landmarkName = "getUserInfo()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/Scenes/TabScenes/MenuItems/AthleteProfileTableViewController.swift"
+            timestampString = "548265093.112781"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1401"
+            endingLineNumber = "1401"
+            landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
+            timestampString = "548265093.112861"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "870"
+            endingLineNumber = "870"
+            landmarkName = "handleTap(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/Views/CardView.swift"
+            timestampString = "548265093.113369"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "videoView"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachPartner.CardView.init(coder: __ObjC.NSCoder) -&gt; Swift.Optional&lt;BeachPartner.CardView&gt;"
+                  moduleName = "BeachPartner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/BP-Repo/bp-ios/BeachPartner/Scenes/TabScenes/BPfinder/Views/CardView.swift"
+                  timestampString = "548254019.499807"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "388">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachPartner.CardView.init(frame: __C.CGRect) -&gt; BeachPartner.CardView"
+                  moduleName = "BeachPartner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Powermac/Desktop/Beach%20Partner/BP-Repo/bp-ios/BeachPartner/Scenes/TabScenes/BPfinder/Views/CardView.swift"
+                  timestampString = "548254019.503135"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "441">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
+            timestampString = "548265093.113456"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "256"
+            endingLineNumber = "256"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
+            timestampString = "548265093.113888"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "251"
+            endingLineNumber = "251"
+            landmarkName = "viewWillAppear(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/Scenes/TabScenes/MenuItems/AthleteProfileTableViewController.swift"
+            timestampString = "548265093.11429"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "883"
+            endingLineNumber = "883"
+            landmarkName = "showImagePicker(sourceType:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/Scenes/TabScenes/MenuItems/AthleteProfileTableViewController.swift"
+            timestampString = "548265093.1143579"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "824"
+            endingLineNumber = "824"
+            landmarkName = "editVIdeoBtnClicked(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
+            timestampString = "548265093.114424"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "281"
+            endingLineNumber = "281"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
+            timestampString = "548265093.114774"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "347"
+            endingLineNumber = "347"
+            landmarkName = "generateSwipeAarray()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
+            timestampString = "548265093.11514"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "357"
+            endingLineNumber = "357"
+            landmarkName = "generateSwipeAarray()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
+            timestampString = "548265093.115485"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "367"
+            endingLineNumber = "367"
+            landmarkName = "generateSwipeAarray()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
+            timestampString = "548265093.115827"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "383"
+            endingLineNumber = "383"
+            landmarkName = "generateSwipeAarray()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
+            timestampString = "548265093.1161669"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "394"
+            endingLineNumber = "394"
+            landmarkName = "generateSwipeAarray()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

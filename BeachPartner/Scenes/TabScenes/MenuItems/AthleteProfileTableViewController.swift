@@ -818,8 +818,8 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
                 self.imagePickerController.delegate = self
                 self.imagePickerController.mediaTypes = [kUTTypeMovie as String]
-                self.imagePickerController.allowsEditing = true
-          //      self.imagePickerController.showsCameraControls = true
+                self.imagePickerController.allowsEditing = false
+//                self.imagePickerController.showsCameraControls = true
                 self.imagePickerController.videoMaximumDuration = 30.0
                 self.showImagePicker(sourceType: UIImagePickerControllerSourceType.camera)
             } else {
@@ -857,7 +857,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
                 self.imagePickerController.delegate = self
                 self.imagePickerController.mediaTypes = [kUTTypeImage as String]
-                self.imagePickerController.allowsEditing = false
+                self.imagePickerController.allowsEditing = true
              //   self.imagePickerController.showsCameraControls = true
                 self.showImagePicker(sourceType: UIImagePickerControllerSourceType.camera)
             } else {
@@ -1404,7 +1404,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         
         var videoUrlValue: NSURL? = nil
         
-        //        self.videoUrl = ""
+        //        self.videoUrl = ""UIImagePickerControllerMediaURL
         self.imageUrl = ""
         
         let mediaType:AnyObject? = info[UIImagePickerControllerMediaType] as AnyObject

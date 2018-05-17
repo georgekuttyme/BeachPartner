@@ -82,13 +82,25 @@
                         <constraint firstItem="Zwc-NC-4hl" firstAttribute="leading" secondItem="h88-Zg-B1h" secondAttribute="leading" constant="24" id="sHv-E7-G54"/>
                     </constraints>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No video available for this profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gp0-Rb-o9F">
+                    <rect key="frame" x="4" y="166.5" width="255" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="255" id="gXu-Tn-Vag"/>
+                        <constraint firstAttribute="height" constant="30" id="lIj-PV-Oan"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="h88-Zg-B1h" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="4Uy-rN-vN6"/>
+                <constraint firstItem="gp0-Rb-o9F" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Bev-7r-xkT"/>
                 <constraint firstItem="bWx-dx-gou" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="GXt-uX-i2c"/>
                 <constraint firstItem="h88-Zg-B1h" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Gcl-rn-c8x"/>
                 <constraint firstItem="1Ys-Gu-W8j" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="I5C-Cp-FF4"/>
+                <constraint firstItem="gp0-Rb-o9F" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Knc-r1-juD"/>
                 <constraint firstItem="bWx-dx-gou" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Lz6-Fr-fL8"/>
                 <constraint firstItem="1Ys-Gu-W8j" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="ScA-EP-14C"/>
                 <constraint firstItem="h88-Zg-B1h" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="TbR-6I-YDc"/>
@@ -105,6 +117,7 @@
                 <outlet property="muteButton" destination="9mu-te-mmi" id="0fc-BR-wfu"/>
                 <outlet property="nameLabel" destination="Zwc-NC-4hl" id="Db7-fl-PTg"/>
                 <outlet property="placeLabel" destination="VTJ-kP-dbi" id="rnS-ht-8ws"/>
+                <outlet property="toastLabel" destination="gp0-Rb-o9F" id="omB-Tu-jC9"/>
                 <outlet property="videoDisplayView" destination="bWx-dx-gou" id="neT-05-piq"/>
             </connections>
             <point key="canvasLocation" x="-30.5" y="-101"/>
