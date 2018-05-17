@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol EventInvitationListViewControllerDelegate {
+    func refreshInvitationList()
+}
+
 class EventInvitationListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
@@ -18,6 +22,8 @@ class EventInvitationListViewController: UIViewController, UITableViewDataSource
     var event: GetEventRespModel?
     var eventInvitation: GetEventInvitationRespModel?
     var eventId: Int = 0
+    
+    var delegate: EventInvitationListViewControllerDelegate?
     
     fileprivate let formatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -55,6 +61,14 @@ class EventInvitationListViewController: UIViewController, UITableViewDataSource
                 print("Rep model does not match")
                 return
             }
+            
+            guard let invitations = eventInvitationModel.invitations, invitations.count > 0 else {
+                
+                self.delegate?.refreshInvitationList()
+                self.navigationController?.popViewController(animated: true)
+                return
+            }
+            
             self.eventInvitation = eventInvitationModel
             self.setupData()
             
@@ -76,12 +90,28 @@ class EventInvitationListViewController: UIViewController, UITableViewDataSource
         
         ActivityIndicatorView.show("Loading")
         
-        
         APIManager.callServer.respondToInvitation(eventId: eventId, organiserId: organiserId, action: action, sucessResult: { (responseModel) in
             
             ActivityIndicatorView.hiding()
             
-            self.navigationController?.popViewController(animated: true)
+            guard let responseModel = responseModel as? GeneralResponse else {
+                print("Rep model does not match")
+                return
+            }
+            self.alert(message: responseModel.message)
+
+            
+//            if let message = responseModel.response?.message {
+//            }
+            
+
+            // If accept action -leave page, if reject - reload page,
+            if action == "Accept" {
+                self.navigationController?.popViewController(animated: true)
+            }
+            else {
+                self.getAllInvitations()
+            }
         }) { (error) in
             
             ActivityIndicatorView.hiding()
@@ -145,18 +175,31 @@ class EventInvitationListViewController: UIViewController, UITableViewDataSource
         let acceptAction = UITableViewRowAction(style: .normal, title: "Accept") { (rowAction, indexPath) in
             self.confirmAction(action: "Accept", index: indexPath.row)
         }
-        acceptAction.backgroundColor = .blue
+        acceptAction.backgroundColor = UIColor(red: 22/255.0, green: 150/255.0, blue: 83/255.0, alpha: 1.0)
         
-        let rejectAction = UITableViewRowAction(style: .destructive, title: "Reject") { (rowAction, indexPath) in
+        let rejectAction = UITableViewRowAction(style: .normal, title: "Reject") { (rowAction, indexPath) in
            self.confirmAction(action: "Reject", index: indexPath.row)
         }
-//        rejectAction.backgroundColor = .red
+        rejectAction.backgroundColor = UIColor(red: 244/255.0, green: 73/255.0, blue: 84/255.0, alpha: 1.0)
         return [acceptAction,rejectAction]
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard let partners = eventInvitation?.invitations?[indexPath.row].partners else { return }
+        
+        let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
+        let viewController = storyBoard.instantiateViewController(withIdentifier: "PartnerListView") as! PartnerListViewController
+        viewController.partners = partners
+        viewController.modalTransitionStyle = .crossDissolve
+        self.present(viewController, animated: true, completion: nil)
+    }
+    
+    
     
     @objc func didTapDetailButton(sender: UIButton) {
         

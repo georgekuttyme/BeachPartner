@@ -26,7 +26,7 @@ class HighFiveViewController: UIViewController,UITableViewDelegate,UITableViewDa
     weak var currentViewController: UIViewController?
     @IBOutlet weak var tblHighFiveList: UITableView!
     @IBOutlet weak var menuBtn: UIBarButtonItem!
-    
+    @IBOutlet var toastLabel: UILabel!
     let dropDown = DropDown()
     var button1 : UIBarButtonItem!
     
@@ -44,14 +44,8 @@ class HighFiveViewController: UIViewController,UITableViewDelegate,UITableViewDa
     }
     
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        rightBarBtn()
+    func setDropDwonMenu()  {
         
-        
-        self.hideKeyboardWhenTappedAround()
         self.dropDown.anchorView = self.button1
         self.dropDown.dataSource =  ["My Profile","About Us","Feedback","Settings", "Help","Logout"]
         self.dropDown.bottomOffset = CGPoint(x: 20, y:45)
@@ -69,6 +63,7 @@ class HighFiveViewController: UIViewController,UITableViewDelegate,UITableViewDa
                 self.navigationController!.navigationBar.topItem!.title = ""
                 self.navigationController?.isNavigationBarHidden = false
             }
+                
             else if(item == "Logout"){
                 self.timoutLogoutAction()
             }
@@ -97,7 +92,17 @@ class HighFiveViewController: UIViewController,UITableViewDelegate,UITableViewDa
             }
         }
         self.dropDown.selectRow(0)
-
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.toastLabel.isHidden = true
+        rightBarBtn()
+        
+        
+        self.hideKeyboardWhenTappedAround()
+        
+        
         let floaty = Floaty()
         floaty.size = 45
         floaty.paddingY = 85
@@ -127,6 +132,7 @@ class HighFiveViewController: UIViewController,UITableViewDelegate,UITableViewDa
         self.getHifiList()
     }
     override func viewDidAppear(_ animated: Bool) {
+        setDropDwonMenu()
         if !isCallHifiview {
             isCallHifiview = true
             let newViewController =  self.storyboard?.instantiateViewController(withIdentifier: "HighFiveViewController")as! HighFiveViewController
@@ -147,7 +153,13 @@ class HighFiveViewController: UIViewController,UITableViewDelegate,UITableViewDa
             }
             
             self.connectedUsers = connectedUserModelArray.connectedUserModel
-            print(self.connectedUsers)
+            print(self.connectedUsers.count)
+            if self.connectedUsers.count > 0 {
+                self.toastLabel.isHidden = true
+            }
+            else {
+                self.toastLabel.isHidden = false
+            }
             self.tblHighFiveList.reloadData()
             ActivityIndicatorView.hiding()
             

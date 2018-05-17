@@ -1119,20 +1119,19 @@ extension APIManager{
             
             APIManager.printOnDebug(response: " Resppp1111 : \(String(describing: response))")
             
-            sucessResult(nil)
-            
-//            let jsonDict = response!
-//
-//            do {
-//                let accRespModel = try GetEventsRespModelArray(jsonDict as! [String : Any])
-//                sucessResult(accRespModel)
-//                return
-//            } catch {
-//                print("Catched")
-//                errorResult(error.localizedDescription)
-//                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
-//                return
-//            }
+//            sucessResult(nil)
+            let jsonDict = response!
+
+            do {
+                let accRespModel = try GeneralResponse(jsonDict as! [String : Any])
+                sucessResult(accRespModel)
+                return
+            } catch {
+                print("Catched")
+                errorResult(error.localizedDescription)
+                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                return
+            }
         }) { (error) in
             self.busyOff()
             errorResult(error?.localizedDescription)
@@ -1205,20 +1204,20 @@ extension APIManager{
             
             APIManager.printOnDebug(response: " Resppp1111 : \(String(describing: response))")
             
-            sucessResult(nil)
+//            sucessResult(nil)
             
-            //            let jsonDict = response!
-            //
-            //            do {
-            //                let accRespModel = try GetEventsRespModelArray(jsonDict as! [String : Any])
-            //                sucessResult(accRespModel)
-            //                return
-            //            } catch {
-            //                print("Catched")
-            //                errorResult(error.localizedDescription)
-            //                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
-            //                return
-            //            }
+                        let jsonDict = response!
+            
+                        do {
+                            let accRespModel = try GeneralResponse(jsonDict as! [String : Any])
+                            sucessResult(accRespModel)
+                            return
+                        } catch {
+                            print("Catched")
+                            errorResult(error.localizedDescription)
+                            APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                            return
+                        }
         }) { (error) in
             self.busyOff()
             errorResult(error?.localizedDescription)

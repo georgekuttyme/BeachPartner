@@ -53,8 +53,8 @@ class MyCalViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
-        let eventDetailsVC = storyBoard.instantiateViewController(withIdentifier: "EventDetailsView") as! EventDetailsViewController
-        //        eventDetailsVC.event = eventListToShow[indexPath.row]
+        let eventDetailsVC = storyBoard.instantiateViewController(withIdentifier: "MyCalEventDetailsView") as! MyCalEventDetailsViewController
+        eventDetailsVC.event = eventListToShow[indexPath.row]
         self.navigationController?.pushViewController(eventDetailsVC, animated: true)
     }
     

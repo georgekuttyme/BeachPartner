@@ -35,6 +35,7 @@ class EventDetailsViewController: BeachPartnerViewController {
     var eventId: Int?
     var isFromHomeTab = false
     var eventInvitation: GetEventInvitationRespModel?
+        
     
     fileprivate let formatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -50,7 +51,7 @@ class EventDetailsViewController: BeachPartnerViewController {
         setupUI()
         setupDataFromEvent()
         
-        if isFromHomeTab {
+        if event?.registerType == "Invitee" || event?.registerType == "Organizer" || isFromHomeTab {
             getAllInvitations()
         }
     }
@@ -58,27 +59,46 @@ class EventDetailsViewController: BeachPartnerViewController {
     private func setupUI() {
         eventNameLabel.adjustsFontSizeToFitWidth = true
         
-        if event?.eventStaus == "Active" && event?.registerType == "Organizer" {
-            registerButton.isEnabled = true
-            registerButton.alpha = 1.0
+        if event?.registerType == "Invitee" {
             
             invitePartnerButton.isEnabled = false
             invitePartnerButton.alpha = 0.6
+            
+            registerButton.isEnabled = false
+            registerButton.alpha = 0.6
+            
+            self.backButton.setTitle("View Partners", for: .normal)
+        }
+        else if event?.registerType == "Organizer" {
+            
+            if event?.eventStaus == "Active" {
+                
+                invitePartnerButton.isEnabled = false
+                invitePartnerButton.alpha = 0.6                
+            }
+            else if event?.eventStaus == "Registered" {
+                
+                invitePartnerButton.isEnabled = false
+                invitePartnerButton.alpha = 0.6
+                
+                registerButton.isEnabled = false
+                registerButton.alpha = 0.6
+            }
+            else {
+                registerButton.isEnabled = false
+                registerButton.alpha = 0.6
+            }
+            self.backButton.setTitle("View Partners", for: .normal)
         }
         else {
             registerButton.isEnabled = false
             registerButton.alpha = 0.6
-            
-            invitePartnerButton.isEnabled = true
-            invitePartnerButton.alpha = 1.0
         }
         
-        if event?.registerType == "Organizer" || event?.registerType == "Invitee" {
-            generalEventDetailsView.isHidden = false
+        if isFromHomeTab {
+            self.backButton.setTitle("View Partners", for: .normal)
         }
-        else {
-            generalEventDetailsView.isHidden = true
-        }
+        
         
         if UserDefaults.standard.string(forKey: "userType") == "Athlete" {
             coachActionView.isHidden = true
@@ -91,13 +111,12 @@ class EventDetailsViewController: BeachPartnerViewController {
     private func setupDataFromEvent() {
         guard let event = event else { return }
         
-        if event.registerType == "Organizer" {
+        if event.userMessage.count > 0 {
+            generalEventDetailsView.isHidden = false
             generalEventDetailsLabel.text = event.userMessage
         }
-        else if event.registerType == "Invitee" {
-            generalEventDetailsLabel.text = event.userMessage
-            
-            invitePartnerButton.setTitle("View Invitation", for: .normal)
+        else {
+            generalEventDetailsView.isHidden = true
         }
         
         eventNameLabel.text = event.eventName
@@ -114,8 +133,9 @@ class EventDetailsViewController: BeachPartnerViewController {
     private func setupDataFromEventInvitation() {
         guard let eventInvitation = eventInvitation else { return }
         
-        self.backButton.setTitle("View Partners", for: .normal)
-        
+        if isFromHomeTab {
+            generalEventDetailsView.isHidden = true
+        }
         
         
 //        if eventInvitation.invitations?.first?.eventStatus == "Active" {
@@ -140,20 +160,17 @@ class EventDetailsViewController: BeachPartnerViewController {
         
         eventStartDateLabel.text = dateStringFromTimeInterval(interval: eventInvitation.eventStartDate)
         eventEndDateLabel.text = dateStringFromTimeInterval(interval: eventInvitation.eventEndDate)
-//        regStartDateLabel.text = dateStringFromTimeInterval(interval: eventInvitation.eventRegistrationStartDate)
-//        regEndDateLabel.text = dateStringFromTimeInterval(interval: eventInvitation.eventRegistrationEndDate)
-        
-        regStartDateLabel.text = ""
-        regEndDateLabel.text = ""
+        regStartDateLabel.text = dateStringFromTimeInterval(interval: eventInvitation.eventRegistrationStartDate)
+        regEndDateLabel.text = dateStringFromTimeInterval(interval: eventInvitation.eventRegistrationEndDate)
     }
     
     
     private func getAllInvitations() {
         
-        guard let eventId = eventId else { return }
+        let eventId = isFromHomeTab ? self.eventId : event?.id
         
         ActivityIndicatorView.show("Loading")
-        APIManager.callServer.getAllEventInvitations(eventId: eventId, calendarType: "mastercalendar", sucessResult: { (responseModel) in
+        APIManager.callServer.getAllEventInvitations(eventId: eventId!, calendarType: "mastercalendar", sucessResult: { (responseModel) in
             ActivityIndicatorView.hiding()
             
             guard let eventInvitationModel = responseModel as? GetEventInvitationRespModel else {
@@ -172,27 +189,44 @@ class EventDetailsViewController: BeachPartnerViewController {
         }
     }
     
+    @IBAction func didTapRegisterButton(_ sender: UIButton) {
+        
+        guard let eventInvitation = eventInvitation else { return }
+        
+        guard let partners = eventInvitation.invitations?.first?.partners else { return }
+        var partnerList = [Int]()
+        for partner in partners {
+            partnerList.append(partner.partnerId)
+        }
+        
+        ActivityIndicatorView.show("Loading")
+        APIManager.callServer.registerEvent(eventId: eventInvitation.eventId, registerType: "Organizer", partners: partnerList, sucessResult: { (response) in
+            ActivityIndicatorView.hiding()
+        }) { (error) in
+            
+            ActivityIndicatorView.hiding()
+            guard let errorString  = error else {
+                return
+            }
+            self.alert(message: errorString)
+            print(error)
+        }
+    }
+    
     @IBAction func didTapInvitePartnerButton(_ sender: UIButton) {
         
         let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
-        if event?.registerType == "Invitee" {
-            
-            guard let eventId = self.event?.masterEventId else { return }
-            let viewController = storyBoard.instantiateViewController(withIdentifier: "InvitationListView") as! EventInvitationListViewController
-            viewController.eventId = eventId
-            self.navigationController?.pushViewController(viewController, animated: true)
-        }
-        else {
-            let viewController = storyBoard.instantiateViewController(withIdentifier: "InviteParentView") as! InviteParentViewController
-            viewController.event = self.event
-            self.navigationController?.pushViewController(viewController, animated: true)
-        }
+        let viewController = storyBoard.instantiateViewController(withIdentifier: "InviteParentView") as! InviteParentViewController
+        viewController.event = self.event
+        viewController.eventInvitation = self.eventInvitation
+        viewController.delegate1 = self
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
     
     @IBAction func didTapBackButton(_ sender: UIButton) {
         
-        if isFromHomeTab {
-            guard let partners = eventInvitation?.invitations?.first?.partners else { return }
+        if sender.titleLabel?.text == "View Partners" {
+            guard let partners = eventInvitation?.invitations?.first?.partners, partners.count > 0 else { return }
             
             let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
             let viewController = storyBoard.instantiateViewController(withIdentifier: "PartnerListView") as! PartnerListViewController
@@ -209,5 +243,17 @@ class EventDetailsViewController: BeachPartnerViewController {
         let date = Date(timeIntervalSince1970: TimeInterval(interval/1000))
         return formatter.string(from: date)
     }
-    
 }
+
+extension EventDetailsViewController: InviteParentViewControllerDelegate {
+    
+    func successfullyInvitedPartners(sender: UIViewController) {
+        self.navigationController?.popViewController(animated: false)
+    }
+
+}
+
+
+
+
+

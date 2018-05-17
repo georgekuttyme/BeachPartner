@@ -132,6 +132,7 @@
 		FF4EDC3F20AC077200BC3ACD /* GetTournamentRequestRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4EDC3E20AC077200BC3ACD /* GetTournamentRequestRespModel.swift */; };
 		FF560C0A2096F7FB00D3BA80 /* GetNoteRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF560C092096F7FB00D3BA80 /* GetNoteRespModel.swift */; };
 		FF560C0C2096F83300D3BA80 /* UpdateNoteRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF560C0B2096F83300D3BA80 /* UpdateNoteRespModel.swift */; };
+		FFABE2B920ADC7080029C3A0 /* MyCalEventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFABE2B820ADC7080029C3A0 /* MyCalEventDetailsViewController.swift */; };
 		FFCE759220AAFBF2007C0CFD /* GetEventInvitationRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCE759120AAFBF2007C0CFD /* GetEventInvitationRespModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -267,6 +268,7 @@
 		FF4EDC3E20AC077200BC3ACD /* GetTournamentRequestRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTournamentRequestRespModel.swift; sourceTree = "<group>"; };
 		FF560C092096F7FB00D3BA80 /* GetNoteRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNoteRespModel.swift; sourceTree = "<group>"; };
 		FF560C0B2096F83300D3BA80 /* UpdateNoteRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNoteRespModel.swift; sourceTree = "<group>"; };
+		FFABE2B820ADC7080029C3A0 /* MyCalEventDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCalEventDetailsViewController.swift; sourceTree = "<group>"; };
 		FFCE759120AAFBF2007C0CFD /* GetEventInvitationRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventInvitationRespModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -644,6 +646,7 @@
 				3BC8F913205B91A50086333E /* CalenderViewController.swift */,
 				3B66B5092062309100CC4FB4 /* MasterCalViewController.swift */,
 				3B1B705C2065617300C3FB57 /* MyCalViewController.swift */,
+				FFABE2B820ADC7080029C3A0 /* MyCalEventDetailsViewController.swift */,
 				3B5D9968206EA46E001ED515 /* EventDetailsViewController.swift */,
 				FF38234320A9CC4200F403BF /* EventInvitationListViewController.swift */,
 				FF07524020AC77D70015866D /* PartnerListViewController.swift */,
@@ -1083,6 +1086,7 @@
 				3B49C3952068EE1A007186E8 /* InvitePartnerCell.swift in Sources */,
 				3B6899E620491B550075128E /* WLMAssetPool.swift in Sources */,
 				3BC8F901205AE4010086333E /* PopUpOneDelegate.swift in Sources */,
+				FFABE2B920ADC7080029C3A0 /* MyCalEventDetailsViewController.swift in Sources */,
 				3B6899EE20491B550075128E /* WLMAssetPoolExtensions.swift in Sources */,
 				3B0DEE98206D09DA00686609 /* WLMPlayer+NSObject+safeObserver.swift in Sources */,
 				D69A1981207388F100497B7C /* HighFiveViewController.swift in Sources */,

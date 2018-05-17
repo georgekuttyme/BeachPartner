@@ -18,6 +18,8 @@ struct GetEventInvitationRespModel : SafeMappable {
     var eventVenue: String = ""
     var eventStartDate: Int = 0
     var eventEndDate: Int = 0
+    var eventRegistrationStartDate: Int = 0
+    var eventRegistrationEndDate: Int = 0
     var eventAdmin: String = ""
     var teamSize: Int = 0
     var invitations: [EventInvitation]?
@@ -31,6 +33,8 @@ struct GetEventInvitationRespModel : SafeMappable {
         eventVenue <- map.property("eventVenue")
         eventStartDate <- map.property("eventStartDate")
         eventEndDate <- map.property("eventEndDate")
+        eventRegistrationStartDate <- map.property("eventRegStartDate")
+        eventRegistrationEndDate <- map.property("eventRegEndDate")
         eventAdmin <- map.property("eventAdmin")
         teamSize <- map.property("teamSize")
         invitations <- map.relations("invitationList")

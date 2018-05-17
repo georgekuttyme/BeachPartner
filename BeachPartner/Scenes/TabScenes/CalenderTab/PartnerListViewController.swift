@@ -20,7 +20,11 @@ class PartnerListViewController: UIViewController, UITableViewDataSource, UITabl
 
     }
     
-
+    @IBAction func didTapDismissButton(_ sender: UIButton) {
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return partners.count
@@ -55,7 +59,6 @@ class PartnerListViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.dismiss(animated: true, completion: nil)
     }
     
     
