@@ -179,6 +179,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     }
     
     @IBAction func saveClicked(_ sender: Any) {
+       
         let image = UIImage(named: "edit_btn_1x") as UIImage?
         editProfileBtn.setImage(image, for: .normal)
         self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
@@ -818,7 +819,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
                 self.imagePickerController.delegate = self
                 self.imagePickerController.mediaTypes = [kUTTypeMovie as String]
-                self.imagePickerController.allowsEditing = false
+                self.imagePickerController.allowsEditing = true
 //                self.imagePickerController.showsCameraControls = true
                 self.imagePickerController.videoMaximumDuration = 30.0
                 self.showImagePicker(sourceType: UIImagePickerControllerSourceType.camera)
@@ -1195,6 +1196,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
                 
                 UserDefaults.standard.set(accRespModel.id, forKey: "bP_userProfileId")
                 self.alert(message: "User profile updated successfully! ")
+                UserDefaults.standard.set(1, forKey: "NewUser")
                 ActivityIndicatorView.hiding()
                 DispatchQueue.main.async {
                 let image = UIImage(named: "edit_btn_1x") as UIImage?

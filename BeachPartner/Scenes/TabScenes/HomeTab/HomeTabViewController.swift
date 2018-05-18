@@ -90,11 +90,13 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         self.getBlockedConnections()
         let loggedIn = UserDefaults.standard.string(forKey: "isFirstLoggedIn") ?? "1"
         if loggedIn != "0" {
+            
             UserDefaults.standard.set("0", forKey: "isFirstLoggedIn")
             let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "HelpViewController") as! HelpViewController
             self.present(vc, animated: true, completion: nil)
         }
+        
         
         if UserDefaults.standard.string(forKey: "userType") == "Athlete" {
             tournamentStackView.isHidden = false
@@ -106,7 +108,9 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
                 messageContainerView.backgroundColor = UIColor(patternImage: bgImage)
             }
         }
+        NotificationCenter.default.addObserver(self, selector: #selector(popUpAlertForCompleteProfile(notification:)), name:NSNotification.Name(rawValue: "complete-profile-popup"), object: nil)
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController!.navigationBar.topItem!.title = "Beach Partner"
@@ -118,6 +122,27 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         self.tabBarController?.selectedIndex = 4
     }
     
+    @objc func popUpAlertForCompleteProfile(notification: NSNotification){
+        let alert = UIAlertController(title: "Update Profile", message: "Please take a moment to complete your profile", preferredStyle: .alert)
+        let actionButton = UIAlertAction(title: "Later", style: .default) { (action) in
+            self.dismiss(animated: true, completion: nil)
+        }
+        let cancelButton = UIAlertAction(title: "Now", style: .cancel) { (action) in
+            let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
+            self.dismiss(animated: true, completion: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "profilevc1") as! CoachProfileTableViewController
+            let vc1 = storyboard.instantiateViewController(withIdentifier: "profilevc") as! AthleteProfileTableViewController
+            let identifier = UserDefaults.standard.string(forKey: "userType") == "Athlete" ? vc1 : vc
+            self.navigationController?.pushViewController(identifier, animated: true)
+            self.tabBarController?.tabBar.isHidden = false
+            self.navigationController!.navigationBar.topItem!.title = ""
+            self.navigationController?.isNavigationBarHidden = false
+        }
+        alert.addAction(actionButton)
+        alert.addAction(cancelButton)
+        self.present(alert, animated: true, completion: nil)
+
+    }
     
     func getAllUserEventsList(){
         APIManager.callServer.getAllEventBetweenDetails(sucessResult: {(response) in

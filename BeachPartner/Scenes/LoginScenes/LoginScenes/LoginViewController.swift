@@ -32,10 +32,10 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
             let acceptTermsAndCondition = UserDefaults.standard.string(forKey: "isAcceptTermsAndCondition") ?? "0"
             if acceptTermsAndCondition == "0" {
                 self.performSegue(withIdentifier: "tandcsegue", sender: self)
-                //      UIApplication.shared.openURL(URL(string: "http://beachpartner.com")!)
             }
-            emailField.text = UserDefaults.standard.string(forKey: "email") ?? ""
-            passwordField.text = UserDefaults.standard.string(forKey: "password") ?? ""
+            
+        emailField.text = UserDefaults.standard.string(forKey: "email") ?? ""
+        passwordField.text = UserDefaults.standard.string(forKey: "password") ?? ""
         passwordField.delegate = self
         emailField.delegate = self
         
@@ -45,9 +45,9 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
         passwordField.rightView = rightButton
         
         rightButton.addTarget(self, action:#selector(self.showhidepwdclicked), for: .touchUpInside)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(ForgotPopUpAction(notification:)), name:NSNotification.Name(rawValue: "popup-ForgotPassword"), object: nil)
         }
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         let loggedIn = UserDefaults.standard.string(forKey: "isLoggedIn") ?? "0"
@@ -55,7 +55,9 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
             let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
             let secondViewController = storyboard.instantiateViewController(withIdentifier: "tabbarcontroller") as! TabBarController
             self.present(secondViewController, animated: false, completion: nil)
+            
         }
+        
     }
 
     @objc func showhidepwdclicked() {
@@ -562,25 +564,6 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
         
         func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
             
-//            if textField == emailField {
-//                if let text = textField.text {
-//                    if (textField as? UITextField) != nil {
-//                        if(text.count > 3 ) {
-//                            if (text + string).isValidEmailAddress() {
-//                                emailField.errorText = ""
-//                                emailField.hideError()
-//                            }else{
-//                                emailField.errorText = "Invalid email"
-//                                emailField.showError()
-//                            }
-//                        }else {
-//                            emailField.errorText = ""
-//                            emailField.hideError()
-//                        }
-//                    }
-//                }
-//                return true
-//            }else
                 if textField == passwordField {
                 let currentCharacterCount = textField.text?.characters.count ?? 0
                 if (range.length + range.location > currentCharacterCount){
@@ -663,8 +646,6 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
         func makeLoginRequest()  {
             
             let nextMonth = Calendar.current.date(byAdding: .month, value: 5, to: Date())
-            print("MONTH  --",nextMonth)
-
             print("makeLoginRequest ")
             if isAllFieldsAreValid(){
                 print("isAllFieldsAreValid ")
@@ -676,28 +657,17 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
                     return
                 }
                 func startLoading(){
-                    //                forgotPasswordButton.alpha = 0.5
-                    //                forgotPasswordButton.isEnabled = false
-                    //                createAccountButton.alpha = 0.5
-                    //                createAccountButton.isEnabled = false
                     passwordField.alpha = 0.5
                     passwordField.isEnabled = false
                     emailField.alpha = 0.5
                     emailField.isEnabled = false
-                    //                signInButton.startLoadingAnimation()
                     ActivityIndicatorView.show("Loading...")
                 }
                 func stopLoading(){
-                    //                forgotPasswordButton.alpha = 1.0
-                    //                forgotPasswordButton.isEnabled = true
-                    //                createAccountButton.alpha = 1.0
-                    //                createAccountButton.isEnabled = true
                     passwordField.alpha = 1.0
                     passwordField.isEnabled = true
                     emailField.alpha = 1.0
                     emailField.isEnabled = true
-                    //                self.signInButton.returnToOriginalState()
-                    //                self.signInButton.layer.cornerRadius = 5.0
                     ActivityIndicatorView.hiding()
                 }
                 
@@ -716,19 +686,11 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
                     if(loginModel.idToken != ""){
 
                         print("loginModel.idToken :", loginModel.idToken)
-                         stopLoading()
-                        
-//                        UserDefaults.standard.set(true, forKey: "Key") //Bool
-//                        UserDefaults.standard.set(1, forKey: "Key")  //Integer
+                        stopLoading()
                         UserDefaults.standard.set(loginModel.idToken, forKey: "bP_token")
                         UserDefaults.standard.set("1", forKey: "isLoggedIn")
                         self.getUserInfo()
-                        
-//                        let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
-//                        let secondViewController = storyboard.instantiateViewController(withIdentifier: "tabbarcontroller") as! TabBarController
-//                        self.present(secondViewController, animated: true, completion: nil)
-                        
-                        
+
                     }else{
                         if(loginModel.details == "Bad credentials"){
                             self.errorlabel.text = "Invalid username/password."
@@ -737,8 +699,6 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
                         else{
                           self.errorlabel.text = "Your account is not activated."
                         }
-                        //                    self.errorLabel.textColor = UIColor.red
-                        //                    self.passwordField.shake()
                         stopLoading()
                     }
                 }, errorResult: { (error) in
@@ -758,43 +718,21 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
         }
         
         func getUserInfo(){
-//            startLoading()
             APIManager.callServer.getAccountDetails(sucessResult: { (responseModel) in
 
                 guard let accRespModel = responseModel as? AccountRespModel else{
-//                    stopLoading()
                     return
                 }
                 UserDefaults.standard.set(accRespModel.location , forKey: "locationInitial")
                 if(accRespModel.id != 0){
                     UserDefaults.standard.set(accRespModel.userType, forKey: "userType")
                     print("&&&&&&", accRespModel.userProfile ?? " ")
-//                    if accRespModel.userProfile == nil{
-//                        UserDefaults.standard.set("true", forKey: "NewUser")
-//                        let alert = UIAlertController(title: "Update Profile", message: "Please take a moment to complete your profile", preferredStyle: .alert)
-//                        let actionButton = UIAlertAction(title: "Later", style: .default) { (action) in
-//                            
-//                            let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
-//                            let secondViewController = storyboard.instantiateViewController(withIdentifier: "tabbarcontroller") as! TabBarController
-//                            self.present(secondViewController, animated: true, completion: nil)
-//                        }
-//                        let cancelButton = UIAlertAction(title: "Now", style: .cancel) { (action) in
-//                            let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
-//                            let vc = storyboard.instantiateViewController(withIdentifier: "profilevc1") as! CoachProfileTableViewController
-//                            let vc1 = storyboard.instantiateViewController(withIdentifier: "profilevc") as! AthleteProfileTableViewController
-//                            let identifier = UserDefaults.standard.string(forKey: "userType") == "Athlete" ? vc1 : vc
-//                            self.navigationController?.pushViewController(identifier, animated: true)
-//                            self.tabBarController?.tabBar.isHidden = false
-//                            self.navigationController!.navigationBar.topItem!.title = ""
-//                            self.navigationController?.isNavigationBarHidden = false
-//                        }
-//                        alert.addAction(actionButton)
-//                        alert.addAction(cancelButton)
-//                        self.present(alert, animated: true, completion: nil)
-//                    }
-//                    else {
-//                        UserDefaults.standard.set("false", forKey: "NewUser")
-//                    }
+                    if accRespModel.userProfile == nil{
+                        UserDefaults.standard.set(0, forKey: "NewUser")
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "complete-profile-popup"), object: nil)
+                    }else{
+                        UserDefaults.standard.set(1, forKey: "NewUser")
+                    }
                     
                     UserDefaults.standard.set(accRespModel.id, forKey: "bP_userId")
                     UserDefaults.standard.set(accRespModel.firstName, forKey: "bP_userName")
@@ -805,14 +743,10 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
                     
                     
                 }else{
-                    //                    self.errorLabel.textColor = UIColor.red
                     self.errorlabel.text = "Something wrong with server."
                     self.passwordField.text = ""
-                    //                    self.passwordField.shake()
-////                    stopLoading()
                 }
             }, errorResult: { (error) in
-//                stopLoading()
                 guard let errorString  = error else {
                     return
                 }
