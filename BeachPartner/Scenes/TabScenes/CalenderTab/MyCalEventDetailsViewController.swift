@@ -222,16 +222,6 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
         return cell!
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let storyboard = UIStoryboard(name: "ConnectionsTabBar", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "NotesViewController") as! NotesViewController
-//        vc.index = index
-//        vc.connectedUserModel = connectedUser
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
