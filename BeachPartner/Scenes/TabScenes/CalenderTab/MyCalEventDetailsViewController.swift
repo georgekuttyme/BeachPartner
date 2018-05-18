@@ -174,7 +174,7 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
             if let imageUrl = URL(string: (partner?.invitorimageURL)!) {
                 cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
                 cell?.profileImageView.sd_setShowActivityIndicatorView(true)
-                cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "img_placeHolder"))
+                cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
             }
             cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
             cell?.profileImageView.clipsToBounds = true
@@ -200,7 +200,7 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
             if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
                 cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
                 cell?.profileImageView.sd_setShowActivityIndicatorView(true)
-                cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "img_placeHolder"))
+                cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
             }
             cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
             cell?.profileImageView.clipsToBounds = true

@@ -233,7 +233,7 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
             if let image = connectedUser?.imageUrl, let imageUrl = URL(string: image) {
                 cell?.profileImage.sd_setIndicatorStyle(.whiteLarge)
                 cell?.profileImage.sd_setShowActivityIndicatorView(true)
-                cell?.profileImage.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "img_placeHolder"))
+                cell?.profileImage.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
             }
             
             cell?.profileImage.layer.cornerRadius = (cell?.profileImage?.frame.size.width)!/2
@@ -263,7 +263,7 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
             if let image = user?.imageUrl, let imageUrl = URL(string: image) {
                 cell?.profileImage.sd_setIndicatorStyle(.whiteLarge)
                 cell?.profileImage.sd_setShowActivityIndicatorView(true)
-                cell?.profileImage.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "img_placeHolder"))
+                cell?.profileImage.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
             }
             
             cell?.profileImage.layer.cornerRadius = (cell?.profileImage?.frame.size.width)!/2
