@@ -107,9 +107,14 @@ class ChatViewController: JSQMessagesViewController {
             }
         }
          else{
-            print("\n\n\n\n///////",connectedUserModel.first)
+            print("\n\n\n\n///////",connectedUserModel.first ?? " Null")
             let connectedUserModelOfFirstElement = connectedUserModel.first
-            title = "Messages with " + (connectedUserModelOfFirstElement?.connectedUser?.firstName ?? "" ) 
+            if let titleName = connectedUserModelOfFirstElement?.connectedUser?.firstName {
+                title = "Messages with " + titleName
+            }else {
+                title = "Message"
+            }
+           
         }
     }
     
