@@ -276,9 +276,13 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         self.modalTransitionStyle = UIModalTransitionStyle.coverVertical
         self.cardView.dataSource = self
         self.cardView.delegate = self
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tappedOn(_:)))
+        tap.numberOfTapsRequired = 2
+        cardView.addGestureRecognizer(tap)
         self.getUsersListforBlueBp()
         self.getUserInfo()
         self.generateSwipeAarray()
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(sendMsg(notification:)), name:NSNotification.Name(rawValue: "send-Message"), object: nil)
 //        NotificationCenter.default.addObserver(self, selector: #selector(findTournament(notification:)), name:NSNotification.Name(rawValue: "find-Tournament"), object: nil)
@@ -751,37 +755,7 @@ extension BPCardsVC :KolodaViewDelegate {
     }
     func koloda(_ koloda: KolodaView, didSelectCardAt index: Int) {
         self.currentIndex = index
-        if let view:CardView = koloda.viewForCard(at: index) as? CardView {
-          
-            var videoString:String
-            if selectedType == "Search" || selectedType == "BlueBp" || selectedType == "BlueBp-New"{
-                let  data = SwipeCardArray[index] as! SearchUserModel
-                videoString = data.videoUrl
-            }
-            else {
-                let  data = SwipeCardArray[index] as! ConnectedUserModel
-                videoString = data.connectedUser?.videoUrl ?? ""
-            }
-            
-            if videoString != "" {
-                 view.showVideo()
-            }
-            else{
-           //     view.showVideo()
-                view.showLabel()
-//                self.lblNotAvailable.alpha = 1.0
-//                self.lblNotAvailable.isHidden = false
-//                self.lblNotAvailable.text = "No video available for this profile"
-//                self.lblNotAvailable.textColor = UIColor.white
-//                lblNotAvailable.layer.shadowColor = UIColor.gray.cgColor
-//                lblNotAvailable.layer.shadowOpacity = 1.0
-//                lblNotAvailable.layer.shadowRadius = 3.0
-//                lblNotAvailable.layer.shadowOffset = CGSize(width: 4, height: 4)
-//                lblNotAvailable.layer.masksToBounds = false
-//                 self.lblNotAviltopSpace.constant = -75
-            }
-           
-        }
+        
     }
     
     func kolodaSpeedThatCardShouldDrag(_ koloda: KolodaView) -> DragSpeed {
@@ -858,16 +832,37 @@ extension BPCardsVC: KolodaViewDataSource {
     }
 }
 
-
-
 extension UIScrollView {
     func updateContentView() {
         contentSize.height = subviews.sorted(by: { $0.frame.maxY < $1.frame.maxY }).last?.frame.maxY ?? contentSize.height
     }
 }
 extension BPCardsVC: UIGestureRecognizerDelegate {
-    @objc func handleTap(_ gesture: UITapGestureRecognizer){
-        print("doubletapped")
+
+   @objc func tappedOn(_ sender : UITapGestureRecognizer) {
+    print("tapped")
+    if let view:CardView = self.cardView.viewForCard(at: self.currentIndex) as? CardView {
+        
+        var videoString:String
+        if selectedType == "Search" || selectedType == "BlueBp" || selectedType == "BlueBp-New"{
+            let  data = SwipeCardArray[self.currentIndex] as! SearchUserModel
+            videoString = data.videoUrl
+        }
+        else {
+            let  data = SwipeCardArray[self.currentIndex] as! ConnectedUserModel
+            videoString = data.connectedUser?.videoUrl ?? ""
+        }
+        
+        if videoString != "" {
+            view.showVideo()
+        }
+        else{
+            
+            view.showLabel()
+            
+        }
+        
+    }
     }
 }
 

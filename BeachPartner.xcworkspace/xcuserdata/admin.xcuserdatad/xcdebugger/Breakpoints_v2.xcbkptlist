@@ -73,22 +73,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/BPfinderViewController.swift"
-            timestampString = "547558269.888932"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "BeachPartner/APIManagement/Client/APIClient.swift"
             timestampString = "546869000.469161"
             startingColumnNumber = "9223372036854775807"
@@ -217,13 +201,13 @@
                   symbolName = "BeachPartner.APIClient.inPostSentPushnotification(url: Swift.String, params: Swift.Dictionary&lt;Swift.String, Any&gt;, sucess: (Swift.Optional&lt;__ObjC.NSDictionary&gt;) -&gt; (), failure: (Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/admin/Desktop/Repo/bp-ios/BeachPartner/APIManagement/Client/APIClient.swift"
-                  timestampString = "548235877.22446"
+                  urlString = "file:///Users/admin/Desktop/Updated%20/BP/bp-ios/BeachPartner/APIManagement/Client/APIClient.swift"
+                  timestampString = "548340366.75896"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "302"
                   endingLineNumber = "302"
-                  offsetFromSymbolStart = "4814">
+                  offsetFromSymbolStart = "3684">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -232,13 +216,13 @@
                   symbolName = "closure #1 (Alamofire.DataResponse&lt;Any&gt;) -&gt; () in BeachPartner.APIClient.inPostSentPushnotification(url: Swift.String, params: Swift.Dictionary&lt;Swift.String, Any&gt;, sucess: (Swift.Optional&lt;__ObjC.NSDictionary&gt;) -&gt; (), failure: (Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/admin/Desktop/Repo/bp-ios/BeachPartner/APIManagement/Client/APIClient.swift"
-                  timestampString = "548235877.229459"
+                  urlString = "file:///Users/admin/Desktop/Updated%20/BP/bp-ios/BeachPartner/APIManagement/Client/APIClient.swift"
+                  timestampString = "548340366.762171"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "305"
                   endingLineNumber = "305"
-                  offsetFromSymbolStart = "41">
+                  offsetFromSymbolStart = "36">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -265,13 +249,13 @@
                   symbolName = "BeachPartner.APIClient.inPostSentPushnotification(url: Swift.String, params: Swift.Dictionary&lt;Swift.String, Any&gt;, sucess: (Swift.Optional&lt;__ObjC.NSDictionary&gt;) -&gt; (), failure: (Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/admin/Desktop/Repo/bp-ios/BeachPartner/APIManagement/Client/APIClient.swift"
-                  timestampString = "548235877.239226"
+                  urlString = "file:///Users/admin/Desktop/Updated%20/BP/bp-ios/BeachPartner/APIManagement/Client/APIClient.swift"
+                  timestampString = "548340366.76983"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "302"
                   endingLineNumber = "302"
-                  offsetFromSymbolStart = "4814">
+                  offsetFromSymbolStart = "3684">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -280,13 +264,13 @@
                   symbolName = "closure #1 (Alamofire.DataResponse&lt;Any&gt;) -&gt; () in BeachPartner.APIClient.inPostSentPushnotification(url: Swift.String, params: Swift.Dictionary&lt;Swift.String, Any&gt;, sucess: (Swift.Optional&lt;__ObjC.NSDictionary&gt;) -&gt; (), failure: (Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/admin/Desktop/Repo/bp-ios/BeachPartner/APIManagement/Client/APIClient.swift"
-                  timestampString = "548235877.2436841"
+                  urlString = "file:///Users/admin/Desktop/Updated%20/BP/bp-ios/BeachPartner/APIManagement/Client/APIClient.swift"
+                  timestampString = "548340366.773051"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "305"
                   endingLineNumber = "305"
-                  offsetFromSymbolStart = "41">
+                  offsetFromSymbolStart = "36">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -313,13 +297,13 @@
                   symbolName = "closure #1 (Swift.Optional&lt;Tailor.SafeMappable&gt;) -&gt; () in BeachPartner.AthleteViewController.unBlockUser(connectedUser: BeachPartner.ConnectedUserModel, atIndex: Swift.Int) -&gt; ()"
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/admin/Desktop/Repo/bp-ios/BeachPartner/Scenes/TabScenes/ConnectiosTab/AthleteViewController.swift"
-                  timestampString = "548235877.253634"
+                  urlString = "file:///Users/admin/Desktop/Updated%20/BP/bp-ios/BeachPartner/Scenes/TabScenes/ConnectiosTab/AthleteViewController.swift"
+                  timestampString = "548340366.780676"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "133"
                   endingLineNumber = "133"
-                  offsetFromSymbolStart = "4448">
+                  offsetFromSymbolStart = "2708">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -328,13 +312,13 @@
                   symbolName = "closure #1 () -&gt; () in closure #1 (Swift.Optional&lt;Tailor.SafeMappable&gt;) -&gt; () in BeachPartner.AthleteViewController.unBlockUser(connectedUser: BeachPartner.ConnectedUserModel, atIndex: Swift.Int) -&gt; ()"
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/admin/Desktop/Repo/bp-ios/BeachPartner/Scenes/TabScenes/ConnectiosTab/AthleteViewController.swift"
-                  timestampString = "548235877.258473"
+                  urlString = "file:///Users/admin/Desktop/Updated%20/BP/bp-ios/BeachPartner/Scenes/TabScenes/ConnectiosTab/AthleteViewController.swift"
+                  timestampString = "548340366.7838399"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "135"
                   endingLineNumber = "135"
-                  offsetFromSymbolStart = "3663">
+                  offsetFromSymbolStart = "2092">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -457,13 +441,13 @@
                   symbolName = "BeachPartner.APIClient.inPostSentPushnotification(url: Swift.String, params: Swift.Dictionary&lt;Swift.String, Any&gt;, sucess: (Swift.Optional&lt;__ObjC.NSDictionary&gt;) -&gt; (), failure: (Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/admin/Desktop/Repo/bp-ios/BeachPartner/APIManagement/Client/APIClient.swift"
-                  timestampString = "548235877.310295"
+                  urlString = "file:///Users/admin/Desktop/Updated%20/BP/bp-ios/BeachPartner/APIManagement/Client/APIClient.swift"
+                  timestampString = "548340366.81998"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "330"
                   endingLineNumber = "330"
-                  offsetFromSymbolStart = "4934">
+                  offsetFromSymbolStart = "3776">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -472,13 +456,13 @@
                   symbolName = "closure #2 (Alamofire.DataResponse&lt;Swift.String&gt;) -&gt; () in BeachPartner.APIClient.inPostSentPushnotification(url: Swift.String, params: Swift.Dictionary&lt;Swift.String, Any&gt;, sucess: (Swift.Optional&lt;__ObjC.NSDictionary&gt;) -&gt; (), failure: (Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/admin/Desktop/Repo/bp-ios/BeachPartner/APIManagement/Client/APIClient.swift"
-                  timestampString = "548235877.315236"
+                  urlString = "file:///Users/admin/Desktop/Updated%20/BP/bp-ios/BeachPartner/APIManagement/Client/APIClient.swift"
+                  timestampString = "548340366.823131"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "331"
                   endingLineNumber = "331"
-                  offsetFromSymbolStart = "51">
+                  offsetFromSymbolStart = "168">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -506,12 +490,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/Scenes/TabScenes/MenuItems/AthleteProfileTableViewController.swift"
-            timestampString = "548074514.060037"
+            timestampString = "548340365.566577"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1643"
-            endingLineNumber = "1643"
-            landmarkName = "enableBtn()"
+            startingLineNumber = "1631"
+            endingLineNumber = "1631"
+            landmarkName = "disableTextFld()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -521,13 +505,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BeachPartner/Scenes/LoginScenes/LoginScenes/LoginViewController.swift"
-            timestampString = "548231969.230799"
+            filePath = "BeachPartner/Scenes/TabScenes/MenuItems/AthleteProfileTableViewController.swift"
+            timestampString = "548340365.566677"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "768"
-            endingLineNumber = "768"
-            landmarkName = "getUserInfo()"
+            startingLineNumber = "655"
+            endingLineNumber = "655"
+            landmarkName = "editProfileTxtBtnClicked(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -537,14 +521,46 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BeachPartner/Scenes/TabScenes/ChatTab/HighFiveViewController.swift"
-            timestampString = "548235876.658133"
+            filePath = "BeachPartner/Scenes/TabScenes/MenuItems/AthleteProfileTableViewController.swift"
+            timestampString = "548340365.566754"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
-            landmarkName = "getHifiList()"
+            startingLineNumber = "668"
+            endingLineNumber = "668"
+            landmarkName = "editProfileTxtBtnClicked(_:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/Scenes/TabScenes/MenuItems/AthleteProfileTableViewController.swift"
+            timestampString = "548340365.566831"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1389"
+            endingLineNumber = "1389"
+            landmarkName = "loadVideoOnPlayer(videoUrlVal:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/Scenes/TabScenes/MenuItems/AthleteProfileTableViewController.swift"
+            timestampString = "548340365.566977"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1400"
+            endingLineNumber = "1400"
+            landmarkName = "AthleteProfileTableViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

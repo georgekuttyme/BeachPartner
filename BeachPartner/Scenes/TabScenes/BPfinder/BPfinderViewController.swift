@@ -56,6 +56,22 @@ class BPfinderViewController: UIViewController, UICollectionViewDelegate,UIColle
     }
     
     override func viewDidAppear(_ animated: Bool) {
+//
+//        let locationSettings = UserDefaults.standard.string(forKey: "LocationSettings") ?? "0"
+//        if locationSettings == "0" {
+//            UserDefaults.standard.set("0", forKey: "LocationSettings")
+//            let newViewController =  self.storyboard?.instantiateViewController(withIdentifier: "ComponentSettings")as! SettingsViewController
+//            newViewController.SettingsType = "SearchSettings"
+//            newViewController.bpDelegate = self
+//            self.currentViewController = newViewController
+//            self.currentViewController!.view.translatesAutoresizingMaskIntoConstraints = false
+//            self.addChildViewController(self.currentViewController!)
+//            self.addSubview(subView: self.currentViewController!.view, toView: self.containerView)
+//        }
+//        UserDefaults.standard.set("0", forKey: "LocationSettings")
+    }
+    override func viewWillAppear(_ animated: Bool) {
+          self.navigationController!.navigationBar.topItem!.title = "Beach Partner"
         
         let locationSettings = UserDefaults.standard.string(forKey: "LocationSettings") ?? "0"
         if locationSettings == "0" {
@@ -69,9 +85,6 @@ class BPfinderViewController: UIViewController, UICollectionViewDelegate,UIColle
             self.addSubview(subView: self.currentViewController!.view, toView: self.containerView)
         }
         UserDefaults.standard.set("0", forKey: "LocationSettings")
-    }
-    override func viewWillAppear(_ animated: Bool) {
-          self.navigationController!.navigationBar.topItem!.title = "Beach Partner"
     }
     override func viewDidLoad() {
         super.viewDidLoad()
