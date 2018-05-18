@@ -435,9 +435,6 @@
                                                             <state key="normal" title="NOTES">
                                                                 <color key="titleColor" red="0.2413429537" green="0.57256523660000003" blue="0.69856745249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
-                                                            <connections>
-                                                                <segue destination="vhm-Lk-Ffs" kind="show" id="KbT-D8-4av"/>
-                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2IU-0g-CWw">
                                                             <rect key="frame" x="2" y="200" width="171" height="27"/>

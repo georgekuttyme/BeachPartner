@@ -20,8 +20,10 @@ class MyCalEventDetailsViewController: UIViewController {
     @IBOutlet weak var eventStartDateLabel: UILabel!
     @IBOutlet weak var eventEndDateLabel: UILabel!
 
+    @IBOutlet weak var tableView: UITableView!
     
     var event: GetAllUserEventsRespModel.Event?
+    var eventInvitation: GetEventInvitationRespModel?
 
     fileprivate let formatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -69,8 +71,58 @@ class MyCalEventDetailsViewController: UIViewController {
                 print("Rep model does not match")
                 return
             }
-//            self.eventInvitation = eventInvitationModel
-//            self.setupDataFromEventInvitation()
+            self.eventInvitation = eventInvitationModel
+            self.tableView.reloadData()
+            
+        }) { (error) in
+            ActivityIndicatorView.hiding()
+            guard let errorString  = error else {
+                return
+            }
+            self.alert(message: errorString)
+        }
+    }
+    
+    @IBAction func didTapCourtAssignmentButton(_ sender: UIButton) {
+        
+        let alert = UIAlertController(title: "", message: "Notifications will be sent to your team partners. Coaches in your connection list and parents (if linked to your profile)will also be notified", preferredStyle: UIAlertControllerStyle.alert)
+        let action = UIAlertAction(title: "Send", style: .default) { (alertAction) in
+            let textField = alert.textFields![0] as UITextField
+            if let text = textField.text, text.count > 0 {
+                self.notifyCourtNumberToOthers(courtNumber: text)
+            }
+            else {
+                self.alert(message: "Input Field is empty")
+            }
+        }
+        alert.addTextField { (textField) in
+            textField.placeholder = "Enter Court Number"
+            textField.keyboardType = .numberPad
+        }
+        let cancelAction =  UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(action)
+        alert.addAction(cancelAction)
+        self.present(alert, animated:true, completion: nil)
+    }
+    
+    func notifyCourtNumberToOthers(courtNumber: String) {
+        
+        guard let courtNumber = Int(courtNumber) else {
+            self.alert(message: "Invalid Number")
+            return
+        }
+        guard let eventId = event?.eventId, let orgId = eventInvitation?.invitations?.first?.invitorId else { return }
+
+        ActivityIndicatorView.show("Loading")
+        APIManager.callServer.notifyCourtNumber(eventId: eventId, organiserId: orgId, courtNumber: courtNumber, sucessResult: { (responseModel) in
+            
+            ActivityIndicatorView.hiding()
+            
+            guard let responseModel = responseModel as? CommonResponse else {
+                print("Rep model does not match")
+                return
+            }
+            self.alert(message: responseModel.message)
             
         }) { (error) in
             ActivityIndicatorView.hiding()
@@ -82,8 +134,70 @@ class MyCalEventDetailsViewController: UIViewController {
     }
     
     
+    @IBAction func didTapBackButton(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    
     private func dateStringFromTimeInterval(interval: Int) -> String {
         let date = Date(timeIntervalSince1970: TimeInterval(interval/1000))
         return formatter.string(from: date)
     }
 }
+
+extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if let count = eventInvitation?.invitations?.first?.partners?.count {
+            return count + 1
+        }
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PartnerListCell", for: indexPath) as? PartnerListCell
+        cell?.selectionStyle = .none
+        
+        if indexPath.row == 0 {
+            let partner = eventInvitation?.invitations?.first
+            cell?.nameLabel.text = partner?.invitorName
+            cell?.statusLabel.text = "Organiser"
+            
+            if let imageUrl = URL(string: (partner?.invitorimageURL)!) {
+                cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
+                cell?.profileImageView.sd_setShowActivityIndicatorView(true)
+                cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "img_placeHolder"))
+            }
+            cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
+            cell?.profileImageView.clipsToBounds = true
+            //            cell?.profileImage.layer.borderColor = UIColor.blue.cgColor
+            cell?.profileImageView.layer.borderColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0).cgColor
+            cell?.profileImageView.layer.borderWidth = 1.5
+            
+        }
+        else {
+            let partner = eventInvitation?.invitations?.first?.partners![indexPath.row - 1]
+            cell?.nameLabel.text = partner?.partnerName
+            cell?.statusLabel.text = ""
+            
+            if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
+                cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
+                cell?.profileImageView.sd_setShowActivityIndicatorView(true)
+                cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "img_placeHolder"))
+            }
+            cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
+            cell?.profileImageView.clipsToBounds = true
+            //            cell?.profileImage.layer.borderColor = UIColor.blue.cgColor
+            cell?.profileImageView.layer.borderColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0).cgColor
+            cell?.profileImageView.layer.borderWidth = 1.5
+        }
+        return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+}
+

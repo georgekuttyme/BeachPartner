@@ -18,8 +18,11 @@ class EventInvitationListViewController: UIViewController, UITableViewDataSource
     @IBOutlet weak var eventNameLabel: UILabel!
     @IBOutlet weak var eventStartDateLabel: UILabel!
     @IBOutlet weak var eventEndDateLabel: UILabel!
+    @IBOutlet weak var eventLocationLabel: UILabel!
+    @IBOutlet weak var eventVenueLabel: UILabel!
+    @IBOutlet weak var eventAdminLabel: UILabel!
     
-    var event: GetEventRespModel?
+//    var event: GetEventRespModel?
     var eventInvitation: GetEventInvitationRespModel?
     var eventId: Int = 0
     
@@ -47,8 +50,15 @@ class EventInvitationListViewController: UIViewController, UITableViewDataSource
         guard let event = eventInvitation else { return }
 
         eventNameLabel.text = event.eventName
+        eventLocationLabel.text = event.eventLocation
+        eventVenueLabel.text = event.eventVenue
+        eventAdminLabel.text = event.eventAdmin
+        
         eventStartDateLabel.text = dateStringFromTimeInterval(interval: event.eventStartDate)
         eventEndDateLabel.text = dateStringFromTimeInterval(interval: event.eventEndDate)
+        
+        
+        
     }
     
     private func getAllInvitations() {
@@ -61,6 +71,8 @@ class EventInvitationListViewController: UIViewController, UITableViewDataSource
                 print("Rep model does not match")
                 return
             }
+            
+            
             
             guard let invitations = eventInvitationModel.invitations, invitations.count > 0 else {
                 
@@ -94,24 +106,24 @@ class EventInvitationListViewController: UIViewController, UITableViewDataSource
             
             ActivityIndicatorView.hiding()
             
-            guard let responseModel = responseModel as? GeneralResponse else {
+            guard let responseModel = responseModel as? CommonResponse else {
                 print("Rep model does not match")
                 return
             }
+
             self.alert(message: responseModel.message)
 
-            
-//            if let message = responseModel.response?.message {
-//            }
-            
+            if responseModel.status == "OK" {
+             
+                // If accept action -leave page, if reject - reload page,
+                if action == "Accept" {
+                    self.navigationController?.popViewController(animated: true)
+                }
+                else {
+                    self.getAllInvitations()
+                }
+            }
 
-            // If accept action -leave page, if reject - reload page,
-            if action == "Accept" {
-                self.navigationController?.popViewController(animated: true)
-            }
-            else {
-                self.getAllInvitations()
-            }
         }) { (error) in
             
             ActivityIndicatorView.hiding()
@@ -175,7 +187,7 @@ class EventInvitationListViewController: UIViewController, UITableViewDataSource
         let acceptAction = UITableViewRowAction(style: .normal, title: "Accept") { (rowAction, indexPath) in
             self.confirmAction(action: "Accept", index: indexPath.row)
         }
-        acceptAction.backgroundColor = UIColor(red: 22/255.0, green: 150/255.0, blue: 83/255.0, alpha: 1.0)
+        acceptAction.backgroundColor = UIColor(red: 152/255.0, green: 227/255.0, blue: 231/255.0, alpha: 1.0)
         
         let rejectAction = UITableViewRowAction(style: .normal, title: "Reject") { (rowAction, indexPath) in
            self.confirmAction(action: "Reject", index: indexPath.row)
@@ -188,8 +200,8 @@ class EventInvitationListViewController: UIViewController, UITableViewDataSource
         return 100
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+
         guard let partners = eventInvitation?.invitations?[indexPath.row].partners else { return }
         
         let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
@@ -198,7 +210,6 @@ class EventInvitationListViewController: UIViewController, UITableViewDataSource
         viewController.modalTransitionStyle = .crossDissolve
         self.present(viewController, animated: true, completion: nil)
     }
-    
     
     
     @objc func didTapDetailButton(sender: UIButton) {

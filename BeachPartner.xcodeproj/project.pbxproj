@@ -134,6 +134,7 @@
 		FF560C0C2096F83300D3BA80 /* UpdateNoteRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF560C0B2096F83300D3BA80 /* UpdateNoteRespModel.swift */; };
 		FFABE2B920ADC7080029C3A0 /* MyCalEventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFABE2B820ADC7080029C3A0 /* MyCalEventDetailsViewController.swift */; };
 		FFCE759220AAFBF2007C0CFD /* GetEventInvitationRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCE759120AAFBF2007C0CFD /* GetEventInvitationRespModel.swift */; };
+		FFFDDA1720AEFE0C00984CB8 /* EventRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFDDA1620AEFE0C00984CB8 /* EventRegisterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -270,6 +271,7 @@
 		FF560C0B2096F83300D3BA80 /* UpdateNoteRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNoteRespModel.swift; sourceTree = "<group>"; };
 		FFABE2B820ADC7080029C3A0 /* MyCalEventDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCalEventDetailsViewController.swift; sourceTree = "<group>"; };
 		FFCE759120AAFBF2007C0CFD /* GetEventInvitationRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventInvitationRespModel.swift; sourceTree = "<group>"; };
+		FFFDDA1620AEFE0C00984CB8 /* EventRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRegisterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -650,6 +652,7 @@
 				3B5D9968206EA46E001ED515 /* EventDetailsViewController.swift */,
 				FF38234320A9CC4200F403BF /* EventInvitationListViewController.swift */,
 				FF07524020AC77D70015866D /* PartnerListViewController.swift */,
+				FFFDDA1620AEFE0C00984CB8 /* EventRegisterViewController.swift */,
 				FF38234520A9CD7400F403BF /* EventInvitationCell.swift */,
 				3B66B50B206242F600CC4FB4 /* CalanderTableViewCell.swift */,
 				3B49C3922068EE15007186E8 /* InvitePartnerViewController.swift */,
@@ -897,7 +900,7 @@
 				TargetAttributes = {
 					3BE40F51203EAEC100EA7DFC = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1104,6 +1107,7 @@
 				FF07524320AC79460015866D /* PartnerListCell.swift in Sources */,
 				3B0DEE84206CA66B00686609 /* FilterViewController.swift in Sources */,
 				3B0DEE95206D099500686609 /* UIVideoView.swift in Sources */,
+				FFFDDA1720AEFE0C00984CB8 /* EventRegisterViewController.swift in Sources */,
 				3B6027A420497364006B108A /* SignUpViewController.swift in Sources */,
 				FF560C0A2096F7FB00D3BA80 /* GetNoteRespModel.swift in Sources */,
 				8DA417C0209B77F60078F814 /* CoachProfileTableViewController.swift in Sources */,
@@ -1296,15 +1300,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = BeachPartner/BeachPartner.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LX9FCBACX7;
 				INFOPLIST_FILE = BeachPartner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.beachpartnerllc.beachpartner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b3ac958a-b0b8-47f9-80e3-1619f08fd141";
-				PROVISIONING_PROFILE_SPECIFIER = provision_Development;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "BeachPartner/Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1317,16 +1321,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = BeachPartner/BeachPartner.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LX9FCBACX7;
 				INFOPLIST_FILE = BeachPartner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.beachpartnerllc.beachpartner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "31e6466c-22ae-441e-8eb2-df1eaad3074b";
-				PROVISIONING_PROFILE_SPECIFIER = Pro_distribution;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "BeachPartner/Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
