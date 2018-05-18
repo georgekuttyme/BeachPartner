@@ -131,7 +131,8 @@ class InviteParentViewController: ButtonBarPagerTabStripViewController {
         child_1.eventInvitation = self.eventInvitation
         child_1.delgate = self
         
-        let child_2 = UIStoryboard(name: "TabBar", bundle: nil).instantiateViewController(withIdentifier: "partnerFinder")
+        let child_2 = UIStoryboard(name: "TabBar", bundle: nil).instantiateViewController(withIdentifier: "partnerFinder") as! BPfinderViewController
+        child_2.selectedCardType = "invitePartner"
         return [child_1, child_2]
     }
     

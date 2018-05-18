@@ -301,7 +301,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        print(selectedType)
         if selectedType == "BlueBp"{
             mainStackViewTopConstraint.constant = 64
             scrlViewHeight.constant = UIScreen.main.bounds.size.height - 150
@@ -310,7 +310,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         else {
             mainStackViewTopConstraint.constant = 0
             scrlViewHeight.constant = UIScreen.main.bounds.size.height - 110
-            if selectedType == "Search"{
+            if selectedType == "Search" || selectedType == "invitePartner"{
                 scrlViewHeight.constant = UIScreen.main.bounds.size.height - 150
             }
         }
@@ -323,7 +323,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
                     cardHeight.constant = -200
                     mainStackViewTopConstraint.constant = 84
                 }
-                else  if selectedType == "Search"{
+                else  if selectedType == "Search" || selectedType == "invitePartner"{
                     mainStackViewTopConstraint.constant = 0
                 }
                 else if selectedType == "Likes"{
@@ -358,7 +358,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
                 self.lblNotAvailable.isHidden = false
             }
         }
-        else if selectedType == "Search"{
+        else if selectedType == "Search" || selectedType == "invitePartner" {
             SwipeCardArray = self.searchUsers
             searchCardSatus = selectedType
             self.cardView.dataSource = self
@@ -541,11 +541,40 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             self.topUserListCollectionView.reloadData()
             
             if self.subscribedBlueBpUsers.count == 0 && self.selectedType == "Search" {
-                self.blueBpListHeight.constant = 0
-                self.scrlViewHeight.constant = UIScreen.main.bounds.size.height - 110
+                if UIDevice.current.userInterfaceIdiom == .phone {
+                    let screenSize = UIScreen.main.bounds.size;
+                    if screenSize.height == 812.0{
+                        self.blueBpListHeight.constant = 40
+                        self.scrlViewHeight.constant = UIScreen.main.bounds.size.height - 110
+                    }
+                }else{
+                    self.blueBpListHeight.constant = 61
+                    self.scrlViewHeight.constant = UIScreen.main.bounds.size.height - 110
+                }
             }
             else{
                 self.blueBpListHeight.constant = 61
+                if UIDevice.current.userInterfaceIdiom == .phone {
+                    let screenSize = UIScreen.main.bounds.size;
+                    if screenSize.height == 812.0{
+                        self.cardHeight.constant = -220
+                        if self.selectedType == "BlueBp"{
+                            self.cardHeight.constant = -200
+                            self.mainStackViewTopConstraint.constant = 84
+                        }
+                        else if self.selectedType == "Likes"{
+                            self.cardHeight.constant = -190
+                            self.mainStackViewTopConstraint.constant = 20
+                        }
+                        else if self.selectedType == "Hifi" {
+                            self.cardHeight.constant = -190
+                            self.mainStackViewTopConstraint.constant = 20
+                        }
+                        else {
+                            self.mainStackViewTopConstraint.constant = 20
+                        }
+                    }
+                }
             }
             
 //            DispatchQueue.main.async {
@@ -663,7 +692,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
 extension BPCardsVC :KolodaViewDelegate {
     func koloda(_ koloda: KolodaView, didShowCardAt index: Int) {
         
-        if selectedType == "Search" || selectedType == "BlueBp" || selectedType == "BlueBp-New"{
+        if selectedType == "Search" || selectedType == "BlueBp" || selectedType == "BlueBp-New" || selectedType == "invitePartner" {
         let data = SwipeCardArray[index] as! SearchUserModel
         if let view:CardView = koloda.viewForCard(at: index) as? CardView {
                 if let videoUrl = URL(string: data.videoUrl) {
@@ -720,7 +749,7 @@ extension BPCardsVC :KolodaViewDelegate {
     {
         var idString:String
         var fcmId:String
-        if selectedType == "Search" || selectedType == "BlueBp" || selectedType == "BlueBp-New"{
+        if selectedType == "Search" || selectedType == "BlueBp" || selectedType == "BlueBp-New" || selectedType == "invitePartner"{
             let  data = SwipeCardArray[index] as! SearchUserModel
             idString = String(data.id)
             fcmId = data.fcmToken
@@ -746,7 +775,7 @@ extension BPCardsVC :KolodaViewDelegate {
              self.selectedType = "Search"
             self.topUserListCollectionView.reloadData()
             if self.subscribedBlueBpUsers.count == 0  {
-                self.blueBpListHeight.constant = 0
+                self.blueBpListHeight.constant = 61
             }
             else{
                 self.blueBpListHeight.constant = 61
@@ -788,7 +817,7 @@ extension BPCardsVC: KolodaViewDataSource {
     func koloda(_ koloda: KolodaView, viewForCardAt index: Int) -> UIView {
         
         let view = CardView.instantiateFromNib()
-        if selectedType == "Search" || selectedType == "BlueBp" || selectedType == "BlueBp-New"{
+        if selectedType == "Search" || selectedType == "BlueBp" || selectedType == "BlueBp-New" || selectedType == "invitePartner"{
             var  data : SearchUserModel
             if  selectedType == "BlueBp-New"{
                 data = SwipeCardArray[0] as! SearchUserModel
@@ -844,7 +873,7 @@ extension BPCardsVC: UIGestureRecognizerDelegate {
     if let view:CardView = self.cardView.viewForCard(at: self.currentIndex) as? CardView {
         
         var videoString:String
-        if selectedType == "Search" || selectedType == "BlueBp" || selectedType == "BlueBp-New"{
+        if selectedType == "Search" || selectedType == "BlueBp" || selectedType == "BlueBp-New" || selectedType == "invitePartner"{
             let  data = SwipeCardArray[self.currentIndex] as! SearchUserModel
             videoString = data.videoUrl
         }

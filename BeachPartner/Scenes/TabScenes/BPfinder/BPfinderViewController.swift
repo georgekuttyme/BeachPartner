@@ -11,6 +11,8 @@ import DropDown
 import XLPagerTabStrip
 
 class BPfinderViewController: UIViewController, UICollectionViewDelegate,UICollectionViewDataSource, BpFinderDelegate, IndicatorInfoProvider {
+    var selectedCardType:String!
+    
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         
@@ -19,7 +21,12 @@ class BPfinderViewController: UIViewController, UICollectionViewDelegate,UIColle
     
     func playButtonPressed(searchList:[SearchUserModel]) {        
         let newViewController = self.storyboard?.instantiateViewController(withIdentifier: "ComponentBPcardsNew") as! BPCardsVC
-        newViewController.selectedType = "Search"
+        if self.selectedCardType == "invitePartner" {
+         newViewController.selectedType = selectedCardType
+        }
+        else{
+         newViewController.selectedType = "Search"
+        }
         newViewController.selectedIndex = 0
         newViewController.searchUsers = searchList
         newViewController.view.translatesAutoresizingMaskIntoConstraints = false
@@ -189,7 +196,7 @@ class BPfinderViewController: UIViewController, UICollectionViewDelegate,UIColle
         if let imageUrl = URL(string: data.imageUrl) {
             cell.imageView.sd_setIndicatorStyle(.whiteLarge)
             cell.imageView.sd_setShowActivityIndicatorView(true)
-            cell.imageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "img_placeHolder"))
+            cell.imageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
         }
         
         
