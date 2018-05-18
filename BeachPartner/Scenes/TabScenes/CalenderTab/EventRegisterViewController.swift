@@ -19,21 +19,23 @@ class EventRegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
-        
-        let dismissButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(didTapDismissButton))
+        let backImage = UIImage(named:"back_58")
+        let dismissButton = UIBarButtonItem(image: backImage, style: .done, target: self, action: #selector(didTapDismissButton))
         self.navigationItem.leftBarButtonItem = dismissButton
         
-        
-        
-        let url = URL(fileURLWithPath: (event?.eventURL)!)
-        let urlRequest = URLRequest(url: url)
-        webView.loadRequest(urlRequest)
+       
+        guard let eventURL = event?.eventURL else {
+            return
+        }
+        if let url =  URL(string: eventURL) {
+            let urlRequest = URLRequest(url: url)
+            webView.loadRequest(urlRequest)
+        }
     }
 
     @objc func didTapDismissButton() {
         
-        let alert = UIAlertController(title: "", message: "Registration complete?", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "", message: "Did you successfully completed Registration?", preferredStyle: UIAlertControllerStyle.alert)
         let action = UIAlertAction(title: "Yes", style: .default) { (alertAction) in
             
             self.registerEvent()
@@ -60,10 +62,38 @@ class EventRegisterViewController: UIViewController {
         ActivityIndicatorView.show("Loading")
         APIManager.callServer.registerEvent(eventId: eventInvitation.eventId, registerType: "Organizer", partners: partnerList, sucessResult: { (response) in
             
-            //Add event to calendar & return
-            
-            
             ActivityIndicatorView.hiding()
+            
+            guard let responseModel = response as? CommonResponse else {
+                print("Rep model does not match")
+                return
+            }
+            self.alert(message: responseModel.message)
+            
+            if responseModel.status == "OK" {
+                
+                let alert = UIAlertController(title: "", message: "Do you want to add this event to your system Calendar?", preferredStyle: UIAlertControllerStyle.alert)
+                let action = UIAlertAction(title: "Yes", style: .default) { (alertAction) in
+                    
+                    let startDate = Date(timeIntervalSince1970: TimeInterval((self.eventInvitation?.eventStartDate)!/1000))
+                    let endDate = Date(timeIntervalSince1970: TimeInterval((self.eventInvitation?.eventEndDate)!/1000))
+                    
+                    
+                    self.addEventToCalendar(title: (self.eventInvitation?.eventName)!, description: self.eventInvitation?.eventDescription, startDate: startDate, endDate: endDate, completion: { (success, error) in
+                        
+                        self.dismiss(animated: true, completion: nil)
+                    })
+                }
+                let noAction = UIAlertAction(title: "No", style: .default) { (alertAction) in
+                    self.dismiss(animated: true, completion: nil)
+                }
+                alert.addAction(action)
+                alert.addAction(noAction)
+                self.present(alert, animated:true, completion: nil)
+            }
+            else {
+                self.dismiss(animated: true, completion: nil)
+            }
             
         }) { (error) in
             
@@ -73,6 +103,8 @@ class EventRegisterViewController: UIViewController {
             }
             self.alert(message: errorString)
             print(error)
+            
+            self.dismiss(animated: true, completion: nil)
         }
     }
     

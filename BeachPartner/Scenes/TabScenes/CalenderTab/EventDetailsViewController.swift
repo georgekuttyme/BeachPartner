@@ -229,11 +229,11 @@ class EventDetailsViewController: BeachPartnerViewController {
     @IBAction func didTapBackButton(_ sender: UIButton) {
         
         if sender.titleLabel?.text == "View Partners" {
-            guard let partners = eventInvitation?.invitations?.first?.partners, partners.count > 0 else { return }
+            guard let invitation = eventInvitation?.invitations?.first else { return }
             
             let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
             let viewController = storyBoard.instantiateViewController(withIdentifier: "PartnerListView") as! PartnerListViewController
-            viewController.partners = partners
+            viewController.invitation = invitation
             viewController.modalTransitionStyle = .crossDissolve
             self.present(viewController, animated: true, completion: nil)
         }

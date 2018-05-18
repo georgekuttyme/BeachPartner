@@ -31,9 +31,15 @@ class MyCalEventDetailsViewController: UIViewController {
         return formatter
     }()
     
+    var loggedInUserId = 0
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if let id = UserDefaults.standard.string(forKey: "bP_userId") {
+            self.loggedInUserId =  Int(id)!
+        }
+        
         setupDataFromEvent()
         getAllInvitations()
     }
@@ -176,6 +182,15 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
             cell?.profileImageView.layer.borderColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0).cgColor
             cell?.profileImageView.layer.borderWidth = 1.5
             
+            cell?.noteButton.tag = indexPath.row+300000
+            cell?.noteButton.addTarget(self, action: #selector(noteBtnPressed), for: .touchUpInside)
+            
+            if partner?.invitorId == loggedInUserId {
+                cell?.noteButton.isHidden = true
+            }
+            else {
+                cell?.noteButton.isHidden = false
+            }
         }
         else {
             let partner = eventInvitation?.invitations?.first?.partners![indexPath.row - 1]
@@ -192,12 +207,52 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
             //            cell?.profileImage.layer.borderColor = UIColor.blue.cgColor
             cell?.profileImageView.layer.borderColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0).cgColor
             cell?.profileImageView.layer.borderWidth = 1.5
+            
+            cell?.noteButton.tag = indexPath.row+300000
+            cell?.noteButton.addTarget(self, action: #selector(noteBtnPressed), for: .touchUpInside)
+
+            if partner?.partnerId == loggedInUserId {
+                cell?.noteButton.isHidden = true
+            }
+            else {
+                cell?.noteButton.isHidden = false
+            }
         }
+        
         return cell!
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let storyboard = UIStoryboard(name: "ConnectionsTabBar", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "NotesViewController") as! NotesViewController
+//        vc.index = index
+//        vc.connectedUserModel = connectedUser
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
+    }
+    
+    
+    @objc func noteBtnPressed(sender: UIButton!) {
+        let index = sender.tag-300000
+        
+        let storyboard = UIStoryboard(name: "ConnectionsTabBar", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "NotesViewController") as! NotesViewController
+        if index == 0 {
+            if let partnerId = eventInvitation?.invitations?.first?.invitorId {
+                vc.toId = partnerId
+            }
+        }
+        else {
+            if let partnerId = eventInvitation?.invitations?.first?.partners![index - 1].partnerId {
+                vc.toId = partnerId
+            }
+        }
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

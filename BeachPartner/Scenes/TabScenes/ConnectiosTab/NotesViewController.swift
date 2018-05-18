@@ -21,8 +21,11 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
     
     var connectedUserModel: ConnectedUserModel?
     var notes = [GetNoteRespModel]()
-//    let dateFormatter = DateFormatter()
 
+    var fromId: Int?
+    var toId: Int?
+    
+    
     var button1 : UIBarButtonItem!
     
     @IBOutlet weak var noNotesLabel: UILabel!
@@ -107,6 +110,13 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        if let id = UserDefaults.standard.string(forKey: "bP_userId") {
+             self.fromId =  Int(id)
+        }
+        if let id = connectedUserModel?.connectedUser?.userId {
+            self.toId = id
+        }
         
         rightBarBtn()
         loadNotes()
@@ -198,7 +208,7 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
     
     private func loadNotes() {
         
-        guard let fromId =  Int(UserDefaults.standard.string(forKey: "bP_userId") ?? ""), let toId = connectedUserModel?.connectedUser?.userId else { return }
+        guard let fromId = fromId, let toId = toId else { return }
         
         ActivityIndicatorView.show("Loading...")
         APIManager.callServer.getNotes(fromUserId: fromId, toUserId: toId, sucessResult: { (responseModel) in
@@ -232,10 +242,12 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
     
     private func updateNote(withId noteId: Int, noteString: String) {
         
-        guard let userId = connectedUserModel?.connectedUser?.userId else { return }
+//        guard let userId = connectedUserModel?.connectedUser?.userId else { return }
+        
+        guard let toId = toId else { return }
         
         ActivityIndicatorView.show("Loading...")
-        APIManager.callServer.updateNote(noteId: noteId, note: noteString, toUserId: userId, sucessResult: { (responseModel) in
+        APIManager.callServer.updateNote(noteId: noteId, note: noteString, toUserId: toId, sucessResult: { (responseModel) in
             ActivityIndicatorView.hiding()
             guard let noteModel = responseModel as? GetNoteRespModel else {
                 print("resp model@@@@@@@@@")
@@ -280,10 +292,12 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
     }
     
     private func didTapAddNoteButton() {
-        guard let connectedUserId = connectedUserModel?.connectedUser?.userId else { return }
+//        guard let connectedUserId = connectedUserModel?.connectedUser?.userId else { return }
+        
+        guard let toId = toId else { return }
         
         ActivityIndicatorView.show("Loading...")
-        APIManager.callServer.postNote(note: " ", toUserId: connectedUserId, sucessResult: { (responseModel) in
+        APIManager.callServer.postNote(note: " ", toUserId: toId, sucessResult: { (responseModel) in
             ActivityIndicatorView.hiding()
 
             guard let noteModel = responseModel as? GetNoteRespModel else { return }

@@ -39,21 +39,21 @@ struct GetEventInvitationRespModel : SafeMappable {
         teamSize <- map.property("teamSize")
         invitations <- map.relations("invitationList")
     }
+}
+
+struct EventInvitation: SafeMappable {
+    var invitorId: Int = 0
+    var invitorName: String = ""
+    var invitorimageURL: String = ""
+    var eventStatus: String = ""
+    var partners: [EventPartner]?
     
-    struct EventInvitation: SafeMappable {
-        var invitorId: Int = 0
-        var invitorName: String = ""
-        var invitorimageURL: String = ""
-        var eventStatus: String = ""
-        var partners: [EventPartner]?
-        
-        init(_ map: [String : Any]) throws {
-            invitorId <- map.property("inviterUserId")
-            invitorName <- map.property("inviterName")
-            invitorimageURL <- map.property("inviterImageUrl")
-            eventStatus <- map.property("eventStatus")
-            partners <- map.relations("partnerList")
-        }
+    init(_ map: [String : Any]) throws {
+        invitorId <- map.property("inviterUserId")
+        invitorName <- map.property("inviterName")
+        invitorimageURL <- map.property("inviterImageUrl")
+        eventStatus <- map.property("eventStatus")
+        partners <- map.relations("partnerList")
     }
 }
 

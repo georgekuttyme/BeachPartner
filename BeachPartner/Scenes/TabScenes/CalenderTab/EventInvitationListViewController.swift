@@ -202,11 +202,11 @@ class EventInvitationListViewController: UIViewController, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
 
-        guard let partners = eventInvitation?.invitations?[indexPath.row].partners else { return }
+        guard let invitation = eventInvitation?.invitations?[indexPath.row] else { return }
         
         let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
         let viewController = storyBoard.instantiateViewController(withIdentifier: "PartnerListView") as! PartnerListViewController
-        viewController.partners = partners
+        viewController.invitation = invitation
         viewController.modalTransitionStyle = .crossDissolve
         self.present(viewController, animated: true, completion: nil)
     }
@@ -215,11 +215,11 @@ class EventInvitationListViewController: UIViewController, UITableViewDataSource
     @objc func didTapDetailButton(sender: UIButton) {
         
         let index =  sender.tag - 20000
-        guard let partners = eventInvitation?.invitations?[index].partners else { return }
+        guard let invitation = eventInvitation?.invitations?[index] else { return }
         
         let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
         let viewController = storyBoard.instantiateViewController(withIdentifier: "PartnerListView") as! PartnerListViewController
-        viewController.partners = partners
+        viewController.invitation = invitation
         viewController.modalTransitionStyle = .crossDissolve
         self.present(viewController, animated: true, completion: nil)
     }
