@@ -388,7 +388,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 if let imageUrl = URL(string: accRespModel.imageUrl) {
                     self.userImageView.sd_setIndicatorStyle(.whiteLarge)
                     self.userImageView.sd_setShowActivityIndicatorView(true)
-                    self.userImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "img_placeHolder"))
+                    self.userImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
                 }
                 self.userName.text = accRespModel.firstName + " " + accRespModel.lastName
                 
