@@ -23,6 +23,7 @@ struct GetEventInvitationRespModel : SafeMappable {
     var eventAdmin: String = ""
     var teamSize: Int = 0
     var invitations: [EventInvitation]?
+    var eventURL: String = ""
     
     init(_ map: [String : Any]) throws {
         
@@ -38,6 +39,7 @@ struct GetEventInvitationRespModel : SafeMappable {
         eventAdmin <- map.property("eventAdmin")
         teamSize <- map.property("teamSize")
         invitations <- map.relations("invitationList")
+        eventURL <- map.property("eventUrl")
     }
 }
 

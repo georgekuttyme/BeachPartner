@@ -210,7 +210,6 @@ class EventDetailsViewController: BeachPartnerViewController {
         let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
         let viewController = storyBoard.instantiateViewController(withIdentifier: "EventRegisterView") as! EventRegisterViewController
         viewController.eventInvitation = self.eventInvitation
-        viewController.event = self.event
         
         let navController = UINavigationController(rootViewController: viewController)
         self.present(navController, animated: true, completion: nil)

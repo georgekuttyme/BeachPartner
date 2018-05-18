@@ -14,7 +14,7 @@ class EventRegisterViewController: UIViewController {
     @IBOutlet weak var webView: UIWebView!
     
     var eventInvitation: GetEventInvitationRespModel?
-    var event: GetEventRespModel?
+    var eventURL: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +24,8 @@ class EventRegisterViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = dismissButton
         
        
-        guard let eventURL = event?.eventURL else {
+        guard let eventURL = eventInvitation?.eventURL else {
+            dismiss(animated: true, completion: nil)
             return
         }
         if let url =  URL(string: eventURL) {
@@ -35,7 +36,7 @@ class EventRegisterViewController: UIViewController {
 
     @objc func didTapDismissButton() {
         
-        let alert = UIAlertController(title: "", message: "Did you successfully completed Registration?", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "", message: "Did you successfully complete Registration?", preferredStyle: UIAlertControllerStyle.alert)
         let action = UIAlertAction(title: "Yes", style: .default) { (alertAction) in
             
             self.registerEvent()
