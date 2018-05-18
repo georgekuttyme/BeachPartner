@@ -30,6 +30,8 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
     var eventId: Int?
     var eventStartDate: Int?
     
+    var numberOfInvitationsLeft: Int = 5
+    
     
 
     var connectedUsers = [ConnectedUserModel]()
@@ -120,7 +122,10 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
         let index = sender.tag-200000
         let user = connectedUsers[index]
         
-        if myTeam.count == 5 { return }
+        if myTeam.count == numberOfInvitationsLeft {
+            self.alert(message: "Only 5 invitations allowed")
+            return
+        }
         
         myTeam.append(user)
         connectedUsers.remove(at: index)
@@ -165,10 +170,6 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
 
     @IBAction func didTapInviteFriendButton(_ sender: UIButton) {
         
-//        delgate?.successfullyInvitedPartners(sender: self)
-//        return
-        
-        
         guard let eventId = eventId else { return }
         if myTeam.count == 0 { return }
         
@@ -179,11 +180,20 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
             }
         }
         
-        
         ActivityIndicatorView.show("Loading")
         APIManager.callServer.registerEvent(eventId: eventId, registerType: "Invitee", partners: partnerList, sucessResult: { (response) in
+            
             ActivityIndicatorView.hiding()
-            self.delgate?.successfullyInvitedPartners(sender: self)
+            
+            guard let responseModel = response as? CommonResponse else {
+                print("Rep model does not match")
+                return
+            }
+            self.alert(message: responseModel.message)
+            
+            if responseModel.status == "OK" {
+                self.delgate?.successfullyInvitedPartners(sender: self)
+            }
         }) { (error) in
             
             ActivityIndicatorView.hiding()

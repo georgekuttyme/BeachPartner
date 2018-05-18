@@ -137,6 +137,21 @@ class EventDetailsViewController: BeachPartnerViewController {
             generalEventDetailsView.isHidden = true
         }
         
+//        if isFromHomeTab && (eventInvitation.invitations?.first?.partners?.count)! < 5 {
+//            
+//            invitePartnerButton.isEnabled = true
+//            invitePartnerButton.alpha = 1.0
+//        }
+//        
+//        if event?.eventStaus != "Active" && event?.eventStaus != "Registered" && (eventInvitation.invitations?.first?.partners?.count)! < 5 {
+//            invitePartnerButton.isEnabled = true
+//            invitePartnerButton.alpha = 1.0
+//        }
+        
+        
+        
+        
+        
         
 //        if eventInvitation.invitations?.first?.eventStatus == "Active" {
 //
@@ -189,28 +204,16 @@ class EventDetailsViewController: BeachPartnerViewController {
         }
     }
     
+    
     @IBAction func didTapRegisterButton(_ sender: UIButton) {
         
-        guard let eventInvitation = eventInvitation else { return }
+        let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
+        let viewController = storyBoard.instantiateViewController(withIdentifier: "EventRegisterView") as! EventRegisterViewController
+        viewController.eventInvitation = self.eventInvitation
+        viewController.event = self.event
         
-        guard let partners = eventInvitation.invitations?.first?.partners else { return }
-        var partnerList = [Int]()
-        for partner in partners {
-            partnerList.append(partner.partnerId)
-        }
-        
-        ActivityIndicatorView.show("Loading")
-        APIManager.callServer.registerEvent(eventId: eventInvitation.eventId, registerType: "Organizer", partners: partnerList, sucessResult: { (response) in
-            ActivityIndicatorView.hiding()
-        }) { (error) in
-            
-            ActivityIndicatorView.hiding()
-            guard let errorString  = error else {
-                return
-            }
-            self.alert(message: errorString)
-            print(error)
-        }
+        let navController = UINavigationController(rootViewController: viewController)
+        self.present(navController, animated: true, completion: nil)
     }
     
     @IBAction func didTapInvitePartnerButton(_ sender: UIButton) {
@@ -237,6 +240,39 @@ class EventDetailsViewController: BeachPartnerViewController {
         else {
             self.navigationController?.popViewController(animated: true)
         }
+    }
+    
+    
+    @IBAction func didTapGoingButton(_ sender: UIButton) {
+        
+        guard let event = event else { return }
+        let partnerList = [Int]()
+        
+        ActivityIndicatorView.show("Loading")
+        APIManager.callServer.registerEvent(eventId: event.masterEventId, registerType: "Organizer", partners: partnerList, sucessResult: { (response) in
+            ActivityIndicatorView.hiding()
+            
+            guard let responseModel = response as? CommonResponse else {
+                print("Rep model does not match")
+                return
+            }
+            
+            self.alert(message: responseModel.message)
+            self.navigationController?.popViewController(animated: true)
+
+        }) { (error) in
+            
+            ActivityIndicatorView.hiding()
+            guard let errorString  = error else {
+                return
+            }
+            self.alert(message: errorString)
+            print(error)
+        }
+    }
+    
+    @IBAction func didTapNotGoingButton(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
     }
     
     private func dateStringFromTimeInterval(interval: Int) -> String {
