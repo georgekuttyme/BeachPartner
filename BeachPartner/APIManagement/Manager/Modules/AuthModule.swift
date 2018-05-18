@@ -1123,7 +1123,7 @@ extension APIManager{
             let jsonDict = response!
 
             do {
-                let accRespModel = try GeneralResponse(jsonDict as! [String : Any])
+                let accRespModel = try CommonResponse(jsonDict as! [String : Any])
                 sucessResult(accRespModel)
                 return
             } catch {
@@ -1209,7 +1209,7 @@ extension APIManager{
                         let jsonDict = response!
             
                         do {
-                            let accRespModel = try GeneralResponse(jsonDict as! [String : Any])
+                            let accRespModel = try CommonResponse(jsonDict as! [String : Any])
                             sucessResult(accRespModel)
                             return
                         } catch {
@@ -1225,6 +1225,41 @@ extension APIManager{
             return
         }
     }
+    
+    public func notifyCourtNumber(eventId: Int, organiserId: Int, courtNumber: Int, sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure) {
+        
+        let params: [String: Any] = [
+            "eventId": eventId,
+            "orgUserId": organiserId,
+            "courtNumber": courtNumber
+        ]
+        
+        APIClient.doRequest.inPostReq(method: ApiMethods.InvitationResponse, params: params, sucess: { (response) in
+            
+            APIManager.printOnDebug(response: " Resppp1111 : \(String(describing: response))")
+            
+            //            sucessResult(nil)
+            
+            let jsonDict = response!
+            
+            do {
+                let accRespModel = try CommonResponse(jsonDict as! [String : Any])
+                sucessResult(accRespModel)
+                return
+            } catch {
+                print("Catched")
+                errorResult(error.localizedDescription)
+                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                return
+            }
+        }) { (error) in
+            self.busyOff()
+            errorResult(error?.localizedDescription)
+            APIManager.printOnDebug(response: "error:\(String(describing: error?.localizedDescription))")
+            return
+        }
+    }
+    
     
     public func getAllEventBetweenDetails(sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure){
         let params = [String:String]()

@@ -56,6 +56,7 @@ struct GetEventRespModel : SafeMappable {
     var registerType: String = ""
     var eventStaus: String = ""
     var status: String = ""
+    var eventURL: String = ""
     var activeDates = [String]()
 //    var createdBy:
 //    var lastModifiedBy
@@ -87,6 +88,7 @@ struct GetEventRespModel : SafeMappable {
         registerType <- map.property("registerType")
         eventStaus <- map.property("eventStatus")
         status <- map.property("status")
+        eventURL <- map.property("eventurl")
     }
 }
 

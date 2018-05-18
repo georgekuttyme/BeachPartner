@@ -39,6 +39,16 @@ struct GeneralResponse : SafeMappable{
     
 }
 
+struct  CommonResponse : SafeMappable {
+
+    var status: String = ""
+    var message: String = ""
+    
+    init(_ map: [String : Any])throws {
+        status <- map.property("status")
+        message  <- map.property("message")
+    }
+}
 
 
 
