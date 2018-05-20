@@ -156,7 +156,7 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if let count = eventInvitation?.invitations?.first?.partners?.count {
-            return count + 1
+            return count 
         }
         return 0
     }
@@ -166,34 +166,79 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
         let cell = tableView.dequeueReusableCell(withIdentifier: "PartnerListCell", for: indexPath) as? PartnerListCell
         cell?.selectionStyle = .none
         
-        if indexPath.row == 0 {
-            let partner = eventInvitation?.invitations?.first
-            cell?.nameLabel.text = partner?.invitorName
-            cell?.statusLabel.text = "Organiser"
-            
-            if let imageUrl = URL(string: (partner?.invitorimageURL)!) {
-                cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
-                cell?.profileImageView.sd_setShowActivityIndicatorView(true)
-                cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
-            }
-            cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
-            cell?.profileImageView.clipsToBounds = true
-            //            cell?.profileImage.layer.borderColor = UIColor.blue.cgColor
-            cell?.profileImageView.layer.borderColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0).cgColor
-            cell?.profileImageView.layer.borderWidth = 1.5
-            
-            cell?.noteButton.tag = indexPath.row+300000
-            cell?.noteButton.addTarget(self, action: #selector(noteBtnPressed), for: .touchUpInside)
-            
-            if partner?.invitorId == loggedInUserId {
-                cell?.noteButton.isHidden = true
+        if eventInvitation?.invitations?.first?.invitorId != loggedInUserId {
+            if indexPath.row == 0 {
+                let partner = eventInvitation?.invitations?.first
+                cell?.nameLabel.text = partner?.invitorName
+                cell?.statusLabel.text = "Organiser"
+                
+                if let imageUrl = URL(string: (partner?.invitorimageURL)!) {
+                    cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
+                    cell?.profileImageView.sd_setShowActivityIndicatorView(true)
+                    cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                }
+                cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
+                cell?.profileImageView.clipsToBounds = true
+                //            cell?.profileImage.layer.borderColor = UIColor.blue.cgColor
+                cell?.profileImageView.layer.borderColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0).cgColor
+                cell?.profileImageView.layer.borderWidth = 1.5
+                
+                cell?.noteButton.tag = indexPath.row+300000
+                cell?.noteButton.addTarget(self, action: #selector(noteBtnPressed), for: .touchUpInside)
+                
+                if partner?.invitorId == loggedInUserId {
+                    cell?.noteButton.isHidden = true
+                }
+                else {
+                    cell?.noteButton.isHidden = false
+                }
             }
             else {
-                cell?.noteButton.isHidden = false
+                if eventInvitation?.invitations?.first?.partners![indexPath.row - 1].partnerId == loggedInUserId {
+                    cell?.noteButton.isHidden = true
+                    let partner = eventInvitation?.invitations?.first?.partners![indexPath.row]
+                    cell?.nameLabel.text = partner?.partnerName
+                    cell?.statusLabel.text = ""
+                    
+                    if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
+                        cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
+                        cell?.profileImageView.sd_setShowActivityIndicatorView(true)
+                        cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                    }
+                    cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
+                    cell?.profileImageView.clipsToBounds = true
+                    //            cell?.profileImage.layer.borderColor = UIColor.blue.cgColor
+                    cell?.profileImageView.layer.borderColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0).cgColor
+                    cell?.profileImageView.layer.borderWidth = 1.5
+                    
+                    cell?.noteButton.tag = indexPath.row+300000
+                    cell?.noteButton.addTarget(self, action: #selector(noteBtnPressed), for: .touchUpInside)
+                }
+                else {
+                    cell?.noteButton.isHidden = false
+                    let partner = eventInvitation?.invitations?.first?.partners![indexPath.row - 1]
+                    cell?.nameLabel.text = partner?.partnerName
+                    cell?.statusLabel.text = ""
+                    
+                    if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
+                        cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
+                        cell?.profileImageView.sd_setShowActivityIndicatorView(true)
+                        cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                    }
+                    cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
+                    cell?.profileImageView.clipsToBounds = true
+                    //            cell?.profileImage.layer.borderColor = UIColor.blue.cgColor
+                    cell?.profileImageView.layer.borderColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0).cgColor
+                    cell?.profileImageView.layer.borderWidth = 1.5
+                    
+                    cell?.noteButton.tag = indexPath.row+300000
+                    cell?.noteButton.addTarget(self, action: #selector(noteBtnPressed), for: .touchUpInside)
+                    
+                }
             }
         }
-        else {
-            let partner = eventInvitation?.invitations?.first?.partners![indexPath.row - 1]
+        else{
+            let partner = eventInvitation?.invitations?.first?.partners![indexPath.row]
             cell?.nameLabel.text = partner?.partnerName
             cell?.statusLabel.text = ""
             
@@ -210,13 +255,6 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
             
             cell?.noteButton.tag = indexPath.row+300000
             cell?.noteButton.addTarget(self, action: #selector(noteBtnPressed), for: .touchUpInside)
-
-            if partner?.partnerId == loggedInUserId {
-                cell?.noteButton.isHidden = true
-            }
-            else {
-                cell?.noteButton.isHidden = false
-            }
         }
         
         return cell!

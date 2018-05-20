@@ -52,7 +52,7 @@ struct ApiMethods {
     static let EventInvitations = "/events/user/invitations/"
     static let InvitationResponse = "/events/user/invitationResponse"
     static let NotifyCourtNumber = "/events/user/notifyCourtNumber"
-    
+    static let GetSearchEvents    = "/events/search"
     static let GetBlockedUser = "/users/block-user"
     static let UnBlockUser = "/users/unblock-user"
     static let AddProfileVideoImage = "/storage/uploadProfileData"

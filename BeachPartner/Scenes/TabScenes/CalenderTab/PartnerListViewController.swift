@@ -13,12 +13,16 @@ class PartnerListViewController: UIViewController, UITableViewDataSource, UITabl
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var tableView: UITableView!
     
+    var loggedInUserId = 0
     var invitation: EventInvitation?
     
 //    var partners: [EventPartner] = [EventPartner]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let id = UserDefaults.standard.string(forKey: "bP_userId") {
+            self.loggedInUserId =  Int(id)!
+        }
 
     }
     
@@ -30,7 +34,7 @@ class PartnerListViewController: UIViewController, UITableViewDataSource, UITabl
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if let count = invitation?.partners?.count {
-            return count + 1
+            return count 
         }
         return 0
     }
@@ -39,40 +43,80 @@ class PartnerListViewController: UIViewController, UITableViewDataSource, UITabl
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "PartnerListCell", for: indexPath) as? PartnerListCell
         cell?.selectionStyle = .none
-        
-        if indexPath.row == 0 {
-            
-            cell?.nameLabel.text = invitation?.invitorName
-            cell?.statusLabel.text = "Organizer"
-            
-            if let imageUrl = URL(string: (invitation?.invitorimageURL)!) {
-                cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
-                cell?.profileImageView.sd_setShowActivityIndicatorView(true)
-                cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+        print("indexPath.row ->",indexPath.row,"\n\n")
+        var index = indexPath.row
+        if invitation?.invitorId != loggedInUserId {
+            if indexPath.row == 0 {
+                
+                cell?.nameLabel.text = invitation?.invitorName
+                cell?.statusLabel.text = "Organizer"
+                
+                if let imageUrl = URL(string: (invitation?.invitorimageURL)!) {
+                    cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
+                    cell?.profileImageView.sd_setShowActivityIndicatorView(true)
+                    cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                }
+                cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
+                cell?.profileImageView.clipsToBounds = true
+                //            cell?.profileImage.layer.borderColor = UIColor.blue.cgColor
+                cell?.profileImageView.layer.borderColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0).cgColor
+                cell?.profileImageView.layer.borderWidth = 1.5
+                
             }
-            cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
-            cell?.profileImageView.clipsToBounds = true
-            //            cell?.profileImage.layer.borderColor = UIColor.blue.cgColor
-            cell?.profileImageView.layer.borderColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0).cgColor
-            cell?.profileImageView.layer.borderWidth = 1.5
-            
+            else {
+                
+                var partner = invitation?.partners![index - 1]
+                if partner?.partnerId == loggedInUserId {
+                    partner = invitation?.partners![index]
+                    cell?.nameLabel.text = partner?.partnerName
+                    cell?.statusLabel.text = partner?.invitationStatus
+                    print("index->",indexPath.row,"  ",index,"\n\n")
+                    if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
+                        cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
+                        cell?.profileImageView.sd_setShowActivityIndicatorView(true)
+                        cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                    }
+                    cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
+                    cell?.profileImageView.clipsToBounds = true
+                    //            cell?.profileImage.layer.borderColor = UIColor.blue.cgColor
+                    cell?.profileImageView.layer.borderColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0).cgColor
+                    cell?.profileImageView.layer.borderWidth = 1.5
+                }
+                else {
+                    cell?.nameLabel.text = partner?.partnerName
+                    cell?.statusLabel.text = partner?.invitationStatus
+                    print("index->",indexPath.row,"  ",index,"\n\n")
+                    if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
+                        cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
+                        cell?.profileImageView.sd_setShowActivityIndicatorView(true)
+                        cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                    }
+                    cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
+                    cell?.profileImageView.clipsToBounds = true
+                    //            cell?.profileImage.layer.borderColor = UIColor.blue.cgColor
+                    cell?.profileImageView.layer.borderColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0).cgColor
+                    cell?.profileImageView.layer.borderWidth = 1.5
+                }
+                
+            }
         }
-        else {
-            
-            let partner = invitation?.partners![indexPath.row - 1]
-            cell?.nameLabel.text = partner?.partnerName
-            cell?.statusLabel.text = partner?.invitationStatus
-            
-            if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
-                cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
-                cell?.profileImageView.sd_setShowActivityIndicatorView(true)
-                cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+        else{
+            print("index->",indexPath.row,"  ",index,"\n\n")
+            if let partner = invitation?.partners![index]{
+                cell?.nameLabel.text = partner.partnerName
+                cell?.statusLabel.text = partner.invitationStatus
+                
+                if let imageUrl = URL(string: (partner.partnerImageURL)) {
+                    cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
+                    cell?.profileImageView.sd_setShowActivityIndicatorView(true)
+                    cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                }
+                cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
+                cell?.profileImageView.clipsToBounds = true
+                //            cell?.profileImage.layer.borderColor = UIColor.blue.cgColor
+                cell?.profileImageView.layer.borderColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0).cgColor
+                cell?.profileImageView.layer.borderWidth = 1.5
             }
-            cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
-            cell?.profileImageView.clipsToBounds = true
-            //            cell?.profileImage.layer.borderColor = UIColor.blue.cgColor
-            cell?.profileImageView.layer.borderColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0).cgColor
-            cell?.profileImageView.layer.borderWidth = 1.5
         }
         
         return cell!

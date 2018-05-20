@@ -432,6 +432,57 @@ final class APIGetClient{
 //        }
 //        )
 //    }
+    public func inPostRespArray(url:String,params:[String:Any],sucess:@escaping sucessClosure, failure:@escaping failureClosure){
+        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        print("####### API Request ....url :", url, "\n #### parameters :", params)
+        let cookieJar = HTTPCookieStorage.shared
+        for cookie in cookieJar.cookies! {
+            print(cookie.name+"="+cookie.value)
+        }
+        let token = API.FCM_AUTH_TOKEN
+        var headders: HTTPHeaders = [:]
+        if( token != ""){
+            headders = [
+                "Accept": "application/json, text/plain, */*",
+                "Content-Type" :"application/json ; charset=utf-8",
+                "Authorization" : "key=" + token
+            ]
+        }
+        else{
+            headders = [
+                "Accept": "application/json, text/plain, */*",
+                "Content-Type" :"application/json; charset=utf-8"
+            ]
+        }
+        
+        let postRequest = self.sessionManager.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers:headders
+        )
+        print("####### API response String :", postRequest.responseString,"\n")
+        postRequest.responseJSON { (responseObject) in
+            print("####### API response :", responseObject,"\n")
+            let cookieJar = HTTPCookieStorage.shared
+            for cookie in cookieJar.cookies! {
+                print(cookie.name+"="+cookie.value)
+            }
+            print("_________________________________________________\n\n\n")
+            
+            
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            switch  responseObject.result {
+            case .success:
+                _ = responseObject.result.value as! NSArray
+//                sucess(_)
+                return
+            case .failure:
+                let error = responseObject.result.error
+                failure(error)
+                return
+            }
+            }.responseString { (jsonString) in
+                APIManager.printOnDebug(response: jsonString)
+        }
+    }
     
 }
 
@@ -515,6 +566,16 @@ extension APIGetClient{
             failure(error)
         }
     }
+    
+    public func inPostRespArray(method:String, params: [String:Any],sucess:@escaping sucessClosure,failure:@escaping failureClosure){
+        
+        self.inPostRespArray(url: BaseUrl.makeUrl(forProduction: false)+method, params: params, sucess: { (response) in
+            sucess(response)
+        }) { (error) in
+            failure(error)
+        }
+    }
+
 }
 
 
