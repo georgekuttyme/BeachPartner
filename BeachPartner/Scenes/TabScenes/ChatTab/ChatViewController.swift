@@ -56,12 +56,22 @@ class ChatViewController: JSQMessagesViewController {
                 }
             }
         })
+        
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            let screenSize = UIScreen.main.bounds.size;
+            if screenSize.height == 812.0{
+                inputToolbar.contentView.textView.becomeFirstResponder()
+            }
+        }
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
+        
     }
+
+    
     @IBAction func didTapBackButton(_ sender: Any) {
+        self.view.endEditing(true)
         self.dismiss(animated: true, completion: nil)
     }
     // MARK: - User configuration
