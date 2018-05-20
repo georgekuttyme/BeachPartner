@@ -32,70 +32,10 @@ final class APIClient{
     /// - parameter failure:    The failureClosure which invoke in falure request.
     ///
     
-    //    public func inPost(url:String,params:[String:String],sucess:@escaping sucessClosure, failure:@escaping failureClosure){
-    //
-    //
-    ////        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-    //        DispatchQueue.main.async(execute: {
-    //            /* Do UI work here */
-    //
-    //        do{
-    //            print("inside do")
-    //            let headers = [
-    //                "Content-Type": "application/json",
-    //                "Cache-Control": "no-cache",
-    //                ]
-    //            let parameters = params
-    //
-    //            let postData = try JSONSerialization.data(withJSONObject: parameters, options: [])
-    //
-    //            let request = NSMutableURLRequest(url: NSURL(string: url)! as URL,
-    //                                              cachePolicy: .useProtocolCachePolicy,
-    //                                              timeoutInterval: 10.0)
-    //            request.httpMethod = "POST"
-    //            request.allHTTPHeaderFields = headers
-    //            request.httpBody = postData as Data
-    //
-    //            let session = URLSession.shared
-    //            let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-    //                if (error != nil) {
-    //                    print(error)
-    //                } else {
-    //                    let httpResponse = response as? HTTPURLResponse
-    //                    print(httpResponse , data)
-    //
-    //                    let responseString = String(data: data!, encoding: .utf8) ?? ""
-    //                    print("responseString = ",responseString)
-    //
-    //                    do {
-    //                        let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String:Any]
-    //                        print("responses :: ", json)
-    //                        sucess(json as NSDictionary?)
-    //                        return
-    //                    } catch let error as NSError {
-    //                        print(error)
-    //                        failure(error)
-    //                        return
-    //                    }
-    //                }
-    //            })
-    //
-    //            dataTask.resume()
-    //
-    //        }catch {
-    //            print(error)
-    //        }
-    //
-    //        })
-    //    }
-    
-    
+
     public func inPost(url:String,params:[String:String],sucess:@escaping sucessClosure, failure:@escaping failureClosure){
         
-        
-        
-        
-        
+    
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
         print("####### API Request ....url :", url, "\n #### parameters :", params)
@@ -127,17 +67,9 @@ final class APIClient{
             ]
         }
         
-//        headders: HTTPHeaders = [
-//            "Accept": "application/json, text/plain, */*",
-//            "Content-Type" :"application/json ; charset=utf-8"
-//        ]
-        
-        
         let postRequest = self.sessionManager.request(url, method: .post, parameters: params as [String:Any], encoding: JSONEncoding.default, headers:headders
         )
-        
-        //""
-        
+ 
         print("####### API response String :", postRequest.responseString,"\n")
         
         
@@ -147,8 +79,6 @@ final class APIClient{
             print("####### API response :", responseObject,"\n")
             
             let cookieJar = HTTPCookieStorage.shared
-            
-            //            print("# Cookie data count :", cookieJar.cookies?.count as Any)
             
             for cookie in cookieJar.cookies! {
                 print(cookie.name+"="+cookie.value)
@@ -180,17 +110,9 @@ final class APIClient{
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
         print("####### API Request ....url :", url, "\n #### parameters :", params)
-        
-        //        let cookie = HTTPCookieStorage.shared.cookies
         let cookieJar = HTTPCookieStorage.shared
-        //        print("\n ####### Request cookie...elements : ", cookieJar.cookies?.count as Any , "\n")
-        
         for cookie in cookieJar.cookies! {
-            //            print(cookie.name+"="+cookie.value)
-            //             cookieJar.deleteCookie(cookie)
         }
-        
-        
         let token = UserDefaults.standard.string(forKey: "bP_token") ?? ""
         
         var headders: HTTPHeaders = [:]
@@ -224,9 +146,6 @@ final class APIClient{
             print("####### API response :", responseObject,"\n")
             
             let cookieJar = HTTPCookieStorage.shared
-            
-            //            print("# Cookie data count :", cookieJar.cookies?.count as Any)
-            
             for cookie in cookieJar.cookies! {
                 print(cookie.name+"="+cookie.value)
             }
@@ -258,10 +177,7 @@ final class APIClient{
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
         print("####### API Request ....url :", url, "\n #### parameters :", params)
-        
-        //        let cookie = HTTPCookieStorage.shared.cookies
         let cookieJar = HTTPCookieStorage.shared
-        //        print("\n ####### Request cookie...elements : ", cookieJar.cookies?.count as Any , "\n")
         
         for cookie in cookieJar.cookies! {
             print(cookie.name+"="+cookie.value)
@@ -284,17 +200,9 @@ final class APIClient{
                 "Content-Type" :"application/json; charset=utf-8"
             ]
         }
-        
-        //        headders: HTTPHeaders = [
-        //            "Accept": "application/json, text/plain, */*",
-        //            "Content-Type" :"application/json ; charset=utf-8"
-        //        ]
-        
-        
+
         let postRequest = self.sessionManager.request(url, method: .post, parameters: params as [String:Any], encoding: JSONEncoding.default, headers:headders
         )
-        
-        //""
         
         print("####### API response String :", postRequest.responseString,"\n")
         
@@ -305,8 +213,6 @@ final class APIClient{
             print("####### API response :", responseObject,"\n")
             
             let cookieJar = HTTPCookieStorage.shared
-            
-            //            print("# Cookie data count :", cookieJar.cookies?.count as Any)
             
             for cookie in cookieJar.cookies! {
                 print(cookie.name+"="+cookie.value)
@@ -508,9 +414,6 @@ final class APIClient{
             let parameters = params
             
             let postData = try JSONSerialization.data(withJSONObject: parameters)
-            //            request.HTTPBody = data
-            
-            //            let postData = try JSONSerialization.data(withJSONObject: parameters)
             
             let request = NSMutableURLRequest(url: NSURL(string: url)! as URL,
                                               cachePolicy: .useProtocolCachePolicy,
@@ -567,61 +470,6 @@ final class APIClient{
     ///
     
     public func inGet(url:String,params:[String:String],sucess:@escaping sucessClosure,failure:@escaping failureClosure){
-        
-        //        do{
-        //            print("inside do")
-        //            let headers = [
-        //                "Content-Type": "application/json",
-        //                "Cache-Control": "no-cache",
-        //                ]
-        //            let parameters = params
-        //
-        //            let postData = try JSONSerialization.data(withJSONObject: parameters, options: [])
-        //
-        //            let request = NSMutableURLRequest(url: NSURL(string: url)! as URL,
-        //                                              cachePolicy: .useProtocolCachePolicy,
-        //                                              timeoutInterval: 10.0)
-        //            request.httpMethod = "GET"
-        //            request.allHTTPHeaderFields = headers
-        //            request.httpBody = postData as Data
-        //
-        //
-        ////            print ("request : ", postData.str)
-        //            let session = URLSession.shared
-        //            let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-        //                if (error != nil) {
-        //                    print(error)
-        //                } else {
-        //                    let httpResponse = response as? HTTPURLResponse
-        //                    print(httpResponse , data)
-        //
-        //                    let responseString = String(data: data!, encoding: .utf8) ?? ""
-        //                    print("responseString = ",responseString)
-        //
-        //                    do {
-        //                        let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String:Any]
-        //                        print("responses :: ", json)
-        //                        sucess(json as NSDictionary?)
-        //                        return
-        //                    } catch let error as NSError {
-        //                        print(error)
-        //                        failure(error)
-        //                        return
-        //                    }
-        //                }
-        //            })
-        //
-        //            dataTask.resume()
-        //
-        //        }catch {
-        //            print(error)
-        //        }
-        //
-        //
-        
-        
-//        if(params.array(<#T##name: String##String#>))
-        
         
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         

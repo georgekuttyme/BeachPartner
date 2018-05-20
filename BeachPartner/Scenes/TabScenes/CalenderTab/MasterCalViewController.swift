@@ -40,7 +40,7 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        getAllEvents()
         //Temp
         let token = UserDefaults.standard.string(forKey: "bP_token")
         print(token)
@@ -51,7 +51,7 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        getAllEvents()
+       // getAllEvents()
     }
     
     
