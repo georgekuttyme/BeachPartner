@@ -471,8 +471,9 @@ final class APIGetClient{
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             switch  responseObject.result {
             case .success:
-                _ = responseObject.result.value as! NSArray
-//                sucess(_)
+                let json = responseObject.result.value
+                print("\n\n\n search response - >",json)
+                sucess(json as! NSDictionary)
                 return
             case .failure:
                 let error = responseObject.result.error

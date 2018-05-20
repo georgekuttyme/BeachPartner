@@ -188,26 +188,26 @@ class FilterViewController: UIViewController {
         //        self.userData.gender = (self.genderBtn.titleLabel?.text)!
         
         
-//        
-//        ActivityIndicatorView.show("Loading")
-//        APIManager.callServer.getSearchEvents(sucessResult: { (responseModel) in
-//            
-//            ActivityIndicatorView.hiding()
-//            guard let eventsArrayModel = responseModel as? GetEventsRespModelArray else {
-//                print("Rep model does not match")
-//                return
-//            }
-//            print(">>÷÷",eventsArrayModel)
-//            
-//        }) { (error) in
-//            
-//            ActivityIndicatorView.hiding()
-//            guard let errorString  = error else {
-//                return
-//            }
-//            self.alert(message: errorString)
-//        }
-//        
+
+        ActivityIndicatorView.show("Loading")
+        APIManager.callServer.getSearchEvents(sucessResult: { (responseModel) in
+
+            ActivityIndicatorView.hiding()
+            guard let eventsArrayModel = responseModel as? GetEventsRespModelArray else {
+                print("Rep model does not match")
+                return
+            }
+            print(">>÷÷",eventsArrayModel)
+
+        }) { (error) in
+
+            ActivityIndicatorView.hiding()
+            guard let errorString  = error else {
+                return
+            }
+            self.alert(message: errorString)
+        }
+
         
     }
     

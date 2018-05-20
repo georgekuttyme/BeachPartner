@@ -34,7 +34,7 @@
 	<key>FacebookDisplayName</key>
 	<string>BeachPartner</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
-	<true/>
+	<false/>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
