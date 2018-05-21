@@ -46,10 +46,10 @@ struct GetAllEventsBetweenResponseModel : SafeMappable {
         var eventDescription:String = ""
         var eventLocation:String = ""
         var eventVenue:String = ""
-        var eventStartDate:String = ""
-        var eventEndDate:String = ""
-        var eventRegStartDate:String = ""
-        var eventRegEndDate:String = ""
+        var eventStartDate:Int = 0
+        var eventEndDate:Int = 0
+        var eventRegStartDate:Int = 0
+        var eventRegEndDate:Int = 0
         var eventadmin:EventAdminModel?
         init() {
             

@@ -1287,7 +1287,7 @@ extension APIManager{
             
             do {
                 
-                let accRespModel = try GetAllEventsBetweenResponseModelArray(jsonDict)
+                let accRespModel = try GetUpcomingTournamentsRespModelArray(jsonDict)
                 sucessResult(accRespModel)
                 return
             } catch {

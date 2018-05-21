@@ -11,7 +11,7 @@ import Firebase
 //import DropDown
 
 class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegate, UICollectionViewDataSource,UITabBarControllerDelegate {
-    
+    var loggedInUserId = 0
     private lazy var channelRef: DatabaseReference = Database.database().reference().child("messages")
     private var channelRefHandle: DatabaseHandle?
     
@@ -52,11 +52,12 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     @IBOutlet var tournamentRequestsNext: UIButton!
     
     var selectedTabViewController:Int!
-    var getAllEventsUsers = [GetAllEventsBetweenResponseModel]()
+    var getAllEventsUsers = [GetUpcomingTournamentsRespModel]()
     var subscribedBlueBpUsers = [SearchUserModel]()
     var connectedUsers = [ConnectedUserModel]()
     var activeUsers = [ConnectedUserModel]()
     var recentChatList = [[String:String]]()
+    var partnerArray = [String]()
     var tournamentRequestList: GetTournamentRequestRespModel?
     
     var tournamentRequestSentViewActive = true
@@ -64,10 +65,8 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     
     var date = ["04/01/2018","04/01/2018","04/01/2018","04/01/2018","04/01/2018","04/01/2018","04/01/2018"]
     var eventName = ["America","America","America","America","America","America","America"]
-    
-    var partners = ["Martin,David,John,Hari","Martin,David,John,Hari","Tom, Jerry","Robin, Chris","Evan, Chris","Evan, Chris","Sam, Thomas"]
     var name = ["Alivia Orvieto","Marti McLaurin","Liz Held"]
-    
+    var partners = [String]()
     fileprivate let formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM-dd-yyyy"
@@ -84,6 +83,9 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         self.userImg.layer.cornerRadius = self.userImg.frame.size.width/2
         self.userImg.clipsToBounds = true
         selectedTabViewController=0
+        if let id = UserDefaults.standard.string(forKey: "bP_userId") {
+            self.loggedInUserId =  Int(id)!
+        }
         self.tabBarController?.delegate = self
         self.getUsersListforBlueBp()
         self.getNewUsersList()
@@ -141,15 +143,15 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         alert.addAction(actionButton)
         alert.addAction(cancelButton)
         self.present(alert, animated: true, completion: nil)
-
+        
     }
     
     func getAllUserEventsList(){
         APIManager.callServer.getAllEventBetweenDetails(sucessResult: {(response) in
-            guard let eventModelArray = response as? GetAllEventsBetweenResponseModelArray else{
+            guard let eventModelArray = response as? GetUpcomingTournamentsRespModelArray else{
                 return
             }
-            self.getAllEventsUsers = eventModelArray.getAllEventsBetRespModel
+            self.getAllEventsUsers = eventModelArray.getUpcomingTournamentsRespModel
             print("#@$%^&*()",self.getAllEventsUsers.count)
             if self.getAllEventsUsers.count == 0 {
                 self.myLabel.isHidden = false
@@ -189,7 +191,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         
         
         
-//        tornamentRequestLabel.text = "No tournament Requests Sent"
+        //        tornamentRequestLabel.text = "No tournament Requests Sent"
     }
     
     @IBAction func tournamentRequestsReceivedBtnClicked(_ sender: UIButton) {
@@ -197,9 +199,9 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         tournamentRequestSentViewActive = false
         self.tournamentRequestsLbl.text = "     Tournament Requests Received"
         self.tournamentRequestsCollectionView.reloadData()
-
         
-//        tornamentRequestLabel.text = "No tournament Requests Received"
+        
+        //        tornamentRequestLabel.text = "No tournament Requests Received"
     }
     
     @IBAction func btnLikesClicked(_ sender: Any) {
@@ -209,15 +211,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     }
     
     @IBAction func UpcomingTournamentsNextBtnClicked(_ sender: Any) {
-        let visibleItems: NSArray = self.upCommingTournament.indexPathsForVisibleItems as NSArray
-        if visibleItems.count == 0 {
-            return
-        }
-        let currentItem: IndexPath = visibleItems.lastObject as! IndexPath
-        let nextItem: IndexPath = IndexPath(item: currentItem.item + 1, section: 0)
-        if nextItem.row < getAllEventsUsers.count {
-            self.upCommingTournament.scrollToItem(at: nextItem, at: .left, animated: true)
-        }
+        
         
     }
     
@@ -236,15 +230,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     }
     
     @IBAction func tournamentRequestsNextBtnClicked(_ sender: Any) {
-        let visibleItems: NSArray = self.tournamentRequestsCollectionView.indexPathsForVisibleItems as NSArray
-        if visibleItems.count == 0 {
-            return
-        }
-        let currentItem: IndexPath = visibleItems.lastObject as! IndexPath
-        let nextItem: IndexPath = IndexPath(item: currentItem.item + 1, section: 0)
-        if nextItem.row < (tournamentRequestList?.requestsSent.count)! {
-            self.tournamentRequestsCollectionView.scrollToItem(at: nextItem, at: .left, animated: true)
-        }
+        
     }
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController){
@@ -325,20 +311,46 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         if collectionView == self.upCommingTournament {
             print("=========")
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UpcomingTournamentCollectionViewCell", for: indexPath) as! UpcomingTournamentCollectionViewCell
-            //            if self.getAllEventsUsers.count != 0 {
-            
-            cell.calendarImageView.image = UIImage(named: "calender")!
-            cell.partnerImage.image = UIImage(named: "partners_1x")!
-            
-            let n = Int(arc4random_uniform(42))
-            cell.dateLabel?.text = self.getAllEventsUsers[indexPath.row].event?.eventStartDate
-            //            cell.dateLabel?.text = date[n % 3]
-            cell.dateLabel.textColor = UIColor.lightGray
-            //            cell.tournamentlabel?.text = eventName[n % 3]
-            cell.tournamentlabel?.text = self.getAllEventsUsers[indexPath.row].event?.eventName
-            cell.tournamentlabel.textColor = UIColor.lightGray
-            cell.partnersName?.text = partners[n % 3]
-            cell.partnersName.textColor = UIColor.lightGray
+//            if self.getAllEventsUsers.count != 0 {
+//
+//                cell.calendarImageView.image = UIImage(named: "calender")!
+//                cell.partnerImage.image = UIImage(named: "partners_1x")!
+//                let limit = self.getAllEventsUsers[indexPath.row].eventPartners?.count
+//                for _ in 1...limit! {
+//                    if self.getAllEventsUsers[indexPath.row].registerType == "Organizer" {
+//                        if let id = self.getAllEventsUsers[indexPath.row].organizerUser?.id, id != loggedInUserId {
+//                            if let name = self.getAllEventsUsers[indexPath.row].organizerUser?.firstName {
+//                                self.partners.append(name)
+//                            }
+//                        }
+//                    }
+//                    else if self.getAllEventsUsers[indexPath.row].registerType == "Invitee"
+//                    {
+//                        if let limit = self.getAllEventsUsers[indexPath.row].eventPartners?.count, limit != 0 {
+//                            let eventUser = self.getAllEventsUsers[indexPath.row].eventPartners
+//                                for index in 1...limit {
+//                                    if loggedInUserId != eventUser![index].partnerId{
+//                                        if let name = self.getAllEventsUsers[indexPath.row].organizerUser?.firstName {
+//                                            self.partners.append(name)
+//                                        }
+//                                    }
+//                                }
+//                        }
+//                    }
+//            }
+//                let startDate = dateStringFromTimeInterval(interval: (self.getAllEventsUsers[indexPath.row].event?.eventStartDate)!)
+//                cell.dateLabel?.text = startDate
+//                cell.dateLabel.textColor = UIColor.lightGray
+//
+//                cell.tournamentlabel?.text = self.getAllEventsUsers[indexPath.row].event?.eventName
+//                cell.tournamentlabel?.font = UIFont.systemFont(ofSize: 13)
+//                cell.tournamentlabel.textColor = UIColor.lightGray
+//                print("+++>>",self.partners)
+//                for name in self.partners {
+//                    cell.partnersName?.text = name
+//                }
+//                cell.partnersName.textColor = UIColor.lightGray
+//            }
             
             return cell
         }
@@ -387,7 +399,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TournamentRequestsCollectionViewCell", for: indexPath) as! TournamentRequestsCollectionViewCell
             
             if tournamentRequestSentViewActive == true {
-             
+                
                 let request = tournamentRequestList?.requestsSent[indexPath.row]
                 cell.eventNameLabel.text = request?.eventName
                 if let date = request?.eventStartDate {
@@ -426,39 +438,6 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             
             
             
-            
-            
-            
-            
-            //            let n = Int(arc4random_uniform(42))
-            //            cell.partnerImage.image = imageSrc[n % 3]
-            //            cell.partnerImage.layer.cornerRadius = cell.partnerImage.frame.size.width/2
-            
-//            if let imageUrl = URL(string: data.imageUrl) {
-//                cell.partnerImage.sd_setIndicatorStyle(.whiteLarge)
-//                cell.partnerImage.sd_setShowActivityIndicatorView(true)
-//                cell.partnerImage.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
-//            }
-            //            let width = cell.partnerImage.bounds.size.width
-            //            let height = cell.partnerImage.bounds.size.height
-            
-            //            let backView = UIView()
-            //            backView.frame = CGRect(x:0,y:0,width:width,height:height)
-            //           backView.backgroundColor = .red
-            //            cell.addSubview(backView)
-            //            cell.sendSubview(toBack: backView)
-            
-            //            cell.bringSubview(toFront: cell.partnerImage)
-            
-//            cell.partnerImage.layer.cornerRadius = cell.partnerImage.frame.size.height/2
-//
-//            cell.partnerImage.clipsToBounds = true
-//            cell.partnerImage.layer.borderColor = UIColor.lightGray.cgColor
-//            cell.partnerImage.layer.borderWidth = 1
-//            cell.partnerName?.text = data.name
-//            cell.partnerName.textColor = UIColor.lightGray
-            
-            
             return cell
         }
         
@@ -493,7 +472,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             self.present(navigationController, animated: true, completion: nil)
         }
         if collectionView == self.tournamentRequestsCollectionView {
-        
+            
             if tournamentRequestSentViewActive == true {
                 guard let eventId = tournamentRequestList?.requestsSent[indexPath.row].eventId else { return }
                 

@@ -122,6 +122,7 @@
 		845B7908208B4A5200DF1F1F /* AthleteProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845B7907208B4A5200DF1F1F /* AthleteProfileTableViewController.swift */; };
 		845BD6A32089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BD6A22089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift */; };
 		8D4B786520ABFE430025F7F7 /* GetAllUserEventsRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4B786420ABFE430025F7F7 /* GetAllUserEventsRespModel.swift */; };
+		8D782FC120B2B153004CA193 /* GetUpcomingTournamentsRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D782FC020B2B153004CA193 /* GetUpcomingTournamentsRespModel.swift */; };
 		8DA417C0209B77F60078F814 /* CoachProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA417BF209B77F60078F814 /* CoachProfileTableViewController.swift */; };
 		D69A1981207388F100497B7C /* HighFiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69A1980207388F100497B7C /* HighFiveViewController.swift */; };
 		FF07524120AC77D70015866D /* PartnerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF07524020AC77D70015866D /* PartnerListViewController.swift */; };
@@ -258,6 +259,7 @@
 		845BD6A22089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllEventsBetweenResponseModel.swift; sourceTree = "<group>"; };
 		8464C58F2084ACDA001FC8E5 /* BeachPartner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BeachPartner.entitlements; sourceTree = "<group>"; };
 		8D4B786420ABFE430025F7F7 /* GetAllUserEventsRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllUserEventsRespModel.swift; sourceTree = "<group>"; };
+		8D782FC020B2B153004CA193 /* GetUpcomingTournamentsRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUpcomingTournamentsRespModel.swift; sourceTree = "<group>"; };
 		8DA417BF209B77F60078F814 /* CoachProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachProfileTableViewController.swift; sourceTree = "<group>"; };
 		A4E87914ED5BC1C1ECF86DA1 /* Pods_BeachPartner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeachPartner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D69A1980207388F100497B7C /* HighFiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighFiveViewController.swift; sourceTree = "<group>"; };
@@ -619,6 +621,7 @@
 				FF3FB96320A4546600B34CA0 /* GetEventRespModel.swift */,
 				FFCE759120AAFBF2007C0CFD /* GetEventInvitationRespModel.swift */,
 				FF4EDC3E20AC077200BC3ACD /* GetTournamentRequestRespModel.swift */,
+				8D782FC020B2B153004CA193 /* GetUpcomingTournamentsRespModel.swift */,
 				8D4B786420ABFE430025F7F7 /* GetAllUserEventsRespModel.swift */,
 			);
 			path = AuthModels;
@@ -900,7 +903,7 @@
 				TargetAttributes = {
 					3BE40F51203EAEC100EA7DFC = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1100,6 +1103,7 @@
 				3BE40F56203EAEC100EA7DFC /* AppDelegate.swift in Sources */,
 				3BC8F907205AE5090086333E /* PopUpThanksViewController.swift in Sources */,
 				844984212099A0E100B8FD37 /* MutualLikesViewController.swift in Sources */,
+				8D782FC120B2B153004CA193 /* GetUpcomingTournamentsRespModel.swift in Sources */,
 				3B6027A22049707E006B108A /* TermsAndConditionVC.swift in Sources */,
 				8D4B786520ABFE430025F7F7 /* GetAllUserEventsRespModel.swift in Sources */,
 				3B49C3932068EE15007186E8 /* InvitePartnerViewController.swift in Sources */,
@@ -1301,15 +1305,15 @@
 				CODE_SIGN_ENTITLEMENTS = BeachPartner/BeachPartner.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = LX9FCBACX7;
 				INFOPLIST_FILE = BeachPartner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.beachpartnerllc.beachpartner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "fff7c28d-3aa4-4028-b9ab-ff6af1500e37";
+				PROVISIONING_PROFILE_SPECIFIER = "development profile";
 				SWIFT_OBJC_BRIDGING_HEADER = "BeachPartner/Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1324,15 +1328,15 @@
 				CODE_SIGN_ENTITLEMENTS = BeachPartner/BeachPartner.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = LX9FCBACX7;
 				INFOPLIST_FILE = BeachPartner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.beachpartnerllc.beachpartner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "fff7c28d-3aa4-4028-b9ab-ff6af1500e37";
+				PROVISIONING_PROFILE_SPECIFIER = "development profile";
 				SWIFT_OBJC_BRIDGING_HEADER = "BeachPartner/Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
