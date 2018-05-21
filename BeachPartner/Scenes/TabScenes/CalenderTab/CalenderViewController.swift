@@ -96,7 +96,18 @@ class CalenderViewController: UIViewController {
             }
                 
             else if(item == "Logout"){
-                self.timoutLogoutAction()
+                let refreshAlert = UIAlertController(title: "Logout", message: "Do you really want to logout from Beach Partner?", preferredStyle: UIAlertControllerStyle.alert)
+                
+                refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                    
+                    self.timoutLogoutAction()
+                    
+                }))
+                refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                    print("Handle Cancel Logic here")
+                }))
+                
+                self.present(refreshAlert, animated: true, completion: nil)
             }
             else if (item == "Settings"){
                 let storyboard : UIStoryboard = UIStoryboard(name: "TabBar", bundle: nil)
