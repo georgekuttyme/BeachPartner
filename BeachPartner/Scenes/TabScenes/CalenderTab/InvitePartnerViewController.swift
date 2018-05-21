@@ -72,6 +72,9 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        self.partnerTableVIew.separatorColor = UIColor.clear
+         self.myteamtableView.separatorColor = UIColor.clear
         self.bottomview.isHidden = true
         
         if let event = event {
@@ -238,6 +241,10 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
             let connectedUser = connectedUsers[indexPath.row].connectedUser
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "InvitePartnerCell", for: indexPath) as? InvitePartnerCell
+            
+            if (indexPath.row == self.connectedUsers.count-1) {
+                cell?.separatorInset = UIEdgeInsetsMake(0.0, (cell?.bounds.size.width)!, 0.0, 0.0);
+            }
             cell?.selectionStyle = .none
             
             cell?.nameLbl.text = connectedUser?.firstName

@@ -20,6 +20,7 @@ class PartnerListViewController: UIViewController, UITableViewDataSource, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.separatorColor = UIColor.clear
         if let id = UserDefaults.standard.string(forKey: "bP_userId") {
             self.loggedInUserId =  Int(id)!
         }
@@ -42,6 +43,10 @@ class PartnerListViewController: UIViewController, UITableViewDataSource, UITabl
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "PartnerListCell", for: indexPath) as? PartnerListCell
+        
+        if (indexPath.row == (self.invitation?.partners?.count)!-1) {
+            cell?.separatorInset = UIEdgeInsetsMake(0.0, (cell?.bounds.size.width)!, 0.0, 0.0);
+        }
         cell?.selectionStyle = .none
         print("indexPath.row ->",indexPath.row,"\n\n")
         var index = indexPath.row
