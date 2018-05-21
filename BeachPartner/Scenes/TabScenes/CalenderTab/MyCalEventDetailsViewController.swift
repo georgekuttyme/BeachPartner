@@ -196,7 +196,7 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
             else {
                 if eventInvitation?.invitations?.first?.partners![indexPath.row - 1].partnerId == loggedInUserId {
                     cell?.noteButton.isHidden = true
-                    let partner = eventInvitation?.invitations?.first?.partners![indexPath.row]
+                    let partner = eventInvitation?.invitations?.first?.partners![(eventInvitation?.invitations?.first?.partners?.count)! - 1]
                     cell?.nameLabel.text = partner?.partnerName
                     cell?.statusLabel.text = ""
                     

@@ -78,7 +78,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         tornamentRequestLabel.isHidden = false
-        //        getAllUserEventsList()
+        getAllUserEventsList()
         getAllTournamentRequests()
         userImg.image = UIImage(named: "likes")!
         self.userImg.layer.cornerRadius = self.userImg.frame.size.width/2

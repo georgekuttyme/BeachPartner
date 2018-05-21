@@ -67,7 +67,7 @@ class PartnerListViewController: UIViewController, UITableViewDataSource, UITabl
                 
                 var partner = invitation?.partners![index - 1]
                 if partner?.partnerId == loggedInUserId {
-                    partner = invitation?.partners![index]
+                    partner = invitation?.partners![(invitation?.partners?.count)!-1]
                     cell?.nameLabel.text = partner?.partnerName
                     cell?.statusLabel.text = partner?.invitationStatus
                     print("index->",indexPath.row,"  ",index,"\n\n")
@@ -75,6 +75,7 @@ class PartnerListViewController: UIViewController, UITableViewDataSource, UITabl
                         cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
                         cell?.profileImageView.sd_setShowActivityIndicatorView(true)
                         cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                        
                     }
                     cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
                     cell?.profileImageView.clipsToBounds = true
