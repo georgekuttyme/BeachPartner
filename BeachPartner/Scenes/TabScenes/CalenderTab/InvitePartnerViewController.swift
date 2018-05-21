@@ -135,15 +135,27 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
     }
     
     @objc func didTapDeleteButton(sender: UIButton) {
-        
         let index = sender.tag-300000
-        let user = myTeam[index]
+        let user = self.myTeam[index]
+        let userName = String(user.connectedUser?.firstName ?? "")
+        let refreshAlert = UIAlertController(title: "", message: "Are you sure you want to remove \(String(describing: userName)) from your potential partners?", preferredStyle: UIAlertControllerStyle.alert)
         
-        connectedUsers.append(user)
-        myTeam.remove(at: index)
+        refreshAlert.addAction(UIAlertAction(title: "NO", style: .default, handler: { (action: UIAlertAction!) in
+            print("Handle NO logic here")
+        }))
         
-        myteamtableView.reloadData()
-        partnerTableVIew.reloadData()
+        refreshAlert.addAction(UIAlertAction(title: "YES", style: .default, handler: { (action: UIAlertAction!) in
+            print("Handle YES Logic here")
+            
+            
+            self.connectedUsers.append(user)
+            self.myTeam.remove(at: index)
+            
+            self.myteamtableView.reloadData()
+            self.partnerTableVIew.reloadData()
+        }))
+        
+        present(refreshAlert, animated: true, completion: nil)
     }
     
     @objc func didTapMyTeamHeaderButton(sender: UIButton) {
