@@ -240,6 +240,7 @@
                                                                             </constraints>
                                                                         </stackView>
                                                                     </subviews>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="trailing" secondItem="sll-3p-SMr" secondAttribute="trailing" id="RiV-JC-xFs"/>
                                                                         <constraint firstItem="sll-3p-SMr" firstAttribute="top" secondItem="Ufr-bu-kSI" secondAttribute="top" id="dEk-q6-NjV"/>
@@ -255,7 +256,7 @@
                                                                 <constraint firstItem="Ufr-bu-kSI" firstAttribute="top" secondItem="NY2-nW-y8R" secondAttribute="top" constant="5" id="g2H-zv-fNF"/>
                                                             </constraints>
                                                         </tableViewCellContentView>
-                                                        <color key="backgroundColor" red="0.89411764709999997" green="0.89411764709999997" blue="0.90588235289999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <connections>
                                                             <outlet property="colorView" destination="U8Y-IN-1WM" id="rK4-rY-4Bf"/>
                                                             <outlet property="eventNameLbl" destination="wEv-hG-bzb" id="Xe6-hz-e84"/>
@@ -551,7 +552,7 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="General Event  Details" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6fB-dG-YUU">
                                                         <rect key="frame" x="8" y="0.0" width="353" height="61"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -1011,7 +1012,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yak-Tv-KGM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3332.8125" y="2857.394366197183"/>
+            <point key="canvasLocation" x="-3732" y="2917"/>
         </scene>
         <!--Event Register View Controller-->
         <scene sceneID="ld2-se-ol7">
@@ -2471,7 +2472,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pls-AH-h94" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2892" y="1991"/>
+            <point key="canvasLocation" x="-4895" y="1896"/>
         </scene>
     </scenes>
     <resources>
@@ -2490,7 +2491,7 @@
         <image name="start_date v2" width="429" height="125"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="BOE-1D-ulU"/>
-        <segue reference="CYk-94-qSb"/>
+        <segue reference="c8u-gq-7eI"/>
+        <segue reference="LIp-gz-T4M"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -134,10 +134,10 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.eventNameLbl.text = event.eventName
 
         if event.registerType == "Organizer" {
-            cell.invitationTypeImage.image = UIImage(named:"sent")
+            cell.invitationTypeImage.image = UIImage(named:"sent1")
         }
         else if event.registerType == "Invitee" {
-            cell.invitationTypeImage.image = UIImage(named:"received")
+            cell.invitationTypeImage.image = UIImage(named:"received1")
         }
         else {
             cell.invitationTypeImage.image = nil
