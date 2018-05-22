@@ -175,26 +175,42 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
 
         if event.registerType == "Organizer" {
             cell.invitationTypeImage.image = UIImage(named:"sent1")
+            if event.eventStaus == "Registered"{
+                cell.colorView.backgroundColor = .green
+            }
+            else if event.eventStaus == "Invited"{
+                cell.colorView.backgroundColor = .red
+            }
+            else if event.eventStaus == "Active"{
+                cell.colorView.backgroundColor = .red
+            }
+            else{
+                cell.colorView.backgroundColor = .clear
+            }
         }
         else if event.registerType == "Invitee" {
             cell.invitationTypeImage.image = UIImage(named:"received1")
+            if event.eventStaus == "Registered"{
+                cell.colorView.backgroundColor = .green
+            }
+            else if event.eventStaus == "Invited"{
+                cell.colorView.backgroundColor = .red
+            }
+            else if event.eventStaus == "Active"{
+                cell.colorView.backgroundColor = .red
+            }
+            else{
+                cell.colorView.backgroundColor = .clear
+            }
         }
         else {
             cell.invitationTypeImage.image = nil
+            cell.colorView.backgroundColor = .clear
         }
         
-        cell.colorView.backgroundColor = .clear
-        
-//        if event.status == EventStatus.Active.rawValue {
-//            cell.colorView.backgroundColor = .red
-//        }
-//        else if event.status == EventStatus.Deleted.rawValue {
-//            cell.colorView.backgroundColor = .red
-//        }
-//        else { //New
-//            cell.colorView.backgroundColor = .red
-//        }
-        
+//        cell.colorView.backgroundColor = .clear
+        print("event.status",event.eventStaus)
+        print("EventStatus.Active.rawValue",EventStatus.Active.rawValue)
         return cell
     }
     

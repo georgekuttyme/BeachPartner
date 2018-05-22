@@ -1272,10 +1272,8 @@ extension APIManager{
         let dateAfterFiveMonth : String = dateFormatter.string(from: futureDate!)
         print("Result: ",currentDate)
         
-//        let fromDate = currentDate
-//        let toDate = dateAfterFiveMonth
-        let fromDate = "21-05-2018"
-        let toDate = "21-10-2018"
+        let fromDate = currentDate
+        let toDate = dateAfterFiveMonth
         let userId = UserDefaults.standard.string(forKey: "bP_userId") ?? ""
         let type = "fromDate="+"\(fromDate)"+"&toDate="+"\(toDate)"+"&userId="+"\(userId)"
         //        let type = "subscriptionType="+"\(type)"

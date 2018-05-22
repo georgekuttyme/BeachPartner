@@ -60,7 +60,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     var partnerArray = [String]()
     var tournamentRequestList: GetTournamentRequestRespModel?
     
-    var tournamentRequestSentViewActive = true
+    var tournamentRequestSentViewActive = false
     
     
     var date = ["04/01/2018","04/01/2018","04/01/2018","04/01/2018","04/01/2018","04/01/2018","04/01/2018"]
@@ -187,9 +187,6 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         tournamentRequestSentViewActive = true
         self.tournamentRequestsLbl.text = "     Tournament Requests Sent"
         self.tournamentRequestsCollectionView.reloadData()
-        
-        
-        
         
         //        tornamentRequestLabel.text = "No tournament Requests Sent"
     }
@@ -355,7 +352,11 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
                 cell.tournamentlabel?.font = UIFont.systemFont(ofSize: 13)
                 cell.tournamentlabel.textColor = UIColor.lightGray
                 print("+++>>",self.partners.count)
-                self.partners.removeLast()
+                if self.partners.isEmpty{
+                    
+                }else {
+                    self.partners.removeLast()
+                }
                 cell.partnersName?.text = self.partners
                 cell.partnersName.textColor = UIColor.lightGray
             }
@@ -504,7 +505,6 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
             let eventDetailsVC = storyBoard.instantiateViewController(withIdentifier: "MyCalEventDetailsView") as! MyCalEventDetailsViewController
             eventDetailsVC.eventId = eventId
-            print(eventId,"d  f  d")
             eventDetailsVC.isFromHomeTab = true
             self.navigationController?.pushViewController(eventDetailsVC, animated: true)
             

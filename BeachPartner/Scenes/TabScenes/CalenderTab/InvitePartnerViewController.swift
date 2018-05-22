@@ -169,6 +169,8 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
                 self.myteamHeight.constant = (UIScreen.main.bounds.height/2) - 100
                 self.bottomview.isHidden = false
                 self.view.layoutIfNeeded()
+                self.myteamtableView.reloadData()
+                self.partnerTableVIew.reloadData()
             }, completion: { (complete) in
                 
             })
@@ -178,6 +180,8 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
                 self.myteamHeight.constant = 1
                 self.bottomview.isHidden = true
                 self.view.layoutIfNeeded()
+                self.myteamtableView.reloadData()
+                self.partnerTableVIew.reloadData()
             }, completion: { (complete) in
             })
         }
@@ -260,13 +264,14 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
             //            cell?.profileImage.layer.borderColor = UIColor.blue.cgColor
             cell?.profileImage.layer.borderColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0).cgColor
             cell?.profileImage.layer.borderWidth = 1.5
-            
             cell?.addBtn.isHidden = !connectedUsers[indexPath.row].availableOnDate
-            if (cell?.addBtn.isHidden)!{
+            if (cell?.addBtn.isHidden)! {
                 cell?.unAvailableLbl.text = "Unavailable"
+                cell?.unAvailableLbl.textColor = UIColor.red
             }else{
-                cell?.unAvailableLbl.isHidden = true
+                cell?.unAvailableLbl.text = ""
             }
+                
             cell?.addBtn.tag = indexPath.row+200000
             cell?.addBtn.addTarget(self, action: #selector(didTapAddButton(sender:)), for: .touchUpInside)
             
@@ -275,7 +280,7 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
         
         
         
-        if(tableView == myteamtableView) {
+        else if(tableView == myteamtableView) {
             
             let user = myTeam[indexPath.row].connectedUser
             
@@ -302,17 +307,19 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
             
             return cell!
         }
-        
+        else {
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MyteamCell", for: indexPath) as? MyteamCell
-        //        cell?.nameLbl.text = name[indexPath.row]
-        //        let n = Int(arc4random_uniform(42))
-        //        cell?.profileImage.image = imageSrc[ n % 3 ]
-        //        cell?.profileImage.layer.cornerRadius = (cell?.imageView?.frame.size.width)!/2
-        //        cell?.profileImage.clipsToBounds = true
-        //        cell?.profileImage.layer.borderColor = UIColor.lightGray.cgColor
-        //        cell?.profileImage.layer.borderWidth = 1
-        return cell!
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MyteamCell", for: indexPath) as? MyteamCell
+            cell?.addBtn.isHidden = true
+            //        cell?.nameLbl.text = name[indexPath.row]
+            //        let n = Int(arc4random_uniform(42))
+            //        cell?.profileImage.image = imageSrc[ n % 3 ]
+            //        cell?.profileImage.layer.cornerRadius = (cell?.imageView?.frame.size.width)!/2
+            //        cell?.profileImage.clipsToBounds = true
+            //        cell?.profileImage.layer.borderColor = UIColor.lightGray.cgColor
+            //        cell?.profileImage.layer.borderWidth = 1
+            return cell!
+        }
     }
 
     
