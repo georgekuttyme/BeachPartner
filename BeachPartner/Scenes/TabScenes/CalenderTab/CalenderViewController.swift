@@ -21,17 +21,23 @@ class CalenderViewController: UIViewController {
     
     @IBOutlet weak var calendarSegmentView: UISegmentedControl!
     
+    @IBOutlet weak var filterButton: UIBarButtonItem!
+    
     var button1 : UIBarButtonItem!
     
     @IBAction func calSegSelection(sender: UISegmentedControl) {
-
+        
         if sender.selectedSegmentIndex == 0{
-                self.loadMasterCalendar()
-            }
-                
-            else if sender.selectedSegmentIndex == 1{
-                self.loadMyCalendar()
-            }
+            filterButton.isEnabled = true
+            filterButton.tintColor = .white
+            self.loadMasterCalendar()
+        }
+            
+        else if sender.selectedSegmentIndex == 1{
+            filterButton.isEnabled = false
+            filterButton.tintColor = .clear
+            self.loadMyCalendar()
+        }
         
     }
     @objc func action() {
@@ -181,6 +187,24 @@ class CalenderViewController: UIViewController {
         })
     }
     
-    
-    
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        if segue.identifier == "FilterViewSegue" {
+            
+            let targetVC = segue.destination as! FilterViewController
+            targetVC.delegate = self
+        }
+     }
 }
+
+extension CalenderViewController: FilterViewControllerDelegate {
+    
+    func didApplyFilter(params: [String : String]) {
+        let activeVC = currentViewController as! MasterCalViewController
+        activeVC.filterParams = params
+    }
+}
+

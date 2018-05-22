@@ -12,6 +12,7 @@ import Alamofire
 final class APIClient{
     
     typealias sucessClosure = (_ result: NSDictionary?) -> Void
+    typealias sucessClosureOfArray = (_ result: NSArray?) -> Void
     typealias failureClosure = (_ error: Error?) -> Void
     static  let doRequest = APIClient()
     private var sessionManager = Alamofire.SessionManager.default
@@ -170,6 +171,70 @@ final class APIClient{
         }
     }
     
+    
+    public func inPostForArray(url:String,params: [String:String],sucess:@escaping sucessClosureOfArray, failure:@escaping failureClosure){
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
+        print("####### API Request ....url :", url, "\n #### parameters :", params)
+        let cookieJar = HTTPCookieStorage.shared
+        for cookie in cookieJar.cookies! {
+        }
+        let token = UserDefaults.standard.string(forKey: "bP_token") ?? ""
+        
+        var headders: HTTPHeaders = [:]
+        
+        if( token != ""){
+            headders = [
+                "Accept": "application/json, text/plain, */*",
+                "Content-Type" :"application/json; charset=utf-8",
+                "Authorization" : "Bearer " + token
+            ]
+        }
+        else{
+            headders = [
+                "Accept": "application/json, text/plain, */*",
+                "Content-Type" :"application/json; charset=utf-8"
+            ]
+        }
+        
+        let postRequest = self.sessionManager.request(url, method: .post, parameters: params as [String:String], encoding: JSONEncoding.default, headers:headders
+        )
+        
+        //""
+        
+        print("####### API response String :", postRequest.responseString,"\n")
+        
+        
+        
+        postRequest.responseJSON { (responseObject) in
+            
+            
+            print("####### API response :", responseObject,"\n")
+            
+            let cookieJar = HTTPCookieStorage.shared
+            for cookie in cookieJar.cookies! {
+                print(cookie.name+"="+cookie.value)
+            }
+            print("_________________________________________________\n\n\n")
+            
+            
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            switch  responseObject.result {
+            case .success:
+                
+                let json = responseObject.result.value
+                
+                sucess(json as! NSArray?)
+                return
+            case .failure:
+                let error = responseObject.result.error
+                failure(error)
+                return
+            }
+            }.responseString { (jsonString) in
+                APIManager.printOnDebug(response: jsonString)
+        }
+    }
     
     
     public func inPostSentPushnotification(url:String,params:[String:Any],sucess:@escaping sucessClosure, failure:@escaping failureClosure){
@@ -836,6 +901,15 @@ extension APIClient{
     public func inPost(method:String, params:[String:String],sucess:@escaping sucessClosure,failure:@escaping failureClosure){
         
         self.inPost(url: BaseUrl.makeUrl(forProduction: false)+method, params: params, sucess: { (response) in
+            sucess(response)
+        }) { (error) in
+            failure(error)
+        }
+    }
+    
+    public func inPostForArray(method:String, params:[String:String],sucess:@escaping sucessClosureOfArray,failure:@escaping failureClosure){
+        
+        self.inPostForArray(url: BaseUrl.makeUrl(forProduction: false)+method, params: params, sucess: { (response) in
             sucess(response)
         }) { (error) in
             failure(error)

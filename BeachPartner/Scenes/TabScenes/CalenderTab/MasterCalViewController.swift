@@ -35,6 +35,12 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
     
     fileprivate let gregorian: NSCalendar! = NSCalendar(calendarIdentifier:NSCalendar.Identifier.gregorian)
 
+    var filterParams: [String: String]? {
+        didSet {
+            searchEvents()
+        }
+    }
+
     
     
     
@@ -71,34 +77,7 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
                 print("Rep model does not match")
                 return
             }
-            
-            self.eventListArray.removeAll()
-            self.eventDateArray.removeAll()
-            for event in eventsArrayModel.getEventsRespModel {
-                
-                let startDate = Date(timeIntervalSince1970: TimeInterval(event.eventStartDate/1000))
-                let endDate = Date(timeIntervalSince1970: TimeInterval(event.eventEndDate/1000))
-                print(startDate)
-                print(endDate)
-                print("---------------------------------------------------")
-
-                let dates = self.generateDateArrayBetweenTwoDates(startDate: startDate, endDate: endDate)
-                self.eventDateArray.append(contentsOf: dates)
-                
-                var eventObject = event
-                eventObject.activeDates = dates
-                self.eventListArray.append(eventObject)
-            }
-
-            self.calendar.reloadData()
-            
-
-            if let date = self.calendar.selectedDate {
-                self.calendar(self.calendar, didSelect: date, at: .current)
-            }
-            else {
-                self.calendar(self.calendar, didSelect: Date(), at: .current)
-            }
+            self.reloadUIWithDatamodel(model: eventsArrayModel)
             
         }) { (error) in
             
@@ -109,6 +88,63 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
             self.alert(message: errorString)
         }
     }
+    
+    func searchEvents() {
+        
+        guard let params = filterParams else {
+            return
+        }
+        
+        ActivityIndicatorView.show("Loading")
+        APIManager.callServer.getSearchEvents(params: params, sucessResult: { (responseModel) in
+            
+            ActivityIndicatorView.hiding()
+            guard let eventsArrayModel = responseModel as? GetEventsRespModelArray else {
+                print("Rep model does not match")
+                return
+            }
+            self.reloadUIWithDatamodel(model: eventsArrayModel)
+            
+        }) { (error) in
+            ActivityIndicatorView.hiding()
+            guard let errorString  = error else {
+                return
+            }
+            self.alert(message: errorString)
+        }
+    }
+    
+    private func reloadUIWithDatamodel(model: GetEventsRespModelArray) {
+        
+        self.eventListArray.removeAll()
+        self.eventDateArray.removeAll()
+        for event in model.getEventsRespModel {
+            
+            let startDate = Date(timeIntervalSince1970: TimeInterval(event.eventStartDate/1000))
+            let endDate = Date(timeIntervalSince1970: TimeInterval(event.eventEndDate/1000))
+            print(startDate)
+            print(endDate)
+            print("---------------------------------------------------")
+            
+            let dates = self.generateDateArrayBetweenTwoDates(startDate: startDate, endDate: endDate)
+            self.eventDateArray.append(contentsOf: dates)
+            
+            var eventObject = event
+            eventObject.activeDates = dates
+            self.eventListArray.append(eventObject)
+        }
+        
+        self.calendar.reloadData()
+        
+        if let date = self.calendar.selectedDate {
+            self.calendar(self.calendar, didSelect: date, at: .current)
+        }
+        else {
+            self.calendar(self.calendar, didSelect: Date(), at: .current)
+        }
+    }
+    
+    
     
     private func titleForEventTable(date: Date) -> String {
         //Eg: Events for 16th November

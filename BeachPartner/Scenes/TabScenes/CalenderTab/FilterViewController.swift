@@ -11,6 +11,11 @@
 import UIKit
 import DropDown
 
+protocol FilterViewControllerDelegate {
+    
+    func didApplyFilter(params: [String : String])
+}
+
 class FilterViewController: UIViewController {
     
     @IBOutlet weak var regionBtn: UIButton!
@@ -29,14 +34,24 @@ class FilterViewController: UIViewController {
     let statedropDown = DropDown()
     let regiondropDown = DropDown()
     
+    var delegate: FilterViewControllerDelegate?
     
     @IBAction func eventBtnClicked(_ sender: Any) {
         eventdropDown.show()
         
     }
     @IBAction func subeventBtnClicked(_ sender: Any) {
-        subeventsdropDown.show()
         
+        if eventdropDown.selectedItem == "Junior" {
+            self.subeventsdropDown.dataSource = ["10U", "12U", "13U", "14U","15U", "16U","17U", "18U"]
+        }
+        else if eventdropDown.selectedItem == "Adult" {
+            self.subeventsdropDown.dataSource = ["Unrated", "B", "A", "AA","AAA", "Open","CoEd", "CoEd Unrated","CoEd B", "CoEd A", "CoEd AA","CoEd AAA","CoEd Open" ]
+        }
+        else {
+            self.subeventsdropDown.dataSource = []
+        }
+        subeventsdropDown.show()
     }
     @IBAction func yearBtnClicked(_ sender: Any) {
         yeardropDown.show()
@@ -63,10 +78,20 @@ class FilterViewController: UIViewController {
     }
     
     @IBAction func searchClicked(_ sender: Any) {
-        searchEvent()
+        
+        let params: [String: String] = [
+            "eventType": eventdropDown.selectedItem ?? "",
+            "month": monthdropDown.selectedItem ?? "",
+            "region": regiondropDown.selectedItem ?? "",
+            "state": statedropDown.selectedItem ?? "",
+            "subType": subeventsdropDown.selectedItem ?? "",
+            "year": yeardropDown.selectedItem ?? ""
+        ]
+        
+        delegate?.didApplyFilter(params: params)
+//        searchEvent()
         navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
-        
     }
     
     
@@ -86,16 +111,23 @@ class FilterViewController: UIViewController {
         self.eventdropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             print("Selected item:",item," at index:",index)
             self.eventBtn.setTitle(item, for: UIControlState.normal)
+            
+            if item == "Junior" || item == "Adult" {
+                self.subTypesBtn.setTitle("Choose subtype", for: UIControlState.normal)
+            }
+            else {
+                self.subTypesBtn.setTitle("Not Applicable", for: UIControlState.normal)
+            }
+            self.subeventsdropDown.clearSelection()
         }
         self.eventBtn.setTitle("Choose event type", for: UIControlState.normal)
-        self.eventdropDown.selectRow(0)
         
         ///////////////////////////////////
         
         self.subeventsdropDown.anchorView = self.subTypesBtn // UIView or UIBarButtonItem
         // The list of items to display. Can be changed dynamically
         //        self.dropDown.direction = .bottom
-        self.subeventsdropDown.dataSource = ["Unrated", "B", "A", "AA","AAA", "Open","CoEd", "CoEd Unrated","CoEd B", "CoEd A", "CoEd AA","CoEd AAA","CoEd Open" ]
+        //        self.subeventsdropDown.dataSource = ["Unrated", "B", "A", "AA","AAA", "Open","CoEd", "CoEd Unrated","CoEd B", "CoEd A", "CoEd AA","CoEd AAA","CoEd Open" ]
         
         self.subeventsdropDown.bottomOffset = CGPoint(x: 0, y:0)
         self.subeventsdropDown.width = 150
@@ -105,7 +137,6 @@ class FilterViewController: UIViewController {
             self.subTypesBtn.setTitle(item, for: UIControlState.normal)
         }
         self.subTypesBtn.setTitle("Choose subtype", for: UIControlState.normal)
-        self.subeventsdropDown.selectRow(0)
         
         ///////////////////////////////////
         
@@ -122,7 +153,6 @@ class FilterViewController: UIViewController {
             self.yearBtn.setTitle(item, for: UIControlState.normal)
         }
         self.yearBtn.setTitle("Choose year", for: UIControlState.normal)
-        self.yeardropDown.selectRow(0)
         
         ///////////////////////////////////
         
@@ -139,7 +169,6 @@ class FilterViewController: UIViewController {
             self.monthBtn.setTitle(item, for: UIControlState.normal)
         }
         self.monthBtn.setTitle("Choose month", for: UIControlState.normal)
-        self.monthdropDown.selectRow(0)
         
         ///////////////////////////////////
         
@@ -156,7 +185,6 @@ class FilterViewController: UIViewController {
             self.stateBtn.setTitle(item, for: UIControlState.normal)
         }
         self.stateBtn.setTitle("Choose state", for: UIControlState.normal)
-        self.statedropDown.selectRow(0)
         
         ///////////////////////////////////
         
@@ -173,44 +201,8 @@ class FilterViewController: UIViewController {
             self.regionBtn.setTitle(item, for: UIControlState.normal)
         }
         self.regionBtn.setTitle("Choose region", for: UIControlState.normal)
-        self.regiondropDown.selectRow(0)
-        
-        
-        
-        // Do any additional setup after loading the view.
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    func searchEvent(){
-        //        self.userData.gender = (self.genderBtn.titleLabel?.text)!
-        
-        
 
-        ActivityIndicatorView.show("Loading")
-        APIManager.callServer.getSearchEvents(sucessResult: { (responseModel) in
-
-            ActivityIndicatorView.hiding()
-            guard let eventsArrayModel = responseModel as? GetEventsRespModelArray else {
-                print("Rep model does not match")
-                return
-            }
-            print(">>÷÷",eventsArrayModel)
-
-        }) { (error) in
-
-            ActivityIndicatorView.hiding()
-            guard let errorString  = error else {
-                return
-            }
-            self.alert(message: errorString)
-        }
-
-        
-    }
-    
     func loadLocations(){
         stateList.append("Alabama");
         stateList.append("Alaska");
