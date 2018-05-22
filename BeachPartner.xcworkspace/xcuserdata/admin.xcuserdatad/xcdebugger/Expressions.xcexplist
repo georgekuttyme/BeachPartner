@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "InvitePartnerViewController.tableView(_:cellForRowAt:):InvitePartnerViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "cell?.addBtn.isHidden">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
