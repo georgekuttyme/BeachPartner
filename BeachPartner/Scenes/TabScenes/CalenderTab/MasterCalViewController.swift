@@ -36,6 +36,9 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
     fileprivate let gregorian: NSCalendar! = NSCalendar(calendarIdentifier:NSCalendar.Identifier.gregorian)
 
     
+    
+    
+    
     // MARK:- Initialization
 
     override func viewDidLoad() {
@@ -50,6 +53,7 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController!.navigationBar.topItem!.title = "Master Calendar"
         
        // getAllEvents()
     }
