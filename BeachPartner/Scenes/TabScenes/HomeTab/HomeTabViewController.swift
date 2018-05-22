@@ -311,59 +311,35 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         if collectionView == self.upCommingTournament {
             print("=========")
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UpcomingTournamentCollectionViewCell", for: indexPath) as! UpcomingTournamentCollectionViewCell
+            cell.calendarImageView.image = UIImage(named: "calender")!
+            cell.partnerImage.image = UIImage(named: "partners_1x")!
+
+            var partnerList = self.getAllEventsUsers[indexPath.row]
             if self.getAllEventsUsers.count != 0 {
-                cell.calendarImageView.image = UIImage(named: "calender")!
-                cell.partnerImage.image = UIImage(named: "partners_1x")!
-                if self.getAllEventsUsers[indexPath.row].registerType == "invitee" {
-                    if let name = self.getAllEventsUsers[indexPath.row].organizerUser?.firstName {
-                        self.partners.append(name)
-                    }
-                    let limit = self.getAllEventsUsers[indexPath.row].eventPartners?.count
-                    for index in 1...limit! {
-                        if let firstName = self.getAllEventsUsers[indexPath.row].eventPartners?[index].partnerName{
-                            self.partners.append(firstName)
-                        }
-                    }
-                 }
-                else {
-                    let limit = self.getAllEventsUsers[indexPath.row].eventPartners?.count
-                    for index in 1...limit! {
-                        if let firstName = self.getAllEventsUsers[indexPath.row].eventPartners?[index].partnerName{
-                            if let id = self.getAllEventsUsers[indexPath.row].eventPartners?[index].partnerId, id != loggedInUserId{
-                                self.partners.append(firstName)
-                            
+                let limit = partnerList.invitationList?.count
+                
+                for index1 in 0..<limit! {
+                    let partnerCount = partnerList.invitationList![index1].eventpartners?.count
+                    for index2 in 0..<partnerCount! {
+                        if let id = partnerList.invitationList![index1].eventpartners?[index2].partnerId , id != loggedInUserId{
+                            if let firstName = partnerList.invitationList![index1].eventpartners?[index2].partnerName {
+                                self.partners.append(firstName + ",")
                             }
                         }
                     }
-                    
                 }
-                
-//                    else if self.getAllEventsUsers[indexPath.row].registerType == "Invitee"
-//                    {
-//                        if let limit = self.getAllEventsUsers[indexPath.row].eventPartners?.count, limit != 0 {
-//                            let eventUser = self.getAllEventsUsers[indexPath.row].eventPartners
-//                                for index in 1...limit {
-//                                    if loggedInUserId != eventUser![index].partnerId{
-//                                        if let name = self.getAllEventsUsers[indexPath.row].organizerUser?.firstName {
-//                                            self.partners.append(name)
-//                                        }
-//                                    }
-//                                }
-//                        }
-//                    }
-//            }
-//                let startDate = dateStringFromTimeInterval(interval: (self.getAllEventsUsers[indexPath.row].event?.eventStartDate)!)
-//                cell.dateLabel?.text = startDate
-//                cell.dateLabel.textColor = UIColor.lightGray
-//
-//                cell.tournamentlabel?.text = self.getAllEventsUsers[indexPath.row].event?.eventName
-//                cell.tournamentlabel?.font = UIFont.systemFont(ofSize: 13)
-//                cell.tournamentlabel.textColor = UIColor.lightGray
-//                print("+++>>",self.partners)
-//                for name in self.partners {
-//                    cell.partnersName?.text = name
-//                }
-//                cell.partnersName.textColor = UIColor.lightGray
+
+                let startDate = dateStringFromTimeInterval(interval: (partnerList.event?.eventStartDate)!)
+                cell.dateLabel?.text = startDate
+                cell.dateLabel.textColor = UIColor.lightGray
+
+                cell.tournamentlabel?.text = partnerList.event?.eventName
+                cell.tournamentlabel?.font = UIFont.systemFont(ofSize: 13)
+                cell.tournamentlabel.textColor = UIColor.lightGray
+                print("+++>>",self.partners.count)
+                self.partners.removeLast()
+                cell.partnersName?.text = self.partners
+                cell.partnersName.textColor = UIColor.lightGray
             }
             
             return cell
@@ -504,6 +480,16 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
                 viewController.eventId = eventId
                 self.navigationController?.pushViewController(viewController, animated: true)
             }
+        }
+        if collectionView == self.upCommingTournament {
+             guard let eventId = self.getAllEventsUsers[indexPath.row].event?.eventId else { return }
+            let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
+            let eventDetailsVC = storyBoard.instantiateViewController(withIdentifier: "MyCalEventDetailsView") as! MyCalEventDetailsViewController
+            eventDetailsVC.eventId = eventId
+            print(eventId,"d  f  d")
+            eventDetailsVC.isFromHomeTab = true
+            self.navigationController?.pushViewController(eventDetailsVC, animated: true)
+            
         }
     }
     

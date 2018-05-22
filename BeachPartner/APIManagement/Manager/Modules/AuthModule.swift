@@ -1272,15 +1272,17 @@ extension APIManager{
         let dateAfterFiveMonth : String = dateFormatter.string(from: futureDate!)
         print("Result: ",currentDate)
         
-        let fromDate = currentDate
-        let toDate = dateAfterFiveMonth
+//        let fromDate = currentDate
+//        let toDate = dateAfterFiveMonth
+        let fromDate = "21-05-2018"
+        let toDate = "21-10-2018"
         let userId = UserDefaults.standard.string(forKey: "bP_userId") ?? ""
         let type = "fromDate="+"\(fromDate)"+"&toDate="+"\(toDate)"+"&userId="+"\(userId)"
         //        let type = "subscriptionType="+"\(type)"
         
         APIGetClient.doGetRequest.inGetReqForArr(method:ApiMethods.GetAllUserEventsBetween + "?\(type)"  , params: params, sucess: { (response) in
             
-            APIManager.printOnDebug(response: " Resppp1111 : \(response)")
+            APIManager.printOnDebug(response: " getAllEventBetweenDetails : \(response)")
             
             
             let jsonDict = response! as! NSArray
@@ -1288,6 +1290,7 @@ extension APIManager{
             do {
                 
                 let accRespModel = try GetUpcomingTournamentsRespModelArray(jsonDict)
+                print("getAllEventBetweenDetails ->",accRespModel)
                 sucessResult(accRespModel)
                 return
             } catch {

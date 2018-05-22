@@ -24,7 +24,8 @@ class MyCalEventDetailsViewController: UIViewController {
     
     var event: GetAllUserEventsRespModel.Event?
     var eventInvitation: GetEventInvitationRespModel?
-
+    var isFromHomeTab = false
+    var eventId: Int?
     fileprivate let formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd, yyyy"//Feb 10 2018
@@ -39,36 +40,42 @@ class MyCalEventDetailsViewController: UIViewController {
         if let id = UserDefaults.standard.string(forKey: "bP_userId") {
             self.loggedInUserId =  Int(id)!
         }
-        
-        setupDataFromEvent()
+
         getAllInvitations()
+        setupDataFromEvent()
     }
     
     private func setupDataFromEvent() {
-        guard let event = event else { return }
-        
-        generalEventDetailsView.isHidden = true
-//        if event.userMessage.count > 0 {
-//            generalEventDetailsView.isHidden = false
-//            generalEventDetailsLabel.text = event.userMessage
-//        }
-//        else {
-//            generalEventDetailsView.isHidden = true
-//        }
-        
-        eventNameLabel.text = event.eventName
-        eventLocationLabel.text = event.eventLocation
-        eventVenueLabel.text = event.eventVenue
-        eventAdminLabel.text = event.eventAdmin
-        
-        eventStartDateLabel.text = dateStringFromTimeInterval(interval: event.eventStartDate)
-        eventEndDateLabel.text = dateStringFromTimeInterval(interval: event.eventEndDate)
+        if isFromHomeTab{
+            generalEventDetailsView.isHidden = true
+            eventNameLabel.text = self.eventInvitation?.eventName
+            eventLocationLabel.text = self.eventInvitation?.eventLocation
+            eventVenueLabel.text = self.eventInvitation?.eventVenue
+            eventAdminLabel.text = self.eventInvitation?.eventAdmin
+            if (self.eventInvitation?.eventStartDate) != nil {
+                eventStartDateLabel.text = dateStringFromTimeInterval(interval: (self.eventInvitation?.eventStartDate)!)
+            }
+            if (self.eventInvitation?.eventEndDate) != nil {
+                eventEndDateLabel.text = dateStringFromTimeInterval(interval: (self.eventInvitation?.eventEndDate)!)
+            }
+        }else {
+            guard let event = event else { return }
+            print("event  ==",event)
+            generalEventDetailsView.isHidden = true
+            eventNameLabel.text = event.eventName
+            eventLocationLabel.text = event.eventLocation
+            eventVenueLabel.text = event.eventVenue
+            eventAdminLabel.text = event.eventAdmin
+            
+            eventStartDateLabel.text = dateStringFromTimeInterval(interval: event.eventStartDate)
+            eventEndDateLabel.text = dateStringFromTimeInterval(interval: event.eventEndDate)
+        }
     }
     
     private func getAllInvitations() {
         
-        let eventId = event?.eventId
-        
+//        let eventId = event?.eventId
+        let eventId = isFromHomeTab ? self.eventId : event?.eventId
         ActivityIndicatorView.show("Loading")
         APIManager.callServer.getAllEventInvitations(eventId: eventId!, calendarType: "mycalendar", sucessResult: { (responseModel) in
             ActivityIndicatorView.hiding()
@@ -78,6 +85,9 @@ class MyCalEventDetailsViewController: UIViewController {
                 return
             }
             self.eventInvitation = eventInvitationModel
+            if self.isFromHomeTab{
+                self.setupDataFromEvent()
+            }
             self.tableView.reloadData()
             
         }) { (error) in

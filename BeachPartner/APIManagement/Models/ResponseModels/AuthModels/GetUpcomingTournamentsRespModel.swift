@@ -37,8 +37,7 @@ struct GetUpcomingTournamentsRespModel: SafeMappable {
     var organizerUser :OrganizerUser?
     var invitationStatus :String = ""
     var eventStatus : String = ""
-    var eventPartners: [EventPartnerList]?
-    //    var inviteeUser : InviteeUser
+    var invitationList : [InvitationList]?
     init(_ map: [String : Any]) throws {
         id <- map.property("id")
         event <- map.relation("event")
@@ -46,8 +45,7 @@ struct GetUpcomingTournamentsRespModel: SafeMappable {
         organizerUser <- map.relation("organizerUser")
         invitationStatus <- map.property("invitationStatus")
         eventStatus <- map.property("eventStatus")
-        eventPartners <- map.relations("partnerList")
-//        inviteeUser <- map.property("inviteeUser")
+        invitationList <- map.relations("invitationList")
         
     }
     struct Event : SafeMappable{
@@ -108,7 +106,23 @@ struct GetUpcomingTournamentsRespModel: SafeMappable {
             userType <- map.property("userType")
         }
     }
-    struct EventPartnerList: SafeMappable{
+    struct InvitationList: SafeMappable {
+        var invitorId: Int = 0
+        var invitorName: String = ""
+        var invitorimageURL: String = ""
+        var eventStatus: String = ""
+        var eventpartners: [EventPartnerList]?
+        
+        init(_ map: [String : Any]) throws {
+            invitorId <- map.property("inviterUserId")
+            invitorName <- map.property("inviterName")
+            invitorimageURL <- map.property("inviterImageUrl")
+            eventStatus <- map.property("eventStatus")
+            eventpartners <- map.relations("partnerList")
+        }
+    }
+    
+    struct EventPartnerList: SafeMappable {
         var partnerId: Int = 0
         var partnerName: String = ""
         var partnerImageURL: String = ""
@@ -122,5 +136,5 @@ struct GetUpcomingTournamentsRespModel: SafeMappable {
         }
     }
     
-    
 }
+
