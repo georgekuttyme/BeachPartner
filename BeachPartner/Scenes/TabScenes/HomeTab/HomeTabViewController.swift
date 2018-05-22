@@ -211,7 +211,16 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     }
     
     @IBAction func UpcomingTournamentsNextBtnClicked(_ sender: Any) {
-        
+        let visibleItems: NSArray = self.upCommingTournament.indexPathsForVisibleItems as NSArray
+        if visibleItems.count == 0 {
+            return
+        }
+        let currentItem: IndexPath = visibleItems.lastObject as! IndexPath
+        let nextItem: IndexPath = IndexPath(item: currentItem.item + 1, section: 0)
+        if nextItem.row < getAllEventsUsers.count {
+            self.upCommingTournament.scrollToItem(at: nextItem, at: .left, animated: true)
+            
+        }
         
     }
     
@@ -230,7 +239,16 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     }
     
     @IBAction func tournamentRequestsNextBtnClicked(_ sender: Any) {
-        
+        let visibleItems: NSArray = self.tournamentRequestsCollectionView.indexPathsForVisibleItems as NSArray
+        if visibleItems.count == 0 {
+            return
+        }
+        let currentItem: IndexPath = visibleItems.lastObject as! IndexPath
+        let nextItem: IndexPath = IndexPath(item: currentItem.item + 1, section: 0)
+        if nextItem.row < (tournamentRequestList?.requestsSent.count)! {
+            self.tournamentRequestsCollectionView.scrollToItem(at: nextItem, at: .left, animated: true)
+            
+        }
     }
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController){
