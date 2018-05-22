@@ -137,6 +137,14 @@ class EventDetailsViewController: BeachPartnerViewController {
             generalEventDetailsView.isHidden = true
         }
         
+        if UserDefaults.standard.string(forKey: "userType") == "Coach" {
+            
+            if eventInvitation.invitations?.first?.eventStatus == "Registered" {
+                coachActionView.isHidden = true
+            }
+        }
+        
+        
 //        if isFromHomeTab && (eventInvitation.invitations?.first?.partners?.count)! < 5 {
 //            
 //            invitePartnerButton.isEnabled = true
@@ -248,7 +256,7 @@ class EventDetailsViewController: BeachPartnerViewController {
         let partnerList = [Int]()
         
         ActivityIndicatorView.show("Loading")
-        APIManager.callServer.registerEvent(eventId: event.masterEventId, registerType: "Organizer", partners: partnerList, sucessResult: { (response) in
+        APIManager.callServer.registerEvent(eventId: event.id, registerType: "Organizer", partners: partnerList, sucessResult: { (response) in
             ActivityIndicatorView.hiding()
             
             guard let responseModel = response as? CommonResponse else {
