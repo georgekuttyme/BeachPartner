@@ -66,7 +66,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     var date = ["04/01/2018","04/01/2018","04/01/2018","04/01/2018","04/01/2018","04/01/2018","04/01/2018"]
     var eventName = ["America","America","America","America","America","America","America"]
     var name = ["Alivia Orvieto","Marti McLaurin","Liz Held"]
-    var partners = [String]()
+    var partners = String()
     fileprivate let formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM-dd-yyyy"
@@ -311,19 +311,33 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         if collectionView == self.upCommingTournament {
             print("=========")
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UpcomingTournamentCollectionViewCell", for: indexPath) as! UpcomingTournamentCollectionViewCell
-//            if self.getAllEventsUsers.count != 0 {
-//
-//                cell.calendarImageView.image = UIImage(named: "calender")!
-//                cell.partnerImage.image = UIImage(named: "partners_1x")!
-//                let limit = self.getAllEventsUsers[indexPath.row].eventPartners?.count
-//                for _ in 1...limit! {
-//                    if self.getAllEventsUsers[indexPath.row].registerType == "Organizer" {
-//                        if let id = self.getAllEventsUsers[indexPath.row].organizerUser?.id, id != loggedInUserId {
-//                            if let name = self.getAllEventsUsers[indexPath.row].organizerUser?.firstName {
-//                                self.partners.append(name)
-//                            }
-//                        }
-//                    }
+            if self.getAllEventsUsers.count != 0 {
+                cell.calendarImageView.image = UIImage(named: "calender")!
+                cell.partnerImage.image = UIImage(named: "partners_1x")!
+                if self.getAllEventsUsers[indexPath.row].registerType == "invitee" {
+                    if let name = self.getAllEventsUsers[indexPath.row].organizerUser?.firstName {
+                        self.partners.append(name)
+                    }
+                    let limit = self.getAllEventsUsers[indexPath.row].eventPartners?.count
+                    for index in 1...limit! {
+                        if let firstName = self.getAllEventsUsers[indexPath.row].eventPartners?[index].partnerName{
+                            self.partners.append(firstName)
+                        }
+                    }
+                 }
+                else {
+                    let limit = self.getAllEventsUsers[indexPath.row].eventPartners?.count
+                    for index in 1...limit! {
+                        if let firstName = self.getAllEventsUsers[indexPath.row].eventPartners?[index].partnerName{
+                            if let id = self.getAllEventsUsers[indexPath.row].eventPartners?[index].partnerId, id != loggedInUserId{
+                                self.partners.append(firstName)
+                            
+                            }
+                        }
+                    }
+                    
+                }
+                
 //                    else if self.getAllEventsUsers[indexPath.row].registerType == "Invitee"
 //                    {
 //                        if let limit = self.getAllEventsUsers[indexPath.row].eventPartners?.count, limit != 0 {
@@ -350,7 +364,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
 //                    cell.partnersName?.text = name
 //                }
 //                cell.partnersName.textColor = UIColor.lightGray
-//            }
+            }
             
             return cell
         }
