@@ -1308,26 +1308,14 @@ extension APIManager{
         }
     }
     
-    public func getSearchEvents( sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure) {
+    public func getSearchEvents(params: [String: String], sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure) {
         
-        let params: [String: Any] = [
-            "eventType": "Junior",
-            "month": "June",
-            "region": "Alaska Region (AK)",
-            "state": "Alaska",
-            "subType": "12U",
-            "year": "2018"
-        ]
-        
-        APIGetClient.doGetRequest.inPostRespArray(method: ApiMethods.GetSearchEvents, params: params, sucess: { (response) in
-            
+        APIClient.doRequest.inPostForArray(method: ApiMethods.GetSearchEvents, params: params, sucess: { (response) in
             APIManager.printOnDebug(response: " Resppp1111 : \(String(describing: response))")
-            
-            //            sucessResult(nil)
             
             let jsonDict = response
             do {
-                let accRespModel = try GetEventsRespModelArray(jsonDict as! [String : Any])
+                let accRespModel = try GetEventsRespModelArray(jsonDict!)
                 sucessResult(accRespModel)
                 return
             } catch {
@@ -1336,7 +1324,6 @@ extension APIManager{
                 APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
                 return
             }
-            
         }) { (error) in
             self.busyOff()
             errorResult(error?.localizedDescription)
@@ -1344,9 +1331,6 @@ extension APIManager{
             return
         }
     }
-    
-
-    
 }
 
 
