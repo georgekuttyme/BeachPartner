@@ -13,5 +13,6 @@ class InvitePartnerCell: UITableViewCell {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nameLbl: UILabel!
     @IBOutlet weak var addBtn: UIButton!
+    @IBOutlet var unAvailableLbl: UILabel!
     
 }

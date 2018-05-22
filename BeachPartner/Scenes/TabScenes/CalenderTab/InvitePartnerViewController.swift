@@ -72,7 +72,7 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+       
         self.partnerTableVIew.separatorColor = UIColor.clear
          self.myteamtableView.separatorColor = UIColor.clear
         self.bottomview.isHidden = true
@@ -262,9 +262,14 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
             cell?.profileImage.layer.borderWidth = 1.5
             
             cell?.addBtn.isHidden = !connectedUsers[indexPath.row].availableOnDate
+            if (cell?.addBtn.isHidden)!{
+                cell?.unAvailableLbl.text = "Unavailable"
+            }else{
+                cell?.unAvailableLbl.isHidden = true
+            }
             cell?.addBtn.tag = indexPath.row+200000
             cell?.addBtn.addTarget(self, action: #selector(didTapAddButton(sender:)), for: .touchUpInside)
-
+            
             return cell!
         }
         
@@ -292,7 +297,6 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
             cell?.profileImage.layer.borderWidth = 1.5
             
             cell?.addBtn.isHidden = true
-            
             cell?.delBtn.tag = indexPath.row+300000
             cell?.delBtn.addTarget(self, action: #selector(didTapDeleteButton(sender:)), for: .touchUpInside)
             

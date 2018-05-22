@@ -51,7 +51,6 @@ class MyCalViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
         let eventDetailsVC = storyBoard.instantiateViewController(withIdentifier: "MyCalEventDetailsView") as! MyCalEventDetailsViewController
         eventDetailsVC.event = eventListToShow[indexPath.row]
@@ -59,6 +58,7 @@ class MyCalViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     override func viewWillAppear(_ animated: Bool) {
+         self.navigationController!.navigationBar.topItem!.title = "My Calendar"
         getAllUserEvents()
     }
     override func viewDidLoad() {

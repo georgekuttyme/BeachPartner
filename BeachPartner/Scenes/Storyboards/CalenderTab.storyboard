@@ -1154,19 +1154,30 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ojL-qH-hZL">
-                                                            <rect key="frame" x="70" y="21.5" width="180" height="20.5"/>
+                                                            <rect key="frame" x="70" y="21.5" width="150" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xg3-F0-dZ1">
-                                                            <rect key="frame" x="260" y="17" width="30" height="30"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="30" id="07M-We-Iyq"/>
-                                                                <constraint firstAttribute="width" constant="30" id="9AG-tx-jU7"/>
-                                                            </constraints>
-                                                            <state key="normal" image="add_48"/>
-                                                        </button>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="yKe-l5-Njb">
+                                                            <rect key="frame" x="230" y="17" width="60" height="30"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zcY-mn-t9o">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xg3-F0-dZ1">
+                                                                    <rect key="frame" x="30" y="0.0" width="30" height="30"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="30" id="07M-We-Iyq"/>
+                                                                        <constraint firstAttribute="width" constant="30" id="9AG-tx-jU7"/>
+                                                                    </constraints>
+                                                                    <state key="normal" image="add_48"/>
+                                                                </button>
+                                                            </subviews>
+                                                        </stackView>
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
@@ -1181,6 +1192,7 @@
                                             <outlet property="addBtn" destination="Xg3-F0-dZ1" id="5tR-zu-cSR"/>
                                             <outlet property="nameLbl" destination="ojL-qH-hZL" id="rt2-Hh-l6E"/>
                                             <outlet property="profileImage" destination="NrL-ri-AGn" id="T9X-zh-2fU"/>
+                                            <outlet property="unAvailableLbl" destination="zcY-mn-t9o" id="I9Y-wj-cM5"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1344,7 +1356,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LAR-rw-zqJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-257" y="1897"/>
+            <point key="canvasLocation" x="-258.75" y="1896.1267605633802"/>
         </scene>
         <!--Filter View Controller-->
         <scene sceneID="xGG-vl-gI4">
