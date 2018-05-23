@@ -625,7 +625,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             self.editUserImageBtn.isHidden = false
             self.editUserImageBtn.isUserInteractionEnabled = true
             editclicked = true
-            self.editProfileTxtBtn.setTitle("Save profile", for: UIControlState.normal)
+            self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
             self.editVideoBtn.isHidden = false
             self.editVideoBtn.isUserInteractionEnabled = true
             self.addToplistBtn.isUserInteractionEnabled = true
@@ -654,29 +654,29 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     }
     @IBAction func editProfileTxtBtnClicked(_ sender: Any) {
         
-        if (self.editUserImageBtn.isHidden) {
-            self.editUserImageBtn.isHidden = false
-            self.editUserImageBtn.isUserInteractionEnabled = true
-            editclicked = true
-            self.editVideoBtn.isHidden = false
-            self.addToplistBtn.isUserInteractionEnabled = true
-            self.delTop1.isUserInteractionEnabled = true
-            self.delTop2.isUserInteractionEnabled = true
-            self.editVideoBtn.isUserInteractionEnabled = true
-            
-            self.tableView.reloadData()
-        }
-        else {
-            self.editUserImageBtn.isHidden = true
-            self.editUserImageBtn.isUserInteractionEnabled = false
-            editclicked = false
-            self.editVideoBtn.isHidden = true
-            self.addToplistBtn.isUserInteractionEnabled = false
-            self.delTop1.isUserInteractionEnabled = false
-            self.delTop2.isUserInteractionEnabled = false
-            self.editVideoBtn.isUserInteractionEnabled = false
-            self.tableView.reloadData()
-        }
+//        if (self.editUserImageBtn.isHidden) {
+//            self.editUserImageBtn.isHidden = false
+//            self.editUserImageBtn.isUserInteractionEnabled = true
+//            editclicked = true
+//            self.editVideoBtn.isHidden = false
+//            self.addToplistBtn.isUserInteractionEnabled = true
+//            self.delTop1.isUserInteractionEnabled = true
+//            self.delTop2.isUserInteractionEnabled = true
+//            self.editVideoBtn.isUserInteractionEnabled = true
+//
+//            self.tableView.reloadData()
+//        }
+//        else {
+//            self.editUserImageBtn.isHidden = true
+//            self.editUserImageBtn.isUserInteractionEnabled = false
+//            editclicked = false
+//            self.editVideoBtn.isHidden = true
+//            self.addToplistBtn.isUserInteractionEnabled = false
+//            self.delTop1.isUserInteractionEnabled = false
+//            self.delTop2.isUserInteractionEnabled = false
+//            self.editVideoBtn.isUserInteractionEnabled = false
+//            self.tableView.reloadData()
+//        }
     }
     
     
@@ -1509,7 +1509,6 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
              //   self.userData.imageUrl = updationResult.profileImgUrl
             }
              self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
-            
         }) { (error) in
             self.alert(message: error!, title: "Faild To Update")
               self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
@@ -1525,6 +1524,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             }
             
             if(updationResult != nil){
+                print("n.n.n.n")
                 self.userData.imageUrl = updationResult.profileImgUrl
             }
               self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
@@ -1540,11 +1540,10 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             guard let `self` = self else {
                 return
             }
-            
-            self.editUserImageBtn.isHidden = true
-            self.editUserImageBtn.isUserInteractionEnabled = false
-            self.editVideoBtn.isHidden = true
-            self.editVideoBtn.isUserInteractionEnabled = false
+            self.editUserImageBtn.isHidden = false
+            self.editUserImageBtn.isUserInteractionEnabled = true
+            self.editVideoBtn.isHidden = false
+            self.editVideoBtn.isUserInteractionEnabled = true
             
         })
     }
