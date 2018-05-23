@@ -575,6 +575,9 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
                         }
                     }
                 }
+                if self.selectedType == "invitePartner" {
+                     self.cardHeight.constant = -180
+                }
             }
             
 //            DispatchQueue.main.async {
