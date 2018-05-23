@@ -1119,17 +1119,26 @@ extension APIManager{
             
             APIManager.printOnDebug(response: " Resppp1111 : \(String(describing: response))")
             
-//            sucessResult(nil)
             let jsonDict = response!
-
-            do {
-                let accRespModel = try CommonResponse(jsonDict as! [String : Any])
-                sucessResult(accRespModel)
+            if let status = jsonDict["status"] as? String?, status == "OK" {
+                
+                do {
+                    let accRespModel = try CommonResponse(jsonDict as! [String : Any])
+                    sucessResult(accRespModel)
+                    return
+                } catch {
+                    print("Catched")
+                    errorResult(error.localizedDescription)
+                    APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                    return
+                }
+            }
+            else if let message = jsonDict["title"] as? String? {
+                errorResult(message)
                 return
-            } catch {
-                print("Catched")
-                errorResult(error.localizedDescription)
-                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+            }
+            else {
+                errorResult("Unknown Error")
                 return
             }
         }) { (error) in
@@ -1204,20 +1213,28 @@ extension APIManager{
             
             APIManager.printOnDebug(response: " Resppp1111 : \(String(describing: response))")
             
-//            sucessResult(nil)
-            
-                        let jsonDict = response!
-            
-                        do {
-                            let accRespModel = try CommonResponse(jsonDict as! [String : Any])
-                            sucessResult(accRespModel)
-                            return
-                        } catch {
-                            print("Catched")
-                            errorResult(error.localizedDescription)
-                            APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
-                            return
-                        }
+            let jsonDict = response!
+            if let status = jsonDict["status"] as? String?, status == "OK" {
+                
+                do {
+                    let accRespModel = try CommonResponse(jsonDict as! [String : Any])
+                    sucessResult(accRespModel)
+                    return
+                } catch {
+                    print("Catched")
+                    errorResult(error.localizedDescription)
+                    APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                    return
+                }
+            }
+            else if let message = jsonDict["title"] as? String? {
+                errorResult(message)
+                return
+            }
+            else {
+                errorResult("Unknown Error")
+                return
+            }
         }) { (error) in
             self.busyOff()
             errorResult(error?.localizedDescription)
@@ -1234,22 +1251,30 @@ extension APIManager{
             "courtNumber": courtNumber
         ]
         
-        APIClient.doRequest.inPostReq(method: ApiMethods.InvitationResponse, params: params, sucess: { (response) in
+        APIClient.doRequest.inPostReq(method: ApiMethods.NotifyCourtNumber, params: params, sucess: { (response) in
             
             APIManager.printOnDebug(response: " Resppp1111 : \(String(describing: response))")
-            
-            //            sucessResult(nil)
-            
+
             let jsonDict = response!
-            
-            do {
-                let accRespModel = try CommonResponse(jsonDict as! [String : Any])
-                sucessResult(accRespModel)
+            if let status = jsonDict["status"] as? String?, status == "OK" {
+                
+                do {
+                    let accRespModel = try CommonResponse(jsonDict as! [String : Any])
+                    sucessResult(accRespModel)
+                    return
+                } catch {
+                    print("Catched")
+                    errorResult(error.localizedDescription)
+                    APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                    return
+                }
+            }
+            else if let message = jsonDict["title"] as? String? {
+                errorResult(message)
                 return
-            } catch {
-                print("Catched")
-                errorResult(error.localizedDescription)
-                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+            }
+            else {
+                errorResult("Unknown Error")
                 return
             }
         }) { (error) in

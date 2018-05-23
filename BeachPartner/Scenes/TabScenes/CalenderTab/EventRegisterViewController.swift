@@ -69,32 +69,13 @@ class EventRegisterViewController: UIViewController {
                 print("Rep model does not match")
                 return
             }
-            self.alert(message: responseModel.message)
             
-            if responseModel.status == "OK" {
-                
-                let alert = UIAlertController(title: "", message: "Do you want to add this event to your system Calendar?", preferredStyle: UIAlertControllerStyle.alert)
-                let action = UIAlertAction(title: "Yes", style: .default) { (alertAction) in
-                    
-                    let startDate = Date(timeIntervalSince1970: TimeInterval((self.eventInvitation?.eventStartDate)!/1000))
-                    let endDate = Date(timeIntervalSince1970: TimeInterval((self.eventInvitation?.eventEndDate)!/1000))
-                    
-                    
-                    self.addEventToCalendar(title: (self.eventInvitation?.eventName)!, description: self.eventInvitation?.eventDescription, startDate: startDate, endDate: endDate, completion: { (success, error) in
-                        
-                        self.dismiss(animated: true, completion: nil)
-                    })
-                }
-                let noAction = UIAlertAction(title: "No", style: .default) { (alertAction) in
-                    self.dismiss(animated: true, completion: nil)
-                }
-                alert.addAction(action)
-                alert.addAction(noAction)
-                self.present(alert, animated:true, completion: nil)
+            let alert = UIAlertController(title: "", message: responseModel.message, preferredStyle: UIAlertControllerStyle.alert)
+            let action = UIAlertAction(title: "OK", style: .default) { (alertAction) in
+                self.showAddEventToCalendarPrompt()
             }
-            else {
-                self.dismiss(animated: true, completion: nil)
-            }
+            alert.addAction(action)
+            self.present(alert, animated:true, completion: nil)
             
         }) { (error) in
             
@@ -107,6 +88,33 @@ class EventRegisterViewController: UIViewController {
             
             self.dismiss(animated: true, completion: nil)
         }
+    }
+    
+    func showAddEventToCalendarPrompt() {
+        
+        guard let startDate = self.eventInvitation?.eventStartDate, let endDate = self.eventInvitation?.eventEndDate else {
+            self.dismiss(animated: true, completion: nil)
+            return
+        }
+        
+        let alert = UIAlertController(title: "", message: "Do you want to add this event to your system Calendar?", preferredStyle: UIAlertControllerStyle.alert)
+        let action = UIAlertAction(title: "Yes", style: .default) { (alertAction) in
+            
+            let sDate = Date(timeIntervalSince1970: TimeInterval(startDate/1000))
+            let eDate = Date(timeIntervalSince1970: TimeInterval(endDate/1000))
+            
+            
+            self.addEventToCalendar(title: self.eventInvitation?.eventName ?? "", description: self.eventInvitation?.eventDescription, startDate: sDate, endDate: eDate, completion: { (success, error) in
+                
+                self.dismiss(animated: true, completion: nil)
+            })
+        }
+        let noAction = UIAlertAction(title: "No", style: .default) { (alertAction) in
+            self.dismiss(animated: true, completion: nil)
+        }
+        alert.addAction(action)
+        alert.addAction(noAction)
+        self.present(alert, animated:true, completion: nil)
     }
     
     

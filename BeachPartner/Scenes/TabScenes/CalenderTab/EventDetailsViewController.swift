@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EventKit
 
 class EventDetailsViewController: BeachPartnerViewController {
 
@@ -28,6 +29,9 @@ class EventDetailsViewController: BeachPartnerViewController {
     @IBOutlet weak var invitePartnerButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
+    
+    @IBOutlet weak var goingButton: UIButton!
+    @IBOutlet weak var notGoingButton: UIButton!
     
     
     var event: GetEventRespModel?
@@ -138,9 +142,14 @@ class EventDetailsViewController: BeachPartnerViewController {
         }
         
         if UserDefaults.standard.string(forKey: "userType") == "Coach" {
-            
+
             if eventInvitation.invitations?.first?.eventStatus == "Registered" {
-                coachActionView.isHidden = true
+
+                goingButton.isEnabled = false
+                goingButton.alpha = 0.6
+                
+                notGoingButton.isEnabled = false
+                notGoingButton.alpha = 0.6
             }
         }
         
@@ -264,9 +273,12 @@ class EventDetailsViewController: BeachPartnerViewController {
                 return
             }
             
-            self.alert(message: responseModel.message)
-            self.navigationController?.popViewController(animated: true)
-
+            let alert = UIAlertController(title: "", message: responseModel.message, preferredStyle: UIAlertControllerStyle.alert)
+            let action = UIAlertAction(title: "OK", style: .default) { (alertAction) in
+                self.showAddEventToCalendarPrompt()
+            }
+            alert.addAction(action)
+            self.present(alert, animated:true, completion: nil)
         }) { (error) in
             
             ActivityIndicatorView.hiding()
@@ -278,6 +290,33 @@ class EventDetailsViewController: BeachPartnerViewController {
         }
     }
     
+    func showAddEventToCalendarPrompt() {
+        
+        guard let startDate = self.event?.eventStartDate, let endDate = self.event?.eventEndDate else {
+            self.navigationController?.popViewController(animated: true)
+            return
+        }
+        
+        let alert = UIAlertController(title: "", message: "Do you want to add this event to your system Calendar?", preferredStyle: UIAlertControllerStyle.alert)
+        let action = UIAlertAction(title: "Yes", style: .default) { (alertAction) in
+            
+            let sDate = Date(timeIntervalSince1970: TimeInterval(startDate/1000))
+            let eDate = Date(timeIntervalSince1970: TimeInterval(endDate/1000))
+            
+            self.addEventToCalendar(title: self.event?.eventName ?? "", description: self.event?.eventDescription ?? "", startDate: sDate, endDate: eDate, completion: { (success, error) in
+                
+                self.navigationController?.popViewController(animated: true)
+            })
+        }
+        let noAction = UIAlertAction(title: "No", style: .default) { (alertAction) in
+            self.navigationController?.popViewController(animated: true)
+        }
+        alert.addAction(action)
+        alert.addAction(noAction)
+        self.present(alert, animated:true, completion: nil)
+    }
+    
+    
     @IBAction func didTapNotGoingButton(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -285,6 +324,31 @@ class EventDetailsViewController: BeachPartnerViewController {
     private func dateStringFromTimeInterval(interval: Int) -> String {
         let date = Date(timeIntervalSince1970: TimeInterval(interval/1000))
         return formatter.string(from: date)
+    }
+    
+    func addEventToCalendar(title: String, description: String?, startDate: Date, endDate: Date, completion: ((_ success: Bool, _ error: NSError?) -> Void)? = nil) {
+        
+        let eventStore = EKEventStore()
+        
+        eventStore.requestAccess(to: .event, completion: { (granted, error) in
+            if (granted) && (error == nil) {
+                let event = EKEvent(eventStore: eventStore)
+                event.title = title
+                event.startDate = startDate
+                event.endDate = endDate
+                event.notes = description
+                event.calendar = eventStore.defaultCalendarForNewEvents
+                do {
+                    try eventStore.save(event, span: .thisEvent)
+                } catch let e as NSError {
+                    completion?(false, e)
+                    return
+                }
+                completion?(true, nil)
+            } else {
+                completion?(false, error as NSError?)
+            }
+        })
     }
 }
 

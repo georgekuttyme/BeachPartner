@@ -19,7 +19,8 @@ class MyCalEventDetailsViewController: UIViewController {
     
     @IBOutlet weak var eventStartDateLabel: UILabel!
     @IBOutlet weak var eventEndDateLabel: UILabel!
-
+    @IBOutlet weak var partnerListHeaderLabel: UILabel!
+    
     @IBOutlet weak var tableView: UITableView!
     
     var event: GetAllUserEventsRespModel.Event?
@@ -41,6 +42,10 @@ class MyCalEventDetailsViewController: UIViewController {
             self.loggedInUserId =  Int(id)!
         }
 
+        if UserDefaults.standard.string(forKey: "userType") == "Coach" {
+            partnerListHeaderLabel.text = "Athletes"
+        }
+        
         getAllInvitations()
         setupDataFromEvent()
     }
