@@ -23,27 +23,25 @@ extension APIManager{
 //    "fcmToken": "string",
     ///
     public func forInstaLogin(sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure){
+        let device_UUID = UIDevice.current.identifierForVendor!.uuidString
         let fcmToken = UserDefaults.standard.string(forKey: "FCM_TOKEN")
         let instaToken = UserDefaults.standard.string(forKey: "INSTATOKEN")
+//            "7527464260.d3f5b1d.d3990de1f0dd4d379df56b75b799ccf2"
         print("fcm Token--->",fcmToken ?? "")
         let params = [
-            "deviceId": "",
-            "deviceToken": instaToken,
-            "fcmToken": fcmToken,
-            "password": "",
-            "rememberMe": "",
-            "username": ""
+          
+            "authToken":instaToken ?? "",
+            "deviceId":device_UUID,
+            "deviceToken":"",
+            "fcmToken": fcmToken ?? "",
+            "loginType": "IG",
+            "rememberMe": "true",
             ]
         
         APIClient.doRequest.inPost(method:ApiMethods.Login, params: params as! [String : String], sucess: { (response) in
-            
-            //            APIManager.printOnDebug(response: "\(response)")
-            
-            
             let jsonDict = response! as! JSONDictionary
             
-            do {
-                
+            do {                
                 let loginModel = try LoginRespModel(jsonDict)
                 sucessResult(loginModel)
                 return

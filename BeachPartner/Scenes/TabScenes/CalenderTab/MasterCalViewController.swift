@@ -179,10 +179,10 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
                 cell.colorView.backgroundColor = .green
             }
             else if event.eventStaus == "Invited"{
-                cell.colorView.backgroundColor = .red
+                cell.colorView.backgroundColor = .orange
             }
             else if event.eventStaus == "Active"{
-                cell.colorView.backgroundColor = .red
+                cell.colorView.backgroundColor = .orange
             }
             else{
                 cell.colorView.backgroundColor = .clear
@@ -194,10 +194,10 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
                 cell.colorView.backgroundColor = .green
             }
             else if event.eventStaus == "Invited"{
-                cell.colorView.backgroundColor = .red
+                cell.colorView.backgroundColor = .orange
             }
             else if event.eventStaus == "Active"{
-                cell.colorView.backgroundColor = .red
+                cell.colorView.backgroundColor = .orange
             }
             else{
                 cell.colorView.backgroundColor = .clear
