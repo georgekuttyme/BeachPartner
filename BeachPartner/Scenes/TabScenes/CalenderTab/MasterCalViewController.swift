@@ -172,7 +172,7 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
         
         let event = eventListToShow[indexPath.row]
         cell.eventNameLbl.text = event.eventName
-
+        
         if event.registerType == "Organizer" {
             cell.invitationTypeImage.image = UIImage(named:"sent1")
             if event.eventStaus == "Registered"{
@@ -209,8 +209,7 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
         }
         
 //        cell.colorView.backgroundColor = .clear
-        print("event.status",event.eventStaus)
-        print("EventStatus.Active.rawValue",EventStatus.Active.rawValue)
+        print("event.eventName    ",event.eventName,"   event.status",event.eventStaus)
         return cell
     }
     
