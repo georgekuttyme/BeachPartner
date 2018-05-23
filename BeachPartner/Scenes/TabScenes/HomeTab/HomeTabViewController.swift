@@ -352,9 +352,8 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
                 cell.tournamentlabel?.font = UIFont.systemFont(ofSize: 13)
                 cell.tournamentlabel.textColor = UIColor.lightGray
                 print("+++>>",self.partners.count)
-                if self.partners.isEmpty{
-                    
-                }else {
+
+                if self.partners.count > 0 {
                     self.partners.removeLast()
                 }
                 cell.partnersName?.text = self.partners
