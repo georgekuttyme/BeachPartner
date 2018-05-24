@@ -1136,11 +1136,13 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
             guard let `self` = self else {
                 return
             }
-            
-            self.editUserImageBtn.isHidden = true
-            self.editUserImageBtn.isUserInteractionEnabled = false
-//            self.editVideoBtn.isHidden = true
-//            self.editVideoBtn.isUserInteractionEnabled = false
+            let image = UIImage(named: "edit_btn_1x") as UIImage?
+            self.editProfileBtn.setImage(image, for: .normal)
+            self.editclicked = true
+            self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
+            self.editUserImageBtn.isHidden = false
+            self.editUserImageBtn.isUserInteractionEnabled = true
+          
             
         })
     }

@@ -1540,11 +1540,17 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             guard let `self` = self else {
                 return
             }
+            let image = UIImage(named: "edit_btn_1x") as UIImage?
+            self.editProfileBtn.setImage(image, for: .normal)
+            self.editclicked = true
+            self.addToplistBtn.isHidden = true
+            self.delTop1.isHidden = true
+            self.delTop2.isHidden = true
+            self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
             self.editUserImageBtn.isHidden = false
             self.editUserImageBtn.isUserInteractionEnabled = true
             self.editVideoBtn.isHidden = false
             self.editVideoBtn.isUserInteractionEnabled = true
-            
         })
     }
     

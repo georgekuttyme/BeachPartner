@@ -40,7 +40,7 @@ class MyCalViewController: UIViewController, UITableViewDelegate, UITableViewDat
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? CalanderTableViewCell  else {
             fatalError("The dequeued cell is not an instance of ManagSenderTableViewCell.")
         }
-        
+
         cell.contentView.layer.cornerRadius = 4.0
         cell.contentView.layer.borderWidth = 1.0
         cell.contentView.layer.borderColor = UIColor.clear.cgColor
@@ -51,6 +51,7 @@ class MyCalViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.layer.shadowOpacity = 1.0
         cell.layer.masksToBounds = false
         cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: cell.contentView.layer.cornerRadius).cgPath
+
         print(eventListToShow)
         let event = eventListToShow[indexPath.row]
         cell.eventNameLbl.text = event?.eventName
