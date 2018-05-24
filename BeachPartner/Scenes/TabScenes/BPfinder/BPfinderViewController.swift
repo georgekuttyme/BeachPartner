@@ -209,22 +209,15 @@ class BPfinderViewController: UIViewController, UICollectionViewDelegate,UIColle
             cell.imageView.sd_setShowActivityIndicatorView(true)
             cell.imageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
         }
-        
-        
-//            cell.imageView.image = imageSrc[indexPath.row]
             cell.imageView.layer.cornerRadius = cell.imageView.frame.size.width/2
             cell.imageView.clipsToBounds = true
             cell.imageView.layer.borderColor = UIColor.blue.cgColor
-        cell.imageView.layer.borderColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0) as! CGColor
+        cell.imageView.layer.borderColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0).cgColor
             cell.imageView.layer.borderWidth = 1
             return cell
-//        }
-        
-        
-        
+
     }
 
-    
     func cycleFromViewController(oldViewController: UIViewController, toViewController newViewController: UIViewController) {
         oldViewController.willMove(toParentViewController: nil)
         self.addChildViewController(newViewController)

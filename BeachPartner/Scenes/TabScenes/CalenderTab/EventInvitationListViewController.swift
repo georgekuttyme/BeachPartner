@@ -36,7 +36,7 @@ class EventInvitationListViewController: UIViewController, UITableViewDataSource
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        toastAlert()
         getAllInvitations()
     }
 
@@ -45,7 +45,13 @@ class EventInvitationListViewController: UIViewController, UITableViewDataSource
         
         self.navigationItem.title = "Invitations"
     }
-    
+    func toastAlert() {
+        let alert = UIAlertController(title: "Direction", message: "Please swipe left to accept or reject invitation", preferredStyle: .alert)
+        let actionButton = UIAlertAction(title: "Continue", style: .default) { (action) in
+        }
+        alert.addAction(actionButton)
+        present(alert, animated: true, completion: nil)
+    }
     private func setupData() {
         guard let event = eventInvitation else { return }
 
