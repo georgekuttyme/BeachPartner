@@ -27,7 +27,9 @@ class MutualLikesViewController: UIViewController {
     }
     
     @IBAction func findTournamentBtnclicked(_ sender: Any) {
-//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "find-Tournament"), object: nil)
+        dismiss(animated: false) {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "find-Tournament"), object: nil)
+        }
     }
     @IBAction func keepSwiping(_ sender: Any) {
         dismiss(animated: true, completion: nil)

@@ -40,22 +40,18 @@ class MyCalViewController: UIViewController, UITableViewDelegate, UITableViewDat
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? CalanderTableViewCell  else {
             fatalError("The dequeued cell is not an instance of ManagSenderTableViewCell.")
         }
-        cell.selectionStyle = .none
-        cell.layer.cornerRadius = 8.0
-        cell.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
-        cell.layer.borderWidth = 0.5
 
+        cell.contentView.layer.cornerRadius = 4.0
+        cell.contentView.layer.borderWidth = 1.0
+        cell.contentView.layer.borderColor = UIColor.clear.cgColor
+        cell.contentView.layer.masksToBounds = false
+        cell.layer.shadowColor = UIColor.gray.cgColor
+        cell.layer.shadowOffset = CGSize(width: 0, height: 0)
+        cell.layer.shadowRadius = 4.0
+        cell.layer.shadowOpacity = 1.0
+        cell.layer.masksToBounds = false
+        cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: cell.contentView.layer.cornerRadius).cgPath
 
-        let border = CALayer()
-        let width = CGFloat(5.0)
-        border.borderColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0).withAlphaComponent(0.2).cgColor
-        border.frame = CGRect(x: 0, y: cell.contentView.frame.size.height - width, width:  cell.frame.size.width, height: cell.contentView.frame.size.height)
-        cell.layer.shadowColor = UIColor.lightGray.withAlphaComponent(0.2).cgColor
-        cell.layer.shadowOpacity = 0.2
-        border.borderWidth = width
-        cell.layer.addSublayer(border)
-        cell.layer.masksToBounds = true
-        cell.clipsToBounds = true
         print(eventListToShow)
         let event = eventListToShow[indexPath.row]
         cell.eventNameLbl.text = event?.eventName

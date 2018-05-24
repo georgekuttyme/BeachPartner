@@ -285,8 +285,11 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(sendMsg(notification:)), name:NSNotification.Name(rawValue: "send-Message"), object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(findTournament(notification:)), name:NSNotification.Name(rawValue: "find-Tournament"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(findTournament(notification:)), name:NSNotification.Name(rawValue: "find-Tournament"), object: nil)
 
+    }
+    @objc func findTournament(notification: NSNotification){
+        self.tabBarController?.selectedIndex = 3
     }
 
     @objc func sendMsg(notification: NSNotification){
