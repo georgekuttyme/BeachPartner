@@ -35,9 +35,14 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
     
     fileprivate let gregorian: NSCalendar! = NSCalendar(calendarIdentifier:NSCalendar.Identifier.gregorian)
 
-    var filterParams: [String: String]? {
+    var filterParams: EventFilterParams? {
         didSet {
-            searchEvents()
+            if filterParams == nil {
+                getAllEvents()
+            }
+            else {
+                searchEvents()
+            }
         }
     }
 
@@ -96,7 +101,7 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
         }
         
         ActivityIndicatorView.show("Loading")
-        APIManager.callServer.getSearchEvents(params: params, sucessResult: { (responseModel) in
+        APIManager.callServer.getSearchEvents(filterParams: params, sucessResult: { (responseModel) in
             
             ActivityIndicatorView.hiding()
             guard let eventsArrayModel = responseModel as? GetEventsRespModelArray else {

@@ -25,6 +25,8 @@ class CalenderViewController: UIViewController {
     
     var button1 : UIBarButtonItem!
     
+    var eventFilterParams: EventFilterParams?
+    
     @IBAction func calSegSelection(sender: UISegmentedControl) {
         
         if sender.selectedSegmentIndex == 0{
@@ -193,18 +195,31 @@ class CalenderViewController: UIViewController {
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
         if segue.identifier == "FilterViewSegue" {
-            
             let targetVC = segue.destination as! FilterViewController
             targetVC.delegate = self
+            
+            if let filterParams = eventFilterParams {
+                targetVC.filterParams = filterParams
+            }
         }
      }
 }
 
 extension CalenderViewController: FilterViewControllerDelegate {
     
-    func didApplyFilter(params: [String : String]) {
+    func didApplyFilter(filterParams: EventFilterParams) {
+        self.eventFilterParams = filterParams
         let activeVC = currentViewController as! MasterCalViewController
-        activeVC.filterParams = params
+        activeVC.filterParams = filterParams
+
+        filterButton.tintColor = UIColor.cyan
+    }
+        
+    func clearAllFilters() {
+        let activeVC = currentViewController as! MasterCalViewController
+        activeVC.filterParams = nil
+        
+        filterButton.tintColor = .white
     }
 }
 

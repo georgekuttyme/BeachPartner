@@ -1329,7 +1329,16 @@ extension APIManager{
         }
     }
     
-    public func getSearchEvents(params: [String: String], sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure) {
+    public func getSearchEvents(filterParams: EventFilterParams, sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure) {
+        
+        let params: [String: String] = [
+            "eventType": filterParams.eventType ?? "",
+            "month": filterParams.month ?? "",
+            "region": filterParams.region ?? "",
+            "state": filterParams.state ?? "",
+            "subType": filterParams.subEventType ?? "",
+            "year": filterParams.year ?? ""
+        ]
         
         APIClient.doRequest.inPostForArray(method: ApiMethods.GetSearchEvents, params: params, sucess: { (response) in
             APIManager.printOnDebug(response: " Resppp1111 : \(String(describing: response))")
