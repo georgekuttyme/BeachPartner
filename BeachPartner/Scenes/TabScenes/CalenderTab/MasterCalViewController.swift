@@ -171,9 +171,10 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
         //cell.selectionStyle = .none
         cell.layer.cornerRadius = 8.0
         cell.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
-        cell.layer.borderWidth = 0.5
+        cell.layer.borderWidth = 1.0
 
-        
+//        cell.layoutSubviews()
+        /*
         let border = CALayer()
         let width = CGFloat(5.0)
         border.borderColor = UIColor.lightGray.cgColor
@@ -184,6 +185,18 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.layer.addSublayer(border)
         cell.layer.masksToBounds = true
         cell.clipsToBounds = true
+ */
+        cell.contentView.layer.cornerRadius = 4.0
+        cell.contentView.layer.borderWidth = 1.0
+        cell.contentView.layer.borderColor = UIColor.clear.cgColor
+        cell.contentView.layer.masksToBounds = false
+        cell.layer.shadowColor = UIColor.gray.cgColor
+        cell.layer.shadowOffset = CGSize(width: 0, height: 0)
+        cell.layer.shadowRadius = 4.0
+        cell.layer.shadowOpacity = 1.0
+        cell.layer.masksToBounds = false
+        cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: cell.contentView.layer.cornerRadius).cgPath
+        
         
         let event = eventListToShow[indexPath.row]
         cell.eventNameLbl.text = event.eventName
