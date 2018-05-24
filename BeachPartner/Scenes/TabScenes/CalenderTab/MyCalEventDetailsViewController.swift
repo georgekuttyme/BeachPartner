@@ -276,11 +276,23 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
             cell?.noteButton.addTarget(self, action: #selector(noteBtnPressed), for: .touchUpInside)
         }
         
+        
+        cell?.contentView.layer.cornerRadius = 4.0
+        cell?.contentView.layer.borderWidth = 1.0
+        cell?.contentView.layer.borderColor = UIColor.clear.cgColor
+        cell?.contentView.layer.masksToBounds = false
+        cell?.layer.shadowColor = UIColor.gray.cgColor
+        cell?.layer.shadowOffset = CGSize(width: 0, height: 0)
+        cell?.layer.shadowRadius = 4.0
+        cell?.layer.shadowOpacity = 1.0
+        cell?.layer.masksToBounds = false
+        cell?.layer.shadowPath = UIBezierPath(roundedRect: (cell?.bounds)!, cornerRadius: (cell?.contentView.layer.cornerRadius)!).cgPath
+        
         return cell!
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 80
     }
     
     
