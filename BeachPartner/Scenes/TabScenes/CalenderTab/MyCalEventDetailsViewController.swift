@@ -189,7 +189,7 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
             if indexPath.row == 0 {
                 let partner = eventInvitation?.invitations?.first
                 cell?.nameLabel.text = partner?.invitorName
-                cell?.statusLabel.text = "Organiser"
+                cell?.statusLabel.text = "Organizer"
                 
                 if let imageUrl = URL(string: (partner?.invitorimageURL)!) {
                     cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)

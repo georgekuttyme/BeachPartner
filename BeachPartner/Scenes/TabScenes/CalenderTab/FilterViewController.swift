@@ -262,6 +262,10 @@ class FilterViewController: UIViewController {
         navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
     }
+    @IBAction func clearAllBtnClicked(_ sender: UIButton) {
+        delegate?.clearAllFilters()
+        dismiss(animated: true, completion: nil)
+    }
     
     @IBAction func searchClicked(_ sender: Any) {
         

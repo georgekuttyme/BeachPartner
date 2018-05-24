@@ -216,6 +216,8 @@ extension CalenderViewController: FilterViewControllerDelegate {
     }
         
     func clearAllFilters() {
+        
+        self.eventFilterParams = nil
         let activeVC = currentViewController as! MasterCalViewController
         activeVC.filterParams = nil
         

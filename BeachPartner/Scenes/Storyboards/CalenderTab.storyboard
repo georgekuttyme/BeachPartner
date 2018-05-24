@@ -1520,10 +1520,22 @@
                                             <action selector="regionBtnClicked:" destination="4Hr-ax-y4B" eventType="touchUpInside" id="n22-BU-jHH"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EFR-c5-abV">
+                                        <rect key="frame" x="178" y="2" width="100" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="OY2-X6-sTk"/>
+                                            <constraint firstAttribute="width" constant="100" id="eG1-Eb-yeD"/>
+                                        </constraints>
+                                        <state key="normal" title="Clear All"/>
+                                        <connections>
+                                            <action selector="clearAllBtnClicked:" destination="4Hr-ax-y4B" eventType="touchUpInside" id="iBU-50-GdC"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="QgH-um-JqQ" firstAttribute="leading" secondItem="7Gr-q7-oPy" secondAttribute="leading" id="1sD-kw-tJE"/>
+                                    <constraint firstAttribute="trailing" secondItem="EFR-c5-abV" secondAttribute="trailing" constant="22" id="2Zy-p7-tjq"/>
                                     <constraint firstItem="TeZ-2k-MNz" firstAttribute="height" secondItem="JHQ-nx-4xP" secondAttribute="height" id="4aV-LP-3sg"/>
                                     <constraint firstItem="QgH-um-JqQ" firstAttribute="height" secondItem="7Gr-q7-oPy" secondAttribute="height" id="6az-0R-XNu"/>
                                     <constraint firstItem="edo-og-w5x" firstAttribute="height" secondItem="7Gr-q7-oPy" secondAttribute="height" id="6dp-Wl-kZo"/>
@@ -1540,6 +1552,7 @@
                                     <constraint firstItem="uiJ-VM-zbP" firstAttribute="trailing" secondItem="7Gr-q7-oPy" secondAttribute="trailing" id="NZj-Ge-Tjx"/>
                                     <constraint firstItem="C6P-xl-I9b" firstAttribute="trailing" secondItem="JHQ-nx-4xP" secondAttribute="trailing" id="NyS-d9-SWJ"/>
                                     <constraint firstItem="NVy-Xf-huO" firstAttribute="centerY" secondItem="kG1-Qp-pb1" secondAttribute="centerY" id="P4a-Lh-xb2"/>
+                                    <constraint firstItem="EFR-c5-abV" firstAttribute="top" secondItem="Eyu-eN-xhY" secondAttribute="top" constant="2" id="QDd-9A-7os"/>
                                     <constraint firstItem="AlR-fa-Zz6" firstAttribute="leading" secondItem="JHQ-nx-4xP" secondAttribute="leading" id="UeS-lo-MC4"/>
                                     <constraint firstItem="edo-og-w5x" firstAttribute="trailing" secondItem="7Gr-q7-oPy" secondAttribute="trailing" id="X15-Qa-Cs7"/>
                                     <constraint firstItem="mY0-Jx-0Ec" firstAttribute="centerY" secondItem="C6P-xl-I9b" secondAttribute="centerY" id="ZKY-QF-MMf"/>
@@ -1593,7 +1606,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ptb-1g-S3h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="186.40000000000001" y="251.42428785607197"/>
+            <point key="canvasLocation" x="185.625" y="251.40845070422534"/>
         </scene>
         <!--Event Invitation List View Controller-->
         <scene sceneID="4me-2C-K1b">

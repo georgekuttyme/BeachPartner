@@ -342,6 +342,8 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             if self.getAllEventsUsers.count != 0 {
                 let limit = partnerList.invitationList?.count
                 
+                self.partners.removeAll()
+                
                 for index1 in 0..<limit! {
                     let partnerCount = partnerList.invitationList![index1].eventpartners?.count
                     for index2 in 0..<partnerCount! {
@@ -355,18 +357,18 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
 
                 let startDate = dateStringFromTimeInterval(interval: (partnerList.event?.eventStartDate)!)
                 cell.dateLabel?.text = startDate
-                cell.dateLabel.textColor = UIColor.lightGray
+//                cell.dateLabel.textColor = UIColor.lightGray
 
                 cell.tournamentlabel?.text = partnerList.event?.eventName
                 cell.tournamentlabel?.font = UIFont.systemFont(ofSize: 13)
-                cell.tournamentlabel.textColor = UIColor.lightGray
+//                cell.tournamentlabel.textColor = UIColor.lightGray
                 print("+++>>",self.partners.count)
 
                 if self.partners.count > 0 {
                     self.partners.removeLast()
                 }
                 cell.partnersName?.text = self.partners
-                cell.partnersName.textColor = UIColor.lightGray
+//                cell.partnersName.textColor = UIColor.lightGray
             }
             
             return cell
@@ -722,6 +724,39 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+}
+
+extension HomeTabViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == topUserListCollectionView {
+            return CGSize(width: 50, height: 50)
+        }
+        if collectionView == messagesCollectionView {
+            return CGSize(width: 100, height: 100)
+        }
+        return CGSize(width: collectionView.frame.width, height: 100)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        if collectionView == topUserListCollectionView || collectionView == messagesCollectionView {
+            return 10.0
+        }
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout
+        collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        if collectionView == topUserListCollectionView {
+            return 10
+        }
+        return 0
     }
 }
 
