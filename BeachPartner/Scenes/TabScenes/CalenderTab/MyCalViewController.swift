@@ -24,7 +24,7 @@ class MyCalViewController: UIViewController, UITableViewDelegate, UITableViewDat
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter
     }()
-    
+   
     fileprivate let gregorian: NSCalendar! = NSCalendar(calendarIdentifier:NSCalendar.Identifier.gregorian)
     
     // MARK:- Tableview data source & Delegates
@@ -41,6 +41,21 @@ class MyCalViewController: UIViewController, UITableViewDelegate, UITableViewDat
             fatalError("The dequeued cell is not an instance of ManagSenderTableViewCell.")
         }
         cell.selectionStyle = .none
+        cell.layer.cornerRadius = 8.0
+        cell.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
+        cell.layer.borderWidth = 0.5
+
+
+        let border = CALayer()
+        let width = CGFloat(5.0)
+        border.borderColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0).withAlphaComponent(0.2).cgColor
+        border.frame = CGRect(x: 0, y: cell.contentView.frame.size.height - width, width:  cell.frame.size.width, height: cell.contentView.frame.size.height)
+        cell.layer.shadowColor = UIColor.lightGray.withAlphaComponent(0.2).cgColor
+        cell.layer.shadowOpacity = 0.2
+        border.borderWidth = width
+        cell.layer.addSublayer(border)
+        cell.layer.masksToBounds = true
+        cell.clipsToBounds = true
         print(eventListToShow)
         let event = eventListToShow[indexPath.row]
         cell.eventNameLbl.text = event?.eventName

@@ -28,6 +28,14 @@
 				<string>fb182470729033334</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>BeachPartner</string>
+			</array>
+			<key>CFBundleURLName</key>
+			<string>BeachPartner://beachpartner.com</string>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>

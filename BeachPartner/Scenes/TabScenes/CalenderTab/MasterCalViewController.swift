@@ -168,7 +168,22 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? CalanderTableViewCell  else {
             fatalError("The dequeued cell is not an instance of ManagSenderTableViewCell.")
         }
-        cell.selectionStyle = .none
+        //cell.selectionStyle = .none
+        cell.layer.cornerRadius = 8.0
+        cell.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
+        cell.layer.borderWidth = 0.5
+
+        
+        let border = CALayer()
+        let width = CGFloat(5.0)
+        border.borderColor = UIColor.lightGray.cgColor
+        border.frame = CGRect(x: 0, y: cell.contentView.frame.size.height - width, width:  cell.frame.size.width, height: cell.contentView.frame.size.height)
+        cell.layer.shadowColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
+        cell.layer.shadowOpacity = 0.2
+        border.borderWidth = width
+        cell.layer.addSublayer(border)
+        cell.layer.masksToBounds = true
+        cell.clipsToBounds = true
         
         let event = eventListToShow[indexPath.row]
         cell.eventNameLbl.text = event.eventName
@@ -205,7 +220,7 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
         }
         else {
             cell.invitationTypeImage.image = nil
-            cell.colorView.backgroundColor = .clear
+            cell.colorView.backgroundColor = .orange
         }
         
 //        cell.colorView.backgroundColor = .clear
