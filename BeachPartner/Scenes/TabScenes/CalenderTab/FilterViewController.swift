@@ -123,6 +123,17 @@ class FilterViewController: UIViewController {
         ///////////////////////////////////
         
         self.subeventsdropDown.anchorView = self.subTypesBtn // UIView or UIBarButtonItem
+        if eventdropDown.selectedItem == "Junior" {
+            self.subeventsdropDown.dataSource = subeventListJunior
+        }
+        else if eventdropDown.selectedItem == "Adult" {
+            self.subeventsdropDown.dataSource = subeventListAdult
+        }
+        else {
+            self.subeventsdropDown.dataSource = []
+        }
+        
+        
         self.subeventsdropDown.bottomOffset = CGPoint(x: 0, y:0)
         self.subeventsdropDown.width = 150
         //        self.dropDown.selectionBackgroundColor = UIColor.lightGray

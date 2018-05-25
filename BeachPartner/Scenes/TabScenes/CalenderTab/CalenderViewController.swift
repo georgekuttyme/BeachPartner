@@ -32,6 +32,7 @@ class CalenderViewController: UIViewController {
         if sender.selectedSegmentIndex == 0{
             filterButton.isEnabled = true
             filterButton.tintColor = .white
+            eventFilterParams = nil
             self.loadMasterCalendar()
         }
             

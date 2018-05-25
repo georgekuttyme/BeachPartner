@@ -36,20 +36,38 @@ extension APIManager{
             "fcmToken": fcmToken ?? "",
             "loginType": "IG",
             "rememberMe": "true",
+            "deviceType": "iOS",
+            "username":"",
+            "password":""
             ]
         
         APIClient.doRequest.inPost(method:ApiMethods.Login, params: params as! [String : String], sucess: { (response) in
             let jsonDict = response! as! JSONDictionary
             
-            do {                
-                let loginModel = try LoginRespModel(jsonDict)
-                sucessResult(loginModel)
-                return
-            } catch {
-                print("Catched")
-                errorResult(error.localizedDescription)
-                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
-                return
+            
+            if let status = jsonDict["status"] as? String, status == "OK" {
+                
+                do {
+                    let loginModel = try LoginRespModel(jsonDict)
+                    sucessResult(loginModel)
+                    return
+                } catch {
+                    print("Catched")
+                    errorResult(error.localizedDescription)
+                    APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                    return
+                }
+            }
+            else {
+                
+                if let message = jsonDict["title"] as? String {
+                    errorResult(message)
+                    return
+                }
+                else {
+                    errorResult("Unknown Error")
+                    return
+                }
             }
             
         }) { (error) in
@@ -79,6 +97,7 @@ extension APIManager{
             "fcmToken": fcmToken ?? "",
             "loginType": "FB",
             "rememberMe": "true",
+            "deviceType": "iOS"
             ]
         print(params)
         APIClient.doRequest.inPost(method:ApiMethods.LoginFb, params: params as! [String : String], sucess: { (response) in

@@ -12,10 +12,13 @@ class InstagramViewController: UIViewController, UIWebViewDelegate{
 
  
     @IBOutlet var instaLogin: UIWebView!
+    
     var loginActivityIndicator: UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
 //        loginInsta()
+        instaLogin.delegate = self
+        
         unSignedRequest()
     }
 
@@ -33,7 +36,10 @@ class InstagramViewController: UIViewController, UIWebViewDelegate{
             self.getUserInfo1()
         },errorResult: {(error) in
             
-            
+            guard let errorString  = error else {
+                return
+            }
+            self.alert(message: errorString)
         })
     }
 
@@ -96,10 +102,13 @@ class InstagramViewController: UIViewController, UIWebViewDelegate{
     func handleAuth(authToken: String) {
         print("Instagram authentication token ==", authToken)
         UserDefaults.standard.set(authToken, forKey: "INSTATOKEN")
-        navigationController?.popViewController(animated: true)
-        dismiss(animated: false) {
-            self.loginInsta()
-        }
+//        navigationController?.popViewController(animated: true)
+        
+        self.loginInsta()
+        
+//        dismiss(animated: false) {
+//            self.loginInsta()
+//        }
 //        dismiss(animated: true, completion:nil)
     }
     
@@ -111,13 +120,13 @@ class InstagramViewController: UIViewController, UIWebViewDelegate{
     }
     
     func webViewDidStartLoad(_ webView: UIWebView) {
-        loginActivityIndicator.isHidden = false
-        loginActivityIndicator.startAnimating()
+//        loginActivityIndicator.isHidden = false
+//        loginActivityIndicator.startAnimating()
     }
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
-        loginActivityIndicator.isHidden = true
-        loginActivityIndicator.stopAnimating()
+//        loginActivityIndicator.isHidden = true
+//        loginActivityIndicator.stopAnimating()
     }
     
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
