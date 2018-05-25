@@ -78,7 +78,12 @@ class BPfinderViewController: UIViewController, UICollectionViewDelegate,UIColle
 //        UserDefaults.standard.set("0", forKey: "LocationSettings")
     }
     override func viewWillAppear(_ animated: Bool) {
-          self.navigationController!.navigationBar.topItem!.title = "Beach Partner"
+        let image : UIImage = UIImage(named: "BP.png")!
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = image
+        self.navigationItem.titleView = imageView
+
         
         let locationSettings = UserDefaults.standard.string(forKey: "LocationSettings") ?? "0"
         if locationSettings == "0" {
