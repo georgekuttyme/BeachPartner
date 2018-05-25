@@ -115,8 +115,12 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController!.navigationBar.topItem!.title = "Beach Partner"
-        
+        let image : UIImage = UIImage(named: "BP.png")!
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = image
+        self.navigationItem.titleView = imageView
+
         NotificationCenter.default.addObserver(self, selector: #selector(tapOnPush(notification:)), name:NSNotification.Name(rawValue: "foreground-pushNotification"), object: nil)
     }
     

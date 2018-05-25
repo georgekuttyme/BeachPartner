@@ -170,7 +170,7 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
                 self.bottomview.isHidden = false
                 self.view.layoutIfNeeded()
                 self.myteamtableView.reloadData()
-                self.partnerTableVIew.reloadData()
+//                self.partnerTableVIew.reloadData()
             }, completion: { (complete) in
                 
             })
@@ -180,7 +180,7 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
                 self.myteamHeight.constant = 1
                 self.bottomview.isHidden = true
                 self.view.layoutIfNeeded()
-                self.myteamtableView.reloadData()
+//                self.myteamtableView.reloadData()
                 self.partnerTableVIew.reloadData()
             }, completion: { (complete) in
             })
@@ -222,6 +222,10 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
             self.alert(message: errorString)
             print(error)
         }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        
+       self.navigationController!.navigationBar.topItem!.title = "Event Name"
     }
     
     // MARK:- Tableview Datasource & Delegates
