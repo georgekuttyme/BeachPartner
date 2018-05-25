@@ -48,6 +48,6 @@
     </scenes>
     <resources>
         <image name="BP - splash bg" width="721" height="1280"/>
-        <image name="Beachlogo" width="78" height="78"/>
+        <image name="Beachlogo" width="94" height="94"/>
     </resources>
 </document>

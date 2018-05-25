@@ -223,10 +223,10 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
             print(error)
         }
     }
-    override func viewWillAppear(_ animated: Bool) {
-        
-       self.navigationController!.navigationBar.topItem!.title = "Event Name"
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        
+//       self.navigationController!.navigationBar.topItem!.title = "Event Name"
+//    }
     
     // MARK:- Tableview Datasource & Delegates
     

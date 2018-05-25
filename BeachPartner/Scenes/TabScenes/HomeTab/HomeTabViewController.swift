@@ -749,7 +749,7 @@ extension HomeTabViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         if collectionView == topUserListCollectionView || collectionView == messagesCollectionView {
-            return 10.0
+            return 12.0
         }
         return 0
     }

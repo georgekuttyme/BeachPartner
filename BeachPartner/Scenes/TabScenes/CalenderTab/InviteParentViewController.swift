@@ -119,6 +119,17 @@ class InviteParentViewController: ButtonBarPagerTabStripViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        
+        if let name = event?.eventName ?? eventInvitation?.eventName {
+            self.navigationItem.title = name
+        }
+        
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
