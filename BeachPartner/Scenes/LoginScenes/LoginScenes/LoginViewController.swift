@@ -23,10 +23,18 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
     @IBOutlet weak var errorlabel: UILabel!
     
     @IBOutlet weak var loginWebView: UIWebView!
+    @IBOutlet weak var buildVersionLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if let version = Bundle.main.buildVersionNumber {
+            buildVersionLabel.text = "Beach Partner v\(version)"
+        }
+        else {
+            buildVersionLabel.text = ""
+        }
+        
         let loggedIn = UserDefaults.standard.string(forKey: "isLoggedIn") ?? "0"
         if loggedIn == "0" {
             let acceptTermsAndCondition = UserDefaults.standard.string(forKey: "isAcceptTermsAndCondition") ?? "0"
@@ -804,5 +812,14 @@ extension String {
         // here, `try!` will always succeed because the pattern is valid
         let regex = try! NSRegularExpression(pattern: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", options: .caseInsensitive)
         return regex.firstMatch(in: self, options: [], range: NSRange(location: 0, length: count)) != nil
+    }
+}
+
+extension Bundle {
+    var releaseVersionNumber: String? {
+        return infoDictionary?["CFBundleShortVersionString"] as? String
+    }
+    var buildVersionNumber: String? {
+        return infoDictionary?["CFBundleVersion"] as? String
     }
 }
