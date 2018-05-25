@@ -218,6 +218,8 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
                 return
             }
             self.notes = notesModel.getNoteRespModel
+            self.notes = self.notes.sorted(by: {$0.createdDate > $1.createdDate })
+            
             
             DispatchQueue.main.async {
                 
@@ -253,7 +255,9 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
                 print("resp model@@@@@@@@@")
                 return
             }
+            DispatchQueue.main.async {
             self.loadNotes()
+            }
             
         }, errorResult: { (error) in
             ActivityIndicatorView.hiding()
@@ -302,23 +306,23 @@ class NotesViewController: UIViewController,UITableViewDataSource,UITableViewDel
 
             guard let noteModel = responseModel as? GetNoteRespModel else { return }
             
+            
+            DispatchQueue.main.async {
+            
             self.loadNotes()
             
             let refreshAlert = UIAlertController(title: "", message: "Note Created", preferredStyle: UIAlertControllerStyle.alert)
             refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
-
-            let lastIndex = self.notesTableview.numberOfRows(inSection: 0) - 1
-            let indexPath = IndexPath(row: lastIndex, section: 0)
+                
+                let indexPath = IndexPath(row: 0, section: 0)
                 let cell = self.notesTableview.cellForRow(at: indexPath) as? NotesCell
-                print("Handle Ok logic here")
-                if(cell != nil)
-                {
+                if(cell != nil) {
                     cell?.noteTextView.becomeFirstResponder()
                 }
-                
              
             }))
             self.present(refreshAlert, animated: true, completion: nil)
+            }
             
         }, errorResult: { (error) in
             
