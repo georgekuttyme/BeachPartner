@@ -23,6 +23,7 @@ class RecentChatCell: UITableViewCell {
 
 class ChatUsersListViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
+    @IBOutlet weak var toastLbl: UILabel!
     private lazy var channelRef: DatabaseReference = Database.database().reference().child("messages")
     private var channelRefHandle: DatabaseHandle?
     var recentChatList = [[String:String]]()
@@ -49,7 +50,7 @@ class ChatUsersListViewController: UIViewController,UITableViewDelegate,UITableV
         super.viewDidLoad()
         self.navigationItem.setHidesBackButton(true, animated:false);
         self.title = "Messages"
-        
+        self.toastLbl.isHidden = true
          rightBarBtn()
         
         self.hideKeyboardWhenTappedAround()
@@ -170,6 +171,7 @@ class ChatUsersListViewController: UIViewController,UITableViewDelegate,UITableV
                     if userId == senderId || userId == receiverId {
                         if bP_userId == senderId || bP_userId == receiverId {
                             latestMsgDic.updateValue(connectedUser.connectedUser?.firstName ?? "", forKey: "sender_name")
+                           latestMsgDic.updateValue(connectedUser.connectedUser?.lastName ?? "", forKey: "sender_lastName")
                             latestMsgDic.updateValue(connectedUser.connectedUser?.imageUrl ?? "", forKey: "profileImg")
                             isActiveUser = true
                             break
@@ -197,11 +199,20 @@ class ChatUsersListViewController: UIViewController,UITableViewDelegate,UITableV
             guard let connectedUserModelArray = responseModel as? ConnectedUserModelArray else {
                 return
             }
+            
 
             for connectedUser in connectedUserModelArray.connectedUserModel {
                 self.activeUsers.append(connectedUser)
             }
             print("activeUsers--->            ", self.activeUsers,"          ___________________")
+            if self.activeUsers.count > 0 {
+                self.toastLbl.isHidden = true
+            }
+            else {
+                self.toastLbl.isHidden = false
+                self.toastLbl.numberOfLines = 3
+            }
+            
             DispatchQueue.main.async {
                 self.recentChatList.removeAll()
                 self.observeChannels()

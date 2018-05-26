@@ -296,7 +296,8 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         print("\n\n\n ???????",self.likedPersonInfo)
         let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
         let chatController = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
-        chatController.connectedUserModel = self.likedPersonInfo
+//        chatController.connectedUserModel = self.likedPersonInfo
+        chatController.connectedUserModel = self.swipeAction
         chatController.chatType = "Connections"
         let navigationController = UINavigationController(rootViewController: chatController)
         self.present(navigationController, animated: true, completion: nil)

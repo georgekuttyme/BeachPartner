@@ -138,7 +138,7 @@ extension APIManager{
             "rememberMe":rememberMe,
             "deviceId": ApiMethods.device_UUID,
             "deviceToken": "",
-            "fcmToken": fcmToken,
+            "fcmToken": fcmToken ?? "",
             "deviceType": "iOS"
         ]
 

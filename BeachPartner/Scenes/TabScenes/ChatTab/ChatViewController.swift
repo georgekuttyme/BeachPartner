@@ -119,12 +119,18 @@ class ChatViewController: JSQMessagesViewController {
          else{
             print("\n\n\n\n///////",connectedUserModel.first ?? " Null")
             let connectedUserModelOfFirstElement = connectedUserModel.first
-            if let titleName = connectedUserModelOfFirstElement?.connectedUser?.firstName {
-                title = "Messages with " + titleName
+            
+            if let titleName = connectedUserModelOfFirstElement?.connectedUser?.firstName{
+                let title1 = "Messages with " + titleName + " "
+                if let lastName = connectedUserModelOfFirstElement?.connectedUser?.lastName{
+                    title = title1 + lastName
+                }
+                
             }else {
                 title = "Message"
+                print("connectedUserModel.first ==>  ",connectedUserModel.first ?? "","\n\nn\n\n connectedUserModel ===00 ",connectedUserModel )
             }
-           
+            
         }
     }
     
