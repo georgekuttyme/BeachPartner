@@ -15,8 +15,6 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     private lazy var channelRef: DatabaseReference = Database.database().reference().child("messages")
     private var channelRefHandle: DatabaseHandle?
     
-    //    let dropDown = DropDown()
-    @IBOutlet weak var menuBtn: UIBarButtonItem!
     
     //    @IBOutlet weak var blueBPCollectionView: UICollectionView!
     
@@ -41,9 +39,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     @IBOutlet var msgLabel: UILabel!
     @IBOutlet var connectionLabel: UILabel!
     @IBOutlet var myLabel: UILabel!
-    @IBAction func menuBtnClicked(_ sender: Any) {
-        //        dropDown.show()
-    }
+
     
     @IBOutlet weak var tournamentStackView: UIStackView!
     @IBOutlet weak var messageContainerView: UIView!
@@ -553,16 +549,16 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         })
     }
     
-    override func addSubview(subView:UIView, toView parentView:UIView) {
-        parentView.addSubview(subView)
-        
-        var viewBindingsDict = [String: AnyObject]()
-        viewBindingsDict["subView"] = subView
-        parentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[subView]|",
-                                                                 options: [], metrics: nil, views: viewBindingsDict))
-        parentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[subView]|",
-                                                                 options: [], metrics: nil, views: viewBindingsDict))
-    }
+//    override func addSubview(subView:UIView, toView parentView:UIView) {
+//        parentView.addSubview(subView)
+//        
+//        var viewBindingsDict = [String: AnyObject]()
+//        viewBindingsDict["subView"] = subView
+//        parentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[subView]|",
+//                                                                 options: [], metrics: nil, views: viewBindingsDict))
+//        parentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[subView]|",
+//                                                                 options: [], metrics: nil, views: viewBindingsDict))
+//    }
     
     func getUsersListforBlueBp()  {
         
@@ -737,7 +733,7 @@ extension HomeTabViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == topUserListCollectionView {
-            return CGSize(width: 50, height: 50)
+            return CGSize(width: 52, height: 52)
         }
         if collectionView == messagesCollectionView {
             return CGSize(width: 100, height: 100)
@@ -749,7 +745,7 @@ extension HomeTabViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         if collectionView == topUserListCollectionView || collectionView == messagesCollectionView {
-            return 12.0
+            return 10.0
         }
         return 0
     }

@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/AppDelegate/AppDelegate.swift"
-            timestampString = "547732027.96778"
+            timestampString = "549209768.637711"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "231"
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/AppDelegate/AppDelegate.swift"
-            timestampString = "547732027.968318"
+            timestampString = "549209768.637832"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "146"
@@ -138,7 +138,7 @@
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/seqato/Desktop/bp-ios/bp-ios/BeachPartner/APIManagement/Manager/Modules/AuthModule.swift"
-                  timestampString = "548952992.92248"
+                  timestampString = "549209769.451869"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "30"
@@ -153,92 +153,12 @@
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/seqato/Desktop/bp-ios/bp-ios/BeachPartner/APIManagement/Manager/Modules/AuthModule.swift"
-                  timestampString = "548952992.925627"
+                  timestampString = "549209769.455126"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "30"
                   endingLineNumber = "30"
                   offsetFromSymbolStart = "12">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/SettingsViewController.swift"
-            timestampString = "548948993.0369999"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "319"
-            endingLineNumber = "319"
-            landmarkName = "getUsersSwipeCard(endPoint:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/SettingsViewController.swift"
-            timestampString = "548948993.037081"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "329"
-            endingLineNumber = "329"
-            landmarkName = "getUsersSwipeCard(endPoint:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/BPfinderViewController.swift"
-            timestampString = "548948993.03716"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
-            landmarkName = "playButtonPressed(searchList:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "BeachPartner.BPfinderViewController.playButtonPressed(searchList: Swift.Array&lt;BeachPartner.SearchUserModel&gt;) -&gt; ()"
-                  moduleName = "BeachPartner"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/seqato/Desktop/bp-ios/bp-ios/BeachPartner/Scenes/TabScenes/BPfinder/BPfinderViewController.swift"
-                  timestampString = "548952992.944209"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "23"
-                  endingLineNumber = "23"
-                  offsetFromSymbolStart = "24">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "BeachPartner.BPfinderViewController.playButtonPressed(searchList: Swift.Array&lt;BeachPartner.SearchUserModel&gt;) -&gt; ()"
-                  moduleName = "BeachPartner"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/seqato/Desktop/bp-ios/bp-ios/BeachPartner/Scenes/TabScenes/BPfinder/BPfinderViewController.swift"
-                  timestampString = "548952992.94742"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "23"
-                  endingLineNumber = "23"
-                  offsetFromSymbolStart = "1188">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -267,13 +187,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
-            timestampString = "548948993.037827"
+            filePath = "BeachPartner/Scenes/TabScenes/MenuItems/AthleteProfileTableViewController.swift"
+            timestampString = "549209768.6382101"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "258"
-            endingLineNumber = "258"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "206"
+            endingLineNumber = "206"
+            landmarkName = "viewDidAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -283,13 +203,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/SettingsViewController.swift"
-            timestampString = "548948993.0380549"
+            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/Views/CardView.swift"
+            timestampString = "549207482.33574"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "playButtonClicked(_:)"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
+            landmarkName = "displayDataOnCard(displayData:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -299,45 +219,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/BPfinderViewController.swift"
-            timestampString = "548948993.038278"
+            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/Views/CardView.swift"
+            timestampString = "549207482.3361959"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/BPfinderViewController.swift"
-            timestampString = "548948993.038602"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
-            landmarkName = "BPfinderViewController"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/SettingsViewController.swift"
-            timestampString = "548948993.038905"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
+            landmarkName = "displaySubscribeDataOnCard(displayData:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -347,29 +235,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/BPfinderViewController.swift"
-            timestampString = "548948993.03897"
+            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/Views/CardView.swift"
+            timestampString = "549207488.256952"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
-            landmarkName = "viewWillAppear(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/SettingsViewController.swift"
-            timestampString = "548949251.758975"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "314"
-            endingLineNumber = "314"
-            landmarkName = "viewWillAppear(_:)"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "displaySearchDetailsOnCard(displayData:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

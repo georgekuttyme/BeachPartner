@@ -11,6 +11,11 @@ import UIKit
 import AlamofireImage
 
 
+protocol BPCardsVCDelegate {
+    
+    func resumeSwipeGame()
+}
+
 private var numberOfCards: Int = 5
 class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewDataSource {
     
@@ -51,6 +56,8 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     var searchUsers = [SearchUserModel]()
     var SwipeCardArray:[Any] = []
     var currentIndex : Int = 0
+    
+    var delegate: BPCardsVCDelegate?
     
     @IBAction func topfinishesClicked(_ sender: Any) {
      
@@ -191,8 +198,9 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     }
     
     @IBAction func btnPlaySwipeGame(_ sender: Any) {
-        self.view .removeFromSuperview()
-        self.tabBarController?.selectedIndex = 2        
+        //        self.view .removeFromSuperview()
+        delegate?.resumeSwipeGame()
+        self.tabBarController?.selectedIndex = 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

@@ -10,9 +10,8 @@ import UIKit
 import DropDown
 import XLPagerTabStrip
 
-class BPfinderViewController: UIViewController, UICollectionViewDelegate,UICollectionViewDataSource, BpFinderDelegate, IndicatorInfoProvider {
+class BPfinderViewController: BeachPartnerViewController, BpFinderDelegate, IndicatorInfoProvider {
     var selectedCardType:String!
-    
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         
@@ -21,6 +20,7 @@ class BPfinderViewController: UIViewController, UICollectionViewDelegate,UIColle
     
     func playButtonPressed(searchList:[SearchUserModel]) {        
         let newViewController = self.storyboard?.instantiateViewController(withIdentifier: "ComponentBPcardsNew") as! BPCardsVC
+        newViewController.delegate = self
         if self.selectedCardType == "invitePartner" {
          newViewController.selectedType = selectedCardType
         }
@@ -32,51 +32,26 @@ class BPfinderViewController: UIViewController, UICollectionViewDelegate,UIColle
         newViewController.view.translatesAutoresizingMaskIntoConstraints = false
         self.cycleFromViewController(oldViewController: self.currentViewController!, toViewController: newViewController)
         self.currentViewController = newViewController
-        
     }
     
    
-    @IBOutlet weak var blueBPCollectionView: UICollectionView!
-
     @IBOutlet weak var menuBtn: UIBarButtonItem!
+    @IBOutlet weak var containerView: UIView!
+
     
     weak var currentViewController: UIViewController?
-    @IBOutlet weak var containerView: UIView!
+//    let dropDown = DropDown()
     
-//    var imageSrc: [UIImage] = [
-//        UIImage(named: "men")!,
-//        UIImage(named: "men")!,UIImage(named: "women")!,
-//        UIImage(named: "men")!,UIImage(named: "women")!,
-//        UIImage(named: "men")!,UIImage(named: "women")!,
-//        UIImage(named: "men")!,UIImage(named: "women")!,
-//        UIImage(named: "men")!,UIImage(named: "women")!,
-//        UIImage(named: "men")!,UIImage(named: "women")!,
-//        UIImage(named: "men")!,UIImage(named: "women")!,
-//        UIImage(named: "men")!,UIImage(named: "women")!,
-//        UIImage(named: "men")!
-//    ]
+//    @IBAction func menuBtnClicked(_ sender: Any) {
+//        dropDown.show()
+//    }
     
-     let dropDown = DropDown()
-    @IBAction func menuBtnClicked(_ sender: Any) {
-        dropDown.show()
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
+//        addMenuDropDown()
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-//
-//        let locationSettings = UserDefaults.standard.string(forKey: "LocationSettings") ?? "0"
-//        if locationSettings == "0" {
-//            UserDefaults.standard.set("0", forKey: "LocationSettings")
-//            let newViewController =  self.storyboard?.instantiateViewController(withIdentifier: "ComponentSettings")as! SettingsViewController
-//            newViewController.SettingsType = "SearchSettings"
-//            newViewController.bpDelegate = self
-//            self.currentViewController = newViewController
-//            self.currentViewController!.view.translatesAutoresizingMaskIntoConstraints = false
-//            self.addChildViewController(self.currentViewController!)
-//            self.addSubview(subView: self.currentViewController!.view, toView: self.containerView)
-//        }
-//        UserDefaults.standard.set("0", forKey: "LocationSettings")
-    }
+
     override func viewWillAppear(_ animated: Bool) {
         let image : UIImage = UIImage(named: "BP.png")!
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
@@ -84,143 +59,16 @@ class BPfinderViewController: UIViewController, UICollectionViewDelegate,UIColle
         imageView.image = image
         self.navigationItem.titleView = imageView
 
+        if currentViewController is SettingsViewController {
+            return
+        }
         
         let locationSettings = UserDefaults.standard.string(forKey: "LocationSettings") ?? "0"
         if locationSettings == "0" {
             UserDefaults.standard.set("0", forKey: "LocationSettings")
-            let newViewController =  self.storyboard?.instantiateViewController(withIdentifier: "ComponentSettings")as! SettingsViewController
-            newViewController.SettingsType = "SearchSettings"
-            newViewController.bpDelegate = self
-            self.currentViewController = newViewController
-            self.currentViewController!.view.translatesAutoresizingMaskIntoConstraints = false
-            self.addChildViewController(self.currentViewController!)
-            self.addSubview(subView: self.currentViewController!.view, toView: self.containerView)
+            showSettingsView()
         }
         UserDefaults.standard.set("0", forKey: "LocationSettings")
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.dropDown.anchorView = self.menuBtn // UIView or UIBarButtonItem
-        // The list of items to display. Can be changed dynamically
-//        self.dropDown.direction = .bottom
-        self.dropDown.dataSource = ["My Profile","About Us","Feedback","Settings", "Help","Logout"]
-        
-        self.dropDown.bottomOffset = CGPoint(x: 20, y:45)
-        self.dropDown.width = 150
-//        self.dropDown.selectionBackgroundColor = UIColor.lightGray
-        self.dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-            print("Selected item:",item," at index:",index)
-            if(item == "My Profile"){
-                let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "profilevc1") as! CoachProfileTableViewController
-                let vc1 = storyboard.instantiateViewController(withIdentifier: "profilevc") as! AthleteProfileTableViewController
-                let identifier = UserDefaults.standard.string(forKey: "userType") == "Athlete" ? vc1 : vc
-                self.navigationController?.pushViewController(identifier, animated: true)
-                self.tabBarController?.tabBar.isHidden = false
-                self.navigationController!.navigationBar.topItem!.title = ""
-                self.navigationController?.isNavigationBarHidden = false
-            }
-
-            else if(item == "Logout"){
-                let refreshAlert = UIAlertController(title: "Logout", message: "Do you really want to logout from Beach Partner?", preferredStyle: UIAlertControllerStyle.alert)
-                
-                refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
-                    
-                    self.timoutLogoutAction()
-                    
-                }))
-                refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
-                    print("Handle Cancel Logic here")
-                }))
-                
-                self.present(refreshAlert, animated: true, completion: nil)
-            }
-            else if (item == "Settings"){
-                let storyboard : UIStoryboard = UIStoryboard(name: "TabBar", bundle: nil)
-                let controller = storyboard.instantiateViewController(withIdentifier: "ComponentSettings") as! SettingsViewController
-                controller.SettingsType = "profileSettings"
-                self.tabBarController?.tabBar.isHidden = false
-                self.navigationController!.navigationBar.topItem!.title = ""
-                self.navigationController?.isNavigationBarHidden = false
-                self.navigationController?.pushViewController(controller, animated: true)
-            }
-            else if (item == "Help"){
-                let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "HelpViewController") as! HelpViewController
-                self.present(vc, animated: true, completion: nil)
-            }
-            else {
-                let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "CommmonWebViewController") as! CommmonWebViewController
-                vc.titleText = item
-                self.tabBarController?.tabBar.isHidden = false
-                self.navigationController!.navigationBar.topItem!.title = ""
-                self.navigationController?.isNavigationBarHidden = false
-                self.present(vc, animated: true, completion: nil)
-            }
-        }
-        self.dropDown.selectRow(0)
-        
-//        let newViewController = self.storyboard?.instantiateViewController(withIdentifier: "ComponentIndonesia") as! AddIndonesiaReceiverVC
-//        newViewController.selectedNation = self.nationListdata[index]
-//        newViewController.view.translatesAutoresizingMaskIntoConstraints = false
-//        self.cycleFromViewController(oldViewController: self.currentViewController!, toViewController: newViewController)
-//        self.currentViewController = newViewController
-//
-        
-        
-        let newViewController =  self.storyboard?.instantiateViewController(withIdentifier: "ComponentSettings")as! SettingsViewController
-        newViewController.bpDelegate = self
-        newViewController.SettingsType = "SearchSettings"
-        self.currentViewController = newViewController
-        self.currentViewController!.view.translatesAutoresizingMaskIntoConstraints = false
-        self.addChildViewController(self.currentViewController!)
-        self.addSubview(subView: self.currentViewController!.view, toView: self.containerView)
-   
-        
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return Dummy.data.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let data = Dummy.data[indexPath.row]
-
-        
-//        if collectionView == self.blueBPCollectionView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BlueBPCollectionViewCell", for: indexPath) as! BlueBPCollectionViewCell
-        
-        if let imageUrl = URL(string: data.imageUrl) {
-            cell.imageView.sd_setIndicatorStyle(.whiteLarge)
-            cell.imageView.sd_setShowActivityIndicatorView(true)
-            cell.imageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
-        }
-            cell.imageView.layer.cornerRadius = cell.imageView.frame.size.width/2
-            cell.imageView.clipsToBounds = true
-            cell.imageView.layer.borderColor = UIColor.blue.cgColor
-        cell.imageView.layer.borderColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0).cgColor
-            cell.imageView.layer.borderWidth = 1
-            return cell
-
     }
 
     func cycleFromViewController(oldViewController: UIViewController, toViewController newViewController: UIViewController) {
@@ -240,7 +88,7 @@ class BPfinderViewController: UIViewController, UICollectionViewDelegate,UIColle
         })
     }
     
-    func addSubview(subView:UIView, toView parentView:UIView) {
+    override func addSubview(subView:UIView, toView parentView:UIView) {
         parentView.addSubview(subView)
         
         var viewBindingsDict = [String: AnyObject]()
@@ -249,5 +97,85 @@ class BPfinderViewController: UIViewController, UICollectionViewDelegate,UIColle
                                                                  options: [], metrics: nil, views: viewBindingsDict))
         parentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[subView]|",
                                                                  options: [], metrics: nil, views: viewBindingsDict))
+    }
+    
+    func showSettingsView() {
+        let newViewController =  self.storyboard?.instantiateViewController(withIdentifier: "ComponentSettings")as! SettingsViewController
+        newViewController.SettingsType = "SearchSettings"
+        newViewController.bpDelegate = self
+        self.currentViewController = newViewController
+        self.currentViewController!.view.translatesAutoresizingMaskIntoConstraints = false
+        self.addChildViewController(self.currentViewController!)
+        self.addSubview(subView: self.currentViewController!.view, toView: self.containerView)
+    }
+    
+//    func addMenuDropDown() {
+//        self.dropDown.anchorView = self.menuBtn // UIView or UIBarButtonItem
+//        // The list of items to display. Can be changed dynamically
+//        //        self.dropDown.direction = .bottom
+//        self.dropDown.dataSource = ["My Profile","About Us","Feedback","Settings", "Help","Logout"]
+//
+//        self.dropDown.bottomOffset = CGPoint(x: 20, y:45)
+//        self.dropDown.width = 150
+//        //        self.dropDown.selectionBackgroundColor = UIColor.lightGray
+//        self.dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//            print("Selected item:",item," at index:",index)
+//            if(item == "My Profile"){
+//                let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
+//                let vc = storyboard.instantiateViewController(withIdentifier: "profilevc1") as! CoachProfileTableViewController
+//                let vc1 = storyboard.instantiateViewController(withIdentifier: "profilevc") as! AthleteProfileTableViewController
+//                let identifier = UserDefaults.standard.string(forKey: "userType") == "Athlete" ? vc1 : vc
+//                self.navigationController?.pushViewController(identifier, animated: true)
+//                self.tabBarController?.tabBar.isHidden = false
+//                self.navigationController!.navigationBar.topItem!.title = ""
+//                self.navigationController?.isNavigationBarHidden = false
+//            }
+//
+//            else if(item == "Logout"){
+//                let refreshAlert = UIAlertController(title: "Logout", message: "Do you really want to logout from Beach Partner?", preferredStyle: UIAlertControllerStyle.alert)
+//
+//                refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+//
+//                    self.timoutLogoutAction()
+//
+//                }))
+//                refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+//                    print("Handle Cancel Logic here")
+//                }))
+//
+//                self.present(refreshAlert, animated: true, completion: nil)
+//            }
+//            else if (item == "Settings"){
+//                let storyboard : UIStoryboard = UIStoryboard(name: "TabBar", bundle: nil)
+//                let controller = storyboard.instantiateViewController(withIdentifier: "ComponentSettings") as! SettingsViewController
+//                controller.SettingsType = "profileSettings"
+//                self.tabBarController?.tabBar.isHidden = false
+//                self.navigationController!.navigationBar.topItem!.title = ""
+//                self.navigationController?.isNavigationBarHidden = false
+//                self.navigationController?.pushViewController(controller, animated: true)
+//            }
+//            else if (item == "Help"){
+//                let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
+//                let vc = storyboard.instantiateViewController(withIdentifier: "HelpViewController") as! HelpViewController
+//                self.present(vc, animated: true, completion: nil)
+//            }
+//            else {
+//                let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
+//                let vc = storyboard.instantiateViewController(withIdentifier: "CommmonWebViewController") as! CommmonWebViewController
+//                vc.titleText = item
+//                self.tabBarController?.tabBar.isHidden = false
+//                self.navigationController!.navigationBar.topItem!.title = ""
+//                self.navigationController?.isNavigationBarHidden = false
+//                self.present(vc, animated: true, completion: nil)
+//            }
+//        }
+//        self.dropDown.selectRow(0)
+//    }
+}
+
+extension BPfinderViewController: BPCardsVCDelegate {
+    
+    func resumeSwipeGame() {
+        showSettingsView()
     }
 }

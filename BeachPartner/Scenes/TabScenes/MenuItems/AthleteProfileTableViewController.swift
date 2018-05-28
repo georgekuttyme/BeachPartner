@@ -208,6 +208,9 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        
+        self.videoView?._player = nil
+//        self.videoView?._playerItem = nil
         self.videoView?.pause()
         self.videoView?.refreshPlayer()
         
@@ -300,8 +303,8 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     }
     
     override func viewDidLoad() {
-        videoView?._player?.volume = 0
         super.viewDidLoad()
+        videoView?._player?.volume = 0
         self.getUserInfo()
         self.hideKeyboardWhenTappedAround()
         loadLocations()
@@ -1261,11 +1264,17 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
                     self.noVideoLbl.text = "No Video Available"
                 }
                 
-                self.loadVideoOnPlayer(videoUrlVal: accRespModel.videoUrl)
+                ActivityIndicatorView.hiding()
+
+                DispatchQueue.main.async {
+                    self.loadVideoOnPlayer(videoUrlVal: accRespModel.videoUrl)
+                    
+                    self.loadDataToUi(accResponseModel: accRespModel)
+                }
                 
-                self.loadDataToUi(accResponseModel: accRespModel)
                 
-                Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(self.runTimedCode), userInfo: nil, repeats: false)
+                
+//                Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(self.runTimedCode), userInfo: nil, repeats: false)
             }else{
                 
                 ActivityIndicatorView.hiding()
@@ -1394,7 +1403,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         
         if let videoUrl = URL(string: videoUrlVal) {
             self.videoView?.load(videoUrl)
-            self.videoView?.isMuted = false
+            self.videoView?.isMuted = true
             self.videoView?.play()
         }
     }
