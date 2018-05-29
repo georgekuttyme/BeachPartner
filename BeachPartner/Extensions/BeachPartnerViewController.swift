@@ -18,7 +18,7 @@ class BeachPartnerViewController: UIViewController {
         super.viewDidLoad()
        
         let menuButton = UIButton(type: UIButtonType.system)
-        menuButton.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        menuButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         menuButton.addTarget(self, action: #selector(openMenu), for:    .touchUpInside)
         menuButton.setImage(UIImage(named: "menudot"), for: UIControlState())
         menuBarButtonItem = UIBarButtonItem(customView: menuButton)
@@ -28,7 +28,7 @@ class BeachPartnerViewController: UIViewController {
         self.dropDown.anchorView = menuButton // UIView or UIBarButtonItem
         // The list of items to display. Can be changed dynamically
         //        self.dropDown.direction = .bottom
-        self.dropDown.dataSource = ["My Profile","Subscription","About Us","Feedback","Settings", "Help","Logout"]
+        self.dropDown.dataSource = ["My Profile","About Us","Feedback","Settings", "Help","Logout"]
         
         self.dropDown.bottomOffset = CGPoint(x: 20, y:30)
         self.dropDown.width = 150

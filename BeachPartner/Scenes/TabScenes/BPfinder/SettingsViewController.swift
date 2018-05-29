@@ -145,7 +145,7 @@ class SettingsViewController: UIViewController {
     
     
     func customView() {
-   
+        
         if SettingsType == "SearchSettings" {
             topSpace.constant = 8
             saveBtnStack.isHidden = true
@@ -156,35 +156,36 @@ class SettingsViewController: UIViewController {
             saveBtnStack.isHidden = false
             playBtnStack.isHidden = true
         }
-            minAge = "5"
-            maxAge = "100"
-            let minValue = UserDefaults.standard.string(forKey: "minAge")
-            let maxValue = UserDefaults.standard.string(forKey: "maxAge")
-            if (minValue != nil)  && (maxValue != nil)   {
-                minAge = minValue!
-                maxAge = maxValue!
-                rangeSlider.selectedMinValue = CGFloat(NSString(string: minValue!).floatValue)
-                rangeSlider.selectedMaxValue = CGFloat(NSString(string: maxValue!).floatValue)
-                ageLabel.text = minValue! + " - " + maxValue!
-            }
-            let location = UserDefaults.standard.string(forKey: "location") ?? ""
-            if (location.count>0){
-                self.selectLoc.setTitle(location, for: UIControlState.normal)
-            }
-            else{
-               let loc = UserDefaults.standard.string(forKey: "locationInitial")
-               self.selectLoc.setTitle(loc, for: UIControlState.normal)
-            }
+        minAge = "5"
+        maxAge = "100"
+        let minValue = UserDefaults.standard.string(forKey: "minAge")
+        let maxValue = UserDefaults.standard.string(forKey: "maxAge")
+        if (minValue != nil)  && (maxValue != nil) {
+            minAge = minValue!
+            maxAge = maxValue!
+            rangeSlider.selectedMinValue = CGFloat(NSString(string: minValue!).floatValue)
+            rangeSlider.selectedMaxValue = CGFloat(NSString(string: maxValue!).floatValue)
+            ageLabel.text = minValue! + " - " + maxValue!
+            rangeSlider.layoutSubviews()
+        }
+        let location = UserDefaults.standard.string(forKey: "location") ?? ""
+        if (location.count > 0) {
+            self.selectLoc.setTitle(location, for: UIControlState.normal)
+        }
+        else {
+            let loc = UserDefaults.standard.string(forKey: "locationInitial")
+            self.selectLoc.setTitle(loc, for: UIControlState.normal)
+        }
         
         
         maleIsSelected = false
         womenIsSelected = false
         if let gender = UserDefaults.standard.string(forKey: "gender") {
             self.showMeLbl.text = gender
-            if gender == "Male"{
+            if gender == "Male" {
                 maleIsSelected = true
             }
-            else if gender == "Female"{
+            else if gender == "Female" {
                 womenIsSelected = true
             }
             else {
@@ -197,15 +198,15 @@ class SettingsViewController: UIViewController {
             womenIsSelected = true
             showMeLbl.text="Both"
         }
-            let includeCoaches = UserDefaults.standard.string(forKey: "includeCoaches")
-            if (includeCoaches != nil){
-                if(includeCoaches == "1" ){
-                    self.couachSwitch.isOn = true
-                }
-                else{
-                    self.couachSwitch.isOn = false
-                }
+        let includeCoaches = UserDefaults.standard.string(forKey: "includeCoaches")
+        if (includeCoaches != nil) {
+            if(includeCoaches == "1" ) {
+                self.couachSwitch.isOn = true
             }
+            else {
+                self.couachSwitch.isOn = false
+            }
+        }
     }
     
     
@@ -312,6 +313,8 @@ class SettingsViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.title = "Settings"
+        
+        customView()
     }
     
     func getUsersSwipeCard(endPoint:String)  {

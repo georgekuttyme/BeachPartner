@@ -566,19 +566,19 @@
                                                         <rect key="frame" x="0.0" y="509" width="394" height="40"/>
                                                         <subviews>
                                                             <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="M25-0R-dnm">
-                                                                <rect key="frame" x="144.66666666666666" y="4" width="105" height="32"/>
+                                                                <rect key="frame" x="147.33333333333334" y="4" width="100" height="32"/>
                                                                 <subviews>
                                                                     <view clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="oDU-wn-C6F" customClass="M13Checkbox" customModule="M13Checkbox">
-                                                                        <rect key="frame" x="0.0" y="1" width="30" height="30"/>
+                                                                        <rect key="frame" x="0.0" y="3.6666666666666288" width="25" height="25"/>
                                                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <color key="tintColor" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="height" constant="30" id="ElV-3P-9bs"/>
-                                                                            <constraint firstAttribute="width" constant="30" id="VJM-7N-Ne0"/>
+                                                                            <constraint firstAttribute="height" constant="25" id="ElV-3P-9bs"/>
+                                                                            <constraint firstAttribute="width" constant="25" id="VJM-7N-Ne0"/>
                                                                         </constraints>
                                                                     </view>
                                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" I Agree" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kVh-4D-8Pf">
-                                                                        <rect key="frame" x="30" y="5.9999999999999982" width="75" height="20.333333333333329"/>
+                                                                        <rect key="frame" x="25" y="5.9999999999999982" width="75" height="20.333333333333329"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="75" id="QGg-3U-fSw"/>
                                                                         </constraints>

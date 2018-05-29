@@ -107,14 +107,24 @@ class ChatViewController: JSQMessagesViewController {
         defaults.synchronize()
          if chatType == "recentChat"  {
             
-            let userName = String(describing: UserDefaults.standard.value(forKey: "bP_userName") ?? "")
-            let ChatuserName = self.recentChatDic["receiver_name"]!
-            if userName == ChatuserName {
-                title = "Messages with " + self.recentChatDic["sender_name"]!
+            
+            var userName = ""
+            if let firstName = self.recentChatDic["sender_name"] {
+                userName = firstName + " "
             }
-            else{
-               title = "Messages with " + self.recentChatDic["receiver_name"]!
+            if let lastName = self.recentChatDic["sender_lastName"] {
+                userName = userName + lastName
             }
+            title = "Messages with " + userName
+            
+//            let userName = String(describing: UserDefaults.standard.value(forKey: "bP_userName") ?? "")
+//            let ChatuserName = self.recentChatDic["receiver_name"]!
+//            if userName == ChatuserName {
+//                title = "Messages with " + self.recentChatDic["sender_name"]!
+//            }
+//            else{
+//               title = "Messages with " + self.recentChatDic["receiver_name"]!
+//            }
         }
          else{
             print("\n\n\n\n///////",connectedUserModel.first ?? " Null")

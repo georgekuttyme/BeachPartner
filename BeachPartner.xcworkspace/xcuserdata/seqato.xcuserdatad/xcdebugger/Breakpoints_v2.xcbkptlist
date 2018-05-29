@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/Scenes/TabScenes/ChatTab/HighFiveViewController.swift"
-            timestampString = "549284770.484985"
+            timestampString = "549296846.091903"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,7 +138,7 @@
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/seqato/Desktop/bp-ios/bp-ios/BeachPartner/APIManagement/Manager/Modules/AuthModule.swift"
-                  timestampString = "549280323.727079"
+                  timestampString = "549296846.750668"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "30"
@@ -153,7 +153,7 @@
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/seqato/Desktop/bp-ios/bp-ios/BeachPartner/APIManagement/Manager/Modules/AuthModule.swift"
-                  timestampString = "549280323.730284"
+                  timestampString = "549296846.753899"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "30"
@@ -194,6 +194,102 @@
             startingLineNumber = "206"
             endingLineNumber = "206"
             landmarkName = "viewDidAppear(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/Scenes/TabScenes/HomeTab/HomeTabViewController.swift"
+            timestampString = "549292461.0076309"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "499"
+            endingLineNumber = "499"
+            landmarkName = "collectionView(_:didSelectItemAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/Scenes/TabScenes/ChatTab/ChatUsersListViewController.swift"
+            timestampString = "549296846.092191"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/Scenes/TabScenes/ChatTab/ChatUsersListViewController.swift"
+            timestampString = "549296846.092266"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "observeChannels()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__ObjC.DataSnapshot) -&gt; () in BeachPartner.ChatUsersListViewController.(observeChannels in _AA914EC04F09B2BE3ABFE49CCF585681)() -&gt; ()"
+                  moduleName = "BeachPartner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/seqato/Desktop/bp-ios/bp-ios/BeachPartner/Scenes/TabScenes/ChatTab/ChatUsersListViewController.swift"
+                  timestampString = "549296846.781504"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "21352">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "implicit closure #6 : @autoclosure () throws -&gt; Swift.String in closure #1 (__ObjC.DataSnapshot) -&gt; () in BeachPartner.ChatUsersListViewController.(observeChannels in _AA914EC04F09B2BE3ABFE49CCF585681)() -&gt; ()"
+                  moduleName = "BeachPartner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/seqato/Desktop/bp-ios/bp-ios/BeachPartner/Scenes/TabScenes/ChatTab/ChatUsersListViewController.swift"
+                  timestampString = "549296846.784806"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/Scenes/TabScenes/ChatTab/ChatViewController.swift"
+            timestampString = "549296846.092334"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
+            landmarkName = "configUser()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

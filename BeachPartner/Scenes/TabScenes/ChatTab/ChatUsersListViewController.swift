@@ -71,11 +71,11 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
                 let index = channelData.startIndex
                 latestMsgDic.updateValue(id, forKey: "chatId")
                 latestMsgDic.updateValue(channelData[channelData.keys[index]]!["receiver_id"] as! String, forKey: "receiver_id")
-                 latestMsgDic.updateValue(channelData[channelData.keys[index]]!["receiver_name"] as! String, forKey: "receiver_name")
-                 latestMsgDic.updateValue(channelData[channelData.keys[index]]!["sender_id"] as! String, forKey: "sender_id")
-//                latestMsgDic.updateValue(channelData[channelData.keys[index]]!["sender_name"] as? String ?? "", forKey: "sender_name")
-                 latestMsgDic.updateValue(channelData[channelData.keys[index]]!["text"] as! String, forKey: "text")
-//                latestMsgDic.updateValue(channelData[channelData.keys[index]]!["profileImg"] as? String ?? "", forKey: "profileImg")
+                latestMsgDic.updateValue(channelData[channelData.keys[index]]!["receiver_name"] as! String, forKey: "receiver_name")
+                latestMsgDic.updateValue(channelData[channelData.keys[index]]!["sender_id"] as! String, forKey: "sender_id")
+                //                latestMsgDic.updateValue(channelData[channelData.keys[index]]!["sender_name"] as? String ?? "", forKey: "sender_name")
+                latestMsgDic.updateValue(channelData[channelData.keys[index]]!["text"] as! String, forKey: "text")
+                //                latestMsgDic.updateValue(channelData[channelData.keys[index]]!["profileImg"] as? String ?? "", forKey: "profileImg")
                 latestMsgDic.updateValue(channelData[channelData.keys[index]]!["date"] as! String, forKey: "date")
                 
                 let senderId = channelData[channelData.keys[index]]!["sender_id"] as! String
@@ -87,18 +87,18 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
                     if userId == senderId || userId == receiverId {
                         if bP_userId == senderId || bP_userId == receiverId {
                             latestMsgDic.updateValue(connectedUser.connectedUser?.firstName ?? "", forKey: "sender_name")
-                           latestMsgDic.updateValue(connectedUser.connectedUser?.lastName ?? "", forKey: "sender_lastName")
+                            latestMsgDic.updateValue(connectedUser.connectedUser?.lastName ?? "", forKey: "sender_lastName")
                             latestMsgDic.updateValue(connectedUser.connectedUser?.imageUrl ?? "", forKey: "profileImg")
                             isActiveUser = true
                             break
                         }
-    
+                    
                     }
                     else {
                         isActiveUser = false
                     }
                 }
-
+                
                 if isActiveUser {
                     self.recentChatList.insert(latestMsgDic, at: 0)
                     self.tblChatList .reloadData()
@@ -158,14 +158,28 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
         
         let cell : RecentChatCell = tableView.dequeueReusableCell(withIdentifier: "RecentChatCell", for: indexPath) as! RecentChatCell
         
-        let userName = String(describing: UserDefaults.standard.value(forKey: "bP_userName") ?? "")
-        let ChatuserName = self.recentChatList[indexPath.row]["receiver_name"] ?? "" as String
-        if userName == ChatuserName {
-            cell.userNameLbl.text = self.recentChatList[indexPath.row]["sender_name"]
+//        let userName = String(describing: UserDefaults.standard.value(forKey: "bP_userName") ?? "")
+        
+//        print(self.recentChatList[indexPath.row])
+        
+//        let ChatuserName = self.recentChatList[indexPath.row]["receiver_name"] ?? "" as String
+//        if userName == ChatuserName {
+//            cell.userNameLbl.text = self.recentChatList[indexPath.row]["sender_name"]
+//        }
+//        else{
+//            cell.userNameLbl.text = self.recentChatList[indexPath.row]["receiver_name"]
+//        }
+        
+        
+        var userName = ""
+        if let firstName = self.recentChatList[indexPath.row]["sender_name"] {
+            userName = firstName + " "
         }
-        else{
-            cell.userNameLbl.text = self.recentChatList[indexPath.row]["receiver_name"]
+        if let lastName = self.recentChatList[indexPath.row]["sender_lastName"] {
+            userName = userName + lastName
         }
+        cell.userNameLbl.text = userName
+        
         
         cell.timeLbl.isHidden = true
         cell.statusImage.isHidden = true
@@ -185,6 +199,9 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
         let chatController = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
+        
+        print(self.recentChatList[indexPath.row])
+        
         chatController.recentChatDic = self.recentChatList[indexPath.row]
         chatController.chatType = "recentChat"
         let navigationController = UINavigationController(rootViewController: chatController)
