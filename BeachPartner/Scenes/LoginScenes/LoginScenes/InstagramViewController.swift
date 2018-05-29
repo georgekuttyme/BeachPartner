@@ -56,7 +56,6 @@ class InstagramViewController: UIViewController, UIWebViewDelegate{
                 print("&&&&&&", accRespModel.userProfile ?? " ")
                 if accRespModel.userProfile == nil{
                     UserDefaults.standard.set(0, forKey: "NewUser")
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "complete-profile-popup"), object: nil)
                 }else{
                     UserDefaults.standard.set(1, forKey: "NewUser")
                 }

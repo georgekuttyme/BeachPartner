@@ -147,8 +147,6 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
                 //                        let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
                 //                        let secondViewController = storyboard.instantiateViewController(withIdentifier: "tabbarcontroller") as! TabBarController
                 //                        self.present(secondViewController, animated: true, completion: nil)
-                
-                
             }
         }, errorResult: { (error) in
             stopLoading()
@@ -737,7 +735,6 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
                     print("&&&&&&", accRespModel.userProfile ?? " ")
                     if accRespModel.userProfile == nil{
                         UserDefaults.standard.set(0, forKey: "NewUser")
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "complete-profile-popup"), object: nil)
                     }else{
                         UserDefaults.standard.set(1, forKey: "NewUser")
                     }

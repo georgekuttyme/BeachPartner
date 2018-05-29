@@ -57,7 +57,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     var tournamentRequestList: GetTournamentRequestRespModel?
     
     var tournamentRequestSentViewActive = false
-    
+    var titleOfChat = String()
     
     var date = ["04/01/2018","04/01/2018","04/01/2018","04/01/2018","04/01/2018","04/01/2018","04/01/2018"]
     var eventName = ["America","America","America","America","America","America","America"]
@@ -68,7 +68,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         formatter.dateFormat = "MM-dd-yyyy"
         return formatter
     }()
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,11 +88,14 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         self.getBlockedConnections()
         let loggedIn = UserDefaults.standard.string(forKey: "isFirstLoggedIn") ?? "1"
         if loggedIn != "0" {
-            
             UserDefaults.standard.set("0", forKey: "isFirstLoggedIn")
             let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "HelpViewController") as! HelpViewController
             self.present(vc, animated: true, completion: nil)
+        }
+        let isNewUser = UserDefaults.standard.string(forKey: "NewUser")
+        if isNewUser == "0" {
+            popUpAlertForCompleteProfile()
         }
         
         
@@ -106,9 +109,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
                 messageContainerView.backgroundColor = UIColor(patternImage: bgImage)
             }
         }
-        NotificationCenter.default.addObserver(self, selector: #selector(popUpAlertForCompleteProfile(notification:)), name:NSNotification.Name(rawValue: "complete-profile-popup"), object: nil)
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         let image : UIImage = UIImage(named: "BP.png")!
@@ -124,14 +125,14 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         self.tabBarController?.selectedIndex = 4
     }
     
-    @objc func popUpAlertForCompleteProfile(notification: NSNotification){
+   func popUpAlertForCompleteProfile(){
         let alert = UIAlertController(title: "Update Profile", message: "Please take a moment to complete your profile", preferredStyle: .alert)
-        let actionButton = UIAlertAction(title: "Later", style: .default) { (action) in
-            self.dismiss(animated: true, completion: nil)
+        let actionButton = UIAlertAction(title: "Later", style: .cancel) { (action) in
+            
         }
-        let cancelButton = UIAlertAction(title: "Now", style: .cancel) { (action) in
+        let cancelButton = UIAlertAction(title: "Now", style: .default) { (action) in
+            
             let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
-            self.dismiss(animated: true, completion: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "profilevc1") as! CoachProfileTableViewController
             let vc1 = storyboard.instantiateViewController(withIdentifier: "profilevc") as! AthleteProfileTableViewController
             let identifier = UserDefaults.standard.string(forKey: "userType") == "Athlete" ? vc1 : vc
@@ -139,11 +140,11 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             self.tabBarController?.tabBar.isHidden = false
             self.navigationController!.navigationBar.topItem!.title = ""
             self.navigationController?.isNavigationBarHidden = false
+            
         }
         alert.addAction(actionButton)
         alert.addAction(cancelButton)
         self.present(alert, animated: true, completion: nil)
-        
     }
     
     func getAllUserEventsList(){
@@ -294,7 +295,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
                     return count
                 }
                 else {
-                    tornamentRequestLabel.text = "No tournament Requests Sent"
+                    tornamentRequestLabel.text = "No Tournament Requests Sent"
                 }
             }
             else {
@@ -303,7 +304,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
                     return count
                 }
                 else {
-                    tornamentRequestLabel.text = "No tournament Requests Received"
+                    tornamentRequestLabel.text = "No Tournament Requests Received"
                 }
             }
         }
@@ -378,7 +379,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             print("collectionView == messagesCollectionView")
             print("====dfhfdghvbhj====")
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MessageCollectionViewCell", for: indexPath) as! MessageCollectionViewCell
-            
+            self.titleOfChat.removeAll()
             //            let n = Int(arc4random_uniform(42))
             //            cell.messageUserProfille.image = imageSrc[n % 3]
             
@@ -401,15 +402,23 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             cell.messageUserProfille.layer.borderColor = UIColor.lightGray.cgColor
             cell.messageUserProfille.layer.borderWidth = 1
             
-            let userName = String(describing: UserDefaults.standard.value(forKey: "bP_userName") ?? "")
-            let ChatuserName = self.recentChatList[indexPath.row]["receiver_name"] ?? "" as String
-            if userName == ChatuserName {
-                cell.nameLbl?.text = self.recentChatList[indexPath.row]["sender_name"]
+//            let userName = String(describing: UserDefaults.standard.value(forKey: "bP_userName") ?? "")
+//            let ChatuserName = self.recentChatList[indexPath.row]["receiver_name"] ?? "" as String
+//            if userName == ChatuserName {
+//                cell.nameLbl?.text = self.recentChatList[indexPath.row]["sender_name"]
+//
+//            }
+//            else{
+//                cell.nameLbl?.text = self.recentChatList[indexPath.row]["receiver_name"]
+//            }
+            if let fName = self.recentChatList[indexPath.row]["sender_name"] {
+                titleOfChat = fName
             }
-            else{
-                cell.nameLbl?.text = self.recentChatList[indexPath.row]["receiver_name"]
+            if let lName = self.recentChatList[indexPath.row]["sender_lastName"] {
+                titleOfChat = titleOfChat + " " + lName
             }
-            
+            print(titleOfChat, "jjindexPath")
+            cell.nameLbl.text = titleOfChat
             cell.nameLbl.textColor = UIColor.lightGray
             
             cell.contentView.layer.cornerRadius = 4.0
@@ -497,6 +506,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
             let chatController = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
             chatController.recentChatDic = self.recentChatList[indexPath.row]
+            print(self.recentChatList[indexPath.row]," ??self.recentChatList[indexPath.row]")
             chatController.chatType = "recentChat"
             let navigationController = UINavigationController(rootViewController: chatController)
             self.present(navigationController, animated: true, completion: nil)
@@ -692,6 +702,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
                     if userId == senderId || userId == receiverId {
                         if bP_userId == senderId || bP_userId == receiverId {
                             latestMsgDic.updateValue(connectedUser.connectedUser?.firstName ?? "", forKey: "sender_name")
+                            latestMsgDic.updateValue(connectedUser.connectedUser?.lastName ?? "", forKey: "sender_lastName")
                             latestMsgDic.updateValue(connectedUser.connectedUser?.imageUrl ?? "", forKey: "profileImg")
                             isActiveUser = true
                             break
