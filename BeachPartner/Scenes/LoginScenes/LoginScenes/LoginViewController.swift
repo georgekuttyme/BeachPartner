@@ -699,7 +699,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
 
                     }else{
                         if(loginModel.details == "Bad credentials"){
-                            self.errorlabel.text = "Invalid username/password."
+                            self.errorlabel.text = "Invalid email/password."
                             self.passwordField.text = ""
                         }
                         else{
@@ -718,7 +718,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
             }
             
             else{
-                self.errorlabel.text = "Invalid username/password."
+                self.errorlabel.text = "Invalid email/password."
                 
             }
         }
