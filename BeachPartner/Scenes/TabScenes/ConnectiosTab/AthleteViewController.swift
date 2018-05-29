@@ -45,7 +45,9 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
         //        let n = Int(arc4random_uniform(42))
         //        let val = String((n % 3 ) + 1)
         
-        cell?.nameLbl.text = connectedUser?.firstName
+        let firstName = connectedUser?.firstName ?? ""
+        let lastName = connectedUser?.lastName ?? ""
+        cell?.nameLbl.text = firstName + " " + lastName
         cell?.ageLbl.text = String(connectedUser?.age ?? 0)
         if let imageUrl = URL(string: (connectedUser?.imageUrl)!) {
             cell?.profileImgView.sd_setIndicatorStyle(.whiteLarge)

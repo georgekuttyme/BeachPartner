@@ -7,7 +7,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -90,22 +89,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Kh8-Kf-JIb"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Calendar" id="uVe-XD-PDR">
-                        <rightBarButtonItems>
-                            <barButtonItem image="menudot" id="hc8-ug-esk"/>
-                            <barButtonItem image="ic_filter" id="wHW-5i-UbN">
-                                <connections>
-                                    <segue destination="4Hr-ax-y4B" kind="presentation" identifier="FilterViewSegue" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="eLs-Q5-4X8"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Calendar" id="uVe-XD-PDR"/>
                     <connections>
                         <outlet property="calendarSegmentView" destination="xS0-2N-oYM" id="wOI-Kf-0et"/>
                         <outlet property="calenderContainerView" destination="5cM-PC-KPM" id="Gwv-fm-k9N"/>
-                        <outlet property="filterButton" destination="wHW-5i-UbN" id="BlD-5I-rEg"/>
                         <segue destination="84T-Ho-JQc" kind="show" identifier="editprofilesegue" id="CYk-94-qSb"/>
                         <segue destination="J5f-di-aeG" kind="show" identifier="settingssegue" id="BOE-1D-ulU"/>
+                        <segue destination="4Hr-ax-y4B" kind="presentation" identifier="FilterViewSegue" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="ePr-ky-BNz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FVO-zq-3vz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1606,7 +1596,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ptb-1g-S3h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="185.625" y="251.40845070422534"/>
+            <point key="canvasLocation" x="109" y="161"/>
         </scene>
         <!--Event Invitation List View Controller-->
         <scene sceneID="4me-2C-K1b">
@@ -2551,16 +2541,14 @@
         <image name="calender" width="29" height="29"/>
         <image name="close" width="128" height="128"/>
         <image name="end_date v2" width="429" height="125"/>
-        <image name="ic_filter" width="24" height="24"/>
         <image name="ic_split" width="48" height="48"/>
-        <image name="menudot" width="16" height="16"/>
         <image name="notes v2" width="350" height="481"/>
         <image name="remove_transparent-1" width="500" height="500"/>
         <image name="star" width="46" height="46"/>
         <image name="start_date v2" width="429" height="125"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="c8u-gq-7eI"/>
-        <segue reference="LIp-gz-T4M"/>
+        <segue reference="BOE-1D-ulU"/>
+        <segue reference="CYk-94-qSb"/>
     </inferredMetricsTieBreakers>
 </document>

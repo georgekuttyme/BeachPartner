@@ -8,26 +8,12 @@
 
 
 import UIKit
-import DropDown
-class ConnectionsViewController : UIViewController{
-    
-        let dropDown = DropDown()
-   private var arrayImage = [AnyHashable]()
-        var count: Int = 0
-    private var i: Int = 0
-    
-    var isExpanded = false
 
-
-    @IBOutlet weak var menuBtn: UIBarButtonItem!
+class ConnectionsViewController : BeachPartnerViewController {
+    
     
     @IBOutlet weak var segmentControl: UISegmentedControl!
-    
-    @IBAction func menuBtnClicked(_ sender: UIBarButtonItem) {
-        dropDown.show()
-    }
-    
-    
+
     weak var currentViewController: UIViewController?
     
     @IBOutlet weak var connectionsContainerView: UIView!
@@ -41,11 +27,9 @@ class ConnectionsViewController : UIViewController{
         if sender.selectedSegmentIndex == 0{
             self.loadAthleteView()
         }
-            
         else if sender.selectedSegmentIndex == 1{
             self.loadCoachView()
         }
-        
     }
     
     
@@ -68,69 +52,7 @@ class ConnectionsViewController : UIViewController{
 
         override func viewDidLoad() {
         super.viewDidLoad()
-       
-        arrayImage = ["", "", ""]
-        count = 0
-        
-       self.dropDown.anchorView = self.menuBtn
-            self.dropDown.dataSource =  ["My Profile","About Us","Feedback","Settings", "Help","Logout"]
-     self.dropDown.bottomOffset = CGPoint(x: 20, y:45)
-            self.dropDown.width = 150
- 
-            self.dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-                print("Selected item:",item," at index:",index)
-                if(item == "My Profile"){
-                    let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
-                    let vc = storyboard.instantiateViewController(withIdentifier: "profilevc1") as! CoachProfileTableViewController
-                    let vc1 = storyboard.instantiateViewController(withIdentifier: "profilevc") as! AthleteProfileTableViewController
-                    let identifier = UserDefaults.standard.string(forKey: "userType") == "Athlete" ? vc1 : vc
-                    self.navigationController?.pushViewController(identifier, animated: true)
-                    self.tabBarController?.tabBar.isHidden = false
-                    self.navigationController!.navigationBar.topItem!.title = ""
-                    self.navigationController?.isNavigationBarHidden = false
-                }
-                else if(item == "Logout"){
-                    
-                    let refreshAlert = UIAlertController(title: "Logout", message: "Do you really want to logout from Beach Partner?", preferredStyle: UIAlertControllerStyle.alert)
-                    
-                    refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
-                        
-                        self.timoutLogoutAction()
-                        
-                    }))
-                    refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
-                        print("Handle Cancel Logic here")
-                    }))
-                    
-                    self.present(refreshAlert, animated: true, completion: nil)
-                }
-                else if (item == "Settings"){
-                    let storyboard : UIStoryboard = UIStoryboard(name: "TabBar", bundle: nil)
-                    let controller = storyboard.instantiateViewController(withIdentifier: "ComponentSettings") as! SettingsViewController
-                    controller.SettingsType = "profileSettings"
-                    self.tabBarController?.tabBar.isHidden = false
-                    self.navigationController!.navigationBar.topItem!.title = ""
-                    self.navigationController?.isNavigationBarHidden = false
-                    self.navigationController?.pushViewController(controller, animated: true)
-                }
-                else if (item == "Help"){
-                    let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
-                    let vc = storyboard.instantiateViewController(withIdentifier: "HelpViewController") as! HelpViewController
-                    self.present(vc, animated: true, completion: nil)
-                }
-                else {
-                    let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
-                    let vc = storyboard.instantiateViewController(withIdentifier: "CommmonWebViewController") as! CommmonWebViewController
-                    vc.titleText = item
-                    self.tabBarController?.tabBar.isHidden = false
-                    self.navigationController!.navigationBar.topItem!.title = ""
-                    self.navigationController?.isNavigationBarHidden = false
-                    self.present(vc, animated: true, completion: nil)
-                }
-            }
-            self.dropDown.selectRow(0)
-            
-            
+
             self.currentViewController = self.storyboard?.instantiateViewController(withIdentifier: "AthleteComponent")
             self.currentViewController!.view.translatesAutoresizingMaskIntoConstraints = false
             self.addChildViewController(self.currentViewController!)
@@ -141,18 +63,6 @@ class ConnectionsViewController : UIViewController{
          self.navigationController!.navigationBar.topItem!.title = "Connections"
        // self.title = "Connections"
     }
-    
-    func addSubview(subView:UIView, toView parentView:UIView) {
-        parentView.addSubview(subView)
-        
-        var viewBindingsDict = [String: AnyObject]()
-        viewBindingsDict["subView"] = subView
-        parentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[subView]|",
-                                                                 options: [], metrics: nil, views: viewBindingsDict))
-        parentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[subView]|",
-                                                                 options: [], metrics: nil, views: viewBindingsDict))
-    }
-    
     
     func cycleFromViewController(oldViewController: UIViewController, toViewController newViewController: UIViewController) {
         oldViewController.willMove(toParentViewController: nil)

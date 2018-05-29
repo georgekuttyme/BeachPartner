@@ -12,6 +12,8 @@ class BeachPartnerViewController: UIViewController {
     let dropDown = DropDown()
 //    weak var currentViewController: UIViewController?
     
+    
+    var menuBarButtonItem: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
        
@@ -19,14 +21,14 @@ class BeachPartnerViewController: UIViewController {
         menuButton.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
         menuButton.addTarget(self, action: #selector(openMenu), for:    .touchUpInside)
         menuButton.setImage(UIImage(named: "menudot"), for: UIControlState())
-        let menuBarButtonItem = UIBarButtonItem(customView: menuButton)
+        menuBarButtonItem = UIBarButtonItem(customView: menuButton)
         
         navigationItem.rightBarButtonItems = [menuBarButtonItem]
         
         self.dropDown.anchorView = menuButton // UIView or UIBarButtonItem
         // The list of items to display. Can be changed dynamically
         //        self.dropDown.direction = .bottom
-        self.dropDown.dataSource = ["My Profile","About Us","Feedback","Settings", "Help","Logout"]
+        self.dropDown.dataSource = ["My Profile","Subscription","About Us","Feedback","Settings", "Help","Logout"]
         
         self.dropDown.bottomOffset = CGPoint(x: 20, y:30)
         self.dropDown.width = 150
@@ -75,6 +77,9 @@ class BeachPartnerViewController: UIViewController {
                 let vc = storyboard.instantiateViewController(withIdentifier: "HelpViewController") as! HelpViewController
                 self.present(vc, animated: true, completion: nil)
             }
+            else if (item == "Subscription"){
+                //Subscription
+            }
             else {
                 let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "CommmonWebViewController") as! CommmonWebViewController
@@ -91,6 +96,7 @@ class BeachPartnerViewController: UIViewController {
     @objc func openMenu() {
         dropDown.show()
     }
+    
     func addSubview(subView:UIView, toView parentView:UIView) {
         parentView.addSubview(subView)
         var viewBindingsDict = [String: AnyObject]()

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import DropDown
+//import DropDown
 import Floaty
 
 class HighfiveCell: UITableViewCell {
@@ -19,7 +19,7 @@ class HighfiveCell: UITableViewCell {
     @IBOutlet weak var highfiveImage: UIImageView!
     
 }
-class HighFiveViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class HighFiveViewController: BeachPartnerViewController,UITableViewDelegate,UITableViewDataSource {
     var isCallHifiview:Bool = false
     var connectedUsers = [ConnectedUserModel]()
     var selectedTabViewController:Int!
@@ -27,88 +27,11 @@ class HighFiveViewController: UIViewController,UITableViewDelegate,UITableViewDa
     @IBOutlet weak var tblHighFiveList: UITableView!
     @IBOutlet weak var menuBtn: UIBarButtonItem!
     @IBOutlet var toastLabel: UILabel!
-    let dropDown = DropDown()
-    var button1 : UIBarButtonItem!
-    
-    @IBAction func didTapMenuButton(_ sender: Any) {
-        dropDown.show()
-    }
-    
-    func rightBarBtn(){
-        button1 = UIBarButtonItem(image: UIImage(named: "menudot"), style: .plain, target: self, action: #selector(action))
-        self.navigationItem.rightBarButtonItem  = button1
-    }
-    
-    @objc func action() {
-        dropDown.show()
-    }
-    
-    
-    func setDropDwonMenu()  {
-        
-        self.dropDown.anchorView = self.button1
-        self.dropDown.dataSource =  ["My Profile","About Us","Feedback","Settings", "Help","Logout"]
-        self.dropDown.bottomOffset = CGPoint(x: 20, y:45)
-        self.dropDown.width = 150
-        
-        self.dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-            print("Selected item:",item," at index:",index)
-            if(item == "My Profile"){
-                let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "profilevc1") as! CoachProfileTableViewController
-                let vc1 = storyboard.instantiateViewController(withIdentifier: "profilevc") as! AthleteProfileTableViewController
-                let identifier = UserDefaults.standard.string(forKey: "userType") == "Athlete" ? vc1 : vc
-                self.navigationController?.pushViewController(identifier, animated: true)
-                self.tabBarController?.tabBar.isHidden = false
-                self.navigationController!.navigationBar.topItem!.title = ""
-                self.navigationController?.isNavigationBarHidden = false
-            }
-                
-            else if(item == "Logout"){
-                let refreshAlert = UIAlertController(title: "Logout", message: "Do you really want to logout from Beach Partner?", preferredStyle: UIAlertControllerStyle.alert)
-                
-                refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
-                    
-                    self.timoutLogoutAction()
-                    
-                }))
-                refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
-                    print("Handle Cancel Logic here")
-                }))
-                
-                self.present(refreshAlert, animated: true, completion: nil)
-            }
-            else if (item == "Settings"){
-                let storyboard : UIStoryboard = UIStoryboard(name: "TabBar", bundle: nil)
-                let controller = storyboard.instantiateViewController(withIdentifier: "ComponentSettings") as! SettingsViewController
-                controller.SettingsType = "profileSettings"
-                self.tabBarController?.tabBar.isHidden = false
-                self.navigationController!.navigationBar.topItem!.title = ""
-                self.navigationController?.isNavigationBarHidden = false
-                self.navigationController?.pushViewController(controller, animated: true)
-            }
-            else if (item == "Help"){
-                let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "HelpViewController") as! HelpViewController
-                self.present(vc, animated: true, completion: nil)
-            }
-            else {
-                let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "CommmonWebViewController") as! CommmonWebViewController
-                vc.titleText = item
-                self.tabBarController?.tabBar.isHidden = false
-                self.navigationController!.navigationBar.topItem!.title = ""
-                self.navigationController?.isNavigationBarHidden = false
-                self.present(vc, animated: true, completion: nil)
-            }
-        }
-        self.dropDown.selectRow(0)
-    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.toastLabel.isHidden = true
-        rightBarBtn()
         
         
         self.hideKeyboardWhenTappedAround()
@@ -143,7 +66,6 @@ class HighFiveViewController: UIViewController,UITableViewDelegate,UITableViewDa
         self.getHifiList()
     }
     override func viewDidAppear(_ animated: Bool) {
-        setDropDwonMenu()
         if !isCallHifiview {
             isCallHifiview = true
             let newViewController =  self.storyboard?.instantiateViewController(withIdentifier: "HighFiveViewController")as! HighFiveViewController
@@ -248,23 +170,6 @@ class HighFiveViewController: UIViewController,UITableViewDelegate,UITableViewDa
                         newViewController.didMove(toParentViewController: self)
         })
     }
-    
-    func addSubview(subView:UIView, toView parentView:UIView) {
-        parentView.addSubview(subView)
-        
-        var viewBindingsDict = [String: AnyObject]()
-        viewBindingsDict["subView"] = subView
-        parentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[subView]|",
-                                                                 options: [], metrics: nil, views: viewBindingsDict))
-        parentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[subView]|",
-                                                                 options: [], metrics: nil, views: viewBindingsDict))
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 }
 
 extension UIView {

@@ -43,10 +43,10 @@ class TermsAndConditionVC: UIViewController,UIWebViewDelegate {
         self.checkBox.boxType = .square
         
         // The tint color when in the selected state.
-        self.checkBox.tintColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0)
+        self.checkBox.tintColor = UIColor(red: 77/255.0, green: 158/255.0, blue: 88/255.0, alpha:1.0)//UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0)
         
         // The tint color when in the unselected state.
-        self.checkBox.secondaryTintColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0)
+        self.checkBox.secondaryTintColor = .red//UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0)
         
         // The color of the checkmark when the animation is a "fill" style animation.
         self.checkBox.secondaryCheckmarkTintColor = .red
@@ -55,10 +55,19 @@ class TermsAndConditionVC: UIViewController,UIWebViewDelegate {
         self.checkBox.markType = .checkmark
         
         // The line width of the checkmark.
-        self.checkBox.checkmarkLineWidth = 3.0
+        self.checkBox.checkmarkLineWidth = 2.0
 
         // The line width of the box.
-        self.checkBox.boxLineWidth = 3.0
+        self.checkBox.boxLineWidth = 2.0
+        
+        self.iagreeLbl.textColor = .red
+        
+        self.checkBox.addTarget(self, action: #selector(self.checkboxValueChanged(_:)), for: .valueChanged)
+    }
+    
+    @objc func checkboxValueChanged(_ sender: M13Checkbox) {
+        
+        self.iagreeLbl.textColor = (sender.checkState == .checked) ? UIColor(red: 77/255.0, green: 158/255.0, blue: 88/255.0, alpha:1.0) : .red
     }
 
     override func didReceiveMemoryWarning() {

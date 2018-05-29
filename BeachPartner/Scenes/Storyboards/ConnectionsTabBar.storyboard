@@ -71,17 +71,10 @@
                         <viewLayoutGuide key="safeArea" id="yzf-Rd-znx"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" title="Connections" id="YZX-tF-sdy">
-                        <barButtonItem key="rightBarButtonItem" image="menudot" id="AZO-wG-4CB">
-                            <connections>
-                                <action selector="menuBtnClicked:" destination="8Ff-Y4-gGn" id="NQz-Ik-KLu"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Connections" id="YZX-tF-sdy"/>
                     <connections>
                         <outlet property="connectionSegmentView" destination="58l-BE-nGp" id="Vx2-QF-zvF"/>
                         <outlet property="connectionsContainerView" destination="t40-ma-7pF" id="PrK-4y-DiZ"/>
-                        <outlet property="menuBtn" destination="AZO-wG-4CB" id="IKk-Ch-nAN"/>
                         <segue destination="by8-7K-CoL" kind="show" identifier="editprofilesegue" id="Ry1-iB-Uyg"/>
                         <segue destination="xmP-Cb-Ozm" kind="show" identifier="" id="57C-4P-mJ7"/>
                     </connections>
@@ -766,7 +759,6 @@
         <image name="clock_notes" width="500" height="500"/>
         <image name="connections" width="29" height="29"/>
         <image name="delete" width="512" height="512"/>
-        <image name="menudot" width="16" height="16"/>
         <image name="tick - notes" width="500" height="500"/>
     </resources>
 </document>
