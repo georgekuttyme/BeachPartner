@@ -735,8 +735,10 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
                     print("&&&&&&", accRespModel.userProfile ?? " ")
                     if accRespModel.userProfile == nil{
                         UserDefaults.standard.set(0, forKey: "NewUser")
+                        UserDefaults.standard.set(0, forKey: "isNewUserFirstLogin")
                     }else{
                         UserDefaults.standard.set(1, forKey: "NewUser")
+                        UserDefaults.standard.set(1, forKey: "isNewUserFirstLogin")
                     }
                     
                     UserDefaults.standard.set(accRespModel.id, forKey: "bP_userId")

@@ -24,18 +24,18 @@
             <objects>
                 <viewController storyboardIdentifier="loginscene" id="2h5-9U-gWf" customClass="LoginViewController" customModule="BeachPartner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jcD-Gw-ddA">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BP - Login BG" translatesAutoresizingMaskIntoConstraints="NO" id="sie-C5-5RE">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="822"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="687"/>
                                 <color key="backgroundColor" red="0.79963050840000005" green="0.79860577020000001" blue="0.81650539339999995" alpha="0.73319777399999997" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="CF8-K9-73M">
-                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Beachlogo" translatesAutoresizingMaskIntoConstraints="NO" id="YzM-sk-3K1">
-                                        <rect key="frame" x="140.66666666666666" y="0.0" width="94" height="150"/>
+                                        <rect key="frame" x="140.5" y="0.0" width="94" height="150"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="150" id="Ur4-ct-x7D"/>
                                         </constraints>
@@ -47,7 +47,7 @@
                                                 <rect key="frame" x="8" y="7" width="329" height="317"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WELCOME!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vjw-B2-EWG">
-                                                        <rect key="frame" x="114" y="0.0" width="101.33333333333331" height="20"/>
+                                                        <rect key="frame" x="114" y="0.0" width="101.5" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="KII-W6-cG7"/>
                                                         </constraints>
@@ -133,7 +133,7 @@
                                                         </connections>
                                                     </button>
                                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y41-m7-vqn">
-                                                        <rect key="frame" x="42.666666666666686" y="277" width="244" height="40"/>
+                                                        <rect key="frame" x="42.5" y="277" width="244" height="40"/>
                                                         <subviews>
                                                             <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Phu-w8-kvg">
                                                                 <rect key="frame" x="30" y="4" width="184" height="32"/>
@@ -145,7 +145,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <button opaque="NO" contentMode="scaleAspectFit" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w2o-ZP-TVL">
-                                                                        <rect key="frame" x="109.99999999999999" y="0.0" width="32.000000000000014" height="32"/>
+                                                                        <rect key="frame" x="110" y="0.0" width="32" height="32"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="32" id="LEO-sH-CeM"/>
                                                                         </constraints>
@@ -206,22 +206,22 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lk1-2c-8Vw">
-                                        <rect key="frame" x="77.666666666666686" y="484" width="220" height="250"/>
+                                        <rect key="frame" x="77.5" y="484" width="220" height="163"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1Im-cQ-s1D">
-                                                <rect key="frame" x="0.0" y="0.0" width="220" height="240"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="220" height="153"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="8e6-qA-3eq">
-                                                        <rect key="frame" x="0.0" y="0.0" width="220" height="210"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="220" height="123"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NBa-tA-Dge">
-                                                                <rect key="frame" x="0.0" y="0.0" width="152.33333333333334" height="210"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="152.5" height="123"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="0.7540667808219178" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5bg-3i-aNp">
-                                                                <rect key="frame" x="152.33333333333331" y="0.0" width="67.666666666666686" height="210"/>
+                                                                <rect key="frame" x="152.5" y="0.0" width="67.5" height="123"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                 <state key="normal" title="   Sign Up">
                                                                     <color key="titleColor" red="0.12549019610000001" green="0.18823529410000001" blue="0.78162211500555556" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -233,7 +233,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t7U-8H-nLO">
-                                                        <rect key="frame" x="0.0" y="210" width="220" height="30"/>
+                                                        <rect key="frame" x="0.0" y="123" width="220" height="30"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bjj-xI-B8q">
                                                                 <rect key="frame" x="0.0" y="0.0" width="220" height="30"/>
@@ -304,7 +304,7 @@
             <objects>
                 <viewController storyboardIdentifier="PasswordResetViewController" id="gtR-Kj-Dpt" customClass="PasswordResetViewController" customModule="BeachPartner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zvD-ns-7ln">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bun-rz-Jr5">
@@ -883,13 +883,14 @@
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cir-It-Xkt" customClass="FloatingText" customModule="BeachPartner" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="278" height="40"/>
+                                                <color key="tintColor" red="0.062745098040000002" green="0.10980392160000001" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="1vi-Ex-U2A"/>
                                                     <constraint firstAttribute="height" constant="40" id="rNG-rj-JFw"/>
                                                 </constraints>
                                                 <color key="textColor" red="0.12549019610000001" green="0.18823529410000001" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="next" textContentType="name"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" textContentType="name"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
                                                         <color key="value" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -901,12 +902,13 @@
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d0L-d9-tGA" customClass="FloatingText" customModule="BeachPartner" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="60" width="278" height="40"/>
+                                                <color key="tintColor" red="0.062745098040000002" green="0.10980392160000001" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="zmm-Qe-hSC"/>
                                                 </constraints>
                                                 <color key="textColor" red="0.12549019610000001" green="0.18823529410000001" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="next" textContentType="name"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" textContentType="name"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
                                                         <color key="value" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1097,12 +1099,13 @@
                                             </view>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jAf-iW-3YD" customClass="FloatingText" customModule="BeachPartner" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="300" width="278" height="40"/>
+                                                <color key="tintColor" red="0.062745098040000002" green="0.10980392160000001" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="5xL-DX-VBY"/>
                                                 </constraints>
                                                 <color key="textColor" red="0.12549019610000001" green="0.18823529410000001" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" textContentType="email"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next" smartInsertDeleteType="no" smartQuotesType="no" textContentType="email"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
                                                         <color key="value" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1114,6 +1117,7 @@
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CbO-B7-ibI" customClass="FloatingText" customModule="BeachPartner" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="360" width="278" height="40"/>
+                                                <color key="tintColor" red="0.062745098040000002" green="0.10980392160000001" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="YiN-CP-L07"/>
                                                 </constraints>
@@ -1131,6 +1135,7 @@
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3OU-4W-ddc" customClass="FloatingText" customModule="BeachPartner" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="420" width="278" height="40"/>
+                                                <color key="tintColor" red="0.062745098040000002" green="0.10980392160000001" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="Cjx-6X-OOZ"/>
                                                 </constraints>
@@ -1148,6 +1153,7 @@
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mobile Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mfG-dv-O4f" customClass="FloatingText" customModule="BeachPartner" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="480" width="278" height="40"/>
+                                                <color key="tintColor" red="0.062745098040000002" green="0.10980392160000001" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="g31-UG-zHH"/>
                                                 </constraints>
@@ -1387,6 +1393,9 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="8"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
@@ -1413,14 +1422,14 @@
             <objects>
                 <viewController id="T5L-Fh-QFK" customClass="PopUpParentDetailsViewController" customModule="BeachPartner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5LG-5K-dUJ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WgP-j6-Hpl">
-                                <rect key="frame" x="42.666666666666657" y="206" width="290" height="400"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WgP-j6-Hpl">
+                                <rect key="frame" x="42.5" y="133.5" width="290" height="400"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="8AZ-J0-SKN">
-                                        <rect key="frame" x="13.666666666666686" y="29.666666666666657" width="270" height="350"/>
+                                        <rect key="frame" x="14" y="29.5" width="270" height="350"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your parent details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xLA-Ng-jL0">
                                                 <rect key="frame" x="28" y="0.0" width="214" height="50"/>
@@ -1429,7 +1438,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oe8-bN-ftu" customClass="FloatingText" customModule="BeachPartner" customModuleProvider="target">
-                                                <rect key="frame" x="5" y="60.000000000000028" width="260" height="50"/>
+                                                <rect key="frame" x="5" y="60" width="260" height="50"/>
                                                 <color key="textColor" red="0.12549019610000001" green="0.18823529410000001" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -1443,7 +1452,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H4o-Ra-kyv" customClass="FloatingText" customModule="BeachPartner" customModuleProvider="target">
-                                                <rect key="frame" x="5" y="120.00000000000003" width="260" height="50"/>
+                                                <rect key="frame" x="5" y="120" width="260" height="50"/>
                                                 <color key="textColor" red="0.12549019610000001" green="0.18823529410000001" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -1457,7 +1466,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="40x-cF-1fN" customClass="FloatingText" customModule="BeachPartner" customModuleProvider="target">
-                                                <rect key="frame" x="5" y="180.00000000000003" width="260" height="50"/>
+                                                <rect key="frame" x="5" y="180" width="260" height="50"/>
                                                 <color key="textColor" red="0.12549019610000001" green="0.18823529410000001" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -1535,6 +1544,11 @@
                                     <constraint firstAttribute="bottom" secondItem="8AZ-J0-SKN" secondAttribute="bottom" constant="20" id="uLU-DT-6Er"/>
                                     <constraint firstAttribute="width" constant="290" id="uev-XX-c0l"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.14569940579999999" green="0.14714197409999999" blue="0.14714197409999999" alpha="0.69772046232876717" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2124,11 +2138,11 @@
             <objects>
                 <viewController id="Pz6-8a-pB9" customClass="ForgotPasswordViewController" customModule="BeachPartner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zkF-Rd-W4O">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q0M-QU-Js9">
-                                <rect key="frame" x="47.666666666666657" y="271" width="290" height="250"/>
+                                <rect key="frame" x="47.5" y="198.5" width="290" height="250"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter email id" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lDF-hJ-POE" customClass="FloatingText" customModule="BeachPartner" customModuleProvider="target">
                                         <rect key="frame" x="15" y="79" width="260" height="50"/>

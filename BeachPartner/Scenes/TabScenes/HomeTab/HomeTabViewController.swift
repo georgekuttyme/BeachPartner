@@ -86,18 +86,15 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         self.getUsersListforBlueBp()
         self.getNewUsersList()
         self.getBlockedConnections()
-        let loggedIn = UserDefaults.standard.string(forKey: "isFirstLoggedIn") ?? "1"
-        if loggedIn != "0" {
+        let isNewUserFirstLogin = UserDefaults.standard.string(forKey: "isNewUserFirstLogin") ?? ""
+        let loggedIn = UserDefaults.standard.string(forKey: "isFirstLoggedIn")
+        if loggedIn != "0" || isNewUserFirstLogin == "0" {
+            UserDefaults.standard.set(1,forKey: "isNewUserFirstLogin")
             UserDefaults.standard.set("0", forKey: "isFirstLoggedIn")
             let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "HelpViewController") as! HelpViewController
             self.present(vc, animated: true, completion: nil)
         }
-        let isNewUser = UserDefaults.standard.string(forKey: "NewUser")
-        if isNewUser == "0" {
-            popUpAlertForCompleteProfile()
-        }
-        
         
         if UserDefaults.standard.string(forKey: "userType") == "Athlete" {
             tournamentStackView.isHidden = false
@@ -110,6 +107,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             }
         }
     }
+
     
     override func viewWillAppear(_ animated: Bool) {
         let image : UIImage = UIImage(named: "BP.png")!
@@ -117,7 +115,12 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         imageView.contentMode = .scaleAspectFit
         imageView.image = image
         self.navigationItem.titleView = imageView
-
+        
+        let isNewUser = UserDefaults.standard.string(forKey: "NewUser")
+        if isNewUser == "0" {
+            popUpAlertForCompleteProfile()
+        }
+        
         NotificationCenter.default.addObserver(self, selector: #selector(tapOnPush(notification:)), name:NSNotification.Name(rawValue: "foreground-pushNotification"), object: nil)
     }
     
@@ -136,10 +139,8 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             let vc = storyboard.instantiateViewController(withIdentifier: "profilevc1") as! CoachProfileTableViewController
             let vc1 = storyboard.instantiateViewController(withIdentifier: "profilevc") as! AthleteProfileTableViewController
             let identifier = UserDefaults.standard.string(forKey: "userType") == "Athlete" ? vc1 : vc
-            self.navigationController?.pushViewController(identifier, animated: true)
-            self.tabBarController?.tabBar.isHidden = false
-            self.navigationController!.navigationBar.topItem!.title = ""
-            self.navigationController?.isNavigationBarHidden = false
+            let navController = UINavigationController(rootViewController: identifier)
+            self.present(navController, animated: true, completion: nil)
             
         }
         alert.addAction(actionButton)
