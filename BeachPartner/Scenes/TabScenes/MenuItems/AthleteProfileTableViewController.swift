@@ -144,13 +144,13 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userName: UILabel!
-    
     var activeTextField: UITextField?
     var userData = AccountRespModel()
     var videoUrl = ""
     var imageUrl = ""
     var movieData: NSData?
     
+    var imagePickerclicked = false
     var editclicked = false
     var isBasicInformation: Bool!
     //    let imagepickerController = UIImagePickerController()
@@ -216,8 +216,32 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         
         
     }
-    override func viewWillAppear(_ animated: Bool) {
+    @objc func didTapDismissButton() {
         
+        if self.editclicked{
+            let alert = UIAlertController(title: "Are you sure you want to discard this changes?", message: "You cannot undo this action", preferredStyle: .alert)
+            let actionButton = UIAlertAction(title: "Save", style: .cancel) { (action) in
+                let image = UIImage(named: "edit_btn_1x") as UIImage?
+                self.editProfileBtn.setImage(image, for: .normal)
+                self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
+                self.saveData()
+                self.dismiss(animated: true, completion: nil)
+            }
+            let cancelButton = UIAlertAction(title: "Discard", style: .default) { (action) in
+                self.dismiss(animated: true, completion: nil)
+            }
+            alert.addAction(actionButton)
+            alert.addAction(cancelButton)
+            self.present(alert, animated: true, completion: nil)
+        }
+        else{
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        let backImage = UIImage(named:"back_58")
+        let dismissButton = UIBarButtonItem(image: backImage, style: .done, target: self, action: #selector(didTapDismissButton))
+        self.navigationItem.leftBarButtonItem = dismissButton
         self.navigationController!.navigationBar.topItem!.title = "My Profile"
         self.addToplistBtn.isHidden = true
         self.delTop1.isHidden = true
@@ -636,50 +660,27 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             self.delTop2.isUserInteractionEnabled = true
             self.tableView.reloadData()
         }
-        else {
-            self.topFinishesAddBtn.isHidden = true
-            self.addToplistBtn.isHidden = true
-            self.delTop1.isHidden = true
-            self.delTop2.isHidden = true
-            let image = UIImage(named: "edit_btn_1x") as UIImage?
-            editProfileBtn.setImage(image, for: .normal)
-            self.editUserImageBtn.isHidden = true
-            self.editUserImageBtn.isUserInteractionEnabled = false
-            editclicked = false
-            self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
-            self.editVideoBtn.isHidden = true
-            self.editVideoBtn.isUserInteractionEnabled = false
-            self.addToplistBtn.isUserInteractionEnabled = false
-            self.delTop1.isUserInteractionEnabled = false
-            self.delTop2.isUserInteractionEnabled = false
-            self.tableView.reloadData()
-        }
-    }
-    @IBAction func editProfileTxtBtnClicked(_ sender: Any) {
-        
-//        if (self.editUserImageBtn.isHidden) {
-//            self.editUserImageBtn.isHidden = false
-//            self.editUserImageBtn.isUserInteractionEnabled = true
-//            editclicked = true
-//            self.editVideoBtn.isHidden = false
-//            self.addToplistBtn.isUserInteractionEnabled = true
-//            self.delTop1.isUserInteractionEnabled = true
-//            self.delTop2.isUserInteractionEnabled = true
-//            self.editVideoBtn.isUserInteractionEnabled = true
-//
-//            self.tableView.reloadData()
-//        }
 //        else {
+//            self.topFinishesAddBtn.isHidden = true
+//            self.addToplistBtn.isHidden = true
+//            self.delTop1.isHidden = true
+//            self.delTop2.isHidden = true
+//            let image = UIImage(named: "edit_btn_1x") as UIImage?
+//            editProfileBtn.setImage(image, for: .normal)
 //            self.editUserImageBtn.isHidden = true
 //            self.editUserImageBtn.isUserInteractionEnabled = false
 //            editclicked = false
+//            self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
 //            self.editVideoBtn.isHidden = true
+//            self.editVideoBtn.isUserInteractionEnabled = false
 //            self.addToplistBtn.isUserInteractionEnabled = false
 //            self.delTop1.isUserInteractionEnabled = false
 //            self.delTop2.isUserInteractionEnabled = false
-//            self.editVideoBtn.isUserInteractionEnabled = false
 //            self.tableView.reloadData()
 //        }
+    }
+    @IBAction func editProfileTxtBtnClicked(_ sender: Any) {
+        self.editProfileTxtBtn.isUserInteractionEnabled = false
     }
     
     
@@ -885,7 +886,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     }
     
     fileprivate func showImagePicker(sourceType: UIImagePickerControllerSourceType) {
-        
+        self.imagePickerclicked = true
         imagePickerController.sourceType = sourceType
         imagePickerController.modalPresentationStyle =
             (sourceType == UIImagePickerControllerSourceType.camera) ?
@@ -1184,7 +1185,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     
     func updateUserInfo(){
         
-        ActivityIndicatorView.show("Loading...")
+        ActivityIndicatorView.show("Saving...")
         
         APIManager.callServer.updateUserDetails(userData: self.userData, sucessResult: { (responseModel) in
             
@@ -1216,6 +1217,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
                     self.loadDataToUi(accResponseModel: accRespModel)
                     
                 self.tableView.reloadData()
+                    
                 }
             }else{
                 
@@ -1410,7 +1412,8 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     // MARK: - UIImagePickerControllerDelegate
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.clear], for: .normal)
+            
+            self.imagePickerclicked = false;        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.clear], for: .normal)
       
         
         var videoUrlValue: NSURL? = nil
@@ -1549,12 +1552,17 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             guard let `self` = self else {
                 return
             }
-            let image = UIImage(named: "edit_btn_1x") as UIImage?
+
+            self.addToplistBtn.isUserInteractionEnabled = true
+            self.delTop1.isUserInteractionEnabled = true
+            self.delTop2.isUserInteractionEnabled = true
+            let image = UIImage(named: "edit_btn_active_1x") as UIImage?
             self.editProfileBtn.setImage(image, for: .normal)
             self.editclicked = true
             self.addToplistBtn.isHidden = true
-            self.delTop1.isHidden = true
-            self.delTop2.isHidden = true
+            self.delTop1.isHidden = (self.delTop1 != nil)
+            self.delTop2.isHidden = (self.delTop2 != nil)
+            print(self.delTop2)
             self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
             self.editUserImageBtn.isHidden = false
             self.editUserImageBtn.isUserInteractionEnabled = true
@@ -1568,11 +1576,20 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
           UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.clear], for: .normal)
         dismiss(animated: true, completion: {
             // Done cancel dismiss of image picker.
-            self.editUserImageBtn.isHidden = true
-            self.editUserImageBtn.isUserInteractionEnabled = false
-            self.editVideoBtn.isHidden = true
-            self.editVideoBtn.isUserInteractionEnabled = false
+            self.addToplistBtn.isUserInteractionEnabled = true
+            self.delTop1.isUserInteractionEnabled = true
+            self.delTop2.isUserInteractionEnabled = true
+            let image = UIImage(named: "edit_btn_active_1x") as UIImage?
+            self.editProfileBtn.setImage(image, for: .normal)
+            self.editclicked = true
+            self.addToplistBtn.isHidden = true
+            self.delTop1.isHidden = false
+            self.delTop2.isHidden = false
             self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
+            self.editUserImageBtn.isHidden = false
+            self.editUserImageBtn.isUserInteractionEnabled = true
+            self.editVideoBtn.isHidden = false
+            self.editVideoBtn.isUserInteractionEnabled = true
         })
     }
     func loadLocations(){

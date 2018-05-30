@@ -40,11 +40,12 @@ class BeachPartnerViewController: UIViewController {
                 let vc = storyboard.instantiateViewController(withIdentifier: "profilevc1") as! CoachProfileTableViewController
                 let vc1 = storyboard.instantiateViewController(withIdentifier: "profilevc") as! AthleteProfileTableViewController
                 let identifier = UserDefaults.standard.string(forKey: "userType") == "Athlete" ? vc1 : vc
-                self.navigationController?.pushViewController(identifier, animated: true)
-                self.tabBarController?.tabBar.isHidden = false
-                self.navigationController!.navigationBar.topItem!.title = ""
-                self.navigationController?.isNavigationBarHidden = false
-                
+                let navController = UINavigationController(rootViewController: identifier)
+                self.present(navController, animated: true, completion: nil)
+//                self.navigationController?.pushViewController(identifier, animated: true)
+//                self.tabBarController?.tabBar.isHidden = false
+//                self.navigationController!.navigationBar.topItem!.title = ""
+//                self.navigationController?.isNavigationBarHidden = false
             }
             else if(item == "Logout"){
                 
@@ -67,10 +68,12 @@ class BeachPartnerViewController: UIViewController {
                 let storyboard : UIStoryboard = UIStoryboard(name: "TabBar", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier: "ComponentSettings") as! SettingsViewController
                 controller.SettingsType = "profileSettings"
-                self.tabBarController?.tabBar.isHidden = false
-                self.navigationController!.navigationBar.topItem!.title = ""
-                self.navigationController?.isNavigationBarHidden = false
-                self.navigationController?.pushViewController(controller, animated: true)
+                let navController = UINavigationController(rootViewController: controller)
+//                self.tabBarController?.tabBar.isHidden = false
+//                self.tabBarController!.navigationBar.topItem!.title = ""
+//                self.tabBarController?.isNavigationBarHidden = false
+                self.present(navController, animated: true, completion: nil)
+                
             }
             else if (item == "Help"){
                 let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
