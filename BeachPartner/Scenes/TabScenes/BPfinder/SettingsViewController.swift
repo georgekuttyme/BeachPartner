@@ -113,12 +113,18 @@ class SettingsViewController: UIViewController {
             }
         }
     }
+    @objc func didTapDismissButton() {
+        self.dismiss(animated:true,completion:nil)
+    }
 
     weak var bpDelegate: BpFinderDelegate?
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        self.tabBarController?.tabBar.isHidden = false
+        let backImage = UIImage(named:"back_58")
+        let dismissButton = UIBarButtonItem(image: backImage, style: .done, target: self, action: #selector(didTapDismissButton))
+        self.navigationItem.leftBarButtonItem = dismissButton
+//        self.tabBarController?.tabBar.isHidden = false
 //self.navigationController!.navigationBar.topItem!.title = ""
 //        self.navigationItem.title = "Settings"
 //        self.navigationItem.hidesBackButton = true
