@@ -32,8 +32,8 @@ class EventDetailsViewController: BeachPartnerViewController {
     
     @IBOutlet weak var goingButton: UIButton!
     @IBOutlet weak var notGoingButton: UIButton!
-    
-    
+    @IBOutlet weak var eventTeamSizeLabel: UILabel!
+     @IBOutlet weak var teamSizeLabel: UILabel!
     var event: GetEventRespModel?
     
     var eventId: Int?
@@ -127,6 +127,7 @@ class EventDetailsViewController: BeachPartnerViewController {
         eventLocationLabel.text = event.eventLocation
         eventVenueLabel.text = event.eventVenue
         eventAdminLabel.text = event.eventAdmin
+//        teamSizeLabel.text = 
         
         eventStartDateLabel.text = dateStringFromTimeInterval(interval: event.eventStartDate)
         eventEndDateLabel.text = dateStringFromTimeInterval(interval: event.eventEndDate)

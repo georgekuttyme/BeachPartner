@@ -576,7 +576,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Afh-jT-ayD">
-                                                        <rect key="frame" x="8" y="66" width="359" height="176"/>
+                                                        <rect key="frame" x="8" y="66" width="359" height="201"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d2h-VU-fi4">
                                                                 <rect key="frame" x="8" y="8" width="98" height="35"/>
@@ -593,37 +593,51 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Wheaton Community Center" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5e-9A-A0m">
-                                                                <rect key="frame" x="166" y="58" width="178" height="51"/>
+                                                                <rect key="frame" x="166" y="52" width="178" height="51"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event Admin Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O3H-Gx-OdM">
-                                                                <rect key="frame" x="8" y="124" width="168" height="35"/>
+                                                                <rect key="frame" x="8" y="114" width="168" height="35"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                 <color key="textColor" red="0.1137254902" green="0.18039215689999999" blue="0.4823529412" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Venue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tJh-hJ-RkO">
-                                                                <rect key="frame" x="8" y="66" width="98" height="35"/>
+                                                                <rect key="frame" x="8" y="64" width="98" height="35"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                 <color key="textColor" red="0.1137254902" green="0.18039215689999999" blue="0.4823529412" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Adam Joan" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mqt-VZ-hZJ">
-                                                                <rect key="frame" x="166" y="124" width="178" height="35"/>
+                                                                <rect key="frame" x="166" y="114" width="178" height="35"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vah-sZ-e0D">
+                                                                <rect key="frame" x="166" y="157" width="156" height="29"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Team Size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JdP-RM-vh1">
+                                                                <rect key="frame" x="8" y="157" width="124" height="36"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                <color key="textColor" red="0.062745098040000002" green="0.10980392160000001" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
                                                         </subviews>
                                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="176" id="JyK-dy-Geu"/>
+                                                            <constraint firstAttribute="height" constant="201" id="JyK-dy-Geu"/>
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -990,6 +1004,7 @@
                         <outlet property="eventLocationLabel" destination="MJu-Y7-BSB" id="l7F-bd-jct"/>
                         <outlet property="eventNameLabel" destination="9fB-21-OnI" id="Sxw-sz-ZyB"/>
                         <outlet property="eventStartDateLabel" destination="9US-te-Tmv" id="48p-Lk-0f4"/>
+                        <outlet property="eventTeamSizeLabel" destination="JdP-RM-vh1" id="HIh-oV-Seq"/>
                         <outlet property="eventVenueLabel" destination="b5e-9A-A0m" id="pYD-an-6zD"/>
                         <outlet property="generalEventDetailsLabel" destination="6fB-dG-YUU" id="bjA-nU-bCq"/>
                         <outlet property="generalEventDetailsView" destination="2lK-Qz-Jx4" id="vhx-4f-res"/>
@@ -999,13 +1014,14 @@
                         <outlet property="regEndDateLabel" destination="nhf-It-h6s" id="fL7-gt-bZJ"/>
                         <outlet property="regStartDateLabel" destination="e6q-3c-ye6" id="wq8-Sg-SX1"/>
                         <outlet property="registerButton" destination="SxD-iO-6Ge" id="7Zz-cZ-eFz"/>
+                        <outlet property="teamSizeLabel" destination="vah-sZ-e0D" id="YY8-Ku-Ptk"/>
                         <segue destination="84T-Ho-JQc" kind="show" identifier="editprofilesegue" id="LIp-gz-T4M"/>
                         <segue destination="J5f-di-aeG" kind="show" identifier="settingssegue" id="c8u-gq-7eI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yak-Tv-KGM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3732" y="2917"/>
+            <point key="canvasLocation" x="-3732.1875" y="2916.5492957746478"/>
         </scene>
         <!--Event Register View Controller-->
         <scene sceneID="ld2-se-ol7">
@@ -2548,7 +2564,7 @@
         <image name="start_date v2" width="429" height="125"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="BOE-1D-ulU"/>
-        <segue reference="CYk-94-qSb"/>
+        <segue reference="c8u-gq-7eI"/>
+        <segue reference="LIp-gz-T4M"/>
     </inferredMetricsTieBreakers>
 </document>
