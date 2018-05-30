@@ -21,6 +21,7 @@ class EventInvitationListViewController: UIViewController, UITableViewDataSource
     @IBOutlet weak var eventLocationLabel: UILabel!
     @IBOutlet weak var eventVenueLabel: UILabel!
     @IBOutlet weak var eventAdminLabel: UILabel!
+    @IBOutlet weak var eventTeamSize: UILabel!
     
 //    var event: GetEventRespModel?
     var eventInvitation: GetEventInvitationRespModel?
@@ -59,7 +60,7 @@ class EventInvitationListViewController: UIViewController, UITableViewDataSource
         eventLocationLabel.text = event.eventLocation
         eventVenueLabel.text = event.eventVenue
         eventAdminLabel.text = event.eventAdmin
-        
+        eventTeamSize.text = String(event.teamSize)
         eventStartDateLabel.text = dateStringFromTimeInterval(interval: event.eventStartDate)
         eventEndDateLabel.text = dateStringFromTimeInterval(interval: event.eventEndDate)
         

@@ -16,7 +16,7 @@ class MyCalEventDetailsViewController: UIViewController {
     @IBOutlet weak var eventLocationLabel: UILabel!
     @IBOutlet weak var eventVenueLabel: UILabel!
     @IBOutlet weak var eventAdminLabel: UILabel!
-    
+    @IBOutlet weak var eventTeamSize: UILabel!
     @IBOutlet weak var eventStartDateLabel: UILabel!
     @IBOutlet weak var eventEndDateLabel: UILabel!
     @IBOutlet weak var partnerListHeaderLabel: UILabel!
@@ -57,6 +57,10 @@ class MyCalEventDetailsViewController: UIViewController {
             eventLocationLabel.text = self.eventInvitation?.eventLocation
             eventVenueLabel.text = self.eventInvitation?.eventVenue
             eventAdminLabel.text = self.eventInvitation?.eventAdmin
+            if let teamCount = self.eventInvitation?.teamSize {
+                eventTeamSize.text = String(teamCount)
+            }
+            print(String((self.eventInvitation?.teamSize) ?? 0),"---String(event.teamSize)")
             if (self.eventInvitation?.eventStartDate) != nil {
                 eventStartDateLabel.text = dateStringFromTimeInterval(interval: (self.eventInvitation?.eventStartDate)!)
             }
@@ -71,7 +75,8 @@ class MyCalEventDetailsViewController: UIViewController {
             eventLocationLabel.text = event.eventLocation
             eventVenueLabel.text = event.eventVenue
             eventAdminLabel.text = event.eventAdmin
-            
+            eventTeamSize.text = String(event.teamSize)
+            print(String(event.teamSize),"String(event.teamSize)")
             eventStartDateLabel.text = dateStringFromTimeInterval(interval: event.eventStartDate)
             eventEndDateLabel.text = dateStringFromTimeInterval(interval: event.eventEndDate)
         }

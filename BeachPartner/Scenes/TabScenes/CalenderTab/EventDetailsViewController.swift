@@ -127,7 +127,7 @@ class EventDetailsViewController: BeachPartnerViewController {
         eventLocationLabel.text = event.eventLocation
         eventVenueLabel.text = event.eventVenue
         eventAdminLabel.text = event.eventAdmin
-//        teamSizeLabel.text = 
+        teamSizeLabel.text = String(event.teamSize)
         
         eventStartDateLabel.text = dateStringFromTimeInterval(interval: event.eventStartDate)
         eventEndDateLabel.text = dateStringFromTimeInterval(interval: event.eventEndDate)
@@ -190,7 +190,7 @@ class EventDetailsViewController: BeachPartnerViewController {
         eventLocationLabel.text = eventInvitation.eventLocation
         eventVenueLabel.text = eventInvitation.eventVenue
         eventAdminLabel.text = eventInvitation.eventAdmin
-        
+        teamSizeLabel.text = String(eventInvitation.teamSize)
         eventStartDateLabel.text = dateStringFromTimeInterval(interval: eventInvitation.eventStartDate)
         eventEndDateLabel.text = dateStringFromTimeInterval(interval: eventInvitation.eventEndDate)
         regStartDateLabel.text = dateStringFromTimeInterval(interval: eventInvitation.eventRegistrationStartDate)
