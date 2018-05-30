@@ -135,6 +135,9 @@
 		FF560C0C2096F83300D3BA80 /* UpdateNoteRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF560C0B2096F83300D3BA80 /* UpdateNoteRespModel.swift */; };
 		FFABE2B920ADC7080029C3A0 /* MyCalEventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFABE2B820ADC7080029C3A0 /* MyCalEventDetailsViewController.swift */; };
 		FFCE759220AAFBF2007C0CFD /* GetEventInvitationRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCE759120AAFBF2007C0CFD /* GetEventInvitationRespModel.swift */; };
+		FFEBEB5B20BE672100521041 /* Subscription.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFEBEB5A20BE672100521041 /* Subscription.storyboard */; };
+		FFEBEB5E20BE6F2900521041 /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFEBEB5D20BE6F2900521041 /* SubscriptionViewController.swift */; };
+		FFEBEB6020BEA79A00521041 /* SubscriptionTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFEBEB5F20BEA79A00521041 /* SubscriptionTypeViewController.swift */; };
 		FFFDDA1720AEFE0C00984CB8 /* EventRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFDDA1620AEFE0C00984CB8 /* EventRegisterViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -273,6 +276,9 @@
 		FF560C0B2096F83300D3BA80 /* UpdateNoteRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNoteRespModel.swift; sourceTree = "<group>"; };
 		FFABE2B820ADC7080029C3A0 /* MyCalEventDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCalEventDetailsViewController.swift; sourceTree = "<group>"; };
 		FFCE759120AAFBF2007C0CFD /* GetEventInvitationRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventInvitationRespModel.swift; sourceTree = "<group>"; };
+		FFEBEB5A20BE672100521041 /* Subscription.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Subscription.storyboard; sourceTree = "<group>"; };
+		FFEBEB5D20BE6F2900521041 /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
+		FFEBEB5F20BEA79A00521041 /* SubscriptionTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionTypeViewController.swift; sourceTree = "<group>"; };
 		FFFDDA1620AEFE0C00984CB8 /* EventRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRegisterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -695,6 +701,7 @@
 				3BE40F6A203EB05600EA7DFC /* AppDelegate */,
 				3BE40F69203EB04500EA7DFC /* APIManagement */,
 				3BE40F68203EB03600EA7DFC /* Scenes */,
+				FFEBEB5C20BE6EB900521041 /* SubscriptionScenes */,
 				3BE40F67203EB02500EA7DFC /* Extensions */,
 				3BE40F57203EAEC100EA7DFC /* ViewController.swift */,
 				3BE40F59203EAEC100EA7DFC /* Main.storyboard */,
@@ -833,6 +840,7 @@
 				3B5643F02048687B00168B34 /* TabBar.storyboard */,
 				3BF0B1B5205BBE4D0043CFB2 /* ConnectionsTabBar.storyboard */,
 				3BC8F90E205B892E0086333E /* CalenderTab.storyboard */,
+				FFEBEB5A20BE672100521041 /* Subscription.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -867,6 +875,15 @@
 				D69A1980207388F100497B7C /* HighFiveViewController.swift */,
 			);
 			path = ChatTab;
+			sourceTree = "<group>";
+		};
+		FFEBEB5C20BE6EB900521041 /* SubscriptionScenes */ = {
+			isa = PBXGroup;
+			children = (
+				FFEBEB5D20BE6F2900521041 /* SubscriptionViewController.swift */,
+				FFEBEB5F20BEA79A00521041 /* SubscriptionTypeViewController.swift */,
+			);
+			path = SubscriptionScenes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -951,6 +968,7 @@
 				3BE40F5B203EAEC100EA7DFC /* Main.storyboard in Resources */,
 				3BE40F74203EB11D00EA7DFC /* Login.storyboard in Resources */,
 				3B5643F12048687B00168B34 /* TabBar.storyboard in Resources */,
+				FFEBEB5B20BE672100521041 /* Subscription.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1120,6 +1138,7 @@
 				3BBDA13F20736145007CE1F3 /* RegResponseModel.swift in Sources */,
 				3B60278F2049538B006B108A /* BPCardsVC.swift in Sources */,
 				5E1648832095F1A400983043 /* ConnectedUsersCountModel.swift in Sources */,
+				FFEBEB5E20BE6F2900521041 /* SubscriptionViewController.swift in Sources */,
 				3B689A1D20493DA20075128E /* MessageCollectionViewCell.swift in Sources */,
 				3BAD587B2068CD7B0076DFD8 /* AuthModels.swift in Sources */,
 				3BAD58792068CD220076DFD8 /* GeneralModels.swift in Sources */,
@@ -1140,6 +1159,7 @@
 				3BC8F909205AE6450086333E /* PopUpParentDelegate.swift in Sources */,
 				3B0DEE9D206D0A1100686609 /* DataModel.swift in Sources */,
 				3BC8F905205AE4DE0086333E /* PopUpParentDetailsViewController.swift in Sources */,
+				FFEBEB6020BEA79A00521041 /* SubscriptionTypeViewController.swift in Sources */,
 				3BAD58712068CC490076DFD8 /* APIClient.swift in Sources */,
 				3B0DEE0B206B5EE600686609 /* UIView+IBInspectable.swift in Sources */,
 				3BC8F8FF205ACB130086333E /* RegisterViewController.swift in Sources */,
