@@ -447,7 +447,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             self.genderBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
 //            self.genderBtn.setTitleColor(UIColor.blue, for: .normal)
         }
-        self.genderBtn.setTitle("Please Select", for: UIControlState.normal)
+        self.genderBtn.setTitle("", for: UIControlState.normal)
         self.genderdropDown.selectRow(0)
         
         
@@ -460,7 +460,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             self.experienceBtn.setTitle(item, for: UIControlState.normal)
             self.experienceBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
         }
-        self.experienceBtn.setTitle("Please Select", for: UIControlState.normal)
+        self.experienceBtn.setTitle("", for: UIControlState.normal)
         self.experiencedropDown.selectRow(0)
         
         //MARK: CourtSidePreference DropDown
@@ -473,7 +473,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             self.courtSidePreferenceBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
 //            self.courtSidePreferenceBtn.setTitleColor(UIColor.blue, for: .normal)
         }
-        self.courtSidePreferenceBtn.setTitle("Please Select", for: UIControlState.normal)
+        self.courtSidePreferenceBtn.setTitle("", for: UIControlState.normal)
         self.courtSidePreferencedropDown.selectRow(0)
         
         
@@ -487,7 +487,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             self.positionBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
 //            self.positionBtn.setTitleColor(UIColor.blue, for: .normal)
         }
-        self.positionBtn.setTitle("Please Select", for: UIControlState.normal)
+        self.positionBtn.setTitle("", for: UIControlState.normal)
         self.positiondropDown.selectRow(0)
         
         
@@ -501,7 +501,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             self.tournamentLevelInterestBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
 //            self.tournamentLevelInterestBtn.setTitleColor(UIColor.blue, for: .normal)
         }
-        self.tournamentLevelInterestBtn.setTitle("Please Select", for: UIControlState.normal)
+        self.tournamentLevelInterestBtn.setTitle("", for: UIControlState.normal)
         self.tournamentLevelInterestdropDown.selectRow(0)
         
         //MARK: HighestTourRatingEarned DropDown
@@ -514,7 +514,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             self.highestTourRatingEarnedBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
 //            self.highestTourRatingEarnedBtn.setTitleColor(UIColor.blue, for: .normal)
         }
-        self.highestTourRatingEarnedBtn.setTitle("Please Select", for: UIControlState.normal)
+        self.highestTourRatingEarnedBtn.setTitle("", for: UIControlState.normal)
         self.highestTourRatingEarneddropDown.selectRow(0)
         
         //MARK: Height DropDown
@@ -527,7 +527,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             self.heightBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
 
         }
-        self.heightBtn.setTitle("Please Select", for: UIControlState.normal)
+        self.heightBtn.setTitle("", for: UIControlState.normal)
         self.heightdropDown.selectRow(0)
         
         //MARK: State DropDown
@@ -556,7 +556,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             self.willingnessToTravelBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
 
         }
-        self.willingnessToTravelBtn.setTitle("Please Select", for: UIControlState.normal)
+        self.willingnessToTravelBtn.setTitle("", for: UIControlState.normal)
         self.willingnessToTraveldropDown.selectRow(0)
         
         self.firstNameTxtFld.delegate = self
@@ -777,18 +777,46 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             }
         }
         
-        self.userData.userProfile?.experience = (experienceBtn.titleLabel?.text) ?? ""
-        self.userData.userProfile?.courtSidePreference = (courtSidePreferenceBtn.titleLabel?.text) ?? ""
-        self.userData.userProfile?.position = (positionBtn.titleLabel?.text) ?? ""
-        self.userData.userProfile?.height = String((heightBtn.titleLabel?.text) ?? "")
-//        self.userData.userProfile?.height = Int(heightTxtFld.text! )!
-        self.userData.userProfile?.tournamentLevelInterest = (tournamentLevelInterestBtn.titleLabel?.text) ?? ""
+        if let value = experienceBtn.titleLabel?.text, value != "Please Select" {
+            self.userData.userProfile?.experience = value
+        }
+        else { self.userData.userProfile?.experience = "" }
+        
+        if let value = courtSidePreferenceBtn.titleLabel?.text, value != "Please Select" {
+            self.userData.userProfile?.courtSidePreference = value
+        }
+        else { self.userData.userProfile?.courtSidePreference = "" }
+        
+        if let value = positionBtn.titleLabel?.text, value != "Please Select" {
+            self.userData.userProfile?.position = value
+        }
+        else { self.userData.userProfile?.position = "" }
+        
+        if let value = heightBtn.titleLabel?.text, value != "Please Select" {
+            self.userData.userProfile?.height = String(value)
+        }
+        else { self.userData.userProfile?.height = "" }
+        
+        if let value = tournamentLevelInterestBtn.titleLabel?.text, value != "Please Select" {
+            self.userData.userProfile?.tournamentLevelInterest = value
+        }
+        else { self.userData.userProfile?.tournamentLevelInterest = "" }
+        
+        if let value = highestTourRatingEarnedBtn.titleLabel?.text, value != "Please Select" {
+            self.userData.userProfile?.highestTourRatingEarned = value
+        }
+        else { self.userData.userProfile?.highestTourRatingEarned = "" }
+        
+        if let value = willingnessToTravelBtn.titleLabel?.text, value != "Please Select" {
+            self.userData.userProfile?.willingToTravel = value
+        }
+        else { self.userData.userProfile?.willingToTravel = "" }
+        
+        
         self.userData.userProfile?.toursPlayedIn = toursPlayedTxtFld.text!
-        self.userData.userProfile?.highestTourRatingEarned = (highestTourRatingEarnedBtn.titleLabel?.text) ?? ""
-        self.userData.userProfile?.cbvaPlayerNumber = cbvaPlayerNumberTxtFld.text! 
+        self.userData.userProfile?.cbvaPlayerNumber = cbvaPlayerNumberTxtFld.text!
         self.userData.userProfile?.cbvaFirstName = cbvaFirstNameTxtFld.text!
         self.userData.userProfile?.cbvaLastName = cbvaLastNameTxtFld.text!
-        self.userData.userProfile?.willingToTravel = (willingnessToTravelBtn.titleLabel?.text) ?? ""
         self.userData.userProfile?.highSchoolAttended = highSchoolAttendedTxtFld.text!
         self.userData.userProfile?.indoorClubPlayed = indoorClubPlayedAtTxtFld.text!
         self.userData.userProfile?.collageClub = collegeClubTxtFld.text!
