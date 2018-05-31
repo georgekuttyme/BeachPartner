@@ -82,6 +82,9 @@ class BeachPartnerViewController: UIViewController {
             }
             else if (item == "Subscription"){
                 //Subscription
+                let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "SubscriptionTypeViewController") as! SubscriptionTypeViewController
+                self.present(vc, animated: true, completion: nil)
             }
             else {
                 let storyboard = UIStoryboard(name: "TabBar", bundle: nil)

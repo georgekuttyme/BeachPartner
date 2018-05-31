@@ -127,6 +127,7 @@
 		D69A1981207388F100497B7C /* HighFiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69A1980207388F100497B7C /* HighFiveViewController.swift */; };
 		FF07524120AC77D70015866D /* PartnerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF07524020AC77D70015866D /* PartnerListViewController.swift */; };
 		FF07524320AC79460015866D /* PartnerListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF07524220AC79450015866D /* PartnerListCell.swift */; };
+		FF32756A20BFE355009345B1 /* GetSubscriptionPlanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF32756920BFE355009345B1 /* GetSubscriptionPlanModel.swift */; };
 		FF38234420A9CC4200F403BF /* EventInvitationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38234320A9CC4200F403BF /* EventInvitationListViewController.swift */; };
 		FF38234620A9CD7400F403BF /* EventInvitationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38234520A9CD7400F403BF /* EventInvitationCell.swift */; };
 		FF3FB96420A4546600B34CA0 /* GetEventRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3FB96320A4546600B34CA0 /* GetEventRespModel.swift */; };
@@ -268,6 +269,7 @@
 		D69A1980207388F100497B7C /* HighFiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighFiveViewController.swift; sourceTree = "<group>"; };
 		FF07524020AC77D70015866D /* PartnerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerListViewController.swift; sourceTree = "<group>"; };
 		FF07524220AC79450015866D /* PartnerListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerListCell.swift; sourceTree = "<group>"; };
+		FF32756920BFE355009345B1 /* GetSubscriptionPlanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSubscriptionPlanModel.swift; sourceTree = "<group>"; };
 		FF38234320A9CC4200F403BF /* EventInvitationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInvitationListViewController.swift; sourceTree = "<group>"; };
 		FF38234520A9CD7400F403BF /* EventInvitationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInvitationCell.swift; sourceTree = "<group>"; };
 		FF3FB96320A4546600B34CA0 /* GetEventRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventRespModel.swift; sourceTree = "<group>"; };
@@ -629,6 +631,7 @@
 				FF4EDC3E20AC077200BC3ACD /* GetTournamentRequestRespModel.swift */,
 				8D782FC020B2B153004CA193 /* GetUpcomingTournamentsRespModel.swift */,
 				8D4B786420ABFE430025F7F7 /* GetAllUserEventsRespModel.swift */,
+				FF32756920BFE355009345B1 /* GetSubscriptionPlanModel.swift */,
 			);
 			path = AuthModels;
 			sourceTree = "<group>";
@@ -1182,6 +1185,7 @@
 				8427705F2093594B0056CBF6 /* HelpViewController.swift in Sources */,
 				3B1B70592063780D00C3FB57 /* HomeTabViewController.swift in Sources */,
 				3BF0B1BA205BC1000043CFB2 /* CustomCell.swift in Sources */,
+				FF32756A20BFE355009345B1 /* GetSubscriptionPlanModel.swift in Sources */,
 				3B0DEE92206D095500686609 /* CardView.swift in Sources */,
 				3B60278B20494FA3006B108A /* SettingsViewController.swift in Sources */,
 				5EF313AD209506F4007DA661 /* ForgotPassModel.swift in Sources */,

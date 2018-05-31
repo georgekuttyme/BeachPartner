@@ -15,51 +15,59 @@ class SubscriptionTypeViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var currentPlan: SubscriptionType?
-    var selectedPlan: SubscriptionType?
+    var subscriptionPlans = [SubscriptionPlanModel]()
     
-    var selectedIndex = 0
-    
+    var selectedIndex = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        selectedPlan = currentPlan
+        getAllSubscriptionPlans()
+    }
+    
+    private func getAllSubscriptionPlans() {
+        
+        ActivityIndicatorView.show("Loading...")
+        
+        APIManager.callServer.getAllSubscriptionPlans(sucessResult: { (responseModel) in
+            
+            ActivityIndicatorView.hiding()
+            
+            guard let subscriptionPlansModel = responseModel as? GetSubscriptionPlansRespModelArray else {
+                print("Rep model does not match")
+                return
+            }
+            self.subscriptionPlans = subscriptionPlansModel.subscriptionPlans
+            self.tableView.reloadData()
+            
+        }) { (errorMessage) in
+            ActivityIndicatorView.hiding()
+            guard let errorString  = errorMessage else {
+                return
+            }
+            self.alert(message: errorString)
+        }
     }
     
     @IBAction func didTapCancelButton(_ sender: Any) {
-        
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func didTapProceedButton(_ sender: UIButton) {
+        //Payments
+    }
+    
+    @objc private func showPlanDetails(sender: UIButton) {
         
         let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "SubscriptionViewController") as! SubscriptionViewController
-        
-        vc.subscriptionType = selectedPlan?.rawValue
-        
+        vc.subscriptionPlan = subscriptionPlans[sender.tag]
         vc.modalTransitionStyle = .crossDissolve
         self.present(vc, animated: true, completion: nil)
     }
     
     @objc private func selectPlan(sender: UIButton) {
-        
         selectedIndex = sender.tag
-        
-        switch selectedIndex {
-            
-        case 0:
-            selectedPlan = SubscriptionType.Free
-        case 1:
-            selectedPlan = SubscriptionType.Lite
-        case 2:
-            selectedPlan = SubscriptionType.Standard
-        case 3:
-            selectedPlan = SubscriptionType.Recruiting
-        default:
-            selectedPlan = nil
-        }
         tableView.reloadData()
     }
     
@@ -68,7 +76,7 @@ class SubscriptionTypeViewController: UIViewController {
 extension SubscriptionTypeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return subscriptionPlans.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -78,30 +86,19 @@ extension SubscriptionTypeViewController: UITableViewDataSource, UITableViewDele
         }
         cell.selectionStyle = .none
         
-        switch indexPath.row {
-        
-        case 0:
-            cell.subscriptionTypeLabel.text = SubscriptionType.Free.rawValue
-            cell.priceLabel.text = "$0.00 /month"
-        case 1:
-            cell.subscriptionTypeLabel.text = SubscriptionType.Lite.rawValue
-            cell.priceLabel.text = "$4.99 /month"
-        case 2:
-            cell.subscriptionTypeLabel.text = SubscriptionType.Standard.rawValue
-            cell.priceLabel.text = "$14.99 /month"
-        case 3:
-            cell.subscriptionTypeLabel.text = SubscriptionType.Recruiting.rawValue
-            cell.priceLabel.text = "$29.99 /month"
-        default:
-            cell.subscriptionTypeLabel.text = ""
-            cell.priceLabel.text = ""
-        }
+        let plan = subscriptionPlans[indexPath.row]
+        cell.subscriptionTypeLabel.text = plan.name
+        cell.priceLabel.text = "$\(plan.monthlycharge) /month"
+        cell.descriptionLabel.text = plan.description
         
         let image = (indexPath.row == selectedIndex) ? UIImage(named:"rb_active") : UIImage(named:"rb")
         cell.radioButton.setImage(image, for: .normal)
         
         cell.radioButton.tag = indexPath.row
         cell.radioButton.addTarget(self, action: #selector(selectPlan), for: .touchUpInside)
+        
+        cell.readmoreButton.tag = indexPath.row
+        cell.readmoreButton.addTarget(self, action: #selector(showPlanDetails), for: .touchUpInside)
         
         return cell
     }

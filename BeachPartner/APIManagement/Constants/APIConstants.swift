@@ -69,6 +69,8 @@ struct ApiMethods {
     static let sendPushnotification = "/fcm/send"
     static let updateAllUserDetails = "/users/update-all"
     
+    static let getSubscriptionPlans = "/payment/subscription-plans"
+    
     //    static let Login   = "/secure/Authentication/authenticate"
     static let findById   = "/secure/CustomerType/findById"
     static let contactsFindById   = "/secure/SingxContacts/findById"

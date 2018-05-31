@@ -26,105 +26,6 @@ enum SubscriptionType: String {
             return UIColor(red: 50.0/255.0, green: 140.0/255.0, blue: 160.0/255.0, alpha: 1.0)
         }
     }
-    
-    func price() -> String {
-        switch self {
-        case .Lite:
-            return "$4.99 /month"
-        case .Standard:
-            return "$14.99 /month"
-        case .Recruiting:
-            return "$29.99 /month"
-        default: // Free
-            return "$0.00 /month"
-        }
-    }
-    
-    func features() -> [(String, Bool)] {
-        
-        switch self {
-        case .Lite:
-            let array = [("Swipes", true),
-                         ("Swipe Visibility", true),
-                         ("High - Fives", true),
-                         ("Connections", true),
-                         ("Chat", true),
-                         ("Master calendar", true),
-                         ("My Calendar", true),
-                         ("My upcoming tournaments", true),
-                         ("Event Invitation", true),
-                         ("Event Search", true),
-                         ("Court notification", true),
-                         ("Partner requests", true),
-                         ("Blue BP profile boost", false),
-                         ("Visibility to players who \"like\" you", false),
-                         ("Visibility to coaches who \"like\" you", false),
-                         ("Passport search location change", false),
-                         ("Undo last swipe option", false)
-            ]
-            return array
-        case .Standard:
-            let array = [("Swipes", true),
-                         ("Swipe Visibility", true),
-                         ("High - Fives", true),
-                         ("Connections", true),
-                         ("Chat", true),
-                         ("Master calendar", true),
-                         ("My Calendar", true),
-                         ("My upcoming tournaments", true),
-                         ("Event Invitation", true),
-                         ("Event Search", true),
-                         ("Court notification", true),
-                         ("Partner requests", true),
-                         ("Blue BP profile boost", true),
-                         ("Visibility to players who \"like\" you", true),
-                         ("Visibility to coaches who \"like\" you", true),
-                         ("Passport search location change", false),
-                         ("Undo last swipe option", true)
-            ]
-            return array
-        case .Recruiting:
-            let array = [("Swipes", true),
-                         ("Swipe Visibility", true),
-                         ("High - Fives", true),
-                         ("Connections", true),
-                         ("Chat", true),
-                         ("Master calendar", true),
-                         ("My Calendar", true),
-                         ("My upcoming tournaments", true),
-                         ("Event Invitation", true),
-                         ("Event Search", true),
-                         ("Court notification", true),
-                         ("Partner requests", true),
-                         ("Blue BP profile boost", true),
-                         ("Visibility to players who \"like\" you", true),
-                         ("Visibility to coaches who \"like\" you", true),
-                         ("Passport search location change", true),
-                         ("Undo last swipe option", true)
-            ]
-            return array
-        default: // Free
-            let array = [("Swipes", true),
-                         ("Swipe Visibility", false),
-                         ("High - Fives", true),
-                         ("Connections", true),
-                         ("Chat", true),
-                         ("Master calendar", false),
-                         ("My Calendar", true),
-                         ("My upcoming tournaments", true),
-                         ("Event Invitation", true),
-                         ("Event Search", false),
-                         ("Court notification", true),
-                         ("Partner requests", true),
-                         ("Blue BP profile boost", false),
-                         ("Visibility to players who \"like\" you", false),
-                         ("Visibility to coaches who \"like\" you", false),
-                         ("Passport search location change", false),
-                         ("Undo last swipe option", false)
-            ]
-            return array
-        }
-    }
 }
 
 
@@ -141,61 +42,59 @@ class SubscriptionViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var actionButton: UIButton!
     
-    var subscriptionType: String?
+    var subscriptionPlan: SubscriptionPlanModel?
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if subscriptionType == nil {
-            subscriptionType = SubscriptionType.Free.rawValue
-        }
-        
         setupView()
+        loadData()
+        
         setupTableView()
     }
     
     private func setupView() {
         
-        guard let subscriptionType = subscriptionType else {
+        guard let subscriptionPlan = subscriptionPlan else {
             return
         }
         
-        
-        switch subscriptionType {
+        switch subscriptionPlan.name {
             
         case SubscriptionType.Lite.rawValue:
-            subscriptionTypeLabel.text = SubscriptionType.Lite.rawValue
             subscriptionTypeView.backgroundColor = SubscriptionType.Lite.color()
             subsciptionPriceBgView.borderColor = SubscriptionType.Lite.color()
             backButton.backgroundColor = SubscriptionType.Lite.color()
             actionButton.backgroundColor = SubscriptionType.Lite.color()
-            subscriptionPriceLabel.text =  SubscriptionType.Lite.price()
 
         case SubscriptionType.Standard.rawValue:
-            subscriptionTypeLabel.text = SubscriptionType.Standard.rawValue
             subscriptionTypeView.backgroundColor = SubscriptionType.Standard.color()
             subsciptionPriceBgView.borderColor = SubscriptionType.Standard.color()
             backButton.backgroundColor = SubscriptionType.Standard.color()
             actionButton.backgroundColor = SubscriptionType.Standard.color()
-            subscriptionPriceLabel.text =  SubscriptionType.Standard.price()
 
         case SubscriptionType.Recruiting.rawValue:
-            subscriptionTypeLabel.text = SubscriptionType.Recruiting.rawValue
             subscriptionTypeView.backgroundColor = SubscriptionType.Recruiting.color()
             subsciptionPriceBgView.borderColor = SubscriptionType.Recruiting.color()
             backButton.backgroundColor = SubscriptionType.Recruiting.color()
             actionButton.backgroundColor = SubscriptionType.Recruiting.color()
-            subscriptionPriceLabel.text =  SubscriptionType.Recruiting.price()
 
         default: // Free
-            subscriptionTypeLabel.text = SubscriptionType.Free.rawValue
             subscriptionTypeView.backgroundColor = SubscriptionType.Free.color()
             subsciptionPriceBgView.borderColor = SubscriptionType.Free.color()
             backButton.backgroundColor = SubscriptionType.Free.color()
             actionButton.backgroundColor = SubscriptionType.Free.color()
-            subscriptionPriceLabel.text =  SubscriptionType.Free.price()
         }
+    }
+    
+    private func loadData() {
+        
+        guard let subscriptionPlan = subscriptionPlan else {
+            return
+        }
+        subscriptionTypeLabel.text = subscriptionPlan.name
+        subscriptionPriceLabel.text = "$\(subscriptionPlan.monthlycharge) /month"
+        registrationFeeLabel.text = "$\(subscriptionPlan.registrationFee) one-time"
     }
     
     private func setupTableView() {
@@ -228,7 +127,8 @@ class SubscriptionViewController: UIViewController {
 extension SubscriptionViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let subscriptionType = subscriptionType, let count = SubscriptionType(rawValue: subscriptionType)?.features().count {
+
+        if let count = subscriptionPlan?.benefits.count {
             return count
         }
         return 0
@@ -241,13 +141,11 @@ extension SubscriptionViewController: UITableViewDataSource, UITableViewDelegate
         }
         cell.selectionStyle = .none
         
-        guard let subscriptionType = subscriptionType, let feature = SubscriptionType(rawValue: subscriptionType)?.features()[indexPath.row] else {
-            fatalError("subscriptionType not found")
-        }
-        
-        cell.featueNameLabel.text = feature.0
-        cell.additionalDescriptionLabel.text = ""
-        cell.statusImageView.image = (feature.1 == true) ? UIImage(named:"tick") : UIImage(named:"wrong")
+        let benefit = subscriptionPlan?.benefits[indexPath.row]
+
+        cell.featueNameLabel.text = benefit?.name
+        cell.additionalDescriptionLabel.text = benefit?.userNote
+        cell.statusImageView.image = (benefit?.status == "Limited" || benefit?.status == "Available") ? UIImage(named:"tick") : UIImage(named:"wrong")
         
         return cell
     }
