@@ -492,30 +492,30 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         
         
         //MARK: TournamentLevelInterest DropDown
-        self.tournamentLevelInterestdropDown.anchorView = self.tournamentLevelInterestBtn
-        self.tournamentLevelInterestdropDown.dataSource = ["Please Select","Novice/Social","Unrated","B","A","AA","AAA","Pro"]
-        self.tournamentLevelInterestdropDown.bottomOffset = CGPoint(x:10, y:10)
-        self.tournamentLevelInterestdropDown.width = 200
-        self.tournamentLevelInterestdropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.tournamentLevelInterestBtn.setTitle(item, for: UIControlState.normal)
-            self.tournamentLevelInterestBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
-//            self.tournamentLevelInterestBtn.setTitleColor(UIColor.blue, for: .normal)
-        }
-        self.tournamentLevelInterestBtn.setTitle("", for: UIControlState.normal)
-        self.tournamentLevelInterestdropDown.selectRow(0)
+//        self.tournamentLevelInterestdropDown.anchorView = self.tournamentLevelInterestBtn
+//        self.tournamentLevelInterestdropDown.dataSource = ["Please Select","Novice/Social","Unrated","B","A","AA","AAA","Pro"]
+//        self.tournamentLevelInterestdropDown.bottomOffset = CGPoint(x:10, y:10)
+//        self.tournamentLevelInterestdropDown.width = 200
+//        self.tournamentLevelInterestdropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//            self.tournamentLevelInterestBtn.setTitle(item, for: UIControlState.normal)
+//            self.tournamentLevelInterestBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
+////            self.tournamentLevelInterestBtn.setTitleColor(UIColor.blue, for: .normal)
+//        }
+//        self.tournamentLevelInterestBtn.setTitle("", for: UIControlState.normal)
+//        self.tournamentLevelInterestdropDown.selectRow(0)
         
         //MARK: HighestTourRatingEarned DropDown
-        self.highestTourRatingEarneddropDown.anchorView = self.highestTourRatingEarnedBtn
-        self.highestTourRatingEarneddropDown.dataSource = ["Please Select","PRO","Open Or AAA","AA","A","BB","B","C Or Novice","Unrated"]
-        self.highestTourRatingEarneddropDown.bottomOffset = CGPoint(x:10, y:10)
-        self.highestTourRatingEarneddropDown.width = 200
-        self.highestTourRatingEarneddropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.highestTourRatingEarnedBtn.setTitle(item, for: UIControlState.normal)
-            self.highestTourRatingEarnedBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
-//            self.highestTourRatingEarnedBtn.setTitleColor(UIColor.blue, for: .normal)
-        }
-        self.highestTourRatingEarnedBtn.setTitle("", for: UIControlState.normal)
-        self.highestTourRatingEarneddropDown.selectRow(0)
+//        self.highestTourRatingEarneddropDown.anchorView = self.highestTourRatingEarnedBtn
+//        self.highestTourRatingEarneddropDown.dataSource = ["Please Select","PRO","Open Or AAA","AA","A","BB","B","C Or Novice","Unrated"]
+//        self.highestTourRatingEarneddropDown.bottomOffset = CGPoint(x:10, y:10)
+//        self.highestTourRatingEarneddropDown.width = 200
+//        self.highestTourRatingEarneddropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//            self.highestTourRatingEarnedBtn.setTitle(item, for: UIControlState.normal)
+//            self.highestTourRatingEarnedBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
+////            self.highestTourRatingEarnedBtn.setTitleColor(UIColor.blue, for: .normal)
+//        }
+//        self.highestTourRatingEarnedBtn.setTitle("", for: UIControlState.normal)
+//        self.highestTourRatingEarneddropDown.selectRow(0)
         
         //MARK: Height DropDown
         self.heightdropDown.anchorView = self.heightBtn
@@ -562,18 +562,18 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.firstNameTxtFld.delegate = self
         self.lastNameTxtFld.delegate = self
         self.phoneTxtFld.delegate = self
-        self.toursPlayedTxtFld.delegate = self
-        self.cbvaPlayerNumberTxtFld.delegate = self
-        self.cbvaFirstNameTxtFld.delegate = self
-        self.cbvaLastNameTxtFld.delegate = self
+//        self.toursPlayedTxtFld.delegate = self
+//        self.cbvaPlayerNumberTxtFld.delegate = self
+//        self.cbvaFirstNameTxtFld.delegate = self
+//        self.cbvaLastNameTxtFld.delegate = self
         self.highSchoolAttendedTxtFld.delegate = self
         self.indoorClubPlayedAtTxtFld.delegate = self
-        self.collegeClubTxtFld.delegate = self
+//        self.collegeClubTxtFld.delegate = self
         self.collegeBeachTxtfld.delegate = self
         self.collegeBeachTxtfld.delegate = self
         self.collegeIndoorTxtFld.delegate = self
-        self.pointsTxtFld.delegate = self
-        self.rankingTxtFld.delegate = self
+//        self.pointsTxtFld.delegate = self
+//        self.rankingTxtFld.delegate = self
         self.topFinishesTxtfld.delegate = self
         self.topFinishesoneTxtFld.delegate = self
         self.topFinishestwoTxtFld.delegate = self
@@ -602,12 +602,12 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     @IBAction func PositionBtnClick(_ sender: Any) {
         positiondropDown.show()
     }
-    @IBAction func tournamentLevelInterestBtnClick(_ sender: Any) {
-        tournamentLevelInterestdropDown.show()
-    }
-    @IBAction func highestTourRatingEarned(_ sender: Any) {
-        highestTourRatingEarneddropDown.show()
-    }
+//    @IBAction func tournamentLevelInterestBtnClick(_ sender: Any) {
+//        tournamentLevelInterestdropDown.show()
+//    }
+//    @IBAction func highestTourRatingEarned(_ sender: Any) {
+//        highestTourRatingEarneddropDown.show()
+//    }
     @IBAction func willingnessToTravelBtnClick(_ sender: Any) {
         willingnessToTraveldropDown.show()
     }
@@ -797,15 +797,15 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         }
         else { self.userData.userProfile?.height = "" }
         
-        if let value = tournamentLevelInterestBtn.titleLabel?.text, value != "Please Select" {
-            self.userData.userProfile?.tournamentLevelInterest = value
-        }
-        else { self.userData.userProfile?.tournamentLevelInterest = "" }
+//        if let value = tournamentLevelInterestBtn.titleLabel?.text, value != "Please Select" {
+//            self.userData.userProfile?.tournamentLevelInterest = value
+//        }
+//        else { self.userData.userProfile?.tournamentLevelInterest = "" }
         
-        if let value = highestTourRatingEarnedBtn.titleLabel?.text, value != "Please Select" {
-            self.userData.userProfile?.highestTourRatingEarned = value
-        }
-        else { self.userData.userProfile?.highestTourRatingEarned = "" }
+//        if let value = highestTourRatingEarnedBtn.titleLabel?.text, value != "Please Select" {
+//            self.userData.userProfile?.highestTourRatingEarned = value
+//        }
+//        else { self.userData.userProfile?.highestTourRatingEarned = "" }
         
         if let value = willingnessToTravelBtn.titleLabel?.text, value != "Please Select" {
             self.userData.userProfile?.willingToTravel = value
@@ -813,17 +813,17 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         else { self.userData.userProfile?.willingToTravel = "" }
         
         
-        self.userData.userProfile?.toursPlayedIn = toursPlayedTxtFld.text!
-        self.userData.userProfile?.cbvaPlayerNumber = cbvaPlayerNumberTxtFld.text!
-        self.userData.userProfile?.cbvaFirstName = cbvaFirstNameTxtFld.text!
-        self.userData.userProfile?.cbvaLastName = cbvaLastNameTxtFld.text!
+//        self.userData.userProfile?.toursPlayedIn = toursPlayedTxtFld.text!
+//        self.userData.userProfile?.cbvaPlayerNumber = cbvaPlayerNumberTxtFld.text!
+//        self.userData.userProfile?.cbvaFirstName = cbvaFirstNameTxtFld.text!
+//        self.userData.userProfile?.cbvaLastName = cbvaLastNameTxtFld.text!
         self.userData.userProfile?.highSchoolAttended = highSchoolAttendedTxtFld.text!
         self.userData.userProfile?.indoorClubPlayed = indoorClubPlayedAtTxtFld.text!
-        self.userData.userProfile?.collageClub = collegeClubTxtFld.text!
+//        self.userData.userProfile?.collageClub = collegeClubTxtFld.text!
         self.userData.userProfile?.collegeBeach = collegeBeachTxtfld.text!
         self.userData.userProfile?.collegeIndoor = collegeIndoorTxtFld.text!
-        self.userData.userProfile?.totalPoints = pointsTxtFld.text!
-        self.userData.userProfile?.usaVolleyballRanking = rankingTxtFld.text!
+//        self.userData.userProfile?.totalPoints = pointsTxtFld.text!
+//        self.userData.userProfile?.usaVolleyballRanking = rankingTxtFld.text!
         var topfinishesVal = String()
         
         if let trimmedString = topFinishesTxtfld.text?.trimmingCharacters(in: .whitespaces), trimmedString.count > 0 {
@@ -953,7 +953,28 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
         if (isBasicInformation){
-            if (cell == self.tableCell_Experience || cell == self.tableCell_CrtSidePreference || cell == self.tableCell_Position || cell == self.tableCell_Height || cell == self.tableCell_TournamentLevelInterest || cell == self.tableCell_ToursPlayed || cell == self.tableCell_HighestTourRatingEarned || cell == self.tableCell_CBVAPlayerNumber  || cell == self.tableCell_CBVAFirstName  || cell == self.tableCell_CBVALastName  || cell == self.tableCell_WillingnessToTravel  || cell == self.tableCell_HighSchoolAttended  || cell == self.tableCell_IndoorClubPlayedat  || cell == self.tableCell_CollegeClub  || cell == self.tableCell_CollegeBeach  || cell == self.tableCell_CollegeIndoor  || cell == self.tableCell_Points  || cell == self.tableCell_Ranking  || cell == self.tableCell_TopFinishesinLastYear  || cell == self.tableCell_TopFinishesinLastYear1  || cell == self.tableCell_TopFinishesinLastYear2) {
+            if (cell == self.tableCell_Experience ||
+                cell == self.tableCell_CrtSidePreference ||
+                cell == self.tableCell_Position ||
+                cell == self.tableCell_Height ||
+                cell == self.tableCell_TournamentLevelInterest ||
+                cell == self.tableCell_ToursPlayed ||
+                cell == self.tableCell_HighestTourRatingEarned ||
+                cell == self.tableCell_CBVAPlayerNumber  ||
+                cell == self.tableCell_CBVAFirstName  ||
+                cell == self.tableCell_CBVALastName  ||
+                cell == self.tableCell_WillingnessToTravel  ||
+                cell == self.tableCell_HighSchoolAttended  ||
+                cell == self.tableCell_IndoorClubPlayedat  ||
+                cell == self.tableCell_CollegeClub  ||
+                cell == self.tableCell_CollegeBeach  ||
+                cell == self.tableCell_CollegeIndoor  ||
+                cell == self.tableCell_Points  ||
+                cell == self.tableCell_Ranking  ||
+                cell == self.tableCell_TopFinishesinLastYear  ||
+                cell == self.tableCell_TopFinishesinLastYear1  ||
+                cell == self.tableCell_TopFinishesinLastYear2)
+            {
                 return 0
             }
             else {
@@ -1027,22 +1048,22 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             experienceBtn.enableBtn()
             courtSidePreferenceBtn.enableBtn()
             positionBtn.enableBtn()
-            tournamentLevelInterestBtn.enableBtn()
+//            tournamentLevelInterestBtn.enableBtn()
             heightBtn.enableBtn()
 //            heightTxtFld.enableTextFld()
-            toursPlayedTxtFld.enableTextFld()
-            highestTourRatingEarnedBtn.enableBtn()
-            cbvaPlayerNumberTxtFld.enableTextFld()
-            cbvaFirstNameTxtFld.enableTextFld()
-            cbvaLastNameTxtFld.enableTextFld()
+//            toursPlayedTxtFld.enableTextFld()
+//            highestTourRatingEarnedBtn.enableBtn()
+//            cbvaPlayerNumberTxtFld.enableTextFld()
+//            cbvaFirstNameTxtFld.enableTextFld()
+//            cbvaLastNameTxtFld.enableTextFld()
             willingnessToTravelBtn.enableBtn()
             highSchoolAttendedTxtFld.enableTextFld()
             indoorClubPlayedAtTxtFld.enableTextFld()
-            collegeClubTxtFld.enableTextFld()
+//            collegeClubTxtFld.enableTextFld()
             collegeBeachTxtfld.enableTextFld()
             collegeIndoorTxtFld.enableTextFld()
-            pointsTxtFld.enableTextFld()
-            rankingTxtFld.enableTextFld()
+//            pointsTxtFld.enableTextFld()
+//            rankingTxtFld.enableTextFld()
             topFinishesTxtfld.enableTextFld()
             topFinishesoneTxtFld.enableTextFld()
             topFinishestwoTxtFld.enableTextFld()
@@ -1060,22 +1081,22 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             experienceBtn.disableBtn()
             courtSidePreferenceBtn.disableBtn()
             positionBtn.disableBtn()
-            tournamentLevelInterestBtn.disableBtn()
+//            tournamentLevelInterestBtn.disableBtn()
             heightBtn.disableBtn()
 //            heightTxtFld.disableTextFld()
-            toursPlayedTxtFld.disableTextFld()
-            highestTourRatingEarnedBtn.disableBtn()
-            cbvaPlayerNumberTxtFld.disableTextFld()
-            cbvaFirstNameTxtFld.disableTextFld()
-            cbvaLastNameTxtFld.disableTextFld()
+//            toursPlayedTxtFld.disableTextFld()
+//            highestTourRatingEarnedBtn.disableBtn()
+//            cbvaPlayerNumberTxtFld.disableTextFld()
+//            cbvaFirstNameTxtFld.disableTextFld()
+//            cbvaLastNameTxtFld.disableTextFld()
             willingnessToTravelBtn.disableBtn()
             highSchoolAttendedTxtFld.disableTextFld()
             indoorClubPlayedAtTxtFld.disableTextFld()
-            collegeClubTxtFld.disableTextFld()
+//            collegeClubTxtFld.disableTextFld()
             collegeBeachTxtfld.disableTextFld()
             collegeIndoorTxtFld.disableTextFld()
-            pointsTxtFld.disableTextFld()
-            rankingTxtFld.disableTextFld()
+//            pointsTxtFld.disableTextFld()
+//            rankingTxtFld.disableTextFld()
             topFinishesTxtfld.disableTextFld()
             topFinishesoneTxtFld.disableTextFld()
             topFinishestwoTxtFld.disableTextFld()
@@ -1102,39 +1123,40 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         else if  textField == phoneTxtFld {
             textField.resignFirstResponder()
         }
-        if  textField == toursPlayedTxtFld {
-            textField.resignFirstResponder()
-        }
-        else if textField == cbvaPlayerNumberTxtFld {
-            cbvaFirstNameTxtFld.becomeFirstResponder()
-        }
-        else if textField == cbvaFirstNameTxtFld{
-            cbvaLastNameTxtFld.becomeFirstResponder()
-        }
-        else if textField == cbvaLastNameTxtFld{
-            textField.resignFirstResponder()
-        }
+//        if  textField == toursPlayedTxtFld {
+//            textField.resignFirstResponder()
+//        }
+//        else if textField == cbvaPlayerNumberTxtFld {
+//            cbvaFirstNameTxtFld.becomeFirstResponder()
+//        }
+//        else if textField == cbvaFirstNameTxtFld{
+//            cbvaLastNameTxtFld.becomeFirstResponder()
+//        }
+//        else if textField == cbvaLastNameTxtFld{
+//            textField.resignFirstResponder()
+//        }
         else if textField == highSchoolAttendedTxtFld{
             indoorClubPlayedAtTxtFld.becomeFirstResponder()
         }
         else if textField == indoorClubPlayedAtTxtFld{
-            collegeClubTxtFld.becomeFirstResponder()
-        }
-        else if textField == collegeClubTxtFld{
             collegeBeachTxtfld.becomeFirstResponder()
         }
+//        else if textField == collegeClubTxtFld{
+//            collegeBeachTxtfld.becomeFirstResponder()
+//        }
         else if textField == collegeBeachTxtfld{
             collegeIndoorTxtFld.becomeFirstResponder()
         }
         else if textField == collegeIndoorTxtFld{
-            pointsTxtFld.becomeFirstResponder()
-        }
-        else if textField == pointsTxtFld{
-            rankingTxtFld.becomeFirstResponder()
-        }
-        else if textField == rankingTxtFld{
             topFinishesTxtfld.becomeFirstResponder()
-        }else if textField == topFinishesTxtfld {
+        }
+//        else if textField == pointsTxtFld{
+//            rankingTxtFld.becomeFirstResponder()
+//        }
+//        else if textField == rankingTxtFld{
+//            topFinishesTxtfld.becomeFirstResponder()
+//        }
+        else if textField == topFinishesTxtfld {
             topFinishesoneTxtFld.becomeFirstResponder()
         }else if textField == topFinishesoneTxtFld{
             topFinishestwoTxtFld.resignFirstResponder()
@@ -1359,20 +1381,20 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.positionBtn.setTitle(accResponseModel.userProfile?.position, for: .normal)
         self.heightBtn.setTitle(accResponseModel.userProfile?.height, for: .normal)
 //        self.heightTxtFld.text = String(accResponseModel.userProfile?.height ?? "0")
-        self.tournamentLevelInterestBtn.setTitle(accResponseModel.userProfile?.tournamentLevelInterest, for: .normal)
-        self.toursPlayedTxtFld.text = accResponseModel.userProfile?.toursPlayedIn
-        self.highestTourRatingEarnedBtn.setTitle(accResponseModel.userProfile?.highestTourRatingEarned, for: .normal)
-        self.cbvaPlayerNumberTxtFld.text = accResponseModel.userProfile?.cbvaPlayerNumber
-        self.cbvaFirstNameTxtFld.text = accResponseModel.userProfile?.cbvaFirstName
-        self.cbvaLastNameTxtFld.text = accResponseModel.userProfile?.cbvaLastName
+//        self.tournamentLevelInterestBtn.setTitle(accResponseModel.userProfile?.tournamentLevelInterest, for: .normal)
+//        self.toursPlayedTxtFld.text = accResponseModel.userProfile?.toursPlayedIn
+//        self.highestTourRatingEarnedBtn.setTitle(accResponseModel.userProfile?.highestTourRatingEarned, for: .normal)
+//        self.cbvaPlayerNumberTxtFld.text = accResponseModel.userProfile?.cbvaPlayerNumber
+//        self.cbvaFirstNameTxtFld.text = accResponseModel.userProfile?.cbvaFirstName
+//        self.cbvaLastNameTxtFld.text = accResponseModel.userProfile?.cbvaLastName
         self.willingnessToTravelBtn.setTitle(accResponseModel.userProfile?.willingToTravel, for: .normal)
         self.highSchoolAttendedTxtFld.text = accResponseModel.userProfile?.highSchoolAttended
         self.indoorClubPlayedAtTxtFld.text = accResponseModel.userProfile?.indoorClubPlayed
-        self.collegeClubTxtFld.text = accResponseModel.userProfile?.collageClub
+//        self.collegeClubTxtFld.text = accResponseModel.userProfile?.collageClub
         self.collegeBeachTxtfld.text = accResponseModel.userProfile?.collegeBeach
         self.collegeIndoorTxtFld.text = accResponseModel.userProfile?.collegeIndoor
-        self.pointsTxtFld.text = accResponseModel.userProfile?.totalPoints
-        self.rankingTxtFld.text = accResponseModel.userProfile?.usaVolleyballRanking
+//        self.pointsTxtFld.text = accResponseModel.userProfile?.totalPoints
+//        self.rankingTxtFld.text = accResponseModel.userProfile?.usaVolleyballRanking
 //        UserDefaults.standard.set(accResponseModel.city , forKey: "locationInitial")
 
         self.tableCell_TopFinishesinLastYear1.isHidden = false

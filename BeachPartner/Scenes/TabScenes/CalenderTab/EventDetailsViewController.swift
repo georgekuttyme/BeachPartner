@@ -124,7 +124,7 @@ class EventDetailsViewController: BeachPartnerViewController {
         }
         
         eventNameLabel.text = event.eventName
-        eventLocationLabel.text = event.eventLocation
+        eventLocationLabel.text = event.state
         eventVenueLabel.text = event.eventVenue
         eventAdminLabel.text = event.eventAdmin
         teamSizeLabel.text = String(event.teamSize)

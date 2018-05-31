@@ -72,7 +72,7 @@ class MyCalEventDetailsViewController: UIViewController {
             print("event  ==",event)
             generalEventDetailsView.isHidden = true
             eventNameLabel.text = event.eventName
-            eventLocationLabel.text = event.eventLocation
+            eventLocationLabel.text = event.state
             eventVenueLabel.text = event.eventVenue
             eventAdminLabel.text = event.eventAdmin
             eventTeamSize.text = String(event.teamSize)
