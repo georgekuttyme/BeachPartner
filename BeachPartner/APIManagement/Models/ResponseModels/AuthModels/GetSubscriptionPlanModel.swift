@@ -32,6 +32,8 @@ struct GetSubscriptionPlansRespModelArray: SafeMappable {
 struct SubscriptionPlanModel : SafeMappable {
     
     var id: Int = 0
+    var code: String = ""
+    var type: String = ""
     var name: String = ""
     var description: String = ""
     var registrationFee: Int = 0
@@ -39,7 +41,9 @@ struct SubscriptionPlanModel : SafeMappable {
     var benefits: [PlanBenefit] = []
     
     init(_ map: [String : Any]) throws {
-        id <- map.property("subscriptionId")
+        id <- map.property("planId")
+        code <- map.property("planCode")
+        type <- map.property("planType")
         name <- map.property("planName")
         description <- map.property("planDescription")
         registrationFee <- map.property("regFee")
