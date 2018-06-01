@@ -57,7 +57,7 @@ class EventInvitationListViewController: UIViewController, UITableViewDataSource
         guard let event = eventInvitation else { return }
 
         eventNameLabel.text = event.eventName
-        eventLocationLabel.text = event.eventLocation
+        eventLocationLabel.text = event.eventState
         eventVenueLabel.text = event.eventVenue
         eventAdminLabel.text = event.eventAdmin
         eventTeamSize.text = String(event.teamSize)
