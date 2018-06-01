@@ -80,10 +80,15 @@ class BeachPartnerViewController: UIViewController {
                 let vc = storyboard.instantiateViewController(withIdentifier: "HelpViewController") as! HelpViewController
                 self.present(vc, animated: true, completion: nil)
             }
-            else if (item == "Subscription"){
+            else if (item == "Subscription") {
                 //Subscription
                 let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "SubscriptionTypeViewController") as! SubscriptionTypeViewController
+                self.present(vc, animated: true, completion: nil)
+            }
+            else if (item == "Add-ons") {
+                let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "AddonsViewController") as! AddonsViewController
                 self.present(vc, animated: true, completion: nil)
             }
             else {
