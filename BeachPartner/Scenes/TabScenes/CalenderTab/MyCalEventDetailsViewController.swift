@@ -54,7 +54,7 @@ class MyCalEventDetailsViewController: UIViewController {
         if isFromHomeTab{
             generalEventDetailsView.isHidden = true
             eventNameLabel.text = self.eventInvitation?.eventName
-            eventLocationLabel.text = self.eventInvitation?.eventLocation
+            eventLocationLabel.text = self.eventInvitation?.eventState
             eventVenueLabel.text = self.eventInvitation?.eventVenue
             eventAdminLabel.text = self.eventInvitation?.eventAdmin
             if let teamCount = self.eventInvitation?.teamSize {
