@@ -11,9 +11,6 @@ import UIKit
 
 class ConnectionsViewController : BeachPartnerViewController,UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate  {
     
-    
-    
-    
 //    unfilteredNFLTeams connectedUsers
     var searchController : UISearchController!
     var rightBarButtonItem: UIBarButtonItem!
@@ -99,6 +96,8 @@ class ConnectionsViewController : BeachPartnerViewController,UISearchControllerD
             searchBtn  = UIBarButtonItem(image: searchImage ,  style: .plain, target: self, action:#selector(searchBtnClicked(_:)))
             navigationItem.rightBarButtonItems = [menuBarButtonItem, searchBtn]
             
+
+            
             self.currentViewController = atheleteVC
             self.currentViewController!.view.translatesAutoresizingMaskIntoConstraints = false
             selectedIndexItem = "athelete"
@@ -107,28 +106,37 @@ class ConnectionsViewController : BeachPartnerViewController,UISearchControllerD
 
     }
     
-    
     @objc func searchBtnClicked(_ sender: AnyObject){
       
+
         self.searchController = UISearchController(searchResultsController:  nil)
+        let textFieldInsideSearchBar = searchController.searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.textColor = UIColor.white
+        textFieldInsideSearchBar?.backgroundColor = UIColor.clear
+        
         self.searchController.searchResultsUpdater = self
         self.searchController.delegate = self
         self.searchController.searchBar.delegate = self
         
         self.searchController.hidesNavigationBarDuringPresentation = false
         self.searchController.dimsBackgroundDuringPresentation = true
-        searchController.searchBar.sizeToFit()
+//        searchController.searchBar.sizeToFit()
+
+        
+        
         
         self.navigationItem.titleView = searchController.searchBar
         self.definesPresentationContext = true
         self.searchBtn.tintColor = UIColor.clear
         self.searchBtn.isEnabled = false
-        self.becomeFirstResponder()
+//        self.becomeFirstResponder()
         self.searchController.searchBar.becomeFirstResponder()
+       
     }
 
     override func viewWillAppear(_ animated: Bool) {
          self.navigationController!.navigationBar.topItem!.title = "Connections"
+        
     }
     
     func cycleFromViewController(oldViewController: UIViewController, toViewController newViewController: UIViewController) {
