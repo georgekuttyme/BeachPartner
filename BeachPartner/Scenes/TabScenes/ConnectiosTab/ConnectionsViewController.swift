@@ -19,67 +19,89 @@ class ConnectionsViewController : BeachPartnerViewController,UISearchControllerD
     var rightBarButtonItem: UIBarButtonItem!
     var activesearchBar: UISearchBar!
     var filteredNFLTeams: [String]?
-    func updateSearchResults(for searchController: UISearchController) {
-       
-    }
     var searchBtn = UIBarButtonItem()
     @IBOutlet weak var segmentControl: UISegmentedControl!
-
+    var coachVC : CoachViewController?
     weak var currentViewController: UIViewController?
-    
+    var atheleteVC : AthleteViewController?
     @IBOutlet weak var connectionsContainerView: UIView!
     
     @IBOutlet weak var connectionSegmentView: UISegmentedControl!
     
-    
+    var selectedIndexItem = ""
     
     @IBAction func connSegSelection(sender: UISegmentedControl) {
         
         if sender.selectedSegmentIndex == 0{
+            selectedIndexItem = "athelete"
             self.loadAthleteView()
         }
         else if sender.selectedSegmentIndex == 1{
+            selectedIndexItem = "coach"
             self.loadCoachView()
         }
     }
     
     
     func loadAthleteView(){
-        let newViewController = self.storyboard?.instantiateViewController(withIdentifier: "AthleteComponent")as! AthleteViewController
-        //        newViewController.selSenderDataModel = self.senderDataModel
-        newViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        self.cycleFromViewController(oldViewController: self.currentViewController!, toViewController: newViewController)
-        self.currentViewController = newViewController
+        atheleteVC?.view.translatesAutoresizingMaskIntoConstraints = false
+        self.cycleFromViewController(oldViewController: self.currentViewController!, toViewController: atheleteVC!)
+        self.currentViewController = atheleteVC
     }
     
     func loadCoachView(){
-        let newViewController = self.storyboard?.instantiateViewController(withIdentifier: "CoachComponent")as! CoachViewController
-        //        newViewController.selSenderDataModel = self.senderDataModel
-        newViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        self.cycleFromViewController(oldViewController: self.currentViewController!, toViewController: newViewController)
-        self.currentViewController = newViewController
+        coachVC?.view.translatesAutoresizingMaskIntoConstraints = false
+        self.cycleFromViewController(oldViewController: self.currentViewController!, toViewController: coachVC!)
+        self.currentViewController = coachVC
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        
         searchBar.isHidden = true
         self.searchBtn.tintColor = UIColor.white
         self.searchBtn.isEnabled = true
         self.navigationItem.titleView = nil
         self.navigationItem.title = "Connections"
-   
+        if selectedIndexItem == "athelete"{
+            atheleteVC?.displayType = ""
+            atheleteVC?.collectionView.reloadData()
+        }else {
+            coachVC?.displayType = ""
+            coachVC?.collectionView.reloadData()
+        }
+        
+    }
+
+    func updateSearchResults(for searchController: UISearchController) {
+        print("\n\n\n",selectedIndexItem)
+        if let searchText = searchController.searchBar.text, !searchText.isEmpty {
+            if selectedIndexItem == "athelete"{
+                atheleteVC?.atheleteConnectionsSearch(searchItem: searchText)
+                atheleteVC?.displayType = "search"
+                atheleteVC?.collectionView.reloadData()
+            }else{
+                coachVC?.coachConnectionsSearch(searchItem: searchText)
+                coachVC?.displayType = "search"
+                coachVC?.collectionView.reloadData()
+            }
+            
+        } else {
+
+        }
     }
 
         override func viewDidLoad() {
         super.viewDidLoad()
             
+            atheleteVC = (self.storyboard?.instantiateViewController(withIdentifier: "AthleteComponent")as! AthleteViewController)
+            coachVC = (self.storyboard?.instantiateViewController(withIdentifier: "CoachComponent")as! CoachViewController)
+            
             let searchImage  = UIImage(named: "search")!
             searchBtn  = UIBarButtonItem(image: searchImage ,  style: .plain, target: self, action:#selector(searchBtnClicked(_:)))
-            
             navigationItem.rightBarButtonItems = [menuBarButtonItem, searchBtn]
             
-            self.currentViewController = self.storyboard?.instantiateViewController(withIdentifier: "AthleteComponent")
+            self.currentViewController = atheleteVC
             self.currentViewController!.view.translatesAutoresizingMaskIntoConstraints = false
+            selectedIndexItem = "athelete"
             self.addChildViewController(self.currentViewController!)
             self.addSubview(subView: self.currentViewController!.view, toView: self.connectionsContainerView)
 

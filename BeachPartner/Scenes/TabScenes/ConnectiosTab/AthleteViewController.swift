@@ -31,26 +31,37 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
     }
     
     func atheleteConnectionsSearch(searchItem:String){
-        self.filterConnectedusers = self.connectedUsers.filter({ (user) -> Bool in
-            return Bool(user.connectedUser?.firstName == "" || user.connectedUser?.lastName == "")
-        })
+        print("displayItem ==> ",self.displayType)
+            self.filterConnectedusers = self.connectedUsers.filter({ (user) -> Bool in
+                return Bool((user.connectedUser?.firstName.contains(searchItem))! || (user.connectedUser?.lastName.contains(searchItem))!)
+            })
+        print("unfiltered  -- ",self.connectedUsers,"\n\n\n\n")
+        print("filtered  -- ",self.filterConnectedusers,"\n\n\n")
+      
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return self.connectedUsers.count
+        print("displayItem ==> count ",self.displayType)
+         if displayType == "search"{
+            return self.filterConnectedusers.count
+        }
+        else{
+            return self.connectedUsers.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath) as? CustomCell
         
         //         let data = Dummy.data[indexPath.row]
-        let connectedUser = self.connectedUsers[indexPath.row].connectedUser
-        //        cell?.nameLbl.text = name[indexPath.item]
-        
-        //        let n = Int(arc4random_uniform(42))
-        //        let val = String((n % 3 ) + 1)
-        
+        print("displayItem ==> cell for row at",self.displayType)
+        var connectedUser: ConnectedUserModel.ConnectedUser?
+        if displayType == "search"{
+          connectedUser = self.filterConnectedusers[indexPath.row].connectedUser
+        }else{
+            connectedUser = self.connectedUsers[indexPath.row].connectedUser
+        }
+
         let firstName = connectedUser?.firstName ?? ""
         let lastName = connectedUser?.lastName ?? ""
         cell?.nameLbl.text = firstName + " " + lastName
@@ -62,15 +73,8 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
         }
         cell?.profileImgView.layer.cornerRadius = (cell?.profileImgView.frame.size.width)!/2
         cell?.profileImgView.clipsToBounds = true
-//        cell?.profileImgView.layer.borderColor = UIColor.green.cgColor
         cell?.profileImgView.layer.borderColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0).cgColor
         cell?.profileImgView.layer.borderWidth = 1.5
-        
-        //        if(cell?.profileImgView.image == nil){
-        //            cell?.profileImgView.image = UIImage(named: "image_" + val)(white: 1.0, alpha: 0.4)
-        //        }
-        
-        
         cell?.profileImgView.layer.cornerRadius = (cell?.profileImgView.frame.size.height)! / 2
         cell?.profileImgView.layer.masksToBounds = true
         cell?.expandBtn.tag = indexPath.row
@@ -126,7 +130,7 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
                 print(self.connectedUsers.count)
                 self.connectedUsers.append(blockedUser)
                 print(self.connectedUsers.count)
-                self.collectionView.reloadData()
+                
             
                 print("User Blocked======",id)
             }

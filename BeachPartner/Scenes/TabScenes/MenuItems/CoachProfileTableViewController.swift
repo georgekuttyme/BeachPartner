@@ -144,7 +144,10 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
     override func viewWillAppear(_ animated: Bool) {
         
         self.navigationController!.navigationBar.topItem!.title = "My Profile"
-        
+        let backImage = UIImage(named:"back_58")
+        let dismissButton = UIBarButtonItem(image: backImage, style: .done, target: self, action: #selector(didTapDismissButton))
+        self.navigationItem.leftBarButtonItem = dismissButton
+        self.navigationController!.navigationBar.topItem!.title = "My Profile"
         let image = UIImage(named: "edit_btn_1x") as UIImage?
         editProfileBtn.setImage(image, for: .normal)
         self.editUserImageBtn.isHidden = true
@@ -156,7 +159,28 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
-    
+    @objc func didTapDismissButton() {
+        
+        if self.editclicked{
+            let alert = UIAlertController(title: "Are you sure you want to discard this changes?", message: "You cannot undo this action", preferredStyle: .alert)
+            let actionButton = UIAlertAction(title: "Save", style: .cancel) { (action) in
+                let image = UIImage(named: "edit_btn_1x") as UIImage?
+                self.editProfileBtn.setImage(image, for: .normal)
+                self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
+                self.saveData()
+                self.dismiss(animated: true, completion: nil)
+            }
+            let cancelButton = UIAlertAction(title: "Discard", style: .default) { (action) in
+                self.dismiss(animated: true, completion: nil)
+            }
+            alert.addAction(actionButton)
+            alert.addAction(cancelButton)
+            self.present(alert, animated: true, completion: nil)
+        }
+        else{
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         

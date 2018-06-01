@@ -14,8 +14,11 @@ class CoachViewController: UIViewController,UICollectionViewDataSource , UIColle
     private var arrayImage = [AnyHashable]()
     var count: Int = 0
     private var i: Int = 0
-
     var connectedUsers = [ConnectedUserModel]()
+    var filterConnectedusers = [ConnectedUserModel]()
+     var displayType = ""
+
+
     
 //    let name = ["Alivia Orvieto","Marti McLaurin","Liz Held","Alivia Orvieto","Marti McLaurin","Liz Held","Alivia Orvieto","Marti McLaurin","Liz Held","Alivia Orvieto"]
     
@@ -31,6 +34,16 @@ class CoachViewController: UIViewController,UICollectionViewDataSource , UIColle
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func coachConnectionsSearch(searchItem:String){
+        print("displayItem ==> ",self.displayType)
+        self.filterConnectedusers = self.connectedUsers.filter({ (user) -> Bool in
+            return Bool((user.connectedUser?.firstName.contains(searchItem))! || (user.connectedUser?.lastName.contains(searchItem))!)
+        })
+        print("unfiltered  -- ",self.connectedUsers,"\n\n\n\n")
+        print("filtered  -- ",self.filterConnectedusers,"\n\n\n")
+        
     }
     
     func blockUser(connectedUser: ConnectedUserModel, atIndex index: Int) {
@@ -99,15 +112,23 @@ class CoachViewController: UIViewController,UICollectionViewDataSource , UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-       return self.connectedUsers.count
+         if displayType == "search"{
+            return self.filterConnectedusers.count
+         }else {
+            return self.connectedUsers.count
+        }
+       
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath) as? CustomCell
         
-        
-        let connectedUser = self.connectedUsers[indexPath.row].connectedUser
+        var connectedUser : ConnectedUserModel.ConnectedUser?
+        if displayType == "search"{
+            connectedUser = self.filterConnectedusers[indexPath.row].connectedUser
+        }else {
+            connectedUser = self.connectedUsers[indexPath.row].connectedUser
+        }
         //        cell?.nameLbl.text = name[indexPath.item]
         
         //        let n = Int(arc4random_uniform(42))
