@@ -63,7 +63,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     let arrayBasicInfo:[String] = ["First Name", "Last Name", "Gender", "Birth Date", "City", "Phone"]
     
-    let arrayMoreInfo:[String] = ["Experience", "Court Side Preference", "Position", "Height", "Tournament Level Interest", "Tours Played", "Height Tour Rating Earned", "CBVA Player Number", "CBVA First Name", "CBVA Last Name", "Willingness To Travel", "High school attended", "Indoor club played at", "College (Club)", "College (Bearch)", "College (Indoor)", "Points", "Ranking"]
+    let arrayMoreInfo:[String] = ["Experience Level", "Court Side Preference", "Position", "Height", "Tournament Level Interest", "Tours Played", "Height Tour Rating Earned", "CBVA Player Number", "CBVA First Name", "CBVA Last Name", "Willingness To Travel", "High school attended", "Indoor club played at", "College (Club)", "College (Bearch)", "College (Indoor)", "Points", "Ranking"]
 
     
     @IBAction func editProfileCLicked(_ sender: Any) {
