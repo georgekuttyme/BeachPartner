@@ -100,13 +100,17 @@ class EventRegisterViewController: UIViewController {
         let alert = UIAlertController(title: "", message: "Do you want to add this event to your system Calendar?", preferredStyle: UIAlertControllerStyle.alert)
         let action = UIAlertAction(title: "Yes", style: .default) { (alertAction) in
             
+            ActivityIndicatorView.show("Loading")
             let sDate = Date(timeIntervalSince1970: TimeInterval(startDate/1000))
             let eDate = Date(timeIntervalSince1970: TimeInterval(endDate/1000))
             
             
             self.addEventToCalendar(title: self.eventInvitation?.eventName ?? "", description: self.eventInvitation?.eventDescription, startDate: sDate, endDate: eDate, completion: { (success, error) in
                 
-                self.dismiss(animated: true, completion: nil)
+                DispatchQueue.main.async {
+                    ActivityIndicatorView.hiding()
+                    self.dismiss(animated: true, completion: nil)
+                }
             })
         }
         let noAction = UIAlertAction(title: "No", style: .default) { (alertAction) in

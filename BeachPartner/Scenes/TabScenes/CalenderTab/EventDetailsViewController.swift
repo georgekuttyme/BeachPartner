@@ -301,12 +301,17 @@ class EventDetailsViewController: BeachPartnerViewController {
         let alert = UIAlertController(title: "", message: "Do you want to add this event to your system Calendar?", preferredStyle: UIAlertControllerStyle.alert)
         let action = UIAlertAction(title: "Yes", style: .default) { (alertAction) in
             
+            ActivityIndicatorView.show("Loading")
+
             let sDate = Date(timeIntervalSince1970: TimeInterval(startDate/1000))
             let eDate = Date(timeIntervalSince1970: TimeInterval(endDate/1000))
             
             self.addEventToCalendar(title: self.event?.eventName ?? "", description: self.event?.eventDescription ?? "", startDate: sDate, endDate: eDate, completion: { (success, error) in
                 
-                self.navigationController?.popViewController(animated: true)
+                DispatchQueue.main.async {
+                    ActivityIndicatorView.hiding()
+                    self.navigationController?.popViewController(animated: true)
+                }
             })
         }
         let noAction = UIAlertAction(title: "No", style: .default) { (alertAction) in

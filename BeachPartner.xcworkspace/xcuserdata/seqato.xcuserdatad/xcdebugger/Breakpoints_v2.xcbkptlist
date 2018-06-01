@@ -122,7 +122,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/APIManagement/Manager/Modules/AuthModule.swift"
-            timestampString = "549541046.3829221"
+            timestampString = "549552777.576295"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "30"
@@ -138,7 +138,7 @@
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/seqato/Desktop/bp-ios/bp-ios/BeachPartner/APIManagement/Manager/Modules/AuthModule.swift"
-                  timestampString = "549467534.282932"
+                  timestampString = "549549767.50564"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "31"
@@ -153,7 +153,7 @@
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/seqato/Desktop/bp-ios/bp-ios/BeachPartner/APIManagement/Manager/Modules/AuthModule.swift"
-                  timestampString = "549467534.2880549"
+                  timestampString = "549549767.5087709"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "31"
@@ -204,11 +204,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/Scenes/TabScenes/HomeTab/HomeTabViewController.swift"
-            timestampString = "549292461.0076309"
+            timestampString = "549552777.5764199"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "499"
-            endingLineNumber = "499"
+            startingLineNumber = "518"
+            endingLineNumber = "518"
             landmarkName = "collectionView(_:didSelectItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -252,7 +252,7 @@
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/seqato/Desktop/bp-ios/bp-ios/BeachPartner/Scenes/TabScenes/ChatTab/ChatUsersListViewController.swift"
-                  timestampString = "549467534.318953"
+                  timestampString = "549549767.535942"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "89"
@@ -267,7 +267,7 @@
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/seqato/Desktop/bp-ios/bp-ios/BeachPartner/Scenes/TabScenes/ChatTab/ChatUsersListViewController.swift"
-                  timestampString = "549467534.323043"
+                  timestampString = "549549767.539119"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "89"
@@ -290,6 +290,22 @@
             startingLineNumber = "108"
             endingLineNumber = "108"
             landmarkName = "configUser()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/Scenes/TabScenes/HomeTab/HomeTabViewController.swift"
+            timestampString = "549552777.576575"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "195"
+            endingLineNumber = "195"
+            landmarkName = "getUserSubscriptionDetails()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

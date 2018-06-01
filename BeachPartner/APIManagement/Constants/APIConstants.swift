@@ -71,7 +71,7 @@ struct ApiMethods {
     
     static let getSubscriptionPlans = "/payment/subscription-plans"
     static let getAddonPlans = "/payment/addon-plans"
-
+    static let usersActivePlans = "/users/active-plans"
     
     //    static let Login   = "/secure/Authentication/authenticate"
     static let findById   = "/secure/CustomerType/findById"

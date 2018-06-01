@@ -106,6 +106,8 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
                 messageContainerView.backgroundColor = UIColor(patternImage: bgImage)
             }
         }
+        
+        getUserSubscriptionDetails()
     }
 
     
@@ -182,6 +184,23 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         }
     }
     
+    func getUserSubscriptionDetails() {
+        
+        APIManager.callServer.getUsersActivePlans(sucessResult: { (responseModel) in
+            
+            guard let subscriptions = responseModel as? GetUserSubscriptionModel else {
+                return
+            }
+            
+            print(subscriptions.addons)
+            print(subscriptions.subscriptions)
+            
+            
+        }) { (error) in
+            
+            
+        }
+    }
     
     
     @IBAction func tournamentRequestsSentBtnClicked(_ sender: UIButton) {

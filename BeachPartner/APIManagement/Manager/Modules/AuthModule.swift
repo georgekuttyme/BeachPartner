@@ -1437,6 +1437,32 @@ extension APIManager{
             return
         }
     }
+    
+    public func getUsersActivePlans(sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure) {
+        
+        let params = [String: String]()
+        
+        APIGetClient.doGetRequest.inGet(method: ApiMethods.usersActivePlans, params: params, sucess: { (response) in
+            let jsonDict = response
+            do {
+                let accRespModel = try GetUserSubscriptionModel(jsonDict! as! [String : Any])
+                sucessResult(accRespModel)
+                return
+            } catch {
+                print("Catched")
+                errorResult(error.localizedDescription)
+                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                return
+            }
+        }) { (error) in
+            
+            self.busyOff()
+            errorResult(error?.localizedDescription)
+            APIManager.printOnDebug(response: "error:\(String(describing: error?.localizedDescription))")
+            return
+        }
+    }
+    
 }
 
 

@@ -10,21 +10,64 @@ import UIKit
 
 class AddonsViewController: UIViewController {
 
+    @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subTitleLabel: UILabel!
+    
+    var addonPlans = [SubscriptionPlanModel]()
+    
+    var selectedIndex = -1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        getAllAddonPlans()
+    }
+    
+    private func getAllAddonPlans() {
         
+        ActivityIndicatorView.show("Loading...")
+        
+        APIManager.callServer.getAllAddonPlans(sucessResult: { (responseModel) in
+            
+            ActivityIndicatorView.hiding()
+            
+            guard let subscriptionPlansModel = responseModel as? GetSubscriptionPlansRespModelArray else {
+                print("Rep model does not match")
+                return
+            }
+            self.addonPlans = subscriptionPlansModel.subscriptionPlans
+            self.tableView.reloadData()
+            
+        }) { (errorMessage) in
+            ActivityIndicatorView.hiding()
+            guard let errorString  = errorMessage else {
+                return
+            }
+            self.alert(message: errorString)
+        }
     }
     
     @IBAction func didTapBackButton(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func didTapProceedButton(_ sender: UIButton) {
+        
+        
+    }
+    
+    @objc private func selectPlan(sender: UIButton) {
+        selectedIndex = sender.tag
+        tableView.reloadData()
     }
 }
 
 extension AddonsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return addonPlans.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -34,19 +77,19 @@ extension AddonsViewController: UITableViewDataSource, UITableViewDelegate {
         }
         cell.selectionStyle = .none
         
-//        let plan = subscriptionPlans[indexPath.row]
-//        cell.subscriptionTypeLabel.text = plan.name
-//        cell.priceLabel.text = "$\(plan.monthlycharge) /month"
-//        cell.descriptionLabel.text = plan.description
-//        
-//        let image = (indexPath.row == selectedIndex) ? UIImage(named:"rb_active") : UIImage(named:"rb")
-//        cell.radioButton.setImage(image, for: .normal)
-//        
-//        cell.radioButton.tag = indexPath.row
-//        cell.radioButton.addTarget(self, action: #selector(selectPlan), for: .touchUpInside)
-//        
-//        cell.readmoreButton.tag = indexPath.row
-//        cell.readmoreButton.addTarget(self, action: #selector(showPlanDetails), for: .touchUpInside)
+        let plan = addonPlans[indexPath.row]
+        
+        cell.subscriptionTypeLabel.text = plan.name
+        cell.priceLabel.text = "$\(plan.monthlycharge) /month"
+        cell.descriptionLabel.text = plan.description
+        
+        let image = (indexPath.row == selectedIndex) ? UIImage(named:"rb_active") : UIImage(named:"rb")
+        cell.radioButton.setImage(image, for: .normal)
+        
+        cell.radioButton.tag = indexPath.row
+        cell.radioButton.addTarget(self, action: #selector(selectPlan), for: .touchUpInside)
+        
+        
         
         return cell
     }
@@ -59,5 +102,10 @@ extension AddonsViewController: UITableViewDataSource, UITableViewDelegate {
 
 class AddonTableViewCell : UITableViewCell {
     
+    @IBOutlet weak var radioButton: UIButton!
+    @IBOutlet weak var subscriptionTypeLabel: UILabel!
+    @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UITextView!
 }
 

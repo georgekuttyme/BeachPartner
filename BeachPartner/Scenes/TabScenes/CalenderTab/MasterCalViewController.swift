@@ -51,7 +51,7 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        getAllEvents()
+//        getAllEvents()
         //Temp
         let token = UserDefaults.standard.string(forKey: "bP_token")
         print(token)
@@ -63,7 +63,7 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewWillAppear(animated)
         self.navigationController!.navigationBar.topItem!.title = "Master Calendar"
         
-       // getAllEvents()
+        getAllEvents()
     }
     
     

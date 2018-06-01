@@ -137,6 +137,7 @@
 		FFABE2B920ADC7080029C3A0 /* MyCalEventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFABE2B820ADC7080029C3A0 /* MyCalEventDetailsViewController.swift */; };
 		FFCE759220AAFBF2007C0CFD /* GetEventInvitationRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCE759120AAFBF2007C0CFD /* GetEventInvitationRespModel.swift */; };
 		FFD93D6D20C1257E00747472 /* AddonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD93D6C20C1257E00747472 /* AddonsViewController.swift */; };
+		FFD93D6F20C1646E00747472 /* GetUserSubscriptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD93D6E20C1646E00747472 /* GetUserSubscriptionModel.swift */; };
 		FFEBEB5B20BE672100521041 /* Subscription.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFEBEB5A20BE672100521041 /* Subscription.storyboard */; };
 		FFEBEB5E20BE6F2900521041 /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFEBEB5D20BE6F2900521041 /* SubscriptionViewController.swift */; };
 		FFEBEB6020BEA79A00521041 /* SubscriptionTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFEBEB5F20BEA79A00521041 /* SubscriptionTypeViewController.swift */; };
@@ -280,6 +281,7 @@
 		FFABE2B820ADC7080029C3A0 /* MyCalEventDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCalEventDetailsViewController.swift; sourceTree = "<group>"; };
 		FFCE759120AAFBF2007C0CFD /* GetEventInvitationRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventInvitationRespModel.swift; sourceTree = "<group>"; };
 		FFD93D6C20C1257E00747472 /* AddonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddonsViewController.swift; sourceTree = "<group>"; };
+		FFD93D6E20C1646E00747472 /* GetUserSubscriptionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserSubscriptionModel.swift; sourceTree = "<group>"; };
 		FFEBEB5A20BE672100521041 /* Subscription.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Subscription.storyboard; sourceTree = "<group>"; };
 		FFEBEB5D20BE6F2900521041 /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
 		FFEBEB5F20BEA79A00521041 /* SubscriptionTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionTypeViewController.swift; sourceTree = "<group>"; };
@@ -634,6 +636,7 @@
 				8D782FC020B2B153004CA193 /* GetUpcomingTournamentsRespModel.swift */,
 				8D4B786420ABFE430025F7F7 /* GetAllUserEventsRespModel.swift */,
 				FF32756920BFE355009345B1 /* GetSubscriptionPlanModel.swift */,
+				FFD93D6E20C1646E00747472 /* GetUserSubscriptionModel.swift */,
 			);
 			path = AuthModels;
 			sourceTree = "<group>";
@@ -1088,6 +1091,7 @@
 				3B5D9961206E368E001ED515 /* RangeSeekSliderDelegate.swift in Sources */,
 				FFD93D6D20C1257E00747472 /* AddonsViewController.swift in Sources */,
 				3B49C3872068D7CC007186E8 /* ActivityIndicatorView.swift in Sources */,
+				FFD93D6F20C1646E00747472 /* GetUserSubscriptionModel.swift in Sources */,
 				5EFA2E48207E6D4F00212B45 /* ChatUsersListViewController.swift in Sources */,
 				3B689A14204937880075128E /* BlueBPCollectionViewCell.swift in Sources */,
 				3B689A1C20493DA20075128E /* IntrestedPeopleCollectionViewCell.swift in Sources */,
