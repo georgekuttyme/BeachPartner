@@ -14,7 +14,8 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
     var count: Int = 0
     private var i: Int = 0
     var connectedUsers = [ConnectedUserModel]()
-    
+    var filterConnectedusers = [ConnectedUserModel]()
+    var displayType = ""
     override func viewDidLoad() {
         super.viewDidLoad()
 //        self.getConnections()
@@ -29,6 +30,11 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
         self.getConnections()
     }
     
+    func atheleteConnectionsSearch(searchItem:String){
+        self.filterConnectedusers = self.connectedUsers.filter({ (user) -> Bool in
+            return Bool(user.connectedUser?.firstName == "" || user.connectedUser?.lastName == "")
+        })
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
