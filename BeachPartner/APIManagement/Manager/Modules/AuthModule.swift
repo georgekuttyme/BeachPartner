@@ -1096,10 +1096,8 @@ extension APIManager{
         }
     }
     
-    public func getAllUserEvents(sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure) {
+    public func getAllUserEvents(userId:String,sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure) {
         let params = [String:String]()
-        
-        let userId = UserDefaults.standard.string(forKey: "bP_userId") ?? ""
         APIGetClient.doGetRequest.inGetReqForArray(method: ApiMethods.GetUserEvents + "/\(userId)" , params: params, sucess: { (response) in
             APIManager.printOnDebug(response:"getAllUserEvents  --> : \(response)")
             

@@ -9,6 +9,7 @@ import Koloda
 import SDWebImage
 import UIKit
 import AlamofireImage
+import FSCalendar
 
 
 protocol BPCardsVCDelegate {
@@ -17,7 +18,7 @@ protocol BPCardsVCDelegate {
 }
 
 private var numberOfCards: Int = 5
-class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewDataSource {
+class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewDataSource, FSCalendarDataSource, FSCalendarDelegate {
     
      @IBOutlet weak var cardView: KolodaView!
     @IBOutlet weak var userImg: UIImageView!
@@ -35,6 +36,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     @IBOutlet weak var lblNotAvailable: UILabel!
     @IBOutlet weak var btnPlaybtn: UIButton!
     @IBOutlet weak var lblSwipeGameMsg: UILabel!
+    @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var lblNotAviltopSpace: NSLayoutConstraint!
     @IBOutlet weak var mainStackViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var scrlViewHeight: NSLayoutConstraint!
@@ -56,8 +58,17 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     var searchUsers = [SearchUserModel]()
     var SwipeCardArray:[Any] = []
     var currentIndex : Int = 0
+    var eventDateArray = [String]()
     
     var delegate: BPCardsVCDelegate?
+    
+    fileprivate let formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
+    
+    fileprivate let gregorian: NSCalendar! = NSCalendar(calendarIdentifier:NSCalendar.Identifier.gregorian)
     
     @IBAction func topfinishesClicked(_ sender: Any) {
      
@@ -697,6 +708,67 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         self.btnUndo.setImage(UIImage(named:"back"), for: UIControlState.normal)
         self.btnUndo.isEnabled = true
     }
+
+    
+ // MARK: UserEventsDetails
+    
+    private func getAllUserEvents(userId:String) {
+        APIManager.callServer.getAllUserEvents(userId:userId ,sucessResult: { (responseModel) in
+            
+            guard let eventsArrayModel = responseModel as? GetAllUserEventsRespModelArray else {
+                print("Rep model does not match")
+                return
+            }
+            print("",eventsArrayModel,"*......*********")
+            self.eventDateArray.removeAll()
+            for event in eventsArrayModel.getAllUserEventsRespModel{
+                
+                let startDate = Date(timeIntervalSince1970: TimeInterval((event.event?.eventStartDate)!/1000))
+                let endDate = Date(timeIntervalSince1970: TimeInterval((event.event?.eventEndDate)!/1000))
+                print(startDate)
+                print(endDate)
+                let dates = self.generateDateArrayBetweenTwoDates(startDate: startDate, endDate: endDate)
+                self.eventDateArray.append(contentsOf: dates)
+            }
+            self.calendar.reloadData()
+            
+        }) { (error) in
+            guard let errorString  = error else {
+                return
+            }
+            self.alert(message: errorString)
+        }
+    }
+
+    // MARK:- FSCalendar Data source & Delegates
+    
+    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
+        print("change page to \(self.formatter.string(from: calendar.currentPage))")
+    }
+    
+    func calendar(_ calendar: FSCalendar, subtitleFor date: Date) -> String? {
+        
+        let selectedDate = formatter.string(from: date)
+        let count = eventDateArray.filter { $0 == selectedDate}.count
+        
+        if count > 0 { return "\(count)" }
+        return nil
+    }
+    // MARK:- Helper Methods
+    
+    func generateDateArrayBetweenTwoDates(startDate: Date , endDate:Date) ->[String] {
+        
+        var datesArray: [String] =  [String]()
+        var startDate = startDate
+        let calendar = Calendar.current
+        
+        while startDate <= endDate {
+            datesArray.append(formatter.string(from: startDate))
+            startDate = calendar.date(byAdding: .day, value: 1, to: startDate)!
+        }
+        return datesArray
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -718,6 +790,7 @@ extension BPCardsVC :KolodaViewDelegate {
             self.didPressDownArrow ? view.moveDown.setImage(UIImage(named:"arrow-up"), for: UIControlState.normal) : view.moveDown.setImage(UIImage(named:"arrow-down"), for: UIControlState.normal)
         }
             topFinishers = data.userMoreProfileDetails?.topFinishes ?? ""
+            getAllUserEvents(userId: String(data.id))
       }
         else{
             let  data = SwipeCardArray[index] as! ConnectedUserModel
@@ -730,6 +803,7 @@ extension BPCardsVC :KolodaViewDelegate {
                 self.didPressDownArrow ? view.moveDown.setImage(UIImage(named:"arrow-up"), for: UIControlState.normal) : view.moveDown.setImage(UIImage(named:"arrow-down"), for: UIControlState.normal)
             }
              topFinishers = data.connectedUser?.userMoreProfileDetails?.topFinishes ?? ""
+            getAllUserEvents(userId: String(data.connectedUser?.userId ?? 0))
         }
         curentCardIndex = index
         self.imgProfile.isHidden = true

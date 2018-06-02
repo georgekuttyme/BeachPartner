@@ -76,7 +76,8 @@ class MyCalViewController: UIViewController, UITableViewDelegate, UITableViewDat
     private func getAllUserEvents() {
         
         ActivityIndicatorView.show("Loading")
-        APIManager.callServer.getAllUserEvents(sucessResult: { (responseModel) in
+       // let userId = UserDefaults.standard.string(forKey: "bP_userId") ?? ""
+        APIManager.callServer.getAllUserEvents(userId:UserDefaults.standard.string(forKey: "bP_userId") ?? "" ,sucessResult: { (responseModel) in
             
             ActivityIndicatorView.hiding()
             guard let eventsArrayModel = responseModel as? GetAllUserEventsRespModelArray else {
