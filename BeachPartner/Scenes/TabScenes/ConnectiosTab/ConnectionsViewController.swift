@@ -108,7 +108,6 @@ class ConnectionsViewController : BeachPartnerViewController,UISearchControllerD
     
     @objc func searchBtnClicked(_ sender: AnyObject){
       
-
         self.searchController = UISearchController(searchResultsController:  nil)
         let textFieldInsideSearchBar = searchController.searchBar.value(forKey: "searchField") as? UITextField
         textFieldInsideSearchBar?.textColor = UIColor.white
@@ -122,9 +121,6 @@ class ConnectionsViewController : BeachPartnerViewController,UISearchControllerD
         self.searchController.dimsBackgroundDuringPresentation = true
 //        searchController.searchBar.sizeToFit()
 
-        
-        
-        
         self.navigationItem.titleView = searchController.searchBar
         self.definesPresentationContext = true
         self.searchBtn.tintColor = UIColor.clear
