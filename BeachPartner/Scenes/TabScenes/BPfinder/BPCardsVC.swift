@@ -199,10 +199,12 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         let storyboard : UIStoryboard = UIStoryboard(name: "TabBar", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "ComponentSettings") as! SettingsViewController
         controller.SettingsType = "location"
-        self.tabBarController?.tabBar.isHidden = false
-        self.navigationController!.navigationBar.topItem!.title = ""
-        self.navigationController?.isNavigationBarHidden = false
-        self.navigationController?.pushViewController(controller, animated: true)
+        let navController = UINavigationController(rootViewController: controller)
+//        self.tabBarController?.tabBar.isHidden = false
+//        self.navigationController!.navigationBar.topItem!.title = ""
+        self.present(navController, animated: true, completion: nil)
+//        self.navigationController?.isNavigationBarHidden = false
+//        self.navigationController?.pushViewController(controller, animated: true)
     }
     @IBAction func HiFiBtnClicked(_ sender: Any) {
         self.cardView.swipe(.up)

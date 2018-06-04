@@ -29,5 +29,13 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "closure #1 in HomeTabViewController.observeChannels():HomeTabViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.recentChatList">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

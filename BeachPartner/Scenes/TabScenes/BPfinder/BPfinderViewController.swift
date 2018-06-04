@@ -62,13 +62,13 @@ class BPfinderViewController: BeachPartnerViewController, BpFinderDelegate, Indi
         if currentViewController is SettingsViewController {
             return
         }
-        
-        let locationSettings = UserDefaults.standard.string(forKey: "LocationSettings") ?? "0"
-        if locationSettings == "0" {
-            UserDefaults.standard.set("0", forKey: "LocationSettings")
-            showSettingsView()
-        }
-        UserDefaults.standard.set("0", forKey: "LocationSettings")
+        showSettingsView()
+//        let locationSettings = UserDefaults.standard.string(forKey: "LocationSettings") ?? "0"
+//        if locationSettings == "0" {
+//            UserDefaults.standard.set("0", forKey: "LocationSettings")
+//            showSettingsView()
+//        }
+//        UserDefaults.standard.set("0", forKey: "LocationSettings")
     }
 
     func cycleFromViewController(oldViewController: UIViewController, toViewController newViewController: UIViewController) {

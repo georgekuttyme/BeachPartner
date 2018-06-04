@@ -84,7 +84,7 @@ class SettingsViewController: UIViewController {
         else{
             UserDefaults.standard.set("0", forKey: "includeCoaches")
         }
-        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated:true,completion:nil)
     }
     var result: [String] = [String]()
     

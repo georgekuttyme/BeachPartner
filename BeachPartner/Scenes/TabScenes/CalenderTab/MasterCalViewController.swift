@@ -208,11 +208,12 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
         }
         else {
             cell.invitationTypeImage.image = nil
-            cell.colorView.backgroundColor = .orange
+            cell.colorView.backgroundColor = .clear
         }
         
 //        cell.colorView.backgroundColor = .clear
-        print("event.eventName    ",event.eventName,"   event.status",event.eventStaus)
+        print(eventListToShow,"\n\n\n")
+//        print("event.eventName    ",event.eventName,"   event.status ",event.eventStaus)
         return cell
     }
     
