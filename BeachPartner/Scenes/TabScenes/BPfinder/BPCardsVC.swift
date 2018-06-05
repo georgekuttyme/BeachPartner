@@ -888,9 +888,9 @@ extension BPCardsVC :KolodaViewDelegate {
          self.lblNotAvailable.alpha = 1.0
         self.btnPlaybtn.isHidden = false
         self.lblSwipeGameMsg.isHidden = false
-        self.lblSwipeGameMsg.text = "Start Swipe Game"
+        self.lblSwipeGameMsg.text = "Start Swiping For Partners"
         if searchCardSatus == "search-remain" {
-           self.lblSwipeGameMsg.text = "Resume Swipe Game"
+           self.lblSwipeGameMsg.text = "Resume Swiping For Partners"
         }
 
         if selectedType == "BlueBp" {

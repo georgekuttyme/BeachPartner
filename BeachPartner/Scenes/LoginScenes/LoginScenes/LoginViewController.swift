@@ -16,6 +16,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
     
     let rightButton  = UIButton(type: .custom)
     var iconClick = true
+    @IBOutlet weak var instaBtn: UIButton!
     
     @IBOutlet weak var transparentView: UIView!
     @IBOutlet weak var emailField: FloatingText!
@@ -27,7 +28,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        instaBtn.isHidden = true
         if let version = Bundle.main.buildVersionNumber {
             buildVersionLabel.text = "Beach Partner v\(version)"
         }

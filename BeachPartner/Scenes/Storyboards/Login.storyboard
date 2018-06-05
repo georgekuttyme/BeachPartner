@@ -187,9 +187,6 @@
                                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="32" id="yx6-20-Xk2"/>
                                                                         </constraints>
                                                                         <state key="normal" image="Icon_insta"/>
-                                                                        <connections>
-                                                                            <segue destination="m2A-05-yqf" kind="show" id="zxt-W0-yjv"/>
-                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                             </stackView>
@@ -275,6 +272,7 @@
                         <outlet property="buildVersionLabel" destination="bjj-xI-B8q" id="SuZ-lb-zJW"/>
                         <outlet property="emailField" destination="neJ-7R-KxG" id="6bC-gj-Mlh"/>
                         <outlet property="errorlabel" destination="aAv-zB-zzd" id="4Cf-KT-YPf"/>
+                        <outlet property="instaBtn" destination="2zD-lV-0kA" id="zWb-3N-wHr"/>
                         <outlet property="passwordField" destination="gE1-dg-o7L" id="aYM-El-w3V"/>
                         <segue destination="9kG-QW-Loc" kind="presentation" identifier="tandcsegue" modalPresentationStyle="overCurrentContext" id="NsG-s3-geG"/>
                         <segue destination="gtR-Kj-Dpt" kind="presentation" identifier="PasswordReset" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="2QV-ZJ-VED"/>
@@ -508,7 +506,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZL9-BV-9fS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4023" y="206"/>
+            <point key="canvasLocation" x="-3825" y="180"/>
         </scene>
         <!--Terms And ConditionVC-->
         <scene sceneID="tLI-bL-PCe">

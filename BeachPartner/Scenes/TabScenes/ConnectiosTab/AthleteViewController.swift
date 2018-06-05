@@ -188,6 +188,7 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
             guard let connectedUserModelArray = responseModel as? ConnectedUserModelArray else {
                 return
             }
+            print("\n\n\n\n",connectedUserModelArray)
             self.connectedUsers = connectedUserModelArray.connectedUserModel.filter({ (user) -> Bool in
                 return Bool(user.connectedUser?.userType == "Athlete")
             })
