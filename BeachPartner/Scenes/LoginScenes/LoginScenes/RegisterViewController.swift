@@ -548,7 +548,7 @@ extension RegisterViewController: UITextFieldDelegate {
 //            return true
 //        }
       
-        self.activeTextField = textField
+//        self.activeTextField = textField
         return true
     }
     @available(iOS 10.0, *)
