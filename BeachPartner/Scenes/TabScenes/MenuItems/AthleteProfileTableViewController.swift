@@ -172,7 +172,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     let dateformatter = DateFormatter()
     let date_formatter1 = DateFormatter()
     
-    
+    var typeOfUser = ""
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
       //  tableView.contentSize = CGSize(width: self.view.frame.size.width, height: 1700)
@@ -329,6 +329,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     override func viewDidLoad() {
         super.viewDidLoad()
         videoView?._player?.volume = 0
+//        self.getConnectedUserInfo()
         self.getUserInfo()
         self.hideKeyboardWhenTappedAround()
         loadLocations()
@@ -1285,6 +1286,58 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         })
         
     }
+    
+    func getConnectedUserInfo(){
+        ActivityIndicatorView.show("Loading...")
+        let userId:Int = 10
+        APIManager.callServer.getConnectedUserAccountDetails(userID: userId,sucessResult: { (responseModel) in
+            
+            guard let accRespModel = responseModel as? AccountRespModel else{
+                return
+            }
+            print("****\n\n",accRespModel,"\n\n\n\n\n")
+            if(accRespModel.id != 0){
+                
+                self.userData = accRespModel
+                print("bP_userId", accRespModel.id )
+                print("accRespimageUrl", accRespModel.videoUrl)
+                
+                if let imageUrl = URL(string: accRespModel.imageUrl) {
+                    self.userImageView.sd_setIndicatorStyle(.whiteLarge)
+                    self.userImageView.sd_setShowActivityIndicatorView(true)
+                    self.userImageView.sd_setImage(with: imageUrl, placeholderImage:  #imageLiteral(resourceName: "user"))
+                }
+                
+                self.videoUrl = accRespModel.videoUrl
+                if self.videoUrl == ""
+                {
+                    self.noVideoLbl.text = "No Video Available"
+                }
+                
+                ActivityIndicatorView.hiding()
+                
+                DispatchQueue.main.async {
+                    self.loadVideoOnPlayer(videoUrlVal: accRespModel.videoUrl)
+                    
+                    self.loadDataToUi(accResponseModel: accRespModel)
+                }
+                
+            }else{
+                
+                ActivityIndicatorView.hiding()
+                
+            }
+            
+        }, errorResult: { (error) in
+            guard let errorString  = error else {
+                return
+            }
+            ActivityIndicatorView.hiding()
+            self.alert(message: errorString)
+        })
+        
+    }
+    
     
     
     func getUserInfo(){

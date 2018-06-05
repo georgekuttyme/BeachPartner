@@ -231,8 +231,34 @@ extension APIManager{
         }
     }
     
-    
-    
+    public func getConnectedUserAccountDetails(userID:Int,sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure){
+        let params = [String:String]()
+        
+        APIGetClient.doGetRequest.inGet(method:ApiMethods.getUserById + "/\(userID)", params: params, sucess: { (response) in
+            
+            APIManager.printOnDebug(response: "\(response)")
+            let jsonDict = response! as! JSONDictionary
+            
+            do {
+                
+                let accRespModel = try AccountRespModel(jsonDict)
+                sucessResult(accRespModel)
+                return
+            } catch {
+                print("Catched")
+                errorResult(error.localizedDescription)
+                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                return
+            }
+            
+        }) { (error) in
+            self.busyOff()
+            errorResult(error?.localizedDescription)
+            APIManager.printOnDebug(response: "error:\(error?.localizedDescription)")
+            return
+        }
+    }
+
 
     public func getAccountDetails( sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure){
         let params = [String:String]()

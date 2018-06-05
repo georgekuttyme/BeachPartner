@@ -68,7 +68,7 @@ struct ApiMethods {
     static let sendHiFiRequest  = "/users/hifi/"
     static let sendPushnotification = "/fcm/send"
     static let updateAllUserDetails = "/users/update-all"
-    
+    static let getUserById = "/users"
     static let getSubscriptionPlans = "/payment/subscription-plans"
     static let getAddonPlans = "/payment/addon-plans"
     static let usersActivePlans = "/users/active-plans"
