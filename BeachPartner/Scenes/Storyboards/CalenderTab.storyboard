@@ -95,7 +95,7 @@
                         <outlet property="calenderContainerView" destination="5cM-PC-KPM" id="Gwv-fm-k9N"/>
                         <segue destination="84T-Ho-JQc" kind="show" identifier="editprofilesegue" id="CYk-94-qSb"/>
                         <segue destination="J5f-di-aeG" kind="show" identifier="settingssegue" id="BOE-1D-ulU"/>
-                        <segue destination="4Hr-ax-y4B" kind="presentation" identifier="FilterViewSegue" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="ePr-ky-BNz"/>
+                        <segue destination="4Hr-ax-y4B" kind="presentation" identifier="FilterViewSegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="ePr-ky-BNz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FVO-zq-3vz" userLabel="First Responder" sceneMemberID="firstResponder"/>

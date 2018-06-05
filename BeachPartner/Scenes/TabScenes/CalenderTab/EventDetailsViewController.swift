@@ -252,6 +252,7 @@ class EventDetailsViewController: BeachPartnerViewController {
             let viewController = storyBoard.instantiateViewController(withIdentifier: "PartnerListView") as! PartnerListViewController
             viewController.invitation = invitation
             viewController.modalTransitionStyle = .crossDissolve
+            viewController.modalPresentationStyle = .overFullScreen
             self.present(viewController, animated: true, completion: nil)
         }
         else {

@@ -125,6 +125,7 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
                 self.toastLbl.isHidden = true
             }
             else {
+                self.toastLbl.text = "Messages sent or received will appear here"
                 self.toastLbl.isHidden = false
                 self.toastLbl.numberOfLines = 3
             }
