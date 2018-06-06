@@ -120,21 +120,14 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
             for connectedUser in connectedUserModelArray.connectedUserModel {
                 self.activeUsers.append(connectedUser)
             }
-            print("activeUsers--->            ", self.activeUsers,"          ___________________")
-            if self.activeUsers.count > 0 {
-                self.toastLbl.isHidden = true
-            }
-            else {
-                self.toastLbl.text = "Messages sent or received will appear here"
-                self.toastLbl.isHidden = false
-                self.toastLbl.numberOfLines = 3
-            }
+            
+           
             
             DispatchQueue.main.async {
                 self.recentChatList.removeAll()
                 self.observeChannels()
             }
-            
+            print("activeUsers--->            ", self.recentChatList,"          ___________________")
         }, errorResult: { (error) in
             //                stopLoading()
             guard let errorString  = error else {
@@ -152,6 +145,14 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.activeUsers.count > 0 {
+            self.toastLbl.isHidden = true
+        }
+        else {
+            self.toastLbl.isHidden = false
+            self.toastLbl.text = "Messages sent or received will appear here"
+            self.toastLbl.numberOfLines = 3
+        }
         return self.recentChatList.count
     }
     

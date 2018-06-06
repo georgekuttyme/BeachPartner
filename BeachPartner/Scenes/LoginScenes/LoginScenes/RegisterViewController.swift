@@ -266,7 +266,7 @@ class RegisterViewController: UIViewController {
         
         if mobileTxt.isEmpty() {
             mobileTxt.shake()
-            mobileTxt.errorText = "Please enter a valid mobile number "
+            mobileTxt.errorText = "Enter a valid mobile number "
             mobileTxt.showError()
         }
         else {
@@ -274,7 +274,7 @@ class RegisterViewController: UIViewController {
                 if (mobileTxt.text?.count)! == 10  {
                     if mobileTxt.text == "0000000000"{
                         mobileTxt.shake()
-                        mobileTxt.errorText = "Please enter a valid mobile number"
+                        mobileTxt.errorText = "Enter a valid mobile number"
                         mobileTxt.showError()
                     }
                     else{
@@ -284,7 +284,7 @@ class RegisterViewController: UIViewController {
                     
                 }else{
                     mobileTxt.shake()
-                    mobileTxt.errorText = "Please enter a valid mobile number"
+                    mobileTxt.errorText = "Enter a valid mobile number"
                     mobileTxt.showError()
                 }
         }
