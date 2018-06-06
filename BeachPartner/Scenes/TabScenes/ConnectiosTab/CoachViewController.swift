@@ -11,6 +11,7 @@ import UIKit
 class CoachViewController: UIViewController,UICollectionViewDataSource , UICollectionViewDelegate  {
 
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var toastCoachLbl: UILabel!
     private var arrayImage = [AnyHashable]()
     var count: Int = 0
     private var i: Int = 0
@@ -202,6 +203,13 @@ class CoachViewController: UIViewController,UICollectionViewDataSource , UIColle
             })
             
             self.collectionView.reloadData()
+            if self.connectedUsers.count == 0{
+                self.toastCoachLbl.isHidden = false
+                self.toastCoachLbl.text = "You have no connections yet"
+            }else{
+                self.toastCoachLbl.isHidden = true
+                
+            }
             ActivityIndicatorView.hiding()
             
             self.getBlockedConnections()
@@ -209,6 +217,7 @@ class CoachViewController: UIViewController,UICollectionViewDataSource , UIColle
         }, errorResult: { (error) in
             //                stopLoading()
             guard let errorString  = error else {
+                
                 return
             }
             ActivityIndicatorView.hiding()

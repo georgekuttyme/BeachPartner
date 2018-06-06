@@ -11,6 +11,7 @@ import UIKit
 class AthleteViewController: UIViewController,UICollectionViewDataSource , UICollectionViewDelegate  {
     var blockStatus = "Block"
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var toastAtleteLbl: UILabel!
     var count: Int = 0
     private var i: Int = 0
     var connectedUsers = [ConnectedUserModel]()
@@ -18,6 +19,7 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
     var displayType = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        toastAtleteLbl.isHidden = true
 //        self.getConnections()
     }
     
@@ -27,6 +29,8 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        toastAtleteLbl.isHidden = true
+       
         self.getConnections()
     }
     
@@ -46,6 +50,7 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
             return self.filterConnectedusers.count
         }
         else{
+
             return self.connectedUsers.count
         }
     }
@@ -186,6 +191,7 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
         APIManager.callServer.getUserConnectionList(status:"status=Active&showReceived=false",sucessResult: { (responseModel) in
             
             guard let connectedUserModelArray = responseModel as? ConnectedUserModelArray else {
+                
                 return
             }
             print("\n\n\n\n",connectedUserModelArray)
@@ -193,6 +199,7 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
                 return Bool(user.connectedUser?.userType == "Athlete")
             })
             self.getBlockedConnections()
+            
 
 //            self.collectionView.reloadData()
 //            ActivityIndicatorView.hiding()
@@ -234,6 +241,9 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
                 }
                 else{
                    self.collectionView.isHidden = true
+                    self.toastAtleteLbl.text = "You have no connections yet"
+                    self.toastAtleteLbl.isHidden = false
+                    
                 }
                 ActivityIndicatorView.hiding()
             }
