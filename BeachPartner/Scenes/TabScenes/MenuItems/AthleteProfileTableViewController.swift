@@ -383,19 +383,12 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.shareDataDropDown.direction = .bottom
         self.shareDataDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             if(item == "Profile Image"){
-                // image to share
-                //        let image = UIImage(named: "Image")
-                
-                // set up activity view controller
-                 if(self.userImageView.image != nil){
+//                 if(self.userImageView.image != nil){
+                print(self.userImageView.image ?? "nothingg","\n\n\n\n")
+                if(self.imageUrl != ""){
                     let imageToShare = [ self.userImageView.image! ]
                     let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
-                    activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-                    
-                    // exclude some activity types from the list (optional)
-                    //        activityViewController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
-                    
-                    // present the view controller
+                    activityViewController.popoverPresentationController?.sourceView = self.view
                     self.present(activityViewController, animated: true, completion: nil)
                 }else {
                     
@@ -409,31 +402,21 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             }
             else if(item == "Profile Video"){
                 print("video url :",self.userData.videoUrl)
-                if self.userData.videoUrl == "" {
+//                if self.userData.videoUrl == "" {
+                if self.videoUrl == "" {
                         let refreshAlert = UIAlertController(title: "", message: "Please Upload a video before sharing", preferredStyle: UIAlertControllerStyle.alert)
                     refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
                     }))
                     self.present(refreshAlert, animated: true, completion: nil)
                 }
                 else {
-                   
                     let text = "Hey view/download my Beach Partner video at : " + self.userData.videoUrl
-                    
-                    // set up activity view controller
+                    print(text)
                     let textToShare = [ text ]
                     let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
-                    activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-                    
-                    // exclude some activity types from the list (optional)
-                    //                activityViewController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
-                    
-                    // present the view controller
+                    activityViewController.popoverPresentationController?.sourceView = self.view
                     self.present(activityViewController, animated: true, completion: nil)
                 }
-                
-                
-               
-                
             }
         }
         
@@ -446,7 +429,6 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.genderdropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.genderBtn.setTitle(item, for: UIControlState.normal)
             self.genderBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
-//            self.genderBtn.setTitleColor(UIColor.blue, for: .normal)
         }
         self.genderBtn.setTitle("", for: UIControlState.normal)
         self.genderdropDown.selectRow(0)
@@ -472,7 +454,6 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.courtSidePreferencedropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.courtSidePreferenceBtn.setTitle(item, for: UIControlState.normal)
             self.courtSidePreferenceBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
-//            self.courtSidePreferenceBtn.setTitleColor(UIColor.blue, for: .normal)
         }
         self.courtSidePreferenceBtn.setTitle("", for: UIControlState.normal)
         self.courtSidePreferencedropDown.selectRow(0)
@@ -486,7 +467,6 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.positiondropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.positionBtn.setTitle(item, for: UIControlState.normal)
             self.positionBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
-//            self.positionBtn.setTitleColor(UIColor.blue, for: .normal)
         }
         self.positionBtn.setTitle("", for: UIControlState.normal)
         self.positiondropDown.selectRow(0)
@@ -731,16 +711,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             self.userData.gender = (self.genderBtn.titleLabel?.text)!
             currentValidation += 1
         }
-//        if cityTxtFld.isEmpty() {
-//            cityTxtFld.shake()
-//            cityTxtFld.errorText = "Empty!"
-//            cityTxtFld.showError()
-//        }else{
-//            cityTxtFld.hideError()
-//            self.userData.city = cityTxtFld.text!
-//            currentValidation += 1
-//        }
-        
+
         if (self.stateBtn.titleLabel?.text == ""){
             self.stateBtn.shake()
             self.view.makeToast("Please select your State", duration: 3.0, position: .center)
@@ -853,7 +824,6 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
                 self.imagePickerController.delegate = self
                 self.imagePickerController.mediaTypes = [kUTTypeMovie as String]
                 self.imagePickerController.allowsEditing = true
-//                self.imagePickerController.showsCameraControls = true
                 self.imagePickerController.videoMaximumDuration = 30.0
                 self.showImagePicker(sourceType: UIImagePickerControllerSourceType.camera)
             } else {
@@ -1160,7 +1130,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         else if textField == topFinishesTxtfld {
             topFinishesoneTxtFld.becomeFirstResponder()
         }else if textField == topFinishesoneTxtFld{
-            topFinishestwoTxtFld.resignFirstResponder()
+            textField.resignFirstResponder()
         }
         else if textField == topFinishestwoTxtFld{
             textField.resignFirstResponder()

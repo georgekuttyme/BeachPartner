@@ -45,7 +45,8 @@ class FilterViewController: UIViewController {
     let statedropDown = DropDown()
     let regiondropDown = DropDown()
     
-    let eventList = ["Junior",
+    let eventList = ["Choose event type",
+                     "Junior",
                      "College Showcase",
                      "College Clinic",
                      "National Tournament",
@@ -71,10 +72,12 @@ class FilterViewController: UIViewController {
                              "CoEd AA",
                              "CoEd AAA",
                              "CoEd Open"]
-    let yearList = ["2018",
+    let yearList = ["Choose year",
+                    "2018",
                     "2019",
                     "2020"]
-    let monthList = ["January",
+    let monthList = ["Choose month",
+                     "January",
                      "February",
                      "March",
                      "April",
@@ -283,12 +286,49 @@ class FilterViewController: UIViewController {
         if filterParams == nil {
             filterParams = EventFilterParams(eventType: nil, subEventType: nil, year: nil, month: nil, state: nil, region: nil)
         }
-        filterParams?.eventType = eventdropDown.selectedItem
-        filterParams?.subEventType = subeventsdropDown.selectedItem
-        filterParams?.year = yeardropDown.selectedItem
-        filterParams?.month = monthdropDown.selectedItem
-        filterParams?.state = statedropDown.selectedItem
-        filterParams?.region = regiondropDown.selectedItem
+  
+        if eventdropDown.selectedItem == "Choose event type"{
+            filterParams?.eventType = nil
+        }else{
+            filterParams?.eventType = eventdropDown.selectedItem
+        }
+        
+        if subeventsdropDown.selectedItem == "Choose subtype" || subeventsdropDown.selectedItem == "Not Applicable" {
+            filterParams?.subEventType = nil
+        }else{
+            filterParams?.subEventType = subeventsdropDown.selectedItem
+        }
+        
+        if yeardropDown.selectedItem == "Choose year"{
+            filterParams?.year = nil
+        }else{
+            filterParams?.year = yeardropDown.selectedItem
+        }
+        
+        if monthdropDown.selectedItem == "Choose month"{
+            filterParams?.month = nil
+        }else{
+            filterParams?.month = monthdropDown.selectedItem
+        }
+        
+        if statedropDown.selectedItem == "Choose state"{
+            filterParams?.state = nil
+        }else{
+            filterParams?.state = statedropDown.selectedItem
+        }
+        
+        if regiondropDown.selectedItem == "Choose region"{
+            filterParams?.region = nil
+        }else{
+            filterParams?.region = regiondropDown.selectedItem
+        }
+        print("??  -",filterParams?.eventType,"  ??  -",filterParams?.subEventType,"  ??  -",filterParams?.year,"   ??  -",filterParams?.month,"  ??  -",filterParams?.state,"  ??  -",filterParams?.region)
+//        filterParams?.eventType = eventdropDown.selectedItem
+//        filterParams?.subEventType = subeventsdropDown.selectedItem
+//        filterParams?.year = yeardropDown.selectedItem
+//        filterParams?.month = monthdropDown.selectedItem
+//        filterParams?.state = statedropDown.selectedItem
+//        filterParams?.region = regiondropDown.selectedItem
         
         delegate?.didApplyFilter(filterParams: filterParams!)
         navigationController?.popViewController(animated: true)
@@ -296,6 +336,7 @@ class FilterViewController: UIViewController {
     }
 
     func loadLocations(){
+        stateList.append("Choose state")
         stateList.append("Alabama");
         stateList.append("Alaska");
         stateList.append("Arizona");
@@ -348,6 +389,7 @@ class FilterViewController: UIViewController {
         stateList.append("Wyoming");
     }
     func loadRegion(){
+        regionList.append("Choose region");
         regionList.append("Alaska Region (AK)");
         regionList.append("Aloha Region (AH)");
         regionList.append("Arizona Region (AZ)");
