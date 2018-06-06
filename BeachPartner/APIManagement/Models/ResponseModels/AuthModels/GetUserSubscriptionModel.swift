@@ -11,22 +11,22 @@ import Tailor
 
 struct GetUserSubscriptionModel : SafeMappable {
     
-    var subscriptions: [Subscription] = [Subscription]()
-    var addons: [Subscription] = [Subscription]()
+    var subscriptions = [ActiveSubscription]()
+    var addons = [ActiveSubscription]()
     
     init(_ map: [String : Any]) throws {
         
         subscriptions <- map.relations("subscriptions")
         addons <- map.relations("addons")
     }
+}
+
+struct ActiveSubscription: SafeMappable {
+    var planName: String = ""
+    var remainingDays: Int = 0
     
-    struct Subscription: SafeMappable {
-        var planName: String = ""
-        var remainingDays: Int = 0
-        
-        init(_ map: [String : Any]) throws {
-            planName <- map.property("planName")
-            remainingDays <- map.property("remainingDays")
-        }
+    init(_ map: [String : Any]) throws {
+        planName <- map.property("planName")
+        remainingDays <- map.property("remainingDays")
     }
 }
