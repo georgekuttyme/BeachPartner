@@ -278,7 +278,7 @@ class FilterViewController: UIViewController {
     }
     @IBAction func clearAllBtnClicked(_ sender: UIButton) {
         delegate?.clearAllFilters()
-        dismiss(animated: true, completion: nil)
+        //dismiss(animated: true, completion: nil)
     }
     
     @IBAction func searchClicked(_ sender: Any) {
