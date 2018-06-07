@@ -20,7 +20,8 @@ protocol BPCardsVCDelegate {
 private var numberOfCards: Int = 5
 class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewDataSource, FSCalendarDataSource, FSCalendarDelegate {
     
-     @IBOutlet weak var cardView: KolodaView!
+    @IBOutlet weak var profileBoostButton: UIButton!
+    @IBOutlet weak var cardView: KolodaView!
     @IBOutlet weak var userImg: UIImageView!
     @IBOutlet weak var badgeImage: UIImageView!
     @IBOutlet weak var topthreefinishesBtn: UIButton!
@@ -69,6 +70,15 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     }()
     
     fileprivate let gregorian: NSCalendar! = NSCalendar(calendarIdentifier:NSCalendar.Identifier.gregorian)
+    
+    @IBAction func didTapProfileBoostButton(_ sender: UIButton) {
+        
+        let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "AddonsViewController") as! AddonsViewController
+        vc.profileBoostmode = true
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     
     @IBAction func topfinishesClicked(_ sender: Any) {
      
@@ -162,11 +172,8 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         return 0;
     }
     
-    @IBAction func undoBtnCLicked(_ sender: Any) {
-        print(self.currentIndex)
-        if let view:CardView = (self.cardView.viewForCard(at: self.currentIndex) as? CardView) {
-            view.pauseVideo()
-        }
+    
+    private func revertCardAction() {
         self.btnUndo.isEnabled = false
         self.btnUndo.setImage(UIImage(named:"grayback"), for: UIControlState.normal)
         self.imgProfile.isHidden = true
@@ -174,6 +181,24 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         self.btnPlaybtn.isHidden = true
         self.lblSwipeGameMsg.isHidden = true
         self.cardView.revertAction()
+    }
+    
+    @IBAction func undoBtnCLicked(_ sender: Any) {
+        
+        if Subscription.current.supportForFunctionality(featureId: BenefitType.UndoSwipe) == false {
+            let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: SubscriptionTypeViewController.identifier) as! SubscriptionTypeViewController
+            vc.benefitCode = BenefitType.UndoSwipe
+            self.present(vc, animated: true, completion: nil)
+            return
+        }
+        
+        print(self.currentIndex)
+        if let view:CardView = (self.cardView.viewForCard(at: self.currentIndex) as? CardView) {
+            view.pauseVideo()
+        }
+
+        revertCardAction()
         
         let firstElement = self.swipeAction.first
         guard let undoId = firstElement?.id else {
@@ -304,6 +329,13 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         self.getUserInfo()
         self.generateSwipeAarray()
         
+        
+        if self.selectedType == "BlueBp" && Subscription.current.statusOfAddOn(addOnId: AddOnType.ProfileBoost) == false {
+            profileBoostButton.isHidden = false
+        }
+        else {
+            profileBoostButton.isHidden = true
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(sendMsg(notification:)), name:NSNotification.Name(rawValue: "send-Message"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(findTournament(notification:)), name:NSNotification.Name(rawValue: "find-Tournament"), object: nil)
@@ -660,13 +692,30 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             if self.selectedType == "BlueBp"{
                  self.getUsersListforBlueBp()
             }
+            
+            self.btnUndo.setImage(UIImage(named:"back"), for: UIControlState.normal)
+            self.btnUndo.isEnabled = true
         
-        }, errorResult: { (error) in
-           
+        }, errorResult: { (error, code) in
+          
+            if let message = error {
+                let alertView = UIAlertController(title: "", message: message, preferredStyle: .alert)
+                let okbutton = UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                    
+                    if let code = code, code == "QuotaExpired" {
+                        
+                        let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
+                        let vc = storyboard.instantiateViewController(withIdentifier: SubscriptionTypeViewController.identifier) as! SubscriptionTypeViewController
+                        vc.benefitCode = BenefitType.SwipeAction
+                        self.tabBarController?.present(vc, animated: true, completion: nil)
+                        return
+                    }
+                })
+                alertView.addAction(okbutton)
+                self.present(alertView, animated: true, completion: nil)
+            }
+            self.revertCardAction()
         })
-    
-        self.btnUndo.setImage(UIImage(named:"back"), for: UIControlState.normal)
-        self.btnUndo.isEnabled = true
     }
     func didSwipeToRight(user_Id:String){
         APIManager.callServer.requestFriendship(userId:user_Id,sucessResult: { (responseModel) in
@@ -687,11 +736,29 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
                 self.present(vc, animated: true, completion: nil)
             }
             
-        }, errorResult: { (error) in
+            self.btnUndo.setImage(UIImage(named:"back"), for: UIControlState.normal)
+            self.btnUndo.isEnabled = true
             
+        }, errorResult: { (error, code) in
+            
+            if let message = error {
+                let alertView = UIAlertController(title: "", message: message, preferredStyle: .alert)
+                let okbutton = UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                    
+                    if let code = code, code == "QuotaExpired" {
+                        
+                        let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
+                        let vc = storyboard.instantiateViewController(withIdentifier: SubscriptionTypeViewController.identifier) as! SubscriptionTypeViewController
+                        vc.benefitCode = BenefitType.SwipeAction
+                        self.tabBarController?.present(vc, animated: true, completion: nil)
+                        return
+                    }
+                })
+                alertView.addAction(okbutton)
+                self.present(alertView, animated: true, completion: nil)
+            }
+            self.revertCardAction()
         })
-        self.btnUndo.setImage(UIImage(named:"back"), for: UIControlState.normal)
-         self.btnUndo.isEnabled = true
     }
     func didSwipeToLeft(user_Id:String){
         APIManager.callServer.rejectFriendship(userId:user_Id,sucessResult: { (responseModel) in
@@ -704,11 +771,29 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             if self.selectedType == "BlueBp"{
                 self.getUsersListforBlueBp()
             }
-        }, errorResult: { (error) in
             
+            self.btnUndo.setImage(UIImage(named:"back"), for: UIControlState.normal)
+            self.btnUndo.isEnabled = true
+        }, errorResult: { (error, code) in
+            
+            if let message = error {
+                let alertView = UIAlertController(title: "", message: message, preferredStyle: .alert)
+                let okbutton = UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                    
+                    if let code = code, code == "QuotaExpired" {
+                        
+                        let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
+                        let vc = storyboard.instantiateViewController(withIdentifier: SubscriptionTypeViewController.identifier) as! SubscriptionTypeViewController
+                        vc.benefitCode = BenefitType.SwipeAction
+                        self.tabBarController?.present(vc, animated: true, completion: nil)
+                        return
+                    }
+                })
+                alertView.addAction(okbutton)
+                self.present(alertView, animated: true, completion: nil)
+            }
+            self.revertCardAction()
         })
-        self.btnUndo.setImage(UIImage(named:"back"), for: UIControlState.normal)
-        self.btnUndo.isEnabled = true
     }
 
     

@@ -654,7 +654,7 @@ extension APIManager{
         }
     }
     
-    public func requestHiFi(userId:String, sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure){
+    public func requestHiFi(userId:String, sucessResult:@escaping resultClosure,errorResult:@escaping errorClosureWithCode){
         let params = ["":""]
         APIClient.doRequest.inPost(method:ApiMethods.sendHiFiRequest + "\(userId)", params: params , sucess: { (response) in
             let jsonDict = response! as! JSONDictionary
@@ -663,8 +663,16 @@ extension APIManager{
                 sucessResult(accRespModel)
                 return
             } catch {
+                
+                if (jsonDict["status"] as? Int) != nil {
+                    if let message = jsonDict["title"] as? String?, let code = jsonDict["errorKey"] as? String? {
+                        errorResult(message, code)
+                        return
+                    }
+                }
+                
                 print("Catched")
-                errorResult(error.localizedDescription)
+                errorResult(error.localizedDescription, nil)
                 APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
                 return
             }
@@ -672,13 +680,13 @@ extension APIManager{
             
         }) { (error) in
             self.busyOff()
-            errorResult(error?.localizedDescription)
+            errorResult(error?.localizedDescription, nil)
             APIManager.printOnDebug(response: "error:\(String(describing: error?.localizedDescription))")
             return
         }
         
  }
-    public func requestFriendship(userId:String, sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure){
+    public func requestFriendship(userId:String, sucessResult:@escaping resultClosure,errorResult:@escaping errorClosureWithCode){
         let params = ["":""]
         APIClient.doRequest.inPost(method:ApiMethods.sendFriendRequest + "\(userId)", params: params , sucess: { (response) in
             let jsonDict = response! as! JSONDictionary
@@ -687,20 +695,27 @@ extension APIManager{
                 sucessResult(accRespModel)
                 return
             } catch {
+                
+                if (jsonDict["status"] as? Int) != nil {
+                    if let message = jsonDict["title"] as? String?, let code = jsonDict["errorKey"] as? String? {
+                        errorResult(message, code)
+                        return
+                    }
+                }
                 print("Catched")
-                errorResult(error.localizedDescription)
+                errorResult(error.localizedDescription, nil)
                 APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
                 return
             }
         }) { (error) in
             self.busyOff()
-            errorResult(error?.localizedDescription)
+            errorResult(error?.localizedDescription, nil)
             APIManager.printOnDebug(response: "error:\(String(describing: error?.localizedDescription))")
             return
         }
         
  }
-    public func rejectFriendship(userId:String, sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure){
+    public func rejectFriendship(userId:String, sucessResult:@escaping resultClosure,errorResult:@escaping errorClosureWithCode){
         let params = ["":""]
         APIClient.doRequest.inPost(method:ApiMethods.rejectFriendRequest + "\(userId)", params: params , sucess: { (response) in
             let jsonDict = response! as! JSONDictionary
@@ -709,15 +724,22 @@ extension APIManager{
                 sucessResult(accRespModel)
                 return
             } catch {
+                
+                if (jsonDict["status"] as? Int) != nil {
+                    if let message = jsonDict["title"] as? String?, let code = jsonDict["errorKey"] as? String? {
+                        errorResult(message, code)
+                        return
+                    }
+                }
                 print("Catched")
-                errorResult(error.localizedDescription)
+                errorResult(error.localizedDescription, nil)
                 APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
                 return
             }
             
         }) { (error) in
             self.busyOff()
-            errorResult(error?.localizedDescription)
+            errorResult(error?.localizedDescription, nil)
             APIManager.printOnDebug(response: "error:\(String(describing: error?.localizedDescription))")
             return
         }
@@ -881,7 +903,8 @@ extension APIManager{
             APIManager.printOnDebug(response: " Resppp222 : \(response)")
             let jsonDict = response! as! JSONDictionary
             do {
-                let accRespModel = try ConnectedUserModelArray(jsonDict)
+                let accRespModel = try ConnectedUserModel(jsonDict)
+//                let accRespModel = try ConnectedUserModelArray(jsonDict)
                 sucessResult(accRespModel)
                 return
             } catch {
@@ -909,7 +932,8 @@ extension APIManager{
             APIManager.printOnDebug(response: " Resppp222 : \(response)")
             let jsonDict = response! as! JSONDictionary
             do {
-                let accRespModel = try ConnectedUserModelArray(jsonDict)
+//                let accRespModel = try ConnectedUserModelArray(jsonDict)
+                let accRespModel = try ConnectedUserModel(jsonDict)
                 sucessResult(accRespModel)
                 return
             } catch {
