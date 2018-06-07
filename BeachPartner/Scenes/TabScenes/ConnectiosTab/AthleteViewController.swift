@@ -135,7 +135,7 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
                 print(self.connectedUsers.count)
                 self.connectedUsers.append(blockedUser)
                 print(self.connectedUsers.count)
-                
+                self.collectionView.reloadData()
             
                 print("User Blocked======",id)
             }

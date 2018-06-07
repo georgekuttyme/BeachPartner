@@ -270,8 +270,10 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="buildVersionLabel" destination="bjj-xI-B8q" id="SuZ-lb-zJW"/>
+                        <outlet property="connectWithLbl" destination="lT1-eG-ynR" id="ID2-j1-IeY"/>
                         <outlet property="emailField" destination="neJ-7R-KxG" id="6bC-gj-Mlh"/>
                         <outlet property="errorlabel" destination="aAv-zB-zzd" id="4Cf-KT-YPf"/>
+                        <outlet property="facebookBtn" destination="w2o-ZP-TVL" id="Gno-co-ZIR"/>
                         <outlet property="instaBtn" destination="2zD-lV-0kA" id="zWb-3N-wHr"/>
                         <outlet property="passwordField" destination="gE1-dg-o7L" id="aYM-El-w3V"/>
                         <segue destination="9kG-QW-Loc" kind="presentation" identifier="tandcsegue" modalPresentationStyle="overCurrentContext" id="NsG-s3-geG"/>
@@ -1142,7 +1144,7 @@
                                                 </constraints>
                                                 <color key="textColor" red="0.12549019610000001" green="0.18823529410000001" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="done" textContentType="tel"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="tel"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
                                                         <color key="value" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
