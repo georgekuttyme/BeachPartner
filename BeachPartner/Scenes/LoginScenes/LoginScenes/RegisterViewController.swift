@@ -270,7 +270,8 @@ class RegisterViewController: UIViewController {
             mobileTxt.showError()
         }
         else {
-            
+            let mobileText = mobileTxt.text?.replacingOccurrences(of: " ", with: "", options: .literal, range: nil)
+            mobileTxt.text = mobileText
                 if (mobileTxt.text?.count)! == 10  {
                     if mobileTxt.text == "0000000000"{
                         mobileTxt.shake()
@@ -334,7 +335,7 @@ class RegisterViewController: UIViewController {
             //failed
         }
     }
-    
+   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -693,14 +694,14 @@ extension RegisterViewController: UITextFieldDelegate {
         }
         if textField == self.mobileTxt {
             //            textField.autocapitalizationType = UITextAutocapitalizationType.words
+            let mobileText = mobileTxt.text?.replacingOccurrences(of: " ", with: "", options: .literal, range: nil)
+            mobileTxt.text = mobileText
             if mobileTxt.isEmpty() {
                 mobileTxt.shake()
                 mobileTxt.errorText = "Enter a valid mobile number"
                 mobileTxt.showError()
             }
             else {
-                
-                
                 
                 if (mobileTxt.text?.count)! == 10  {
                     if mobileTxt.text == "0000000000"{
@@ -722,7 +723,9 @@ extension RegisterViewController: UITextFieldDelegate {
             
         }
     }
+   
 
+    
  
         func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
