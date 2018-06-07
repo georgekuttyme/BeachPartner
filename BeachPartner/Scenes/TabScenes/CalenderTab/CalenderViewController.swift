@@ -118,7 +118,9 @@ extension CalenderViewController: FilterViewControllerDelegate {
         self.eventFilterParams = filterParams
         let activeVC = currentViewController as! MasterCalViewController
         activeVC.filterParams = filterParams
-        
+        if activeVC.filterParams == nil{
+            filterButton.tintColor = UIColor.white
+        }
         filterButton.tintColor = UIColor.cyan
     }
     

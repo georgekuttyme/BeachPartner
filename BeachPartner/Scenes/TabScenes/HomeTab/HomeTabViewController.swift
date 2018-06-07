@@ -88,7 +88,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         self.getBlockedConnections()
         let isNewUserFirstLogin = UserDefaults.standard.string(forKey: "isNewUserFirstLogin") ?? ""
         let loggedIn = UserDefaults.standard.string(forKey: "isFirstLoggedIn")
-        if loggedIn != "0" || isNewUserFirstLogin == "0" {
+        if loggedIn != "0" {
             UserDefaults.standard.set(1,forKey: "isNewUserFirstLogin")
             UserDefaults.standard.set("0", forKey: "isFirstLoggedIn")
             let storyboard = UIStoryboard(name: "TabBar", bundle: nil)

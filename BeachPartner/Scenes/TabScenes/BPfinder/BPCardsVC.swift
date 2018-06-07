@@ -904,6 +904,9 @@ extension BPCardsVC: KolodaViewDataSource {
     func kolodaNumberOfCards(_ koloda: KolodaView) -> Int {
         return SwipeCardArray.count
     }
+    func kolodaShouldApplyAppearAnimation(_ koloda: KolodaView) -> Bool{
+        return false
+    }
     
     func koloda(_ koloda: KolodaView, viewForCardAt index: Int) -> UIView {
         
