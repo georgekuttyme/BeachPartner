@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/Scenes/TabScenes/CalenderTab/FilterViewController.swift"
-            timestampString = "549985733.758148"
+            timestampString = "550056770.307026"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "338"
-            endingLineNumber = "338"
-            landmarkName = "searchClicked(_:)"
+            startingLineNumber = "280"
+            endingLineNumber = "280"
+            landmarkName = "clearAllBtnClicked(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,14 +25,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BeachPartner/Scenes/TabScenes/CalenderTab/CalenderViewController.swift"
-            timestampString = "549985733.759113"
+            filePath = "BeachPartner/Scenes/TabScenes/CalenderTab/MasterCalViewController.swift"
+            timestampString = "550042496.304168"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
-            landmarkName = "clearAllFilters()"
-            landmarkType = "7">
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "filterParams"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/Scenes/TabScenes/CalenderTab/CalenderViewController.swift"
-            timestampString = "549985733.759365"
+            timestampString = "550056770.307714"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
             landmarkName = "didApplyFilter(filterParams:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/Scenes/TabScenes/CalenderTab/FilterViewController.swift"
-            timestampString = "549985733.7594351"
+            timestampString = "550056770.307996"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "280"
-            endingLineNumber = "280"
-            landmarkName = "clearAllBtnClicked(_:)"
+            startingLineNumber = "300"
+            endingLineNumber = "300"
+            landmarkName = "searchClicked(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

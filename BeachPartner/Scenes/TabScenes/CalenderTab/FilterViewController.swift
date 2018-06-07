@@ -34,7 +34,7 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var yearBtn: UIButton!
     @IBOutlet weak var subTypesBtn: UIButton!
     @IBOutlet weak var eventBtn: UIButton!
-    
+    var clearFilterClicked = Bool()
     var stateList = [String]()
     var regionList = [String]()
     
@@ -99,7 +99,7 @@ class FilterViewController: UIViewController {
         
         loadLocations()
         loadRegion()
-        
+        clearFilterClicked = false
         self.eventdropDown.anchorView = self.eventBtn // UIView or UIBarButtonItem
         self.eventdropDown.dataSource = eventList
         self.eventdropDown.bottomOffset = CGPoint(x: 0, y:0)
@@ -277,19 +277,20 @@ class FilterViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     @IBAction func clearAllBtnClicked(_ sender: UIButton) {
-//        self.eventBtn.setTitle("Choose event type", for: UIControlState.normal)
-//        self.eventdropDown.selectRow(0)
-//        self.subTypesBtn.setTitle("Choose subtype", for: UIControlState.normal)
-////        self.subeventsdropDown.selectRow(0)
-//        self.yearBtn.setTitle("Choose year", for: UIControlState.normal)
-//        self.yeardropDown.selectRow(0)
-//        self.monthBtn.setTitle("Choose month", for: UIControlState.normal)
-//        self.monthdropDown.selectRow(0)
-//        self.stateBtn.setTitle("Choose state", for: UIControlState.normal)
-//        self.statedropDown.selectRow(0)
-//        self.regionBtn.setTitle("Choose region", for: UIControlState.normal)
-//        self.regiondropDown.selectRow(0)
-//        filterParams = nil
+        self.eventBtn.setTitle("Choose event type", for: UIControlState.normal)
+        self.eventdropDown.selectRow(0)
+        self.subTypesBtn.setTitle("Choose subtype", for: UIControlState.normal)
+//        self.subeventsdropDown.selectRow(0)
+        self.yearBtn.setTitle("Choose year", for: UIControlState.normal)
+        self.yeardropDown.selectRow(0)
+        self.monthBtn.setTitle("Choose month", for: UIControlState.normal)
+        self.monthdropDown.selectRow(0)
+        self.stateBtn.setTitle("Choose state", for: UIControlState.normal)
+        self.statedropDown.selectRow(0)
+        self.regionBtn.setTitle("Choose region", for: UIControlState.normal)
+        self.regiondropDown.selectRow(0)
+        filterParams = nil
+        clearFilterClicked = true
         delegate?.clearAllFilters()
         //dismiss(animated: true, completion: nil)
     }
@@ -297,9 +298,18 @@ class FilterViewController: UIViewController {
     @IBAction func searchClicked(_ sender: Any) {
         
         if filterParams == nil {
-            filterParams = EventFilterParams(eventType: nil, subEventType: nil, year: nil, month: nil, state: nil, region: nil)
+            
+            if clearFilterClicked{
+                filterParams = nil
+            }else{
+
+                filterParams = EventFilterParams(eventType: nil, subEventType: nil, year: nil, month: nil, state: nil, region: nil)
+            }
+            
         }
-  
+//        if eventdropDown.selectedItem == nil || subeventsdropDown.selectedItem == nil {
+//
+//        }
         if eventdropDown.selectedItem == "Choose event type"{
             filterParams?.eventType = nil
         }else{
@@ -336,16 +346,15 @@ class FilterViewController: UIViewController {
             filterParams?.region = regiondropDown.selectedItem
         }
         print("??  -",filterParams?.eventType,"  ??  -",filterParams?.subEventType,"  ??  -",filterParams?.year,"   ??  -",filterParams?.month,"  ??  -",filterParams?.state,"  ??  -",filterParams?.region)
-//        filterParams?.eventType = eventdropDown.selectedItem
-//        filterParams?.subEventType = subeventsdropDown.selectedItem
-//        filterParams?.year = yeardropDown.selectedItem
-//        filterParams?.month = monthdropDown.selectedItem
-//        filterParams?.state = statedropDown.selectedItem
-//        filterParams?.region = regiondropDown.selectedItem
-        
-        delegate?.didApplyFilter(filterParams: filterParams!)
+        if filterParams?.eventType == nil || filterParams?.subEventType == nil || filterParams?.year == nil || filterParams?.month == nil || filterParams?.state == nil || filterParams?.region == nil {
+            filterParams = nil
+            clearFilterClicked = true
+        }
+        if !clearFilterClicked {
+            delegate?.didApplyFilter(filterParams: filterParams!)
+        }
         navigationController?.popViewController(animated: true)
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: {self.clearFilterClicked = false})
     }
 
     func loadLocations(){

@@ -30,6 +30,14 @@ extension UIViewController {
     
     func timoutLogoutAction(){
          UserDefaults.standard.set("0", forKey: "isLoggedIn")
+//        let userName = UserDefaults.standard.string(forKey: "email")
+//        let password = UserDefaults.standard.string(forKey: "password")
+//        let domain = Bundle.main.bundleIdentifier!
+//        UserDefaults.standard.removePersistentDomain(forName: domain)
+//        UserDefaults.standard.synchronize()
+//        print(Array(UserDefaults.standard.dictionaryRepresentation().keys).count)
+//        UserDefaults.standard.set(userName, forKey: "email")
+//        UserDefaults.standard.set(password, forKey: "password")
         let mainStoryBoard = UIStoryboard(name: "Login", bundle: nil)
         let loginViewController = mainStoryBoard.instantiateViewController(withIdentifier: "loginscene") as! LoginViewController
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
