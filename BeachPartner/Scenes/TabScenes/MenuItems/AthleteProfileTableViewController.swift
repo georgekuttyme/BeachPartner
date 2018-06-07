@@ -16,6 +16,7 @@ import Floaty
 
 class AthleteProfileTableViewController: UITableViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate {
     
+    @IBOutlet weak var shareLbl: UILabel!
     @IBOutlet weak var videoDisplayView: UIView!
     
     @IBOutlet var noVideoLbl: UILabel!
@@ -146,6 +147,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     @IBOutlet weak var userName: UILabel!
     var activeTextField: UITextField?
     var userData = AccountRespModel()
+    var connectedUserId = Int()
     var videoUrl = ""
     var imageUrl = ""
     var movieData: NSData?
@@ -171,8 +173,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     let datePicker = UIDatePicker()
     let dateformatter = DateFormatter()
     let date_formatter1 = DateFormatter()
-    
-    var typeOfUser = ""
+    var isFromConnectedUser = ""
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
       //  tableView.contentSize = CGSize(width: self.view.frame.size.width, height: 1700)
@@ -209,15 +210,18 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     
     override func viewDidDisappear(_ animated: Bool) {
         
-        self.videoView?._player = nil
-//        self.videoView?._playerItem = nil
-        self.videoView?.pause()
-        self.videoView?.refreshPlayer()
+//        self.videoView?._player = nil
+////        self.videoView?._playerItem = nil
+//        self.videoView?.pause()
+//        self.videoView?.refreshPlayer()
         
         
     }
     @objc func didTapDismissButton() {
-        
+        self.videoView?._player = nil
+        //        self.videoView?._playerItem = nil
+        self.videoView?.pause()
+        self.videoView?.refreshPlayer()
         if self.editclicked{
             let alert = UIAlertController(title: "Are you sure you want to discard this changes?", message: "You cannot undo this action", preferredStyle: .alert)
             let actionButton = UIAlertAction(title: "Save", style: .cancel) { (action) in
@@ -329,13 +333,29 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     override func viewDidLoad() {
         super.viewDidLoad()
         videoView?._player?.volume = 0
-//        self.getConnectedUserInfo()
-        self.getUserInfo()
+        print(connectedUserId,"====",isFromConnectedUser)
+        if isFromConnectedUser == "ConnectedUser"{
+            self.editUserImageBtn.isHidden = true
+            self.editUserImageBtn.isUserInteractionEnabled = false
+            self.editVideoBtn.isHidden = true
+            self.editVideoBtn.isUserInteractionEnabled = false
+            self.shareBtn.isHidden = true
+            self.shareBtn.isUserInteractionEnabled = false
+            self.editProfileTxtBtn.isHidden = true
+            self.editProfileTxtBtn.isUserInteractionEnabled = false
+            self.shareLbl.isHidden = true
+            self.editProfileBtn.isHidden = true
+            self.editProfileBtn.isUserInteractionEnabled = false
+            self.getConnectedUserInfo(userId:connectedUserId)
+        }else{
+            self.getUserInfo()
+        }
+        
         self.hideKeyboardWhenTappedAround()
         loadLocations()
         dateformatter.dateFormat = "MM-dd-yyyy"
         date_formatter1.dateFormat = "yyyy-MM-dd"
-
+        
         
         tableCell_SaveCancel.isHidden = true
         
@@ -1257,9 +1277,9 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         
     }
     
-    func getConnectedUserInfo(){
+    func getConnectedUserInfo(userId:Int){
         ActivityIndicatorView.show("Loading...")
-        let userId:Int = 10
+//        let userId:Int = 10
         APIManager.callServer.getConnectedUserAccountDetails(userID: userId,sucessResult: { (responseModel) in
             
             guard let accRespModel = responseModel as? AccountRespModel else{

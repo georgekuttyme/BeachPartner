@@ -1582,7 +1582,7 @@
                                             <constraint firstAttribute="height" constant="30" id="OY2-X6-sTk"/>
                                             <constraint firstAttribute="width" constant="105" id="eG1-Eb-yeD"/>
                                         </constraints>
-                                        <state key="normal" title="Clear All &amp; Exit"/>
+                                        <state key="normal" title="Clear All"/>
                                         <connections>
                                             <action selector="clearAllBtnClicked:" destination="4Hr-ax-y4B" eventType="touchUpInside" id="iBU-50-GdC"/>
                                         </connections>

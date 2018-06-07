@@ -17,6 +17,7 @@ class RecentChatCell: UITableViewCell {
     @IBOutlet weak var userNameLbl: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var statusImage: UILabel!
+    @IBOutlet weak var profileImgBtn: UIButton!
     
 }
 
@@ -61,6 +62,19 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
         self.getBlockedConnections()
     }
     
+    @IBAction func profileImageBtnClicked(_ sender: Any) {
+        
+//        let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
+//        let vc = storyboard.instantiateViewController(withIdentifier: "profilevc1") as! CoachProfileTableViewController
+//        vc.isFromConnectedUser = "ConnectedUser"
+//        vc.connectedUserId = connectedUser.id
+//        let vc1 = storyboard.instantiateViewController(withIdentifier: "profilevc") as! AthleteProfileTableViewController
+//        vc1.isFromConnectedUser = "ConnectedUser"
+//        vc1.connectedUserId = connectedUser.id
+//        let identifier = UserDefaults.standard.string(forKey: "userType") == "Athlete" ? vc1 : vc
+//        let navController = UINavigationController(rootViewController: identifier)
+//        self.present(navController, animated: true, completion: nil)
+    }
     private func observeChannels() {
         channelRefHandle = channelRef.observe(.childAdded, with: { (snapshot) -> Void in // 1
             let channelData = snapshot.value as! Dictionary<String, AnyObject> // 2

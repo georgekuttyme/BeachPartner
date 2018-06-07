@@ -20,8 +20,8 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
     var state = ""
     var stateList = [String]()
     let statedropDown = DropDown()
-
-    
+    var isFromConnectedUser = ""
+    var connectedUserId = Int()
 
     @IBOutlet weak var editUserImageBtn: UIButton!
     @IBOutlet weak var userImage: UIImageView!
@@ -191,27 +191,20 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
     override func viewDidLoad() {
         
         super.viewDidLoad()
-
-        self.getUserInfo()
+        print(connectedUserId,"====")
+        
+        if isFromConnectedUser == "ConnectedUser"{
+            self.getConnectedUserInfo(userId:connectedUserId)
+            self.editUserImageBtn.isHidden = true
+            self.editUserImageBtn.isUserInteractionEnabled = false
+           
+        }else{
+            self.getUserInfo()
+        }
         self.hideKeyboardWhenTappedAround()
         loadLocations()
         dateformatter.dateFormat = "MM-dd-yyyy"
         date_formatter1.dateFormat = "yyyy-MM-dd"
-        //
-        //        let floaty = Floaty()
-        //        floaty.addItem("I got a handler", icon: UIImage(named: "chat")!, handler: { item in
-        //            let alert = UIAlertController(title: "Hey", message: "I'm hungry...", preferredStyle: .alert)
-        //            alert.addAction(UIAlertAction(title: "Me too", style: .default, handler: nil))
-        //            self.present(alert, animated: true, completion: nil)
-        ////            alert.close()
-        //        })
-        //        self.shareBtnView.addSubview(floaty)
-        //
-        //        let floaty = Floaty()
-        //        floaty.addItem("Hello, World!", icon: UIImage(named: "chat")!)
-        //        self.shareBtnView.addSubview(floaty)
-        
-        
         tableCell_SaveCancel.isHidden = true
         
         
@@ -540,6 +533,58 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         }
         
     }
+    func getConnectedUserInfo(userId:Int){
+        ActivityIndicatorView.show("Loading...")
+//        let userId:Int = 10
+        APIManager.callServer.getConnectedUserAccountDetails(userID: userId,sucessResult: { (responseModel) in
+            
+            guard let accRespModel = responseModel as? AccountRespModel else{
+                return
+            }
+            print("****\n\n",accRespModel,"\n\n\n\n\n")
+            if(accRespModel.id != 0){
+                
+                self.userData = accRespModel
+                print("bP_userId", accRespModel.id )
+                print("accRespimageUrl", accRespModel.videoUrl)
+                
+                if let imageUrl = URL(string: accRespModel.imageUrl) {
+                    self.userImageView.sd_setIndicatorStyle(.whiteLarge)
+                    self.userImageView.sd_setShowActivityIndicatorView(true)
+                    self.userImageView.sd_setImage(with: imageUrl, placeholderImage:  #imageLiteral(resourceName: "user"))
+                }
+                
+//                self.videoUrl = accRespModel.videoUrl
+//                if self.videoUrl == ""
+//                {
+//                    self.noVideoLbl.text = "No Video Available"
+//                }
+                
+                ActivityIndicatorView.hiding()
+                
+                DispatchQueue.main.async {
+//                    self.loadVideoOnPlayer(videoUrlVal: accRespModel.videoUrl)
+                    
+                    self.loadDataToUi(accResponseModel: accRespModel)
+                }
+                
+            }else{
+                
+                ActivityIndicatorView.hiding()
+                
+            }
+            
+        }, errorResult: { (error) in
+            guard let errorString  = error else {
+                return
+            }
+            ActivityIndicatorView.hiding()
+            self.alert(message: errorString)
+        })
+        
+    }
+    
+    
     
 
     @IBAction func editUserImageClicked(_ sender: Any) {

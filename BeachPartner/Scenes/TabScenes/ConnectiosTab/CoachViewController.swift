@@ -172,7 +172,8 @@ class CoachViewController: UIViewController,UICollectionViewDataSource , UIColle
         cell?.notesBtn.tag = indexPath.row+300000
         cell?.notesBtn.addTarget(self, action: #selector(noteBtnPressed), for: .touchUpInside)
         
-        
+        cell?.didSelectBtn.tag = indexPath.row+600000
+        cell?.didSelectBtn.addTarget(self, action: #selector(didSelectItemAtIndex), for: .touchUpInside)
         
         cell?.contentView.layer.cornerRadius = 2.0
         cell?.contentView.layer.borderWidth = 1.0
@@ -189,6 +190,27 @@ class CoachViewController: UIViewController,UICollectionViewDataSource , UIColle
         
         
         return cell!
+    }
+
+    @objc func didSelectItemAtIndex(sender: UIButton!){
+        var connectedUser: ConnectedUserModel.ConnectedUser?
+        if displayType == "search"{
+            connectedUser = self.filterConnectedusers[sender.tag-600000].connectedUser
+        }else{
+            connectedUser = self.connectedUsers[sender.tag-600000].connectedUser
+        }
+        
+        //        let index = sender.tag-600000
+        let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "profilevc1") as! CoachProfileTableViewController
+        vc.isFromConnectedUser = "ConnectedUser"
+        vc.connectedUserId = connectedUser?.userId ?? 0
+        let vc1 = storyboard.instantiateViewController(withIdentifier: "profilevc") as! AthleteProfileTableViewController
+        vc1.isFromConnectedUser = "ConnectedUser"
+        vc1.connectedUserId = connectedUser?.userId ?? 0
+        let identifier = UserDefaults.standard.string(forKey: "userType") == "Athlete" ? vc1 : vc
+        let navController = UINavigationController(rootViewController: identifier)
+        self.present(navController, animated: true, completion: nil)
     }
     
     func getConnections() {
@@ -262,7 +284,12 @@ class CoachViewController: UIViewController,UICollectionViewDataSource , UIColle
     }
     
     @objc func noteBtnPressed(sender: UIButton!){
-        let connectedUser = self.connectedUsers[sender.tag-300000]
+        var connectedUser: ConnectedUserModel
+        if displayType == "search"{
+            connectedUser = self.filterConnectedusers[sender.tag-300000]
+        }else{
+            connectedUser = self.connectedUsers[sender.tag-300000]
+        }
         let index = sender.tag-300000
         let storyboard = UIStoryboard(name: "ConnectionsTabBar", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "NotesViewController") as! NotesViewController
@@ -272,7 +299,12 @@ class CoachViewController: UIViewController,UICollectionViewDataSource , UIColle
     }
     
     @objc func msgBtnPressed(sender: UIButton!) {
-        let connectedUser = self.connectedUsers[sender.tag-100000]
+        var connectedUser: ConnectedUserModel
+        if displayType == "search"{
+            connectedUser = self.filterConnectedusers[sender.tag-100000]
+        }else{
+            connectedUser = self.connectedUsers[sender.tag-100000]
+        }
         if connectedUser.connectedUser?.isBlocked  == false {
             let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
             let chatController = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
@@ -285,7 +317,13 @@ class CoachViewController: UIViewController,UICollectionViewDataSource , UIColle
     
     @objc func blockBtnPressed(sender: UIButton!){
         
-        let connectedUser = self.connectedUsers[sender.tag-200000]
+        print("displayItem ==> cell for row at",self.displayType)
+        var connectedUser: ConnectedUserModel
+        if displayType == "search"{
+            connectedUser = self.filterConnectedusers[sender.tag-200000]
+        }else{
+            connectedUser = self.connectedUsers[sender.tag-200000]
+        }
         let index = sender.tag-200000
         
         var message = ""

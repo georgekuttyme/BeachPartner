@@ -305,12 +305,19 @@
                                                         <action selector="expandBtnClicked:" destination="9Im-bH-R8b" eventType="touchUpInside" id="t7n-3b-NN3"/>
                                                     </connections>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nqg-Ye-9iB">
+                                                    <rect key="frame" x="0.0" y="0.0" width="175" height="175"/>
+                                                </button>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="nqg-Ye-9iB" firstAttribute="trailing" secondItem="Fgy-HM-d05" secondAttribute="trailing" id="1N7-r7-kiR"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="SC3-9p-hkU" secondAttribute="trailing" constant="-3" id="8tS-Ao-jdc"/>
                                             <constraint firstItem="2yd-2L-rsb" firstAttribute="leading" secondItem="9Im-bH-R8b" secondAttribute="leading" id="DHy-15-Mcc"/>
+                                            <constraint firstItem="nqg-Ye-9iB" firstAttribute="leading" secondItem="Fgy-HM-d05" secondAttribute="leading" id="Ltl-n9-dFb"/>
+                                            <constraint firstAttribute="bottom" secondItem="nqg-Ye-9iB" secondAttribute="bottom" id="TEQ-Fd-7n6"/>
+                                            <constraint firstItem="nqg-Ye-9iB" firstAttribute="top" secondItem="9Im-bH-R8b" secondAttribute="top" id="VWl-t9-qf4"/>
                                             <constraint firstItem="SC3-9p-hkU" firstAttribute="top" secondItem="9Im-bH-R8b" secondAttribute="topMargin" constant="-4" id="a0w-Ld-ifm"/>
                                             <constraint firstItem="Fgy-HM-d05" firstAttribute="leading" secondItem="9Im-bH-R8b" secondAttribute="leading" id="ccA-9p-iBv"/>
                                             <constraint firstAttribute="trailing" secondItem="2yd-2L-rsb" secondAttribute="trailing" id="kyx-Wd-0YS"/>
@@ -332,6 +339,7 @@
                                             <outlet property="blockBtn" destination="Re2-uZ-3QH" id="wkz-6x-Ian"/>
                                             <outlet property="btnMsgHeight" destination="YFW-9N-eL4" id="uav-2T-igi"/>
                                             <outlet property="connScrollView" destination="2yd-2L-rsb" id="ydu-ej-iyX"/>
+                                            <outlet property="didSelectBtn" destination="nqg-Ye-9iB" id="2Gz-At-drG"/>
                                             <outlet property="expandBtn" destination="SC3-9p-hkU" id="fnk-mM-Pke"/>
                                             <outlet property="messageBtn" destination="q2P-Mh-2HH" id="GoY-28-exr"/>
                                             <outlet property="nameLbl" destination="v1S-pS-iOE" id="tJ4-u0-PyZ"/>

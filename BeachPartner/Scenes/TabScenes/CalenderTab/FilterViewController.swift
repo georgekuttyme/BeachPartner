@@ -290,7 +290,6 @@ class FilterViewController: UIViewController {
         self.regionBtn.setTitle("Choose region", for: UIControlState.normal)
         self.regiondropDown.selectRow(0)
         filterParams = nil
-        clearFilterClicked = true
         delegate?.clearAllFilters()
         //dismiss(animated: true, completion: nil)
     }
@@ -346,15 +345,15 @@ class FilterViewController: UIViewController {
             filterParams?.region = regiondropDown.selectedItem
         }
         print("??  -",filterParams?.eventType,"  ??  -",filterParams?.subEventType,"  ??  -",filterParams?.year,"   ??  -",filterParams?.month,"  ??  -",filterParams?.state,"  ??  -",filterParams?.region)
-        if filterParams?.eventType == nil || filterParams?.subEventType == nil || filterParams?.year == nil || filterParams?.month == nil || filterParams?.state == nil || filterParams?.region == nil {
+        if filterParams?.eventType == nil && filterParams?.subEventType == nil && filterParams?.year == nil && filterParams?.month == nil && filterParams?.state == nil && filterParams?.region == nil {
             filterParams = nil
             clearFilterClicked = true
-        }
-        if !clearFilterClicked {
+            delegate?.clearAllFilters()
+        }else {
             delegate?.didApplyFilter(filterParams: filterParams!)
         }
         navigationController?.popViewController(animated: true)
-        dismiss(animated: true, completion: {self.clearFilterClicked = false})
+        dismiss(animated: true, completion: nil)
     }
 
     func loadLocations(){

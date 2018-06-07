@@ -379,7 +379,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             self.cardView.dataSource = self
             self.cardView.delegate = self
             if SwipeCardArray.count == 0{
-                self.imgProfile.isHidden = false
+//                self.imgProfile.isHidden = false
                 self.lblNotAvailable.isHidden = false
             }
         }
@@ -389,7 +389,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             self.cardView.dataSource = self
             self.cardView.delegate = self
             if SwipeCardArray.count == 0{
-                self.imgProfile.isHidden = false
+//                self.imgProfile.isHidden = false
                 self.lblNotAvailable.isHidden = false
             }
         }
@@ -404,7 +404,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             self.cardView.dataSource = self
             self.cardView.delegate = self
             if SwipeCardArray.count == 0{
-                self.imgProfile.isHidden = false
+//                self.imgProfile.isHidden = false
                 self.lblNotAvailable.isHidden = false
             }
             
@@ -416,7 +416,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
              searchCardSatus = selectedType
             self.cardView.reloadData()
             if self.SwipeCardArray.count == 0{
-                self.imgProfile.isHidden = false
+//                self.imgProfile.isHidden = false
                 self.lblNotAvailable.isHidden = false
             }
         }
@@ -431,7 +431,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             self.SwipeCardArray.insert(self.subscribedBlueBpUsers[selectedIndex], at: 0)
             self.cardView.reloadData()
             if SwipeCardArray.count == 0{
-                self.imgProfile.isHidden = false
+//                self.imgProfile.isHidden = false
                 self.lblNotAvailable.isHidden = false
             }
             isFirstBlueBpCard = true
@@ -883,7 +883,7 @@ extension BPCardsVC :KolodaViewDelegate {
     }
     
     func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
-        self.imgProfile.isHidden = false
+//        self.imgProfile.isHidden = false
         self.lblNotAvailable.isHidden = false
          self.lblNotAvailable.alpha = 1.0
         self.btnPlaybtn.isHidden = false
