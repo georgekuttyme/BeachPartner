@@ -174,6 +174,8 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
                     if userId == senderId || userId == receiverId {
                         if bP_userId == senderId || bP_userId == receiverId {
                             latestMsgDic.updateValue(connectedUser.connectedUser?.firstName ?? "", forKey: "sender_name")
+                            latestMsgDic.updateValue(connectedUser.connectedUser?.userType ?? "", forKey: "sender_userType")
+                            latestMsgDic.updateValue(String(connectedUser.connectedUser?.userId ?? 0), forKey: "sender_userId")
                             latestMsgDic.updateValue(connectedUser.connectedUser?.lastName ?? "", forKey: "sender_lastName")
                             latestMsgDic.updateValue(connectedUser.connectedUser?.imageUrl ?? "", forKey: "profileImg")
                             isActiveUser = true
@@ -295,6 +297,8 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
                 cell.profileImage.sd_setShowActivityIndicatorView(true)
                 cell.profileImage.sd_setImage(with: imageUrl, placeholderImage:#imageLiteral(resourceName: "user"))
             }
+            cell.profileImgBtn.tag = indexPath.row+600000
+            cell.profileImgBtn.addTarget(self, action: #selector(didSelectItemAtIndex), for: .touchUpInside)
         }else{
             var userName = ""
             if let firstName = self.recentChatList[indexPath.row]["sender_name"] {
@@ -313,6 +317,8 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
                 cell.profileImage.sd_setShowActivityIndicatorView(true)
                 cell.profileImage.sd_setImage(with: imageUrl, placeholderImage:#imageLiteral(resourceName: "user"))
             }
+            cell.profileImgBtn.tag = indexPath.row+600000
+            cell.profileImgBtn.addTarget(self, action: #selector(didSelectItemAtIndex), for: .touchUpInside)
         }
         
        
@@ -341,7 +347,68 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
         let navigationController = UINavigationController(rootViewController: chatController)
         self.present(navigationController, animated: true, completion: nil)
     }
-    
+    @objc func didSelectItemAtIndex(sender: UIButton!){
+         if displayType == "search"{
+            if let userType = self.filterConnectedusers[sender.tag-600000]["sender_userType"], userType == "Athlete"{
+                let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
+                let vc1 = storyboard.instantiateViewController(withIdentifier: "profilevc") as! AthleteProfileTableViewController
+                vc1.isFromConnectedUser = "ConnectedUser"
+                if let id = self.filterConnectedusers[sender.tag-600000]["sender_userId"]{
+                    vc1.connectedUserId = Int(id)!
+                }
+                if let name = self.filterConnectedusers[sender.tag-600000]["sender_name"]{
+                        vc1.connectedUserName = name
+                }
+                let navController = UINavigationController(rootViewController: vc1)
+                self.present(navController, animated: true, completion: nil)
+            }else{
+                let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
+                let vc1 = storyboard.instantiateViewController(withIdentifier: "profilevc1") as! CoachProfileTableViewController
+                vc1.isFromConnectedUser = "ConnectedUser"
+                if let id = self.recentChatList[sender.tag-600000]["sender_userId"]{
+                    vc1.connectedUserId = Int(id)!
+                }
+                if let name = self.recentChatList[sender.tag-600000]["sender_name"]{
+                    vc1.connectedUserName = name
+                }
+                let navController = UINavigationController(rootViewController: vc1)
+                self.present(navController, animated: true, completion: nil)
+            }
+            
+         }else{
+
+            if let userType = self.recentChatList[sender.tag-600000]["sender_userType"], userType == "Athlete"{
+                let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
+                let vc1 = storyboard.instantiateViewController(withIdentifier: "profilevc") as! AthleteProfileTableViewController
+                vc1.isFromConnectedUser = "ConnectedUser"
+                if let id = self.recentChatList[sender.tag-600000]["sender_userId"]{
+                    vc1.connectedUserId = Int(id)!
+                }
+                if let name = self.recentChatList[sender.tag-600000]["sender_name"]{
+                    vc1.connectedUserName = name
+                }
+                let navController = UINavigationController(rootViewController: vc1)
+                self.present(navController, animated: true, completion: nil)
+            }else{
+                let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
+                let vc1 = storyboard.instantiateViewController(withIdentifier: "profilevc1") as! CoachProfileTableViewController
+                vc1.isFromConnectedUser = "ConnectedUser"
+                if let id = self.recentChatList[sender.tag-600000]["sender_userId"]{
+                    vc1.connectedUserId = Int(id)!
+                }
+                if let name = self.recentChatList[sender.tag-600000]["sender_name"]{
+                    vc1.connectedUserName = name
+                }
+                let navController = UINavigationController(rootViewController: vc1)
+                self.present(navController, animated: true, completion: nil)
+            }
+         }
+        
+        
+        
+        
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

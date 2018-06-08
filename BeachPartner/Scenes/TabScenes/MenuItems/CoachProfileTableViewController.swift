@@ -196,6 +196,13 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         
         if isFromConnectedUser == "ConnectedUser"{
             self.navigationController!.navigationBar.topItem!.title = connectedUserName+"'s"+" Profile"
+            
+            self.editProfileTxtBtn.isHidden = true
+            self.editProfileTxtBtn.isUserInteractionEnabled = false
+            
+            self.editProfileBtn.isHidden = true
+            self.editProfileBtn.isUserInteractionEnabled = false
+            
             self.getConnectedUserInfo(userId:connectedUserId)
             self.editUserImageBtn.isHidden = true
             self.editUserImageBtn.isUserInteractionEnabled = false

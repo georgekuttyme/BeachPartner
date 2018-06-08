@@ -339,15 +339,22 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         print(connectedUserId,"====",isFromConnectedUser,"^^^^",connectedUserName)
         if isFromConnectedUser == "ConnectedUser"{
             self.navigationController!.navigationBar.topItem!.title = connectedUserName+"'s"+" Profile"
+            
+           
             self.editUserImageBtn.isHidden = true
             self.editUserImageBtn.isUserInteractionEnabled = false
+            
             self.editVideoBtn.isHidden = true
             self.editVideoBtn.isUserInteractionEnabled = false
+            
             self.shareBtn.isHidden = true
             self.shareBtn.isUserInteractionEnabled = false
+            
             self.editProfileTxtBtn.isHidden = true
             self.editProfileTxtBtn.isUserInteractionEnabled = false
+            
             self.shareLbl.isHidden = true
+            
             self.editProfileBtn.isHidden = true
             self.editProfileBtn.isUserInteractionEnabled = false
             self.getConnectedUserInfo(userId:connectedUserId)
