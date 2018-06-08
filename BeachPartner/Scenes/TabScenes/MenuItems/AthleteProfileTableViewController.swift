@@ -1307,6 +1307,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
                     self.userImageView.sd_setIndicatorStyle(.whiteLarge)
                     self.userImageView.sd_setShowActivityIndicatorView(true)
                     self.userImageView.sd_setImage(with: imageUrl, placeholderImage:  #imageLiteral(resourceName: "user"))
+                     self.imageUrl = accRespModel.imageUrl
                 }
                 
                 self.videoUrl = accRespModel.videoUrl
@@ -1362,6 +1363,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
                     self.userImageView.sd_setIndicatorStyle(.whiteLarge)
                     self.userImageView.sd_setShowActivityIndicatorView(true)
                     self.userImageView.sd_setImage(with: imageUrl, placeholderImage:  #imageLiteral(resourceName: "user"))
+                    self.imageUrl = accRespModel.imageUrl
                 }
                 
                 self.videoUrl = accRespModel.videoUrl
