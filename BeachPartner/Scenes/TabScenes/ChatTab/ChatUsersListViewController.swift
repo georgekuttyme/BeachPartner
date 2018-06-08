@@ -21,8 +21,15 @@ class RecentChatCell: UITableViewCell {
     
 }
 
-class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegate,UITableViewDataSource {
-
+class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegate,UITableViewDataSource,UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
+ 
+    var filterConnectedusers = [[String:String]]()
+    var searchController : UISearchController!
+    var rightBarButtonItem: UIBarButtonItem!
+    var activesearchBar: UISearchBar!
+    var searchBtn = UIBarButtonItem()
+    var selectedIndexItem = ""
+    var displayType = ""
     @IBOutlet weak var toastLbl: UILabel!
     private lazy var channelRef: DatabaseReference = Database.database().reference().child("messages")
     private var channelRefHandle: DatabaseHandle?
@@ -33,6 +40,12 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let searchImage  = UIImage(named: "search")!
+        searchBtn  = UIBarButtonItem(image: searchImage ,  style: .plain, target: self, action:#selector(searchBtnClicked(_:)))
+        navigationItem.rightBarButtonItems = [menuBarButtonItem, searchBtn]
+        
+        
         self.navigationItem.setHidesBackButton(true, animated:false);
         self.title = "Messages"
         self.toastLbl.isHidden = true
@@ -56,8 +69,68 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
          self.tblChatList.delegate = self
         self.tblChatList.dataSource = self
     }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        print("\n\n\n",selectedIndexItem)
+        if let searchText = searchController.searchBar.text, !searchText.isEmpty {
+            self.displayType = "search"
+            print("displayItem ==> ",self.displayType)
+            self.filterConnectedusers = self.recentChatList.filter({ (User) -> Bool in
+                return Bool((User["sender_name"]?.contains(searchText))! || (User["sender_lastName"]?.contains(searchText))!)
+            })
+            print("unfiltered  -- ",self.activeUsers,"\n\n\n\n")
+            print("filtered  -- ",self.filterConnectedusers,"\n\n\n")
+            self.tblChatList.reloadData()
+            
+        }else{
+        
+        }
+        }
 
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.isHidden = true
+        self.searchBtn.tintColor = UIColor.white
+        self.searchBtn.isEnabled = true
+        self.navigationItem.titleView = nil
+        self.navigationItem.title = "Messages"
+        self.displayType = ""
+        self.tblChatList.reloadData()
+        
+    }
+    
+    @objc func searchBtnClicked(_ sender: AnyObject){
+        
+        self.searchController = UISearchController(searchResultsController:  nil)
+        let textFieldInsideSearchBar = searchController.searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.textColor = UIColor.white
+        textFieldInsideSearchBar?.backgroundColor = UIColor.clear
+        
+        self.searchController.searchResultsUpdater = self
+        self.searchController.delegate = self
+        self.searchController.searchBar.delegate = self
+        
+        self.searchController.hidesNavigationBarDuringPresentation = false
+        self.searchController.dimsBackgroundDuringPresentation = true
+        //        searchController.searchBar.sizeToFit()
+        
+        self.navigationItem.titleView = searchController.searchBar
+        self.definesPresentationContext = true
+        self.searchBtn.tintColor = UIColor.clear
+        self.searchBtn.isEnabled = false
+        //        self.becomeFirstResponder()
+        self.searchController.searchBar.becomeFirstResponder()
+        
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
+        if displayType == "search"{
+            self.searchBtn.tintColor = UIColor.white
+            self.searchBtn.isEnabled = true
+            self.navigationItem.titleView = nil
+            self.navigationItem.title = "Messages"
+            self.displayType = ""
+            self.tblChatList.reloadData()
+        }
         self.title = "Messages"
         self.getBlockedConnections()
     }
@@ -159,15 +232,33 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.activeUsers.count > 0 {
-            self.toastLbl.isHidden = true
+        
+        if displayType == "search" {
+            if self.filterConnectedusers.count > 0 {
+                self.toastLbl.isHidden = true
+            }
+            else {
+                self.toastLbl.isHidden = false
+                self.toastLbl.text = "User not found"
+                self.toastLbl.numberOfLines = 0
+            }
+            print(displayType,"hdddddd")
+            return self.filterConnectedusers.count
         }
-        else {
-            self.toastLbl.isHidden = false
-            self.toastLbl.text = "Messages sent or received will appear here"
-            self.toastLbl.numberOfLines = 3
+        else{
+            if self.activeUsers.count > 0 {
+                self.toastLbl.isHidden = true
+            }
+            else {
+                self.toastLbl.isHidden = false
+                self.toastLbl.text = "Messages sent or received will appear here"
+                self.toastLbl.numberOfLines = 3
+            }
+            print(displayType,"jghjhfghfgh")
+            displayType = ""
+            return self.recentChatList.count
         }
-        return self.recentChatList.count
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -185,25 +276,46 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
 //        else{
 //            cell.userNameLbl.text = self.recentChatList[indexPath.row]["receiver_name"]
 //        }
-        
-        
-        var userName = ""
-        if let firstName = self.recentChatList[indexPath.row]["sender_name"] {
-            userName = firstName + " "
+        print(displayType,"LLLLL")
+        if displayType == "search" {
+            var userName = ""
+            if let firstName = self.filterConnectedusers[indexPath.row]["sender_name"] {
+                userName = firstName + " "
+            }
+            if let lastName = self.filterConnectedusers[indexPath.row]["sender_lastName"] {
+                userName = userName + lastName
+            }
+            cell.userNameLbl.text = userName
+            
+            
+            cell.timeLbl.isHidden = true
+            cell.statusImage.isHidden = true
+            if let imageUrl = URL(string: (self.filterConnectedusers[indexPath.row]["profileImg"])!) {
+                cell.profileImage.sd_setIndicatorStyle(.whiteLarge)
+                cell.profileImage.sd_setShowActivityIndicatorView(true)
+                cell.profileImage.sd_setImage(with: imageUrl, placeholderImage:#imageLiteral(resourceName: "user"))
+            }
+        }else{
+            var userName = ""
+            if let firstName = self.recentChatList[indexPath.row]["sender_name"] {
+                userName = firstName + " "
+            }
+            if let lastName = self.recentChatList[indexPath.row]["sender_lastName"] {
+                userName = userName + lastName
+            }
+            cell.userNameLbl.text = userName
+            
+            
+            cell.timeLbl.isHidden = true
+            cell.statusImage.isHidden = true
+            if let imageUrl = URL(string: (self.recentChatList[indexPath.row]["profileImg"])!) {
+                cell.profileImage.sd_setIndicatorStyle(.whiteLarge)
+                cell.profileImage.sd_setShowActivityIndicatorView(true)
+                cell.profileImage.sd_setImage(with: imageUrl, placeholderImage:#imageLiteral(resourceName: "user"))
+            }
         }
-        if let lastName = self.recentChatList[indexPath.row]["sender_lastName"] {
-            userName = userName + lastName
-        }
-        cell.userNameLbl.text = userName
         
-        
-        cell.timeLbl.isHidden = true
-        cell.statusImage.isHidden = true
-        if let imageUrl = URL(string: (self.recentChatList[indexPath.row]["profileImg"])!) {
-            cell.profileImage.sd_setIndicatorStyle(.whiteLarge)
-            cell.profileImage.sd_setShowActivityIndicatorView(true)
-            cell.profileImage.sd_setImage(with: imageUrl, placeholderImage:#imageLiteral(resourceName: "user"))
-        }
+       
         cell.profileImage.layer.cornerRadius = cell.profileImage.frame.size.width/2
         cell.profileImage.clipsToBounds = true
         cell.profileImage.layer.borderColor = UIColor(red:112/255, green:122/255, blue:172/255, alpha: 1).cgColor;
@@ -213,12 +325,18 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var recentChats = [[String:String]]()
+        if displayType == "search" {
+            recentChats = self.filterConnectedusers
+        }else{
+            recentChats = self.recentChatList
+        }
         let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
         let chatController = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
         
-        print(self.recentChatList[indexPath.row])
+        print(recentChats[indexPath.row])
         
-        chatController.recentChatDic = self.recentChatList[indexPath.row]
+        chatController.recentChatDic = recentChats[indexPath.row]
         chatController.chatType = "recentChat"
         let navigationController = UINavigationController(rootViewController: chatController)
         self.present(navigationController, animated: true, completion: nil)
