@@ -41,6 +41,20 @@ class MyCalViewController: UIViewController, UITableViewDelegate, UITableViewDat
             fatalError("The dequeued cell is not an instance of ManagSenderTableViewCell.")
         }
 
+        cell.selectionStyle = .none
+        
+        cell.mainBackground.layer.cornerRadius = 8
+        cell.mainBackground.layer.masksToBounds = true
+        
+        cell.shadowLayer.layer.masksToBounds = false
+        cell.shadowLayer.layer.shadowOffset = CGSize(width: 0, height: 0)
+        cell.shadowLayer.layer.shadowColor = UIColor.black.cgColor
+        cell.shadowLayer.layer.shadowOpacity = 0.23
+        cell.shadowLayer.layer.shadowRadius = 4
+        
+        cell.shadowLayer.layer.shadowPath = UIBezierPath(roundedRect: cell.shadowLayer.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 8, height: 8)).cgPath
+        cell.shadowLayer.layer.shouldRasterize = true
+        cell.shadowLayer.layer.rasterizationScale = UIScreen.main.scale
        
         print(eventListToShow)
         let event = eventListToShow[indexPath.row]

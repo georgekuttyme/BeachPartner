@@ -21,7 +21,9 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var masterCalTableVIew: UITableView!
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var tableHeaderLabel: UILabel!
-    
+    @IBOutlet weak var calendarContainerView: UIView!
+    @IBOutlet weak var filterLabel: UILabel!
+    @IBOutlet weak var filterContainerView: UIView!
     // MARK:-
     var eventListArray = [GetEventRespModel]()
     var eventListToShow = [GetEventRespModel]()
@@ -38,9 +40,12 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
     var filterParams: EventFilterParams? {
         didSet {
             if filterParams == nil {
+                
+                filterContainerView.isHidden = true
                 getAllEvents()
             }
             else {
+                filterContainerView.isHidden = false
                 searchEvents()
             }
         }
@@ -63,13 +68,20 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewWillAppear(animated)
         self.navigationController!.navigationBar.topItem!.title = "Master Calendar"
         
-        getAllEvents()
+        if filterParams == nil {
+            getAllEvents()
+        }
+        else {
+            searchEvents()
+        }
     }
     
     
     // MARK:- Methods
     
     private func getAllEvents() {
+        
+        calendarContainerView.isHidden = false
         
         ActivityIndicatorView.show("Loading")
         APIManager.callServer.getAllEvents(sucessResult: { (responseModel) in
@@ -91,11 +103,46 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    func searchEvents() {
+    func setUpFilterDisplay() {
         
         guard let params = filterParams else {
             return
         }
+        
+        var filterString = ""
+        if let param = params.eventType {
+            filterString += "Event Type:\(param) > "
+        }
+        if let param = params.subEventType {
+            filterString += "SubEvent:\(param) > "
+        }
+        if let param = params.year {
+            filterString += "Year:\(param) > "
+        }
+        if let param = params.month {
+            filterString += "Month:\(param) > "
+        }
+        if let param = params.region {
+            filterString += "Region:\(param) > "
+        }
+        if let param = params.state {
+            filterString += "State:\(param) > "
+        }
+        
+        filterLabel.text = filterString
+    }
+    
+    
+    func searchEvents() {
+        
+        calendarContainerView.isHidden = true
+        
+        
+        guard let params = filterParams else {
+            return
+        }
+        
+        setUpFilterDisplay()
         
         ActivityIndicatorView.show("Loading")
         APIManager.callServer.getSearchEvents(filterParams: params, sucessResult: { (responseModel) in
@@ -124,9 +171,9 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
             
             let startDate = Date(timeIntervalSince1970: TimeInterval(event.eventStartDate/1000))
             let endDate = Date(timeIntervalSince1970: TimeInterval(event.eventEndDate/1000))
-            print(startDate)
-            print(endDate)
-            print("---------------------------------------------------")
+//            print(startDate)
+//            print(endDate)
+//            print("---------------------------------------------------")
             
             let dates = self.generateDateArrayBetweenTwoDates(startDate: startDate, endDate: endDate)
             self.eventDateArray.append(contentsOf: dates)
@@ -173,6 +220,22 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
             fatalError("The dequeued cell is not an instance of ManagSenderTableViewCell.")
         }
       
+        cell.selectionStyle = .none
+        
+//        cell.shadowLayer.layer.cornerRadius = 8
+        cell.mainBackground.layer.cornerRadius = 8
+        cell.mainBackground.layer.masksToBounds = true
+        
+        cell.shadowLayer.layer.masksToBounds = false
+        cell.shadowLayer.layer.shadowOffset = CGSize(width: 0, height: 0)
+        cell.shadowLayer.layer.shadowColor = UIColor.black.cgColor
+        cell.shadowLayer.layer.shadowOpacity = 0.23
+        cell.shadowLayer.layer.shadowRadius = 4
+        
+        cell.shadowLayer.layer.shadowPath = UIBezierPath(roundedRect: cell.shadowLayer.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 8, height: 8)).cgPath
+        cell.shadowLayer.layer.shouldRasterize = true
+        cell.shadowLayer.layer.rasterizationScale = UIScreen.main.scale
+        
         let event = eventListToShow[indexPath.row]
         cell.eventNameLbl.text = event.eventName
         
@@ -212,7 +275,7 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
         }
         
 //        cell.colorView.backgroundColor = .clear
-        print(eventListToShow,"\n\n\n")
+//        print(eventListToShow,"\n\n\n")
 //        print("event.eventName    ",event.eventName,"   event.status ",event.eventStaus)
         return cell
     }
