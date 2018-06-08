@@ -25,14 +25,15 @@ class HelpViewController: UIViewController,UIScrollViewDelegate {
         mainScrollView.isPagingEnabled = true
         mainScrollView.delegate = self
         imageArray.append(UIImage(named: "home-1")!)
-        imageArray.append(UIImage(named: "Image2")!)
-        imageArray.append(UIImage(named: "Image3")!)
+        imageArray.append(UIImage(named: "home-2")!)
+        imageArray.append(UIImage(named: "home-3")!)
         imageArray.append(UIImage(named: "home-4")!)
         imageArray.append(UIImage(named: "Image5")!)
         imageArray.append(UIImage(named: "Image6")!)
         imageArray.append(UIImage(named: "Image7")!)
-        imageArray.append(UIImage(named: "Image8")!)
-        imageArray.append(UIImage(named: "Image9")!)
+        imageArray.append(UIImage(named: "messages-v3")!)
+        imageArray.append(UIImage(named: "High-fives-v3")!)
+     
         
         print(imageArray);
         pageControl.numberOfPages = imageArray.count
