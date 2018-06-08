@@ -185,6 +185,12 @@ class UIVideoView: UIView {
         self._activityIndicator.isHidden = true
     }
     internal func commonInit(){
+        
+        _playerRefreshCoverView.backgroundColor = UIColor.black
+        self.addSubview(_playerRefreshCoverView)
+        self.addSubview(_activityIndicator)
+        self._activityIndicator.isHidden = true
+        
         self.layer.cornerRadius = 25.0
         _player = AVPlayer()
         self.loopVideo(videoPlayer: _player!)

@@ -343,7 +343,7 @@ extension APIManager{
                 "location": userData.location,
                 "phoneNumber": userData.phoneNumber,
                 "userType": userData.userType,
-//                "videoUrl": "",
+                "videoUrl": userData.videoUrl,
                 "parentUserId": ""
             ],
             "userProfileDto": userProfile
