@@ -298,17 +298,12 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
         }else{
             connectedUser = self.connectedUsers[sender.tag-600000].connectedUser
         }
-
-//        let index = sender.tag-600000
         let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "profilevc1") as! CoachProfileTableViewController
-        vc.isFromConnectedUser = "ConnectedUser"
-        vc.connectedUserId = connectedUser?.userId ?? 0
         let vc1 = storyboard.instantiateViewController(withIdentifier: "profilevc") as! AthleteProfileTableViewController
         vc1.isFromConnectedUser = "ConnectedUser"
         vc1.connectedUserId = connectedUser?.userId ?? 0
-        let identifier = UserDefaults.standard.string(forKey: "userType") == "Athlete" ? vc1 : vc
-        let navController = UINavigationController(rootViewController: identifier)
+        vc1.connectedUserName = connectedUser?.firstName ?? ""
+        let navController = UINavigationController(rootViewController: vc1)
         self.present(navController, animated: true, completion: nil)
     }
     @objc func blockBtnPressed(sender: UIButton!) {

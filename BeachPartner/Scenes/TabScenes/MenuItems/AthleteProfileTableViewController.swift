@@ -148,6 +148,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     var activeTextField: UITextField?
     var userData = AccountRespModel()
     var connectedUserId = Int()
+    var connectedUserName = String()
     var videoUrl = ""
     var imageUrl = ""
     var movieData: NSData?
@@ -246,7 +247,9 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         let backImage = UIImage(named:"back_58")
         let dismissButton = UIBarButtonItem(image: backImage, style: .done, target: self, action: #selector(didTapDismissButton))
         self.navigationItem.leftBarButtonItem = dismissButton
-        self.navigationController!.navigationBar.topItem!.title = "My Profile"
+        if isFromConnectedUser == ""{
+            self.navigationController!.navigationBar.topItem!.title = "My Profile"
+        }
         self.addToplistBtn.isHidden = true
         self.delTop1.isHidden = true
         self.delTop2.isHidden = true
@@ -333,8 +336,9 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     override func viewDidLoad() {
         super.viewDidLoad()
         videoView?._player?.volume = 0
-        print(connectedUserId,"====",isFromConnectedUser)
+        print(connectedUserId,"====",isFromConnectedUser,"^^^^",connectedUserName)
         if isFromConnectedUser == "ConnectedUser"{
+            self.navigationController!.navigationBar.topItem!.title = connectedUserName+"'s"+" Profile"
             self.editUserImageBtn.isHidden = true
             self.editUserImageBtn.isUserInteractionEnabled = false
             self.editVideoBtn.isHidden = true

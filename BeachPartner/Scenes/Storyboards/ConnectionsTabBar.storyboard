@@ -552,6 +552,10 @@
                                                         <action selector="expandBtnClicked:" destination="b31-UN-0lF" eventType="touchUpInside" id="vp0-lY-Qmh"/>
                                                     </connections>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KYa-2p-j3A">
+                                                    <rect key="frame" x="0.0" y="0.0" width="175" height="175"/>
+                                                    <state key="normal" title="Button"/>
+                                                </button>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -560,12 +564,16 @@
                                             <constraint firstAttribute="bottomMargin" secondItem="96S-KL-2NX" secondAttribute="bottom" constant="-110" id="BX3-yT-YAw"/>
                                             <constraint firstItem="96S-KL-2NX" firstAttribute="leading" secondItem="b31-UN-0lF" secondAttribute="leading" id="DEe-Y7-rX3"/>
                                             <constraint firstItem="u36-9w-hc7" firstAttribute="top" secondItem="b31-UN-0lF" secondAttribute="top" id="MgN-Dt-vES"/>
+                                            <constraint firstAttribute="bottom" secondItem="KYa-2p-j3A" secondAttribute="bottom" id="Mzl-bt-jrD"/>
                                             <constraint firstAttribute="trailing" secondItem="u36-9w-hc7" secondAttribute="trailing" id="O7Z-0h-PDs"/>
+                                            <constraint firstItem="KYa-2p-j3A" firstAttribute="leading" secondItem="u36-9w-hc7" secondAttribute="leading" id="eNZ-hs-cWD"/>
+                                            <constraint firstItem="KYa-2p-j3A" firstAttribute="trailing" secondItem="u36-9w-hc7" secondAttribute="trailing" id="eON-fN-3t9"/>
                                             <constraint firstAttribute="bottom" secondItem="u36-9w-hc7" secondAttribute="bottom" id="gz0-Jl-Mff"/>
                                             <constraint firstAttribute="trailing" secondItem="96S-KL-2NX" secondAttribute="trailing" id="lOW-ac-Qav"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="Znm-jy-cRS" secondAttribute="trailing" constant="-3" id="loB-41-huU"/>
                                             <constraint firstItem="Znm-jy-cRS" firstAttribute="top" secondItem="b31-UN-0lF" secondAttribute="topMargin" constant="-4" id="oWM-qq-9qi"/>
                                             <constraint firstItem="u36-9w-hc7" firstAttribute="leading" secondItem="b31-UN-0lF" secondAttribute="leading" id="pSl-8c-bn7"/>
+                                            <constraint firstItem="KYa-2p-j3A" firstAttribute="top" secondItem="b31-UN-0lF" secondAttribute="top" id="u8d-ie-dar"/>
                                         </constraints>
                                         <size key="customSize" width="175" height="175"/>
                                         <userDefinedRuntimeAttributes>
@@ -578,6 +586,7 @@
                                             <outlet property="bgView" destination="u36-9w-hc7" id="rX2-ok-p2g"/>
                                             <outlet property="blockBtn" destination="g0B-nQ-arU" id="Rkp-tM-ql3"/>
                                             <outlet property="connScrollView" destination="96S-KL-2NX" id="X2o-f3-1SO"/>
+                                            <outlet property="didSelectBtn" destination="KYa-2p-j3A" id="MJq-bY-qaH"/>
                                             <outlet property="expandBtn" destination="Znm-jy-cRS" id="h8A-Zu-HgD"/>
                                             <outlet property="messageBtn" destination="2IU-0g-CWw" id="1nY-ZJ-Ool"/>
                                             <outlet property="nameLbl" destination="Ako-Au-f8l" id="w5K-SB-jfT"/>
@@ -611,7 +620,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PzP-jL-K2i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4286" y="213"/>
+            <point key="canvasLocation" x="4285.6000000000004" y="212.74362818590706"/>
         </scene>
         <!--Notes View Controller-->
         <scene sceneID="Fpi-ty-lKn">
