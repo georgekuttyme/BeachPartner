@@ -37,6 +37,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     @IBOutlet weak var btnPlaybtn: UIButton!
     @IBOutlet weak var lblSwipeGameMsg: UILabel!
     @IBOutlet weak var calendar: FSCalendar!
+    @IBOutlet weak var topfinishesHeight: NSLayoutConstraint!
     @IBOutlet weak var lblNotAviltopSpace: NSLayoutConstraint!
     @IBOutlet weak var mainStackViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var scrlViewHeight: NSLayoutConstraint!
@@ -86,6 +87,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
                 if toplist.count == 0 {
                     self.toponeBtn.isHidden = false
                     self.toponeBtn.setTitle("No notable finishes", for: UIControlState.normal)
+//                    self.topfinishesHeight = 
                     self.badgeImage.isHidden = true
                     self.topthreefinishesBtn.isHidden = true
                 }

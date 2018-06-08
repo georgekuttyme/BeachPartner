@@ -694,7 +694,10 @@ extension RegisterViewController: UITextFieldDelegate {
         }
         if textField == self.mobileTxt {
             //            textField.autocapitalizationType = UITextAutocapitalizationType.words
-            let mobileText = mobileTxt.text?.replacingOccurrences(of: " ", with: "", options: .literal, range: nil)
+//            let mobileText = mobileTxt.text?.replacingOccurrences(of: " ", with: "", options: .literal, range: nil)
+            let mobileText = mobileTxt.text?.replacingOccurrences(of: " ", with: "")
+            
+            
             mobileTxt.text = mobileText
             if mobileTxt.isEmpty() {
                 mobileTxt.shake()

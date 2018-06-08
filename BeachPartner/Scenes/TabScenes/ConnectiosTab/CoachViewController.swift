@@ -205,11 +205,8 @@ class CoachViewController: UIViewController,UICollectionViewDataSource , UIColle
         let vc = storyboard.instantiateViewController(withIdentifier: "profilevc1") as! CoachProfileTableViewController
         vc.isFromConnectedUser = "ConnectedUser"
         vc.connectedUserId = connectedUser?.userId ?? 0
-        let vc1 = storyboard.instantiateViewController(withIdentifier: "profilevc") as! AthleteProfileTableViewController
-        vc1.isFromConnectedUser = "ConnectedUser"
-        vc1.connectedUserId = connectedUser?.userId ?? 0
-        let identifier = UserDefaults.standard.string(forKey: "userType") == "Athlete" ? vc1 : vc
-        let navController = UINavigationController(rootViewController: identifier)
+        vc.connectedUserName = connectedUser?.firstName ?? ""
+        let navController = UINavigationController(rootViewController: vc)
         self.present(navController, animated: true, completion: nil)
     }
     
