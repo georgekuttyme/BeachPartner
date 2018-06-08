@@ -100,7 +100,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
     var videoUrl = ""
     var imageUrl = ""
     var movieData: NSData?
-    
+    var connectedUserName = String()
     var editclicked = false
     var isBasicInformation: Bool!
     //    let imagepickerController = UIImagePickerController()
@@ -142,8 +142,9 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
-        self.navigationController!.navigationBar.topItem!.title = "My Profile"
+        if isFromConnectedUser == ""{
+            self.navigationController!.navigationBar.topItem!.title = "My Profile"
+        }
         let backImage = UIImage(named:"back_58")
         let dismissButton = UIBarButtonItem(image: backImage, style: .done, target: self, action: #selector(didTapDismissButton))
         self.navigationItem.leftBarButtonItem = dismissButton
@@ -194,6 +195,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         print(connectedUserId,"====")
         
         if isFromConnectedUser == "ConnectedUser"{
+            self.navigationController!.navigationBar.topItem!.title = connectedUserName+"'s"+" Profile"
             self.getConnectedUserInfo(userId:connectedUserId)
             self.editUserImageBtn.isHidden = true
             self.editUserImageBtn.isUserInteractionEnabled = false
