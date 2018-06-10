@@ -28,7 +28,6 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     @IBOutlet weak var topThreeBtn: UIButton!
     @IBOutlet weak var topTwoBtn: UIButton!
     @IBOutlet weak var toponeBtn: UIButton!
-    @IBOutlet weak var topsView: UIView!
     @IBOutlet weak var blueBpListHeight: NSLayoutConstraint!
     @IBOutlet weak var btnUndo: UIButton!
     @IBOutlet weak var btnLoc: UIButton!
@@ -90,6 +89,11 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
 //                    self.topfinishesHeight = 
                     self.badgeImage.isHidden = true
                     self.topthreefinishesBtn.isHidden = true
+                    self.topfinishesHeight.constant = 40
+                }
+                else
+                {
+                    self.topfinishesHeight.constant = CGFloat(toplist.count * 40)
                 }
                 
                 if(toplist.count == 3){
@@ -101,6 +105,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
                         self.topThreeBtn.isHidden = false
                         self.topThreeBtn.setTitle(firstFinish, for: UIControlState.normal)
                     }
+                    
                     toplist.removeLast()
                 }
                 if(toplist.count == 2){
@@ -137,14 +142,15 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
                 self.toponeBtn.setTitle("No notable finishes", for: UIControlState.normal)
                 self.badgeImage.isHidden = true
                 self.topthreefinishesBtn.isHidden = true
+                 self.topfinishesHeight.constant = 40
             }
             
         }
     }
     
     @IBAction func topfinishesCollapseClicked(_ sender: Any) {
-    
        resetTopFinishView()
+        self.topfinishesHeight.constant = 75
     }
     
     private func resetTopFinishView() {
@@ -288,6 +294,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         self.topThreeBtn.isHidden = true
         self.topTwoBtn.isHidden = true
         self.toponeBtn.isHidden = true
+        self.topfinishesHeight.constant = 75
         self.didPressDownArrow = false
         isFirstBlueBpCard = false
         self.bpscrollview.isScrollEnabled=false
