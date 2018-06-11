@@ -99,7 +99,7 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
     }
     
     @objc func searchBtnClicked(_ sender: AnyObject){
-        
+        self.displayType = "search"
         self.searchController = UISearchController(searchResultsController:  nil)
         let textFieldInsideSearchBar = searchController.searchBar.value(forKey: "searchField") as? UITextField
         textFieldInsideSearchBar?.textColor = UIColor.white
@@ -108,7 +108,7 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
         self.searchController.searchResultsUpdater = self
         self.searchController.delegate = self
         self.searchController.searchBar.delegate = self
-        
+        self.searchController.searchBar.showsCancelButton = true
         self.searchController.hidesNavigationBarDuringPresentation = false
         self.searchController.dimsBackgroundDuringPresentation = true
         //        searchController.searchBar.sizeToFit()
@@ -121,7 +121,13 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
         self.searchController.searchBar.becomeFirstResponder()
         
     }
-    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.count == 0{
+                self.filterConnectedusers = self.recentChatList
+                self.tblChatList.reloadData()
+            
+        }
+    }
     override func viewWillAppear(_ animated: Bool) {
         if displayType == "search"{
             self.searchBtn.tintColor = UIColor.white

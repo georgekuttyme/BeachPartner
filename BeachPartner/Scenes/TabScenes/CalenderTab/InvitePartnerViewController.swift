@@ -346,6 +346,7 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
             
             
             if (cell?.addBtn.isHidden)! {
+                cell?.nameLbl.textColor = UIColor.gray
                 cell?.unAvailableLbl.text = "Unavailable"
                 cell?.unAvailableLbl.textColor = UIColor.gray
                 cell?.backgroundColor = UIColor.init(red: 230/255, green: 230/255, blue: 230/255, alpha: 1.0)

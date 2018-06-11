@@ -122,6 +122,8 @@
 		845B7908208B4A5200DF1F1F /* AthleteProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845B7907208B4A5200DF1F1F /* AthleteProfileTableViewController.swift */; };
 		845BD6A32089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BD6A22089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift */; };
 		8D4B786520ABFE430025F7F7 /* GetAllUserEventsRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4B786420ABFE430025F7F7 /* GetAllUserEventsRespModel.swift */; };
+		8D65CAEA20CE95230008CD7F /* UpdateFcmTokenRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D65CAE920CE95230008CD7F /* UpdateFcmTokenRespModel.swift */; };
+		8D65CAEC20CE95580008CD7F /* CheckAppVersionRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D65CAEB20CE95580008CD7F /* CheckAppVersionRespModel.swift */; };
 		8D782FC120B2B153004CA193 /* GetUpcomingTournamentsRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D782FC020B2B153004CA193 /* GetUpcomingTournamentsRespModel.swift */; };
 		8DA417C0209B77F60078F814 /* CoachProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA417BF209B77F60078F814 /* CoachProfileTableViewController.swift */; };
 		D69A1981207388F100497B7C /* HighFiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69A1980207388F100497B7C /* HighFiveViewController.swift */; };
@@ -265,6 +267,8 @@
 		845BD6A22089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllEventsBetweenResponseModel.swift; sourceTree = "<group>"; };
 		8464C58F2084ACDA001FC8E5 /* BeachPartner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BeachPartner.entitlements; sourceTree = "<group>"; };
 		8D4B786420ABFE430025F7F7 /* GetAllUserEventsRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllUserEventsRespModel.swift; sourceTree = "<group>"; };
+		8D65CAE920CE95230008CD7F /* UpdateFcmTokenRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateFcmTokenRespModel.swift; sourceTree = "<group>"; };
+		8D65CAEB20CE95580008CD7F /* CheckAppVersionRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckAppVersionRespModel.swift; sourceTree = "<group>"; };
 		8D782FC020B2B153004CA193 /* GetUpcomingTournamentsRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUpcomingTournamentsRespModel.swift; sourceTree = "<group>"; };
 		8DA417BF209B77F60078F814 /* CoachProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachProfileTableViewController.swift; sourceTree = "<group>"; };
 		A4E87914ED5BC1C1ECF86DA1 /* Pods_BeachPartner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeachPartner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -637,6 +641,8 @@
 				8D4B786420ABFE430025F7F7 /* GetAllUserEventsRespModel.swift */,
 				FF32756920BFE355009345B1 /* GetSubscriptionPlanModel.swift */,
 				FFD93D6E20C1646E00747472 /* GetUserSubscriptionModel.swift */,
+				8D65CAE920CE95230008CD7F /* UpdateFcmTokenRespModel.swift */,
+				8D65CAEB20CE95580008CD7F /* CheckAppVersionRespModel.swift */,
 			);
 			path = AuthModels;
 			sourceTree = "<group>";
@@ -1124,6 +1130,7 @@
 				FFABE2B920ADC7080029C3A0 /* MyCalEventDetailsViewController.swift in Sources */,
 				3B6899EE20491B550075128E /* WLMAssetPoolExtensions.swift in Sources */,
 				3B0DEE98206D09DA00686609 /* WLMPlayer+NSObject+safeObserver.swift in Sources */,
+				8D65CAEC20CE95580008CD7F /* CheckAppVersionRespModel.swift in Sources */,
 				D69A1981207388F100497B7C /* HighFiveViewController.swift in Sources */,
 				FF38234420A9CC4200F403BF /* EventInvitationListViewController.swift in Sources */,
 				3B1B705B206378CC00C3FB57 /* TournamentRequestsCollectionViewCell.swift in Sources */,
@@ -1193,6 +1200,7 @@
 				8427705F2093594B0056CBF6 /* HelpViewController.swift in Sources */,
 				3B1B70592063780D00C3FB57 /* HomeTabViewController.swift in Sources */,
 				3BF0B1BA205BC1000043CFB2 /* CustomCell.swift in Sources */,
+				8D65CAEA20CE95230008CD7F /* UpdateFcmTokenRespModel.swift in Sources */,
 				FF32756A20BFE355009345B1 /* GetSubscriptionPlanModel.swift in Sources */,
 				3B0DEE92206D095500686609 /* CardView.swift in Sources */,
 				3B60278B20494FA3006B108A /* SettingsViewController.swift in Sources */,

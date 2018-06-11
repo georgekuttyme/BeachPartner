@@ -45,6 +45,17 @@ class ConnectionsViewController : BeachPartnerViewController,UISearchControllerD
         self.cycleFromViewController(oldViewController: self.currentViewController!, toViewController: atheleteVC!)
         self.currentViewController = atheleteVC
     }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.count == 0{
+            if selectedIndexItem == "athelete"{
+                atheleteVC?.filterConnectedusers = (atheleteVC?.connectedUsers)!
+                atheleteVC?.collectionView.reloadData()
+            }else{
+                coachVC?.filterConnectedusers = (coachVC?.connectedUsers)!
+                coachVC?.collectionView.reloadData()
+            }
+        }
+    }
     
     func loadCoachView(){
         coachVC?.view.translatesAutoresizingMaskIntoConstraints = false
@@ -106,8 +117,14 @@ class ConnectionsViewController : BeachPartnerViewController,UISearchControllerD
 
     }
     
+    
     @objc func searchBtnClicked(_ sender: AnyObject){
-      
+        
+        if selectedIndexItem == "athelete"{
+            atheleteVC?.displayType = "search"
+        }else {
+            coachVC?.displayType = "search"
+        }
         self.searchController = UISearchController(searchResultsController:  nil)
         let textFieldInsideSearchBar = searchController.searchBar.value(forKey: "searchField") as? UITextField
         textFieldInsideSearchBar?.textColor = UIColor.white
@@ -116,7 +133,7 @@ class ConnectionsViewController : BeachPartnerViewController,UISearchControllerD
         self.searchController.searchResultsUpdater = self
         self.searchController.delegate = self
         self.searchController.searchBar.delegate = self
-        
+        self.searchController.searchBar.showsCancelButton = true
         self.searchController.hidesNavigationBarDuringPresentation = false
         self.searchController.dimsBackgroundDuringPresentation = true
 //        searchController.searchBar.sizeToFit()
@@ -132,6 +149,22 @@ class ConnectionsViewController : BeachPartnerViewController,UISearchControllerD
 
     override func viewWillAppear(_ animated: Bool) {
          self.navigationController!.navigationBar.topItem!.title = "Connections"
+        let searchImage  = UIImage(named: "search")!
+        searchBtn  = UIBarButtonItem(image: searchImage ,  style: .plain, target: self, action:#selector(searchBtnClicked(_:)))
+        navigationItem.rightBarButtonItems = [menuBarButtonItem, searchBtn]
+        if atheleteVC?.displayType == "search" || coachVC?.displayType == "search" {
+            self.searchBtn.tintColor = UIColor.white
+            self.searchBtn.isEnabled = true
+            self.navigationItem.titleView = nil
+            self.navigationItem.title = "Connections"
+            if selectedIndexItem == "athelete"{
+                atheleteVC?.displayType = ""
+                atheleteVC?.collectionView.reloadData()
+            }else {
+                coachVC?.displayType = ""
+                coachVC?.collectionView.reloadData()
+            }
+        }
         
     }
     

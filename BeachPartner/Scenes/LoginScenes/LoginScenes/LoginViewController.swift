@@ -38,7 +38,8 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
         else {
             buildVersionLabel.text = ""
         }
-        
+        checkAppUpdate()
+        updateUserFcmToken()
         let loggedIn = UserDefaults.standard.string(forKey: "isLoggedIn") ?? "0"
         if loggedIn == "0" {
             let acceptTermsAndCondition = UserDefaults.standard.string(forKey: "isAcceptTermsAndCondition") ?? "0"
@@ -83,6 +84,42 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
             iconClick = true
         }
         
+    }
+    func checkAppUpdate(){
+        
+        APIManager.callServer.checkUpdateVersion( sucessResult: { (responseModel) in
+            
+            
+            guard let CheckAppBuildNumberModel = responseModel as? CheckAppBuildNumber else{
+                return
+            }
+            print("+ ++ +\n ",CheckAppBuildNumberModel," \n+ ++ +")
+        
+        }, errorResult: { (error) in
+        
+                guard let errorString  = error else {
+                return
+                }
+                self.alert(message: errorString)
+            })
+    }
+    func updateUserFcmToken(){
+        
+        APIManager.callServer.updateUserFcmToken( sucessResult: { (responseModel) in
+            
+            
+            guard let updateFcmTokenModel = responseModel as? updateFcmTokenRespModel else{
+                
+                return
+            }
+            print("& ** &\n ",updateFcmTokenModel," \n& ** &")
+        }, errorResult: { (error) in
+            
+            guard let errorString  = error else {
+                return
+            }
+            self.alert(message: errorString)
+        })
     }
     
 
