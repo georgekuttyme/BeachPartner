@@ -79,6 +79,65 @@ extension APIManager{
             return
         }
     }
+    public func checkUpdateVersion(sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure){
+        let buildNumber = Bundle.main.buildVersionNumber
+        let version = Bundle.main.releaseVersionNumber
+            let params = [ "deviceType":"iOS",
+                           "currentVersion":version,
+                           "currentBuild":buildNumber                         ]
+            print(params)
+        APIClient.doRequest.inPost(method:ApiMethods.checkAppVersion, params: params as! [String : String], sucess: { (response) in
+            
+            let jsonDict = response! as! JSONDictionary
+            
+            do {
+                
+                let checkAppBuildNumberModel = try CheckAppBuildNumber(jsonDict)
+                sucessResult(checkAppBuildNumberModel)
+                return
+            } catch {
+                print("Catched")
+                errorResult(error.localizedDescription)
+                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                return
+            }
+            
+        }) { (error) in
+            self.busyOff()
+            errorResult(error?.localizedDescription)
+            APIManager.printOnDebug(response: "error:\(error?.localizedDescription)")
+            return
+        }
+    }
+    public func updateUserFcmToken(sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure){
+        let fcmToken = UserDefaults.standard.string(forKey: "FCM_TOKEN")
+        let params = [ "fcmToken":fcmToken ?? ""]
+        print(params)
+        APIClient.doRequest.inPost(method:ApiMethods.updateUserFcmToken, params: params , sucess: { (response) in
+
+            let jsonDict = response! as! JSONDictionary
+            
+            do {
+                
+                let updateFcmTokenModel = try updateFcmTokenRespModel(jsonDict)
+                sucessResult(updateFcmTokenModel)
+                return
+            } catch {
+                print("Catched")
+                errorResult(error.localizedDescription)
+                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                return
+            }
+            
+        }) { (error) in
+            self.busyOff()
+            errorResult(error?.localizedDescription)
+            APIManager.printOnDebug(response: "error:\(error?.localizedDescription)")
+            return
+        }
+        
+        
+    }
     
     public func forFbLogin(sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure){
         

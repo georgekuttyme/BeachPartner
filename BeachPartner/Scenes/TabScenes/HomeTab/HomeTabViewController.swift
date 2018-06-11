@@ -101,6 +101,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         }
         else {
             tournamentStackView.isHidden = true
+            self.msgLabel.textColor = UIColor.white
             
             if let bgImage = UIImage(named: "BP - Cal_Events") {
                 messageContainerView.backgroundColor = UIColor(patternImage: bgImage)
@@ -117,7 +118,10 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         imageView.contentMode = .scaleAspectFit
         imageView.image = image
         self.navigationItem.titleView = imageView
-        
+//        self.msgLabel.isHidden = true
+//        self.connectionLabel.isHidden = true
+//        tornamentRequestLabel.isHidden = true
+//        self.myLabel.isHidden = true
         let isNewUser = UserDefaults.standard.string(forKey: "NewUser")
         if isNewUser == "0" {
             popUpAlertForCompleteProfile()
@@ -600,6 +604,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             self.subscribedBlueBpUsers = searchUserModelArray.searchUserModel
             
             if self.subscribedBlueBpUsers.count == 0 {
+               
                 self.connectionLabel.isHidden = false
             }else {
                 self.connectionLabel.isHidden = true
@@ -736,6 +741,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
                 if isActiveUser {
                     self.recentChatList.insert(latestMsgDic, at: 0)
                     if self.recentChatList.count == 0{
+
                         self.msgLabel.isHidden = false
                     }else{
                         self.msgLabel.isHidden = true

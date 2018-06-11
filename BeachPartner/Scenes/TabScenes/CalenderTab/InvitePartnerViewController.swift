@@ -270,8 +270,9 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
             cell?.profileImage.layer.borderWidth = 1.5
             cell?.addBtn.isHidden = !connectedUsers[indexPath.row].availableOnDate
             if (cell?.addBtn.isHidden)! {
+                cell?.nameLbl.textColor = UIColor.gray
                 cell?.unAvailableLbl.text = "Unavailable"
-                cell?.unAvailableLbl.textColor = UIColor.blue
+                cell?.unAvailableLbl.textColor = UIColor.gray
                 cell?.backgroundColor = UIColor.init(red: 230/255, green: 230/255, blue: 230/255, alpha: 1.0)
             }else{
                 cell?.unAvailableLbl.text = ""

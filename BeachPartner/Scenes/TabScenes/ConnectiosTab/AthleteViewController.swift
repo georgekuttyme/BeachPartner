@@ -241,7 +241,6 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
                 }
                 else{
                    self.collectionView.isHidden = true
-                    self.toastAtleteLbl.text = "You have no connections yet"
                     self.toastAtleteLbl.isHidden = false
                     
                 }
