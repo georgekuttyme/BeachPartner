@@ -16,7 +16,7 @@ protocol InvitePartnerViewControllerDelegate {
 }
 
 
-class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,IndicatorInfoProvider {
+class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,IndicatorInfoProvider,UISearchResultsUpdating {
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title:"Connections")
@@ -32,9 +32,10 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
     
     var numberOfInvitationsLeft: Int = 5
     
-    
+    let searchController = UISearchController(searchResultsController: nil)
 
     var connectedUsers = [ConnectedUserModel]()
+    var filteredConnectedUsers = [ConnectedUserModel]()
     var myTeam = [ConnectedUserModel]()
     
     fileprivate let formatter: DateFormatter = {
@@ -72,7 +73,14 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        definesPresentationContext = true
+        
+ 
+        
+        
         self.partnerTableVIew.separatorColor = UIColor.clear
          self.myteamtableView.separatorColor = UIColor.clear
         self.bottomview.isHidden = true
@@ -90,6 +98,49 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
         
         getConnectionsList()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        partnerTableVIew.tableHeaderView = searchController.searchBar
+    }
+    
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        
+//        self.view.endEditing(true)
+//    }
+    
+    
+    func searchBarIsEmpty() -> Bool {
+        // Returns true if the text is empty or nil
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchText: searchController.searchBar.text!)
+    }
+    
+    
+    func filterContentForSearchText(searchText: String) {
+        
+        filteredConnectedUsers = connectedUsers.filter({ (user) -> Bool in
+            
+            if let firstName = user.connectedUser?.firstName, firstName.lowercased().contains(searchText.lowercased()) {
+                return true
+            }
+            else if let lastName = user.connectedUser?.lastName, lastName.lowercased().contains(searchText.lowercased()) {
+                return true
+            }
+            return false
+        })
+        partnerTableVIew.reloadData()
+    }
+    
     
     private func getConnectionsList() {
         
@@ -122,17 +173,29 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
     
     @objc func didTapAddButton(sender: UIButton) {
         
-        let index = sender.tag-200000
-        let user = connectedUsers[index]
-        
         if myTeam.count == numberOfInvitationsLeft {
             self.alert(message: "Only 5 invitations allowed")
             return
         }
         
+        let index = sender.tag-200000
+        let user = isFiltering() ? filteredConnectedUsers[index] : connectedUsers[index]
         myTeam.append(user)
-        connectedUsers.remove(at: index)
-
+        
+        if isFiltering() {
+            
+            let index = connectedUsers.index(where: { (connectedUser) -> Bool in
+                return Bool(user.connectedUser?.userId == connectedUser.connectedUser?.userId)
+            })
+            if let index = index {
+                connectedUsers.remove(at: index)
+            }
+            filterContentForSearchText(searchText: searchController.searchBar.text ?? "")
+        }
+        else {
+            connectedUsers.remove(at: index)
+        }
+        
         myteamtableView.reloadData()
         partnerTableVIew.reloadData()
     }
@@ -237,7 +300,7 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if(tableView == partnerTableVIew) {
-            return connectedUsers.count
+            return isFiltering() ? filteredConnectedUsers.count: connectedUsers.count
         }
         return myTeam.count
     }
@@ -246,7 +309,14 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
         
         if(tableView == partnerTableVIew) {
             
-            let connectedUser = connectedUsers[indexPath.row].connectedUser
+            var connectedUser : ConnectedUserModel.ConnectedUser
+            
+            if isFiltering() {
+                connectedUser = filteredConnectedUsers[indexPath.row].connectedUser!
+            }
+            else {
+                connectedUser = connectedUsers[indexPath.row].connectedUser!
+            }
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "InvitePartnerCell", for: indexPath) as? InvitePartnerCell
             
@@ -255,27 +325,35 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
             }
             cell?.selectionStyle = .none
             
-            cell?.nameLbl.text = connectedUser?.firstName
+            cell?.nameLbl.text = connectedUser.firstName
             
-            if let image = connectedUser?.imageUrl, let imageUrl = URL(string: image) {
+            let image = connectedUser.imageUrl
+            let imageUrl = URL(string: image)
                 cell?.profileImage.sd_setIndicatorStyle(.whiteLarge)
                 cell?.profileImage.sd_setShowActivityIndicatorView(true)
                 cell?.profileImage.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
-            }
+            
             
             cell?.profileImage.layer.cornerRadius = (cell?.profileImage?.frame.size.width)!/2
             cell?.profileImage.clipsToBounds = true
             //            cell?.profileImage.layer.borderColor = UIColor.blue.cgColor
             cell?.profileImage.layer.borderColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0).cgColor
             cell?.profileImage.layer.borderWidth = 1.5
-            cell?.addBtn.isHidden = !connectedUsers[indexPath.row].availableOnDate
+            
+            
+            
+            cell?.addBtn.isHidden = isFiltering() ? !filteredConnectedUsers[indexPath.row].availableOnDate : !connectedUsers[indexPath.row].availableOnDate
+            
+            
             if (cell?.addBtn.isHidden)! {
                 cell?.unAvailableLbl.text = "Unavailable"
-                cell?.unAvailableLbl.textColor = UIColor.blue
+                cell?.unAvailableLbl.textColor = UIColor.gray
                 cell?.backgroundColor = UIColor.init(red: 230/255, green: 230/255, blue: 230/255, alpha: 1.0)
+                cell?.nameLbl.textColor = UIColor.gray
             }else{
                 cell?.unAvailableLbl.text = ""
                 cell?.backgroundColor = UIColor.white
+                cell?.nameLbl.textColor = UIColor.black
             }
                 
             cell?.addBtn.tag = indexPath.row+200000

@@ -18,6 +18,8 @@ class CommmonWebViewController: UIViewController,UIWebViewDelegate {
     @IBOutlet var backBtn: UIButton!
     @IBOutlet var titleLbl: UILabel!
     
+    var dismissActive = false
+    
     var contentType = String()
     var titleText = String()
     override func viewWillAppear(_ animated: Bool) {
@@ -25,6 +27,10 @@ class CommmonWebViewController: UIViewController,UIWebViewDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let barButtonItemAppearance = UIBarButtonItem.appearance()
+        barButtonItemAppearance.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.white], for: .normal)
+
         titleLbl.text = titleText
         if titleText == "About Us"{
             contentType = "https://www.beachpartner.com/about_us.html"
@@ -45,11 +51,24 @@ class CommmonWebViewController: UIViewController,UIWebViewDelegate {
     }
     
     @IBAction func backBtnClicked(_ sender: Any) {
+    
+        dismissActive = true
         dismiss(animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
 
+    }
+    
+    override func dismiss(animated flag: Bool, completion: (() -> Void)?) {
+        if self.presentedViewController != nil  {
+            super.dismiss(animated: flag, completion: completion)
+        }
+        if dismissActive {
+            let barButtonItemAppearance = UIBarButtonItem.appearance()
+            barButtonItemAppearance.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.clear], for: .normal)
+            super.dismiss(animated: flag, completion: completion)
+        }
     }
 }
