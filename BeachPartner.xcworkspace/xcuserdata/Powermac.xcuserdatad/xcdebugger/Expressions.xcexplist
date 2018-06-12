@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "BPCardsVC.calendar(_:didSelect:at:):BPCardsVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "eventListToShow.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "APIManager.undoSwipeAction(userId:sucessResult:errorResult:):AuthModule.swift">
       </ContextState>
       <ContextState
