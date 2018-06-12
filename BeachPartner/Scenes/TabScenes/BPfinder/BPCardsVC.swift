@@ -59,9 +59,10 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     var SwipeCardArray:[Any] = []
     var currentIndex : Int = 0
     var eventDateArray = [String]()
-    
+    var eventNameToList = [GetAllUserEventsRespModel]()
+    var eventListToShow = [GetAllUserEventsRespModel]()
     var delegate: BPCardsVCDelegate?
-    
+    var eventNames = String()
     fileprivate let formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -730,7 +731,8 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
                 print("Rep model does not match")
                 return
             }
-            print("",eventsArrayModel,"*......*********")
+            self.eventNameToList = eventsArrayModel.getAllUserEventsRespModel
+            print("",self.eventNameToList,"*......*********")
             self.eventDateArray.removeAll()
             for event in eventsArrayModel.getAllUserEventsRespModel{
                 
@@ -740,6 +742,9 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
                 print(endDate)
                 let dates = self.generateDateArrayBetweenTwoDates(startDate: startDate, endDate: endDate)
                 self.eventDateArray.append(contentsOf: dates)
+                var eventObject = event
+                eventObject.event?.activeDates = dates
+                self.eventNameToList.append(eventObject)
             }
             self.calendar.reloadData()
             
@@ -765,8 +770,40 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         if count > 0 { return "\(count)" }
         return nil
     }
-    // MARK:- Helper Methods
     
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        self.eventNames.removeAll()
+        print("---***----",self.eventNameToList,"\n\n\n\n\n")
+        self.eventListToShow = eventNameToList.filter { (event) -> Bool in
+            print(event.event?.activeDates ?? "")
+            let selectedDate = formatter.string(from: date)
+            return Bool((event.event?.activeDates.contains(selectedDate))!)
+        }
+        
+        print("-----",eventListToShow,"-----")
+        let limit = self.eventListToShow.count
+        for index1 in 0..<limit {
+            if let names = self.eventListToShow[index1].event?.eventName{
+                self.eventNames.append(names + "\n\n")
+            }
+        }
+        print(self.eventNames)
+        if self.eventNames.count > 0 {
+            self.eventNames.removeLast()
+            self.eventNames.removeLast()
+        }
+        if eventListToShow.count > 0 {
+            let alert = UIAlertController(title: "Events", message: self.eventNames, preferredStyle: .alert)
+            let actionButton = UIAlertAction(title: "Ok", style: .default) { (action) in
+            }
+            alert.addAction(actionButton)
+            present(alert, animated: true, completion: nil)
+        }else {
+            
+        }
+        
+    }
+    // MARK:- Helper Methods
     func generateDateArrayBetweenTwoDates(startDate: Date , endDate:Date) ->[String] {
         
         var datesArray: [String] =  [String]()
