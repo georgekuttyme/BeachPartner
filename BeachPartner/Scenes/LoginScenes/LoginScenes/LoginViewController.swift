@@ -26,53 +26,58 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
     
     @IBOutlet weak var loginWebView: UIWebView!
     @IBOutlet weak var buildVersionLabel: UILabel!
+    @IBOutlet weak var loginContainerView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        facebookBtn.isHidden = true
-        connectWithLbl.isHidden = true
-        instaBtn.isHidden = true
+        
+        loginContainerView.isHidden = true
+        
         if let version = Bundle.main.buildVersionNumber {
             buildVersionLabel.text = "Beach Partner v\(version)"
         }
         else {
             buildVersionLabel.text = ""
         }
-        checkAppUpdate()
-        updateUserFcmToken()
+        
+        facebookBtn.isHidden = true
+        connectWithLbl.isHidden = true
+        instaBtn.isHidden = true
+        
+        checkForAppUpdate()
+    }
+
+    func setUpLoginUI() {
+        
         let loggedIn = UserDefaults.standard.string(forKey: "isLoggedIn") ?? "0"
         if loggedIn == "0" {
+            loginContainerView.isHidden = false
+            
             let acceptTermsAndCondition = UserDefaults.standard.string(forKey: "isAcceptTermsAndCondition") ?? "0"
             if acceptTermsAndCondition == "0" {
                 self.performSegue(withIdentifier: "tandcsegue", sender: self)
             }
             
-        emailField.text = UserDefaults.standard.string(forKey: "email") ?? ""
-        passwordField.text = UserDefaults.standard.string(forKey: "password") ?? ""
-        passwordField.delegate = self
-        emailField.delegate = self
-        
-        rightButton.setImage(UIImage(named: "hidepwd"), for: .normal)
-        rightButton.frame = CGRect(x:0, y:0, width:40, height:30)
-        passwordField.rightViewMode = .always
-        passwordField.rightView = rightButton
-        
-        rightButton.addTarget(self, action:#selector(self.showhidepwdclicked), for: .touchUpInside)
-        NotificationCenter.default.addObserver(self, selector: #selector(ForgotPopUpAction(notification:)), name:NSNotification.Name(rawValue: "popup-ForgotPassword"), object: nil)
+            emailField.text = UserDefaults.standard.string(forKey: "email") ?? ""
+            passwordField.text = UserDefaults.standard.string(forKey: "password") ?? ""
+            passwordField.delegate = self
+            emailField.delegate = self
+            
+            rightButton.setImage(UIImage(named: "hidepwd"), for: .normal)
+            rightButton.frame = CGRect(x:0, y:0, width:40, height:30)
+            passwordField.rightViewMode = .always
+            passwordField.rightView = rightButton
+            
+            rightButton.addTarget(self, action:#selector(self.showhidepwdclicked), for: .touchUpInside)
+            NotificationCenter.default.addObserver(self, selector: #selector(ForgotPopUpAction(notification:)), name:NSNotification.Name(rawValue: "popup-ForgotPassword"), object: nil)
         }
-        
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        let loggedIn = UserDefaults.standard.string(forKey: "isLoggedIn") ?? "0"
-        if loggedIn != "0" {
+        else {
             let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
             let secondViewController = storyboard.instantiateViewController(withIdentifier: "tabbarcontroller") as! TabBarController
             self.present(secondViewController, animated: false, completion: nil)
-            
         }
-        
     }
-
+    
     @objc func showhidepwdclicked() {
         if(iconClick == true) {
             self.passwordField.isSecureTextEntry = false
@@ -85,24 +90,44 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
         }
         
     }
-    func checkAppUpdate(){
+    
+    func checkForAppUpdate() {
         
+        ActivityIndicatorView.show("Loading...")
         APIManager.callServer.checkUpdateVersion( sucessResult: { (responseModel) in
+            ActivityIndicatorView.hiding()
             
+            guard let appVersionModel = responseModel as? CheckAppBuildNumber else { return }
             
-            guard let CheckAppBuildNumberModel = responseModel as? CheckAppBuildNumber else{
+            guard let updateStatus = appVersionModel.updateAvailable else { return }
+            
+            if updateStatus == false {
+                self.setUpLoginUI()
                 return
             }
-            print("+ ++ +\n ",CheckAppBuildNumberModel," \n+ ++ +")
-        
-        }, errorResult: { (error) in
-        
-                guard let errorString  = error else {
-                return
+            else {
+                let storyboard = UIStoryboard(name: "Login", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "AppUpdateView") as! AppUpdateViewController
+                vc.delegate = self
+                if let forceUpdateStatus = appVersionModel.mandatoryUpdate,  forceUpdateStatus == true {
+                    vc.mandatoryUpdate = true
                 }
-                self.alert(message: errorString)
-            })
+                vc.modalPresentationStyle = .overCurrentContext
+                vc.modalTransitionStyle = .crossDissolve
+                self.present(vc, animated: true, completion: nil)
+            }
+            print("+ ++ +\n ",appVersionModel," \n+ ++ +")
+            
+        }, errorResult: { (error) in
+            ActivityIndicatorView.hiding()
+            guard let errorString  = error else {
+                return
+            }
+            self.alert(message: errorString)
+        })
     }
+
+    
     func updateUserFcmToken(){
         
         APIManager.callServer.updateUserFcmToken( sucessResult: { (responseModel) in
@@ -564,8 +589,16 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
-    
 }
+
+extension LoginViewController: AppUpdateViewControllerDelegate {
+    
+    func didDismissUpdateView() {
+        self.setUpLoginUI()
+    }
+}
+
+
 
     // MARK: - UITextFieldDelegates
     extension LoginViewController : UITextFieldDelegate {

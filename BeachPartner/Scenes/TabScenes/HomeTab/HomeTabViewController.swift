@@ -475,12 +475,13 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
                 }
                 cell.eventLocationLabel.text = request?.eventLocation
                 
-                if let count = request?.sentCount, count > 0 {
-                    cell.invitationCountLabel.text = "\(count)"
-                }
-                else {
-                    cell.invitationCountLabel.text = ""
-                }
+                cell.invitationCountLabel.text = ""
+//                if let count = request?.sentCount, count > 0 {
+//                    cell.invitationCountLabel.text = "\(count)"
+//                }
+//                else {
+//                    cell.invitationCountLabel.text = ""
+//                }
             }
             else {
                 let request = tournamentRequestList?.requestsReceived[indexPath.row]
@@ -493,12 +494,13 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
                 }
                 cell.eventLocationLabel.text = request?.eventLocation
                 
-                if let count = request?.invitationCount, count > 0 {
-                    cell.invitationCountLabel.text = "\(count)"
-                }
-                else {
-                    cell.invitationCountLabel.text = ""
-                }
+                cell.invitationCountLabel.text = ""
+//                if let count = request?.invitationCount, count > 0 {
+//                    cell.invitationCountLabel.text = "\(count)"
+//                }
+//                else {
+//                    cell.invitationCountLabel.text = ""
+//                }
             }
             
             return cell

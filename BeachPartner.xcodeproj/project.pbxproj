@@ -138,6 +138,7 @@
 		FF560C0C2096F83300D3BA80 /* UpdateNoteRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF560C0B2096F83300D3BA80 /* UpdateNoteRespModel.swift */; };
 		FFABE2B920ADC7080029C3A0 /* MyCalEventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFABE2B820ADC7080029C3A0 /* MyCalEventDetailsViewController.swift */; };
 		FFCE759220AAFBF2007C0CFD /* GetEventInvitationRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCE759120AAFBF2007C0CFD /* GetEventInvitationRespModel.swift */; };
+		FFD0F9D720CFC3B300330F77 /* AppUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD0F9D620CFC3B300330F77 /* AppUpdateViewController.swift */; };
 		FFD93D6D20C1257E00747472 /* AddonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD93D6C20C1257E00747472 /* AddonsViewController.swift */; };
 		FFD93D6F20C1646E00747472 /* GetUserSubscriptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD93D6E20C1646E00747472 /* GetUserSubscriptionModel.swift */; };
 		FFEBEB5B20BE672100521041 /* Subscription.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFEBEB5A20BE672100521041 /* Subscription.storyboard */; };
@@ -284,6 +285,7 @@
 		FF560C0B2096F83300D3BA80 /* UpdateNoteRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNoteRespModel.swift; sourceTree = "<group>"; };
 		FFABE2B820ADC7080029C3A0 /* MyCalEventDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCalEventDetailsViewController.swift; sourceTree = "<group>"; };
 		FFCE759120AAFBF2007C0CFD /* GetEventInvitationRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventInvitationRespModel.swift; sourceTree = "<group>"; };
+		FFD0F9D620CFC3B300330F77 /* AppUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUpdateViewController.swift; sourceTree = "<group>"; };
 		FFD93D6C20C1257E00747472 /* AddonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddonsViewController.swift; sourceTree = "<group>"; };
 		FFD93D6E20C1646E00747472 /* GetUserSubscriptionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserSubscriptionModel.swift; sourceTree = "<group>"; };
 		FFEBEB5A20BE672100521041 /* Subscription.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Subscription.storyboard; sourceTree = "<group>"; };
@@ -417,6 +419,7 @@
 				3B60279F2049707E006B108A /* InstagramViewController.swift */,
 				3BC8F8FE205ACB130086333E /* RegisterViewController.swift */,
 				3B6027A02049707E006B108A /* TermsAndConditionVC.swift */,
+				FFD0F9D620CFC3B300330F77 /* AppUpdateViewController.swift */,
 			);
 			path = LoginScenes;
 			sourceTree = "<group>";
@@ -1171,6 +1174,7 @@
 				3B5D995B206E2EFB001ED515 /* DummyLocations.swift in Sources */,
 				3B689A1220492E0E0075128E /* BPfinderViewController.swift in Sources */,
 				3B60279C20497044006B108A /* LoginViewController.swift in Sources */,
+				FFD0F9D720CFC3B300330F77 /* AppUpdateViewController.swift in Sources */,
 				3B89E60B2072BD9C008DAFE0 /* CenterViewFlowLayout.swift in Sources */,
 				3BAD58752068CCC60076DFD8 /* AuthModule.swift in Sources */,
 				3B1B705D2065617300C3FB57 /* MyCalViewController.swift in Sources */,
