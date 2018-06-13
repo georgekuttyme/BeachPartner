@@ -229,6 +229,11 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         
         //MARK: Date of Birth
         datePicker.datePickerMode = UIDatePickerMode.date
+        let currentDate = Date()
+        var dateComponent = DateComponents()
+        dateComponent.year = -18
+        let eighteenYearAgo = Calendar.current.date(byAdding: dateComponent, to: currentDate)
+        datePicker.maximumDate = eighteenYearAgo
         datePicker.addTarget(self, action: #selector(self.datePickerValueChanged(sender:)), for: UIControlEvents.valueChanged)
         birthDateTxtFld.inputView = datePicker
         //        self.imagePickerController.preferredStatusBarStyle  = .default

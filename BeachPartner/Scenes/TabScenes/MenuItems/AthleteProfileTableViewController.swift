@@ -390,6 +390,11 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         
         //MARK: Date of Birth
         datePicker.datePickerMode = UIDatePickerMode.date
+        let currentDate = Date()
+        var dateComponents = DateComponents()
+        dateComponents.year = -5
+        let fiveYearAgo = Calendar.current.date(byAdding: dateComponents, to: currentDate)
+        datePicker.maximumDate = fiveYearAgo
         datePicker.addTarget(self, action: #selector(self.datePickerValueChanged(sender:)), for: UIControlEvents.valueChanged)
         birthDateTxtFld.inputView = datePicker
 //        self.imagePickerController.preferredStatusBarStyle  = .default
