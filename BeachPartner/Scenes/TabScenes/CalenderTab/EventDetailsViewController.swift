@@ -11,6 +11,17 @@ import EventKit
 
 class EventDetailsViewController: BeachPartnerViewController {
 
+    enum EventStatus: String {
+        case registered = "Registered"
+        case active = "Active"
+    }
+    
+    enum RegisterType: String {
+        case organizer = "Organizer"
+        case invitee = "Invitee"
+    }
+    
+    
     @IBOutlet weak var generalEventDetailsView: UIView!
     @IBOutlet weak var generalEventDetailsLabel: UILabel!
     @IBOutlet weak var eventNameLabel: UILabel!
@@ -55,7 +66,7 @@ class EventDetailsViewController: BeachPartnerViewController {
         setupUI()
         setupDataFromEvent()
         
-        if event?.registerType == "Invitee" || event?.registerType == "Organizer" || isFromHomeTab {
+        if event?.registerType == RegisterType.invitee.rawValue || event?.registerType == RegisterType.organizer.rawValue || isFromHomeTab {
             getAllInvitations()
         }
     }
@@ -63,7 +74,7 @@ class EventDetailsViewController: BeachPartnerViewController {
     private func setupUI() {
         eventNameLabel.adjustsFontSizeToFitWidth = true
         
-        if event?.registerType == "Invitee" {
+        if event?.registerType == RegisterType.invitee.rawValue {
             
             invitePartnerButton.isEnabled = false
             invitePartnerButton.alpha = 0.6
@@ -73,14 +84,14 @@ class EventDetailsViewController: BeachPartnerViewController {
             
             self.backButton.setTitle("View Partners", for: .normal)
         }
-        else if event?.registerType == "Organizer" {
+        else if event?.registerType == RegisterType.organizer.rawValue {
             
-            if event?.eventStaus == "Active" {
+            if event?.eventStaus == EventStatus.active.rawValue {
                 
                 invitePartnerButton.isEnabled = false
                 invitePartnerButton.alpha = 0.6                
             }
-            else if event?.eventStaus == "Registered" {
+            else if event?.eventStaus == EventStatus.registered.rawValue {
                 
                 invitePartnerButton.isEnabled = false
                 invitePartnerButton.alpha = 0.6
@@ -109,6 +120,23 @@ class EventDetailsViewController: BeachPartnerViewController {
         }
         else {
             athleteActionView.isHidden = true
+        }
+        
+        
+        // ~~~~~ Temporary fix ~~~~~~
+        if let date = event?.eventRegistrationEndDate {
+            let endDate = Date(timeIntervalSince1970: TimeInterval(date/1000))
+            
+            if endDate.compare(Date()) == .orderedAscending { // registration already closed
+                invitePartnerButton.isEnabled = false
+                invitePartnerButton.alpha = 0.6
+                
+                registerButton.isEnabled = false
+                registerButton.alpha = 0.6
+            }
+            else {// registration open
+               
+            }
         }
     }
     
@@ -144,7 +172,7 @@ class EventDetailsViewController: BeachPartnerViewController {
         
         if UserDefaults.standard.string(forKey: "userType") == "Coach" {
 
-            if eventInvitation.invitations?.first?.eventStatus == "Registered" {
+            if eventInvitation.invitations?.first?.eventStatus == EventStatus.registered.rawValue {
 
                 goingButton.isEnabled = false
                 goingButton.alpha = 0.6

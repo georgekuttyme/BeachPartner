@@ -229,7 +229,7 @@ class FilterViewController: UIViewController {
         self.regiondropDown.anchorView = self.regionBtn // UIView or UIBarButtonItem
         self.regiondropDown.dataSource = self.regionList
         self.regiondropDown.bottomOffset = CGPoint(x: 0, y:0)
-        self.regiondropDown.width = 150
+        self.regiondropDown.width = 250
         //        self.dropDown.selectionBackgroundColor = UIColor.lightGray
         self.regiondropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             print("Selected item:",item," at index:",index)
