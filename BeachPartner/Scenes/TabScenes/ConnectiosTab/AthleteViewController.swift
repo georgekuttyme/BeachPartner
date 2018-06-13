@@ -242,7 +242,8 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
                 else{
                    self.collectionView.isHidden = true
                     self.toastAtleteLbl.isHidden = false
-                    
+                    self.toastAtleteLbl.text = "You have no connections yet"
+                    self.toastAtleteLbl.textColor = UIColor.gray
                 }
                 ActivityIndicatorView.hiding()
             }

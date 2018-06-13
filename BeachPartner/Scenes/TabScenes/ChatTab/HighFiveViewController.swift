@@ -92,6 +92,7 @@ class HighFiveViewController: BeachPartnerViewController,UITableViewDelegate,UIT
             }
             else {
                 self.toastLabel.isHidden = false
+                self.toastLabel.textColor = UIColor.gray
             }
             self.tblHighFiveList.reloadData()
             ActivityIndicatorView.hiding()
