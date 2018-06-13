@@ -693,7 +693,8 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
                 self.likedPersonInfo = [connectedUserModelValue]
                 let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "MutualLikesViewController") as! MutualLikesViewController
-//                vc.modalPresentationStyle = .overCurrentContext
+                vc.modalTransitionStyle = .crossDissolve
+                vc.modalPresentationStyle = .overFullScreen
                 self.present(vc, animated: true, completion: nil)
             }
             

@@ -249,6 +249,7 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
                 self.toastLbl.isHidden = false
                 self.toastLbl.text = "User not found"
                 self.toastLbl.numberOfLines = 0
+                self.toastLbl.textColor = UIColor.gray
             }
             print(displayType,"hdddddd")
             return self.filterConnectedusers.count
@@ -261,6 +262,7 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
                 self.toastLbl.isHidden = false
                 self.toastLbl.text = "Messages sent or received will appear here"
                 self.toastLbl.numberOfLines = 3
+                self.toastLbl.textColor = UIColor.gray
             }
             print(displayType,"jghjhfghfgh")
             displayType = ""

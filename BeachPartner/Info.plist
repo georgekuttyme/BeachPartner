@@ -66,6 +66,14 @@
 	<string>$(PRODUCT_NAME) camera use</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>$(PRODUCT_NAME) microphone use</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>This app access Media Library </string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>This app access Photo Library </string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app access Media Library Usage</string>
+	<key>CFBundleGetInfoString</key>
+	<string></string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
@@ -92,6 +100,10 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+	<key>NSHumanReadableCopyright</key>
+	<string></string>
+	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 </dict>
 </plist>

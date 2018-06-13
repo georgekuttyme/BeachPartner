@@ -224,6 +224,8 @@ class CoachViewController: UIViewController,UICollectionViewDataSource , UIColle
             self.collectionView.reloadData()
             if self.connectedUsers.count == 0{
                 self.toastCoachLbl.isHidden = false
+                self.toastCoachLbl.text = "You have no connections yet"
+                self.toastCoachLbl.textColor = UIColor.gray
                 
             }else{
                 self.toastCoachLbl.isHidden = true
