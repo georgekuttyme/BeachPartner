@@ -65,7 +65,7 @@
 		<true/>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>This app access Media Library </string>
+	<string>$(PRODUCT_NAME) Media Library </string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>$(PRODUCT_NAME) calendar use</string>
 	<key>NSCameraUsageDescription</key>
@@ -75,9 +75,9 @@
 	<key>NSMicrophoneUsageDescription</key>
 	<string>$(PRODUCT_NAME) microphone use</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>This app access Photo Library </string>
+	<string>$(PRODUCT_NAME) Photo Library </string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app access Media Library Usage</string>
+	<string>$(PRODUCT_NAME) Media Library Usage</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
