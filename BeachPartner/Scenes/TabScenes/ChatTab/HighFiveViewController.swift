@@ -176,15 +176,15 @@ class HighFiveViewController: BeachPartnerViewController,UITableViewDelegate,UIT
 extension UIView {
     // OUTPUT 1
     func dropShadow(scale: Bool = true) {
+        
         layer.masksToBounds = false
         layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOpacity = 0.5
-        layer.shadowOffset = CGSize(width: -1, height: 1)
-        layer.shadowRadius = 1
-        
-        layer.shadowPath = UIBezierPath(rect: CGRect(x:self.bounds.origin.x,y:self.bounds.origin.y,width:self.bounds.size.width-37,height:self.bounds.size.height )).cgPath
+        layer.shadowOpacity = 0.23
+        layer.shadowOffset = CGSize(width: 0, height: 0)
+        layer.shadowRadius = 4
+        layer.shadowPath = UIBezierPath(roundedRect: layer.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 8, height: 8)).cgPath
         layer.shouldRasterize = true
-        layer.rasterizationScale = scale ? UIScreen.main.scale : 1
+        layer.rasterizationScale = UIScreen.main.scale
     }
     
     // OUTPUT 2
