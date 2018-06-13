@@ -239,7 +239,6 @@ class EventDetailsViewController: BeachPartnerViewController {
         let viewController = storyBoard.instantiateViewController(withIdentifier: "InviteParentView") as! InviteParentViewController
         viewController.event = self.event
         viewController.eventInvitation = self.eventInvitation
-        viewController.delegate1 = self
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -358,16 +357,3 @@ class EventDetailsViewController: BeachPartnerViewController {
         })
     }
 }
-
-extension EventDetailsViewController: InviteParentViewControllerDelegate {
-    
-    func successfullyInvitedPartners(sender: UIViewController) {
-        self.navigationController?.popViewController(animated: false)
-    }
-
-}
-
-
-
-
-

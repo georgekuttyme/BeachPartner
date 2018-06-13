@@ -119,8 +119,8 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="pWI-pt-vIE">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="328"/>
                                                 <subviews>
-                                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cpw-uq-FU4" customClass="FSCalendar">
-                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="303"/>
+                                                    <view clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cpw-uq-FU4" customClass="FSCalendar">
+                                                        <rect key="frame" x="0.0" y="28" width="320" height="275"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="303" id="zjM-gv-Iwg"/>
@@ -247,14 +247,14 @@
                                                                                             </constraints>
                                                                                         </imageView>
                                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xqt-TF-5dR">
-                                                                                            <rect key="frame" x="290" y="0.0" width="20" height="69.5"/>
+                                                                                            <rect key="frame" x="290" y="10" width="20" height="49.5"/>
                                                                                             <constraints>
                                                                                                 <constraint firstAttribute="width" constant="20" id="Wvw-sy-FDm"/>
                                                                                             </constraints>
                                                                                         </imageView>
                                                                                     </subviews>
                                                                                     <constraints>
-                                                                                        <constraint firstAttribute="trailing" secondItem="xqt-TF-5dR" secondAttribute="trailing" constant="5" id="9DL-cc-LWw"/>
+                                                                                        <constraint firstAttribute="trailing" secondItem="xqt-TF-5dR" secondAttribute="trailing" id="9DL-cc-LWw"/>
                                                                                         <constraint firstAttribute="bottom" secondItem="xqt-TF-5dR" secondAttribute="bottom" constant="10" id="GTw-El-2bc"/>
                                                                                         <constraint firstItem="xqt-TF-5dR" firstAttribute="top" secondItem="sll-3p-SMr" secondAttribute="top" constant="10" id="SL6-yB-mBp"/>
                                                                                         <constraint firstAttribute="bottom" secondItem="wEv-hG-bzb" secondAttribute="bottom" id="es8-8u-IJJ"/>
@@ -501,7 +501,7 @@
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g7Q-JE-gMb">
-                                                                                    <rect key="frame" x="290" y="0.0" width="20" height="69.5"/>
+                                                                                    <rect key="frame" x="290" y="10" width="20" height="49.5"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" constant="20" id="16E-ER-oQd"/>
                                                                                     </constraints>
@@ -515,7 +515,7 @@
                                                                                 <constraint firstItem="ViV-CA-STL" firstAttribute="top" secondItem="zo1-gV-MpR" secondAttribute="top" id="cyz-q6-Dj3"/>
                                                                                 <constraint firstAttribute="bottom" secondItem="mmT-0D-8lG" secondAttribute="bottom" id="jar-ol-0Ej"/>
                                                                                 <constraint firstItem="g7Q-JE-gMb" firstAttribute="top" secondItem="zo1-gV-MpR" secondAttribute="top" constant="10" id="kS6-OR-phv"/>
-                                                                                <constraint firstAttribute="trailing" secondItem="g7Q-JE-gMb" secondAttribute="trailing" constant="5" id="mkz-p3-0qe"/>
+                                                                                <constraint firstAttribute="trailing" secondItem="g7Q-JE-gMb" secondAttribute="trailing" id="mkz-p3-0qe"/>
                                                                             </constraints>
                                                                         </stackView>
                                                                     </subviews>

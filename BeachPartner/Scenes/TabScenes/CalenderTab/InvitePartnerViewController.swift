@@ -10,12 +10,6 @@ import UIKit
 import DropDown
 import XLPagerTabStrip
 
-protocol InvitePartnerViewControllerDelegate {
-    
-    func successfullyInvitedPartners(sender: UIViewController)
-}
-
-
 class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,IndicatorInfoProvider,UISearchResultsUpdating {
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -25,8 +19,6 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
     var event: GetEventRespModel?
     var eventInvitation: GetEventInvitationRespModel?
 
-    var delgate:InvitePartnerViewControllerDelegate?
-    
     var eventId: Int?
     var eventStartDate: Int?
     
@@ -271,11 +263,21 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
                 print("Rep model does not match")
                 return
             }
-            self.alert(message: responseModel.message)
             
             if responseModel.status == "OK" {
-                self.delgate?.successfullyInvitedPartners(sender: self)
+                
+                let alert = UIAlertController(title: "", message: responseModel.message, preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                    
+                    self.navigationController?.popToRootViewController(animated: true)
+                })
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
             }
+            else {
+                self.alert(message: responseModel.message)
+            }
+            
         }) { (error) in
             
             ActivityIndicatorView.hiding()

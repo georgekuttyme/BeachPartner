@@ -9,18 +9,11 @@
 import UIKit
 import XLPagerTabStrip
 
-protocol InviteParentViewControllerDelegate {
-    
-    func successfullyInvitedPartners(sender: UIViewController)
-}
-
 class InviteParentViewController: ButtonBarPagerTabStripViewController {
     
     
     var event: GetEventRespModel?
     var eventInvitation: GetEventInvitationRespModel?
-
-    var delegate1: InviteParentViewControllerDelegate?
     
     //    let purpleInspireColor = UIColor(red:0.13, green:0.03, blue:0.25, alpha:1.0)
     override func viewDidLoad() {
@@ -67,19 +60,9 @@ class InviteParentViewController: ButtonBarPagerTabStripViewController {
         let child_1 = UIStoryboard(name: "CalenderTab", bundle: nil).instantiateViewController(withIdentifier: "invitePartner") as! InvitePartnerViewController
         child_1.event = self.event
         child_1.eventInvitation = self.eventInvitation
-        child_1.delgate = self
         
         let child_2 = UIStoryboard(name: "TabBar", bundle: nil).instantiateViewController(withIdentifier: "partnerFinder") as! BPfinderViewController
         child_2.selectedCardType = "invitePartner"
         return [child_1, child_2]
     }
 }
-
-extension InviteParentViewController: InvitePartnerViewControllerDelegate {
-    
-    func successfullyInvitedPartners(sender: UIViewController) {
-        self.navigationController?.popViewController(animated: false)
-        delegate1?.successfullyInvitedPartners(sender: self)
-    }
-}
-
