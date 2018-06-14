@@ -28,7 +28,7 @@ class BeachPartnerViewController: UIViewController {
         self.dropDown.anchorView = menuButton // UIView or UIBarButtonItem
         // The list of items to display. Can be changed dynamically
         //        self.dropDown.direction = .bottom
-        self.dropDown.dataSource = ["My Profile","Feedback","Settings", "Help","Logout"]
+        self.dropDown.dataSource = ["My Profile","Feedback","Settings", "Help","Log Out"]
         
         self.dropDown.bottomOffset = CGPoint(x: 20, y:30)
         self.dropDown.width = 150
@@ -47,9 +47,9 @@ class BeachPartnerViewController: UIViewController {
 //                self.navigationController!.navigationBar.topItem!.title = ""
 //                self.navigationController?.isNavigationBarHidden = false
             }
-            else if(item == "Logout"){
+            else if(item == "Log Out"){
                 
-                let refreshAlert = UIAlertController(title: "Logout", message: "Do you really want to logout from Beach Partner?", preferredStyle: UIAlertControllerStyle.alert)
+                let refreshAlert = UIAlertController(title: "Log Out", message: "Do you really want to log out from Beach Partner?", preferredStyle: UIAlertControllerStyle.alert)
                 
                 refreshAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
                  

@@ -82,7 +82,14 @@ class HelpViewController: UIViewController,UIScrollViewDelegate {
 
     }
     @IBAction func skipBtnClicked(_ sender: Any) {
-             dismiss(animated: true, completion: nil)
-        
+        print("====+++ ",pageControl.currentPage)
+        if pageControl.currentPage == 0 {
+            dismiss(animated: true, completion: nil)
+        }
+        if currentContentOffset < mainScrollView.contentSize.width + mainScrollView.frame.width {
+            print("==== ",pageControl.currentPage," ==== ",currentContentOffset," ==== ")
+            currentContentOffset = currentContentOffset - mainScrollView.frame.width
+            self.mainScrollView.contentOffset = CGPoint(x: currentContentOffset, y:0)
+        }
          }
 }
