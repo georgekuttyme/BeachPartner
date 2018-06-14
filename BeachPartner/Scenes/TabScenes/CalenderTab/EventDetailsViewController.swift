@@ -35,11 +35,13 @@ class EventDetailsViewController: BeachPartnerViewController {
     @IBOutlet weak var regEndDateLabel: UILabel!
     
     @IBOutlet weak var athleteActionView: UIView!
+    @IBOutlet weak var athleteGoingView: UIView!
     @IBOutlet weak var coachActionView: UIView!
     
     @IBOutlet weak var invitePartnerButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
-    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var viewPartnersButton: UIButton!
+    @IBOutlet weak var athleteGoingButton: UIButton!
     
     @IBOutlet weak var goingButton: UIButton!
     @IBOutlet weak var notGoingButton: UIButton!
@@ -74,15 +76,23 @@ class EventDetailsViewController: BeachPartnerViewController {
     private func setupUI() {
         eventNameLabel.adjustsFontSizeToFitWidth = true
         
+        if UserDefaults.standard.string(forKey: "userType") == "Athlete" {
+            coachActionView.isHidden = true
+        }
+        else {
+            athleteActionView.isHidden = true
+            athleteGoingView.isHidden = true
+        }
+        
+        
         if event?.registerType == RegisterType.invitee.rawValue {
             
             invitePartnerButton.isEnabled = false
             invitePartnerButton.alpha = 0.6
             
-            registerButton.isEnabled = false
-            registerButton.alpha = 0.6
-            
-            self.backButton.setTitle("View Partners", for: .normal)
+            athleteGoingButton.isEnabled = false
+            athleteGoingButton.alpha = 0.6
+            athleteGoingButton.setTitleColor(.lightGray, for: .normal)
         }
         else if event?.registerType == RegisterType.organizer.rawValue {
             
@@ -96,30 +106,14 @@ class EventDetailsViewController: BeachPartnerViewController {
                 invitePartnerButton.isEnabled = false
                 invitePartnerButton.alpha = 0.6
                 
-                registerButton.isEnabled = false
-                registerButton.alpha = 0.6
+                athleteGoingButton.isEnabled = false
+                athleteGoingButton.alpha = 0.6
+                athleteGoingButton.setTitleColor(.lightGray, for: .normal)
             }
-            else {
-                registerButton.isEnabled = false
-                registerButton.alpha = 0.6
-            }
-            self.backButton.setTitle("View Partners", for: .normal)
         }
         else {
-            registerButton.isEnabled = false
-            registerButton.alpha = 0.6
-        }
-        
-        if isFromHomeTab {
-            self.backButton.setTitle("View Partners", for: .normal)
-        }
-        
-        
-        if UserDefaults.standard.string(forKey: "userType") == "Athlete" {
-            coachActionView.isHidden = true
-        }
-        else {
-            athleteActionView.isHidden = true
+            viewPartnersButton.isEnabled = false
+            viewPartnersButton.alpha = 0.6
         }
         
         
@@ -131,8 +125,9 @@ class EventDetailsViewController: BeachPartnerViewController {
                 invitePartnerButton.isEnabled = false
                 invitePartnerButton.alpha = 0.6
                 
-                registerButton.isEnabled = false
-                registerButton.alpha = 0.6
+                athleteGoingButton.isEnabled = false
+                athleteGoingButton.alpha = 0.6
+                athleteGoingButton.setTitleColor(.lightGray, for: .normal)
             }
             else {// registration open
                
@@ -182,38 +177,6 @@ class EventDetailsViewController: BeachPartnerViewController {
             }
         }
         
-        
-//        if isFromHomeTab && (eventInvitation.invitations?.first?.partners?.count)! < 5 {
-//            
-//            invitePartnerButton.isEnabled = true
-//            invitePartnerButton.alpha = 1.0
-//        }
-//        
-//        if event?.eventStaus != "Active" && event?.eventStaus != "Registered" && (eventInvitation.invitations?.first?.partners?.count)! < 5 {
-//            invitePartnerButton.isEnabled = true
-//            invitePartnerButton.alpha = 1.0
-//        }
-        
-        
-        
-        
-        
-        
-//        if eventInvitation.invitations?.first?.eventStatus == "Active" {
-//
-//        }
-        
-        
-        
-//        if event.registerType == "Organizer" {
-//            generalEventDetailsLabel.text = event.userMessage
-//        }
-//        else if event.registerType == "Invitee" {
-//            generalEventDetailsLabel.text = event.userMessage
-//
-//            invitePartnerButton.setTitle("View Invitation", for: .normal)
-//        }
-        
         eventNameLabel.text = eventInvitation.eventName
         eventLocationLabel.text = eventInvitation.eventState
         eventVenueLabel.text = eventInvitation.eventVenue
@@ -253,12 +216,25 @@ class EventDetailsViewController: BeachPartnerViewController {
     
     @IBAction func didTapRegisterButton(_ sender: UIButton) {
         
-        let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
-        let viewController = storyBoard.instantiateViewController(withIdentifier: "EventRegisterView") as! EventRegisterViewController
-        viewController.eventInvitation = self.eventInvitation
+//        let eventURL = "https://www.beachpartner.com"
         
-        let navController = UINavigationController(rootViewController: viewController)
-        self.present(navController, animated: true, completion: nil)
+        let  eventURL = eventInvitation?.eventURL ?? event?.eventURL
+        guard let eventRegisterURL = eventURL else {
+            alert(message: "Event URL not found")
+            return
+        }
+        
+        let customURL = URL(string: eventRegisterURL)!
+        if UIApplication.shared.canOpenURL(customURL) {
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(customURL)
+            } else {
+                UIApplication.shared.openURL(customURL)
+            }
+        }
+        else {
+            alert(message: "Unable to open the specified URL")
+        }
     }
     
     @IBAction func didTapInvitePartnerButton(_ sender: UIButton) {
@@ -270,23 +246,45 @@ class EventDetailsViewController: BeachPartnerViewController {
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     
-    @IBAction func didTapBackButton(_ sender: UIButton) {
+    @IBAction func didTapViewPartnerButton(_ sender: UIButton) {
         
-        if sender.titleLabel?.text == "View Partners" {
-            guard let invitation = eventInvitation?.invitations?.first else { return }
-            
-            let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
-            let viewController = storyBoard.instantiateViewController(withIdentifier: "PartnerListView") as! PartnerListViewController
-            viewController.invitation = invitation
-            viewController.modalTransitionStyle = .crossDissolve
-            viewController.modalPresentationStyle = .overFullScreen
-            self.present(viewController, animated: true, completion: nil)
+        guard let invitation = eventInvitation?.invitations?.first else {
+            alert(message: "Please invite partners")
+            return
         }
-        else {
-            self.navigationController?.popViewController(animated: true)
-        }
+        
+        let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
+        let viewController = storyBoard.instantiateViewController(withIdentifier: "PartnerListView") as! PartnerListViewController
+        viewController.invitation = invitation
+        viewController.modalTransitionStyle = .crossDissolve
+        viewController.modalPresentationStyle = .overFullScreen
+        self.present(viewController, animated: true, completion: nil)
     }
     
+    
+    
+    
+    @IBAction func didAddEventToDB(_ sender: UIButton) {
+        
+        //        let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
+        //        let viewController = storyBoard.instantiateViewController(withIdentifier: "EventRegisterView") as! EventRegisterViewController
+        //        viewController.eventInvitation = self.eventInvitation
+        //
+        //        let navController = UINavigationController(rootViewController: viewController)
+        //        self.present(navController, animated: true, completion: nil)
+        
+        
+        let alert = UIAlertController(title: "", message: "Did you successfully complete Registration?", preferredStyle: UIAlertControllerStyle.alert)
+        let action = UIAlertAction(title: "Yes", style: .default) { (alertAction) in
+            
+            self.registerEvent()
+        }
+        let noAction = UIAlertAction(title: "No", style: .default) { (alertAction) in
+        }
+        alert.addAction(action)
+        alert.addAction(noAction)
+        self.present(alert, animated:true, completion: nil)
+    }
     
     @IBAction func didTapGoingButton(_ sender: UIButton) {
         
@@ -315,7 +313,6 @@ class EventDetailsViewController: BeachPartnerViewController {
                 return
             }
             self.alert(message: errorString)
-            print(error)
         }
     }
     
@@ -338,12 +335,23 @@ class EventDetailsViewController: BeachPartnerViewController {
                 
                 DispatchQueue.main.async {
                     ActivityIndicatorView.hiding()
-                    self.navigationController?.popViewController(animated: true)
+                    if UserDefaults.standard.string(forKey: "userType") == "Athlete" {
+                        self.getAllInvitations()
+                    }
+                    else {
+                         self.navigationController?.popViewController(animated: true)
+                    }
                 }
             })
         }
         let noAction = UIAlertAction(title: "No", style: .default) { (alertAction) in
-            self.navigationController?.popViewController(animated: true)
+            
+            if UserDefaults.standard.string(forKey: "userType") == "Athlete" {
+                self.getAllInvitations()
+            }
+            else {
+                self.navigationController?.popViewController(animated: true)
+            }
         }
         alert.addAction(action)
         alert.addAction(noAction)
@@ -384,4 +392,47 @@ class EventDetailsViewController: BeachPartnerViewController {
             }
         })
     }
+    
+    func registerEvent() {
+        
+        guard let eventId = eventInvitation?.eventId ?? event?.id else {
+            return
+        }
+        
+        var partnerList = [Int]()
+        if let eventInvitation = eventInvitation {
+            if let partners = eventInvitation.invitations?.first?.partners {
+                for partner in partners {
+                    partnerList.append(partner.partnerId)
+                }
+            }
+        }
+        
+        ActivityIndicatorView.show("Loading")
+        APIManager.callServer.registerEvent(eventId: eventId, registerType: "Organizer", partners: partnerList, sucessResult: { (response) in
+            
+            ActivityIndicatorView.hiding()
+            
+            guard let responseModel = response as? CommonResponse else {
+                print("Rep model does not match")
+                return
+            }
+            
+            let alert = UIAlertController(title: "", message: responseModel.message, preferredStyle: UIAlertControllerStyle.alert)
+            let action = UIAlertAction(title: "OK", style: .default) { (alertAction) in
+                self.showAddEventToCalendarPrompt()
+            }
+            alert.addAction(action)
+            self.present(alert, animated:true, completion: nil)
+            
+        }) { (error) in
+            
+            ActivityIndicatorView.hiding()
+            guard let errorString  = error else {
+                return
+            }
+            self.alert(message: errorString)
+        }
+    }
+
 }
