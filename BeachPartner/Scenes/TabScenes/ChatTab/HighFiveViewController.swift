@@ -117,8 +117,8 @@ class HighFiveViewController: BeachPartnerViewController,UITableViewDelegate,UIT
         let connectedUser = self.connectedUsers[indexPath.row].connectedUser
         
         let cell : HighfiveCell = tableView.dequeueReusableCell(withIdentifier: "HighfiveCell", for: indexPath) as! HighfiveCell
-        
-        cell.notificationLbl.text =  (connectedUser?.firstName) ?? "" + " sent you a High Five"
+        let name = (connectedUser?.firstName) ?? "" + " " + (connectedUser?.lastName)! ?? ""
+        cell.notificationLbl.text =  name + " sent you a High Five"
         cell.highfiveView.layer.borderColor = UIColor.lightGray.cgColor
         cell.highfiveView.layer.borderWidth = 1
         cell.highfiveView.dropShadow()
