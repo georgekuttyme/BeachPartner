@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BeachPartner/Scenes/TabScenes/BPfinder/BPCardsVC.swift"
-            timestampString = "550581638.9413691"
+            filePath = "BeachPartner/Scenes/LoginScenes/LoginScenes/RegisterViewController.swift"
+            timestampString = "550659719.05336"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "791"
-            endingLineNumber = "791"
-            landmarkName = "calendar(_:didSelect:at:)"
+            startingLineNumber = "503"
+            endingLineNumber = "503"
+            landmarkName = "keyboardWillShow(notification:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
