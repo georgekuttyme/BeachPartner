@@ -2273,6 +2273,15 @@
                                             <outlet property="delegate" destination="3cQ-Ow-zOv" id="tZL-uB-FR3"/>
                                         </connections>
                                     </tableView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No partners" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5x9-dw-pq7">
+                                        <rect key="frame" x="0.0" y="241" width="343" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="HSw-Jd-rkv"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N2d-gP-wDs">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
                                         <subviews>
@@ -2315,6 +2324,9 @@
                                     <constraint firstItem="N2d-gP-wDs" firstAttribute="top" secondItem="FjB-3f-YRe" secondAttribute="top" id="9bI-zj-asg"/>
                                     <constraint firstItem="DrD-8s-IJm" firstAttribute="leading" secondItem="FjB-3f-YRe" secondAttribute="leading" id="RY6-L3-Ylm"/>
                                     <constraint firstAttribute="trailing" secondItem="DrD-8s-IJm" secondAttribute="trailing" id="gpU-Kw-BWT"/>
+                                    <constraint firstItem="5x9-dw-pq7" firstAttribute="top" secondItem="N2d-gP-wDs" secondAttribute="bottom" constant="191" id="gvL-Hy-oF5"/>
+                                    <constraint firstItem="5x9-dw-pq7" firstAttribute="leading" secondItem="FjB-3f-YRe" secondAttribute="leading" id="hsM-42-YVa"/>
+                                    <constraint firstAttribute="trailing" secondItem="5x9-dw-pq7" secondAttribute="trailing" id="iAy-dc-hDx"/>
                                     <constraint firstItem="DrD-8s-IJm" firstAttribute="top" secondItem="N2d-gP-wDs" secondAttribute="bottom" id="tmP-L7-nu6"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -2335,6 +2347,7 @@
                     </view>
                     <connections>
                         <outlet property="containerView" destination="FjB-3f-YRe" id="NZI-Qu-OZF"/>
+                        <outlet property="noPartnersLbl" destination="5x9-dw-pq7" id="hKn-Bo-8r8"/>
                         <outlet property="tableView" destination="DrD-8s-IJm" id="tpu-bq-HdT"/>
                     </connections>
                 </viewController>

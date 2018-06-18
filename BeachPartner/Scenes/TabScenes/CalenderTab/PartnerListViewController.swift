@@ -12,6 +12,7 @@ class PartnerListViewController: UIViewController, UITableViewDataSource, UITabl
 
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var noPartnersLbl: UILabel!
     
     var loggedInUserId = 0
     var invitation: EventInvitation?
@@ -34,10 +35,15 @@ class PartnerListViewController: UIViewController, UITableViewDataSource, UITabl
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if let count = invitation?.partners?.count {
-            return count 
+        if let count = invitation?.partners?.count, count != 0 {
+            noPartnersLbl.isHidden = true
+            return count
         }
-        return 0
+        else {
+            noPartnersLbl.isHidden = false
+            return 0
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
