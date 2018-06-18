@@ -223,13 +223,16 @@ class EventDetailsViewController: BeachPartnerViewController {
             alert(message: "Event URL not found")
             return
         }
-        
-        let customURL = URL(string: eventRegisterURL)!
-        if UIApplication.shared.canOpenURL(customURL) {
-            if #available(iOS 10.0, *) {
-                UIApplication.shared.open(customURL)
-            } else {
-                UIApplication.shared.openURL(customURL)
+        print(eventRegisterURL)
+        print(URL(string: eventRegisterURL))
+        if let customURL = URL(string: eventRegisterURL) {
+            print(customURL)
+            if UIApplication.shared.canOpenURL(customURL) {
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(customURL)
+                } else {
+                    UIApplication.shared.openURL(customURL)
+                }
             }
         }
         else {
