@@ -36,7 +36,7 @@ struct ConnectedUserModel:SafeMappable {
         status <- map.property("status")
         id <- map.property("id")
         availableOnDate <- map.property("availableOnDate")
-        connectedUser = map.relation("connectedUser")
+        connectedUser = try map.relation("connectedUser").unwrapOrThrow()
     }
     
     struct ConnectedUser:SafeMappable {

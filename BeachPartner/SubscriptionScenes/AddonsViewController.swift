@@ -15,6 +15,8 @@ class AddonsViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subTitleLabel: UILabel!
     
+    var profileBoostmode = false
+    
     var addonPlans = [SubscriptionPlanModel]()
     
     var selectedIndex = -1
@@ -37,7 +39,20 @@ class AddonsViewController: UIViewController {
                 print("Rep model does not match")
                 return
             }
-            self.addonPlans = subscriptionPlansModel.subscriptionPlans
+            if self.profileBoostmode == true {
+                
+                let addOnPlan = subscriptionPlansModel.subscriptionPlans.filter({ (plan) -> Bool in
+                    return Bool(plan.code == AddOnType.ProfileBoost)
+                })
+                
+                if let plan = addOnPlan.first {
+                    self.addonPlans.append(plan)
+                }
+            }
+            else {
+                self.addonPlans = subscriptionPlansModel.subscriptionPlans
+            }
+            
             self.tableView.reloadData()
             
         }) { (errorMessage) in
@@ -80,7 +95,8 @@ extension AddonsViewController: UITableViewDataSource, UITableViewDelegate {
         let plan = addonPlans[indexPath.row]
         
         cell.subscriptionTypeLabel.text = plan.name
-        cell.priceLabel.text = "$\(plan.monthlycharge) /month"
+        cell.subscriptionTypeLabel.adjustsFontSizeToFitWidth = true
+        cell.priceLabel.text = "$\(plan.monthlycharge)"
         cell.descriptionLabel.text = plan.description
         
         let image = (indexPath.row == selectedIndex) ? UIImage(named:"rb_active") : UIImage(named:"rb")
@@ -89,7 +105,14 @@ extension AddonsViewController: UITableViewDataSource, UITableViewDelegate {
         cell.radioButton.tag = indexPath.row
         cell.radioButton.addTarget(self, action: #selector(selectPlan), for: .touchUpInside)
         
-        
+        if Subscription.current.statusOfAddOn(addOnId: plan.code) {
+            cell.statusLabel.text = "Active"
+            cell.radioButton.isHidden = true
+        }
+        else {
+            cell.statusLabel.text = ""
+            cell.radioButton.isHidden = false
+        }
         
         return cell
     }

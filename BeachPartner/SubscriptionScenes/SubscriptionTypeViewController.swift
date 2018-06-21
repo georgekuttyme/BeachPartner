@@ -10,6 +10,8 @@ import UIKit
 
 class SubscriptionTypeViewController: UIViewController {
 
+    static let identifier = "SubscriptionTypeViewController"
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subTitleLabel: UILabel!
     
@@ -19,6 +21,9 @@ class SubscriptionTypeViewController: UIViewController {
     
     var selectedIndex = -1
     
+    var currentPlan: String?
+    var benefitCode: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,7 +32,10 @@ class SubscriptionTypeViewController: UIViewController {
     
     private func getAllSubscriptionPlans() {
         
+        
+//        ActivityIndicatorView.addActivityOnView(tableView.superview)
         ActivityIndicatorView.show("Loading...")
+        
         
         APIManager.callServer.getAllSubscriptionPlans(sucessResult: { (responseModel) in
             
@@ -37,7 +45,55 @@ class SubscriptionTypeViewController: UIViewController {
                 print("Rep model does not match")
                 return
             }
-            self.subscriptionPlans = subscriptionPlansModel.subscriptionPlans
+            
+            if self.benefitCode == nil {
+                self.subscriptionPlans = subscriptionPlansModel.subscriptionPlans
+                self.tableView.reloadData()
+            }
+            else {
+                self.subscriptionPlans = subscriptionPlansModel.subscriptionPlans.filter({ (plan) -> Bool in
+                    return Bool(plan.benefits.contains(where: { (benefit) -> Bool in
+                        return Bool(benefit.code == self.benefitCode && benefit.status == "Available")
+                    }))
+                })
+                
+                if self.benefitCode == BenefitType.PassportSearch {
+                    self.getAllAddonPlans()
+                }
+                else {
+                    self.tableView.reloadData()
+                }
+            }
+        }) { (errorMessage) in
+            ActivityIndicatorView.hiding()
+            guard let errorString  = errorMessage else {
+                return
+            }
+            self.alert(message: errorString)
+        }
+    }
+    
+    private func getAllAddonPlans() {
+        ActivityIndicatorView.addActivityOnView(tableView.superview)
+        ActivityIndicatorView.show("Loading...")
+        
+        APIManager.callServer.getAllAddonPlans(sucessResult: { (responseModel) in
+            
+            ActivityIndicatorView.hiding()
+            
+            guard let subscriptionPlansModel = responseModel as? GetSubscriptionPlansRespModelArray else {
+                print("Rep model does not match")
+                return
+            }
+            
+            let addOnPlan = subscriptionPlansModel.subscriptionPlans.filter({ (plan) -> Bool in
+                return Bool(plan.code == "TEMP_PASSPORT")
+            })
+            
+            if let plan = addOnPlan.first {
+                self.subscriptionPlans.append(plan)
+            }
+            
             self.tableView.reloadData()
             
         }) { (errorMessage) in
@@ -88,7 +144,23 @@ extension SubscriptionTypeViewController: UITableViewDataSource, UITableViewDele
         
         let plan = subscriptionPlans[indexPath.row]
         cell.subscriptionTypeLabel.text = plan.name
-        cell.priceLabel.text = "$\(plan.monthlycharge) /month"
+        cell.subscriptionTypeLabel.adjustsFontSizeToFitWidth = true
+        
+        if plan.code == Subscription.current.activeSubscriptionPlan?.planName {
+            cell.statusLabel.text = "Current Plan"
+            cell.radioButton.isHidden = true
+        }
+        else {
+            cell.statusLabel.text = ""
+            cell.radioButton.isHidden = false
+        }
+        
+        
+        var charge = "$\(plan.monthlycharge)"
+        if plan.type == "Subscription" {
+            charge += " /month"
+        }
+        cell.priceLabel.text = charge
         cell.descriptionLabel.text = plan.description
         
         let image = (indexPath.row == selectedIndex) ? UIImage(named:"rb_active") : UIImage(named:"rb")
@@ -99,6 +171,8 @@ extension SubscriptionTypeViewController: UITableViewDataSource, UITableViewDele
         
         cell.readmoreButton.tag = indexPath.row
         cell.readmoreButton.addTarget(self, action: #selector(showPlanDetails), for: .touchUpInside)
+        
+        cell.readmoreButton.isHidden = (plan.type == "Subscription") ? false: true
         
         return cell
     }
@@ -115,4 +189,6 @@ class SubscriptionTypeTableViewCell : UITableViewCell {
     @IBOutlet weak var subscriptionTypeLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UITextView!
+    @IBOutlet weak var statusLabel: UILabel!
+    
 }

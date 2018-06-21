@@ -88,7 +88,7 @@ class BeachPartnerViewController: UIViewController {
             }
             else if (item == "Add-ons") {
                 let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "AddonsViewController") as! AddonsViewController
+                let vc = storyboard.instantiateViewController(withIdentifier: SubscriptionTypeViewController.identifier) as! AddonsViewController
                 self.present(vc, animated: true, completion: nil)
             }
             else {

@@ -108,7 +108,8 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             }
         }
         
-        getUserSubscriptionDetails()
+        Subscription.current.getAllSubscriptionPlans()
+        Subscription.current.getUsersActivePlans()
     }
 
     
@@ -188,23 +189,23 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         }
     }
     
-    func getUserSubscriptionDetails() {
-        
-        APIManager.callServer.getUsersActivePlans(sucessResult: { (responseModel) in
-            
-            guard let subscriptions = responseModel as? GetUserSubscriptionModel else {
-                return
-            }
-            
-            print(subscriptions.addons)
-            print(subscriptions.subscriptions)
-            
-            
-        }) { (error) in
-            
-            
-        }
-    }
+//    func getUserSubscriptionDetails() {
+//
+//        APIManager.callServer.getUsersActivePlans(sucessResult: { (responseModel) in
+//
+//            guard let subscriptions = responseModel as? GetUserSubscriptionModel else {
+//                return
+//            }
+//
+//            print(subscriptions.addons)
+//            print(subscriptions.subscriptions)
+//
+//
+//        }) { (error) in
+//
+//
+//        }
+//    }
     
     
     @IBAction func tournamentRequestsSentBtnClicked(_ sender: UIButton) {
@@ -227,6 +228,15 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     }
     
     @IBAction func btnLikesClicked(_ sender: Any) {
+       
+        if Subscription.current.supportForFunctionality(featureId: BenefitType.PlayerLikeVisibility) == false {
+            let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: SubscriptionTypeViewController.identifier) as! SubscriptionTypeViewController
+            vc.benefitCode = BenefitType.PlayerLikeVisibility
+            self.present(vc, animated: true, completion: nil)
+            return
+        }
+        
         if lblUserCount.text != "No"{
             self.getAllConnectedUsers()
         }

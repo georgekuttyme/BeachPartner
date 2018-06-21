@@ -34,7 +34,19 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var includeCoachesView: UIView!
     @IBOutlet weak var videoView: UIView!
     @IBAction func selectLocClicked(_ sender: Any) {
-        dropDown.show()
+        
+        if Subscription.current.supportForFunctionality(featureId: BenefitType.PassportSearch) == true {
+            dropDown.show()
+        }
+        else if Subscription.current.statusOfAddOn(addOnId: AddOnType.TempPassport) == true {
+            dropDown.show()
+        }
+        else {
+            let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: SubscriptionTypeViewController.identifier) as! SubscriptionTypeViewController
+            vc.benefitCode = BenefitType.PassportSearch
+            self.present(vc, animated: true, completion: nil)
+        }
     }
     @IBAction func playButtonClicked(_ sender: Any) {
         DispatchQueue.main.async {
@@ -146,9 +158,22 @@ class SettingsViewController: UIViewController {
         }
         let loc = UserDefaults.standard.string(forKey: "locationInitial")
         self.selectLoc.setTitle(loc, for: UIControlState.normal)
+        self.couachSwitch.addTarget(self, action: #selector(switchValueChange), for: .valueChanged)
         customView()
     }
     
+    @objc func switchValueChange(sender: UISwitch) {
+        
+        if Subscription.current.supportForFunctionality(featureId: BenefitType.CoachLikeVisibility) == false {
+            let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: SubscriptionTypeViewController.identifier) as! SubscriptionTypeViewController
+            vc.benefitCode = BenefitType.CoachLikeVisibility
+            self.present(vc, animated: true, completion: nil)
+            
+            sender.isOn = false
+            return
+        }
+    }
     
     func customView() {
         
@@ -204,14 +229,21 @@ class SettingsViewController: UIViewController {
             womenIsSelected = true
             showMeLbl.text="Both"
         }
-        let includeCoaches = UserDefaults.standard.string(forKey: "includeCoaches")
-        if (includeCoaches != nil) {
+        
+        
+        if Subscription.current.supportForFunctionality(featureId: BenefitType.CoachLikeVisibility) == true {
+            
+            let includeCoaches = UserDefaults.standard.string(forKey: "includeCoaches")
             if(includeCoaches == "1" ) {
                 self.couachSwitch.isOn = true
             }
             else {
                 self.couachSwitch.isOn = false
             }
+        }
+        else {
+            self.couachSwitch.isOn = false
+            UserDefaults.standard.set("0", forKey: "includeCoaches")
         }
     }
     

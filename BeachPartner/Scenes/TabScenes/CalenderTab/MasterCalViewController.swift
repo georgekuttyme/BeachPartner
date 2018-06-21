@@ -62,6 +62,11 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
         print(token)
         
         tableHeaderLabel.text = titleForEventTable(date: Date())
+        
+        if Subscription.current.supportForFunctionality(featureId: BenefitType.MasterCalendar) == false {
+            masterCalTableVIew.isHidden = true
+            getAllEvents()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -319,6 +324,17 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         
         tableHeaderLabel.text = titleForEventTable(date: date)
+        
+        if Subscription.current.supportForFunctionality(featureId: BenefitType.MasterCalendar) == false {
+            
+            masterCalTableVIew.isHidden = true
+            
+            let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: SubscriptionTypeViewController.identifier) as! SubscriptionTypeViewController
+            vc.benefitCode = BenefitType.MasterCalendar
+            self.present(vc, animated: true, completion: nil)
+            return
+        }
         
         eventListToShow = eventListArray.filter { (event) -> Bool in
             let selectedDate = formatter.string(from: date)

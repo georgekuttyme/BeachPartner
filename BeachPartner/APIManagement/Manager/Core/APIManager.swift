@@ -17,6 +17,7 @@ typealias resultClosure  = (_ result: SafeMappable?) -> Void
 //typealias resultArray[Any] = []
 typealias sucessClosureOfArray = (_ result: NSArray?) -> Void
 typealias errorClosure   = (_ error: String?) -> Void
+typealias errorClosureWithCode = (_ error: String?, _ code: String?) -> Void
 typealias JSONDictionary =   [String : Any]
 class APIManager {
     

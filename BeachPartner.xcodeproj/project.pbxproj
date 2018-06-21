@@ -134,6 +134,7 @@
 		FF38234620A9CD7400F403BF /* EventInvitationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38234520A9CD7400F403BF /* EventInvitationCell.swift */; };
 		FF3FB96420A4546600B34CA0 /* GetEventRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3FB96320A4546600B34CA0 /* GetEventRespModel.swift */; };
 		FF4EDC3F20AC077200BC3ACD /* GetTournamentRequestRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4EDC3E20AC077200BC3ACD /* GetTournamentRequestRespModel.swift */; };
+		FF4F510020C82013002707DC /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4F50FF20C82013002707DC /* Subscription.swift */; };
 		FF560C0A2096F7FB00D3BA80 /* GetNoteRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF560C092096F7FB00D3BA80 /* GetNoteRespModel.swift */; };
 		FF560C0C2096F83300D3BA80 /* UpdateNoteRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF560C0B2096F83300D3BA80 /* UpdateNoteRespModel.swift */; };
 		FFABE2B920ADC7080029C3A0 /* MyCalEventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFABE2B820ADC7080029C3A0 /* MyCalEventDetailsViewController.swift */; };
@@ -281,6 +282,7 @@
 		FF38234520A9CD7400F403BF /* EventInvitationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInvitationCell.swift; sourceTree = "<group>"; };
 		FF3FB96320A4546600B34CA0 /* GetEventRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventRespModel.swift; sourceTree = "<group>"; };
 		FF4EDC3E20AC077200BC3ACD /* GetTournamentRequestRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTournamentRequestRespModel.swift; sourceTree = "<group>"; };
+		FF4F50FF20C82013002707DC /* Subscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subscription.swift; sourceTree = "<group>"; };
 		FF560C092096F7FB00D3BA80 /* GetNoteRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNoteRespModel.swift; sourceTree = "<group>"; };
 		FF560C0B2096F83300D3BA80 /* UpdateNoteRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNoteRespModel.swift; sourceTree = "<group>"; };
 		FFABE2B820ADC7080029C3A0 /* MyCalEventDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCalEventDetailsViewController.swift; sourceTree = "<group>"; };
@@ -900,6 +902,7 @@
 				FFEBEB5D20BE6F2900521041 /* SubscriptionViewController.swift */,
 				FFEBEB5F20BEA79A00521041 /* SubscriptionTypeViewController.swift */,
 				FFD93D6C20C1257E00747472 /* AddonsViewController.swift */,
+				FF4F50FF20C82013002707DC /* Subscription.swift */,
 			);
 			path = SubscriptionScenes;
 			sourceTree = "<group>";
@@ -1157,6 +1160,7 @@
 				3B6899E920491B550075128E /* WLMPoolData.swift in Sources */,
 				3B0DEE99206D09DA00686609 /* Extensions.swift in Sources */,
 				3BBDA13F20736145007CE1F3 /* RegResponseModel.swift in Sources */,
+				FF4F510020C82013002707DC /* Subscription.swift in Sources */,
 				3B60278F2049538B006B108A /* BPCardsVC.swift in Sources */,
 				5E1648832095F1A400983043 /* ConnectedUsersCountModel.swift in Sources */,
 				FFEBEB5E20BE6F2900521041 /* SubscriptionViewController.swift in Sources */,
