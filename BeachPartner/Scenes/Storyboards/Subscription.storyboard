@@ -78,7 +78,7 @@
                                         <rect key="frame" x="0.0" y="28" width="327" height="61"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SNT-gm-oUZ" id="LEY-O0-quS">
-                                            <rect key="frame" x="0.0" y="0.0" width="327" height="60.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="327" height="61"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qIy-1m-VXe">
@@ -240,6 +240,7 @@
                     <connections>
                         <outlet property="actionButton" destination="NeZ-rZ-TfD" id="GMV-Uc-y8L"/>
                         <outlet property="backButton" destination="zxO-tr-zp7" id="cEq-aG-z9d"/>
+                        <outlet property="buyNowBtn" destination="NeZ-rZ-TfD" id="DhI-vu-fnu"/>
                         <outlet property="registrationFeeLabel" destination="pZD-c0-lJm" id="GLR-p7-nDp"/>
                         <outlet property="subsciptionPriceBgView" destination="eJU-Ej-PCa" id="uvj-aW-FFt"/>
                         <outlet property="subscriptionPriceLabel" destination="PwS-T2-CNK" id="Hff-2E-rMb"/>

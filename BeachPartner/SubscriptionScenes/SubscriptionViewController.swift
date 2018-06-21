@@ -42,6 +42,8 @@ class SubscriptionViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var actionButton: UIButton!
     
+    @IBOutlet weak var buyNowBtn: UIButton!
+    
     var subscriptionPlan: SubscriptionPlanModel?
     
     override func viewDidLoad() {
@@ -93,8 +95,17 @@ class SubscriptionViewController: UIViewController {
             return
         }
         subscriptionTypeLabel.text = subscriptionPlan.name
-        subscriptionPriceLabel.text = "$\(subscriptionPlan.monthlycharge) /month"
-        registrationFeeLabel.text = "$\(subscriptionPlan.registrationFee) one-time"
+        if subscriptionPlan.name == "FREE"{
+           subscriptionPriceLabel.isHidden = true
+            subsciptionPriceBgView.isHidden = true
+            buyNowBtn.isEnabled = false
+            buyNowBtn.isHidden = true
+           registrationFeeLabel.text = "$\(subscriptionPlan.registrationFee)"
+        }
+        else{
+            subscriptionPriceLabel.text = "$\(subscriptionPlan.monthlycharge) /month"
+            registrationFeeLabel.text = "$\(subscriptionPlan.registrationFee) one-time"
+        }
     }
     
     private func setupTableView() {
