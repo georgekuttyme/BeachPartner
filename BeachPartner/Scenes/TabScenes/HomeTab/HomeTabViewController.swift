@@ -221,10 +221,17 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     
     
     @IBAction func tournamentRequestsSentBtnClicked(_ sender: UIButton) {
-        
-        tournamentRequestSentViewActive = true
-        self.tournamentRequestsLbl.text = "     Tournament Requests Sent"
-        self.tournamentRequestsCollectionView.reloadData()
+        if Subscription.current.supportForFunctionality(featureId: BenefitType.PlayerLikeVisibility) == false {
+            let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: SubscriptionTypeViewController.identifier) as! SubscriptionTypeViewController
+            vc.benefitCode = BenefitType.PlayerLikeVisibility
+            self.present(vc, animated: true, completion: nil)
+            return
+        }else{
+            tournamentRequestSentViewActive = true
+            self.tournamentRequestsLbl.text = "     Tournament Requests Sent"
+            self.tournamentRequestsCollectionView.reloadData()
+        }
         
         //        tornamentRequestLabel.text = "No tournament Requests Sent"
     }
@@ -288,10 +295,18 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             return
         }
         if tournamentRequestSentViewActive {
-            let currentItem: IndexPath = visibleItems.lastObject as! IndexPath
-            let nextItem: IndexPath = IndexPath(item: currentItem.item + 1, section: 0)
-            if nextItem.row < (tournamentRequestList?.requestsSent.count)! {
-                self.tournamentRequestsCollectionView.scrollToItem(at: nextItem, at: .left, animated: true)
+            if Subscription.current.supportForFunctionality(featureId: BenefitType.PlayerLikeVisibility) == false {
+                let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: SubscriptionTypeViewController.identifier) as! SubscriptionTypeViewController
+                vc.benefitCode = BenefitType.PlayerLikeVisibility
+                self.present(vc, animated: true, completion: nil)
+                return
+            }else{
+                let currentItem: IndexPath = visibleItems.lastObject as! IndexPath
+                let nextItem: IndexPath = IndexPath(item: currentItem.item + 1, section: 0)
+                if nextItem.row < (tournamentRequestList?.requestsSent.count)! {
+                    self.tournamentRequestsCollectionView.scrollToItem(at: nextItem, at: .left, animated: true)
+                }
                 
             }
         }else{
@@ -672,6 +687,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         APIManager.callServer.getUserConnectionList(status:"status=New&showReceived=true",sucessResult: { (responseModel) in
             
             guard let connectedUserModelArray = responseModel as? ConnectedUserModelArray else{
+                ActivityIndicatorView.hiding()
                 return
             }
             ActivityIndicatorView.hiding()
