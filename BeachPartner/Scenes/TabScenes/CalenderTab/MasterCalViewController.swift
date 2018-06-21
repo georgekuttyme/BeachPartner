@@ -73,11 +73,13 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewWillAppear(animated)
         self.navigationController!.navigationBar.topItem!.title = "Master Calendar"
         
-        if filterParams == nil {
-            getAllEvents()
-        }
-        else {
-            searchEvents()
+        if Subscription.current.supportForFunctionality(featureId: BenefitType.MasterCalendar) == true {
+            if filterParams == nil {
+                getAllEvents()
+            }
+            else {
+                searchEvents()
+            }
         }
     }
     
@@ -279,7 +281,7 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
             cell.colorView.backgroundColor = .clear
         }
         
-//        cell.colorView.backgroundColor = .clear
+//        print(eventListToShow,"\n\n\n")
 //        print(eventListToShow,"\n\n\n")
 //        print("event.eventName    ",event.eventName,"   event.status ",event.eventStaus)
         return cell
