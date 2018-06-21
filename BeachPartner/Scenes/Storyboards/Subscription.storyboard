@@ -78,7 +78,7 @@
                                         <rect key="frame" x="0.0" y="28" width="327" height="61"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SNT-gm-oUZ" id="LEY-O0-quS">
-                                            <rect key="frame" x="0.0" y="0.0" width="327" height="61"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="327" height="60.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qIy-1m-VXe">
@@ -98,7 +98,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sij-L0-J2M">
-                                                    <rect key="frame" x="0.0" y="5" width="222" height="50.5"/>
+                                                    <rect key="frame" x="0.0" y="5" width="227" height="50.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="rUj-nQ-pDt"/>
                                                     </constraints>
@@ -110,7 +110,7 @@
                                             <constraints>
                                                 <constraint firstItem="sij-L0-J2M" firstAttribute="leading" secondItem="LEY-O0-quS" secondAttribute="leading" id="0OF-mJ-P7A"/>
                                                 <constraint firstAttribute="trailing" secondItem="fFt-KM-tqB" secondAttribute="trailing" constant="10" id="12g-82-xqD"/>
-                                                <constraint firstItem="qIy-1m-VXe" firstAttribute="leading" secondItem="sij-L0-J2M" secondAttribute="trailing" constant="10" id="84q-iZ-nnU"/>
+                                                <constraint firstItem="qIy-1m-VXe" firstAttribute="leading" secondItem="sij-L0-J2M" secondAttribute="trailing" constant="5" id="84q-iZ-nnU"/>
                                                 <constraint firstItem="qIy-1m-VXe" firstAttribute="top" secondItem="LEY-O0-quS" secondAttribute="top" constant="5" id="RSs-eI-IqW"/>
                                                 <constraint firstAttribute="bottom" secondItem="qIy-1m-VXe" secondAttribute="bottom" constant="5" id="RoG-bx-b5t"/>
                                                 <constraint firstAttribute="bottom" secondItem="sij-L0-J2M" secondAttribute="bottom" constant="5" id="XQo-qs-sT8"/>
@@ -195,7 +195,7 @@
                                     </label>
                                     <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6zx-5u-PyV">
                                         <rect key="frame" x="0.0" y="49" width="327" height="1"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" red="0.60392156862745094" green="0.60392156862745094" blue="0.60392156862745094" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="X7H-1B-Mmh"/>
                                         </constraints>
@@ -251,7 +251,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OR0-3P-Wms" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-434" y="-249"/>
+            <point key="canvasLocation" x="-434.39999999999998" y="-249.62518740629687"/>
         </scene>
         <!--Subscription Type View Controller-->
         <scene sceneID="Cfy-4s-1Ry">
@@ -469,6 +469,7 @@
                         <viewLayoutGuide key="safeArea" id="J4T-Ck-2M1"/>
                     </view>
                     <connections>
+                        <outlet property="proceedBtn" destination="Zj1-Ax-6Vo" id="rsk-Ex-piO"/>
                         <outlet property="subTitleLabel" destination="xul-fx-mOk" id="0Ha-AU-AJK"/>
                         <outlet property="tableView" destination="nn1-xB-J3j" id="TAk-fV-Ada"/>
                         <outlet property="titleLabel" destination="acY-ya-oJJ" id="9uF-xG-mK9"/>

@@ -19,15 +19,18 @@ class SubscriptionTypeViewController: UIViewController {
     
     var subscriptionPlans = [SubscriptionPlanModel]()
     
+    @IBOutlet weak var proceedBtn: UIButton!
     var selectedIndex = -1
     
+    @IBOutlet weak var descriptionBottonConstraint: NSLayoutConstraint!
     var currentPlan: String?
     var benefitCode: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         getAllSubscriptionPlans()
+        proceedBtn.isEnabled = false
+        proceedBtn.alpha = 0.5
     }
     
     private func getAllSubscriptionPlans() {
@@ -111,18 +114,23 @@ class SubscriptionTypeViewController: UIViewController {
     
     @IBAction func didTapProceedButton(_ sender: UIButton) {
         //Payments
+     
+                let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "SubscriptionViewController") as! SubscriptionViewController
+                vc.subscriptionPlan = subscriptionPlans[selectedIndex]
+                vc.modalTransitionStyle = .crossDissolve
+                self.present(vc, animated: true, completion: nil)
+        
     }
     
     @objc private func showPlanDetails(sender: UIButton) {
-        
-        let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "SubscriptionViewController") as! SubscriptionViewController
-        vc.subscriptionPlan = subscriptionPlans[sender.tag]
-        vc.modalTransitionStyle = .crossDissolve
-        self.present(vc, animated: true, completion: nil)
+       
+
     }
     
     @objc private func selectPlan(sender: UIButton) {
+        proceedBtn.isEnabled = true
+        proceedBtn.alpha = 1.0
         selectedIndex = sender.tag
         tableView.reloadData()
     }

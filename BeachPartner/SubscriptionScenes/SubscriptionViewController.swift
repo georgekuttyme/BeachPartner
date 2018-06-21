@@ -154,14 +154,17 @@ extension SubscriptionViewController: UITableViewDataSource, UITableViewDelegate
         cell.selectionStyle = .none
         
         let benefit = subscriptionPlan?.benefits[indexPath.row]
-
-        cell.featueNameLabel.text = benefit?.name
+        let test = benefit?.name.trimmingCharacters(in: .newlines)
+        print("+++ ",benefit?.name," +++ ",test)
+        cell.featueNameLabel.text =  test
         cell.additionalDescriptionLabel.text = benefit?.userNote
         cell.statusImageView.image = (benefit?.status == "Limited" || benefit?.status == "Available") ? UIImage(named:"tick") : UIImage(named:"wrong")
         
         return cell
     }
 }
+//let text = "This \n is a st\tri\rng"
+//let test = String(text.filter { !" \n\t\r".contains($0) })
 
 class SubscriptionTableViewCell : UITableViewCell {
     
