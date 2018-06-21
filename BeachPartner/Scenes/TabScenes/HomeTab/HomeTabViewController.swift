@@ -129,10 +129,22 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(tapOnPush(notification:)), name:NSNotification.Name(rawValue: "foreground-pushNotification"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(tapOnHome(notification:)), name:NSNotification.Name(rawValue: "HOME-pushNotification"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(tapOnActive(notification:)), name:NSNotification.Name(rawValue: "ACTIVE-pushNotification"), object: nil)
     }
     
     @objc func tapOnPush(notification: NSNotification) {
         self.tabBarController?.selectedIndex = 4
+    }
+    
+    @objc func tapOnHome(notification: NSNotification) {
+        self.tabBarController?.selectedIndex = 0
+    }
+    
+    @objc func tapOnActive(notification: NSNotification) {
+        self.tabBarController?.selectedIndex = 1
     }
     
    func popUpAlertForCompleteProfile(){

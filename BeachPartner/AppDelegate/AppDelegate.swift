@@ -153,10 +153,21 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         if let aps = userInfo["aps"] as? NSDictionary {
             if let category = aps["category"] as? String {
                 print(category,"")
+                let categoryType:[String: String
+                    ] = ["image": category]
                 if category == "HIFI"{
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: "foreground-pushNotification"), object: nil)
                     print("&&&&&&&&")
                 }
+                else if category == "HOME"{
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "HOME-pushNotification"), object: nil)
+                    print("*********")
+                }
+                else if category == "ACTIVE"{
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ACTIVE-pushNotification"), object: nil)
+                    print("---------")
+                }
+
             }
         }
         
