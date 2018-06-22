@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-     
+        UIApplication.shared.statusBarView?.backgroundColor = UIColor(red: 56.0/255.0, green: 68.0/255.0, blue: 134.0/255.0, alpha: 1.0)
         let attributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributes, for: .normal)
         

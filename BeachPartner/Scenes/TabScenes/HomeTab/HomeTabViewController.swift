@@ -844,5 +844,10 @@ extension HomeTabViewController: EventInvitationListViewControllerDelegate {
         self.getAllTournamentRequests()
     }
 }
+extension UIApplication {
+    var statusBarView: UIView? {
+        return value(forKey: "statusBar") as? UIView
+    }
+}
 
 
