@@ -136,9 +136,9 @@ class SubscriptionTypeViewController: UIViewController {
         let indexPath1 = self.tableView.indexPathForRow(at: position)
         let cell: SubscriptionTypeTableViewCell = tableView.cellForRow(at: indexPath1!)! as!
         SubscriptionTypeTableViewCell
-        print("----- ?? ",indexPath1 ?? "")
-        cell.descriptionLabel.numberOfLines = 0
+        print(readMoreClicked," ----- ?? ",indexPath1 ?? ""," \n\n -- ",readMoreButtonTitle)
         cell.readmoreButton.setTitle("Less", for: .normal)
+        cell.descriptionLabel.numberOfLines = 0
         tableView.estimatedRowHeight = 250.0
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.reloadData()
@@ -198,6 +198,7 @@ extension SubscriptionTypeViewController: UITableViewDataSource, UITableViewDele
 
         let image = (indexPath.row == selectedIndex) ? UIImage(named:"rb_active") : UIImage(named:"rb")
         readMoreButtonTitle = self.readMoreClicked ? "less" : "Read more"
+        print("\n\n\n\n\n",readMoreClicked,"***  ",readMoreButtonTitle,"*** ",indexPath)
         cell.radioButton.setImage(image, for: .normal)
         if readMoreButtonTitle == "Read more"{
             tableView.estimatedRowHeight = 200.0
@@ -205,11 +206,13 @@ extension SubscriptionTypeViewController: UITableViewDataSource, UITableViewDele
             cell.descriptionLabel.numberOfLines = 3
             cell.descriptionLabel.lineBreakMode = .byTruncatingTail
             cell.readmoreButton.setTitle(readMoreButtonTitle, for: .normal)
+            cell.readmoreButton.tag = indexPath.row+1000
+            
         }
+        cell.readmoreButton.addTarget(self, action: #selector(showPlanDetails), for: .touchUpInside)
         cell.radioButton.tag = indexPath.row
         cell.radioButton.addTarget(self, action: #selector(selectPlan), for: .touchUpInside)
-        cell.readmoreButton.tag = indexPath.row+1000
-        cell.readmoreButton.addTarget(self, action: #selector(showPlanDetails), for: .touchUpInside)
+        
         
         cell.readmoreButton.isHidden = (plan.type == "Subscription") ? false: true
         

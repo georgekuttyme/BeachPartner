@@ -111,7 +111,7 @@ class MyCalEventDetailsViewController: UIViewController {
     
     @IBAction func didTapCourtAssignmentButton(_ sender: UIButton) {
         
-        let alert = UIAlertController(title: "", message: "Notifications will be sent to your team partners. Coaches in your connection list and parents (if linked to your profile)will also be notified", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "", message: "Notifications will be sent to your team partners. Coaches in your connection list and parents (if linked to your profile) will also be notified.", preferredStyle: UIAlertControllerStyle.alert)
         let action = UIAlertAction(title: "Send", style: .default) { (alertAction) in
             let textField = alert.textFields![0] as UITextField
             if let text = textField.text, text.count > 0 {
