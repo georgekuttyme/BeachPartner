@@ -22,11 +22,11 @@ class SubscriptionTypeViewController: UIViewController {
     
     @IBOutlet weak var proceedBtn: UIButton!
     var selectedIndex = -1
+     var selectedReadMoreIndex = -1
     
     @IBOutlet weak var descriptionBottonConstraint: NSLayoutConstraint!
     var currentPlan: String?
     var benefitCode: String?
-    
     var readMoreButtonTitle: String = "Read more"
     
 
@@ -132,15 +132,7 @@ class SubscriptionTypeViewController: UIViewController {
     
     @objc private func showPlanDetails(sender: UIButton) {
         readMoreClicked = !readMoreClicked
-        let position: CGPoint = sender.convert(.zero, to: self.tableView)
-        let indexPath1 = self.tableView.indexPathForRow(at: position)
-        let cell: SubscriptionTypeTableViewCell = tableView.cellForRow(at: indexPath1!)! as!
-        SubscriptionTypeTableViewCell
-        print(readMoreClicked," ----- ?? ",indexPath1 ?? ""," \n\n -- ",readMoreButtonTitle)
-        cell.readmoreButton.setTitle("Less", for: .normal)
-        cell.descriptionLabel.numberOfLines = 0
-        tableView.estimatedRowHeight = 250.0
-        tableView.rowHeight = UITableViewAutomaticDimension
+        selectedReadMoreIndex = sender.tag-1000
         tableView.reloadData()
     }
     
@@ -193,27 +185,33 @@ extension SubscriptionTypeViewController: UITableViewDataSource, UITableViewDele
             charge += " /month"
         }
         cell.priceLabel.text = charge
-//        cell.descriptionLabel.text = plan.description
-        cell.descriptionLabel.text = "Select the height constraint from the Interface builder and take an outlet of it. So, when you want to change the height of the view you can use the below code.France won again, but are still struggling for rhythm, while Argentinas drubbing at the hands of Croatia on Thursday night leaves them on the brink of an early World Cup exit.Can Brazil stamp their authority on the tournament today? We will soon find out."
+        cell.descriptionLabel.text = plan.description
+//        cell.descriptionLabel.text = "Select the height constraint from the Interface builder and take an outlet of it. So, when you want to change the height of the view you can use the below code.France won again, but are still struggling for rhythm, while Argentinas drubbing at the hands of Croatia on Thursday night leaves them on the brink of an early World Cup exit.Can Brazil stamp their authority on the tournament today? We will soon find out."
 
         let image = (indexPath.row == selectedIndex) ? UIImage(named:"rb_active") : UIImage(named:"rb")
-        readMoreButtonTitle = self.readMoreClicked ? "less" : "Read more"
-        print("\n\n\n\n\n",readMoreClicked,"***  ",readMoreButtonTitle,"*** ",indexPath)
+        readMoreButtonTitle = (indexPath.row == selectedReadMoreIndex) ? "less" : "Read more"
+        if(readMoreButtonTitle == "less" && !self.readMoreClicked ){
+            readMoreButtonTitle = "Read more"
+        }
+        
         cell.radioButton.setImage(image, for: .normal)
+        
         if readMoreButtonTitle == "Read more"{
             tableView.estimatedRowHeight = 200.0
             tableView.rowHeight = UITableViewAutomaticDimension
             cell.descriptionLabel.numberOfLines = 3
             cell.descriptionLabel.lineBreakMode = .byTruncatingTail
-            cell.readmoreButton.setTitle(readMoreButtonTitle, for: .normal)
-            cell.readmoreButton.tag = indexPath.row+1000
-            
         }
+        else{
+            cell.descriptionLabel.numberOfLines = 0
+            tableView.estimatedRowHeight = 250.0
+            tableView.rowHeight = UITableViewAutomaticDimension
+        }
+        cell.readmoreButton.setTitle(readMoreButtonTitle, for: .normal)
+        cell.readmoreButton.tag = indexPath.row+1000
         cell.readmoreButton.addTarget(self, action: #selector(showPlanDetails), for: .touchUpInside)
         cell.radioButton.tag = indexPath.row
         cell.radioButton.addTarget(self, action: #selector(selectPlan), for: .touchUpInside)
-        
-        
         cell.readmoreButton.isHidden = (plan.type == "Subscription") ? false: true
         
         return cell
