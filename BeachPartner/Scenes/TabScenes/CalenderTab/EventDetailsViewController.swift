@@ -164,44 +164,17 @@ class EventDetailsViewController: BeachPartnerViewController {
         if isFromHomeTab {
             generalEventDetailsView.isHidden = true
             
-            if   eventInvitation.invitations?.first?.eventStatus == RegisterType.invitee.rawValue {
-                
-                invitePartnerButton.isEnabled = false
-                invitePartnerButton.alpha = 0.6
-                
-                athleteGoingButton.isEnabled = false
-                athleteGoingButton.alpha = 0.6
-                athleteGoingButton.setTitleColor(.lightGray, for: .normal)
-            }
-            else if   eventInvitation.invitations?.first?.eventStatus == RegisterType.organizer.rawValue {
-                
-                if event?.eventStaus == EventStatus.active.rawValue {
-                    
-                    invitePartnerButton.isEnabled = false
-                    invitePartnerButton.alpha = 0.6
-                }
-                else if   eventInvitation.invitations?.first?.eventStatus == EventStatus.registered.rawValue {
-                    
-                    invitePartnerButton.isEnabled = false
-                    invitePartnerButton.alpha = 0.6
-                    
-                    athleteGoingButton.isEnabled = false
-                    athleteGoingButton.alpha = 0.6
-                    athleteGoingButton.setTitleColor(.lightGray, for: .normal)
-                }
-            }
-            else {
-                viewPartnersButton.isEnabled = false
-                viewPartnersButton.alpha = 0.6
-            }
             if  eventInvitation.invitations?.first?.eventStatus == "Registered" || eventInvitation.invitations?.first?.eventStatus == "Expired" {
+                self.viewPartnersButton.isEnabled = true
+                self.viewPartnersButton.alpha = 1.0
                 self.invitePartnerButton.isEnabled = false
                 self.invitePartnerButton.alpha = 0.6
-
+                
                 self.athleteGoingButton.isEnabled = false
                 self.athleteGoingButton.alpha = 0.6
                 self.athleteGoingButton.setTitleColor(.lightGray, for: .normal)
             }
+           
         }
         
         if UserDefaults.standard.string(forKey: "userType") == "Coach" {
