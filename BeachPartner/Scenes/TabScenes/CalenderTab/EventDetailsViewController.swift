@@ -352,6 +352,7 @@ class EventDetailsViewController: BeachPartnerViewController {
                     ActivityIndicatorView.hiding()
                     if UserDefaults.standard.string(forKey: "userType") == "Athlete" {
                         self.getAllInvitations()
+                        self.navigationController?.popViewController(animated: true)
                     }
                     else {
                          self.navigationController?.popViewController(animated: true)
