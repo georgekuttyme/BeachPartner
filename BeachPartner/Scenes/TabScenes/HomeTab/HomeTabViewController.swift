@@ -685,7 +685,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         
         ActivityIndicatorView.show("Loading...")
         APIManager.callServer.getUserConnectionList(status:"status=New&showReceived=true",sucessResult: { (responseModel) in
-            
+            ActivityIndicatorView.hiding()
             guard let connectedUserModelArray = responseModel as? ConnectedUserModelArray else{
                 ActivityIndicatorView.hiding()
                 return

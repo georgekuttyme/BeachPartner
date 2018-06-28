@@ -302,6 +302,8 @@ final class APIGetClient{
                 if status == 200 {
                     let json = responseObject.result.value
                     sucess(json as! NSArray?)
+                }else{
+                    ActivityIndicatorView.hiding()
                 }
                 sessionManagerNew.session.flush {
                     

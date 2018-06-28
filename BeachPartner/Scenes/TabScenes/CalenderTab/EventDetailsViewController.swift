@@ -64,7 +64,11 @@ class EventDetailsViewController: BeachPartnerViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        if isFromHomeTab{
+            if (eventId != nil){
+                getAllEvents(eventId: eventId!)
+            }
+        }
         setupUI()
         setupDataFromEvent()
         
@@ -73,7 +77,37 @@ class EventDetailsViewController: BeachPartnerViewController {
         }
     }
 
+    private func getAllEvents(eventId:Int) {
+        
+        ActivityIndicatorView.show("Loading")
+        APIManager.callServer.getAllEvents(sucessResult: { (responseModel) in
+            
+            
+            guard let eventsArrayModel = responseModel as? GetEventsRespModelArray else {
+                ActivityIndicatorView.hiding()
+                print("Rep model does not match")
+                return
+            }
+            self.eventArray = eventsArrayModel.getEventsRespModel.filter { (event) -> Bool in
+                return Bool(event.id == eventId)
+            }
+            self.event = self.eventArray.first
+            print("]]]]]]]]  ",self.event)
+            self.setupUI()
+            ActivityIndicatorView.hiding()
+            
+        }) { (error) in
+            
+            ActivityIndicatorView.hiding()
+            guard let errorString  = error else {
+                return
+            }
+            self.alert(message: errorString)
+        }
+    }
+    
     private func setupUI() {
+        print("/****** \n\n\n\n",event ?? "null")
         eventNameLabel.adjustsFontSizeToFitWidth = true
         
         if UserDefaults.standard.string(forKey: "userType") == "Athlete" {
@@ -164,16 +198,16 @@ class EventDetailsViewController: BeachPartnerViewController {
         if isFromHomeTab {
             generalEventDetailsView.isHidden = true
             
-            if  eventInvitation.invitations?.first?.eventStatus == "Registered" || eventInvitation.invitations?.first?.eventStatus == "Expired" {
-                self.viewPartnersButton.isEnabled = true
-                self.viewPartnersButton.alpha = 1.0
-                self.invitePartnerButton.isEnabled = false
-                self.invitePartnerButton.alpha = 0.6
-                
-                self.athleteGoingButton.isEnabled = false
-                self.athleteGoingButton.alpha = 0.6
-                self.athleteGoingButton.setTitleColor(.lightGray, for: .normal)
-            }
+//            if  eventInvitation.invitations?.first?.eventStatus == "Registered" || eventInvitation.invitations?.first?.eventStatus == "Expired" {
+//                self.viewPartnersButton.isEnabled = true
+//                self.viewPartnersButton.alpha = 1.0
+//                self.invitePartnerButton.isEnabled = false
+//                self.invitePartnerButton.alpha = 0.6
+//                
+//                self.athleteGoingButton.isEnabled = false
+//                self.athleteGoingButton.alpha = 0.6
+//                self.athleteGoingButton.setTitleColor(.lightGray, for: .normal)
+//            }
            
         }
         
