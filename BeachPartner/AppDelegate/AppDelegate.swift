@@ -130,44 +130,46 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     // iOS10+, called when presenting notification in foreground
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         let userInfo = notification.request.content.userInfo
-        NSLog("[UserNotificationCenter] applicationState: \(applicationStateString) willPresentNotification: \(userInfo)")
+        let pushUserId = userInfo["gcm.notification.user_id"] ?? ""
+        let pushEventId = userInfo["gcm.notification.event_id"] ?? ""
+        let currentUserId = UserDefaults.standard.string(forKey: "bP_userId") ?? ""
+        NSLog("[UserNotificationCenter] applicationState: \(applicationStateString) willPresentNotification: \(userInfo): \(String(describing: pushUserId))  -- \(pushUserId) ** \(currentUserId)  //  \(pushEventId)  ++ \(String(describing: pushEventId))")
+        
+        if String(describing: pushUserId) == currentUserId{
+            completionHandler([.alert, .sound])
+        }else{
+            
+        }
         //TODO: Handle foreground notification
-        completionHandler([.alert, .sound])
+        
         
     }
     
-//    // iOS10+, called when received response (default open, dismiss or custom action) for a notification
-//    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-//        let userInfo = response.notification.request.content.userInfo
-//        NSLog("[UserNotificationCenter] applicationState: \(applicationStateString) didReceiveResponse: \(userInfo)")
-//        //TODO: Handle background notification
-//        completionHandler()
-//    }
     
     // iOS10+, called when received response (default open, dismiss or custom action) for a notification
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
-        
-        NSLog("[UserNotificationCenter] applicationState: \(applicationStateString) didReceiveResponse: \(userInfo)")
+        let pushEventId = userInfo["gcm.notification.event_id"] ?? ""
+        NSLog("[UserNotificationCenter] applicationState: \(applicationStateString) didReceiveResponse: \(userInfo)   \(pushEventId)")
         
         if let aps = userInfo["aps"] as? NSDictionary {
             if let category = aps["category"] as? String {
                 print(category,"")
-                let categoryType:[String: String
-                    ] = ["image": category]
+                let eventId:[String: String
+                    ] = ["eventID": String(describing: pushEventId)]
                 if category == "HIFI"{
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: "foreground-pushNotification"), object: nil)
                     print("&&&&&&&&")
                 }
-                else if category == "HOME"{
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "HOME-pushNotification"), object: nil)
+                else if category == "INVITATION"{
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "HOME-pushNotification"), object: nil,userInfo:eventId)
                     print("*********")
                 }
                 else if category == "ACTIVE"{
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ACTIVE-pushNotification"), object: nil)
                     print("---------")
                 }
-
+                
             }
         }
         

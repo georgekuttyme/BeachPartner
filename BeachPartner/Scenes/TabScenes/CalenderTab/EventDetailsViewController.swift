@@ -48,7 +48,7 @@ class EventDetailsViewController: BeachPartnerViewController {
     @IBOutlet weak var eventTeamSizeLabel: UILabel!
      @IBOutlet weak var teamSizeLabel: UILabel!
     var event: GetEventRespModel?
-    
+    var eventArray = [GetEventRespModel]()
     var eventId: Int?
     var isFromHomeTab = false
     var eventInvitation: GetEventInvitationRespModel?
