@@ -489,7 +489,16 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             // 200 or any value you like.
             if !self.didPressDownArrow {
                 self.didPressDownArrow = true
-                let point = CGPoint(x: 0, y: 300) // 200 or any value you like.
+                var point = CGPoint()
+                if UIDevice.current.userInterfaceIdiom == .phone {
+                    let screenSize = UIScreen.main.bounds.size;
+                    if screenSize.height == 568.0{
+                        point = CGPoint(x: 0, y: 240)
+                    }else{
+                        point = CGPoint(x: 0, y: 300)
+                    }
+                }
+                // 200 or any value you like.
                 if(self.bpscrollview.contentOffset.y < point.y){
                     
                     self.bpscrollview.contentOffset = point
@@ -502,7 +511,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             }
             else{
                 self.didPressDownArrow = false
-                let point = CGPoint(x: 0, y: 10)
+                let point = CGPoint(x: 0, y: 0)
                 self.bpscrollview.contentOffset = point
                 self.bpscrollview.isScrollEnabled=false
             }

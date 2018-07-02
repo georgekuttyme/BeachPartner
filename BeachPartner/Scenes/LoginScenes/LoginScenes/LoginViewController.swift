@@ -137,6 +137,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
                 
                 return
             }
+//            UserDefaults.standard.set(updateFcmTokenRespModel.city , forKey: "locationInitial")
             print("& ** &\n ",updateFcmTokenModel," \n& ** &")
         }, errorResult: { (error) in
             
@@ -804,7 +805,7 @@ extension LoginViewController: AppUpdateViewControllerDelegate {
                     return
                 }
 //                UserDefaults.standard.set(accRespModel.location, forKey: "location")
-                UserDefaults.standard.set(accRespModel.location , forKey: "locationInitial")
+                UserDefaults.standard.set(accRespModel.city , forKey: "locationInitial")
                 if(accRespModel.id != 0){
                     UserDefaults.standard.set(accRespModel.userType, forKey: "userType")
                     print("&&&&&&", accRespModel.userProfile ?? " ")

@@ -11,9 +11,11 @@ import Tailor
 struct updateFcmTokenRespModel : SafeMappable{
     var status: String = ""
     var message: String = ""
+//    var city: String = ""
     init(_ map: [String : Any]) throws {
         status <- map.property("status")
         message <- map.property("message")
+//        city <- map.property("city")
     }
 }
 
