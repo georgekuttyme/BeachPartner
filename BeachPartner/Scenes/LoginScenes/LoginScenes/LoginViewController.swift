@@ -803,6 +803,7 @@ extension LoginViewController: AppUpdateViewControllerDelegate {
                 guard let accRespModel = responseModel as? AccountRespModel else{
                     return
                 }
+//                UserDefaults.standard.set(accRespModel.location, forKey: "location")
                 UserDefaults.standard.set(accRespModel.location , forKey: "locationInitial")
                 if(accRespModel.id != 0){
                     UserDefaults.standard.set(accRespModel.userType, forKey: "userType")

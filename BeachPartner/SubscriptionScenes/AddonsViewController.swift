@@ -14,17 +14,22 @@ class AddonsViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subTitleLabel: UILabel!
-    
+    @IBOutlet weak var proceedBtn: UIButton!
     var profileBoostmode = false
     
     var addonPlans = [SubscriptionPlanModel]()
-    
+    var selectedReadMoreIndex = -1
     var selectedIndex = -1
-    
+    var readMoreButtonTitle: String = "Read more"
+    var readMoreClicked:Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
         
         getAllAddonPlans()
+        tableView.estimatedRowHeight = 200.0
+        tableView.rowHeight = UITableViewAutomaticDimension
+        proceedBtn.isEnabled = false
+        proceedBtn.alpha = 0.5
     }
     
     private func getAllAddonPlans() {
@@ -73,7 +78,16 @@ class AddonsViewController: UIViewController {
         
     }
     
+    @objc private func showPlanDetails(sender: UIButton) {
+        readMoreClicked = !readMoreClicked
+        selectedReadMoreIndex = sender.tag-1000
+        tableView.reloadData()
+    }
+
+    
     @objc private func selectPlan(sender: UIButton) {
+        proceedBtn.isEnabled = true
+        proceedBtn.alpha = 1.0
         selectedIndex = sender.tag
         tableView.reloadData()
     }
@@ -100,6 +114,28 @@ extension AddonsViewController: UITableViewDataSource, UITableViewDelegate {
         cell.descriptionLabel.text = plan.description
         
         let image = (indexPath.row == selectedIndex) ? UIImage(named:"rb_active") : UIImage(named:"rb")
+        readMoreButtonTitle = (indexPath.row == selectedReadMoreIndex) ? "less" : "Read more"
+        if(readMoreButtonTitle == "less" && !self.readMoreClicked ){
+            readMoreButtonTitle = "Read more"
+        }
+        
+        cell.radioButton.setImage(image, for: .normal)
+        
+        if readMoreButtonTitle == "Read more"{
+            tableView.estimatedRowHeight = 200.0
+            tableView.rowHeight = UITableViewAutomaticDimension
+            cell.descriptionLabel.numberOfLines = 3
+            cell.descriptionLabel.lineBreakMode = .byTruncatingTail
+        }
+        else{
+            cell.descriptionLabel.numberOfLines = 0
+            tableView.estimatedRowHeight = 250.0
+            tableView.rowHeight = UITableViewAutomaticDimension
+        }
+        cell.readMore.setTitle(readMoreButtonTitle, for: .normal)
+        cell.readMore.tag = indexPath.row+1000
+        cell.readMore.addTarget(self, action: #selector(showPlanDetails), for: .touchUpInside)
+        
         cell.radioButton.setImage(image, for: .normal)
         
         cell.radioButton.tag = indexPath.row
@@ -117,18 +153,17 @@ extension AddonsViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120.0
-    }
 }
 
 
 class AddonTableViewCell : UITableViewCell {
     
+    @IBOutlet weak var readMore: UIButton!
     @IBOutlet weak var radioButton: UIButton!
     @IBOutlet weak var subscriptionTypeLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UITextView!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    
 }
 

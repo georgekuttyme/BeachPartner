@@ -551,7 +551,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
                enPoint = enPoint+"&gender="+"\(gender ?? "")"
             }
         }
-        let location = UserDefaults.standard.string(forKey: "location")
+        let location = UserDefaults.standard.string(forKey: "locationInitial")
         if (location != nil){
             enPoint = enPoint+"&location="+"\(location ?? "")"
         }
@@ -702,7 +702,14 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             if self.selectedType == "BlueBp"{
                  self.getUsersListforBlueBp()
             }
-            
+            if (self.swipeAction[0].status == "Active") {
+                self.likedPersonInfo = [connectedUserModelValue]
+                let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "MutualLikesViewController") as! MutualLikesViewController
+                vc.modalTransitionStyle = .crossDissolve
+                vc.modalPresentationStyle = .overFullScreen
+                self.present(vc, animated: true, completion: nil)
+            }
             self.btnUndo.setImage(UIImage(named:"back"), for: UIControlState.normal)
             self.btnUndo.isEnabled = true
         

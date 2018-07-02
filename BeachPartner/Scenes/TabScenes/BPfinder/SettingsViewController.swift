@@ -83,10 +83,10 @@ class SettingsViewController: UIViewController {
         UserDefaults.standard.set(minAge, forKey: "minAge")
         UserDefaults.standard.set(maxAge, forKey: "maxAge")
         if self.selectLoc.titleLabel?.text != "Choose State"{
-            UserDefaults.standard.set(self.selectLoc.titleLabel?.text ?? "", forKey: "location")
+            UserDefaults.standard.set(self.selectLoc.titleLabel?.text ?? "", forKey: "locationInitial")
         }
         else{
-            UserDefaults.standard.set("", forKey: "location")
+//            UserDefaults.standard.set(, forKey: "locationInitial")
         }
          UserDefaults.standard.set(self.showMeLbl.text ?? "Both", forKey: "gender")
         
@@ -199,7 +199,7 @@ class SettingsViewController: UIViewController {
             ageLabel.text = minValue! + " - " + maxValue!
             rangeSlider.layoutSubviews()
         }
-        let location = UserDefaults.standard.string(forKey: "location") ?? ""
+        let location = UserDefaults.standard.string(forKey: "locationInitial") ?? ""
         if (location.count > 0) {
             self.selectLoc.setTitle(location, for: UIControlState.normal)
         }

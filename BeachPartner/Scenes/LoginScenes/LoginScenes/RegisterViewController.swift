@@ -303,7 +303,7 @@ class RegisterViewController: UIViewController {
                 return
             }
             else{
-                UserDefaults.standard.set(self.state , forKey: "location")
+                UserDefaults.standard.set(self.state , forKey: "locationInitial")
             }
             let date = dateformatter.date(from: self.dob)
             date_formatter1.dateFormat = "yyyy-MM-dd"
