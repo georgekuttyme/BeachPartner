@@ -2,8 +2,8 @@
 //  CenterViewFlowLayout.swift
 //  UICollectionViewHorizontalPaging
 //
-//  Created by Maxim on 2/6/16.
-//  Copyright © 2016 Maxim Bilan. All rights reserved.
+//  Created by Beach Partner LLC on 2/6/16.
+//  Copyright © 2016 Beach Partner LLC. All rights reserved.
 //
 
 import UIKit

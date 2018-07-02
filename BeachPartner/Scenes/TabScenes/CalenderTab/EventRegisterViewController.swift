@@ -2,8 +2,8 @@
 //  EventRegisterViewController.swift
 //  BeachPartner
 //
-//  Created by seq-mary on 18/05/18.
-//  Copyright © 2018 dev. All rights reserved.
+//  Created by Beach Partner LLC on 18/05/18.
+//  Copyright © 2018 Beach Partner LLC. All rights reserved.
 //
 
 import UIKit

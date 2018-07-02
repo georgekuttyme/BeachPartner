@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  FCMChat
 //
-//  Created by Georgekutty Joy on 02/04/18.
-//  Copyright © 2018 Georgekutty Joy. All rights reserved.
+//  Created by Beach Partner LLC on 02/04/18.
+//  Copyright © 2018 Beach Partner LLC. All rights reserved.
 //
 import UIKit
 import Firebase

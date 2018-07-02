@@ -2,8 +2,8 @@
 //  SearchUserModel.swift
 //  BeachPartner
 //
-//  Created by Georgekutty on 18/04/18.
-//  Copyright © 2018 dev. All rights reserved.
+//  Created by Beach Partner LLC on 18/04/18.
+//  Copyright © 2018 Beach Partner LLC. All rights reserved.
 //
 
 import Foundation

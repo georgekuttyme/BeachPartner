@@ -2,8 +2,8 @@
 //  HighFiveViewController.swift
 //  BeachPartner
 //
-//  Created by krishnapillai on 13/01/1940 Saka.
-//  Copyright © 1940 dev. All rights reserved.
+//  Created by Beach Partner LLC on 13/01/1940 Saka.
+//  Copyright © 1940 Beach Partner LLC. All rights reserved.
 //
 
 import UIKit

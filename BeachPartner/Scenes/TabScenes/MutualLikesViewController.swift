@@ -2,8 +2,8 @@
 //  MutualLikesViewController.swift
 //  BeachPartner
 //
-//  Created by Admin on 02/05/18.
-//  Copyright © 2018 dev. All rights reserved.
+//  Created by Beach Partner LLC on 02/05/18.
+//  Copyright © 2018 Beach Partner LLC. All rights reserved.
 //
 
 import UIKit

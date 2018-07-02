@@ -2,8 +2,8 @@
 //  UIVideoView.swift
 //  JerryCardView
 //
-//  Created by Midhun P Mathew on 3/29/18.
-//  Copyright © 2018 Midhun P Mathew. All rights reserved.
+//  Created by Beach Partner LLC on 3/29/18.
+//  Copyright © 2018 Beach Partner LLC. All rights reserved.
 //
 
 import UIKit

@@ -2,8 +2,8 @@
 //  CustomCell.swift
 //  BeachPartner
 //
-//  Created by krishnapillai on 21/12/1939 Saka.
-//  Copyright © 1939 dev. All rights reserved.
+//  Created by Beach Partner LLC on 21/12/1939 Saka.
+//  Copyright © 1939 Beach Partner LLC. All rights reserved.
 //
 
 import UIKit

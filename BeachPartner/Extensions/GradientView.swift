@@ -2,8 +2,8 @@
 //  GradientView.swift
 //  BeachPartner
 //
-//  Created by Jerry K Mathew on 28/03/18.
-//  Copyright © 2018 dev. All rights reserved.
+//  Created by Beach Partner LLC on 28/03/18.
+//  Copyright © 2018 Beach Partner LLC. All rights reserved.
 //
 
 import Foundation

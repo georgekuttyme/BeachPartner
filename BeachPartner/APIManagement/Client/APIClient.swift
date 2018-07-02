@@ -2,8 +2,8 @@
 //  APIClient.swift
 //  BeachPartner
 //
-//  Created by Jerry K Mathew on 26/03/18.
-//  Copyright © 2018 dev. All rights reserved.
+//  Created by Beach Partner LLCon 26/03/18.
+//  Copyright © 2018 Beach Partner LLC. All rights reserved.
 //
 
 import Foundation

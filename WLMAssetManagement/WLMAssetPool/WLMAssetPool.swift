@@ -2,8 +2,8 @@
 //  WLMAssetPool.swift
 //  Playing Offline HLS
 //
-//  Created by Midhun P Mathew on 11/6/17.
-//  Copyright © 2017 Midhun P Mathew. All rights reserved.
+//  Created by Beach Partner LLC on 11/6/17.
+//  Copyright © 2017 Beach Partner LLC. All rights reserved.
 //
 
 import Foundation

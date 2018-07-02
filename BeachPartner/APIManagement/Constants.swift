@@ -2,8 +2,8 @@
 //  Constants.swift
 //  BeachPartner
 //
-//  Created by seqato on 23/02/18.
-//  Copyright © 2018 seqato. All rights reserved.
+//  Created by Beach Partner LLC on 23/02/18.
+//  Copyright © 2018 Beach Partner LLC. All rights reserved.
 //
 
 import Foundation

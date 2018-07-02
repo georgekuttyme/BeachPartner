@@ -2,8 +2,8 @@
 //  HomeTabViewController.swift
 //  BeachPartner
 //
-//  Created by Jerry K Mathew on 22/03/18.
-//  Copyright © 2018 dev. All rights reserved.
+//  Created by Beach Partner LLCon 22/03/18.
+//  Copyright © 2018 Beach Partner LLC. All rights reserved.
 //
 
 import UIKit

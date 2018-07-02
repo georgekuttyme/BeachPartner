@@ -2,7 +2,7 @@
 //  RangeSeekSlider.swift
 //  RangeSeekSlider
 //
-//  Created by Keisuke Shoji on 2017/03/09.
+//  Created by Beach Partner LLC on 2017/03/09.
 //
 //
 

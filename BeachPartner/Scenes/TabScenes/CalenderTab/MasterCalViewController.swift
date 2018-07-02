@@ -2,8 +2,8 @@
 //  MasterCalViewController.swift
 //  BeachPartner
 //
-//  Created by Jerry K Mathew on 21/03/18.
-//  Copyright © 2018 dev. All rights reserved.
+//  Created by Beach Partner LLC on 21/03/18.
+//  Copyright © 2018 Beach Partner LLC. All rights reserved.
 //
 
 import UIKit

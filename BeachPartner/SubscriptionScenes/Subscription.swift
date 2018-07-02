@@ -2,8 +2,8 @@
 //  Subscription.swift
 //  BeachPartner
 //
-//  Created by seq-mary on 06/06/18.
-//  Copyright © 2018 dev. All rights reserved.
+//  Created by Beach Partner LLC on 06/06/18.
+//  Copyright © 2018 Beach Partner LLC. All rights reserved.
 //
 
 import Foundation
