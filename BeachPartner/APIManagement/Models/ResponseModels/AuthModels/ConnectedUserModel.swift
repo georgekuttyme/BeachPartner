@@ -29,6 +29,7 @@ struct ConnectedUserModel:SafeMappable {
     var status: String = ""
     var id: Int = 0
     var availableOnDate: Bool = false
+    var invitationStatus: String = ""
     var connectedUser: ConnectedUser?
     
     init(_ map: [String : Any]) throws {
@@ -36,6 +37,7 @@ struct ConnectedUserModel:SafeMappable {
         status <- map.property("status")
         id <- map.property("id")
         availableOnDate <- map.property("availableOnDate")
+        invitationStatus <- map.property("invitationStatus")
         connectedUser = try map.relation("connectedUser").unwrapOrThrow()
     }
     

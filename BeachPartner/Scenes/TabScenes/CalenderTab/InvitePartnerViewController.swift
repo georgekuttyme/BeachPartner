@@ -137,12 +137,12 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
     private func getConnectionsList() {
         
         guard let eventStartDate = eventStartDate  else { return }
-        
+        let eventID = eventId ?? 0
         let date = Date(timeIntervalSince1970: TimeInterval(eventStartDate/1000))
         let eventDate = formatter.string(from: date)
         
         ActivityIndicatorView.show("Loading...")
-        APIManager.callServer.getUserConnectionList(status:"status=Active&filterDate=\(eventDate)",sucessResult: { (responseModel) in
+        APIManager.callServer.getUserConnectionList(status:"status=Active&filterDate=\(eventDate)&eventId=\(eventID)",sucessResult: { (responseModel) in
             
             ActivityIndicatorView.hiding()
 
@@ -312,12 +312,14 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
         if(tableView == partnerTableVIew) {
             
             var connectedUser : ConnectedUserModel.ConnectedUser
-            
+            var connectedUserModelResponse : ConnectedUserModel
             if isFiltering() {
                 connectedUser = filteredConnectedUsers[indexPath.row].connectedUser!
+                connectedUserModelResponse = filteredConnectedUsers[indexPath.row]
             }
             else {
                 connectedUser = connectedUsers[indexPath.row].connectedUser!
+                connectedUserModelResponse = connectedUsers[indexPath.row]
             }
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "InvitePartnerCell", for: indexPath) as? InvitePartnerCell
@@ -331,9 +333,9 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
             
             let image = connectedUser.imageUrl
             let imageUrl = URL(string: image)
-                cell?.profileImage.sd_setIndicatorStyle(.whiteLarge)
-                cell?.profileImage.sd_setShowActivityIndicatorView(true)
-                cell?.profileImage.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+            cell?.profileImage.sd_setIndicatorStyle(.whiteLarge)
+            cell?.profileImage.sd_setShowActivityIndicatorView(true)
+            cell?.profileImage.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
             
             
             cell?.profileImage.layer.cornerRadius = (cell?.profileImage?.frame.size.width)!/2
@@ -345,25 +347,36 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
             
             
             cell?.addBtn.isHidden = isFiltering() ? !filteredConnectedUsers[indexPath.row].availableOnDate : !connectedUsers[indexPath.row].availableOnDate
-            
-            
-            if (cell?.addBtn.isHidden)! {
+            print(connectedUserModelResponse.availableOnDate," ---- // ** ", connectedUserModelResponse.invitationStatus)
+            if connectedUserModelResponse.invitationStatus != "" {
+                cell?.addBtn.isHidden = true
                 cell?.nameLbl.textColor = UIColor.gray
-                cell?.unAvailableLbl.text = "Unavailable"
+                cell?.unAvailableLbl.text = connectedUserModelResponse.invitationStatus
                 cell?.unAvailableLbl.textColor = UIColor.gray
                 cell?.backgroundColor = UIColor.init(red: 230/255, green: 230/255, blue: 230/255, alpha: 1.0)
                 cell?.nameLbl.textColor = UIColor.gray
-            }else{
-                cell?.unAvailableLbl.text = ""
-                cell?.backgroundColor = UIColor.white
-                cell?.nameLbl.textColor = UIColor.black
-            }
+            }else {
+                if (cell?.addBtn.isHidden)! {
+                    cell?.nameLbl.textColor = UIColor.gray
+                    cell?.unAvailableLbl.text = "Unavailable"
+                    cell?.unAvailableLbl.textColor = UIColor.gray
+                    cell?.backgroundColor = UIColor.init(red: 230/255, green: 230/255, blue: 230/255, alpha: 1.0)
+                    cell?.nameLbl.textColor = UIColor.gray
+                }
+                else{
+                    cell?.unAvailableLbl.text = ""
+                    cell?.backgroundColor = UIColor.white
+                    cell?.nameLbl.textColor = UIColor.black
+                }
                 
+            }
+            
             cell?.addBtn.tag = indexPath.row+200000
             cell?.addBtn.addTarget(self, action: #selector(didTapAddButton(sender:)), for: .touchUpInside)
             
             return cell!
         }
+            
         
         
         
