@@ -74,6 +74,7 @@ struct ApiMethods {
     static let usersActivePlans = "/users/active-plans"
     static let checkAppVersion = "/misc/check-app-version"
     static let updateUserFcmToken = "/users/update-fcmtoken"
+    static let updateCity = "/users/update-city"
     
     //    static let Login   = "/secure/Authentication/authenticate"
     static let findById   = "/secure/CustomerType/findById"

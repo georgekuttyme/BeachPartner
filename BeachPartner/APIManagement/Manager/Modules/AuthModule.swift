@@ -138,6 +138,32 @@ extension APIManager{
         
         
     }
+    public func updateCity(city:String,successResult:@escaping resultClosure, errorResult:@escaping errorClosure){
+        let city = UserDefaults.standard.string(forKey: "CITY")
+        let params = ["city":city ?? ""]
+        print(params)
+        APIClient.doRequest.inPost(method:ApiMethods.updateCity, params: params, sucess: { (response) in
+            
+            let jsonDict = response! as! JSONDictionary
+            
+            do {
+                let updateCity = try updateCityRespModel(jsonDict)
+                successResult(updateCity)
+                return
+            } catch {
+                print("Catched")
+                errorResult(error.localizedDescription)
+                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                return
+            }
+        }) { (error) in
+            self.busyOff()
+            errorResult(error?.localizedDescription)
+            APIManager.printOnDebug(response: "error:\(error?.localizedDescription)")
+            return
+        }
+            
+    }
     
     public func forFbLogin(sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure){
         

@@ -17,7 +17,7 @@ class SettingsViewController: UIViewController {
     var stateList = [String]()
     var minAge = String()
     var maxAge = String()
-    
+    var city_ = String()
     @IBOutlet var topSpace: NSLayoutConstraint!
     @IBOutlet fileprivate weak var rangeSlider: RangeSeekSlider!
     @IBOutlet weak var selectLoc: UIButton!
@@ -82,12 +82,12 @@ class SettingsViewController: UIViewController {
         
         UserDefaults.standard.set(minAge, forKey: "minAge")
         UserDefaults.standard.set(maxAge, forKey: "maxAge")
-        if self.selectLoc.titleLabel?.text != "Choose State"{
-            UserDefaults.standard.set(self.selectLoc.titleLabel?.text ?? "", forKey: "locationInitial")
-        }
-        else{
-//            UserDefaults.standard.set(, forKey: "locationInitial")
-        }
+//        if self.selectLoc.titleLabel?.text != "Choose State"{
+//            UserDefaults.standard.set(self.selectLoc.titleLabel?.text ?? "", forKey: "locationInitial")
+//        }
+//        else{
+////            UserDefaults.standard.set(, forKey: "locationInitial")
+//        }
          UserDefaults.standard.set(self.showMeLbl.text ?? "Both", forKey: "gender")
         
         if self.couachSwitch.isOn {
@@ -155,6 +155,7 @@ class SettingsViewController: UIViewController {
         self.dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             print("Selected item:",item," at index:",index)
             self.selectLoc.setTitle(item , for: UIControlState.normal)
+            self.updateCity(city: item)
         }
         let loc = UserDefaults.standard.string(forKey: "locationInitial")
         self.selectLoc.setTitle(loc, for: UIControlState.normal)
@@ -293,6 +294,27 @@ class SettingsViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func updateCity(city:String){
+//        let city = self.selectLoc.titleLabel?.text ?? ""
+        print("*** ** ** * ",city)
+        APIManager.callServer.updateCity(city:city,successResult: { (responseModel) in
+            
+            
+            guard let updateCityModel = responseModel as? updateCityRespModel else{
+                
+                return
+            }
+            //            UserDefaults.standard.set(updateFcmTokenRespModel.city , forKey: "locationInitial")
+            print("& ** &\n ",updateCityModel," \n& ** &")
+        }, errorResult: { (error) in
+            
+            guard let errorString  = error else {
+                return
+            }
+            self.alert(message: errorString)
+        })
     }
     
     

@@ -30,6 +30,7 @@ extension UIViewController {
     
     func timoutLogoutAction(){
          UserDefaults.standard.set("0", forKey: "isLoggedIn")
+        UserDefaults.standard.set("", forKey: "locationInitial")
 //        let userName = UserDefaults.standard.string(forKey: "email")
 //        let password = UserDefaults.standard.string(forKey: "password")
 //        let domain = Bundle.main.bundleIdentifier!

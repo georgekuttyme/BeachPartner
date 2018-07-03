@@ -1,14 +1,16 @@
 //
-//  UpdateFcmTokenRespModel.swift
+//  updateCityRespModel.swift
 //  BeachPartner
 //
-//  Created by Beach Partner LLC on 6/11/18.
+//  Created by Admin on 03/07/18.
 //  Copyright © 2018 Beach Partner LLC. All rights reserved.
 //
 
 import Foundation
 import Tailor
-struct updateFcmTokenRespModel : SafeMappable{
+
+struct updateCityRespModel : SafeMappable {
+    
     var status: String = ""
     var message: String = ""
     var city: String = ""
@@ -18,5 +20,4 @@ struct updateFcmTokenRespModel : SafeMappable{
         city <- map.property("city")
     }
 }
-
 

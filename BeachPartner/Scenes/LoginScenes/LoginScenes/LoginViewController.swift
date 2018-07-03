@@ -45,6 +45,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
         instaBtn.isHidden = true
         
         checkForAppUpdate()
+        updateUserFcmToken()
     }
 
     func setUpLoginUI() {
@@ -88,9 +89,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
             rightButton.setImage(UIImage(named: "hidepwd"), for: .normal)
             iconClick = true
         }
-        
     }
-    
     func checkForAppUpdate() {
         
         ActivityIndicatorView.show("Loading...")
@@ -137,7 +136,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
                 
                 return
             }
-//            UserDefaults.standard.set(updateFcmTokenRespModel.city , forKey: "locationInitial")
+            UserDefaults.standard.set(updateFcmTokenModel.city , forKey: "locationInitial")
             print("& ** &\n ",updateFcmTokenModel," \n& ** &")
         }, errorResult: { (error) in
             
@@ -147,8 +146,6 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
             self.alert(message: errorString)
         })
     }
-    
-
     
     @IBAction func fbLogin(_ sender: Any) {
         
@@ -804,6 +801,7 @@ extension LoginViewController: AppUpdateViewControllerDelegate {
                 guard let accRespModel = responseModel as? AccountRespModel else{
                     return
                 }
+                print("+++ ** **  ",accRespModel)
 //                UserDefaults.standard.set(accRespModel.location, forKey: "location")
                 UserDefaults.standard.set(accRespModel.city , forKey: "locationInitial")
                 if(accRespModel.id != 0){
