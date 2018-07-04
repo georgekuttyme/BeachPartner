@@ -20,6 +20,7 @@ protocol BPCardsVCDelegate {
 private var numberOfCards: Int = 5
 class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewDataSource, FSCalendarDataSource, FSCalendarDelegate {
     
+    @IBOutlet weak var btnHifi: UIButton!
     @IBOutlet weak var profileBoostButton: UIButton!
     @IBOutlet weak var cardView: KolodaView!
     @IBOutlet weak var userImg: UIImageView!
@@ -42,6 +43,10 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     @IBOutlet weak var mainStackViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var scrlViewHeight: NSLayoutConstraint!
     @IBOutlet weak var cardHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var imageBackground: UIImageView!
+    
+    @IBOutlet weak var topFinishesStackView: UIStackView!
     var userData = AccountRespModel()
     let videoView = UIVideoView()
     var didPressDownArrow :Bool!
@@ -64,6 +69,8 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     var eventListToShow = [GetAllUserEventsRespModel]()
     var delegate: BPCardsVCDelegate?
     var eventNames = String()
+    
+    
     fileprivate let formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -314,6 +321,8 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         videoView._player?.isMuted=true
         videoView._player?.volume = 0
         
+        self.topFinishesStackView.isHidden = true
+        
         self.badgeImage.isHidden = false
         self.topthreefinishesBtn.isHidden = false
         self.btnUndo.isEnabled = false
@@ -412,6 +421,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         
         resetTopFinishView()
         if didPressDownArrow == true {
+           
             moveCardView()
         }
         
@@ -489,11 +499,16 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             // 200 or any value you like.
             if !self.didPressDownArrow {
                 self.didPressDownArrow = true
+                self.btnUndo.isHidden = true
+                self.btnLoc.isHidden = true
+                self.btnHifi.isHidden = true
+                self.imageBackground.isHidden = true
+                self.topFinishesStackView.isHidden = false
                 var point = CGPoint()
                 if UIDevice.current.userInterfaceIdiom == .phone {
                     let screenSize = UIScreen.main.bounds.size;
                     if screenSize.height == 568.0{
-                        point = CGPoint(x: 0, y: 240)
+                        point = CGPoint(x: 0, y: 200)
                     }else{
                         point = CGPoint(x: 0, y: 300)
                     }
@@ -511,6 +526,12 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             }
             else{
                 self.didPressDownArrow = false
+                self.didPressDownArrow = false
+                self.btnUndo.isHidden = false
+                self.btnLoc.isHidden = false
+                self.btnHifi.isHidden = false
+                self.imageBackground.isHidden = false
+                self.topFinishesStackView.isHidden = true
                 let point = CGPoint(x: 0, y: 0)
                 self.bpscrollview.contentOffset = point
                 self.bpscrollview.isScrollEnabled=false
