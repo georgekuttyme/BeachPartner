@@ -141,14 +141,15 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     
     @objc func tapOnHome(notification: NSNotification) {
         self.tabBarController?.selectedIndex = 0
-        let eventId = notification.userInfo!["eventID"] ?? ""
+        print("................*** ",notification.userInfo!["eventID"])
+        guard let eventId = notification.userInfo!["eventID"]else { return }
         let eventID = String(describing: eventId)
         print(":::: \(Int(eventID)!)      eventId === > ",String(describing: eventId))
         let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
         let viewController = storyBoard.instantiateViewController(withIdentifier: "InvitationListView") as! EventInvitationListViewController
         viewController.eventId = Int(eventID)!
         self.navigationController?.pushViewController(viewController, animated: true)
-        
+        return
     }
     
     
