@@ -139,9 +139,8 @@ extension APIManager{
         
     }
     public func updateCity(city:String,successResult:@escaping resultClosure, errorResult:@escaping errorClosure){
-        let city = UserDefaults.standard.string(forKey: "CITY")
         let params = ["city":city ?? ""]
-        print(params)
+        print("[city:city ?? ]  ",params)
         APIClient.doRequest.inPost(method:ApiMethods.updateCity, params: params, sucess: { (response) in
             
             let jsonDict = response! as! JSONDictionary

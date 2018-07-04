@@ -802,11 +802,13 @@ extension LoginViewController: AppUpdateViewControllerDelegate {
                     return
                 }
                 print("+++ ** **  ",accRespModel)
-//                UserDefaults.standard.set(accRespModel.location, forKey: "location")
-                UserDefaults.standard.set(accRespModel.city , forKey: "locationInitial")
+               
+                
                 if(accRespModel.id != 0){
+                    UserDefaults.standard.set(accRespModel.location, forKey: "location")
+                    UserDefaults.standard.set(accRespModel.city , forKey: "locationInitial")
                     UserDefaults.standard.set(accRespModel.userType, forKey: "userType")
-                    print("&&&&&&", accRespModel.userProfile ?? " ")
+                    print(accRespModel.city,"   &&&&&&", accRespModel.userProfile ?? " ")
                     if accRespModel.userProfile == nil{
                         UserDefaults.standard.set(0, forKey: "NewUser")
                         UserDefaults.standard.set(0, forKey: "isNewUserFirstLogin")

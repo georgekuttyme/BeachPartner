@@ -755,7 +755,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         else{
             self.userData.city = (self.stateBtn.titleLabel?.text)!
             self.userData.location = (self.stateBtn.titleLabel?.text)!
-//            UserDefaults.standard.set((self.stateBtn.titleLabel?.text)! , forKey: "location")
+            UserDefaults.standard.set((self.stateBtn.titleLabel?.text)! , forKey: "location")
             currentValidation += 1
         }
         
@@ -1254,7 +1254,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             }
             
             if(accRespModel.id != 0){
-                
+                UserDefaults.standard.set(accRespModel.location , forKey: "location")
                 UserDefaults.standard.set(accRespModel.id, forKey: "bP_userProfileId")
                 self.alert(message: "User profile updated successfully! ")
                 UserDefaults.standard.set(1, forKey: "NewUser")
@@ -1435,7 +1435,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         
 //        self.birthDateTxtFld.text = String(accResponseModel.dob)
 //        self.cityTxtFld.text = accResponseModel.city
-        self.stateBtn.setTitle(accResponseModel.city, for: .normal)
+        self.stateBtn.setTitle(accResponseModel.location, for: .normal)
         self.phoneTxtFld.text = accResponseModel.phoneNumber
         self.experienceBtn.setTitle(accResponseModel.userProfile?.experience, for: .normal)
         self.courtSidePreferenceBtn.setTitle(accResponseModel.userProfile?.courtSidePreference, for: .normal)
@@ -1456,7 +1456,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.collegeIndoorTxtFld.text = accResponseModel.userProfile?.collegeIndoor
 //        self.pointsTxtFld.text = accResponseModel.userProfile?.totalPoints
 //        self.rankingTxtFld.text = accResponseModel.userProfile?.usaVolleyballRanking
-//        UserDefaults.standard.set(accResponseModel.city , forKey: "locationInitial")
+        UserDefaults.standard.set(accResponseModel.location , forKey: "location")
 
         self.tableCell_TopFinishesinLastYear1.isHidden = false
         self.tableCell_TopFinishesinLastYear2.isHidden = false

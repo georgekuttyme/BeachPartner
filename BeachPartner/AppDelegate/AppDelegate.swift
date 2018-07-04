@@ -150,7 +150,8 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
         let pushEventId = userInfo["gcm.notification.event_id"] ?? ""
-        NSLog("[UserNotificationCenter] applicationState: \(applicationStateString) didReceiveResponse: \(userInfo)   \(pushEventId)")
+        let pushUserId = userInfo["gcm.notification.user_id"] ?? ""
+        NSLog("[UserNotificationCenter] applicationState: \(applicationStateString) didReceiveResponse: \(userInfo)   | EventId  \(pushEventId)  |  userID= \(pushUserId)")
         
         if let aps = userInfo["aps"] as? NSDictionary {
             if let category = aps["category"] as? String {

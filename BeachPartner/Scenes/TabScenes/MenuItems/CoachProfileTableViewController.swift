@@ -480,7 +480,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         else{
             self.userData.city = (self.stateBtn.titleLabel?.text)!
             self.userData.location = (self.stateBtn.titleLabel?.text)!
-//            UserDefaults.standard.set((self.stateBtn.titleLabel?.text)! , forKey: "location")
+            UserDefaults.standard.set((self.stateBtn.titleLabel?.text)! , forKey: "location")
             currentValidation += 1
         }
         
@@ -557,7 +557,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
             }
             print("****\n\n",accRespModel,"\n\n\n\n\n")
             if(accRespModel.id != 0){
-                
+                UserDefaults.standard.set(accRespModel.location , forKey: "location")
                 self.userData = accRespModel
                 print("bP_userId", accRespModel.id )
                 print("accRespimageUrl", accRespModel.videoUrl)
@@ -885,7 +885,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
             }
             
             if(accRespModel.id != 0){
-                
+                UserDefaults.standard.set(accRespModel.location , forKey: "location")
                 UserDefaults.standard.set(accRespModel.id, forKey: "bP_userProfileId")
                 self.alert(message: "User profile updated successfully! ")
                 ActivityIndicatorView.hiding()
@@ -994,7 +994,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         
         //        self.birthDateTxtFld.text = String(accResponseModel.dob)
         //        self.cityTxtFld.text = accResponseModel.city
-        self.stateBtn.setTitle(accResponseModel.city, for: .normal)
+        self.stateBtn.setTitle(accResponseModel.location, for: .normal)
         self.phoneTxtFld.text = accResponseModel.phoneNumber
         
         self.collegeTxtFld.text = accResponseModel.userProfile?.collage

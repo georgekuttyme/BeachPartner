@@ -82,12 +82,16 @@ class SettingsViewController: UIViewController {
         
         UserDefaults.standard.set(minAge, forKey: "minAge")
         UserDefaults.standard.set(maxAge, forKey: "maxAge")
+        print(self.selectLoc.titleLabel?.text ?? "","+++++1")
+        UserDefaults.standard.set(self.selectLoc.titleLabel?.text ?? "" , forKey: "locationInitial")
 //        if self.selectLoc.titleLabel?.text != "Choose State"{
 //            UserDefaults.standard.set(self.selectLoc.titleLabel?.text ?? "", forKey: "locationInitial")
 //        }
 //        else{
 ////            UserDefaults.standard.set(, forKey: "locationInitial")
 //        }
+         self.updateCity(city: (self.selectLoc.titleLabel?.text ?? ""))
+        
          UserDefaults.standard.set(self.showMeLbl.text ?? "Both", forKey: "gender")
         
         if self.couachSwitch.isOn {
@@ -157,7 +161,8 @@ class SettingsViewController: UIViewController {
             self.selectLoc.setTitle(item , for: UIControlState.normal)
             self.updateCity(city: item)
         }
-        let loc = UserDefaults.standard.string(forKey: "locationInitial")
+        let loc = UserDefaults.standard.string(forKey: "locationInitial") ?? ""
+        print(".... ",loc)
         self.selectLoc.setTitle(loc, for: UIControlState.normal)
         self.couachSwitch.addTarget(self, action: #selector(switchValueChange), for: .valueChanged)
         customView()

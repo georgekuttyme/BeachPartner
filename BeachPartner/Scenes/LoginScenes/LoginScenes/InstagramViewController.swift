@@ -50,6 +50,7 @@ class InstagramViewController: UIViewController, UIWebViewDelegate{
                 return
             }
             print("AccountRespModel >>> ",accRespModel)
+            UserDefaults.standard.set(accRespModel.location, forKey: "location")
             UserDefaults.standard.set(accRespModel.city , forKey: "locationInitial")
             
                 UserDefaults.standard.set(accRespModel.userType, forKey: "userType")
