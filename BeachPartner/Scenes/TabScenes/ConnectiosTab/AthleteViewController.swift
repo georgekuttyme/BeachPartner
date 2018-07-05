@@ -125,7 +125,7 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
         APIManager.callServer.blockConnectedUser(id: id,sucessResult: { (responseModel) in
             
             ActivityIndicatorView.hiding()
-            guard let resp = responseModel as? ConnectedUserModelArray else {
+            guard let resp = responseModel as? ConnectedUserModel else {
                 return
             }
             DispatchQueue.main.async {
@@ -158,7 +158,7 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
         APIManager.callServer.unBlockConnectedUser(id: id, sucessResult: { (responseModel) in
             
             ActivityIndicatorView.hiding()
-            guard let resp = responseModel as? ConnectedUserModelArray else {
+            guard let resp = responseModel as? ConnectedUserModel else {
                 return
             }
             print("User UnBlocked======", id)
