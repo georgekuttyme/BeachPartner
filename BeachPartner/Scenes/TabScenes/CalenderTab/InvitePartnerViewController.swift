@@ -32,7 +32,7 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
     
     fileprivate let formatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yy-MM-dd"
+        formatter.dateFormat = "dd-MM-yyyy"
         return formatter
     }()
     
@@ -328,8 +328,10 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
                 cell?.separatorInset = UIEdgeInsetsMake(0.0, (cell?.bounds.size.width)!, 0.0, 0.0);
             }
             cell?.selectionStyle = .none
-            
-            cell?.nameLbl.text = connectedUser.firstName
+            var name = String()
+            name = connectedUser.firstName + " "
+            name = name + connectedUser.lastName
+            cell?.nameLbl.text = name
             
             let image = connectedUser.imageUrl
             let imageUrl = URL(string: image)
