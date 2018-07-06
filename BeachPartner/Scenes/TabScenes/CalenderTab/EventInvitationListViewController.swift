@@ -102,34 +102,42 @@ class EventInvitationListViewController: UIViewController, UITableViewDataSource
         }
     }
     
-    private func responsdToInvitation(action: String, index: Int) {
+    private func responsdToInvitation(mainaction: String, index: Int) {
         
         guard let eventId = eventInvitation?.eventId else { return }
         guard let organiserId = eventInvitation?.invitations?[index].invitorId else { return }
         
         ActivityIndicatorView.show("Loading")
         
-        APIManager.callServer.respondToInvitation(eventId: eventId, organiserId: organiserId, action: action, sucessResult: { (responseModel) in
+        APIManager.callServer.respondToInvitation(eventId: eventId, organiserId: organiserId, action: mainaction, sucessResult: { (responseModel) in
             
-            ActivityIndicatorView.hiding()
+            
             
             guard let responseModel = responseModel as? CommonResponse else {
                 print("Rep model does not match")
                 return
             }
-
-            self.alert(message: responseModel.message)
-
-            if responseModel.status == "OK" {
-             
-                // If accept action -leave page, if reject - reload page,
-                if action == "Accept" {
-                    self.navigationController?.popViewController(animated: true)
-                }
-                else {
-                    self.getAllInvitations()
+            ActivityIndicatorView.hiding()
+//            self.alert(message: responseModel.message)
+            let alert = UIAlertController(title:"" , message:responseModel.message, preferredStyle: .alert)
+            let actionButton = UIAlertAction(title: "OK", style: .default) { (action) in
+                if responseModel.status == "OK" {
+                    
+                    // If accept action -leave page, if reject - reload page,
+                    if mainaction == "Accept" {
+                        
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                    else {
+                        //                    self.alert(message: responseModel.message)
+                        self.getAllInvitations()
+                    }
                 }
             }
+            alert.addAction(actionButton)
+            self.present(alert, animated: true, completion: nil)
+            
+            
 
         }) { (error) in
             
@@ -145,7 +153,8 @@ class EventInvitationListViewController: UIViewController, UITableViewDataSource
         
         let alert = UIAlertController(title: "", message: "Do you really want to \(action) this invitation?", preferredStyle: .alert)
         let action = UIAlertAction(title: "Yes", style: .default, handler: { (handlr) in
-            self.responsdToInvitation(action: action, index: index)
+            self.responsdToInvitation(mainaction: action, index: index)
+//            self.navigationController?.popViewController(animated: true)
         })
         let cancel =  UIAlertAction(title: "No", style: .cancel, handler: nil)
         alert.addAction(action)

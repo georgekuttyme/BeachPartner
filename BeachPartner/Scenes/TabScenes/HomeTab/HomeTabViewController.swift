@@ -58,7 +58,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     
     var tournamentRequestSentViewActive = false
     var titleOfChat = String()
-    
+    var flag :Bool = true
     var date = ["04/01/2018","04/01/2018","04/01/2018","04/01/2018","04/01/2018","04/01/2018","04/01/2018"]
     var eventName = ["America","America","America","America","America","America","America"]
     var name = ["Alivia Orvieto","Marti McLaurin","Liz Held"]
@@ -73,8 +73,8 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         tornamentRequestLabel.isHidden = false
-        getAllUserEventsList()
-        getAllTournamentRequests()
+        
+//        getAllTournamentRequests()
         userImg.image = UIImage(named: "likes")!
         self.userImg.layer.cornerRadius = self.userImg.frame.size.width/2
         self.userImg.clipsToBounds = true
@@ -86,7 +86,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         self.getUsersListforBlueBp()
         self.getNewUsersList()
         self.getBlockedConnections()
-        let isNewUserFirstLogin = UserDefaults.standard.string(forKey: "isNewUserFirstLogin") ?? ""
+        _ = UserDefaults.standard.string(forKey: "isNewUserFirstLogin") ?? ""
         let loggedIn = UserDefaults.standard.string(forKey: "isFirstLoggedIn")
         if loggedIn != "0" {
             UserDefaults.standard.set(1,forKey: "isNewUserFirstLogin")
@@ -110,6 +110,12 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         
         Subscription.current.getAllSubscriptionPlans()
         Subscription.current.getUsersActivePlans()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(tapOnPush(notification:)), name:NSNotification.Name(rawValue: "foreground-pushNotification"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(tapOnHome(notification:)), name:NSNotification.Name(rawValue: "HOME-pushNotification"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(tapOnActive(notification:)), name:NSNotification.Name(rawValue: "ACTIVE-pushNotification"), object: nil)
     }
 
     
@@ -127,12 +133,9 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         if isNewUser == "0" {
             popUpAlertForCompleteProfile()
         }
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(tapOnPush(notification:)), name:NSNotification.Name(rawValue: "foreground-pushNotification"), object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(tapOnHome(notification:)), name:NSNotification.Name(rawValue: "HOME-pushNotification"), object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(tapOnActive(notification:)), name:NSNotification.Name(rawValue: "ACTIVE-pushNotification"), object: nil)
+        getAllUserEventsList()
+        getAllTournamentRequests()
+       
     }
     
     @objc func tapOnPush(notification: NSNotification) {
@@ -140,16 +143,20 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     }
     
     @objc func tapOnHome(notification: NSNotification) {
-        self.tabBarController?.selectedIndex = 0
-        print("................*** ",notification.userInfo!["eventID"])
-        guard let eventId = notification.userInfo!["eventID"]else { return }
-        let eventID = String(describing: eventId)
-        print(":::: \(Int(eventID)!)      eventId === > ",String(describing: eventId))
-        let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
-        let viewController = storyBoard.instantiateViewController(withIdentifier: "InvitationListView") as! EventInvitationListViewController
-        viewController.eventId = Int(eventID)!
-        self.navigationController?.pushViewController(viewController, animated: true)
-        return
+        
+    //    if flag {
+            self.tabBarController?.selectedIndex = 0
+            print("................*** ",notification.userInfo!["eventID"] ?? ""," *** ",flag)
+            guard let eventId = notification.userInfo!["eventID"]else { return }
+            let eventID = String(describing: eventId)
+            print(":::: \(Int(eventID)!)      eventId === > ",String(describing: eventId))
+            let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
+            let viewController = storyBoard.instantiateViewController(withIdentifier: "InvitationListView") as! EventInvitationListViewController
+            viewController.eventId = Int(eventID)!
+            self.navigationController?.pushViewController(viewController, animated: true)
+      //      flag = false
+            print(" *** ",flag)
+//        }
     }
     
     
@@ -204,6 +211,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             }
             
             self.tournamentRequestList = tournaments
+            print("/////// 000000 ///////")
             self.tournamentRequestsCollectionView.reloadData()
             
         }) { (error) in
@@ -741,6 +749,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
                 self.recentChatList.removeAll()
                 self.observeChannels()
             }
+            
         }, errorResult: { (error) in
             //                stopLoading()
             guard let errorString  = error else {
