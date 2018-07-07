@@ -49,6 +49,26 @@ class SettingsViewController: UIViewController {
         }
     }
     @IBAction func playButtonClicked(_ sender: Any) {
+        UserDefaults.standard.set(minAge, forKey: "minAge")
+        UserDefaults.standard.set(maxAge, forKey: "maxAge")
+        print(self.selectLoc.titleLabel?.text ?? "","+++++1")
+        UserDefaults.standard.set(self.selectLoc.titleLabel?.text ?? "" , forKey: "locationInitial")
+        //        if self.selectLoc.titleLabel?.text != "Choose State"{
+        //            UserDefaults.standard.set(self.selectLoc.titleLabel?.text ?? "", forKey: "locationInitial")
+        //        }
+        //        else{
+        ////            UserDefaults.standard.set(, forKey: "locationInitial")
+        //        }
+        self.updateCity(city: (self.selectLoc.titleLabel?.text ?? ""))
+        
+        UserDefaults.standard.set(self.showMeLbl.text ?? "Both", forKey: "gender")
+        
+        if self.couachSwitch.isOn {
+            UserDefaults.standard.set("1", forKey: "includeCoaches")
+        }
+        else{
+            UserDefaults.standard.set("0", forKey: "includeCoaches")
+        }
         DispatchQueue.main.async {
             var paramString = String()
             
