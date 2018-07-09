@@ -17,6 +17,7 @@ class CommmonWebViewController: UIViewController,UIWebViewDelegate {
     @IBOutlet var navigationView: UIView!
     @IBOutlet var backBtn: UIButton!
     @IBOutlet var titleLbl: UILabel!
+    @IBOutlet weak var topLayout: NSLayoutConstraint!
     
     var dismissActive = false
     
@@ -27,6 +28,17 @@ class CommmonWebViewController: UIViewController,UIWebViewDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            let screenSize = UIScreen.main.bounds.size;
+            if screenSize.height == 812.0{
+                topLayout.constant = 20
+            }
+            else{
+                topLayout.constant = 0
+            }
+        }
+
         
         let barButtonItemAppearance = UIBarButtonItem.appearance()
         barButtonItemAppearance.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.white], for: .normal)

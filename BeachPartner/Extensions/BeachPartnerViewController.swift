@@ -28,7 +28,7 @@ class BeachPartnerViewController: UIViewController {
         self.dropDown.anchorView = menuButton // UIView or UIBarButtonItem
         // The list of items to display. Can be changed dynamically
         //        self.dropDown.direction = .bottom
-        self.dropDown.dataSource = ["My Profile","Subscription","Add-ons","Feedback","Help","Log Out"]
+        self.dropDown.dataSource = ["My Profile","Subscription","Add-Ons","Feedback","Help","Log Out"]
         
         self.dropDown.bottomOffset = CGPoint(x: 20, y:30)
         self.dropDown.width = 150
@@ -86,7 +86,7 @@ class BeachPartnerViewController: UIViewController {
                 let vc = storyboard.instantiateViewController(withIdentifier: "SubscriptionTypeViewController") as! SubscriptionTypeViewController
                 self.present(vc, animated: true, completion: nil)
             }
-            else if (item == "Add-ons") {
+            else if (item == "Add-Ons") {
                 let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "AddonsViewController") as! AddonsViewController
                 self.present(vc, animated: true, completion: nil)
