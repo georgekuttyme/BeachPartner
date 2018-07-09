@@ -86,10 +86,8 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         self.getUsersListforBlueBp()
         self.getNewUsersList()
         self.getBlockedConnections()
-        _ = UserDefaults.standard.string(forKey: "isNewUserFirstLogin") ?? ""
         let loggedIn = UserDefaults.standard.string(forKey: "isFirstLoggedIn")
         if loggedIn != "0" {
-            UserDefaults.standard.set(1,forKey: "isNewUserFirstLogin")
             UserDefaults.standard.set("0", forKey: "isFirstLoggedIn")
             let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "HelpViewController") as! HelpViewController
