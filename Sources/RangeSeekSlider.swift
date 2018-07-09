@@ -37,13 +37,44 @@ import UIKit
     /// The minimum possible value to select in the range
     @IBInspectable open var minValue: CGFloat = 0.0 {
         didSet {
+            let ageCategory = UserDefaults.standard.string(forKey: "ageCategory")
+            if UserDefaults.standard.string(forKey: "userType") == "Athlete" {
+                if ageCategory == "adult"{
+                    
+                    minValue = 19.0
+                }
+                    
+                else if ageCategory == "minor"{
+                    
+                    minValue = 5.0
+                }
+            }else{
+                minValue = 5.0
+            }
             refresh()
         }
     }
 
     /// The maximum possible value to select in the range
-    @IBInspectable open var maxValue: CGFloat = 100.0 {
+    @IBInspectable open var maxValue: CGFloat = 80.0 {
         didSet {
+            let ageCategory = UserDefaults.standard.string(forKey: "ageCategory")
+            
+            if UserDefaults.standard.string(forKey: "userType") == "Athlete" {
+                if ageCategory == "adult"{
+                    
+                    maxValue = 80.0
+                    
+                }
+                    
+                else if ageCategory == "minor"{
+                    
+                    maxValue =  18.0
+                }
+            }else{
+                maxValue = 80.0
+                
+            }
             refresh()
         }
     }

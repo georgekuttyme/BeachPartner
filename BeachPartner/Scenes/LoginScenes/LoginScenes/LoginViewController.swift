@@ -809,12 +809,20 @@ extension LoginViewController: AppUpdateViewControllerDelegate {
                     UserDefaults.standard.set(accRespModel.city , forKey: "locationInitial")
                     UserDefaults.standard.set(accRespModel.userType, forKey: "userType")
                     print(accRespModel.city,"   &&&&&&", accRespModel.userProfile ?? " ")
+                    
+                    let age = accRespModel.age
+                    if age > 18 {
+                        UserDefaults.standard.set("adult" , forKey: "ageCategory")
+                        print("*** adult ***")
+                    }else {
+                        UserDefaults.standard.set("minor" , forKey: "ageCategory")
+                        print("--- minor ---")
+                    }
+                    
                     if accRespModel.userProfile == nil{
                         UserDefaults.standard.set(0, forKey: "NewUser")
-                        UserDefaults.standard.set(0, forKey: "isNewUserFirstLogin")
                     }else{
                         UserDefaults.standard.set(1, forKey: "NewUser")
-                        UserDefaults.standard.set(1, forKey: "isNewUserFirstLogin")
                     }
                     
                     UserDefaults.standard.set(accRespModel.id, forKey: "bP_userId")

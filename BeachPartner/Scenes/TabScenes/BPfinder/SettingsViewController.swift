@@ -100,8 +100,8 @@ class SettingsViewController: UIViewController {
     }
     @IBAction func btnSave(_ sender: Any) {
         
-        UserDefaults.standard.set(minAge, forKey: "minAge")
-        UserDefaults.standard.set(maxAge, forKey: "maxAge")
+//        UserDefaults.standard.set(minAge, forKey: "minAge")
+//        UserDefaults.standard.set(maxAge, forKey: "maxAge")
         print(self.selectLoc.titleLabel?.text ?? "","+++++1")
         UserDefaults.standard.set(self.selectLoc.titleLabel?.text ?? "" , forKey: "locationInitial")
 //        if self.selectLoc.titleLabel?.text != "Choose State"{
@@ -213,11 +213,25 @@ class SettingsViewController: UIViewController {
             saveBtnStack.isHidden = false
             playBtnStack.isHidden = true
         }
-        minAge = "5"
-        maxAge = "100"
+//        var minValue = ""
+//        var maxValue = ""
+//        let ageCategory = UserDefaults.standard.string(forKey: "ageCategory")
+//        if ageCategory == "adult"{
+//            minAge = "19"
+//            maxAge = "80"
+//            minValue = "19"
+//            maxValue = "80"
+//        }
+//        else if ageCategory == "minor"{
+//            minAge = "5"
+//            maxAge = "18"
+//            minValue = "5"
+//            maxValue = "18"
+//        }
+        
         let minValue = UserDefaults.standard.string(forKey: "minAge")
         let maxValue = UserDefaults.standard.string(forKey: "maxAge")
-        if (minValue != nil)  && (maxValue != nil) {
+        if (minValue != "")  && (maxValue != "") {
             minAge = minValue!
             maxAge = maxValue!
             rangeSlider.selectedMinValue = CGFloat(NSString(string: minValue!).floatValue)
