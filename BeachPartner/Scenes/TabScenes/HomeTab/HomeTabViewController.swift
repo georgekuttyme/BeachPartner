@@ -58,7 +58,6 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     
     var tournamentRequestSentViewActive = false
     var titleOfChat = String()
-    var flag :Bool = true
     var date = ["04/01/2018","04/01/2018","04/01/2018","04/01/2018","04/01/2018","04/01/2018","04/01/2018"]
     var eventName = ["America","America","America","America","America","America","America"]
     var name = ["Alivia Orvieto","Marti McLaurin","Liz Held"]
@@ -73,8 +72,6 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         tornamentRequestLabel.isHidden = false
-        
-//        getAllTournamentRequests()
         userImg.image = UIImage(named: "likes")!
         self.userImg.layer.cornerRadius = self.userImg.frame.size.width/2
         self.userImg.clipsToBounds = true
@@ -123,10 +120,6 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         imageView.contentMode = .scaleAspectFit
         imageView.image = image
         self.navigationItem.titleView = imageView
-//        self.msgLabel.isHidden = true
-//        self.connectionLabel.isHidden = true
-//        tornamentRequestLabel.isHidden = true
-//        self.myLabel.isHidden = true
         let isNewUser = UserDefaults.standard.string(forKey: "NewUser")
         if isNewUser == "0" {
             popUpAlertForCompleteProfile()
@@ -141,10 +134,8 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     }
     
     @objc func tapOnHome(notification: NSNotification) {
-        
-    //    if flag {
             self.tabBarController?.selectedIndex = 0
-            print("................*** ",notification.userInfo!["eventID"] ?? ""," *** ",flag)
+            print("................*** ",notification.userInfo!["eventID"] ?? ""," *** ")
             guard let eventId = notification.userInfo!["eventID"]else { return }
             let eventID = String(describing: eventId)
             print(":::: \(Int(eventID)!)      eventId === > ",String(describing: eventId))
@@ -152,9 +143,6 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             let viewController = storyBoard.instantiateViewController(withIdentifier: "InvitationListView") as! EventInvitationListViewController
             viewController.eventId = Int(eventID)!
             self.navigationController?.pushViewController(viewController, animated: true)
-      //      flag = false
-            print(" *** ",flag)
-//        }
     }
     
     
@@ -217,24 +205,6 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         }
     }
     
-//    func getUserSubscriptionDetails() {
-//
-//        APIManager.callServer.getUsersActivePlans(sucessResult: { (responseModel) in
-//
-//            guard let subscriptions = responseModel as? GetUserSubscriptionModel else {
-//                return
-//            }
-//
-//            print(subscriptions.addons)
-//            print(subscriptions.subscriptions)
-//
-//
-//        }) { (error) in
-//
-//
-//        }
-//    }
-    
     
     @IBAction func tournamentRequestsSentBtnClicked(_ sender: UIButton) {
         if Subscription.current.supportForFunctionality(featureId: BenefitType.PlayerLikeVisibility) == false {
@@ -248,8 +218,6 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             self.tournamentRequestsLbl.text = "     Tournament Requests Sent"
             self.tournamentRequestsCollectionView.reloadData()
         }
-        
-        //        tornamentRequestLabel.text = "No tournament Requests Sent"
     }
     
     @IBAction func tournamentRequestsReceivedBtnClicked(_ sender: UIButton) {
@@ -257,9 +225,6 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         tournamentRequestSentViewActive = false
         self.tournamentRequestsLbl.text = "     Tournament Requests Received"
         self.tournamentRequestsCollectionView.reloadData()
-        
-        
-        //        tornamentRequestLabel.text = "No tournament Requests Received"
     }
     
     @IBAction func btnLikesClicked(_ sender: Any) {
@@ -404,7 +369,6 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             }
             cell.imageView.layer.cornerRadius = cell.imageView.frame.size.width/2
             cell.imageView.clipsToBounds = true
-            //            cell.imageView.layer.borderColor = UIColor.green.cgColor
             cell.imageView.layer.borderColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0).cgColor
             cell.imageView.layer.borderWidth = 1.5
             
@@ -435,18 +399,14 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
 
                 let startDate = dateStringFromTimeInterval(interval: (partnerList.event?.eventStartDate)!)
                 cell.dateLabel?.text = startDate
-//                cell.dateLabel.textColor = UIColor.lightGray
-
                 cell.tournamentlabel?.text = partnerList.event?.eventName
                 cell.tournamentlabel?.font = UIFont.systemFont(ofSize: 13)
-//                cell.tournamentlabel.textColor = UIColor.lightGray
                 print("+++>>",self.partners.count)
 
                 if self.partners.count > 0 {
                     self.partners.removeLast()
                 }
                 cell.partnersName?.text = self.partners
-//                cell.partnersName.textColor = UIColor.lightGray
             }
             
             return cell
@@ -457,9 +417,6 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             print("====dfhfdghvbhj====")
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MessageCollectionViewCell", for: indexPath) as! MessageCollectionViewCell
             self.titleOfChat.removeAll()
-            //            let n = Int(arc4random_uniform(42))
-            //            cell.messageUserProfille.image = imageSrc[n % 3]
-            
             if let imageUrl = URL(string: (self.recentChatList[indexPath.row]["profileImg"])!) {
                 print("hdgh  ",self.recentChatList)
                 cell.messageUserProfille.sd_setIndicatorStyle(.whiteLarge)
@@ -478,16 +435,6 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             cell.messageUserProfille.clipsToBounds = true
             cell.messageUserProfille.layer.borderColor = UIColor.lightGray.cgColor
             cell.messageUserProfille.layer.borderWidth = 1
-            
-//            let userName = String(describing: UserDefaults.standard.value(forKey: "bP_userName") ?? "")
-//            let ChatuserName = self.recentChatList[indexPath.row]["receiver_name"] ?? "" as String
-//            if userName == ChatuserName {
-//                cell.nameLbl?.text = self.recentChatList[indexPath.row]["sender_name"]
-//
-//            }
-//            else{
-//                cell.nameLbl?.text = self.recentChatList[indexPath.row]["receiver_name"]
-//            }
             if let fName = self.recentChatList[indexPath.row]["sender_name"] {
                 titleOfChat = fName
             }
@@ -497,7 +444,6 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             print(titleOfChat, "jjindexPath")
             cell.nameLbl.text = titleOfChat
             cell.nameLbl.textColor = UIColor.lightGray
-            
             cell.contentView.layer.cornerRadius = 4.0
             cell.contentView.layer.borderWidth = 1.0
             cell.contentView.layer.borderColor = UIColor.clear.cgColor
@@ -529,12 +475,6 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
                 cell.eventLocationLabel.text = request?.eventLocation
                 
                 cell.invitationCountLabel.text = ""
-//                if let count = request?.sentCount, count > 0 {
-//                    cell.invitationCountLabel.text = "\(count)"
-//                }
-//                else {
-//                    cell.invitationCountLabel.text = ""
-//                }
             }
             else {
                 let request = tournamentRequestList?.requestsReceived[indexPath.row]
@@ -548,12 +488,6 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
                 cell.eventLocationLabel.text = request?.eventLocation
                 
                 cell.invitationCountLabel.text = ""
-//                if let count = request?.invitationCount, count > 0 {
-//                    cell.invitationCountLabel.text = "\(count)"
-//                }
-//                else {
-//                    cell.invitationCountLabel.text = ""
-//                }
             }
             
             return cell
@@ -570,7 +504,6 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     {
         if collectionView == self.topUserListCollectionView {
             let newViewController = self.storyboard?.instantiateViewController(withIdentifier: "ComponentBPcardsNew") as! BPCardsVC
-            //     newViewController.selectedNation = self.nationListdata[index]
             newViewController.selectedIndex = indexPath.row
             newViewController.selectedType = "BlueBp"
             newViewController.searchUsers = self.subscribedBlueBpUsers
@@ -638,17 +571,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         })
     }
     
-//    override func addSubview(subView:UIView, toView parentView:UIView) {
-//        parentView.addSubview(subView)
-//        
-//        var viewBindingsDict = [String: AnyObject]()
-//        viewBindingsDict["subView"] = subView
-//        parentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[subView]|",
-//                                                                 options: [], metrics: nil, views: viewBindingsDict))
-//        parentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[subView]|",
-//                                                                 options: [], metrics: nil, views: viewBindingsDict))
-//    }
-    
+
     func getUsersListforBlueBp()  {
         
         let endPoint="includeCoach=true&subscriptionType=BlueBP&hideConnectedUser=true&hideLikedUser=true&hideRejectedConnections=true&hideBlockedUsers=true"
@@ -689,7 +612,6 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             }
             
         }, errorResult: { (error) in
-            //                stopLoading()
             guard let errorString  = error else {
                 return
             }
@@ -711,7 +633,6 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             
             if self.connectedUsers.count>0 {
                 let newViewController = self.storyboard?.instantiateViewController(withIdentifier: "ComponentBPcardsNew") as! BPCardsVC
-                //     newViewController.selectedNation = self.nationListdata[index]
                 newViewController.selectedIndex = 0
                 newViewController.selectedType = "Likes"
                 newViewController.connectedUsers = self.connectedUsers
@@ -749,7 +670,6 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             }
             
         }, errorResult: { (error) in
-            //                stopLoading()
             guard let errorString  = error else {
                 return
             }
@@ -770,11 +690,8 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
                 latestMsgDic.updateValue(channelData[channelData.keys[index]]!["receiver_id"] as! String, forKey: "receiver_id")
                 latestMsgDic.updateValue(channelData[channelData.keys[index]]!["receiver_name"] as! String, forKey: "receiver_name")
                 latestMsgDic.updateValue(channelData[channelData.keys[index]]!["sender_id"] as! String, forKey: "sender_id")
-                //                latestMsgDic.updateValue(channelData[channelData.keys[index]]!["sender_name"] as? String ?? "", forKey: "sender_name")
                 latestMsgDic.updateValue(channelData[channelData.keys[index]]!["text"] as! String, forKey: "text")
-                //                latestMsgDic.updateValue(channelData[channelData.keys[index]]!["profileImg"] as? String ?? "", forKey: "profileImg")
                 latestMsgDic.updateValue(channelData[channelData.keys[index]]!["date"] as! String, forKey: "date")
-                
                 let senderId = channelData[channelData.keys[index]]!["sender_id"] as! String
                 let receiverId = channelData[channelData.keys[index]]!["receiver_id"] as! String
                 var isActiveUser = Bool ()
@@ -817,7 +734,6 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }
 
