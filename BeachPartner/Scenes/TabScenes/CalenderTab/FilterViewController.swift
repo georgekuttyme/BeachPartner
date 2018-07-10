@@ -72,7 +72,7 @@ class FilterViewController: UIViewController {
                              "CoEd AA",
                              "CoEd AAA",
                              "CoEd Open"]
-    let yearList = ["Choose year",
+    let yearList = [
                     "2018",
                     "2019",
                     "2020"]
@@ -178,7 +178,7 @@ class FilterViewController: UIViewController {
             print("Selected item:",item," at index:",index)
             self.yearBtn.setTitle(item, for: UIControlState.normal)
         }
-        self.yearBtn.setTitle("Choose year", for: UIControlState.normal)
+        self.yearBtn.setTitle("2018", for: UIControlState.normal)
         
         if let year = filterParams?.year, let index = yearList.index(of: year) {
             self.yeardropDown.selectRow(index)
@@ -302,7 +302,7 @@ class FilterViewController: UIViewController {
                 filterParams = nil
             }else{
 
-                filterParams = EventFilterParams(eventType: nil, subEventType: nil, year: nil, month: nil, state: nil, region: nil)
+                filterParams = EventFilterParams(eventType: nil, subEventType: nil, year: "2018", month: nil, state: nil, region: nil)
             }
             
         }
@@ -321,12 +321,12 @@ class FilterViewController: UIViewController {
             filterParams?.subEventType = subeventsdropDown.selectedItem
         }
         
-        if yeardropDown.selectedItem == "Choose year"{
-            filterParams?.year = nil
+        if yeardropDown.selectedItem == nil{
+            filterParams?.year = "2018"
         }else{
             filterParams?.year = yeardropDown.selectedItem
         }
-        
+        print(yeardropDown.selectedItem)
         if monthdropDown.selectedItem == "Choose month"{
             filterParams?.month = nil
         }else{
@@ -345,6 +345,7 @@ class FilterViewController: UIViewController {
             filterParams?.region = regiondropDown.selectedItem
         }
         print("??  -",filterParams?.eventType,"  ??  -",filterParams?.subEventType,"  ??  -",filterParams?.year,"   ??  -",filterParams?.month,"  ??  -",filterParams?.state,"  ??  -",filterParams?.region)
+        print(filterParams)
         if filterParams?.eventType == nil && filterParams?.subEventType == nil && filterParams?.year == nil && filterParams?.month == nil && filterParams?.state == nil && filterParams?.region == nil {
             filterParams = nil
             clearFilterClicked = true

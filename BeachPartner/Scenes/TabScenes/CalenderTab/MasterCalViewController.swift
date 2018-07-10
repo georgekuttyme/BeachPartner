@@ -56,10 +56,9 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        getAllEvents()
-        //Temp
+
         let token = UserDefaults.standard.string(forKey: "bP_token")
-        print(token)
+        print(token ?? "")
         
         tableHeaderLabel.text = titleForEventTable(date: Date())
         
@@ -159,7 +158,7 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
                 print("Rep model does not match")
                 return
             }
-            self.reloadUIWithDatamodel(model: eventsArrayModel)
+            self.reloadUIWithFilter(model: eventsArrayModel)
             
         }) { (error) in
             ActivityIndicatorView.hiding()
@@ -178,20 +177,13 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
             
             let startDate = Date(timeIntervalSince1970: TimeInterval(event.eventStartDate/1000))
             let endDate = Date(timeIntervalSince1970: TimeInterval(event.eventEndDate/1000))
-//            print(startDate)
-//            print(endDate)
-//            print("---------------------------------------------------")
-            
             let dates = self.generateDateArrayBetweenTwoDates(startDate: startDate, endDate: endDate)
             self.eventDateArray.append(contentsOf: dates)
-            
             var eventObject = event
             eventObject.activeDates = dates
             self.eventListArray.append(eventObject)
         }
-        
         self.calendar.reloadData()
-        
         if let date = self.calendar.selectedDate {
             self.calendar(self.calendar, didSelect: date, at: .current)
         }
@@ -200,10 +192,27 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
+    private func reloadUIWithFilter(model: GetEventsRespModelArray) {
+        
+        self.eventListArray.removeAll()
+        self.eventDateArray.removeAll()
+        for event in model.getEventsRespModel {
+            
+            let startDate = Date(timeIntervalSince1970: TimeInterval(event.eventStartDate/1000))
+            let endDate = Date(timeIntervalSince1970: TimeInterval(event.eventEndDate/1000))
+            let dates = self.generateDateArrayBetweenTwoDates(startDate: startDate, endDate: endDate)
+            self.eventDateArray.append(contentsOf: dates)
+            var eventObject = event
+            eventObject.activeDates = dates
+            self.eventListArray.append(eventObject)
+        }
+        self.eventListToShow = self.eventListArray
+        print("\n\n\n\n\n\n ",self.eventListToShow,"\n\n",self.eventListToShow.count,"\n\n\n\n\n")
+        masterCalTableVIew.reloadData()
+    }
     
     
     private func titleForEventTable(date: Date) -> String {
-        //Eg: Events for 16th November
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "LLLL"
         let nameOfMonth = dateFormatter.string(from: date)
@@ -228,21 +237,16 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
         }
       
         cell.selectionStyle = .none
-        
-//        cell.shadowLayer.layer.cornerRadius = 8
         cell.mainBackground.layer.cornerRadius = 8
         cell.mainBackground.layer.masksToBounds = true
-        
         cell.shadowLayer.layer.masksToBounds = false
         cell.shadowLayer.layer.shadowOffset = CGSize(width: 0, height: 0)
         cell.shadowLayer.layer.shadowColor = UIColor.black.cgColor
         cell.shadowLayer.layer.shadowOpacity = 0.23
         cell.shadowLayer.layer.shadowRadius = 4
-        
         cell.shadowLayer.layer.shadowPath = UIBezierPath(roundedRect: cell.shadowLayer.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 8, height: 8)).cgPath
         cell.shadowLayer.layer.shouldRasterize = true
         cell.shadowLayer.layer.rasterizationScale = UIScreen.main.scale
-        
         let event = eventListToShow[indexPath.row]
         cell.eventNameLbl.text = event.eventName
         
@@ -280,10 +284,7 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
             cell.invitationTypeImage.image = nil
             cell.colorView.backgroundColor = .clear
         }
-        
-//        print(eventListToShow,"\n\n\n")
-//        print(eventListToShow,"\n\n\n")
-//        print("event.eventName    ",event.eventName,"   event.status ",event.eventStaus)
+
         return cell
     }
     
