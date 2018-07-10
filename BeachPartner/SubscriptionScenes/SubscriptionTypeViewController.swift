@@ -9,64 +9,60 @@
 import UIKit
 
 class SubscriptionTypeViewController: UIViewController {
-    @IBOutlet weak var textViewHeight: NSLayoutConstraint!
     
-    static let identifier = "SubscriptionTypeViewController"
-    
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var subTitleLabel: UILabel!
-    
-    @IBOutlet weak var trailingPremiumImage: NSLayoutConstraint!
-    @IBOutlet weak var leadingPremiumImage: NSLayoutConstraint!
-    @IBOutlet weak var topSpaceSubTitle: NSLayoutConstraint!
-    
-    @IBOutlet weak var tableView: UITableView!
     var readMoreClicked:Bool = false
-    var subscriptionPlans = [SubscriptionPlanModel]()
-    
-    @IBOutlet weak var proceedBtn: UIButton!
     var selectedIndex = -1
-     var selectedReadMoreIndex = -1
-    
-    @IBOutlet weak var descriptionBottonConstraint: NSLayoutConstraint!
+    var selectedReadMoreIndex = -1
     var currentPlan: String?
     var benefitCode: String?
     var readMoreButtonTitle: String = "Read more"
-    
+    static let identifier = "SubscriptionTypeViewController"
+    var subscriptionPlans = [SubscriptionPlanModel]()
 
+
+    @IBOutlet weak var textViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subTitleLabel: UILabel!
+    @IBOutlet weak var trailingPremiumImage: NSLayoutConstraint!
+    @IBOutlet weak var leadingPremiumImage: NSLayoutConstraint!
+    @IBOutlet weak var topSpaceSubTitle: NSLayoutConstraint!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var proceedBtn: UIButton!
+    @IBOutlet weak var descriptionBottonConstraint: NSLayoutConstraint!
+
+// MARK: -- View Properties
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         getAllSubscriptionPlans()
+        viewCustomization()
+    }
+    private func viewCustomization(){
+
         tableView.estimatedRowHeight = 200.0
         tableView.rowHeight = UITableViewAutomaticDimension
         proceedBtn.isEnabled = false
         proceedBtn.alpha = 0.5
-        
-        
         if UIDevice.current.userInterfaceIdiom == .phone {
             let screenSize = UIScreen.main.bounds.size;
             if screenSize.height == 568.0{
                 trailingPremiumImage.constant = -3
                 leadingPremiumImage.constant = -3
                 topSpaceSubTitle.constant = 2
-                
             }
             else{
                 trailingPremiumImage.constant = 0
                 leadingPremiumImage.constant = 0
                 topSpaceSubTitle.constant = 8
-                
             }
         }
     }
     
+// MARK: -- Fetch Data
     private func getAllSubscriptionPlans() {
         
-        
-//        ActivityIndicatorView.addActivityOnView(tableView.superview)
+        //        ActivityIndicatorView.addActivityOnView(tableView.superview)
         ActivityIndicatorView.show("Loading...")
-        
-        
         APIManager.callServer.getAllSubscriptionPlans(sucessResult: { (responseModel) in
             
             ActivityIndicatorView.hiding()
@@ -135,25 +131,34 @@ class SubscriptionTypeViewController: UIViewController {
         }
     }
     
+// MARK: -- Button Actions
+    
     @IBAction func didTapCancelButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func didTapProceedButton(_ sender: UIButton) {
         //Payments
-     
                 let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "SubscriptionViewController") as! SubscriptionViewController
                 vc.subscriptionPlan = subscriptionPlans[selectedIndex]
                 vc.modalTransitionStyle = .crossDissolve
                 self.present(vc, animated: true, completion: nil)
-        
     }
     
     @objc private func showPlanDetails(sender: UIButton) {
-        readMoreClicked = !readMoreClicked
-        selectedReadMoreIndex = sender.tag-1000
-        tableView.reloadData()
+        if selectedReadMoreIndex == sender.tag-1000 {
+            readMoreClicked = !readMoreClicked
+            selectedReadMoreIndex = sender.tag-1000
+            tableView.reloadData()
+        }
+        else{
+            readMoreClicked = false
+            selectedReadMoreIndex = sender.tag-1000
+            tableView.reloadData()
+             readMoreClicked = !readMoreClicked
+            tableView.reloadData()
+        }
     }
     
     @objc private func selectPlan(sender: UIButton) {
@@ -164,6 +169,8 @@ class SubscriptionTypeViewController: UIViewController {
     }
     
 }
+
+// MARK: -- Tableview Properties
 
 extension SubscriptionTypeViewController: UITableViewDataSource, UITableViewDelegate {
     
@@ -213,15 +220,12 @@ extension SubscriptionTypeViewController: UITableViewDataSource, UITableViewDele
         }
         cell.priceLabel.text = charge
         cell.descriptionLabel.text = plan.description
-//        cell.descriptionLabel.text = "Select the height constraint from the Interface builder and take an outlet of it. So, when you want to change the height of the view you can use the below code.France won again, but are still struggling for rhythm, while Argentinas drubbing at the hands of Croatia on Thursday night leaves them on the brink of an early World Cup exit.Can Brazil stamp their authority on the tournament today? We will soon find out."
-
+        
         let image = (indexPath.row == selectedIndex) ? UIImage(named:"rb_active") : UIImage(named:"rb")
         readMoreButtonTitle = (indexPath.row == selectedReadMoreIndex) ? "less" : "Read more"
         if(readMoreButtonTitle == "less" && !self.readMoreClicked ){
             readMoreButtonTitle = "Read more"
         }
-        
-        cell.radioButton.setImage(image, for: .normal)
         
         if readMoreButtonTitle == "Read more"{
             tableView.estimatedRowHeight = 200.0
@@ -234,9 +238,12 @@ extension SubscriptionTypeViewController: UITableViewDataSource, UITableViewDele
             tableView.estimatedRowHeight = 250.0
             tableView.rowHeight = UITableViewAutomaticDimension
         }
+        
         cell.readmoreButton.setTitle(readMoreButtonTitle, for: .normal)
         cell.readmoreButton.tag = indexPath.row+1000
         cell.readmoreButton.addTarget(self, action: #selector(showPlanDetails), for: .touchUpInside)
+        
+        cell.radioButton.setImage(image, for: .normal)
         cell.radioButton.tag = indexPath.row
         cell.radioButton.addTarget(self, action: #selector(selectPlan), for: .touchUpInside)
         cell.readmoreButton.isHidden = (plan.type == "Subscription") ? false: true

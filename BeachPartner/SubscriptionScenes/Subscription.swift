@@ -11,10 +11,8 @@ import Foundation
 class Subscription {
     
     static let current = Subscription()
-    
     var subscriptionPlans: [SubscriptionPlanModel]?
     var addonPlans: [SubscriptionPlanModel]?
-    
     var activeSubscriptionPlan: ActiveSubscription?
     var activeAddonPlans: [ActiveSubscription]?
     
@@ -22,17 +20,13 @@ class Subscription {
     func getAllSubscriptionPlans() {
         
         ActivityIndicatorView.show("Loading...")
-        
         APIManager.callServer.getAllSubscriptionPlans(sucessResult: { (responseModel) in
-            
             ActivityIndicatorView.hiding()
-            
             guard let subscriptionPlansModel = responseModel as? GetSubscriptionPlansRespModelArray else {
                 print("Rep model does not match")
                 return
             }
             self.subscriptionPlans = subscriptionPlansModel.subscriptionPlans
-            
         }) { (errorMessage) in
             
         }
@@ -41,9 +35,7 @@ class Subscription {
     func getUsersActivePlans() {
         
         ActivityIndicatorView.show("Loading...")
-        
         APIManager.callServer.getUsersActivePlans(sucessResult: { (responseModel) in
-            
             guard let activeSubscriptionPlansModel = responseModel as? GetUserSubscriptionModel else {
                 print("Rep model does not match")
                 return

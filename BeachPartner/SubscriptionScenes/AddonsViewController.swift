@@ -9,49 +9,54 @@
 import UIKit
 
 class AddonsViewController: UIViewController {
-
-    @IBOutlet weak var tableView: UITableView!
-   
-    @IBOutlet weak var trailingPremiumImage: NSLayoutConstraint!
-    @IBOutlet weak var leadingPremiumImage: NSLayoutConstraint!
-    @IBOutlet weak var topSpaceSubTitle: NSLayoutConstraint!
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var subTitleLabel: UILabel!
-    @IBOutlet weak var proceedBtn: UIButton!
     var profileBoostmode = false
-    
-    var addonPlans = [SubscriptionPlanModel]()
+    var readMoreClicked:Bool = false
     var selectedReadMoreIndex = -1
     var selectedIndex = -1
     var readMoreButtonTitle: String = "Read more"
-    var readMoreClicked:Bool = false
+    var addonPlans = [SubscriptionPlanModel]()
+    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subTitleLabel: UILabel!
+    @IBOutlet weak var proceedBtn: UIButton!
+    @IBOutlet weak var trailingPremiumImage: NSLayoutConstraint!
+    @IBOutlet weak var leadingPremiumImage: NSLayoutConstraint!
+    @IBOutlet weak var topSpaceSubTitle: NSLayoutConstraint!
+ 
+// MARK: -- View Properties
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewCustomization()
+        getAllAddonPlans()
         
+    }
+    
+    private func viewCustomization(){
+
         if UIDevice.current.userInterfaceIdiom == .phone {
             let screenSize = UIScreen.main.bounds.size;
             if screenSize.height == 568.0{
                 trailingPremiumImage.constant = -3
                 leadingPremiumImage.constant = -3
                 topSpaceSubTitle.constant = 2
-               
             }
             else{
                 trailingPremiumImage.constant = 0
                 leadingPremiumImage.constant = 0
-                 topSpaceSubTitle.constant = 8
-               
+                topSpaceSubTitle.constant = 8
             }
         }
         
-        
-        getAllAddonPlans()
         tableView.estimatedRowHeight = 200.0
         tableView.rowHeight = UITableViewAutomaticDimension
         proceedBtn.isEnabled = false
         proceedBtn.alpha = 0.5
     }
+
+// MARK: -- Fetch Data
     
     private func getAllAddonPlans() {
         
@@ -90,21 +95,30 @@ class AddonsViewController: UIViewController {
         }
     }
     
+// MARK: -- Button Actions
+    
     @IBAction func didTapBackButton(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func didTapProceedButton(_ sender: UIButton) {
         
-        
     }
     
     @objc private func showPlanDetails(sender: UIButton) {
-        readMoreClicked = !readMoreClicked
-        selectedReadMoreIndex = sender.tag-1000
-        tableView.reloadData()
+        if selectedReadMoreIndex == sender.tag-1000 {
+            readMoreClicked = !readMoreClicked
+            selectedReadMoreIndex = sender.tag-1000
+            tableView.reloadData()
+        }
+        else{
+            readMoreClicked = false
+            selectedReadMoreIndex = sender.tag-1000
+            tableView.reloadData()
+            readMoreClicked = !readMoreClicked
+            tableView.reloadData()
+        }
     }
-
     
     @objc private func selectPlan(sender: UIButton) {
         proceedBtn.isEnabled = true
@@ -113,6 +127,8 @@ class AddonsViewController: UIViewController {
         tableView.reloadData()
     }
 }
+
+// MARK: -- Tableview Properties
 
 extension AddonsViewController: UITableViewDataSource, UITableViewDelegate {
     
@@ -128,7 +144,6 @@ extension AddonsViewController: UITableViewDataSource, UITableViewDelegate {
         cell.selectionStyle = .none
         
         let plan = addonPlans[indexPath.row]
-        
         cell.subscriptionTypeLabel.text = plan.name
     //    cell.subscriptionTypeLabel.adjustsFontSizeToFitWidth = true
         cell.priceLabel.text = "$\(plan.monthlycharge)" + "/day"
@@ -139,8 +154,6 @@ extension AddonsViewController: UITableViewDataSource, UITableViewDelegate {
         if(readMoreButtonTitle == "less" && !self.readMoreClicked ){
             readMoreButtonTitle = "Read more"
         }
-        
-        cell.radioButton.setImage(image, for: .normal)
         
         if readMoreButtonTitle == "Read more"{
             tableView.estimatedRowHeight = 200.0
@@ -153,12 +166,12 @@ extension AddonsViewController: UITableViewDataSource, UITableViewDelegate {
             tableView.estimatedRowHeight = 250.0
             tableView.rowHeight = UITableViewAutomaticDimension
         }
+        
         cell.readMore.setTitle(readMoreButtonTitle, for: .normal)
         cell.readMore.tag = indexPath.row+1000
         cell.readMore.addTarget(self, action: #selector(showPlanDetails), for: .touchUpInside)
         
         cell.radioButton.setImage(image, for: .normal)
-        
         cell.radioButton.tag = indexPath.row
         cell.radioButton.addTarget(self, action: #selector(selectPlan), for: .touchUpInside)
         
@@ -173,12 +186,10 @@ extension AddonsViewController: UITableViewDataSource, UITableViewDelegate {
         
         return cell
     }
-    
 }
 
 
 class AddonTableViewCell : UITableViewCell {
-    
     @IBOutlet weak var readMore: UIButton!
     @IBOutlet weak var radioButton: UIButton!
     @IBOutlet weak var subscriptionTypeLabel: UILabel!

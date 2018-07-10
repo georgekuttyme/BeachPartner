@@ -30,28 +30,25 @@ enum SubscriptionType: String {
 
 
 class SubscriptionViewController: UIViewController {
-
+    
+    var subscriptionPlan: SubscriptionPlanModel?
     @IBOutlet weak var subscriptionTypeView: UIView!
     @IBOutlet weak var subsciptionPriceBgView: UIView!
-    
     @IBOutlet weak var subscriptionTypeLabel: UILabel!
     @IBOutlet weak var subscriptionPriceLabel: UILabel!
     @IBOutlet weak var registrationFeeLabel: UILabel!
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var actionButton: UIButton!
-    
     @IBOutlet weak var buyNowBtn: UIButton!
     
-    var subscriptionPlan: SubscriptionPlanModel?
+// MARK: -- View Properties
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
         loadData()
-        
         setupTableView()
     }
     
@@ -109,32 +106,23 @@ class SubscriptionViewController: UIViewController {
     }
     
     private func setupTableView() {
-        
+
         tableView.estimatedRowHeight = 40.0
         tableView.rowHeight = UITableViewAutomaticDimension
     }
-
+    
+// MARK: -- Button Actions
+    
     @IBAction func didTapActionButton(_ sender: UIButton) {
-        
         // Add Payment
-        
     }
     
     @IBAction func didTapBackButton(_ sender: UIButton) {
-        
         dismiss(animated: true, completion: nil)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }
+
+// MARK: -- Tableview Properties
 
 extension SubscriptionViewController: UITableViewDataSource, UITableViewDelegate {
     
@@ -155,7 +143,6 @@ extension SubscriptionViewController: UITableViewDataSource, UITableViewDelegate
         
         let benefit = subscriptionPlan?.benefits[indexPath.row]
         let test = benefit?.name.trimmingCharacters(in: .newlines)
-        print("+++ ",benefit?.name," +++ ",test)
         cell.featueNameLabel.text =  test
         cell.additionalDescriptionLabel.text = benefit?.userNote
         cell.statusImageView.image = (benefit?.status == "Limited" || benefit?.status == "Available") ? UIImage(named:"tick") : UIImage(named:"wrong")
@@ -163,11 +150,8 @@ extension SubscriptionViewController: UITableViewDataSource, UITableViewDelegate
         return cell
     }
 }
-//let text = "This \n is a st\tri\rng"
-//let test = String(text.filter { !" \n\t\r".contains($0) })
 
 class SubscriptionTableViewCell : UITableViewCell {
-    
     @IBOutlet weak var featueNameLabel: UILabel!
     @IBOutlet weak var additionalDescriptionLabel: UILabel!
     @IBOutlet weak var statusImageView: UIImageView!
