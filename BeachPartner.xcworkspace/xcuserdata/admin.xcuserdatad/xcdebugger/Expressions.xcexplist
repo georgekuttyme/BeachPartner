@@ -10,5 +10,16 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "SubscriptionTypeViewController.tableView(_:cellForRowAt:):SubscriptionTypeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "subscriptionPlans[indexPath.row].name">
+            </PersistentString>
+            <PersistentString
+               value = "subscriptionPlans">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

@@ -16,6 +16,10 @@ class SubscriptionTypeViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subTitleLabel: UILabel!
     
+    @IBOutlet weak var trailingPremiumImage: NSLayoutConstraint!
+    @IBOutlet weak var leadingPremiumImage: NSLayoutConstraint!
+    @IBOutlet weak var topSpaceSubTitle: NSLayoutConstraint!
+    
     @IBOutlet weak var tableView: UITableView!
     var readMoreClicked:Bool = false
     var subscriptionPlans = [SubscriptionPlanModel]()
@@ -38,6 +42,22 @@ class SubscriptionTypeViewController: UIViewController {
         proceedBtn.isEnabled = false
         proceedBtn.alpha = 0.5
         
+        
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            let screenSize = UIScreen.main.bounds.size;
+            if screenSize.height == 568.0{
+                trailingPremiumImage.constant = -3
+                leadingPremiumImage.constant = -3
+                topSpaceSubTitle.constant = 2
+                
+            }
+            else{
+                trailingPremiumImage.constant = 0
+                leadingPremiumImage.constant = 0
+                topSpaceSubTitle.constant = 8
+                
+            }
+        }
     }
     
     private func getAllSubscriptionPlans() {
@@ -164,11 +184,18 @@ extension SubscriptionTypeViewController: UITableViewDataSource, UITableViewDele
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SubscriptionTypeTableViewCell", for: indexPath) as? SubscriptionTypeTableViewCell else {
             fatalError("Cell not found")
         }
+        print ("---> \n\n\n\n ",subscriptionPlans[indexPath.row].name)
+//        if subscriptionPlans[indexPath.row].name == "FREE"{
+//            cell.readmoreButton.isHidden = true
+//            cell.readmoreButton.isEnabled = false
+//            cell.readmoreButton.setTitleColor(UIColor.white, for: .normal)
+//
+//        }
         cell.selectionStyle = .none
         
         let plan = subscriptionPlans[indexPath.row]
         cell.subscriptionTypeLabel.text = plan.name
-        cell.subscriptionTypeLabel.adjustsFontSizeToFitWidth = true
+       // cell.subscriptionTypeLabel.adjustsFontSizeToFitWidth = true
         
         if plan.code == Subscription.current.activeSubscriptionPlan?.planName {
             cell.statusLabel.text = "Current Plan"
@@ -199,7 +226,7 @@ extension SubscriptionTypeViewController: UITableViewDataSource, UITableViewDele
         if readMoreButtonTitle == "Read more"{
             tableView.estimatedRowHeight = 200.0
             tableView.rowHeight = UITableViewAutomaticDimension
-            cell.descriptionLabel.numberOfLines = 3
+            cell.descriptionLabel.numberOfLines = 2
             cell.descriptionLabel.lineBreakMode = .byTruncatingTail
         }
         else{

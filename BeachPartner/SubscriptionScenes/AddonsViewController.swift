@@ -11,6 +11,10 @@ import UIKit
 class AddonsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+   
+    @IBOutlet weak var trailingPremiumImage: NSLayoutConstraint!
+    @IBOutlet weak var leadingPremiumImage: NSLayoutConstraint!
+    @IBOutlet weak var topSpaceSubTitle: NSLayoutConstraint!
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subTitleLabel: UILabel!
@@ -24,6 +28,23 @@ class AddonsViewController: UIViewController {
     var readMoreClicked:Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            let screenSize = UIScreen.main.bounds.size;
+            if screenSize.height == 568.0{
+                trailingPremiumImage.constant = -3
+                leadingPremiumImage.constant = -3
+                topSpaceSubTitle.constant = 2
+               
+            }
+            else{
+                trailingPremiumImage.constant = 0
+                leadingPremiumImage.constant = 0
+                 topSpaceSubTitle.constant = 8
+               
+            }
+        }
+        
         
         getAllAddonPlans()
         tableView.estimatedRowHeight = 200.0
@@ -109,8 +130,8 @@ extension AddonsViewController: UITableViewDataSource, UITableViewDelegate {
         let plan = addonPlans[indexPath.row]
         
         cell.subscriptionTypeLabel.text = plan.name
-        cell.subscriptionTypeLabel.adjustsFontSizeToFitWidth = true
-        cell.priceLabel.text = "$\(plan.monthlycharge)"
+    //    cell.subscriptionTypeLabel.adjustsFontSizeToFitWidth = true
+        cell.priceLabel.text = "$\(plan.monthlycharge)" + "/day"
         cell.descriptionLabel.text = plan.description
         
         let image = (indexPath.row == selectedIndex) ? UIImage(named:"rb_active") : UIImage(named:"rb")
@@ -124,7 +145,7 @@ extension AddonsViewController: UITableViewDataSource, UITableViewDelegate {
         if readMoreButtonTitle == "Read more"{
             tableView.estimatedRowHeight = 200.0
             tableView.rowHeight = UITableViewAutomaticDimension
-            cell.descriptionLabel.numberOfLines = 3
+            cell.descriptionLabel.numberOfLines = 2
             cell.descriptionLabel.lineBreakMode = .byTruncatingTail
         }
         else{
