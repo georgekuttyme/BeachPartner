@@ -804,30 +804,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         
         return true;
     }
-    
-    //    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-    //        let pointInTable:CGPoint = textField.superview!.convert(textField.frame.origin, to: tableView)
-    //        var contentOffset:CGPoint = tableView.contentOffset
-    //        contentOffset.y  = pointInTable.y
-    //        print(pointInTable.y)
-    //        if let accessoryView = textField.inputAccessoryView {
-    //            contentOffset.y -= accessoryView.frame.size.height
-    //        }
-    //        tableView.contentOffset = contentOffset
-    //        return true;
-    //    }
-    //
-    //    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-    //        textField.resignFirstResponder()
-    //        if (textField.superview?.superview is UITableViewCell) {
-    //            let buttonPosition = textField.convert(CGPoint.zero, to: tableView)
-    //            let indexPath: IndexPath? = tableView.indexPathForRow(at: buttonPosition)
-    //            if let aPath = indexPath {
-    //                tableView.scrollToRow(at: aPath, at: .middle, animated: true)
-    //            }
-    //        }
-    //        return true
-    //    }
+
     
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {

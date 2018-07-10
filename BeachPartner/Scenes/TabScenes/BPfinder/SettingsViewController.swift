@@ -213,30 +213,30 @@ class SettingsViewController: UIViewController {
             saveBtnStack.isHidden = false
             playBtnStack.isHidden = true
         }
-//        var minValue = ""
-//        var maxValue = ""
-//        let ageCategory = UserDefaults.standard.string(forKey: "ageCategory")
-//        if ageCategory == "adult"{
-//            minAge = "19"
-//            maxAge = "80"
-//            minValue = "19"
-//            maxValue = "80"
-//        }
-//        else if ageCategory == "minor"{
-//            minAge = "5"
-//            maxAge = "18"
-//            minValue = "5"
-//            maxValue = "18"
-//        }
+        var minValue = ""
+        var maxValue = ""
+        let ageCategory = UserDefaults.standard.string(forKey: "ageCategory")
+        if ageCategory == "adult"{
+            minAge = "19"
+            maxAge = "80"
+            minValue = "19"
+            maxValue = "80"
+        }
+        else if ageCategory == "minor"{
+            minAge = "5"
+            maxAge = "18"
+            minValue = "5"
+            maxValue = "18"
+        }
         
-        let minValue = UserDefaults.standard.string(forKey: "minAge")
-        let maxValue = UserDefaults.standard.string(forKey: "maxAge")
+//        let minValue = UserDefaults.standard.string(forKey: "minAge")
+//        let maxValue = UserDefaults.standard.string(forKey: "maxAge")
         if (minValue != "")  && (maxValue != "") {
-            minAge = minValue!
-            maxAge = maxValue!
-            rangeSlider.selectedMinValue = CGFloat(NSString(string: minValue!).floatValue)
-            rangeSlider.selectedMaxValue = CGFloat(NSString(string: maxValue!).floatValue)
-            ageLabel.text = minValue! + " - " + maxValue!
+            minAge = minValue
+            maxAge = maxValue
+            rangeSlider.selectedMinValue = CGFloat(NSString(string: minValue).floatValue)
+            rangeSlider.selectedMaxValue = CGFloat(NSString(string: maxValue).floatValue)
+            ageLabel.text = minValue + " - " + maxValue
             rangeSlider.layoutSubviews()
         }
         let location = UserDefaults.standard.string(forKey: "locationInitial") ?? ""
