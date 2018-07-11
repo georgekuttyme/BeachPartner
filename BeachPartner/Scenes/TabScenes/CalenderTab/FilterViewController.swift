@@ -51,7 +51,8 @@ class FilterViewController: UIViewController {
                      "College Clinic",
                      "National Tournament",
                      "Adult"]
-    let subeventListJunior = ["10U",
+    let subeventListJunior = ["Choose subtype",
+                              "10U",
                               "12U",
                               "13U",
                               "14U",
@@ -59,7 +60,8 @@ class FilterViewController: UIViewController {
                               "16U",
                               "17U",
                               "18U"]
-    let subeventListAdult = ["Unrated",
+    let subeventListAdult = ["Choose subtype",
+                             "Unrated",
                              "B",
                              "A",
                              "AA",
@@ -139,7 +141,6 @@ class FilterViewController: UIViewController {
         
         self.subeventsdropDown.bottomOffset = CGPoint(x: 0, y:0)
         self.subeventsdropDown.width = 150
-        //        self.dropDown.selectionBackgroundColor = UIColor.lightGray
         self.subeventsdropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             print("Selected item:",item," at index:",index)
             self.subTypesBtn.setTitle(item, for: UIControlState.normal)
@@ -169,17 +170,14 @@ class FilterViewController: UIViewController {
         ///////////////////////////////////
         
         self.yeardropDown.anchorView = self.yearBtn // UIView or UIBarButtonItem
-        //        self.dropDown.direction = .bottom
         self.yeardropDown.dataSource = yearList
         self.yeardropDown.bottomOffset = CGPoint(x: 0, y:0)
         self.yeardropDown.width = 150
-        //        self.dropDown.selectionBackgroundColor = UIColor.lightGray
         self.yeardropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             print("Selected item:",item," at index:",index)
             self.yearBtn.setTitle(item, for: UIControlState.normal)
         }
         self.yearBtn.setTitle("2018", for: UIControlState.normal)
-        
         if let year = filterParams?.year, let index = yearList.index(of: year) {
             self.yeardropDown.selectRow(index)
             self.yearBtn.setTitle(year, for: UIControlState.normal)
@@ -192,13 +190,11 @@ class FilterViewController: UIViewController {
         self.monthdropDown.dataSource = monthList
         self.monthdropDown.bottomOffset = CGPoint(x: 0, y:0)
         self.monthdropDown.width = 150
-        //        self.dropDown.selectionBackgroundColor = UIColor.lightGray
         self.monthdropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             print("Selected item:",item," at index:",index)
             self.monthBtn.setTitle(item, for: UIControlState.normal)
         }
         self.monthBtn.setTitle("Choose month", for: UIControlState.normal)
-        
         if let month = filterParams?.month, let index = monthList.index(of: month) {
             self.monthdropDown.selectRow(index)
             self.monthBtn.setTitle(month, for: UIControlState.normal)
@@ -207,18 +203,14 @@ class FilterViewController: UIViewController {
         ///////////////////////////////////
         
         self.statedropDown.anchorView = self.stateBtn // UIView or UIBarButtonItem
-        // The list of items to display. Can be changed dynamically
         self.statedropDown.dataSource = self.stateList
-        
         self.statedropDown.bottomOffset = CGPoint(x: 0, y:0)
         self.statedropDown.width = 150
-        //        self.dropDown.selectionBackgroundColor = UIColor.lightGray
         self.statedropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             print("Selected item:",item," at index:",index)
             self.stateBtn.setTitle(item, for: UIControlState.normal)
         }
         self.stateBtn.setTitle("Choose state", for: UIControlState.normal)
-        
         if let state = filterParams?.state, let index = stateList.index(of: state) {
             self.statedropDown.selectRow(index)
             self.stateBtn.setTitle(state, for: UIControlState.normal)
@@ -230,7 +222,6 @@ class FilterViewController: UIViewController {
         self.regiondropDown.dataSource = self.regionList
         self.regiondropDown.bottomOffset = CGPoint(x: 0, y:0)
         self.regiondropDown.width = 250
-        //        self.dropDown.selectionBackgroundColor = UIColor.lightGray
         self.regiondropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             print("Selected item:",item," at index:",index)
             self.regionBtn.setTitle(item, for: UIControlState.normal)
@@ -280,7 +271,6 @@ class FilterViewController: UIViewController {
         self.eventBtn.setTitle("Choose event type", for: UIControlState.normal)
         self.eventdropDown.selectRow(0)
         self.subTypesBtn.setTitle("Choose subtype", for: UIControlState.normal)
-//        self.subeventsdropDown.selectRow(0)
         self.yearBtn.setTitle("Choose year", for: UIControlState.normal)
         self.yeardropDown.selectRow(0)
         self.monthBtn.setTitle("Choose month", for: UIControlState.normal)
@@ -291,7 +281,6 @@ class FilterViewController: UIViewController {
         self.regiondropDown.selectRow(0)
         filterParams = nil
         delegate?.clearAllFilters()
-        //dismiss(animated: true, completion: nil)
     }
     
     @IBAction func searchClicked(_ sender: Any) {
@@ -306,9 +295,7 @@ class FilterViewController: UIViewController {
             }
             
         }
-//        if eventdropDown.selectedItem == nil || subeventsdropDown.selectedItem == nil {
-//
-//        }
+
         if eventdropDown.selectedItem == "Choose event type"{
             filterParams?.eventType = nil
         }else{
@@ -412,46 +399,46 @@ class FilterViewController: UIViewController {
     }
     func loadRegion(){
         regionList.append("Choose region");
-        regionList.append("Alaska Region (AK)");
-        regionList.append("Aloha Region (AH)");
-        regionList.append("Arizona Region (AZ)");
-        regionList.append("Badger Region (BG)");
-        regionList.append("Bayou Region (BY)");
-        regionList.append("Carolina Region (CR)");
-        regionList.append("Chesapeake Region (CH)");
-        regionList.append("Columbia Empire Region (CE)");
-        regionList.append("Delta Region (DE)");
-        regionList.append("Evergreen Region (EV)");
-        regionList.append("Florida Region (FL)");
-        regionList.append("Garden Empire Region (GE)");
-        regionList.append("Gateway Region (GW)");
-        regionList.append("Great Lakes Region (GL)");
-        regionList.append("Great Plains Region (GP)");
-        regionList.append("Gulf Coast Region (GC)");
-        regionList.append("Heart of America Region (HA)");
-        regionList.append("Hoosier Region (HO)");
-        regionList.append("Intermountain Region (IM)");
-        regionList.append("Iowa Region (IA)");
-        regionList.append("Iroquois Empire Region (IE)");
-        regionList.append("Keystone Region (KE)");
-        regionList.append("Lakeshore Region (LK)");
-        regionList.append("Lone Star Region (LS)");
-        regionList.append("Moku O Keawe Region (MK)");
-        regionList.append("New England Region (NE)");
-        regionList.append("North Country Region (NO)");
-        regionList.append("North Texas Region (NT)");
-        regionList.append("Northern California Region (NC)");
-        regionList.append("Ohio Valley Region (OV)");
-        regionList.append("Oklahoma Region (OK)");
-        regionList.append("Old Dominion Region (OD)");
-        regionList.append("Palmetto Region (PM)");
-        regionList.append("Pioneer Region (PR)");
-        regionList.append("Puget Sound Region (PS)");
-        regionList.append("Rocky Mountain Region (RM)");
-        regionList.append("Southern Region (SO)");
-        regionList.append("Southern California Region (SC)");
-        regionList.append("Sun Country Region (SU)");
-        regionList.append("Western Empire Region (WE)");
+        regionList.append("Alaska Region");
+        regionList.append("Aloha Region");
+        regionList.append("Arizona Region");
+        regionList.append("Badger Region");
+        regionList.append("Bayou Region");
+        regionList.append("Carolina Region");
+        regionList.append("Chesapeake Region");
+        regionList.append("Columbia Empire Region");
+        regionList.append("Delta Region");
+        regionList.append("Evergreen Region");
+        regionList.append("Florida Region");
+        regionList.append("Garden Empire Region");
+        regionList.append("Gateway Region");
+        regionList.append("Great Lakes Region");
+        regionList.append("Great Plains Region");
+        regionList.append("Gulf Coast Region");
+        regionList.append("Heart of America Region");
+        regionList.append("Hoosier Region");
+        regionList.append("Intermountain Region");
+        regionList.append("Iowa Region");
+        regionList.append("Iroquois Empire Region");
+        regionList.append("Keystone Region");
+        regionList.append("Lakeshore Region");
+        regionList.append("Lone Star Region");
+        regionList.append("Moku O Keawe Region");
+        regionList.append("New England Region");
+        regionList.append("North Country Region");
+        regionList.append("North Texas Region");
+        regionList.append("Northern California Region");
+        regionList.append("Ohio Valley Region");
+        regionList.append("Oklahoma Region");
+        regionList.append("Old Dominion Region");
+        regionList.append("Palmetto Region");
+        regionList.append("Pioneer Region");
+        regionList.append("Puget Sound Region");
+        regionList.append("Rocky Mountain Region");
+        regionList.append("Southern Region");
+        regionList.append("Southern California Region");
+        regionList.append("Sun Country Region");
+        regionList.append("Western Empire Region");
     }
     
     
