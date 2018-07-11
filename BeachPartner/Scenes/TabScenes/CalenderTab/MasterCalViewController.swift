@@ -24,6 +24,7 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var calendarContainerView: UIView!
     @IBOutlet weak var filterLabel: UILabel!
     @IBOutlet weak var filterContainerView: UIView!
+    @IBOutlet weak var noEventsFoundLabel: UILabel!
     // MARK:-
     var eventListArray = [GetEventRespModel]()
     var eventListToShow = [GetEventRespModel]()
@@ -57,6 +58,9 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        noEventsFoundLabel.isHidden = true
+        noEventsFoundLabel.textColor = UIColor.white
+        
         let token = UserDefaults.standard.string(forKey: "bP_token")
         print(token ?? "")
         
@@ -223,6 +227,15 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
     // MARK:- Tableview data source & Delegates
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if eventListToShow.count == 0 {
+            noEventsFoundLabel.isHidden = false
+            noEventsFoundLabel.textColor = UIColor.darkGray
+            noEventsFoundLabel.text = "No Events Found"
+        }
+        else {
+            noEventsFoundLabel.isHidden = true
+            noEventsFoundLabel.textColor = UIColor.white
+        }
         return eventListToShow.count
     }
     

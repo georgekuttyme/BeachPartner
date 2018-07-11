@@ -14,6 +14,7 @@ class MyCalViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var MyCalTableVIew: UITableView!
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var tableHeaderLabel: UILabel!
+    @IBOutlet weak var noEventsFoundLbl: UILabel!
     
     var eventListArray = [GetAllUserEventsRespModel.Event?]()
     var eventListToShow = [GetAllUserEventsRespModel.Event?]()
@@ -30,6 +31,15 @@ class MyCalViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // MARK:- Tableview data source & Delegates
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if eventListToShow.count == 0 {
+            noEventsFoundLbl.isHidden = false
+            noEventsFoundLbl.textColor = UIColor.darkGray
+            noEventsFoundLbl.text = "No Events Found"
+        }
+        else {
+            noEventsFoundLbl.isHidden = true
+            noEventsFoundLbl.textColor = UIColor.white
+        }
         return eventListToShow.count
     }
     
@@ -78,6 +88,8 @@ class MyCalViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        noEventsFoundLbl.isHidden = true
+        noEventsFoundLbl.textColor = UIColor.white
         tableHeaderLabel.text = titleForEventTable(date: Date())
     }
     
