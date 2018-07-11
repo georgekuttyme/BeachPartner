@@ -77,7 +77,8 @@ class FilterViewController: UIViewController {
     let yearList = [
                     "2018",
                     "2019",
-                    "2020"]
+                    "2020",
+                    "2021"]
     let monthList = ["Choose month",
                      "January",
                      "February",
