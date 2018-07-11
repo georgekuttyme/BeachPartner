@@ -150,8 +150,8 @@ extension AddonsViewController: UITableViewDataSource, UITableViewDelegate {
         cell.descriptionLabel.text = plan.description
         
         let image = (indexPath.row == selectedIndex) ? UIImage(named:"rb_active") : UIImage(named:"rb")
-        readMoreButtonTitle = (indexPath.row == selectedReadMoreIndex) ? "less" : "Read more"
-        if(readMoreButtonTitle == "less" && !self.readMoreClicked ){
+        readMoreButtonTitle = (indexPath.row == selectedReadMoreIndex) ? "Read less" : "Read more"
+        if(readMoreButtonTitle == "Read less" && !self.readMoreClicked ){
             readMoreButtonTitle = "Read more"
         }
         
