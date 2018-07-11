@@ -53,12 +53,6 @@ class SettingsViewController: UIViewController {
         UserDefaults.standard.set(maxAge, forKey: "maxAge")
         print(self.selectLoc.titleLabel?.text ?? "","+++++1")
         UserDefaults.standard.set(self.selectLoc.titleLabel?.text ?? "" , forKey: "locationInitial")
-        //        if self.selectLoc.titleLabel?.text != "Choose State"{
-        //            UserDefaults.standard.set(self.selectLoc.titleLabel?.text ?? "", forKey: "locationInitial")
-        //        }
-        //        else{
-        ////            UserDefaults.standard.set(, forKey: "locationInitial")
-        //        }
         self.updateCity(city: (self.selectLoc.titleLabel?.text ?? ""))
         
         UserDefaults.standard.set(self.showMeLbl.text ?? "Both", forKey: "gender")
@@ -96,20 +90,14 @@ class SettingsViewController: UIViewController {
             self.getUsersSwipeCard(endPoint: paramString)
             
             }
-//        }
     }
     @IBAction func btnSave(_ sender: Any) {
         
-//        UserDefaults.standard.set(minAge, forKey: "minAge")
-//        UserDefaults.standard.set(maxAge, forKey: "maxAge")
+        UserDefaults.standard.set(minAge, forKey: "minAge")
+        UserDefaults.standard.set(maxAge, forKey: "maxAge")
         print(self.selectLoc.titleLabel?.text ?? "","+++++1")
         UserDefaults.standard.set(self.selectLoc.titleLabel?.text ?? "" , forKey: "locationInitial")
-//        if self.selectLoc.titleLabel?.text != "Choose State"{
-//            UserDefaults.standard.set(self.selectLoc.titleLabel?.text ?? "", forKey: "locationInitial")
-//        }
-//        else{
-////            UserDefaults.standard.set(, forKey: "locationInitial")
-//        }
+
          self.updateCity(city: (self.selectLoc.titleLabel?.text ?? ""))
         
          UserDefaults.standard.set(self.showMeLbl.text ?? "Both", forKey: "gender")
@@ -160,22 +148,14 @@ class SettingsViewController: UIViewController {
         let backImage = UIImage(named:"back_58")
         let dismissButton = UIBarButtonItem(image: backImage, style: .done, target: self, action: #selector(didTapDismissButton))
         self.navigationItem.leftBarButtonItem = dismissButton
-//        self.tabBarController?.tabBar.isHidden = false
-//self.navigationController!.navigationBar.topItem!.title = ""
-//        self.navigationItem.title = "Settings"
-//        self.navigationItem.hidesBackButton = true
         self.navigationItem.title = "Settings"
         rangeSlider.delegate = self
         self.loadLocations()
         
         self.dropDown.anchorView = self.selectLoc // UIView or UIBarButtonItem
-        // The list of items to display. Can be changed dynamically
-        //        self.dropDown.direction = .bottom
         self.dropDown.dataSource = self.stateList
-        
         self.dropDown.bottomOffset = CGPoint(x: -50, y:45)
         self.dropDown.width = 230
-        //        self.dropDown.selectionBackgroundColor = UIColor.lightGray
         self.dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             print("Selected item:",item," at index:",index)
             self.selectLoc.setTitle(item , for: UIControlState.normal)
@@ -217,20 +197,15 @@ class SettingsViewController: UIViewController {
         var maxValue = ""
         let ageCategory = UserDefaults.standard.string(forKey: "ageCategory")
         if ageCategory == "adult"{
-            minAge = "19"
-            maxAge = "80"
-            minValue = "19"
-            maxValue = "80"
+                minValue = UserDefaults.standard.string(forKey: "minAge") ?? "19"
+                maxValue = UserDefaults.standard.string(forKey: "maxAge") ?? "80"
+            
         }
         else if ageCategory == "minor"{
-            minAge = "5"
-            maxAge = "18"
-            minValue = "5"
-            maxValue = "18"
+                minValue = UserDefaults.standard.string(forKey: "minAge") ?? "5"
+                maxValue = UserDefaults.standard.string(forKey: "maxAge") ?? "18"
         }
-        
-//        let minValue = UserDefaults.standard.string(forKey: "minAge")
-//        let maxValue = UserDefaults.standard.string(forKey: "maxAge")
+
         if (minValue != "")  && (maxValue != "") {
             minAge = minValue
             maxAge = maxValue
@@ -247,7 +222,6 @@ class SettingsViewController: UIViewController {
             let loc = UserDefaults.standard.string(forKey: "locationInitial")
             self.selectLoc.setTitle(loc, for: UIControlState.normal)
         }
-        
         
         maleIsSelected = false
         womenIsSelected = false
@@ -336,7 +310,6 @@ class SettingsViewController: UIViewController {
     }
     
     func updateCity(city:String){
-//        let city = self.selectLoc.titleLabel?.text ?? ""
         print("*** ** ** * ",city)
         APIManager.callServer.updateCity(city:city,successResult: { (responseModel) in
             
@@ -345,7 +318,6 @@ class SettingsViewController: UIViewController {
                 
                 return
             }
-            //            UserDefaults.standard.set(updateFcmTokenRespModel.city , forKey: "locationInitial")
             print("& ** &\n ",updateCityModel," \n& ** &")
         }, errorResult: { (error) in
             
@@ -429,11 +401,11 @@ class SettingsViewController: UIViewController {
             ActivityIndicatorView.hiding()
 //            if self.searchUsers.count > 0{
                 self.bpDelegate?.playButtonPressed(searchList: self.searchUsers)
-//            }
-//            else{
-//                self.alert(message: "No users found with this criteria. Please change the search parameters and play again")
-//            }
-            
+ /*           }
+            else{
+                self.alert(message: "No users found with this criteria. Please change the search parameters and play again")
+            }*/
+        
         }, errorResult: { (error) in
             guard let errorString  = error else {
                 return
