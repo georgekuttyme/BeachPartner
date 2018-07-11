@@ -51,6 +51,7 @@ class SettingsViewController: UIViewController {
     @IBAction func playButtonClicked(_ sender: Any) {
         UserDefaults.standard.set(minAge, forKey: "minAge")
         UserDefaults.standard.set(maxAge, forKey: "maxAge")
+        print("\n\n\n\n ",minAge," ",maxAge)
         print(self.selectLoc.titleLabel?.text ?? "","+++++1")
         UserDefaults.standard.set(self.selectLoc.titleLabel?.text ?? "" , forKey: "locationInitial")
         self.updateCity(city: (self.selectLoc.titleLabel?.text ?? ""))
@@ -84,7 +85,7 @@ class SettingsViewController: UIViewController {
                    paramString = paramString+"&location="+"\(self.selectLoc.titleLabel?.text ?? "" )"
             }
             paramString = paramString+"&hideConnectedUser=true&hideLikedUser=true&hideRejectedConnections=true&hideBlockedUsers=true"
-            
+            print(paramString)
             paramString = paramString.replacingOccurrences(of: " ", with: "%20")
             
             self.getUsersSwipeCard(endPoint: paramString)

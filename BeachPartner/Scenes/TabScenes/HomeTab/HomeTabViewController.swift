@@ -111,6 +111,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         NotificationCenter.default.addObserver(self, selector: #selector(tapOnHome(notification:)), name:NSNotification.Name(rawValue: "HOME-pushNotification"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(tapOnActive(notification:)), name:NSNotification.Name(rawValue: "ACTIVE-pushNotification"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(tapOnAccepted(notification:)), name:NSNotification.Name(rawValue: "ACCEPTED-pushNotification"), object: nil)
     }
 
     
@@ -143,6 +144,18 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             let viewController = storyBoard.instantiateViewController(withIdentifier: "InvitationListView") as! EventInvitationListViewController
             viewController.eventId = Int(eventID)!
             self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    @objc func tapOnAccepted(notification: NSNotification) {
+        self.tabBarController?.selectedIndex = 0
+        print("................*** ",notification.userInfo!["eventID"] ?? ""," *** ")
+        guard let eventId = notification.userInfo!["eventID"]else { return }
+        let eventID = String(describing: eventId)
+        print(":::: \(Int(eventID)!)      eventId === > ",String(describing: eventId))
+        let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
+        let eventDetailsVC = storyBoard.instantiateViewController(withIdentifier: "EventDetailsView") as! EventDetailsViewController
+        eventDetailsVC.eventId = Int(eventID)!
+        eventDetailsVC.isFromHomeTab = true
+        self.navigationController?.pushViewController(eventDetailsVC, animated: true)
     }
     
     

@@ -137,12 +137,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         
         if String(describing: pushUserId) == currentUserId{
             completionHandler([.alert, .sound])
-        }else{
-            
         }
-        //TODO: Handle foreground notification
-        
-        
     }
     
     
@@ -151,33 +146,35 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         let userInfo = response.notification.request.content.userInfo
         let pushEventId = userInfo["gcm.notification.event_id"] ?? ""
         let pushUserId = userInfo["gcm.notification.user_id"] ?? ""
-        NSLog("[UserNotificationCenter] applicationState: \(applicationStateString) didReceiveResponse: \(userInfo)   | EventId  \(pushEventId)  |  userID= \(pushUserId)")
-        
-        if let aps = userInfo["aps"] as? NSDictionary {
-            if let category = aps["category"] as? String {
-                print(category,"")
-                let eventId:[String: String
-                    ] = ["eventID": String(describing: pushEventId)]
-                if category == "HIFI"{
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "foreground-pushNotification"), object: nil)
-                    print("&&&&&&&&")
+        let currentUserId = UserDefaults.standard.string(forKey: "bP_userId") ?? ""
+        NSLog("[UserNotificationCenter] applicationState: \(applicationStateString) didReceiveResponse: \(userInfo)   | EventId  \(pushEventId)  |  userID= \(String(describing: pushUserId))")
+        if String(describing: pushUserId) == currentUserId {
+            if let aps = userInfo["aps"] as? NSDictionary {
+                if let category = aps["category"] as? String {
+                    print(category,"")
+                    let eventId:[String: String
+                        ] = ["eventID": String(describing: pushEventId)]
+                    if category == "HIFI"{
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "foreground-pushNotification"), object: nil)
+                        print("&&&&&&&&")
+                    }
+                    else if category == "INVITATION"{
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "HOME-pushNotification"), object: nil,userInfo:eventId)
+                        print("*********")
+                    }
+                    else if category == "ACTIVE"{
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ACTIVE-pushNotification"), object: nil)
+                        print("---------")
+                    }
+                    else if category == "ACCEPTED"{
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ACCEPTED-pushNotification"), object: nil,userInfo:eventId)
+                        print("---------")
+                    }
+                    
                 }
-                else if category == "INVITATION"{
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "HOME-pushNotification"), object: nil,userInfo:eventId)
-                    print("*********")
-                }
-                else if category == "ACTIVE"{
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ACTIVE-pushNotification"), object: nil)
-                    print("---------")
-                }
-                
             }
+            completionHandler()
         }
-        
-        
-        //TODO: Handle background notification
-        
-        completionHandler()
     }
     
 }
