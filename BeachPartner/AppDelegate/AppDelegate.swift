@@ -41,6 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if Messaging.messaging().fcmToken != nil {
             configureTopicSubscriptions()
         }
+        UIApplication.shared.applicationIconBadgeNumber = 0
         
         return true
     }
@@ -155,19 +156,19 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                     let eventId:[String: String
                         ] = ["eventID": String(describing: pushEventId)]
                     if category == "HIFI"{
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "foreground-pushNotification"), object: nil)
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "foreground-pushNotification"), object: nil,userInfo:userInfo)
                         print("&&&&&&&&")
                     }
                     else if category == "INVITATION"{
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "HOME-pushNotification"), object: nil,userInfo:eventId)
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "HOME-pushNotification"), object: nil,userInfo:userInfo)
                         print("*********")
                     }
                     else if category == "ACTIVE"{
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ACTIVE-pushNotification"), object: nil)
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ACTIVE-pushNotification"), object: nil,userInfo:userInfo)
                         print("---------")
                     }
                     else if category == "ACCEPTED"{
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ACCEPTED-pushNotification"), object: nil,userInfo:eventId)
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ACCEPTED-pushNotification"), object: nil,userInfo:userInfo)
                         print("---------")
                     }
                     
