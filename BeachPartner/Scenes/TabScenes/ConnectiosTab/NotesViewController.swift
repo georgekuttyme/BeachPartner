@@ -38,7 +38,8 @@ class NotesViewController: BeachPartnerViewController, UITableViewDataSource, UI
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "NotesCell", for: indexPath) as? NotesCell
         cell?.selectionStyle = .none
-        
+        cell?.timeLabel.isHidden = true
+        cell?.clockImage.isHidden = true
         let note = notes[indexPath.row]
 
 //        let createdDate = Date(timeIntervalSince1970: TimeInterval(note.createdDate/1000))

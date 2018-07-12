@@ -126,7 +126,8 @@ extension CardView {
             self.imageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
         }
         self.muteButton.isHidden = true
-        let ageValue = getAgeValue(dob: data.doblong)
+//        let ageValue = getAgeValue(dob: data.doblong)
+        let ageValue = data.age
         self.nameLabel.text = data.firstName + " " + data.lastName + "," + " " + "\(ageValue)"
         self.placeLabel?.text = data.userType
         
