@@ -179,12 +179,12 @@ class EventDetailsViewController: BeachPartnerViewController {
         else {
             generalEventDetailsView.isHidden = true
         }
-        
-        eventNameLabel.text = event.eventName
-        eventLocationLabel.text = event.state
-        eventVenueLabel.text = event.eventVenue
-        eventAdminLabel.text = event.eventAdmin
-        teamSizeLabel.text = String(event.teamSize)
+    
+        eventNameLabel.text = event.eventName.trimmingCharacters(in: .whitespacesAndNewlines)
+        eventLocationLabel.text = event.state.trimmingCharacters(in: .whitespacesAndNewlines)
+        eventVenueLabel.text = event.eventVenue.trimmingCharacters(in: .whitespacesAndNewlines)
+        eventAdminLabel.text = event.eventAdmin.trimmingCharacters(in: .whitespacesAndNewlines)
+        teamSizeLabel.text = String(event.teamSize).trimmingCharacters(in: .whitespacesAndNewlines)
         
         eventStartDateLabel.text = dateStringFromTimeInterval(interval: event.eventStartDate)
         eventEndDateLabel.text = dateStringFromTimeInterval(interval: event.eventEndDate)
