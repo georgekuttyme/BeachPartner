@@ -812,9 +812,13 @@ extension LoginViewController: AppUpdateViewControllerDelegate {
                     
                     let age = accRespModel.age
                     if age > 18 {
+                        UserDefaults.standard.set("19", forKey: "minAge")
+                        UserDefaults.standard.set("80", forKey: "maxAge")
                         UserDefaults.standard.set("adult" , forKey: "ageCategory")
                         print("*** adult ***")
                     }else {
+                        UserDefaults.standard.set("5", forKey: "minAge")
+                        UserDefaults.standard.set("18", forKey: "maxAge")
                         UserDefaults.standard.set("minor" , forKey: "ageCategory")
                         print("--- minor ---")
                     }
