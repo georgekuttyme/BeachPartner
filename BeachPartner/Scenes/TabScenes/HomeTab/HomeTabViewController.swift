@@ -135,28 +135,64 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     }
     
     @objc func tapOnHome(notification: NSNotification) {
-            self.tabBarController?.selectedIndex = 0
-            print("................*** ",notification.userInfo!["eventID"] ?? ""," *** ")
-            guard let eventId = notification.userInfo!["eventID"]else { return }
-            let eventID = String(describing: eventId)
-            print(":::: \(Int(eventID)!)      eventId === > ",String(describing: eventId))
-            let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
-            let viewController = storyBoard.instantiateViewController(withIdentifier: "InvitationListView") as! EventInvitationListViewController
-            viewController.eventId = Int(eventID)!
-            self.navigationController?.pushViewController(viewController, animated: true)
-    }
-    @objc func tapOnAccepted(notification: NSNotification) {
+        
         self.tabBarController?.selectedIndex = 0
-        print("................*** ",notification.userInfo!["eventID"] ?? ""," *** ")
-        guard let eventId = notification.userInfo!["eventID"]else { return }
+        
+        let pushEventId = notification.userInfo!["gcm.notification.event_id"] ?? ""
+        
+        let pushUserId = notification.userInfo!["gcm.notification.user_id"] ?? ""
+        
+        let currentUserId = UserDefaults.standard.string(forKey: "bP_userId") ?? ""
+        
+        print("................*** \(pushEventId)   \(pushUserId)    \(currentUserId) ",notification.userInfo!["eventID"] ?? ""," *** ")
+        
+        guard let eventId = notification.userInfo!["gcm.notification.event_id"]else { return }
+        
         let eventID = String(describing: eventId)
+        
         print(":::: \(Int(eventID)!)      eventId === > ",String(describing: eventId))
+        
         let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
-        let eventDetailsVC = storyBoard.instantiateViewController(withIdentifier: "EventDetailsView") as! EventDetailsViewController
-        eventDetailsVC.eventId = Int(eventID)!
-        eventDetailsVC.isFromHomeTab = true
-        self.navigationController?.pushViewController(eventDetailsVC, animated: true)
+        
+        let viewController = storyBoard.instantiateViewController(withIdentifier: "InvitationListView") as! EventInvitationListViewController
+        
+        viewController.eventId = Int(eventID)!
+        
+        self.navigationController?.pushViewController(viewController, animated: true)
+        
     }
+    
+    @objc func tapOnAccepted(notification: NSNotification) {
+        
+        self.tabBarController?.selectedIndex = 0
+        
+        let pushEventId = notification.userInfo!["gcm.notification.event_id"] ?? ""
+        
+        let pushUserId = notification.userInfo!["gcm.notification.user_id"] ?? ""
+        
+        let currentUserId = UserDefaults.standard.string(forKey: "bP_userId") ?? ""
+        
+        print("................***  \(pushEventId)   \(pushUserId)    \(currentUserId) ",notification.userInfo!["eventID"] ?? ""," *** ")
+        
+        guard let eventId = notification.userInfo!["eventID"]else { return }
+        
+        let eventID = String(describing: eventId)
+        
+        print(":::: \(Int(eventID)!)      eventId === > ",String(describing: eventId))
+        
+        let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
+        
+        let eventDetailsVC = storyBoard.instantiateViewController(withIdentifier: "EventDetailsView") as! EventDetailsViewController
+        
+        eventDetailsVC.eventId = Int(eventID)!
+        
+        eventDetailsVC.isFromHomeTab = true
+        
+        self.navigationController?.pushViewController(eventDetailsVC, animated: true)
+        
+    }
+    
+
     
     
     @objc func tapOnActive(notification: NSNotification) {
