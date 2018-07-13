@@ -194,8 +194,8 @@ class SettingsViewController: UIViewController {
             saveBtnStack.isHidden = false
             playBtnStack.isHidden = true
         }
-        var minValue = ""
-        var maxValue = ""
+        var minValue = String()
+        var maxValue = String()
         let ageCategory = UserDefaults.standard.string(forKey: "ageCategory")
         if ageCategory == "adult"{
                 minValue = UserDefaults.standard.string(forKey: "minAge") ?? "19"
