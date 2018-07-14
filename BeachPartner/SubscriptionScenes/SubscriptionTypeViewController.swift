@@ -116,9 +116,9 @@ class SubscriptionTypeViewController: UIViewController {
                 return Bool(plan.code == "TEMP_PASSPORT")
             })
             
-            if let plan = addOnPlan.first {
-                self.subscriptionPlans.append(plan)
-            }
+//            if let plan = addOnPlan.first {
+//                self.subscriptionPlans.append(plan)
+//            }
             
             self.tableView.reloadData()
             

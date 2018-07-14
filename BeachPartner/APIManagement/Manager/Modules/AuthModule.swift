@@ -116,7 +116,7 @@ extension APIManager{
         APIClient.doRequest.inPost(method:ApiMethods.updateUserFcmToken, params: params , sucess: { (response) in
 
             let jsonDict = response! as! JSONDictionary
-            
+            print(jsonDict)
             do {
                 
                 let updateFcmTokenModel = try updateFcmTokenRespModel(jsonDict)
