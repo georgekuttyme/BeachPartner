@@ -15,7 +15,7 @@ protocol AppUpdateViewControllerDelegate {
 
 class AppUpdateViewController: UIViewController {
 
-    let beachPartnerAppId = 375380948//Change this ID ############################
+    let beachPartnerAppId = 1397972399  // 1327790446
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
@@ -24,6 +24,7 @@ class AppUpdateViewController: UIViewController {
     
     var delegate: AppUpdateViewControllerDelegate?
     var mandatoryUpdate = false
+    var updateMessage = ""
     
     
     
@@ -33,18 +34,20 @@ class AppUpdateViewController: UIViewController {
         if mandatoryUpdate {
             cancelButton.isHidden = true
             titleLabel.text = "UPDATE REQUIRED"
-            messageLabel.text = "This version of the app is no longer supported. Please update Beach Partner to continue"
+        //    messageLabel.text = "This version of the app is no longer supported. Please update Beach Partner to continue"
         }
         else {
-            titleLabel.text = "UPDATE AVAILABLE"
-            messageLabel.text = "There is a newer version available for download! Please update the app by visiting the AppStore"
+            titleLabel.text = "NEW VERSION AVAILABLE"
+        //    messageLabel.text = "There is a newer version available for download! Please update the app by visiting the AppStore"
         }
+        messageLabel.text = updateMessage
     }
 
     
     @IBAction func didTapUpdateButton(_ sender: Any) {
         
-        let urlStr = "itms://itunes.apple.com/us/app/apple-store/id\(beachPartnerAppId)?mt=8"
+       // let urlStr = "itms://itunes.apple.com/us/app/apple-store/id\(beachPartnerAppId)?mt=8"
+        let urlStr = "https://itunes.apple.com/us/app/id\(beachPartnerAppId)"
         if #available(iOS 10.0, *) {
             UIApplication.shared.open(URL(string: urlStr)!, options: [:], completionHandler: nil)
             

@@ -111,6 +111,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
                 if let forceUpdateStatus = appVersionModel.mandatoryUpdate,  forceUpdateStatus == true {
                     vc.mandatoryUpdate = true
                 }
+                vc.updateMessage = appVersionModel.message
                 vc.modalPresentationStyle = .overCurrentContext
                 vc.modalTransitionStyle = .crossDissolve
                 self.present(vc, animated: true, completion: nil)
