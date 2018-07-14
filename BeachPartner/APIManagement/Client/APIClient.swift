@@ -90,10 +90,12 @@ final class APIClient{
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             switch  responseObject.result {
             case .success:
-                
-                let json = responseObject.result.value
-                
-                sucess(json as! NSDictionary?)
+                let status = responseObject.response?.statusCode
+                if status == 200 {
+                    let json = responseObject.result.value
+                    
+                    sucess(json as! NSDictionary?)
+                }
                 return
             case .failure:
                 let error = responseObject.result.error

@@ -136,6 +136,9 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
                 
                 return
             }
+//            if updateFcmTokenModel.status == {
+//                
+//            }
             UserDefaults.standard.set(updateFcmTokenModel.city , forKey: "locationInitial")
             print("& ** &\n ",updateFcmTokenModel," \n& ** &")
         }, errorResult: { (error) in
