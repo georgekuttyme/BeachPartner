@@ -33,8 +33,8 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
         
         loginContainerView.isHidden = true
         
-        if let version = Bundle.main.buildVersionNumber {
-            buildVersionLabel.text = "Beach Partner v\(version)"
+        if let version = Bundle.main.releaseVersionNumber {
+            buildVersionLabel.text = "Beach Partner \(version)"
         }
         else {
             buildVersionLabel.text = ""

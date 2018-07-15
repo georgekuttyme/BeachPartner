@@ -91,7 +91,7 @@ final class APIClient{
             switch  responseObject.result {
             case .success:
                 let status = responseObject.response?.statusCode
-                if status == 200 {
+                if (status == 200 || status == 201) {
                     let json = responseObject.result.value
                     
                     sucess(json as! NSDictionary?)
