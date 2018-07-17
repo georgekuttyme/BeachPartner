@@ -151,7 +151,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         let eventID = String(describing: eventId)
         
         print(":::: \(Int(eventID)!)      eventId === > ",String(describing: eventId))
-        
+        UIApplication.shared.applicationIconBadgeNumber = 0
         let storyBoard = UIStoryboard(name: "CalenderTab", bundle: nil)
         
         let viewController = storyBoard.instantiateViewController(withIdentifier: "InvitationListView") as! EventInvitationListViewController

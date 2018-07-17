@@ -55,7 +55,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VTJ-kP-dbi">
-                            <rect key="frame" x="24" y="42" width="177" height="50"/>
+                            <rect key="frame" x="24" y="42" width="118" height="50"/>
                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="16"/>
                             <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
                             <nil key="highlightedColor"/>
@@ -68,14 +68,24 @@
                             </constraints>
                             <state key="normal" image="arrow-down"/>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vfu-a0-MAl">
+                            <rect key="frame" x="162" y="51" width="32" height="32"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="32" id="EHO-1s-5bI"/>
+                                <constraint firstAttribute="height" constant="32" id="So8-He-nFF"/>
+                            </constraints>
+                            <state key="normal" image="Image-1"/>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.12549019610000001" green="0.18823529410000001" blue="0.49803921569999998" alpha="0.47610766267123289" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="cmZ-ZQ-QgS" firstAttribute="leading" secondItem="VTJ-kP-dbi" secondAttribute="trailing" constant="8" id="4pf-3T-1YL"/>
                         <constraint firstAttribute="bottom" secondItem="VTJ-kP-dbi" secondAttribute="bottom" constant="6" id="FiP-9A-DFO"/>
                         <constraint firstItem="VTJ-kP-dbi" firstAttribute="top" secondItem="Zwc-NC-4hl" secondAttribute="bottom" constant="-16" id="HG6-by-542"/>
                         <constraint firstAttribute="trailing" secondItem="cmZ-ZQ-QgS" secondAttribute="trailing" constant="22" id="Ojk-Z5-Eie"/>
+                        <constraint firstItem="cmZ-ZQ-QgS" firstAttribute="leading" secondItem="vfu-a0-MAl" secondAttribute="trailing" constant="15" id="S4g-CB-t3O"/>
                         <constraint firstItem="VTJ-kP-dbi" firstAttribute="leading" secondItem="h88-Zg-B1h" secondAttribute="leading" constant="24" id="YrF-Yv-7nf"/>
+                        <constraint firstItem="vfu-a0-MAl" firstAttribute="leading" secondItem="VTJ-kP-dbi" secondAttribute="trailing" constant="20" id="cpG-sT-l59"/>
+                        <constraint firstAttribute="bottom" secondItem="vfu-a0-MAl" secondAttribute="bottom" constant="15" id="jGg-eS-PbN"/>
                         <constraint firstAttribute="bottom" secondItem="cmZ-ZQ-QgS" secondAttribute="bottom" constant="15" id="jIh-Cw-GfC"/>
                         <constraint firstAttribute="height" constant="98" id="lG0-VC-fsw"/>
                         <constraint firstItem="Zwc-NC-4hl" firstAttribute="top" secondItem="h88-Zg-B1h" secondAttribute="top" constant="8" id="q6P-w2-KoD"/>
@@ -124,6 +134,7 @@
         </view>
     </objects>
     <resources>
+        <image name="Image-1" width="29" height="29"/>
         <image name="arrow-down" width="29" height="29"/>
         <image name="icn_mute" width="50" height="50"/>
         <image name="icn_unmute" width="25" height="25"/>

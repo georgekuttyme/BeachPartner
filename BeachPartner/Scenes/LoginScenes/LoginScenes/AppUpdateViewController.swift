@@ -25,20 +25,27 @@ class AppUpdateViewController: UIViewController {
     var delegate: AppUpdateViewControllerDelegate?
     var mandatoryUpdate = false
     var updateMessage = ""
-    
+    var titleMsg = ""
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if mandatoryUpdate {
-            cancelButton.isHidden = true
-            titleLabel.text = "UPDATE REQUIRED"
-        //    messageLabel.text = "This version of the app is no longer supported. Please update Beach Partner to continue"
+        if titleMsg == ""{
+            if mandatoryUpdate {
+                cancelButton.isHidden = true
+                titleLabel.text = "UPDATE REQUIRED"
+            //    messageLabel.text = "This version of the app is no longer supported. Please update Beach Partner to continue"
+            }
+            else {
+                titleLabel.text = "NEW VERSION AVAILABLE"
+            //    messageLabel.text = "There is a newer version available for download! Please update the app by visiting the AppStore"
+            }
         }
-        else {
-            titleLabel.text = "NEW VERSION AVAILABLE"
-        //    messageLabel.text = "There is a newer version available for download! Please update the app by visiting the AppStore"
+        else{
+            if mandatoryUpdate {
+                cancelButton.isHidden = true
+            }
+            titleLabel.text = titleMsg
         }
         messageLabel.text = updateMessage
     }

@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if Messaging.messaging().fcmToken != nil {
             configureTopicSubscriptions()
         }
-        UIApplication.shared.applicationIconBadgeNumber = 0
+//        UIApplication.shared.applicationIconBadgeNumber = 0
         
         return true
     }

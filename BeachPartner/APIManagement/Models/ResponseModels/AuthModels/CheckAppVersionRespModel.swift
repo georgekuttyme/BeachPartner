@@ -11,6 +11,7 @@ import Tailor
 struct CheckAppBuildNumber : SafeMappable{
     
     var status: String = ""
+    var title: String = ""
     var message: String = ""
     var deviceType: String = ""
     var currentVersion: Int = 0
@@ -22,6 +23,7 @@ struct CheckAppBuildNumber : SafeMappable{
     
     init(_ map: [String : Any]) throws {
         status <- map.property("status")
+        title <- map.property("title")
         message <- map.property("message")
         deviceType <- map.property("deviceType")
         currentVersion <- map.property("currentVersion")
