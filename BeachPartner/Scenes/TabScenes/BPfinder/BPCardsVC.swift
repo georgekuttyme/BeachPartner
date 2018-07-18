@@ -555,6 +555,18 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         
        moveCardView()
     }
+ 
+    @objc func flagBtnClick(sender:UIButton) {
+        let index = sender.tag
+        let  data : SearchUserModel
+        data = SwipeCardArray[index] as! SearchUserModel
+        let alert = UIAlertController(title: "Are you sure you want to Flag \(data.firstName)?", message: "Flagged users are reviewed by Beach Partner staff to determine whether they violate the guideliness. Serious or repeated violations can lead to account termination.", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "YES", style: UIAlertActionStyle.default, handler: nil))
+        alert.addAction(UIAlertAction(title: "NO", style: UIAlertActionStyle.cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
     
     func getEnPointForSearch() -> String {
         var enPoint = String()
@@ -1096,6 +1108,8 @@ extension BPCardsVC: KolodaViewDataSource {
                     view.videoView = self.videoView
                 }
             }
+            view.flagBtn.tag = index
+             view.flagBtn.addTarget(self, action: #selector(flagBtnClick(sender:)), for: UIControlEvents.touchUpInside)
             view.moveDown.addTarget(self, action:#selector(moveDownScroll(sender:)), for: UIControlEvents.touchUpInside)
             view.displaySearchDetailsOnCard(displayData: data)
         }
@@ -1109,6 +1123,7 @@ extension BPCardsVC: KolodaViewDataSource {
                     view.videoView = self.videoView
                 }
             }
+            view.flagBtn.addTarget(self, action: #selector(flagBtnClick(sender:)), for: UIControlEvents.touchUpInside)
             
             view.moveDown.addTarget(self, action:#selector(moveDownScroll(sender:)), for: UIControlEvents.touchUpInside)
             view.displayDataOnCard(displayData: data.connectedUser!)
