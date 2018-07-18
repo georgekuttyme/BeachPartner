@@ -74,7 +74,7 @@
                                 <constraint firstAttribute="width" constant="32" id="EHO-1s-5bI"/>
                                 <constraint firstAttribute="height" constant="32" id="So8-He-nFF"/>
                             </constraints>
-                            <state key="normal" image="Image-1"/>
+                            <state key="normal" image="flag"/>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.12549019610000001" green="0.18823529410000001" blue="0.49803921569999998" alpha="0.47610766267123289" colorSpace="custom" customColorSpace="sRGB"/>
@@ -134,8 +134,8 @@
         </view>
     </objects>
     <resources>
-        <image name="Image-1" width="29" height="29"/>
         <image name="arrow-down" width="29" height="29"/>
+        <image name="flag" width="29" height="29"/>
         <image name="icn_mute" width="50" height="50"/>
         <image name="icn_unmute" width="25" height="25"/>
         <image name="img_placeHolder" width="400" height="300"/>
