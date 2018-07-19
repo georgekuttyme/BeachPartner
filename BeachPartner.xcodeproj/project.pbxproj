@@ -119,6 +119,7 @@
 		843F356C2084F8CE00E268D6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843F356B2084F8CE00E268D6 /* GoogleService-Info.plist */; };
 		844984212099A0E100B8FD37 /* MutualLikesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844984202099A0E100B8FD37 /* MutualLikesViewController.swift */; };
 		844F70502090BC01004F3005 /* noteResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844F704F2090BC01004F3005 /* noteResponseModel.swift */; };
+		8459CEB721006BD200DCEC93 /* FlagRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459CEB621006BD200DCEC93 /* FlagRespModel.swift */; };
 		845B7908208B4A5200DF1F1F /* AthleteProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845B7907208B4A5200DF1F1F /* AthleteProfileTableViewController.swift */; };
 		845BD6A32089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BD6A22089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift */; };
 		846C010420EB386B0030490A /* updateCityRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846C010320EB386B0030490A /* updateCityRespModel.swift */; };
@@ -267,6 +268,7 @@
 		843F356B2084F8CE00E268D6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		844984202099A0E100B8FD37 /* MutualLikesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutualLikesViewController.swift; sourceTree = "<group>"; };
 		844F704F2090BC01004F3005 /* noteResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noteResponseModel.swift; sourceTree = "<group>"; };
+		8459CEB621006BD200DCEC93 /* FlagRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagRespModel.swift; sourceTree = "<group>"; };
 		845B7907208B4A5200DF1F1F /* AthleteProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AthleteProfileTableViewController.swift; sourceTree = "<group>"; };
 		845BD6A22089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllEventsBetweenResponseModel.swift; sourceTree = "<group>"; };
 		8464C58F2084ACDA001FC8E5 /* BeachPartner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BeachPartner.entitlements; sourceTree = "<group>"; };
@@ -654,6 +656,7 @@
 				8D65CAE920CE95230008CD7F /* UpdateFcmTokenRespModel.swift */,
 				846C010320EB386B0030490A /* updateCityRespModel.swift */,
 				8D65CAEB20CE95580008CD7F /* CheckAppVersionRespModel.swift */,
+				8459CEB621006BD200DCEC93 /* FlagRespModel.swift */,
 			);
 			path = AuthModels;
 			sourceTree = "<group>";
@@ -1113,6 +1116,7 @@
 				5EFA2E48207E6D4F00212B45 /* ChatUsersListViewController.swift in Sources */,
 				3B689A14204937880075128E /* BlueBPCollectionViewCell.swift in Sources */,
 				3B689A1C20493DA20075128E /* IntrestedPeopleCollectionViewCell.swift in Sources */,
+				8459CEB721006BD200DCEC93 /* FlagRespModel.swift in Sources */,
 				5E0543AB2081C0C3002744D8 /* SubscriptionUserModel.swift in Sources */,
 				3BC8F914205B91A50086333E /* CalenderViewController.swift in Sources */,
 				3BC8F903205AE4C50086333E /* PopUpOneViewController.swift in Sources */,

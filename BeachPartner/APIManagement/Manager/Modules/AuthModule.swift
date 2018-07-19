@@ -1515,6 +1515,35 @@ extension APIManager{
         }
     }
     
+    public func flagInappropriateUser(flagId:Int ,flagReason:String, sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure){
+        let params: [String: Any] = [
+        
+            "flagReason": flagReason ,
+            "flagUserId": flagId ,
+        ]
+        APIClient.doRequest.inPostReq(method: ApiMethods.flagInappropriateUser, params: params as! [String : Any], sucess: { (response) in
+            APIManager.printOnDebug(response: " Resppp1111 : \(String(describing: response))")
+            
+            let jsonDict = response
+            do {
+                let accRespModel = try FlagRespModel(jsonDict! as! [String : Any])
+                sucessResult(accRespModel)
+                return
+            } catch {
+                print("Catched")
+                errorResult(error.localizedDescription)
+                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                return
+            }
+        }) { (error) in
+            self.busyOff()
+            errorResult(error?.localizedDescription)
+            APIManager.printOnDebug(response: "error:\(String(describing: error?.localizedDescription))")
+            return
+        }
+        
+    }
+    
     
     // MARK:- Subscriptions
     
