@@ -122,6 +122,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="flagBtn" destination="vfu-a0-MAl" id="A8T-BY-n3Z"/>
                 <outlet property="imageView" destination="1Ys-Gu-W8j" id="jI2-Zm-f7Y"/>
                 <outlet property="moveDown" destination="cmZ-ZQ-QgS" id="BPh-99-Vir"/>
                 <outlet property="muteButton" destination="9mu-te-mmi" id="0fc-BR-wfu"/>

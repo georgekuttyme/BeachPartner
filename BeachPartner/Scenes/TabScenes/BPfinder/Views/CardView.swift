@@ -11,7 +11,8 @@ import SDWebImage
 class CardView: UIView {
     @IBOutlet weak var toastLabel: UILabel!
     @IBOutlet weak var muteButton: UIButton!
-     @IBOutlet weak var moveDown: UIButton!
+    @IBOutlet weak var moveDown: UIButton!
+    @IBOutlet weak var flagBtn: UIButton!
     
     weak var videoView:UIVideoView? {
         
@@ -77,8 +78,8 @@ class CardView: UIView {
         self.layer.shadowOpacity = 0.8
         self.layer.shadowRadius = 3.0
         
-        
     }
+
     @IBAction func muteButtonCliked(_ sender: UIButton) {
         if let videoView =  self.videoView {
             if videoView.isMuted {
