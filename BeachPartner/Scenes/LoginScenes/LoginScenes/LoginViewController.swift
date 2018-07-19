@@ -97,7 +97,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
             ActivityIndicatorView.hiding()
             
             guard let appVersionModel = responseModel as? CheckAppBuildNumber else { return }
-            
+            print(appVersionModel)
             guard let updateStatus = appVersionModel.updateAvailable else { return }
             
             if updateStatus == false {
