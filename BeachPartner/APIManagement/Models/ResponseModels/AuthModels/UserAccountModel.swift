@@ -78,6 +78,7 @@ struct AccountRespModel:SafeMappable {
         var collageClub: String = ""
         var collegeBeach: String = ""
         var collegeIndoor: String = ""
+        var sandRecruitNumber: String = ""
         var courtSidePreference: String = ""
         var description: String = ""
         var division: String = ""

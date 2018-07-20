@@ -99,6 +99,8 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     @IBOutlet weak var tableCell_CollegeClub:UITableViewCell!
     @IBOutlet weak var tableCell_CollegeBeach:UITableViewCell!
     @IBOutlet weak var tableCell_CollegeIndoor: UITableViewCell!
+    @IBOutlet weak var tableCell_SandRecruitNumber: UITableViewCell!
+    
     @IBOutlet weak var tableCell_Points: UITableViewCell!
     @IBOutlet weak var tableCell_Ranking:UITableViewCell!
     @IBOutlet weak var tableCell_TopFinishesinLastYear:UITableViewCell!
@@ -128,6 +130,8 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     @IBOutlet weak var collegeClubTxtFld: UITextField!
     @IBOutlet weak var collegeBeachTxtfld: UITextField!
     @IBOutlet weak var collegeIndoorTxtFld: UITextField!
+    @IBOutlet weak var sandRecruitNumberTxtFld: FloatingText!
+    
     @IBOutlet weak var pointsTxtFld: UITextField!
     @IBOutlet weak var rankingTxtFld: UITextField!
     @IBOutlet weak var topFinishesTxtfld: UITextField!
@@ -589,6 +593,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.collegeBeachTxtfld.delegate = self
         self.collegeBeachTxtfld.delegate = self
         self.collegeIndoorTxtFld.delegate = self
+        self.sandRecruitNumberTxtFld.delegate = self
 //        self.pointsTxtFld.delegate = self
 //        self.rankingTxtFld.delegate = self
         self.topFinishesTxtfld.delegate = self
@@ -830,6 +835,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
 //        self.userData.userProfile?.collageClub = collegeClubTxtFld.text!
         self.userData.userProfile?.collegeBeach = collegeBeachTxtfld.text!
         self.userData.userProfile?.collegeIndoor = collegeIndoorTxtFld.text!
+        self.userData.userProfile?.sandRecruitNumber = sandRecruitNumberTxtFld.text!
 //        self.userData.userProfile?.totalPoints = pointsTxtFld.text!
 //        self.userData.userProfile?.usaVolleyballRanking = rankingTxtFld.text!
         var topfinishesVal = String()
@@ -976,6 +982,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
                 cell == self.tableCell_CollegeClub  ||
                 cell == self.tableCell_CollegeBeach  ||
                 cell == self.tableCell_CollegeIndoor  ||
+                cell == self.tableCell_SandRecruitNumber ||
                 cell == self.tableCell_Points  ||
                 cell == self.tableCell_Ranking  ||
                 cell == self.tableCell_TopFinishesinLastYear  ||
@@ -1069,6 +1076,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
 //            collegeClubTxtFld.enableTextFld()
             collegeBeachTxtfld.enableTextFld()
             collegeIndoorTxtFld.enableTextFld()
+            sandRecruitNumberTxtFld.enableTextFld()
 //            pointsTxtFld.enableTextFld()
 //            rankingTxtFld.enableTextFld()
             topFinishesTxtfld.enableTextFld()
@@ -1102,6 +1110,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
 //            collegeClubTxtFld.disableTextFld()
             collegeBeachTxtfld.disableTextFld()
             collegeIndoorTxtFld.disableTextFld()
+            sandRecruitNumberTxtFld.disableTextFld()
 //            pointsTxtFld.disableTextFld()
 //            rankingTxtFld.disableTextFld()
             topFinishesTxtfld.disableTextFld()
@@ -1155,7 +1164,10 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             collegeIndoorTxtFld.becomeFirstResponder()
         }
         else if textField == collegeIndoorTxtFld{
-            topFinishesTxtfld.becomeFirstResponder()
+           sandRecruitNumberTxtFld.becomeFirstResponder()
+        }
+        else if textField == sandRecruitNumberTxtFld{
+             topFinishesTxtfld.becomeFirstResponder()
         }
 //        else if textField == pointsTxtFld{
 //            rankingTxtFld.becomeFirstResponder()
@@ -1430,6 +1442,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
 //        self.collegeClubTxtFld.text = accResponseModel.userProfile?.collageClub
         self.collegeBeachTxtfld.text = accResponseModel.userProfile?.collegeBeach
         self.collegeIndoorTxtFld.text = accResponseModel.userProfile?.collegeIndoor
+        self.sandRecruitNumberTxtFld.text = accResponseModel.userProfile?.sandRecruitNumber
 //        self.pointsTxtFld.text = accResponseModel.userProfile?.totalPoints
 //        self.rankingTxtFld.text = accResponseModel.userProfile?.usaVolleyballRanking
         UserDefaults.standard.set(accResponseModel.location , forKey: "location")
