@@ -560,14 +560,38 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         let index = sender.tag
         let  data : SearchUserModel
         data = SwipeCardArray[index] as! SearchUserModel
-        let alert = UIAlertController(title: "Are you sure you want to Flag \(data.firstName)?", message: "Flagged users are reviewed by Beach Partner staff to determine whether they violate the guideliness. Serious or repeated violations can lead to account termination.", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "YES", style: UIAlertActionStyle.default, handler: nil))
+        let flagUserId = data.id
+        let flagReason = "Inappropriate Image"
+        let alert = UIAlertController(title: "Are you sure you want to Flag \(data.firstName + " " + data.lastName)?", message: "Flagged users are reviewed by Beach Partner staff to determine whether they violate the guideliness. Serious or repeated violations can lead to account termination.", preferredStyle: UIAlertControllerStyle.alert)
+        //alert.addAction(UIAlertAction(title: "YES", style: UIAlertActionStyle.default, handler: nil))
+        let yesAction = UIAlertAction(title: "YES", style: UIAlertActionStyle.default) {
+            UIAlertAction in
+            self.flagingUser(flagId: flagUserId, flagReason: flagReason)
+           print("YES Clicked")
+            
+        }
         alert.addAction(UIAlertAction(title: "NO", style: UIAlertActionStyle.cancel, handler: nil))
+        alert.addAction(yesAction)
         self.present(alert, animated: true, completion: nil)
     }
     
     
-    
+    func flagingUser(flagId:Int,flagReason:String){
+        APIManager.callServer.flagInappropriateUser(flagId: flagId, flagReason: flagReason, sucessResult: { (response) in
+            guard let flagRespModel = response as? FlagRespModel else{
+                return
+            }
+            print("===",flagRespModel)
+        }, errorResult: { (error) in
+            //                stopLoading()
+            guard let errorString  = error else {
+                return
+            }
+            ActivityIndicatorView.hiding()
+            self.alert(message: errorString)
+        })
+       
+    }
     func getEnPointForSearch() -> String {
         var enPoint = String()
         let includeCoaches = UserDefaults.standard.string(forKey: "includeCoaches")
