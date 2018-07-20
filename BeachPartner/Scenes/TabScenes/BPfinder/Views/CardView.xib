@@ -38,7 +38,7 @@
                         <constraint firstItem="9mu-te-mmi" firstAttribute="top" secondItem="bWx-dx-gou" secondAttribute="top" constant="18" id="hSk-gu-tnV"/>
                     </constraints>
                 </view>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_placeHolder" translatesAutoresizingMaskIntoConstraints="NO" id="1Ys-Gu-W8j">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="1Ys-Gu-W8j">
                     <rect key="frame" x="0.0" y="0.0" width="263" height="362"/>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </imageView>
@@ -139,6 +139,6 @@
         <image name="flag" width="29" height="29"/>
         <image name="icn_mute" width="50" height="50"/>
         <image name="icn_unmute" width="25" height="25"/>
-        <image name="img_placeHolder" width="400" height="300"/>
+        <image name="user" width="502" height="502"/>
     </resources>
 </document>
