@@ -1419,7 +1419,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         datePicker.date = date as Date
         
           self.birthDateTxtFld.text = dateString
-      
+           print(accResponseModel.userProfile?.sandRecruitNumber)
         
 //        self.birthDateTxtFld.text = String(accResponseModel.dob)
 //        self.cityTxtFld.text = accResponseModel.city

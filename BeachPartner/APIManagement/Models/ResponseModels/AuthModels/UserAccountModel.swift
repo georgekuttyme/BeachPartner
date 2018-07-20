@@ -117,6 +117,7 @@ struct AccountRespModel:SafeMappable {
             collageClub <- map.property("collageClub")
             collegeBeach  <- map.property("collegeBeach")
             collegeIndoor <- map.property("collegeIndoor")
+            sandRecruitNumber <- map.property("sandRecruitsNo")
             
             courtSidePreference <- map.property("courtSidePreference")
             description <- map.property("description")
