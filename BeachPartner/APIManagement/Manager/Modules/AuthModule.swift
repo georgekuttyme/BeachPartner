@@ -402,6 +402,7 @@ extension APIManager{
                                              "position": ((userData.userProfile?.position) ?? "")!,
                                              "programsOffered": ((userData.userProfile?.programsOffered) ?? "")!,
                                              "shareAthlets": ((userData.userProfile?.shareAthlets) ?? "")!,
+                                             "sandRecruitNumber": ((userData.userProfile?.sandRecruitNumber) ?? "")!,
                                              "topFinishes": ((userData.userProfile?.topFinishes) ?? "")!,
                                              "totalPoints": ((userData.userProfile?.totalPoints ) ?? "")!,
                                              "tournamentLevelInterest": ((userData.userProfile?.tournamentLevelInterest) ?? "")!,
@@ -410,7 +411,7 @@ extension APIManager{
                                              "willingToTravel": ((userData.userProfile?.willingToTravel) ?? "")!,
                                              "yearsRunning": ((userData.userProfile?.yearsRunning) ?? "")!
         ]
-        
+        print(userProfile)
         let params: [String: [String:String]] = [
             "userInputDto": [
                 "authToken": userData.authToken,
