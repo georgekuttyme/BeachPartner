@@ -62,6 +62,7 @@ struct SearchUserModel:SafeMappable {
     init(_ map: [String : Any]) throws {
 
         id  <- map.property("id")
+        status <- map.property("status")
         firstName <- map.property("firstName")
         activated <- map.property("activated")
         authToken <- map.property("authToken")
