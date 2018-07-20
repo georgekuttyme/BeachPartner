@@ -61,6 +61,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
     @IBOutlet weak var tableCell_Funded: UITableViewCell!
     
     @IBOutlet weak var tableCell_ShareAthletes: UITableViewCell!
+    @IBOutlet weak var tableCell_SandRecruitNumber: UITableViewCell!
     
     @IBOutlet var blurImageView: UIVisualEffectView!
     
@@ -82,6 +83,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
     
     @IBOutlet weak var programsOffered: FloatingText!
     @IBOutlet weak var divisionTxtFld: FloatingText!
+    @IBOutlet weak var sandRecruitNumberTxtFld: FloatingText!
     
     @IBOutlet weak var fundedBtn: UIButton!
     @IBOutlet weak var shareAthletesBtn: UIButton!
@@ -325,6 +327,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         
         self.programsOffered.delegate = self
         self.divisionTxtFld.delegate = self
+        self.sandRecruitNumberTxtFld.delegate = self
     }
     
     @IBAction func stateBtnAction(_ sender: Any) {
@@ -518,6 +521,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         self.userData.userProfile?.division = divisionTxtFld.text ?? ""
         self.userData.userProfile?.fundingStatus = fundedBtn.titleLabel?.text ?? ""
         self.userData.userProfile?.shareAthlets = shareAthletesBtn.titleLabel?.text ?? ""
+        self.userData.userProfile?.sandRecruitNumber = sandRecruitNumberTxtFld.text ?? ""
         
         
         self.userData.userProfile?.experience =  ""
@@ -672,7 +676,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         
         if (isBasicInformation){
             
-            if (cell == self.tableCell_College || cell == self.tableCell_Description || cell == self.tableCell_YearsRunning || cell == self.tableCell_NumberOfAthletes || cell == self.tableCell_ProgramsOffered || cell == self.tableCell_Division || cell == self.tableCell_Funded || cell == self.tableCell_ShareAthletes) {
+            if (cell == self.tableCell_College || cell == self.tableCell_Description || cell == self.tableCell_YearsRunning || cell == self.tableCell_NumberOfAthletes || cell == self.tableCell_ProgramsOffered || cell == self.tableCell_Division || cell == self.tableCell_SandRecruitNumber || cell == self.tableCell_Funded || cell == self.tableCell_ShareAthletes) {
                 return 0
             }
             else {
@@ -735,6 +739,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
             numberOfAthletesTxtFld.enableTextFld()
             programsOffered.enableTextFld()
             divisionTxtFld.enableTextFld()
+            sandRecruitNumberTxtFld.enableTextFld()
             fundedBtn.enableBtn()
             shareAthletesBtn.enableBtn()
             
@@ -755,6 +760,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
             numberOfAthletesTxtFld.disableTextFld()
             programsOffered.disableTextFld()
             divisionTxtFld.disableTextFld()
+            sandRecruitNumberTxtFld.disableTextFld()
             fundedBtn.disableBtn()
             shareAthletesBtn.disableBtn()
             
@@ -982,13 +988,9 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         
         self.programsOffered.text = accResponseModel.userProfile?.programsOffered
         self.divisionTxtFld.text = accResponseModel.userProfile?.division
-        
+        self.sandRecruitNumberTxtFld.text = accResponseModel.userProfile?.sandRecruitNumber
         self.fundedBtn.setTitle(accResponseModel.userProfile?.fundingStatus, for: .normal)
         self.shareAthletesBtn.setTitle(accResponseModel.userProfile?.shareAthlets, for: .normal)
-        
- 
-        
-        
         
 //        self.experienceBtn.setTitle(accResponseModel.userProfile?.experience, for: .normal)
 //        self.courtSidePreferenceBtn.setTitle(accResponseModel.userProfile?.courtSidePreference, for: .normal)
