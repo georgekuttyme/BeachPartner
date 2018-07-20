@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BeachPartner/Scenes/TabScenes/ChatTab/ChatUsersListViewController.swift"
-            timestampString = "553528059.910308"
+            filePath = "BeachPartner/Scenes/LoginScenes/LoginScenes/LoginViewController.swift"
+            timestampString = "553674430.011103"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
-            landmarkName = "getBlockedConnections()"
+            startingLineNumber = "779"
+            endingLineNumber = "779"
+            landmarkName = "makeLoginRequest()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,43 +26,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/Scenes/LoginScenes/LoginScenes/LoginViewController.swift"
-            timestampString = "553610096.46613"
+            timestampString = "553674430.011461"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "856"
-            endingLineNumber = "856"
-            landmarkName = "getUserInfo()"
+            startingLineNumber = "759"
+            endingLineNumber = "759"
+            landmarkName = "makeLoginRequest()"
             landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Tailor.SafeMappable&gt;) -&gt; () in BeachPartner.LoginViewController.getUserInfo() -&gt; ()"
+                  symbolName = "BeachPartner.LoginViewController.makeLoginRequest() -&gt; ()"
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Powermac/Desktop/PROJECT/bp-ios/BeachPartner/Scenes/LoginScenes/LoginScenes/LoginViewController.swift"
-                  timestampString = "553610099.0619071"
+                  timestampString = "553674430.349384"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "856"
-                  endingLineNumber = "856"
-                  offsetFromSymbolStart = "35862">
+                  startingLineNumber = "759"
+                  endingLineNumber = "759"
+                  offsetFromSymbolStart = "1689">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Swift.Optional&lt;Swift.String&gt;) -&gt; () in BeachPartner.LoginViewController.getUserInfo() -&gt; ()"
+                  symbolName = "closure #1 (Swift.Optional&lt;Tailor.SafeMappable&gt;) -&gt; () in BeachPartner.LoginViewController.makeLoginRequest() -&gt; ()"
                   moduleName = "BeachPartner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Powermac/Desktop/PROJECT/bp-ios/BeachPartner/Scenes/LoginScenes/LoginScenes/LoginViewController.swift"
-                  timestampString = "553610099.066227"
+                  timestampString = "553674430.353809"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "857"
-                  endingLineNumber = "857"
-                  offsetFromSymbolStart = "42">
+                  startingLineNumber = "763"
+                  endingLineNumber = "763"
+                  offsetFromSymbolStart = "25">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -73,45 +73,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BeachPartner/APIManagement/Manager/Modules/AuthModule.swift"
-            timestampString = "553585842.350872"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "353"
-            endingLineNumber = "353"
-            landmarkName = "getAccountDetails(sucessResult:errorResult:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BeachPartner/APIManagement/Client/APIGetClient.swift"
-            timestampString = "553586115.262284"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "386"
-            endingLineNumber = "386"
-            landmarkName = "inGetReq(url:params:sucess:failure:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "BeachPartner/Scenes/LoginScenes/LoginScenes/LoginViewController.swift"
-            timestampString = "553668029.537773"
+            timestampString = "553674430.011533"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
-            landmarkName = "checkForAppUpdate()"
+            startingLineNumber = "763"
+            endingLineNumber = "763"
+            landmarkName = "makeLoginRequest()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/APIManagement/Manager/Modules/AuthModule.swift"
+            timestampString = "553752743.260269"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "checkUpdateVersion(sucessResult:errorResult:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

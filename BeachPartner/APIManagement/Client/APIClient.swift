@@ -95,6 +95,9 @@ final class APIClient{
                     let json = responseObject.result.value
                     
                     sucess(json as! NSDictionary?)
+                }else if status == 401{
+                    let json = responseObject.result.value
+                    sucess(json as! NSDictionary?)
                 }
                 return
             case .failure:
