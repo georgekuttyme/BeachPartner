@@ -139,6 +139,7 @@ struct AccountRespModel:SafeMappable {
             programsOffered <- map.property("programsOffered")
             
             shareAthlets <- map.property("shareAthlets")
+            sandRecruitNumber <- map.property("sandRecruitsNo")
             topFinishes  <- map.property("topFinishes")
             totalPoints <- map.property("totalPoints")
             

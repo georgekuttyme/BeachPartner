@@ -437,6 +437,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         }
         else if selectedType == "Search" || selectedType == "invitePartner" {
             SwipeCardArray = self.searchUsers
+            print(SwipeCardArray)
             searchCardSatus = selectedType
             self.cardView.dataSource = self
             self.cardView.delegate = self
@@ -562,17 +563,21 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         data = SwipeCardArray[index] as! SearchUserModel
         let flagUserId = data.id
         let flagReason = "Inappropriate Image"
-        let alert = UIAlertController(title: "Are you sure you want to Flag \(data.firstName + " " + data.lastName)?", message: "Flagged users are reviewed by Beach Partner staff to determine whether they violate the guideliness. Serious or repeated violations can lead to account termination.", preferredStyle: UIAlertControllerStyle.alert)
-        //alert.addAction(UIAlertAction(title: "YES", style: UIAlertActionStyle.default, handler: nil))
+        let titleString: NSString = "Are you sure you want to Flag \(data.firstName + " " + data.lastName)?" as NSString
+        let range = (titleString).range(of: "Flag")
+        let attribute = NSMutableAttributedString.init(string: titleString as String)
+        attribute.addAttribute(NSAttributedStringKey.foregroundColor as NSAttributedStringKey, value: UIColor.red, range:range)
+        let alertController = UIAlertController(title: titleString as String, message: "The profile of flagged users will be reviewed by Beach Partner admin team for any violations of terms and conditions with respect to profile photo or video. If violations found, flagged accounts will be deactivated. Please be judicious and genuine while flagging other users. Bogus or negligent flagging may result in your account being deactivated." , preferredStyle: UIAlertControllerStyle.alert)
+       alertController.setValue(attribute, forKey: "attributedTitle")
         let yesAction = UIAlertAction(title: "YES", style: UIAlertActionStyle.default) {
             UIAlertAction in
             self.flagingUser(flagId: flagUserId, flagReason: flagReason)
            print("YES Clicked")
             
         }
-        alert.addAction(UIAlertAction(title: "NO", style: UIAlertActionStyle.cancel, handler: nil))
-        alert.addAction(yesAction)
-        self.present(alert, animated: true, completion: nil)
+        alertController.addAction(UIAlertAction(title: "NO", style: UIAlertActionStyle.cancel, handler: nil))
+        alertController.addAction(yesAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     
