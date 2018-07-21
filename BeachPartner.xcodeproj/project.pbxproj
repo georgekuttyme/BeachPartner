@@ -368,7 +368,6 @@
 		3B49C3842068D795007186E8 /* UIClasses */ = {
 			isa = PBXGroup;
 			children = (
-				3B89E60C2072C3F4008DAFE0 /* Preferences */,
 				3B49C3852068D7B5007186E8 /* ActivityIndicator */,
 			);
 			path = UIClasses;
@@ -557,13 +556,6 @@
 			path = HomeTab;
 			sourceTree = "<group>";
 		};
-		3B89E60C2072C3F4008DAFE0 /* Preferences */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Preferences;
-			sourceTree = "<group>";
-		};
 		3BAD58642068CB270076DFD8 /* Client */ = {
 			isa = PBXGroup;
 			children = (
@@ -585,7 +577,6 @@
 		3BAD58662068CB3F0076DFD8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				3BAD586B2068CB950076DFD8 /* RequestModel */,
 				3BAD586A2068CB890076DFD8 /* ResponseModels */,
 			);
 			path = Models;
@@ -622,13 +613,6 @@
 				3BAD586C2068CBA50076DFD8 /* AuthModels */,
 			);
 			path = ResponseModels;
-			sourceTree = "<group>";
-		};
-		3BAD586B2068CB950076DFD8 /* RequestModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = RequestModel;
 			sourceTree = "<group>";
 		};
 		3BAD586C2068CBA50076DFD8 /* AuthModels */ = {
@@ -735,7 +719,6 @@
 				3BE40F59203EAEC100EA7DFC /* Main.storyboard */,
 				3BE40F5C203EAEC100EA7DFC /* Assets.xcassets */,
 				3BE40F6F203EB09E00EA7DFC /* LaunchScene */,
-				3BE40F70203EB0B000EA7DFC /* ProjectSettings */,
 				3BE40F61203EAEC100EA7DFC /* Info.plist */,
 				843F356B2084F8CE00E268D6 /* GoogleService-Info.plist */,
 				5E023EB8207AA1CD00DFC27B /* Bridging-Header.h */,
@@ -801,25 +784,9 @@
 			isa = PBXGroup;
 			children = (
 				3B0DEE93206D099500686609 /* VideoPlayer */,
-				3BE40F6E203EB08F00EA7DFC /* Images */,
-				3BE40F6D203EB08900EA7DFC /* Fonts */,
 				3BC8F910205B8B470086333E /* Others */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		3BE40F6D203EB08900EA7DFC /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Fonts;
-			sourceTree = "<group>";
-		};
-		3BE40F6E203EB08F00EA7DFC /* Images */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Images;
 			sourceTree = "<group>";
 		};
 		3BE40F6F203EB09E00EA7DFC /* LaunchScene */ = {
@@ -828,13 +795,6 @@
 				3BE40F5E203EAEC100EA7DFC /* LaunchScreen.storyboard */,
 			);
 			path = LaunchScene;
-			sourceTree = "<group>";
-		};
-		3BE40F70203EB0B000EA7DFC /* ProjectSettings */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ProjectSettings;
 			sourceTree = "<group>";
 		};
 		3BE40F71203EB0DB00EA7DFC /* LoginScenes */ = {
@@ -1395,8 +1355,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.beachpartnerllc.beachpartner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "baf31d75-1da4-4f41-9442-0644efe43e9f";
-				PROVISIONING_PROFILE_SPECIFIER = Provision_adhocMay18;
+				PROVISIONING_PROFILE = "6b84d2da-f3d5-4b07-ac82-843e83908b54";
+				PROVISIONING_PROFILE_SPECIFIER = Provision_distribution_jun12;
 				SWIFT_OBJC_BRIDGING_HEADER = "BeachPartner/Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -559,11 +559,22 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
  
     @objc func flagBtnClick(sender:UIButton) {
         let index = sender.tag
-        let  data : SearchUserModel
-        data = SwipeCardArray[index] as! SearchUserModel
-        let flagUserId = data.id
+        var flagUserId :Int = 0
+        var titleString :NSString = ""
+
+        if selectedType == "Search" || selectedType == "BlueBp" || selectedType == "BlueBp-New" || selectedType == "invitePartner" {
+            let  data : SearchUserModel
+            data = SwipeCardArray[index] as! SearchUserModel
+            flagUserId = data.id
+            titleString = "Are you sure you want to Flag \(data.firstName + " " + data.lastName)?" as NSString
+        }
+        else{
+            let  data : ConnectedUserModel
+            data = SwipeCardArray[index] as! ConnectedUserModel
+            flagUserId = data.connectedUser?.userId ?? 0
+            titleString = "Are you sure you want to Flag \((data.connectedUser?.firstName)! + " " + (data.connectedUser?.lastName)!)?" as NSString
+        }
         let flagReason = "Inappropriate Image"
-        let titleString: NSString = "Are you sure you want to Flag \(data.firstName + " " + data.lastName)?" as NSString
         let range = (titleString).range(of: "Flag")
         let attribute = NSMutableAttributedString.init(string: titleString as String)
         attribute.addAttribute(NSAttributedStringKey.foregroundColor as NSAttributedStringKey, value: UIColor.red, range:range)
