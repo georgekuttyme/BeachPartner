@@ -34,7 +34,7 @@ class BeachPartnerViewController: UIViewController {
         self.dropDown.width = 150
         //        self.dropDown.selectionBackgroundColor = UIColor.lightGray
         self.dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-            print("Selected item:",item," at index:",index)
+
             if(item == "My Profile"){
                 let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "profilevc1") as! CoachProfileTableViewController

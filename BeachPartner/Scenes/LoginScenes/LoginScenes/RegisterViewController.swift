@@ -96,7 +96,7 @@ class RegisterViewController: UIViewController {
             self.state = item
             print("@@@@@",self.state)
             self.statebtn.setTitle(item, for: UIControlState.normal)
-            self.statebtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
+            self.statebtn.setTitleColor(UIColor.navigationBarTintColor, for: .normal)
         }
         self.statebtn.setTitle("State", for: UIControlState.normal)
         self.statedropDown.selectRow(0)
@@ -399,10 +399,8 @@ class RegisterViewController: UIViewController {
         else {
             maxDate = eighteenYearAgo!
         }
-        let datePicker = DatePickerDialog(textColor: UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0),
-//                                          textColor: .blue,
-                                          buttonColor: UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0),
-//                                          buttonColor: .blue,
+        let datePicker = DatePickerDialog(textColor: UIColor.navigationBarTintColor,
+                                          buttonColor: UIColor.navigationBarTintColor,
                                           font: UIFont.boldSystemFont(ofSize: 17),
                                           showCancelButton: true)
 

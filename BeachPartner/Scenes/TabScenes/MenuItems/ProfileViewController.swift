@@ -346,10 +346,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         self.basicInfoColorView.isHidden = false
         self.moreInfoColorView.isHidden = false
-//        self.basicInfoBtn.setTitleColor(UIColor.blue, for: .normal)
-        self.basicInfoBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
-//        self.basicInfoColorView.backgroundColor = UIColor.blue
-        
+        self.basicInfoBtn.setTitleColor(UIColor.navigationBarTintColor, for: .normal)
         self.moreInfoBtn.setTitleColor(UIColor.lightGray, for: .normal)
         self.moreInfoColorView.backgroundColor = UIColor.white
     }
@@ -359,10 +356,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         self.basicInfoColorView.isHidden = false
         self.moreInfoColorView.isHidden = false
-//        self.moreInfoBtn.setTitleColor(UIColor.blue, for: .normal)
-        self.moreInfoBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
-        self.moreInfoColorView.backgroundColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0)
-//        self.moreInfoColorView.backgroundColor = UIColor.blue
+        self.moreInfoBtn.setTitleColor(UIColor.navigationBarTintColor, for: .normal)
+        self.moreInfoColorView.backgroundColor = UIColor.navigationBarTintColor
         self.basicInfoBtn.setTitleColor(UIColor.lightGray, for: .normal)
         self.basicInfoColorView.backgroundColor = UIColor.white
     }

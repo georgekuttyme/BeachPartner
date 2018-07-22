@@ -247,10 +247,8 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         
         //MARK: Show basic info details by default
         isBasicInformation = true
-        //        button_BasicInformation.setTitleColor(UIColor.blue, for: .normal)
-        button_BasicInformation.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
-        view_BasicLine.backgroundColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0)
-        //        view_BasicLine.backgroundColor = UIColor.blue
+        button_BasicInformation.setTitleColor(UIColor.navigationBarTintColor, for: .normal)
+        view_BasicLine.backgroundColor = UIColor.navigationBarTintColor
         view_BasicMoreSeperator.isHidden = true
         
         //MARK: Gender DropDown
@@ -260,8 +258,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         self.genderdropDown.width = 100
         self.genderdropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.genderBtn.setTitle(item, for: UIControlState.normal)
-            self.genderBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
-            //            self.genderBtn.setTitleColor(UIColor.blue, for: .normal)
+            self.genderBtn.setTitleColor(UIColor.navigationBarTintColor, for: .normal)
         }
         self.genderBtn.setTitle("Please Select", for: UIControlState.normal)
         self.genderdropDown.selectRow(0)
@@ -274,8 +271,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         self.fundeddropDown.width = 100
         self.fundeddropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.fundedBtn.setTitle(item, for: UIControlState.normal)
-            self.fundedBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
-            //            self.genderBtn.setTitleColor(UIColor.blue, for: .normal)
+            self.fundedBtn.setTitleColor(UIColor.navigationBarTintColor, for: .normal)
         }
         self.fundedBtn.setTitle("Please Select", for: UIControlState.normal)
         self.fundeddropDown.selectRow(0)
@@ -288,8 +284,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         self.shareAthletesDropDown.width = 100
         self.shareAthletesDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.shareAthletesBtn.setTitle(item, for: UIControlState.normal)
-            self.shareAthletesBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
-            //            self.genderBtn.setTitleColor(UIColor.blue, for: .normal)
+            self.shareAthletesBtn.setTitleColor(UIColor.navigationBarTintColor, for: .normal)
         }
         self.shareAthletesBtn.setTitle("Please Select", for: UIControlState.normal)
         self.shareAthletesDropDown.selectRow(0)
@@ -306,7 +301,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
             self.state = item
             print("@@@@@",self.state)
             self.stateBtn.setTitle(item, for: UIControlState.normal)
-            self.stateBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
+            self.stateBtn.setTitleColor(UIColor.navigationBarTintColor, for: .normal)
         }
         self.stateBtn.setTitle("Select your State", for: UIControlState.normal)
         self.statedropDown.selectRow(0)
@@ -350,10 +345,8 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
     
     //  MARK: Basic Info Button Action
     @IBAction func buttonActionForBasicInformation(_ basicInfoBtn: UIButton) {
-        //        view_BasicLine.backgroundColor = UIColor.blue
-        view_BasicLine.backgroundColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0)
-        //        basicInfoBtn.setTitleColor(UIColor.blue, for: .normal)
-        basicInfoBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
+        view_BasicLine.backgroundColor = UIColor.navigationBarTintColor
+        basicInfoBtn.setTitleColor(UIColor.navigationBarTintColor, for: .normal)
         isBasicInformation = true
         view_MoreLine.backgroundColor = UIColor.white
         button_MoreInformation.setTitleColor(.white, for: .normal)
@@ -361,16 +354,13 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
     }
     //  MARK: More Info Button Action
     @IBAction func buttonActionForMoreInformation(_ moreInfoBtn: UIButton) {
-        //        view_MoreLine.backgroundColor = UIColor.blue
-        view_MoreLine.backgroundColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0)
+        view_MoreLine.backgroundColor = UIColor.navigationBarTintColor
         view_BasicLine.backgroundColor = UIColor.white
         button_BasicInformation.setTitleColor(UIColor.white, for: .normal)
         isBasicInformation = false
         
-        moreInfoBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
+        moreInfoBtn.setTitleColor(UIColor.navigationBarTintColor, for: .normal)
         self.tableView.reloadData()
-        //        moreInfoBtn.setTitleColor(UIColor.blue, for: .normal)
-        
     }
     
     
@@ -657,7 +647,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         //            imagePickerController.cameraOverlayView = overlayView
         //        }
         
-        imagePickerController.navigationBar.barTintColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0)// Background color
+        imagePickerController.navigationBar.barTintColor = UIColor.navigationBarTintColor// Background color
         imagePickerController.navigationBar.tintColor = UIColor.white // Cancel button ~ any UITabBarButton items
         imagePickerController.navigationBar.titleTextAttributes = [
             NSAttributedStringKey.foregroundColor : UIColor.white

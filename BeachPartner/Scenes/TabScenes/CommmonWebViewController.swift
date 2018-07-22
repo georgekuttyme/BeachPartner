@@ -43,8 +43,7 @@ class CommmonWebViewController: UIViewController,UIWebViewDelegate {
         let barButtonItemAppearance = UIBarButtonItem.appearance()
         barButtonItemAppearance.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.white], for: .normal)
         UIPickerView.appearance().tintColor = UIColor.red
-        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UIToolbar.self]).setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor(red: 32.0/255.0, green: 48.0/255.0, blue: 127.0/255.0, alpha: 1.0)], for: .normal)
-//        (red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0)
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UIToolbar.self]).setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.statusBarTintColor], for: .normal)
         titleLbl.text = titleText
         if titleText == "About Us"{
             contentType = "https://www.beachpartner.com/about_us.html"

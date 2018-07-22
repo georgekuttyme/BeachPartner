@@ -204,7 +204,7 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
                 cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
                 cell?.profileImageView.clipsToBounds = true
                 //            cell?.profileImage.layer.borderColor = UIColor.blue.cgColor
-                cell?.profileImageView.layer.borderColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0).cgColor
+                cell?.profileImageView.layer.borderColor = UIColor.navigationBarTintColor.cgColor
                 cell?.profileImageView.layer.borderWidth = 1.5
                 
                 cell?.noteButton.tag = indexPath.row+300000
@@ -232,7 +232,7 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
                     cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
                     cell?.profileImageView.clipsToBounds = true
                     //            cell?.profileImage.layer.borderColor = UIColor.blue.cgColor
-                    cell?.profileImageView.layer.borderColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0).cgColor
+                    cell?.profileImageView.layer.borderColor = UIColor.navigationBarTintColor.cgColor
                     cell?.profileImageView.layer.borderWidth = 1.5
                     
                     cell?.noteButton.tag = indexPath.row+300000
@@ -252,7 +252,7 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
                     cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
                     cell?.profileImageView.clipsToBounds = true
                     //            cell?.profileImage.layer.borderColor = UIColor.blue.cgColor
-                    cell?.profileImageView.layer.borderColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0).cgColor
+                    cell?.profileImageView.layer.borderColor = UIColor.navigationBarTintColor.cgColor
                     cell?.profileImageView.layer.borderWidth = 1.5
                     
                     cell?.noteButton.tag = indexPath.row+300000
@@ -274,7 +274,7 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
             cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
             cell?.profileImageView.clipsToBounds = true
             //            cell?.profileImage.layer.borderColor = UIColor.blue.cgColor
-            cell?.profileImageView.layer.borderColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0).cgColor
+            cell?.profileImageView.layer.borderColor = UIColor.navigationBarTintColor.cgColor
             cell?.profileImageView.layer.borderWidth = 1.5
             
             cell?.noteButton.tag = indexPath.row+300000

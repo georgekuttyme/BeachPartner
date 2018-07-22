@@ -16,24 +16,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     static var shared: AppDelegate { return UIApplication.shared.delegate as! AppDelegate }
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        UIApplication.shared.statusBarView?.backgroundColor = UIColor(red: 56.0/255.0, green: 68.0/255.0, blue: 134.0/255.0, alpha: 1.0)
-        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
+        
+        UIApplication.shared.statusBarView?.backgroundColor = UIColor.statusBarTintColor
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.whiteColor]
+        UINavigationBar.appearance().barTintColor = UIColor.navigationBarTintColor
+        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.whiteColor]
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributes, for: .normal)
-        
         let barButtonItemAppearance = UIBarButtonItem.appearance()
-        barButtonItemAppearance.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.clear], for: .normal)
-        
-        UINavigationBar.appearance().tintColor = UIColor.white
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
-        UINavigationBar.appearance().barTintColor = UIColor(red: 32.0/255.0, green: 48.0/255.0, blue: 127.0/255.0, alpha: 1.0)
+        barButtonItemAppearance.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.clearColor], for: .normal)
 
         FirebaseApp.configure()
         application.registerForRemoteNotifications()
         Messaging.messaging().delegate = self
         Messaging.messaging().shouldEstablishDirectChannel = true
         requestNotificationAuthorization(application: application)
+        
         if let userInfo = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] {
             NSLog("[RemoteNotification] applicationState: \(applicationStateString) didFinishLaunchingWithOptions for iOS9: \(userInfo)")
             //TODO: Handle background notification
@@ -78,13 +77,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 switch settings.soundSetting{
                 case .enabled:
-                    
                     print("enabled sound setting")
-                    
                 case .disabled:
-                    
                     print("setting has been disabled")
-                    
                 case .notSupported:
                     print("something vital went wrong here")
                 }
@@ -134,8 +129,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         let pushUserId = userInfo["gcm.notification.user_id"] ?? ""
         let pushEventId = userInfo["gcm.notification.event_id"] ?? ""
         let currentUserId = UserDefaults.standard.string(forKey: "bP_userId") ?? ""
-        NSLog("[UserNotificationCenter] applicationState: \(applicationStateString) willPresentNotification: \(userInfo): \(String(describing: pushUserId))  -- \(pushUserId) ** \(currentUserId)  //  \(pushEventId)  ++ \(String(describing: pushEventId))")
-        
         if String(describing: pushUserId) == currentUserId{
             completionHandler([.alert, .sound])
         }
@@ -148,13 +141,12 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         let pushEventId = userInfo["gcm.notification.event_id"] ?? ""
         let pushUserId = userInfo["gcm.notification.user_id"] ?? ""
         let currentUserId = UserDefaults.standard.string(forKey: "bP_userId") ?? ""
-        NSLog("[UserNotificationCenter] applicationState: \(applicationStateString) didReceiveResponse: \(userInfo)   | EventId  \(pushEventId)  |  userID= \(String(describing: pushUserId))")
+        
         if String(describing: pushUserId) == currentUserId {
             if let aps = userInfo["aps"] as? NSDictionary {
                 if let category = aps["category"] as? String {
                     print(category,"")
-                    let eventId:[String: String
-                        ] = ["eventID": String(describing: pushEventId)]
+                    let eventId:[String: String] = ["eventID": String(describing: pushEventId)]
                     if category == "HIFI"{
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "foreground-pushNotification"), object: nil,userInfo:userInfo)
                         print("&&&&&&&&")

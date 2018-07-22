@@ -342,8 +342,7 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
             
             cell?.profileImage.layer.cornerRadius = (cell?.profileImage?.frame.size.width)!/2
             cell?.profileImage.clipsToBounds = true
-            //            cell?.profileImage.layer.borderColor = UIColor.blue.cgColor
-            cell?.profileImage.layer.borderColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0).cgColor
+            cell?.profileImage.layer.borderColor = UIColor.navigationBarTintColor.cgColor
             cell?.profileImage.layer.borderWidth = 1.5
             
             
@@ -399,8 +398,7 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
             
             cell?.profileImage.layer.cornerRadius = (cell?.profileImage?.frame.size.width)!/2
             cell?.profileImage.clipsToBounds = true
-            cell?.profileImage.layer.borderColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0).cgColor
-            //            cell?.profileImage.layer.borderColor = UIColor.blue.cgColor
+            cell?.profileImage.layer.borderColor = UIColor.navigationBarTintColor.cgColor
             cell?.profileImage.layer.borderWidth = 1.5
             
             cell?.addBtn.isHidden = true

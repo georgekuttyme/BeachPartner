@@ -410,10 +410,8 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         
         //MARK: Show basic info details by default
         isBasicInformation = true
-//        button_BasicInformation.setTitleColor(UIColor.blue, for: .normal)
-        button_BasicInformation.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
-        view_BasicLine.backgroundColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0)
-//        view_BasicLine.backgroundColor = UIColor.blue
+        button_BasicInformation.setTitleColor(UIColor.navigationBarTintColor, for: .normal)
+        view_BasicLine.backgroundColor = UIColor.navigationBarTintColor
         view_BasicMoreSeperator.isHidden = true
         
         self.shareDataDropDown.anchorView = self.shareBtn
@@ -468,7 +466,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.genderdropDown.width = 100
         self.genderdropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.genderBtn.setTitle(item, for: UIControlState.normal)
-            self.genderBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
+            self.genderBtn.setTitleColor(UIColor.navigationBarTintColor, for: .normal)
         }
         self.genderBtn.setTitle("", for: UIControlState.normal)
         self.genderdropDown.selectRow(0)
@@ -481,7 +479,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.experiencedropDown.width = 300
         self.experiencedropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.experienceBtn.setTitle(item, for: UIControlState.normal)
-            self.experienceBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
+            self.experienceBtn.setTitleColor(UIColor.navigationBarTintColor, for: .normal)
         }
         self.experienceBtn.setTitle("", for: UIControlState.normal)
         self.experiencedropDown.selectRow(0)
@@ -493,7 +491,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.courtSidePreferencedropDown.width = 300
         self.courtSidePreferencedropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.courtSidePreferenceBtn.setTitle(item, for: UIControlState.normal)
-            self.courtSidePreferenceBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
+            self.courtSidePreferenceBtn.setTitleColor(UIColor.navigationBarTintColor, for: .normal)
         }
         self.courtSidePreferenceBtn.setTitle("", for: UIControlState.normal)
         self.courtSidePreferencedropDown.selectRow(0)
@@ -506,7 +504,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.positiondropDown.width = 300
         self.positiondropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.positionBtn.setTitle(item, for: UIControlState.normal)
-            self.positionBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
+            self.positionBtn.setTitleColor(UIColor.navigationBarTintColor, for: .normal)
         }
         self.positionBtn.setTitle("", for: UIControlState.normal)
         self.positiondropDown.selectRow(0)
@@ -519,7 +517,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
 //        self.tournamentLevelInterestdropDown.width = 200
 //        self.tournamentLevelInterestdropDown.selectionAction = { [unowned self] (index: Int, item: String) in
 //            self.tournamentLevelInterestBtn.setTitle(item, for: UIControlState.normal)
-//            self.tournamentLevelInterestBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
+//            self.tournamentLevelInterestBtn.setTitleColor(UIColor.navigationBarTintColor, for: .normal)
 ////            self.tournamentLevelInterestBtn.setTitleColor(UIColor.blue, for: .normal)
 //        }
 //        self.tournamentLevelInterestBtn.setTitle("", for: UIControlState.normal)
@@ -532,7 +530,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
 //        self.highestTourRatingEarneddropDown.width = 200
 //        self.highestTourRatingEarneddropDown.selectionAction = { [unowned self] (index: Int, item: String) in
 //            self.highestTourRatingEarnedBtn.setTitle(item, for: UIControlState.normal)
-//            self.highestTourRatingEarnedBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
+//            self.highestTourRatingEarnedBtn.setTitleColor(UIColor.navigationBarTintColor, for: .normal)
 ////            self.highestTourRatingEarnedBtn.setTitleColor(UIColor.blue, for: .normal)
 //        }
 //        self.highestTourRatingEarnedBtn.setTitle("", for: UIControlState.normal)
@@ -545,7 +543,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.heightdropDown.width = 300
         self.heightdropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.heightBtn.setTitle(item, for: UIControlState.normal)
-            self.heightBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
+            self.heightBtn.setTitleColor(UIColor.navigationBarTintColor, for: .normal)
 
         }
         self.heightBtn.setTitle("", for: UIControlState.normal)
@@ -561,7 +559,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             self.state = item
             print("@@@@@",self.state)
             self.stateBtn.setTitle(item, for: UIControlState.normal)
-            self.stateBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
+            self.stateBtn.setTitleColor(UIColor.navigationBarTintColor, for: .normal)
         }
         self.stateBtn.setTitle("Select your State", for: UIControlState.normal)
         self.statedropDown.selectRow(0)
@@ -574,7 +572,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.willingnessToTraveldropDown.width = 300
         self.willingnessToTraveldropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.willingnessToTravelBtn.setTitle(item, for: UIControlState.normal)
-            self.willingnessToTravelBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
+            self.willingnessToTravelBtn.setTitleColor(UIColor.navigationBarTintColor, for: .normal)
 
         }
         self.willingnessToTravelBtn.setTitle("", for: UIControlState.normal)
@@ -636,10 +634,8 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     
     //  MARK: Basic Info Button Action
     @IBAction func buttonActionForBasicInformation(_ basicInfoBtn: UIButton) {
-//        view_BasicLine.backgroundColor = UIColor.blue
-        view_BasicLine.backgroundColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0)
-//        basicInfoBtn.setTitleColor(UIColor.blue, for: .normal)
-        basicInfoBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
+        view_BasicLine.backgroundColor = UIColor.navigationBarTintColor
+        basicInfoBtn.setTitleColor(UIColor.navigationBarTintColor, for: .normal)
         isBasicInformation = true
         view_MoreLine.backgroundColor = UIColor.white
         button_MoreInformation.setTitleColor(.white, for: .normal)
@@ -647,18 +643,13 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     }
     //  MARK: More Info Button Action
     @IBAction func buttonActionForMoreInformation(_ moreInfoBtn: UIButton) {
-//        view_MoreLine.backgroundColor = UIColor.blue
-        view_MoreLine.backgroundColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0)
+        view_MoreLine.backgroundColor = UIColor.navigationBarTintColor
         view_BasicLine.backgroundColor = UIColor.white
         button_BasicInformation.setTitleColor(UIColor.white, for: .normal)
         isBasicInformation = false
         
-        moreInfoBtn.setTitleColor(UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0), for: .normal)
+        moreInfoBtn.setTitleColor(UIColor.navigationBarTintColor, for: .normal)
         self.tableView.reloadData()
-//        moreInfoBtn.setTitleColor(UIColor.blue, for: .normal)
-        
-        
-        
     }
     @IBAction func editBtnClicked(_ sender: Any) {
 
@@ -946,7 +937,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         //            imagePickerController.cameraOverlayView = overlayView
         //        }
         
-        imagePickerController.navigationBar.barTintColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0)// Background color
+        imagePickerController.navigationBar.barTintColor = UIColor.navigationBarTintColor // Background color
         imagePickerController.navigationBar.tintColor = UIColor.white // Cancel button ~ any UITabBarButton items
         imagePickerController.navigationBar.titleTextAttributes = [
             NSAttributedStringKey.foregroundColor : UIColor.white
@@ -1756,8 +1747,7 @@ extension UITextField {
         self.layer.cornerRadius = 5
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.lightGray.cgColor
-//        self.textColor = UIColor.blue
-        self.textColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0)
+        self.textColor = UIColor.navigationBarTintColor
         
     }
     func disableTextFld() {

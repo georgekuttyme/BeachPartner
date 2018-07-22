@@ -55,7 +55,7 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
         let floaty = Floaty()
         floaty.size = 45
         floaty.paddingY = 85
-        floaty.buttonColor = UIColor(red: 41/255.0, green: 56/255.0, blue: 133/255.0, alpha:1.0)
+        floaty.buttonColor = UIColor.navigationBarTintColor
         floaty.plusColor = UIColor.white
         floaty.addItem("", icon: UIImage(named: "highfive")!,handler: { item in
             self.navigationController?.popViewController(animated: false);

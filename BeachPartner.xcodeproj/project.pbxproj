@@ -107,6 +107,7 @@
 		3BF0B1BB205BC1000043CFB2 /* ConnectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF0B1B9205BC1000043CFB2 /* ConnectionsViewController.swift */; };
 		5E023EB4207A9C4900DFC27B /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E023EB3207A9C4900DFC27B /* ChatViewController.swift */; };
 		5E0543AB2081C0C3002744D8 /* SubscriptionUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0543AA2081C0C3002744D8 /* SubscriptionUserModel.swift */; };
+		5E0D1B502104FE180062AF58 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0D1B4F2104FE180062AF58 /* AppColors.swift */; };
 		5E1648812095837500983043 /* PasswordResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E16487F2095837500983043 /* PasswordResetViewController.swift */; };
 		5E1648832095F1A400983043 /* ConnectedUsersCountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1648822095F1A400983043 /* ConnectedUsersCountModel.swift */; };
 		5EF313AB20947BD2007DA661 /* ProfileUpdateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF313AA20947BD2007DA661 /* ProfileUpdateModel.swift */; };
@@ -256,6 +257,7 @@
 		5E023EB3207A9C4900DFC27B /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		5E023EB8207AA1CD00DFC27B /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		5E0543AA2081C0C3002744D8 /* SubscriptionUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionUserModel.swift; sourceTree = "<group>"; };
+		5E0D1B4F2104FE180062AF58 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		5E16487F2095837500983043 /* PasswordResetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordResetViewController.swift; sourceTree = "<group>"; };
 		5E1648822095F1A400983043 /* ConnectedUsersCountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedUsersCountModel.swift; sourceTree = "<group>"; };
 		5EF313AA20947BD2007DA661 /* ProfileUpdateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUpdateModel.swift; sourceTree = "<group>"; };
@@ -711,14 +713,14 @@
 				3BE40F6C203EB07D00EA7DFC /* Resources */,
 				3BE40F6B203EB06A00EA7DFC /* Classes */,
 				3BE40F6A203EB05600EA7DFC /* AppDelegate */,
-				3BE40F69203EB04500EA7DFC /* APIManagement */,
 				3BE40F68203EB03600EA7DFC /* Scenes */,
 				FFEBEB5C20BE6EB900521041 /* SubscriptionScenes */,
+				3BE40F69203EB04500EA7DFC /* APIManagement */,
 				3BE40F67203EB02500EA7DFC /* Extensions */,
+				3BE40F6F203EB09E00EA7DFC /* LaunchScene */,
 				3BE40F57203EAEC100EA7DFC /* ViewController.swift */,
 				3BE40F59203EAEC100EA7DFC /* Main.storyboard */,
 				3BE40F5C203EAEC100EA7DFC /* Assets.xcassets */,
-				3BE40F6F203EB09E00EA7DFC /* LaunchScene */,
 				3BE40F61203EAEC100EA7DFC /* Info.plist */,
 				843F356B2084F8CE00E268D6 /* GoogleService-Info.plist */,
 				5E023EB8207AA1CD00DFC27B /* Bridging-Header.h */,
@@ -738,6 +740,7 @@
 				3B49C38A2068DDE5007186E8 /* UITextField+Empty.swift */,
 				3B49C38C2068DF44007186E8 /* UIViewController+Alert.swift */,
 				3B0DEE0A206B5EE500686609 /* UIView+IBInspectable.swift */,
+				5E0D1B4F2104FE180062AF58 /* AppColors.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1183,6 +1186,7 @@
 				8D65CAEA20CE95230008CD7F /* UpdateFcmTokenRespModel.swift in Sources */,
 				FF32756A20BFE355009345B1 /* GetSubscriptionPlanModel.swift in Sources */,
 				3B0DEE92206D095500686609 /* CardView.swift in Sources */,
+				5E0D1B502104FE180062AF58 /* AppColors.swift in Sources */,
 				3B60278B20494FA3006B108A /* SettingsViewController.swift in Sources */,
 				5EF313AD209506F4007DA661 /* ForgotPassModel.swift in Sources */,
 			);
