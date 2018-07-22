@@ -346,10 +346,10 @@ class RegisterViewController: UIViewController {
     
     @IBAction func pressedButton(_ sender: UIButton) {
         
-        if sender.backgroundColor == UIColor(red: 32.0/255, green: 48.0/255, blue: 127.0/255, alpha: 1.0) {
+        if sender.backgroundColor == UIColor.statusBarTintColor {
             return
         }
-        sender.backgroundColor = UIColor(red: 32.0/255, green: 48.0/255, blue: 127.0/255, alpha: 1.0)
+        sender.backgroundColor = UIColor.statusBarTintColor
         sender.setTitleColor(UIColor.white, for: UIControlState.normal)
         
         switch sender {

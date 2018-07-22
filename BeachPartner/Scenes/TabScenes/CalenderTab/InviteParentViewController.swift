@@ -15,7 +15,6 @@ class InviteParentViewController: ButtonBarPagerTabStripViewController {
     var event: GetEventRespModel?
     var eventInvitation: GetEventInvitationRespModel?
     
-    //    let purpleInspireColor = UIColor(red:0.13, green:0.03, blue:0.25, alpha:1.0)
     override func viewDidLoad() {
         super.viewDidLoad()
         

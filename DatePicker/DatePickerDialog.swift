@@ -65,8 +65,7 @@ open class DatePickerDialog: UIView {
         self.dialogView!.layer.opacity = 0.5
         self.dialogView!.layer.transform = CATransform3DMakeScale(1.3, 1.3, 1)
 
-        self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
-
+        self.backgroundColor = UIColor.blackColorWithoutAlfa
         self.addSubview(self.dialogView!)
     }
 
@@ -120,7 +119,7 @@ open class DatePickerDialog: UIView {
             delay: 0,
             options: .curveEaseInOut,
             animations: {
-                self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4)
+                self.backgroundColor = UIColor.blackColorWithAlfaMin
                 self.dialogView!.layer.opacity = 1
                 self.dialogView!.layer.transform = CATransform3DMakeScale(1, 1, 1)
         }
@@ -142,7 +141,7 @@ open class DatePickerDialog: UIView {
             delay: 0,
             options: [],
             animations: {
-                self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
+                self.backgroundColor = UIColor.blackColorWithoutAlfa
                 let transform = CATransform3DConcat(currentTransform, CATransform3DMakeScale(0.6, 0.6, 1))
                 self.dialogView.layer.transform = transform
                 self.dialogView.layer.opacity = 0
