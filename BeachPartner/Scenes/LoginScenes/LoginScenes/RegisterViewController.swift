@@ -46,7 +46,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet var statebtn: UIButton!
     let statedropDown = DropDown()
     
-    var gender = ""
+    var gender = "Male"
     var userType = "Athlete"
     var maxDate = Date()
     let dateformatter = DateFormatter()
@@ -290,7 +290,6 @@ class RegisterViewController: UIViewController {
                 }
         }
        
-        
         if sucessValidation == currentValidation {
         
             if gender == "" {
