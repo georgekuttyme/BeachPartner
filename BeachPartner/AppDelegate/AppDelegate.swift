@@ -9,13 +9,15 @@
 import UIKit
 import Firebase
 import UserNotifications
+import Braintree
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     static var shared: AppDelegate { return UIApplication.shared.delegate as! AppDelegate }
-
+    let urlScheme = "com.beachpartnerllc.beachpartner.payments"
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         UIApplication.shared.statusBarView?.backgroundColor = UIColor.statusBarTintColor
@@ -27,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let barButtonItemAppearance = UIBarButtonItem.appearance()
         barButtonItemAppearance.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.clearColor], for: .normal)
 
+        
         FirebaseApp.configure()
         application.registerForRemoteNotifications()
         Messaging.messaging().delegate = self
@@ -40,7 +43,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if Messaging.messaging().fcmToken != nil {
             configureTopicSubscriptions()
         }
-//        UIApplication.shared.applicationIconBadgeNumber = 0
+        
+        BTAppSwitch.setReturnURLScheme(urlScheme)
+//      UIApplication.shared.applicationIconBadgeNumber = 0
         
         return true
     }
@@ -119,7 +124,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(userInfo)
     }
 
-
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
+        if url.scheme?.localizedCaseInsensitiveCompare(urlScheme) == .orderedSame {
+            return BTAppSwitch.handleOpen(url, options: options)
+        }
+        return false
+    }
+    
 }
 @available(iOS 10, *)
 extension AppDelegate : UNUserNotificationCenterDelegate {

@@ -108,6 +108,7 @@
 		5E023EB4207A9C4900DFC27B /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E023EB3207A9C4900DFC27B /* ChatViewController.swift */; };
 		5E0543AB2081C0C3002744D8 /* SubscriptionUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0543AA2081C0C3002744D8 /* SubscriptionUserModel.swift */; };
 		5E0D1B502104FE180062AF58 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0D1B4F2104FE180062AF58 /* AppColors.swift */; };
+		5E102A702108FAF7004C9300 /* PaymentRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E102A6F2108FAF7004C9300 /* PaymentRequestModel.swift */; };
 		5E1648812095837500983043 /* PasswordResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E16487F2095837500983043 /* PasswordResetViewController.swift */; };
 		5E1648832095F1A400983043 /* ConnectedUsersCountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1648822095F1A400983043 /* ConnectedUsersCountModel.swift */; };
 		5EF313AB20947BD2007DA661 /* ProfileUpdateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF313AA20947BD2007DA661 /* ProfileUpdateModel.swift */; };
@@ -258,6 +259,7 @@
 		5E023EB8207AA1CD00DFC27B /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		5E0543AA2081C0C3002744D8 /* SubscriptionUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionUserModel.swift; sourceTree = "<group>"; };
 		5E0D1B4F2104FE180062AF58 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
+		5E102A6F2108FAF7004C9300 /* PaymentRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRequestModel.swift; sourceTree = "<group>"; };
 		5E16487F2095837500983043 /* PasswordResetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordResetViewController.swift; sourceTree = "<group>"; };
 		5E1648822095F1A400983043 /* ConnectedUsersCountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedUsersCountModel.swift; sourceTree = "<group>"; };
 		5EF313AA20947BD2007DA661 /* ProfileUpdateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUpdateModel.swift; sourceTree = "<group>"; };
@@ -643,6 +645,7 @@
 				846C010320EB386B0030490A /* updateCityRespModel.swift */,
 				8D65CAEB20CE95580008CD7F /* CheckAppVersionRespModel.swift */,
 				8459CEB621006BD200DCEC93 /* FlagRespModel.swift */,
+				5E102A6F2108FAF7004C9300 /* PaymentRequestModel.swift */,
 			);
 			path = AuthModels;
 			sourceTree = "<group>";
@@ -996,6 +999,8 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/Braintree/Braintree.framework",
+				"${BUILT_PRODUCTS_DIR}/BraintreeDropIn/BraintreeDropIn.framework",
 				"${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
@@ -1025,6 +1030,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Braintree.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BraintreeDropIn.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DropDown.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
@@ -1185,6 +1192,7 @@
 				3BF0B1BA205BC1000043CFB2 /* CustomCell.swift in Sources */,
 				8D65CAEA20CE95230008CD7F /* UpdateFcmTokenRespModel.swift in Sources */,
 				FF32756A20BFE355009345B1 /* GetSubscriptionPlanModel.swift in Sources */,
+				5E102A702108FAF7004C9300 /* PaymentRequestModel.swift in Sources */,
 				3B0DEE92206D095500686609 /* CardView.swift in Sources */,
 				5E0D1B502104FE180062AF58 /* AppColors.swift in Sources */,
 				3B60278B20494FA3006B108A /* SettingsViewController.swift in Sources */,

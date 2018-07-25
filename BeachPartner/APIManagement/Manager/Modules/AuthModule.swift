@@ -1627,6 +1627,69 @@ extension APIManager{
         }
     }
     
+    // MARK:- Payment services
+    
+    public func requestForPaymentPaln(planId:Int ,amount:Int, sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure){
+        
+        let params: [String: Any] = [
+            "paymentAmount": amount ,
+            "planId": planId ,
+            ]
+        APIClient.doRequest.inPostReq(method: ApiMethods.paymentRequest, params: params as! [String : Any], sucess: { (response) in
+            APIManager.printOnDebug(response: " Resppp1111 : \(String(describing: response))")
+            
+            let jsonDict = response
+            do {
+                let accRespModel = try PaymentModel(jsonDict! as! [String : Any])
+                sucessResult(accRespModel)
+                return
+            } catch {
+                print("Catched")
+                errorResult(error.localizedDescription)
+                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                return
+            }
+        }) { (error) in
+            self.busyOff()
+            errorResult(error?.localizedDescription)
+            APIManager.printOnDebug(response: "error:\(String(describing: error?.localizedDescription))")
+            return
+        }
+        
+    }
+    
+    public func PaymentResponse(nonce:String ,transactionId:String, sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure){
+        
+        let params: [String: Any] = [
+            "braintreeNonce": nonce ,
+            "transactionId": transactionId ,
+            ]
+        APIClient.doRequest.inPostReq(method: ApiMethods.paymentResponse, params: params as! [String : Any], sucess: { (response) in
+            APIManager.printOnDebug(response: " Resppp1111 : \(String(describing: response))")
+            
+            let jsonDict = response
+            do {
+                let accRespModel = try PaymentModel(jsonDict! as! [String : Any])
+                sucessResult(accRespModel)
+                return
+            } catch {
+                print("Catched")
+                errorResult(error.localizedDescription)
+                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                return
+            }
+        }) { (error) in
+            self.busyOff()
+            errorResult(error?.localizedDescription)
+            APIManager.printOnDebug(response: "error:\(String(describing: error?.localizedDescription))")
+            return
+        }
+        
+    }
+    
+    
+    
+    
 }
 
 

@@ -12,14 +12,14 @@ import Foundation
 class BaseUrl {
     //    dev1.singx.co:8444
     //    http://34.215.18.181:8080/swagger/index.html#/
-    static let developmentUrl =  "http://beachpartner.com:8080/api"
+    static let developmentUrl =  "http://35.196.227.120:8080/api"
     static let productionUrl  = "http://beachpartner.com:8080/api"
     static let fcmbaseUrl = "https://beachpartner-6cd7a.firebaseio.com"
-     static let fcmMessageUrl = "https://fcm.googleapis.com"
+    static let fcmMessageUrl = "https://fcm.googleapis.com"
     //http://34.215.18.181:8080/api
     class func makeUrl(forProduction:Bool) -> String {
         if forProduction {
-            return developmentUrl
+            return productionUrl
         }else{
             return developmentUrl
         }
@@ -105,7 +105,6 @@ struct ApiMethods {
     static let resendotp   = "/secure/TransactionInfo/getOtpReceiver"
     
     
-    
     static let findByFromToCountryId   = "/secure/Corridor/FindByFromToCountryId/"
     
     static let transferEnquirySaveVal   = "/secure/TransferEnquiry/save"
@@ -130,6 +129,10 @@ struct ApiMethods {
     static let transHistory   = "/secure/queryExecutor/getData"
     
     static let cancelTransaction   = "/secure/TransferEnquiry/cancel"
+    
+    static let paymentRequest   = "/payment/payment-request"
+    
+    static let paymentResponse   = "/payment/payment-response"
     
     
 }
