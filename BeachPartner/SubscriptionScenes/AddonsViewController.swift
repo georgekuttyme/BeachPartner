@@ -7,15 +7,19 @@
 //
 
 import UIKit
+import BraintreeDropIn
+import Braintree
 
 class AddonsViewController: UIViewController {
-    
+//    var plan =
     var profileBoostmode = false
     var readMoreClicked:Bool = false
     var selectedReadMoreIndex = -1
     var selectedIndex = -1
     var readMoreButtonTitle: String = "Read more"
     var addonPlans = [SubscriptionPlanModel]()
+    var transactionId:String = ""
+    
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -95,6 +99,80 @@ class AddonsViewController: UIViewController {
         }
     }
     
+    // MARK:- Payment services
+    
+    func requestForSubscribe(planId:Int, amount:Int)  {
+        ActivityIndicatorView.addActivityOnView(tableView.superview)
+        ActivityIndicatorView.show("Loading...")
+        
+        APIManager.callServer.requestForPaymentPaln(planId: planId, amount: amount, sucessResult: { (responseModel) in
+            
+            ActivityIndicatorView.hiding()
+            guard let paymentDetailsModel = responseModel as? PaymentModel else {
+                print("Rep model does not match")
+                return
+            }
+            if paymentDetailsModel.status == "SUCCESS"
+            {
+                self.transactionId = paymentDetailsModel.transactionId
+                self.requestForNonce(clientToken: paymentDetailsModel.clientToken, amount: "100")
+            }
+            
+        }) { (errorMessage) in
+            ActivityIndicatorView.hiding()
+            guard let errorString  = errorMessage else {
+                return
+            }
+            self.alert(message: errorString)
+        }
+        
+    }
+
+    //MARK:- BrainTreeServices
+    
+    func requestForNonce(clientToken:String,amount:String)  {
+        
+        let request =  BTDropInRequest()
+        let dropIn = BTDropInController(authorization: clientToken, request: request)
+        { [unowned self] (controller, result, error) in
+            
+            if let error = error {
+                self.alert(message: error.localizedDescription)
+                
+            } else if (result?.isCancelled == true) {
+                self.alert(message: "Transaction Cancelled")
+                
+            } else if let nonce = result?.paymentMethod?.nonce {
+                self.sendRequestPaymentResponse(nonce: nonce, amount: amount)
+            }
+            controller.dismiss(animated: true, completion: nil)
+        }
+        self.present(dropIn!, animated: true, completion: nil)
+    }
+    
+    func sendRequestPaymentResponse(nonce: String, amount: String) {
+        ActivityIndicatorView.addActivityOnView(tableView.superview)
+        ActivityIndicatorView.show("Loading...")
+        
+        APIManager.callServer.PaymentResponse(nonce: nonce, transactionId: self.transactionId, sucessResult: { (responseModel) in
+            
+            ActivityIndicatorView.hiding()
+            guard let paymentDetailsModel = responseModel as? PaymentModel else {
+                print("Rep model does not match")
+                return
+            }
+            print(paymentDetailsModel)
+            
+        }) { (errorMessage) in
+            ActivityIndicatorView.hiding()
+            guard let errorString  = errorMessage else {
+                return
+            }
+            self.alert(message: errorString)
+        }
+    }
+
+    
 // MARK: -- Button Actions
     
     @IBAction func didTapBackButton(_ sender: UIButton) {
@@ -102,7 +180,11 @@ class AddonsViewController: UIViewController {
     }
     
     @IBAction func didTapProceedButton(_ sender: UIButton) {
-        
+        guard let plan:SubscriptionPlanModel? = addonPlans[selectedIndex] else {
+            return
+        }
+        print(addonPlans[selectedIndex],selectedIndex)
+        requestForSubscribe(planId: (plan?.id)!, amount: Int((plan?.monthlycharge)!))
     }
     
     @objc private func showPlanDetails(sender: UIButton) {

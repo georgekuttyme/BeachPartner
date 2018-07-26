@@ -648,12 +648,12 @@ extension APIManager{
         }
     }
  
-    public func getUserSubscriptionList(type:String, sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure){
+    public func getUserSubscriptionList(sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure){
         let params = [String:String]()
         
         let userId = UserDefaults.standard.string(forKey: "bP_userId") ?? ""
         let trimmeduserId = userId.trimmingCharacters(in: .whitespaces)
-        let type = "subscriptionType="+"\(type)"+"&hideConnectedUser=true&hideLikedUser=true&hideRejectedConnections=true&hideBlockedUsers=true&showReceived=true"
+        let type = "subscriptionType=BlueBP&hideConnectedUser=true&hideLikedUser=true&hideRejectedConnections=true&hideBlockedUsers=true&showReceived=true"
         
         APIGetClient.doGetRequest.inGetReqForArray(method:ApiMethods.getSubscription + "?\(type)"  , params: params, sucess: { (response) in
             
