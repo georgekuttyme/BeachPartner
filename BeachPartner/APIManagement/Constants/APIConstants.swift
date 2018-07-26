@@ -16,7 +16,7 @@ class BaseUrl {
     static let productionUrl  = "http://beachpartner.com:8080/api"
     static let fcmbaseUrl = "https://beachpartner-6cd7a.firebaseio.com"
     static let fcmMessageUrl = "https://fcm.googleapis.com"
-    //http://34.215.18.181:8080/api
+    //http://35.196.227.120:8080/api
     class func makeUrl(forProduction:Bool) -> String {
         if forProduction {
             return productionUrl
