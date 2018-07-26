@@ -593,9 +593,11 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     
     func flagingUser(flagId:Int,flagReason:String){
         APIManager.callServer.flagInappropriateUser(flagId: flagId, flagReason: flagReason, sucessResult: { (response) in
+            
             guard let flagRespModel = response as? FlagRespModel else{
                 return
             }
+
             print("===",flagRespModel)
         }, errorResult: { (error) in
             //                stopLoading()
@@ -1147,6 +1149,11 @@ extension BPCardsVC: KolodaViewDataSource {
                     view.videoView = self.videoView
                 }
             }
+            if data.status == "Flagged"{
+                view.flagBtn.isEnabled = false
+                view.flagBtn.isHidden = true
+                //view.flagBtn.setImage(UIImage(named:"grayback"), for: .normal)
+            }
             view.flagBtn.tag = index
              view.flagBtn.addTarget(self, action: #selector(flagBtnClick(sender:)), for: UIControlEvents.touchUpInside)
             view.moveDown.addTarget(self, action:#selector(moveDownScroll(sender:)), for: UIControlEvents.touchUpInside)
@@ -1161,6 +1168,10 @@ extension BPCardsVC: KolodaViewDataSource {
                     self.videoView.isMuted = true
                     view.videoView = self.videoView
                 }
+            }
+            if data.status == "Flagged"{
+                view.flagBtn.isEnabled = false
+                view.flagBtn.isHidden = true
             }
             view.flagBtn.addTarget(self, action: #selector(flagBtnClick(sender:)), for: UIControlEvents.touchUpInside)
             
