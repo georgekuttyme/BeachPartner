@@ -49,7 +49,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     
     var selectedTabViewController:Int!
     var getAllEventsUsers = [GetUpcomingTournamentsRespModel]()
-    var subscribedBlueBpUsers = [SearchUserModel]()
+    var subscribedBlueBpUsers = [SubscriptionUserModel]()
     var connectedUsers = [ConnectedUserModel]()
     var activeUsers = [ConnectedUserModel]()
     var recentChatList = [[String:String]]()
@@ -407,11 +407,11 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         
         print("collectionView == ", collectionView)
         if collectionView == self.topUserListCollectionView {
-            let blueBpData = subscribedBlueBpUsers[indexPath.row]
+            let blueBpData = subscribedBlueBpUsers[indexPath.row].connectedUser
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BlueBPCollectionViewCell", for: indexPath) as! BlueBPCollectionViewCell
             
-            if let imageUrl = URL(string: (blueBpData.imageUrl)) {
+            if let imageUrl = URL(string: (blueBpData?.imageUrl)!) {
                 cell.imageView.sd_setIndicatorStyle(.whiteLarge)
                 cell.imageView.sd_setShowActivityIndicatorView(true)
                 cell.imageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
@@ -555,7 +555,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             let newViewController = self.storyboard?.instantiateViewController(withIdentifier: "ComponentBPcardsNew") as! BPCardsVC
             newViewController.selectedIndex = indexPath.row
             newViewController.selectedType = "BlueBp"
-            newViewController.searchUsers = self.subscribedBlueBpUsers
+            newViewController.subscribedUsers = self.subscribedBlueBpUsers
             newViewController.view.translatesAutoresizingMaskIntoConstraints = false
             let curentViewController =  self.storyboard?.instantiateViewController(withIdentifier: "HomeTabViewController")as! HomeTabViewController
             self.currentViewController = curentViewController
@@ -622,14 +622,14 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     
 
     func getUsersListforBlueBp()  {
-        
-        let endPoint="includeCoach=true&subscriptionType=BlueBP&hideConnectedUser=true&hideLikedUser=true&hideRejectedConnections=true&hideBlockedUsers=true"
-        APIManager.callServer.getSearchList(endpoint:endPoint ,sucessResult: { (responseModel) in
-            guard let searchUserModelArray = responseModel as? SearchUserModelArray else{
+//        SubscriptionUserModelArray
+//        let endPoint="includeCoach=true&subscriptionType=BlueBP&hideConnectedUser=true&hideLikedUser=true&hideRejectedConnections=true&hideBlockedUsers=true"
+        APIManager.callServer.getUserSubscriptionList(sucessResult: { (responseModel) in
+            guard let subscriptionUserModelArray = responseModel as? SubscriptionUserModelArray else{
                 return
             }
-            self.subscribedBlueBpUsers = searchUserModelArray.searchUserModel
-            
+            self.subscribedBlueBpUsers = subscriptionUserModelArray.subscriptionUserModel
+            print(self.subscribedBlueBpUsers)
             if self.subscribedBlueBpUsers.count == 0 {
                
                 self.connectionLabel.isHidden = false

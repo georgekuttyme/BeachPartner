@@ -12,6 +12,7 @@ import DropDown
 class SettingsViewController: UIViewController {
     
     var searchUsers = [SearchUserModel]()
+    var subscriptionUsers = [SubscriptionUserModel]()
     let dropDown = DropDown()
     var SettingsType = String()
     var stateList = [String]()
