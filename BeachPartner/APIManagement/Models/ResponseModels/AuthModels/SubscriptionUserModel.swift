@@ -64,7 +64,7 @@ struct SubscriptionUserModel:SafeMappable {
         var phoneNumber: String = ""
         var videoUrl: String = ""
         var userType: String = ""
-        
+        var fcmToken: String = ""
         
         init() {
             
@@ -74,6 +74,7 @@ struct SubscriptionUserModel:SafeMappable {
             age <- map.property("age")
             authToken  <- map.property("authToken")
             city <- map.property("city")
+            fcmToken <- map.property("fcmToken")
             id <- map.property("id")
             dob <- map.property("dob")
             deviceId <- map.property("deviceId")

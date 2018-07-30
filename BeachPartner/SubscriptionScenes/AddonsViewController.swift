@@ -115,7 +115,7 @@ class AddonsViewController: UIViewController {
             if paymentDetailsModel.status == "SUCCESS"
             {
                 self.transactionId = paymentDetailsModel.transactionId
-                self.requestForNonce(clientToken: paymentDetailsModel.clientToken, amount: "100")
+                self.requestForNonce(clientToken: paymentDetailsModel.clientToken, palnAmount: String(amount))
             }
             
         }) { (errorMessage) in
@@ -130,7 +130,7 @@ class AddonsViewController: UIViewController {
 
     //MARK:- BrainTreeServices
     
-    func requestForNonce(clientToken:String,amount:String)  {
+    func requestForNonce(clientToken:String,palnAmount:String)  {
         
         let request =  BTDropInRequest()
         let dropIn = BTDropInController(authorization: clientToken, request: request)
@@ -143,7 +143,7 @@ class AddonsViewController: UIViewController {
                 self.alert(message: "Transaction Cancelled")
                 
             } else if let nonce = result?.paymentMethod?.nonce {
-                self.sendRequestPaymentResponse(nonce: nonce, amount: amount)
+                self.sendRequestPaymentResponse(nonce: nonce, amount: palnAmount)
             }
             controller.dismiss(animated: true, completion: nil)
         }
@@ -161,7 +161,14 @@ class AddonsViewController: UIViewController {
                 print("Rep model does not match")
                 return
             }
-            print(paymentDetailsModel)
+            if paymentDetailsModel.status == "SUCCESS"
+            {
+                let refreshAlert = UIAlertController(title: "Payment Success", message: "Successfully changed your plan.Please Log out for switch current plan", preferredStyle: UIAlertControllerStyle.alert)
+                refreshAlert.addAction(UIAlertAction(title: "Log Out", style: .default, handler: { (action: UIAlertAction!) in
+                    self.timoutLogoutAction()
+                }))
+                self.present(refreshAlert, animated: true, completion: nil)
+            }
             
         }) { (errorMessage) in
             ActivityIndicatorView.hiding()

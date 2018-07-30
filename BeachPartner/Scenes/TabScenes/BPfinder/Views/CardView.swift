@@ -107,16 +107,16 @@ extension CardView {
         self.placeLabel?.text = data.userType
     }
     
-    func displaySubscribeDataOnCard(displayData data:SubscriptionUserModel.SubscribedUser) {
+    func displaySubscribeDataOnCard(displayData data:SubscriptionUserModel) {
 
-        if let imageUrl = URL(string: data.imageUrl) {
+        if let imageUrl = URL(string: (data.connectedUser?.imageUrl)!) {
             self.imageView.sd_setIndicatorStyle(.whiteLarge)
             self.imageView.sd_setShowActivityIndicatorView(true)
             self.imageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
         }
          self.muteButton.isHidden = true
-        self.nameLabel.text = data.firstName //+ "," + " " + String(data.age ?? 0)
-        self.placeLabel?.text = data.userType
+        self.nameLabel.text = data.connectedUser?.firstName //+ "," + " " + String(data.age ?? 0)
+        self.placeLabel?.text = data.connectedUser?.userType
     }
     
     func displaySearchDetailsOnCard(displayData data:SearchUserModel) {

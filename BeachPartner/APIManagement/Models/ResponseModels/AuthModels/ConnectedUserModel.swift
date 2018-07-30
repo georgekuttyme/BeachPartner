@@ -76,7 +76,7 @@ struct ConnectedUserModel:SafeMappable {
             activated <- map.property("activated")
             age <- map.property("age")
             authToken  <- map.property("authToken")
-            city <- map.property("fcmToken")
+            fcmToken <- map.property("fcmToken")
             city <- map.property("city")
             createdDate <- map.property("createdDate")
             deviceId  <- map.property("deviceId")

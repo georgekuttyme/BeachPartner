@@ -15,9 +15,6 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     private lazy var channelRef: DatabaseReference = Database.database().reference().child("messages")
     private var channelRefHandle: DatabaseHandle?
     
-    
-    //    @IBOutlet weak var blueBPCollectionView: UICollectionView!
-    
     @IBOutlet weak var topUserListCollectionView: UICollectionView!
     
     @IBOutlet weak var upCommingTournament: UICollectionView!
@@ -55,13 +52,10 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     var recentChatList = [[String:String]]()
     var partnerArray = [String]()
     var tournamentRequestList: GetTournamentRequestRespModel?
-    
     var tournamentRequestSentViewActive = false
     var titleOfChat = String()
-    var date = ["04/01/2018","04/01/2018","04/01/2018","04/01/2018","04/01/2018","04/01/2018","04/01/2018"]
-    var eventName = ["America","America","America","America","America","America","America"]
-    var name = ["Alivia Orvieto","Marti McLaurin","Liz Held"]
     var partners = String()
+    
     fileprivate let formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM-dd-yyyy"
@@ -555,7 +549,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             let newViewController = self.storyboard?.instantiateViewController(withIdentifier: "ComponentBPcardsNew") as! BPCardsVC
             newViewController.selectedIndex = indexPath.row
             newViewController.selectedType = "BlueBp"
-            newViewController.subscribedUsers = self.subscribedBlueBpUsers
+            newViewController.subscribedBlueBpUsers = self.subscribedBlueBpUsers
             newViewController.view.translatesAutoresizingMaskIntoConstraints = false
             let curentViewController =  self.storyboard?.instantiateViewController(withIdentifier: "HomeTabViewController")as! HomeTabViewController
             self.currentViewController = curentViewController
