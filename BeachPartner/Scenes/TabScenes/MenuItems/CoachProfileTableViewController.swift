@@ -22,7 +22,8 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
     let statedropDown = DropDown()
     var isFromConnectedUser = ""
     var connectedUserId = Int()
-
+    var connectedUserAge = Int()
+   
     @IBOutlet weak var editUserImageBtn: UIButton!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var editProfileBtn: UIButton!
@@ -954,7 +955,12 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         dateformatter.dateFormat = "MM-dd-yyyy"
         let dateString = dateformatter.string(from: date as Date)
         datePicker.date = date as Date
-        self.birthDateTxtFld.text = dateString
+        if isFromConnectedUser == "ConnectedUser"{
+          self.birthDateTxtFld.text = String(connectedUserAge) ?? ""
+        }
+        else{
+              self.birthDateTxtFld.text = dateString
+        }
         
 //        if accResponseModel.dob > 0 {
 //            self.birthDateTxtFld.text = dateString

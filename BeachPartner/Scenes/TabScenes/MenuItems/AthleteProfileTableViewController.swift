@@ -149,10 +149,13 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userName: UILabel!
+    
+    @IBOutlet weak var dateofBirthLbl: UILabel!
     var activeTextField: UITextField?
     var userData = AccountRespModel()
     var connectedUserId = Int()
     var connectedUserName = String()
+    var connectedUserAge = Int()
     var videoUrl = ""
     var imageUrl = ""
     var movieData: NSData?
@@ -337,13 +340,15 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.tableView.reloadData()
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         videoView?._player?.volume = 0
-        print(connectedUserId,"====",isFromConnectedUser,"^^^^",connectedUserName)
+        print(connectedUserId,"====",isFromConnectedUser,"^^^^",connectedUserAge)
         if isFromConnectedUser == "ConnectedUser"{
             self.navigationController!.navigationBar.topItem!.title = connectedUserName+"'s"+" Profile"
-            
+            self.dateofBirthLbl.text = "Age"
+            self.birthDateTxtFld.text = String(connectedUserAge) ?? ""
             self.tableCell_PhoneNumber.isHidden = true
             self.editUserImageBtn.isHidden = true
             self.editUserImageBtn.isUserInteractionEnabled = false
@@ -364,13 +369,13 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             self.getConnectedUserInfo(userId:connectedUserId)
         }else{
             self.getUserInfo()
+            
         }
         
         self.hideKeyboardWhenTappedAround()
         loadLocations()
         dateformatter.dateFormat = "MM-dd-yyyy"
         date_formatter1.dateFormat = "yyyy-MM-dd"
-        
         
         tableCell_SaveCancel.isHidden = true
         
@@ -401,7 +406,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         datePicker.maximumDate = fiveYearAgo
         datePicker.addTarget(self, action: #selector(self.datePickerValueChanged(sender:)), for: UIControlEvents.valueChanged)
         birthDateTxtFld.inputView = datePicker
-//        self.imagePickerController.preferredStatusBarStyle  = .default
+        //        self.imagePickerController.preferredStatusBarStyle  = .default
         self.imagePickerController.modalPresentationStyle = .currentContext
         self.imagePickerController.delegate = self
         
@@ -1408,8 +1413,12 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         let dateString = dateformatter.string(from: date as Date)
         
         datePicker.date = date as Date
-        
-          self.birthDateTxtFld.text = dateString
+        if isFromConnectedUser == "ConnectedUser"{
+            self.birthDateTxtFld.text = String(connectedUserAge) ?? ""
+        }
+        else{
+            self.birthDateTxtFld.text = dateString
+        }
            print(accResponseModel.userProfile?.sandRecruitNumber)
         
 //        self.birthDateTxtFld.text = String(accResponseModel.dob)

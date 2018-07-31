@@ -303,6 +303,7 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
         vc1.isFromConnectedUser = "ConnectedUser"
         vc1.connectedUserId = connectedUser?.userId ?? 0
         vc1.connectedUserName = connectedUser?.firstName ?? ""
+        vc1.connectedUserAge = connectedUser?.age ?? 0
         let navController = UINavigationController(rootViewController: vc1)
         self.present(navController, animated: true, completion: nil)
     }

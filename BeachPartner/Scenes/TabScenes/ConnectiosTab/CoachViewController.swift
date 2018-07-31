@@ -205,6 +205,7 @@ class CoachViewController: UIViewController,UICollectionViewDataSource , UIColle
         vc.isFromConnectedUser = "ConnectedUser"
         vc.connectedUserId = connectedUser?.userId ?? 0
         vc.connectedUserName = connectedUser?.firstName ?? ""
+        vc.connectedUserAge = connectedUser?.age ?? 0
         let navController = UINavigationController(rootViewController: vc)
         self.present(navController, animated: true, completion: nil)
     }
