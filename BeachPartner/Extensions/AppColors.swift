@@ -46,5 +46,10 @@ extension UIColor
     {
         return  UIColor.white
     }
+
+    open class var disableTextFieldBackgroundColor:UIColor
+    {
+        return UIColor(red: 216/255, green: 216/255, blue: 216/255, alpha: 1.0)
+    }
 }
 
