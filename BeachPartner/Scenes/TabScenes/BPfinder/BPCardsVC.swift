@@ -560,12 +560,18 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         var flagUserId :Int = 0
         var titleString :NSString = ""
 
-        if selectedType == "Search"  || selectedType == "BlueBp-New" || selectedType == "invitePartner" {
-            //|| selectedType == "BlueBp"
+        if selectedType == "Search"  || selectedType == "invitePartner" {
+            //||
             let  data : SearchUserModel
             data = SwipeCardArray[index] as! SearchUserModel
             flagUserId = data.id
             titleString = "Are you sure you want to Flag \(data.firstName + " " + data.lastName)?" as NSString
+        }
+        else if selectedType == "BlueBp" || selectedType == "BlueBp-New"{
+            let data : SubscriptionUserModel
+            data = SwipeCardArray[index] as! SubscriptionUserModel
+            flagUserId = data.id
+            titleString = "Are you sure you want to Flag \((data.connectedUser?.firstName)! + " " + (data.connectedUser?.lastName)!)?" as NSString
         }
         else{
             let  data : ConnectedUserModel
@@ -1240,10 +1246,14 @@ extension BPCardsVC: UIGestureRecognizerDelegate {
     if let view:CardView = self.cardView.viewForCard(at: self.currentIndex) as? CardView {
         
         var videoString:String
-        if selectedType == "Search" || selectedType == "BlueBp-New" || selectedType == "invitePartner"{
+        if selectedType == "Search" || selectedType == "invitePartner"{
             //|| selectedType == "BlueBp"
             let  data = SwipeCardArray[self.currentIndex] as! SearchUserModel
             videoString = data.videoUrl
+        }
+        else if selectedType == "BlueBp"  || selectedType == "BlueBp-New" {
+            let  data = SwipeCardArray[self.currentIndex] as! SubscriptionUserModel
+            videoString = data.connectedUser?.videoUrl ?? ""
         }
         else {
             let  data = SwipeCardArray[self.currentIndex] as! ConnectedUserModel

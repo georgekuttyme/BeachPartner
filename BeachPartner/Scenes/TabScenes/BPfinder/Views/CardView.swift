@@ -114,9 +114,16 @@ extension CardView {
             self.imageView.sd_setShowActivityIndicatorView(true)
             self.imageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
         }
-         self.muteButton.isHidden = true
-        self.nameLabel.text = data.connectedUser?.firstName //+ "," + " " + String(data.age ?? 0)
-        self.placeLabel?.text = data.connectedUser?.userType
+        self.muteButton.isHidden = true
+        var name = String()
+        if let firstName = data.connectedUser?.firstName{
+            name = firstName + " "
+        }
+        if let lastName = data.connectedUser?.lastName{
+            name = name + lastName
+        }
+        self.nameLabel.text = name + "," + " " + String(data.connectedUser?.age ?? 0)
+        self.placeLabel?.text = data.connectedUser?.userType ?? ""
     }
     
     func displaySearchDetailsOnCard(displayData data:SearchUserModel) {
