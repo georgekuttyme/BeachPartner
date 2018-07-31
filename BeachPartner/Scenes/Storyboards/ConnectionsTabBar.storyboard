@@ -238,7 +238,7 @@
                                                                 <color key="titleColor" red="0.2413429537" green="0.57256523660000003" blue="0.69856745249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
                                                         </button>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ALC-bc-L0f">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="ALC-bc-L0f">
                                                             <rect key="frame" x="41" y="15" width="93" height="93"/>
                                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
@@ -485,7 +485,7 @@
                                                                 <color key="titleColor" red="0.2413429537" green="0.57256523660000003" blue="0.69856745249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
                                                         </button>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tJ4-oM-pfu">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="tJ4-oM-pfu">
                                                             <rect key="frame" x="41" y="15" width="93" height="93"/>
                                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
@@ -797,10 +797,11 @@
     <resources>
         <image name="BP - connections BG" width="1080" height="498"/>
         <image name="arrow_down v2" width="500" height="500"/>
-        <image name="balll bg" width="202" height="428"/>
+        <image name="balll bg" width="202" height="500"/>
         <image name="clock_notes" width="500" height="500"/>
         <image name="connections" width="29" height="29"/>
         <image name="delete" width="512" height="512"/>
         <image name="tick - notes" width="500" height="500"/>
+        <image name="user" width="502" height="502"/>
     </resources>
 </document>

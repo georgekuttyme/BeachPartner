@@ -323,7 +323,7 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
             }
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "InvitePartnerCell", for: indexPath) as? InvitePartnerCell
-            
+
             if (indexPath.row == self.connectedUsers.count-1) {
                 cell?.separatorInset = UIEdgeInsetsMake(0.0, (cell?.bounds.size.width)!, 0.0, 0.0);
             }
@@ -332,13 +332,17 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
             name = connectedUser.firstName + " "
             name = name + connectedUser.lastName
             cell?.nameLbl.text = name
-            
+            print("||||| ",connectedUser.imageUrl,"  ",connectedUser.firstName)
             let image = connectedUser.imageUrl
-            let imageUrl = URL(string: image)
-            cell?.profileImage.sd_setIndicatorStyle(.whiteLarge)
-            cell?.profileImage.sd_setShowActivityIndicatorView(true)
-            cell?.profileImage.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
-            
+            if image == ""{
+                cell?.profileImage.image = UIImage(named: "user")
+            }else{
+                if let imageUrl = URL(string: image){
+                    cell?.profileImage.sd_setIndicatorStyle(.whiteLarge)
+                    cell?.profileImage.sd_setShowActivityIndicatorView(true)
+                    cell?.profileImage.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                }
+            }
             
             cell?.profileImage.layer.cornerRadius = (cell?.profileImage?.frame.size.width)!/2
             cell?.profileImage.clipsToBounds = true
@@ -388,14 +392,16 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
             let cell = tableView.dequeueReusableCell(withIdentifier: "MyteamCell", for: indexPath) as? MyteamCell
             cell?.selectionStyle = .none
             
-            cell?.nameLbl.text = user?.firstName
-            
-            if let image = user?.imageUrl, let imageUrl = URL(string: image) {
-                cell?.profileImage.sd_setIndicatorStyle(.whiteLarge)
-                cell?.profileImage.sd_setShowActivityIndicatorView(true)
-                cell?.profileImage.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+            cell?.nameLbl.text = (user?.firstName)! + " " + (user?.lastName)!
+            if user?.imageUrl == ""{
+                cell?.profileImage.image = UIImage(named: "user")
+            }else{
+                if let image = user?.imageUrl, let imageUrl = URL(string: image) {
+                    cell?.profileImage.sd_setIndicatorStyle(.whiteLarge)
+                    cell?.profileImage.sd_setShowActivityIndicatorView(true)
+                    cell?.profileImage.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                }
             }
-            
             cell?.profileImage.layer.cornerRadius = (cell?.profileImage?.frame.size.width)!/2
             cell?.profileImage.clipsToBounds = true
             cell?.profileImage.layer.borderColor = UIColor.navigationBarTintColor.cgColor

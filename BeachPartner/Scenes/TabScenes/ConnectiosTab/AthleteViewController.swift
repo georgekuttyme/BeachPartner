@@ -71,11 +71,16 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
         let lastName = connectedUser?.lastName ?? ""
         cell?.nameLbl.text = firstName + " " + lastName
         cell?.ageLbl.text = String(connectedUser?.age ?? 0)
-        if let imageUrl = URL(string: (connectedUser?.imageUrl)!) {
-            cell?.profileImgView.sd_setIndicatorStyle(.whiteLarge)
-            cell?.profileImgView.sd_setShowActivityIndicatorView(true)
-            cell?.profileImgView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+        if connectedUser?.imageUrl == ""{
+            cell?.profileImgView.image = UIImage(named: "user")
+        }else{
+            if let imageUrl = URL(string: (connectedUser?.imageUrl)!) {
+                cell?.profileImgView.sd_setIndicatorStyle(.whiteLarge)
+                cell?.profileImgView.sd_setShowActivityIndicatorView(true)
+                cell?.profileImgView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+            }
         }
+        
         cell?.profileImgView.layer.cornerRadius = (cell?.profileImgView.frame.size.width)!/2
         cell?.profileImgView.clipsToBounds = true
         cell?.profileImgView.layer.borderColor = UIColor.navigationBarTintColor.cgColor
