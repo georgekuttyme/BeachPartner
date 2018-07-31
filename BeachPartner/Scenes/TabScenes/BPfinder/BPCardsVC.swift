@@ -1029,7 +1029,7 @@ extension BPCardsVC :KolodaViewDelegate {
                 }
                 self.didPressDownArrow ? view.moveDown.setImage(UIImage(named:"arrow-up"), for: UIControlState.normal) : view.moveDown.setImage(UIImage(named:"arrow-down"), for: UIControlState.normal)
             }
-        //    topFinishers = data.userMoreProfileDetails?.topFinishes ?? ""
+            topFinishers = data.connectedUser?.userMoreDetails?.topFinishes ?? ""
             getAllUserEvents(userId:(data.connectedUser?.id)!)
         }
         else{
