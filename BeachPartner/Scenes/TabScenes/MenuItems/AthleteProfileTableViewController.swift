@@ -344,7 +344,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         if isFromConnectedUser == "ConnectedUser"{
             self.navigationController!.navigationBar.topItem!.title = connectedUserName+"'s"+" Profile"
             
-           
+            self.tableCell_PhoneNumber.isHidden = true
             self.editUserImageBtn.isHidden = true
             self.editUserImageBtn.isUserInteractionEnabled = false
             
