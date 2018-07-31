@@ -300,10 +300,14 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
             
             cell.timeLbl.isHidden = true
             cell.statusImage.isHidden = true
-            if let imageUrl = URL(string: (self.filterConnectedusers[indexPath.row]["profileImg"])!) {
-                cell.profileImage.sd_setIndicatorStyle(.whiteLarge)
-                cell.profileImage.sd_setShowActivityIndicatorView(true)
-                cell.profileImage.sd_setImage(with: imageUrl, placeholderImage:#imageLiteral(resourceName: "user"))
+            if self.filterConnectedusers[indexPath.row]["profileImg"] == ""{
+                cell.profileImage.image = UIImage(named: "user")
+            }else{
+                if let imageUrl = URL(string: (self.filterConnectedusers[indexPath.row]["profileImg"])!) {
+                    cell.profileImage.sd_setIndicatorStyle(.whiteLarge)
+                    cell.profileImage.sd_setShowActivityIndicatorView(true)
+                    cell.profileImage.sd_setImage(with: imageUrl, placeholderImage:#imageLiteral(resourceName: "user"))
+                }
             }
             cell.profileImgBtn.tag = indexPath.row+600000
             cell.profileImgBtn.addTarget(self, action: #selector(didSelectItemAtIndex), for: .touchUpInside)
