@@ -198,14 +198,26 @@ class RegisterViewController: UIViewController {
             emailTxt.showError()
         }
         else if let email = emailTxt.text {
-            if email.isValidEmailAddress() {
-                currentValidation += 1
+            if userType == "Coach"{
+                if email.isValid(){
+                    
+                }else{
+                    emailTxt.shake()
+                    emailTxt.errorText = " Please enter a valid coach email"
+                    emailTxt.showError()
+                }
             }
             else {
-                emailTxt.shake()
-                emailTxt.errorText = " Please enter a valid email"
-                emailTxt.showError()
+                if email.isValidEmailAddress() {
+                    currentValidation += 1
+                }
+                else {
+                    emailTxt.shake()
+                    emailTxt.errorText = " Please enter a valid email"
+                    emailTxt.showError()
+                }
             }
+           
         }
         
         if paswordTxt.isEmpty() {
@@ -617,18 +629,29 @@ extension RegisterViewController: UITextFieldDelegate {
             
         }
         if textField == self.emailTxt {
+            
             if emailTxt.isEmpty() {
                 emailTxt.shake()
                 emailTxt.errorText = "Email cannot be blank"
                 emailTxt.showError()
             }else{
                 if let email = emailTxt.text {
-                    if email.isValidEmailAddress() {
-                        
+                    if userType == "Coach"{
+                        if email.isValid(){
+                            
+                        }else{
+                            emailTxt.shake()
+                            emailTxt.errorText = " Please enter a valid coach email"
+                            emailTxt.showError()
+                        }
                     }else{
-                        emailTxt.shake()
-                        emailTxt.errorText = " Please enter a valid email"
-                        emailTxt.showError()
+                        if email.isValidEmailAddress() {
+                            
+                        }else{
+                            emailTxt.shake()
+                            emailTxt.errorText = " Please enter a valid email"
+                            emailTxt.showError()
+                        }
                     }
                 }
             }
@@ -690,11 +713,7 @@ extension RegisterViewController: UITextFieldDelegate {
             
         }
         if textField == self.mobileTxt {
-            //            textField.autocapitalizationType = UITextAutocapitalizationType.words
-//            let mobileText = mobileTxt.text?.replacingOccurrences(of: " ", with: "", options: .literal, range: nil)
             let mobileText = mobileTxt.text?.replacingOccurrences(of: " ", with: "")
-            
-            
             mobileTxt.text = mobileText
             if mobileTxt.isEmpty() {
                 mobileTxt.shake()

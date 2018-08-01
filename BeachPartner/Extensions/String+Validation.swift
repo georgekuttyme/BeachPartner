@@ -15,7 +15,12 @@ extension String {
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailTest.evaluate(with: self)
     }
-
+//    ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.+-]+\.edu$
+    func isValid() -> Bool {
+        let emailRegEx = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.+-]+\\.edu"
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluate(with: self)
+    }
         func isValidName() -> Bool {
             // here, `try!` will always succeed because the pattern is valid
             let regex = try! NSRegularExpression(pattern: "[A-Za-z]", options: .caseInsensitive)
