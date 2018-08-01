@@ -1303,15 +1303,19 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
                 if self.videoUrl == ""
                 {
                     self.noVideoLbl.text = "No Video Available"
+                    DispatchQueue.main.async {
+                        self.loadDataToUi(accResponseModel: accRespModel)
+                    }
+                }else{
+                    DispatchQueue.main.async {
+                        self.loadVideoOnPlayer(videoUrlVal: accRespModel.videoUrl)
+                        self.loadDataToUi(accResponseModel: accRespModel)
+                    }
                 }
                 
                 ActivityIndicatorView.hiding()
                 
-                DispatchQueue.main.async {
-                    self.loadVideoOnPlayer(videoUrlVal: accRespModel.videoUrl)
-                    
-                    self.loadDataToUi(accResponseModel: accRespModel)
-                }
+                
                 
             }else{
                 
@@ -1359,16 +1363,19 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
                 if self.videoUrl == ""
                 {
                     self.noVideoLbl.text = "No Video Available"
+                    DispatchQueue.main.async {
+                        self.loadDataToUi(accResponseModel: accRespModel)
+                    }
+                }else{
+                    DispatchQueue.main.async {
+                        self.loadVideoOnPlayer(videoUrlVal: accRespModel.videoUrl)
+                        self.loadDataToUi(accResponseModel: accRespModel)
+                    }
                 }
                 
                 ActivityIndicatorView.hiding()
 
-                DispatchQueue.main.async {
-                    self.loadVideoOnPlayer(videoUrlVal: accRespModel.videoUrl)
-                    
-                    self.loadDataToUi(accResponseModel: accRespModel)
-                }
-                
+               
                 
                 
 //                Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(self.runTimedCode), userInfo: nil, repeats: false)
