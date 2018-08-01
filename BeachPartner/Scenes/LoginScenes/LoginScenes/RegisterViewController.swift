@@ -138,6 +138,8 @@ class RegisterViewController: UIViewController {
             firstName.showError()
         }
         else {
+            let firstNametxt = firstName.text?.replacingOccurrences(of: " ", with: "", options: .literal, range: nil)
+            firstName.text = firstNametxt
             if (firstName.text?.hasPrefix(" "))! {
                 firstName.shake()
                 firstName.errorText = "First name can’t start with whitespaces"
@@ -203,7 +205,7 @@ class RegisterViewController: UIViewController {
                     
                 }else{
                     emailTxt.shake()
-                    emailTxt.errorText = " Please enter a valid coach email"
+                    emailTxt.errorText = "Enter a valid college email address"
                     emailTxt.showError()
                 }
             }
@@ -570,6 +572,8 @@ extension RegisterViewController: UITextFieldDelegate {
                 firstName.showError()
             }
             else{
+                let firstNametxt = firstName.text?.replacingOccurrences(of: " ", with: "", options: .literal, range: nil)
+                firstName.text = firstNametxt
                 if (firstName.text?.hasPrefix(" "))! {
                     firstName.shake()
                     firstName.errorText = "First name can’t start with whitespaces"
@@ -641,7 +645,7 @@ extension RegisterViewController: UITextFieldDelegate {
                             
                         }else{
                             emailTxt.shake()
-                            emailTxt.errorText = " Please enter a valid coach email"
+                            emailTxt.errorText = "Enter a valid college email address"
                             emailTxt.showError()
                         }
                     }else{
