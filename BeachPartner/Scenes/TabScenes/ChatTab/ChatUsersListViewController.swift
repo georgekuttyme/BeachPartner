@@ -184,6 +184,7 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
                             latestMsgDic.updateValue(String(connectedUser.connectedUser?.userId ?? 0), forKey: "sender_userId")
                             latestMsgDic.updateValue(connectedUser.connectedUser?.lastName ?? "", forKey: "sender_lastName")
                             latestMsgDic.updateValue(connectedUser.connectedUser?.imageUrl ?? "", forKey: "profileImg")
+                            latestMsgDic.updateValue(String(connectedUser.connectedUser?.age ?? 0), forKey: "age")
                             isActiveUser = true
                             break
                         }
@@ -365,6 +366,9 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
                 let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
                 let vc1 = storyboard.instantiateViewController(withIdentifier: "profilevc") as! AthleteProfileTableViewController
                 vc1.isFromConnectedUser = "ConnectedUser"
+                if let age = self.filterConnectedusers[sender.tag-600000]["age"]{
+                    vc1.connectedUserAge = Int(age)!
+                }
                 if let id = self.filterConnectedusers[sender.tag-600000]["sender_userId"]{
                     vc1.connectedUserId = Int(id)!
                 }
@@ -377,6 +381,9 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
                 let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
                 let vc1 = storyboard.instantiateViewController(withIdentifier: "profilevc1") as! CoachProfileTableViewController
                 vc1.isFromConnectedUser = "ConnectedUser"
+                if let age = self.recentChatList[sender.tag-600000]["age"]{
+                    vc1.connectedUserAge = Int(age)!
+                }
                 if let id = self.recentChatList[sender.tag-600000]["sender_userId"]{
                     vc1.connectedUserId = Int(id)!
                 }
@@ -393,6 +400,9 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
                 let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
                 let vc1 = storyboard.instantiateViewController(withIdentifier: "profilevc") as! AthleteProfileTableViewController
                 vc1.isFromConnectedUser = "ConnectedUser"
+                if let age = self.recentChatList[sender.tag-600000]["age"]{
+                    vc1.connectedUserAge = Int(age)!
+                }
                 if let id = self.recentChatList[sender.tag-600000]["sender_userId"]{
                     vc1.connectedUserId = Int(id)!
                 }
@@ -405,6 +415,9 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
                 let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
                 let vc1 = storyboard.instantiateViewController(withIdentifier: "profilevc1") as! CoachProfileTableViewController
                 vc1.isFromConnectedUser = "ConnectedUser"
+                if let age = self.recentChatList[sender.tag-600000]["age"]{
+                    vc1.connectedUserAge = Int(age)!
+                }
                 if let id = self.recentChatList[sender.tag-600000]["sender_userId"]{
                     vc1.connectedUserId = Int(id)!
                 }
