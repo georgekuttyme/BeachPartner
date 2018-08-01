@@ -2399,7 +2399,7 @@
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q0M-QU-Js9">
                                 <rect key="frame" x="47.5" y="198.5" width="290" height="250"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter email id" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lDF-hJ-POE" customClass="FloatingText" customModule="BeachPartner" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter email id" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lDF-hJ-POE" customClass="FloatingText" customModule="BeachPartner" customModuleProvider="target">
                                         <rect key="frame" x="15" y="79" width="260" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
