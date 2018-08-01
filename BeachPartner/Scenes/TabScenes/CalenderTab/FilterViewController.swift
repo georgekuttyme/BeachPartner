@@ -27,6 +27,7 @@ struct EventFilterParams {
 }
 
 class FilterViewController: UIViewController {
+    @IBOutlet weak var regionLabel: UILabel!
     
     @IBOutlet weak var regionBtn: UIButton!
     @IBOutlet weak var stateBtn: UIButton!
@@ -102,6 +103,8 @@ class FilterViewController: UIViewController {
         
         loadLocations()
         loadRegion()
+        self.regionBtn.isHidden = true
+        self.regionLabel.isHidden = true
         clearFilterClicked = false
         self.eventdropDown.anchorView = self.eventBtn // UIView or UIBarButtonItem
         self.eventdropDown.dataSource = eventList
