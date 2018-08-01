@@ -1761,10 +1761,10 @@ extension UITextField {
     }
     func disableTextFld() {
         self.layer.borderWidth = 0
-        self.layer.borderColor = UIColor.disableTextFieldBackgroundColor.cgColor
+        self.layer.borderColor = UIColor(rgb: 0xECECEF).cgColor
         self.isUserInteractionEnabled = false
-        self.backgroundColor = UIColor.disableTextFieldBackgroundColor
-        
+        self.backgroundColor = UIColor(rgb: 0xECECEF)
+        //
     }
 }
 extension UIButton{
@@ -1778,8 +1778,8 @@ extension UIButton{
     func disableBtn() {
         self.layer.borderWidth = 0
         self.isUserInteractionEnabled = false
-        self.backgroundColor = UIColor.disableTextFieldBackgroundColor
-        self.borderColor = UIColor.disableTextFieldBackgroundColor
+        self.backgroundColor = UIColor(rgb: 0xECECEF)
+        self.borderColor = UIColor(rgb: 0xECECEF)
     }
 }
 
