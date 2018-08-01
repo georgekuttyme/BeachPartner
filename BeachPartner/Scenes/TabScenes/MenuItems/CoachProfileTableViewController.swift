@@ -37,6 +37,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
     @IBOutlet weak var tableCell_videoView: UITableViewCell!
     @IBOutlet weak var tableCell_basicMore: UITableViewCell!
     
+    @IBOutlet weak var dateOfBirthLbl: UILabel!
     
     @IBOutlet weak var tableCell_FirstName:UITableViewCell!
     @IBOutlet weak var tableCell_LastName:UITableViewCell!
@@ -199,7 +200,9 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         
         if isFromConnectedUser == "ConnectedUser"{
             self.navigationController!.navigationBar.topItem!.title = connectedUserName+"'s"+" Profile"
-            
+            self.dateOfBirthLbl.text = "Age"
+            self.birthDateTxtFld.text = String(connectedUserAge) ?? ""
+            self.tableCell_PhoneNumber.isHidden = true
             self.editProfileTxtBtn.isHidden = true
             self.editProfileTxtBtn.isUserInteractionEnabled = false
             
