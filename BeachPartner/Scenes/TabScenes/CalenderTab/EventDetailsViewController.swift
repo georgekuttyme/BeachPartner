@@ -14,6 +14,7 @@ class EventDetailsViewController: BeachPartnerViewController {
     enum EventStatus: String {
         case registered = "Registered"
         case active = "Active"
+        case expired = "Expired"
     }
     
     enum RegisterType: String {
@@ -149,6 +150,17 @@ class EventDetailsViewController: BeachPartnerViewController {
             viewPartnersButton.isEnabled = false
             viewPartnersButton.alpha = 0.6
         }
+        
+        if event?.status == EventStatus.expired.rawValue{
+            
+            invitePartnerButton.isEnabled = false
+            invitePartnerButton.alpha = 0.6
+            
+            athleteGoingButton.isEnabled = false
+            athleteGoingButton.alpha = 0.6
+            athleteGoingButton.setTitleColor(.lightGray, for: .normal)
+        }
+        
         
         
         // ~~~~~ Temporary fix ~~~~~~

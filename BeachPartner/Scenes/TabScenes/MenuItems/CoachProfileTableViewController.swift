@@ -1186,7 +1186,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
             
             
         }) { (error) in
-            self.alert(message: error!, title: "Faild To Update")
+            self.alert(message: error!, title: "Failed To Update")
         }
     }
     
