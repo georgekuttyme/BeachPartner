@@ -375,8 +375,9 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.hideKeyboardWhenTappedAround()
         loadLocations()
         dateformatter.dateFormat = "MM-dd-yyyy"
+        dateformatter.timeZone = TimeZone(identifier: "UTC")
         date_formatter1.dateFormat = "yyyy-MM-dd"
-        
+        date_formatter1.timeZone = TimeZone(identifier: "UTC")
         tableCell_SaveCancel.isHidden = true
         
         self.editUserImageBtn.isHidden = true
@@ -398,6 +399,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         
         
         //MARK: Date of Birth
+        datePicker.timeZone = TimeZone(identifier: "UTC")
         datePicker.datePickerMode = UIDatePickerMode.date
         let currentDate = Date()
         var dateComponents = DateComponents()
@@ -735,6 +737,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             birthDateTxtFld.hideError()
             let date = dateformatter.date(from: birthDateTxtFld.text!)
             date_formatter1.dateFormat = "yyyy-MM-dd"
+            date_formatter1.timeZone = TimeZone(identifier: "UTC")
             let dateForSave = date_formatter1.string(from: date!)
             self.userData.inputDob = dateForSave
             currentValidation += 1
@@ -1217,7 +1220,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         
         let formatter = DateFormatter()
         formatter.dateFormat = "MM-dd-yyyy"
-        
+        formatter.timeZone = TimeZone(identifier: "UTC")
         //        formatter.dateStyle = DateFormatter.Style.medium
         //        formatter.timeStyle = DateFormatter.Style.none
         
@@ -1417,6 +1420,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         let date = NSDate(timeIntervalSince1970: TimeInterval(accResponseModel.dob/1000))
 //        let dayTimePeriodFormatter = DateFormatter()
         dateformatter.dateFormat = "MM-dd-yyyy"
+        dateformatter.timeZone = TimeZone(identifier: "UTC")
         let dateString = dateformatter.string(from: date as Date)
         
         datePicker.date = date as Date

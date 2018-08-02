@@ -138,7 +138,7 @@ class RegisterViewController: UIViewController {
             firstName.showError()
         }
         else {
-            let firstNametxt = firstName.text?.replacingOccurrences(of: " ", with: "", options: .literal, range: nil)
+            let firstNametxt = firstName.text?.trimmingCharacters(in: .whitespacesAndNewlines)
             firstName.text = firstNametxt
             if (firstName.text?.hasPrefix(" "))! {
                 firstName.shake()
@@ -165,6 +165,8 @@ class RegisterViewController: UIViewController {
             lastName.showError()
         }
         else {
+            let lastNametxt = lastName.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            lastName.text = lastNametxt
             if (lastName.text?.hasPrefix(" "))! {
                 lastName.shake()
                 lastName.errorText = "Lastname can't start with whitespaces"
@@ -199,10 +201,12 @@ class RegisterViewController: UIViewController {
             emailTxt.errorText = "Email cannot be blank"
             emailTxt.showError()
         }
-        else if let email = emailTxt.text {
+        else if var email = emailTxt.text {
+            let emailtxt = email.trimmingCharacters(in: .whitespacesAndNewlines)
+            email = emailtxt
             if userType == "Coach"{
                 if email.isValid(){
-                    
+                    currentValidation += 1
                 }else{
                     emailTxt.shake()
                     emailTxt.errorText = "Enter a valid college email address"
@@ -284,7 +288,7 @@ class RegisterViewController: UIViewController {
             mobileTxt.showError()
         }
         else {
-            let mobileText = mobileTxt.text?.replacingOccurrences(of: " ", with: "", options: .literal, range: nil)
+            let mobileText = mobileTxt.text?.trimmingCharacters(in: .whitespacesAndNewlines)
             mobileTxt.text = mobileText
                 if (mobileTxt.text?.count)! == 10  {
                     if mobileTxt.text == "0000000000"{
@@ -572,7 +576,7 @@ extension RegisterViewController: UITextFieldDelegate {
                 firstName.showError()
             }
             else{
-                let firstNametxt = firstName.text?.replacingOccurrences(of: " ", with: "", options: .literal, range: nil)
+                let firstNametxt = firstName.text?.trimmingCharacters(in: .whitespacesAndNewlines)
                 firstName.text = firstNametxt
                 if (firstName.text?.hasPrefix(" "))! {
                     firstName.shake()
@@ -600,6 +604,8 @@ extension RegisterViewController: UITextFieldDelegate {
                 lastName.showError()
             }
             else{
+                let lastNametxt = lastName.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+                lastName.text = lastNametxt
                 if (lastName.text?.hasPrefix(" "))! {
                     lastName.shake()
                     lastName.errorText = "Lastname can't start with whitespaces"
@@ -639,7 +645,10 @@ extension RegisterViewController: UITextFieldDelegate {
                 emailTxt.errorText = "Email cannot be blank"
                 emailTxt.showError()
             }else{
+                let emailTxttxt = emailTxt.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+                emailTxt.text = emailTxttxt
                 if let email = emailTxt.text {
+                   
                     if userType == "Coach"{
                         if email.isValid(){
                             
@@ -717,7 +726,7 @@ extension RegisterViewController: UITextFieldDelegate {
             
         }
         if textField == self.mobileTxt {
-            let mobileText = mobileTxt.text?.replacingOccurrences(of: " ", with: "")
+            let mobileText = mobileTxt.text?.trimmingCharacters(in: .whitespacesAndNewlines)
             mobileTxt.text = mobileText
             if mobileTxt.isEmpty() {
                 mobileTxt.shake()
