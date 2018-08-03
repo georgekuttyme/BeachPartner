@@ -219,7 +219,9 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         self.hideKeyboardWhenTappedAround()
         loadLocations()
         dateformatter.dateFormat = "MM-dd-yyyy"
+        dateformatter.timeZone = TimeZone(identifier: "UTC")
         date_formatter1.dateFormat = "yyyy-MM-dd"
+        date_formatter1.timeZone = TimeZone(identifier: "UTC")
         tableCell_SaveCancel.isHidden = true
         
         
@@ -234,6 +236,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         
         
         //MARK: Date of Birth
+        datePicker.timeZone = TimeZone(identifier: "UTC")
         datePicker.datePickerMode = UIDatePickerMode.date
         let currentDate = Date()
         var dateComponent = DateComponents()
@@ -446,6 +449,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
             birthDateTxtFld.hideError()
             let date = dateformatter.date(from: birthDateTxtFld.text!)
             date_formatter1.dateFormat = "yyyy-MM-dd"
+            date_formatter1.timeZone = TimeZone(identifier: "UTC")
             let dateForSave = date_formatter1.string(from: date!)
             self.userData.inputDob = dateForSave
 //            self.userData.inputDob = birthDateTxtFld.text!
@@ -841,6 +845,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         
         let formatter = DateFormatter()
         formatter.dateFormat = "MM-dd-yyyy"
+        formatter.timeZone = TimeZone(identifier: "UTC")
         
         //        formatter.dateStyle = DateFormatter.Style.medium
         //        formatter.timeStyle = DateFormatter.Style.none
@@ -955,6 +960,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         
         let date = NSDate(timeIntervalSince1970: TimeInterval(accResponseModel.dob/1000))
         dateformatter.dateFormat = "MM-dd-yyyy"
+        dateformatter.timeZone = TimeZone(identifier: "UTC")
         let dateString = dateformatter.string(from: date as Date)
         datePicker.date = date as Date
         if isFromConnectedUser == "ConnectedUser"{
