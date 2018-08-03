@@ -947,8 +947,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
     }
     
     func loadDataToUi( accResponseModel : AccountRespModel){
-        self.userName.text = accResponseModel.firstName
-        //        + " " + accResponseModel.lastName
+        self.userName.text = accResponseModel.firstName + " " + accResponseModel.lastName
         self.userTypeLbl.text = accResponseModel.userType
         self.firstNameTxtFld.text = accResponseModel.firstName
         self.lastNameTxtFld.text = accResponseModel.lastName
