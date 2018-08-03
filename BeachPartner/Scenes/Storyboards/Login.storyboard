@@ -61,7 +61,7 @@
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5bg-3i-aNp">
                                                                 <rect key="frame" x="0.0" y="0.0" width="300" height="0.0"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                                <state key="normal" title="Register Here to Sign Up">
+                                                                <state key="normal" title="Click Here to Register">
                                                                     <color key="titleColor" red="0.12549019607843137" green="0.18823529411764706" blue="0.49803921568627452" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 </state>
                                                                 <connections>
@@ -528,7 +528,7 @@
                                 <color key="backgroundColor" red="0.79963050840000005" green="0.79860577020000001" blue="0.81650539339999995" alpha="0.73319777399999997" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fjg-6K-mWC">
-                                <rect key="frame" x="8" y="20" width="359" height="627"/>
+                                <rect key="frame" x="8" y="0.0" width="359" height="647"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Beachlogo" translatesAutoresizingMaskIntoConstraints="NO" id="PKY-dR-Jyn">
                                         <rect key="frame" x="132.5" y="0.0" width="94" height="100"/>
@@ -537,10 +537,10 @@
                                         </constraints>
                                     </imageView>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gKY-dC-zmE">
-                                        <rect key="frame" x="0.0" y="100" width="359" height="527"/>
+                                        <rect key="frame" x="0.0" y="100" width="359" height="547"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="m9t-J9-Ql9">
-                                                <rect key="frame" x="2" y="7" width="355" height="520"/>
+                                                <rect key="frame" x="2" y="7" width="355" height="540"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terms &amp; Conditions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ggm-Nc-ybm">
                                                         <rect key="frame" x="0.0" y="0.0" width="355" height="40"/>
@@ -552,11 +552,11 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gYN-Jf-bBR">
-                                                        <rect key="frame" x="0.0" y="40" width="355" height="400"/>
+                                                        <rect key="frame" x="0.0" y="40" width="355" height="420"/>
                                                         <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </webView>
                                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FgB-L5-6OO">
-                                                        <rect key="frame" x="0.0" y="440" width="355" height="40"/>
+                                                        <rect key="frame" x="0.0" y="460" width="355" height="40"/>
                                                         <subviews>
                                                             <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="M25-0R-dnm">
                                                                 <rect key="frame" x="127.5" y="4" width="100" height="32"/>
@@ -591,7 +591,7 @@
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zf2-PM-KS7">
-                                                        <rect key="frame" x="0.0" y="480" width="355" height="40"/>
+                                                        <rect key="frame" x="0.0" y="500" width="355" height="40"/>
                                                         <color key="backgroundColor" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="mJb-bW-h2O"/>
