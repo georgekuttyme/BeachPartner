@@ -432,11 +432,19 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
                 for index1 in 0..<limit! {
                     let partnerCount = partnerList.invitationList![index1].eventpartners?.count
                     for index2 in 0..<partnerCount! {
-                        if let id = partnerList.invitationList![index1].eventpartners?[index2].partnerId , id != loggedInUserId{
+                        if partnerList.invitationList![index1].eventpartners?[index2].partnerId != loggedInUserId{
                             if let firstName = partnerList.invitationList![index1].eventpartners?[index2].partnerName {
                                 self.partners.append(firstName + ",")
                             }
                         }
+                    }
+                }
+                
+                for index1 in 0..<limit! {
+                        if partnerList.invitationList![index1].invitorId != loggedInUserId{
+                            if let firstName = partnerList.invitationList?[index1].invitorName {
+                                self.partners.append(firstName + ",")
+                            }
                     }
                 }
 

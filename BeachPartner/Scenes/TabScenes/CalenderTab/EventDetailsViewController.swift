@@ -159,26 +159,35 @@ class EventDetailsViewController: BeachPartnerViewController {
             athleteGoingButton.isEnabled = false
             athleteGoingButton.alpha = 0.6
             athleteGoingButton.setTitleColor(.lightGray, for: .normal)
+            if UserDefaults.standard.string(forKey: "userType") == "Coach" {
+                goingButton.isEnabled = false
+                goingButton.alpha = 0.6
+                notGoingButton.isEnabled = false
+                notGoingButton.alpha = 0.6
+            }
         }
-        
-        
-        
-        // ~~~~~ Temporary fix ~~~~~~
-        if let date = event?.eventRegistrationEndDate {
-            let endDate = Date(timeIntervalSince1970: TimeInterval(date/1000))
-            
-            if endDate.compare(Date()) == .orderedAscending { // registration already closed
-                invitePartnerButton.isEnabled = false
-                invitePartnerButton.alpha = 0.6
+   
+            // ~~~~~ Temporary fix ~~~~~~
+            if let date = event?.eventRegistrationEndDate {
+                let endDate = Date(timeIntervalSince1970: TimeInterval(date/1000))
                 
-                athleteGoingButton.isEnabled = false
-                athleteGoingButton.alpha = 0.6
-                athleteGoingButton.setTitleColor(.lightGray, for: .normal)
+                if endDate.compare(Date()) == .orderedAscending { // registration already closed
+                    invitePartnerButton.isEnabled = false
+                    invitePartnerButton.alpha = 0.6
+                    
+                    athleteGoingButton.isEnabled = false
+                    athleteGoingButton.alpha = 0.6
+                    athleteGoingButton.setTitleColor(.lightGray, for: .normal)
+                    if UserDefaults.standard.string(forKey: "userType") == "Coach" {
+                        goingButton.isEnabled = false
+                        goingButton.alpha = 0.6
+                        notGoingButton.isEnabled = false
+                        notGoingButton.alpha = 0.6
+                    }
+                }
             }
-            else {// registration open
-               
-            }
-        }
+      
+        
     }
     
     private func setupDataFromEvent() {
