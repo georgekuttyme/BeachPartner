@@ -1673,9 +1673,9 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             let image = UIImage(named: "edit_btn_active_1x") as UIImage?
             self.editProfileBtn.setImage(image, for: .normal)
             self.editclicked = true
-            self.addToplistBtn.isHidden = true
-            self.delTop1.isHidden = (self.delTop1 != nil)
-            self.delTop2.isHidden = (self.delTop2 != nil)
+            self.addToplistBtn.isHidden = false
+            self.delTop1.isHidden = false
+            self.delTop2.isHidden = false
             print(self.delTop2)
             self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
             self.editUserImageBtn.isHidden = false
@@ -1696,7 +1696,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             let image = UIImage(named: "edit_btn_active_1x") as UIImage?
             self.editProfileBtn.setImage(image, for: .normal)
             self.editclicked = true
-            self.addToplistBtn.isHidden = true
+            self.addToplistBtn.isHidden = false
             self.delTop1.isHidden = false
             self.delTop2.isHidden = false
             self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
