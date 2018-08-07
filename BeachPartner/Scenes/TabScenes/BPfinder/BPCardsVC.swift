@@ -347,7 +347,6 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         self.getUserInfo()
         self.generateSwipeAarray()
         
-        
         if self.selectedType == "BlueBp" && Subscription.current.statusOfAddOn(addOnId: AddOnType.ProfileBoost) == false {
             profileBoostButton.isHidden = false
         }
@@ -551,7 +550,15 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     
     
     @objc func moveDownScroll(sender:UIButton) {
+        print("khghghgh")
         
+        if UserDefaults.standard.string(forKey: "userType") == "Coach"
+        {
+            print("abckjkllkhl")
+            self.topFinishesStackView.isHidden = true
+            self.topthreefinishesBtn.isHidden = true
+            self.topfinishesHeight.constant = 0
+        }
        moveCardView()
     }
  
@@ -1174,6 +1181,8 @@ extension BPCardsVC: KolodaViewDataSource {
             view.flagBtn.tag = index
              view.flagBtn.addTarget(self, action: #selector(flagBtnClick(sender:)), for: UIControlEvents.touchUpInside)
             view.moveDown.addTarget(self, action:#selector(moveDownScroll(sender:)), for: UIControlEvents.touchUpInside)
+        
+            
             view.displaySearchDetailsOnCard(displayData: data)
         }
         else if selectedType == "BlueBp" || selectedType == "BlueBp-New"
