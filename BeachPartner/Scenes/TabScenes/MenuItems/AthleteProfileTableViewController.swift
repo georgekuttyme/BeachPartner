@@ -153,6 +153,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     @IBOutlet weak var dateofBirthLbl: UILabel!
     var activeTextField: UITextField?
     var userData = AccountRespModel()
+    var dataToList = AccountRespModel()
     var connectedUserId = Int()
     var connectedUserName = String()
     var connectedUserAge = Int()
@@ -196,6 +197,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     }
     
     @IBAction func cancelClicked(_ sender: Any) {
+        getUserInfo()
         let image = UIImage(named: "edit_btn_1x") as UIImage?
         editProfileBtn.setImage(image, for: .normal)
         self.editUserImageBtn.isHidden = true
@@ -716,6 +718,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         }else{
             firstNameTxtFld.hideError()
             self.userData.firstName = firstNameTxtFld.text!
+            self.userName.text = self.userData.firstName
             currentValidation += 1
         }
         

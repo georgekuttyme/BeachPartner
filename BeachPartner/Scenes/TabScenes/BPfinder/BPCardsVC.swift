@@ -1030,7 +1030,7 @@ extension BPCardsVC :KolodaViewDelegate {
                 self.didPressDownArrow ? view.moveDown.setImage(UIImage(named:"arrow-up"), for: UIControlState.normal) : view.moveDown.setImage(UIImage(named:"arrow-down"), for: UIControlState.normal)
             }
             topFinishers = data.connectedUser?.userMoreDetails?.topFinishes ?? ""
-            getAllUserEvents(userId:(data.connectedUser?.id)!)
+            getAllUserEvents(userId:String(data.id))
         }
         else{
             let  data = SwipeCardArray[index] as! ConnectedUserModel
@@ -1043,7 +1043,7 @@ extension BPCardsVC :KolodaViewDelegate {
                 self.didPressDownArrow ? view.moveDown.setImage(UIImage(named:"arrow-up"), for: UIControlState.normal) : view.moveDown.setImage(UIImage(named:"arrow-down"), for: UIControlState.normal)
             }
              topFinishers = data.connectedUser?.userMoreProfileDetails?.topFinishes ?? ""
-            getAllUserEvents(userId: String(data.connectedUser?.userId ?? 0))
+            getAllUserEvents(userId: String(data.id))
         }
         curentCardIndex = index
         self.imgProfile.isHidden = true
