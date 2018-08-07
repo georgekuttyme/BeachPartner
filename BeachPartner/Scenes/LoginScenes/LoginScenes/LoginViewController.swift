@@ -833,7 +833,7 @@ extension LoginViewController: AppUpdateViewControllerDelegate {
                         print("--- minor ---")
                     }
                     
-                    if accRespModel.userProfile == nil{
+                    if accRespModel.profileUpdated == false{
                         UserDefaults.standard.set(0, forKey: "NewUser")
                     }else{
                         UserDefaults.standard.set(1, forKey: "NewUser")
