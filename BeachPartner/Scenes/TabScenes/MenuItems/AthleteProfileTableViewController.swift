@@ -349,7 +349,9 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         print(connectedUserId,"====",isFromConnectedUser,"^^^^",connectedUserAge)
         if isFromConnectedUser == "ConnectedUser"{
             self.navigationController!.navigationBar.topItem!.title = connectedUserName+"'s"+" Profile"
+          
             self.dateofBirthLbl.text = "Age"
+            
             self.birthDateTxtFld.text = String(connectedUserAge) ?? ""
             self.tableCell_PhoneNumber.isHidden = true
             self.editUserImageBtn.isHidden = true
@@ -1414,11 +1416,20 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         topFinishestwoTxtFld.text = ""
         
         self.userName.text = accResponseModel.firstName
-//        + " " + accResponseModel.lastName
-        self.userTypeLbl.text = accResponseModel.userType
+    + " " + accResponseModel.lastName
+//        self.userTypeLbl.text = accResponseModel.userType
         self.firstNameTxtFld.text = accResponseModel.firstName
         self.lastNameTxtFld.text = accResponseModel.lastName
         self.genderBtn.setTitle(accResponseModel.gender, for: .normal)
+        
+        if accResponseModel.userType == "Coach"
+        {
+            self.userTypeLbl.text = "College Coach"
+        }
+        else
+        {
+            self.userTypeLbl.text = accResponseModel.userType
+        }
         
         let date = NSDate(timeIntervalSince1970: TimeInterval(accResponseModel.dob/1000))
 //        let dayTimePeriodFormatter = DateFormatter()
@@ -1433,6 +1444,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         else{
             self.birthDateTxtFld.text = dateString
         }
+        
            print(accResponseModel.userProfile?.sandRecruitNumber)
         
 //        self.birthDateTxtFld.text = String(accResponseModel.dob)

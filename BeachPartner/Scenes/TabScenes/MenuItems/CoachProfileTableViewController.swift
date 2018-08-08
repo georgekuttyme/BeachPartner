@@ -23,6 +23,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
     var isFromConnectedUser = ""
     var connectedUserId = Int()
     var connectedUserAge = Int()
+    
    
     @IBOutlet weak var editUserImageBtn: UIButton!
     @IBOutlet weak var userImage: UIImageView!
@@ -201,6 +202,8 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         if isFromConnectedUser == "ConnectedUser"{
             self.navigationController!.navigationBar.topItem!.title = connectedUserName+"'s"+" Profile"
             self.dateOfBirthLbl.text = "Age"
+
+            //self.userTypeLbl.text = "College Coach"
             self.birthDateTxtFld.text = String(connectedUserAge) ?? ""
             self.tableCell_PhoneNumber.isHidden = true
             self.editProfileTxtBtn.isHidden = true
@@ -313,14 +316,10 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         self.stateBtn.setTitle("Select your State", for: UIControlState.normal)
         self.statedropDown.selectRow(0)
         
-        
-
-        
         self.firstNameTxtFld.delegate = self
         self.lastNameTxtFld.delegate = self
         self.phoneTxtFld.delegate = self
         
-
         self.collegeTxtFld.delegate = self
         self.descriptionTxtFld.delegate = self
         self.numberOfYearsTxtFld.delegate = self
@@ -348,8 +347,6 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         shareAthletesDropDown.show()
     }
     
-    
-    
     //  MARK: Basic Info Button Action
     @IBAction func buttonActionForBasicInformation(_ basicInfoBtn: UIButton) {
         view_BasicLine.backgroundColor = UIColor.navigationBarTintColor
@@ -369,8 +366,6 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         moreInfoBtn.setTitleColor(UIColor.navigationBarTintColor, for: .normal)
         self.tableView.reloadData()
     }
-    
-    
     
     @IBAction func editBtnClicked(_ sender: Any) {
         
@@ -954,10 +949,19 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
     
     func loadDataToUi( accResponseModel : AccountRespModel){
         self.userName.text = accResponseModel.firstName + " " + accResponseModel.lastName
-        self.userTypeLbl.text = accResponseModel.userType
+       // self.userTypeLbl.text = accResponseModel.userType
         self.firstNameTxtFld.text = accResponseModel.firstName
         self.lastNameTxtFld.text = accResponseModel.lastName
         self.genderBtn.setTitle(accResponseModel.gender, for: .normal)
+        
+        if accResponseModel.userType == "Coach"
+        {
+            self.userTypeLbl.text = "College Coach"
+        }
+        else
+        {
+            self.userTypeLbl.text = accResponseModel.userType
+        }
         
         let date = NSDate(timeIntervalSince1970: TimeInterval(accResponseModel.dob/1000))
         dateformatter.dateFormat = "MM-dd-yyyy"
