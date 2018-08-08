@@ -445,10 +445,11 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             if SwipeCardArray.count == 0{
 //                self.imgProfile.isHidden = false
                 self.lblNotAvailable.isHidden = false
+            }else{
+                let  data : SearchUserModel
+                data = SwipeCardArray[0] as! SearchUserModel
+                userType = data.userType ?? ""
             }
-            let  data : SearchUserModel
-            data = SwipeCardArray[0] as! SearchUserModel
-            userType = data.userType ?? ""
         }
         else if selectedType == "Hifi"{
             SwipeCardArray.insert(self.connectedUsers[selectedIndex], at: 0)
@@ -463,11 +464,13 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             if SwipeCardArray.count == 0{
 //                self.imgProfile.isHidden = false
                 self.lblNotAvailable.isHidden = false
+            }else{
+                let  data : ConnectedUserModel
+                data = SwipeCardArray[0] as! ConnectedUserModel
+                userType = (data.connectedUser?.userType) ?? ""
+                
             }
-            let  data : ConnectedUserModel
-            data = SwipeCardArray[0] as! ConnectedUserModel
-            userType = (data.connectedUser?.userType) ?? ""
-            
+           
         }
         else if selectedType == "BlueBp"{
             SwipeCardArray.insert(self.subscribedBlueBpUsers[selectedIndex], at: 0)
@@ -478,10 +481,13 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             if self.SwipeCardArray.count == 0{
 //                self.imgProfile.isHidden = false
                 self.lblNotAvailable.isHidden = false
+            }else{
+                let  data : SubscriptionUserModel
+                data = SwipeCardArray[0] as! SubscriptionUserModel
+                userType = (data.connectedUser?.userType) ?? ""
+                
             }
-            let  data : SubscriptionUserModel
-            data = SwipeCardArray[0] as! SubscriptionUserModel
-            userType = (data.connectedUser?.userType) ?? ""
+           
         }
        else if selectedType == "BlueBp-New"{
             
@@ -496,14 +502,16 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             if SwipeCardArray.count == 0{
 //                self.imgProfile.isHidden = false
                 self.lblNotAvailable.isHidden = false
+            }else{
+                let  data : SubscriptionUserModel
+                data = SwipeCardArray[0] as! SubscriptionUserModel
+                userType = (data.connectedUser?.userType) ?? ""
             }
             isFirstBlueBpCard = true
             self.cardView.dataSource = self
             self.cardView.delegate = self
             self.cardView.resetCurrentCardIndex()
-            let  data : SubscriptionUserModel
-            data = SwipeCardArray[0] as! SubscriptionUserModel
-            userType = (data.connectedUser?.userType) ?? ""
+           
         }
         resetTopFinishView()
         if didPressDownArrow == true {
@@ -1234,14 +1242,13 @@ extension BPCardsVC: KolodaViewDataSource {
         
         let view = CardView.instantiateFromNib()
         if selectedType == "Search" || selectedType == "invitePartner"{
-                var data : SearchUserModel
-                data = SwipeCardArray[index] as! SearchUserModel
-                if index == 0{
-                    if let videoUrl = URL(string: data.videoUrl) {
-                        self.videoView.load(videoUrl)
-                        self.videoView.isMuted = true
-                        view.videoView = self.videoView
-                    }
+            var data : SearchUserModel
+            data = SwipeCardArray[index] as! SearchUserModel
+            if index == 0{
+                if let videoUrl = URL(string: data.videoUrl) {
+                    self.videoView.load(videoUrl)
+                    self.videoView.isMuted = true
+                    view.videoView = self.videoView
                 }
             }
             if data.status == "Flagged"{
@@ -1250,20 +1257,18 @@ extension BPCardsVC: KolodaViewDataSource {
                 //view.flagBtn.setImage(UIImage(named:"grayback"), for: .normal)
             }
             view.flagBtn.tag = index
-             view.flagBtn.addTarget(self, action: #selector(flagBtnClick(sender:)), for: UIControlEvents.touchUpInside)
-            view.moveDown.tag = index
+            view.flagBtn.addTarget(self, action: #selector(flagBtnClick(sender:)), for: UIControlEvents.touchUpInside)
             view.moveDown.addTarget(self, action:#selector(moveDownScroll(sender:)), for: UIControlEvents.touchUpInside)
-        
-            
             view.displaySearchDetailsOnCard(displayData: data)
+            
         }
         else if selectedType == "BlueBp" || selectedType == "BlueBp-New"
         {
             var data :SubscriptionUserModel
-             if  selectedType == "BlueBp-New"{
+            if  selectedType == "BlueBp-New"{
                 data = SwipeCardArray[0] as! SubscriptionUserModel
             }
-             else{
+            else{
                 data = SwipeCardArray[index] as! SubscriptionUserModel
             }
             
