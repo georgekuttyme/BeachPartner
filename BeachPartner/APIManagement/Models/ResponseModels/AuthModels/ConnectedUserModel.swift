@@ -65,6 +65,7 @@ struct ConnectedUserModel:SafeMappable {
         var userId: Int = 0
         var userType: String = ""
         var isBlocked: Bool = false
+        var userStatus: String = ""
         var userMoreProfileDetails: userMoreDetails?
         
         init() {
@@ -76,6 +77,7 @@ struct ConnectedUserModel:SafeMappable {
             activated <- map.property("activated")
             age <- map.property("age")
             authToken  <- map.property("authToken")
+            userStatus  <- map.property("status")
             fcmToken <- map.property("fcmToken")
             city <- map.property("city")
             createdDate <- map.property("createdDate")
