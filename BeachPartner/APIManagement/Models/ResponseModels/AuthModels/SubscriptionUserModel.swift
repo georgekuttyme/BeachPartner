@@ -49,7 +49,7 @@ struct SubscriptionUserModel:SafeMappable {
         var authToken: Int = 0
         var city: String = ""
         var age: Int = 0
-        var id: String = ""
+        var id: Int = 0
         var dob: String = ""
         var deviceId: String = ""
         var email: String = ""
@@ -65,6 +65,7 @@ struct SubscriptionUserModel:SafeMappable {
         var videoUrl: String = ""
         var userType: String = ""
         var fcmToken: String = ""
+        var userStatus: String = ""
         var userMoreDetails : userMoreDetails?
         init() {
             
@@ -78,6 +79,7 @@ struct SubscriptionUserModel:SafeMappable {
             id <- map.property("id")
             dob <- map.property("dob")
             deviceId <- map.property("deviceId")
+            userStatus <- map.property("status")
             email <- map.property("email")
             firstName <- map.property("firstName")
             gender <- map.property("gender")

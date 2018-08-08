@@ -405,10 +405,15 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BlueBPCollectionViewCell", for: indexPath) as! BlueBPCollectionViewCell
             
-            if let imageUrl = URL(string: (blueBpData?.imageUrl)!) {
-                cell.imageView.sd_setIndicatorStyle(.whiteLarge)
-                cell.imageView.sd_setShowActivityIndicatorView(true)
-                cell.imageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+            let image = blueBpData?.imageUrl
+            if image == ""{
+                cell.imageView.image = UIImage(named: "user")
+            }else{
+                if let imageUrl = URL(string: (blueBpData?.imageUrl)!) {
+                    cell.imageView.sd_setIndicatorStyle(.whiteLarge)
+                    cell.imageView.sd_setShowActivityIndicatorView(true)
+                    cell.imageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                }
             }
             cell.imageView.layer.cornerRadius = cell.imageView.frame.size.width/2
             cell.imageView.clipsToBounds = true

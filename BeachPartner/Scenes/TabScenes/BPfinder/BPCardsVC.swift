@@ -265,11 +265,15 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             let blueBpData = subscribedBlueBpUsers[indexPath.row]
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BlueBPCollectionViewCell", for: indexPath) as! BlueBPCollectionViewCell
-            
-            if let imageUrl = URL(string: (blueBpData.connectedUser?.imageUrl)!) {
-                cell.imageView.sd_setIndicatorStyle(.whiteLarge)
-                cell.imageView.sd_setShowActivityIndicatorView(true)
-                cell.imageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+            let image = blueBpData.connectedUser?.imageUrl
+            if image == ""{
+                cell.imageView.image = UIImage(named: "user")
+            }else{
+                if let imageUrl = URL(string: (blueBpData.connectedUser?.imageUrl)!) {
+                    cell.imageView.sd_setIndicatorStyle(.whiteLarge)
+                    cell.imageView.sd_setShowActivityIndicatorView(true)
+                    cell.imageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                }
             }
             cell.imageView.layer.cornerRadius = cell.imageView.frame.size.width/2
             cell.imageView.clipsToBounds = true
@@ -570,7 +574,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
         else if selectedType == "BlueBp" || selectedType == "BlueBp-New"{
             let data : SubscriptionUserModel
             data = SwipeCardArray[index] as! SubscriptionUserModel
-            flagUserId = data.id
+            flagUserId = data.connectedUser?.id ?? 0
             titleString = "Are you sure you want to Flag \((data.connectedUser?.firstName)! + " " + (data.connectedUser?.lastName)!)?" as NSString
         }
         else{
@@ -665,10 +669,15 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             if(accRespModel.id != 0){
                 
                 self.userData = accRespModel
-                if let imageUrl = URL(string: accRespModel.imageUrl) {
-                    self.imgProfile.sd_setIndicatorStyle(.whiteLarge)
-                    self.imgProfile.sd_setShowActivityIndicatorView(true)
-                    self.imgProfile.sd_setImage(with: imageUrl, placeholderImage:  #imageLiteral(resourceName: "user"))
+                let image = accRespModel.imageUrl
+                if image == ""{
+                    self.imgProfile.image = UIImage(named: "user")
+                }else{
+                    if let imageUrl = URL(string: accRespModel.imageUrl) {
+                        self.imgProfile.sd_setIndicatorStyle(.whiteLarge)
+                        self.imgProfile.sd_setShowActivityIndicatorView(true)
+                        self.imgProfile.sd_setImage(with: imageUrl, placeholderImage:  #imageLiteral(resourceName: "user"))
+                    }
                 }
             }else{
                 
@@ -1005,8 +1014,8 @@ extension BPCardsVC :KolodaViewDelegate {
     func koloda(_ koloda: KolodaView, didShowCardAt index: Int) {
         
         if selectedType == "Search"  || selectedType == "invitePartner" {
-            //|| selectedType == "BlueBp"
-        let data = SwipeCardArray[index] as! SearchUserModel
+            var data : SearchUserModel
+            data = SwipeCardArray[index] as! SearchUserModel
         if let view:CardView = koloda.viewForCard(at: index) as? CardView {
                 if let videoUrl = URL(string: data.videoUrl) {
                     self.videoView.load(videoUrl)
@@ -1020,7 +1029,8 @@ extension BPCardsVC :KolodaViewDelegate {
       }
     else if selectedType == "BlueBp" || selectedType == "BlueBp-New"
         {
-            let data = SwipeCardArray[index] as! SubscriptionUserModel
+            var data : SubscriptionUserModel
+            data = SwipeCardArray[index] as! SubscriptionUserModel
             if let view:CardView = koloda.viewForCard(at: index) as? CardView {
                 if let videoUrl = URL(string: (data.connectedUser?.videoUrl)!) {
                     self.videoView.load(videoUrl)
@@ -1030,10 +1040,11 @@ extension BPCardsVC :KolodaViewDelegate {
                 self.didPressDownArrow ? view.moveDown.setImage(UIImage(named:"arrow-up"), for: UIControlState.normal) : view.moveDown.setImage(UIImage(named:"arrow-down"), for: UIControlState.normal)
             }
             topFinishers = data.connectedUser?.userMoreDetails?.topFinishes ?? ""
-            getAllUserEvents(userId:String(data.id))
+            getAllUserEvents(userId:String(data.connectedUser?.id ?? 0))
         }
         else{
-            let  data = SwipeCardArray[index] as! ConnectedUserModel
+            var data : ConnectedUserModel
+            data = SwipeCardArray[index] as! ConnectedUserModel
             if let view:CardView = koloda.viewForCard(at: index) as? CardView {
                 if let videoUrl = URL(string: data.connectedUser!.videoUrl) {
                     self.videoView.load(videoUrl)
@@ -1043,7 +1054,7 @@ extension BPCardsVC :KolodaViewDelegate {
                 self.didPressDownArrow ? view.moveDown.setImage(UIImage(named:"arrow-up"), for: UIControlState.normal) : view.moveDown.setImage(UIImage(named:"arrow-down"), for: UIControlState.normal)
             }
              topFinishers = data.connectedUser?.userMoreProfileDetails?.topFinishes ?? ""
-            getAllUserEvents(userId: String(data.id))
+            getAllUserEvents(userId:String(data.connectedUser?.userId ?? 0))
         }
         curentCardIndex = index
         self.imgProfile.isHidden = true
@@ -1080,19 +1091,22 @@ extension BPCardsVC :KolodaViewDelegate {
         var fcmId:String
         if selectedType == "Search" || selectedType == "invitePartner"{
             //|| selectedType == "BlueBp"
-            let  data = SwipeCardArray[index] as! SearchUserModel
+            var data : SearchUserModel
+            data = SwipeCardArray[index] as! SearchUserModel
             idString = String(data.id)
             fcmId = data.fcmToken
         }
         else if selectedType == "BlueBp" || selectedType == "BlueBp-New"
         {
-            let  data = SwipeCardArray[index] as! SubscriptionUserModel
-            idString = data.connectedUser?.id ?? ""
+            var data : SubscriptionUserModel
+            data = SwipeCardArray[index] as! SubscriptionUserModel
+            idString = String(data.connectedUser?.id ?? 0)
             fcmId = data.connectedUser?.fcmToken ?? ""
         }
         else {
-            let  data = SwipeCardArray[index] as! ConnectedUserModel
-            idString = String(data.connectedUser!.userId as Int!)
+            var data : ConnectedUserModel
+            data = SwipeCardArray[index] as! ConnectedUserModel
+            idString = String(data.connectedUser?.userId ?? 0)
             fcmId = data.connectedUser?.fcmToken ?? ""
         }
         if direction == .up{
@@ -1108,7 +1122,7 @@ extension BPCardsVC :KolodaViewDelegate {
         if isFirstBlueBpCard {
             isFirstBlueBpCard = false;
             self.subscribedBlueBpUsers.remove(at:selectedIndex)
-             self.selectedType = "Search"
+//             self.selectedType = "Search"
             self.topUserListCollectionView.reloadData()
             if self.subscribedBlueBpUsers.count == 0  {
                 self.blueBpListHeight.constant = 61
@@ -1157,24 +1171,25 @@ extension BPCardsVC: KolodaViewDataSource {
         
         let view = CardView.instantiateFromNib()
         if selectedType == "Search" || selectedType == "invitePartner"{
-            //|| selectedType == "BlueBp"
-             let   data = SwipeCardArray[index] as! SearchUserModel
-        if index == 0{
-                if let videoUrl = URL(string: data.videoUrl) {
-                    self.videoView.load(videoUrl)
-                    self.videoView.isMuted = true
-                    view.videoView = self.videoView
+                var data : SearchUserModel
+                data = SwipeCardArray[index] as! SearchUserModel
+                if index == 0{
+                    if let videoUrl = URL(string: data.videoUrl) {
+                        self.videoView.load(videoUrl)
+                        self.videoView.isMuted = true
+                        view.videoView = self.videoView
+                    }
                 }
-            }
-            if data.status == "Flagged"{
-                view.flagBtn.isEnabled = false
-                view.flagBtn.isHidden = true
-                //view.flagBtn.setImage(UIImage(named:"grayback"), for: .normal)
-            }
-            view.flagBtn.tag = index
-             view.flagBtn.addTarget(self, action: #selector(flagBtnClick(sender:)), for: UIControlEvents.touchUpInside)
-            view.moveDown.addTarget(self, action:#selector(moveDownScroll(sender:)), for: UIControlEvents.touchUpInside)
-            view.displaySearchDetailsOnCard(displayData: data)
+                if data.status == "Flagged"{
+                    view.flagBtn.isEnabled = false
+                    view.flagBtn.isHidden = true
+                    //view.flagBtn.setImage(UIImage(named:"grayback"), for: .normal)
+                }
+                view.flagBtn.tag = index
+                view.flagBtn.addTarget(self, action: #selector(flagBtnClick(sender:)), for: UIControlEvents.touchUpInside)
+                view.moveDown.addTarget(self, action:#selector(moveDownScroll(sender:)), for: UIControlEvents.touchUpInside)
+                view.displaySearchDetailsOnCard(displayData: data)
+            
         }
         else if selectedType == "BlueBp" || selectedType == "BlueBp-New"
         {
@@ -1193,7 +1208,7 @@ extension BPCardsVC: KolodaViewDataSource {
                     view.videoView = self.videoView
                 }
             }
-            if data.status == "Flagged"{
+            if data.connectedUser?.userStatus == "Flagged"{
                 view.flagBtn.isEnabled = false
                 view.flagBtn.isHidden = true
                 //view.flagBtn.setImage(UIImage(named:"grayback"), for: .normal)
@@ -1205,7 +1220,8 @@ extension BPCardsVC: KolodaViewDataSource {
             
         }
         else{
-            let  data = SwipeCardArray[index] as! ConnectedUserModel
+            var data : ConnectedUserModel
+            data = SwipeCardArray[index] as! ConnectedUserModel
             
             if index == 0 {
                 if let videoUrl = URL(string: data.connectedUser!.videoUrl) {
@@ -1214,7 +1230,7 @@ extension BPCardsVC: KolodaViewDataSource {
                     view.videoView = self.videoView
                 }
             }
-            if data.status == "Flagged"{
+            if data.connectedUser?.userStatus == "Flagged"{
                 view.flagBtn.isEnabled = false
                 view.flagBtn.isHidden = true
             }
