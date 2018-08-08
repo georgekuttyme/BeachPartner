@@ -417,11 +417,8 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     
     func generateSwipeAarray() {
         
-        resetTopFinishView()
-        if didPressDownArrow == true {
-            moveCardView()
-        }
-        
+       
+        var userType : String = ""
         if selectedType == "Likes" {
             SwipeCardArray = self.connectedUsers
             searchCardSatus = selectedType
@@ -431,6 +428,9 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
 //                self.imgProfile.isHidden = false
                 self.lblNotAvailable.isHidden = false
             }
+            let  data : ConnectedUserModel
+            data = SwipeCardArray[0] as! ConnectedUserModel
+            userType = (data.connectedUser?.userType) ?? ""
         }
         else if selectedType == "Search" || selectedType == "invitePartner" {
             SwipeCardArray = self.searchUsers
@@ -442,6 +442,9 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
 //                self.imgProfile.isHidden = false
                 self.lblNotAvailable.isHidden = false
             }
+            let  data : SearchUserModel
+            data = SwipeCardArray[0] as! SearchUserModel
+            userType = data.userType ?? ""
         }
         else if selectedType == "Hifi"{
             SwipeCardArray.insert(self.connectedUsers[selectedIndex], at: 0)
@@ -457,6 +460,9 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
 //                self.imgProfile.isHidden = false
                 self.lblNotAvailable.isHidden = false
             }
+            let  data : ConnectedUserModel
+            data = SwipeCardArray[0] as! ConnectedUserModel
+            userType = (data.connectedUser?.userType) ?? ""
             
         }
         else if selectedType == "BlueBp"{
@@ -469,6 +475,9 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
 //                self.imgProfile.isHidden = false
                 self.lblNotAvailable.isHidden = false
             }
+            let  data : SubscriptionUserModel
+            data = SwipeCardArray[0] as! SubscriptionUserModel
+            userType = (data.connectedUser?.userType) ?? ""
         }
        else if selectedType == "BlueBp-New"{
             
@@ -488,20 +497,39 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             self.cardView.dataSource = self
             self.cardView.delegate = self
             self.cardView.resetCurrentCardIndex()
+            let  data : SubscriptionUserModel
+            data = SwipeCardArray[0] as! SubscriptionUserModel
+            userType = (data.connectedUser?.userType) ?? ""
+        }
+        resetTopFinishView()
+        if didPressDownArrow == true {
+            moveCardView(userType: userType)
         }
         
     }
     
-    private func moveCardView() {
-        UIView.animate(withDuration: 0.5, animations: {
+    private func moveCardView(userType: String) {
+        UIView.animate(withDuration: 0.3, animations: {
+            
             // 200 or any value you like.
             if !self.didPressDownArrow {
+                if userType == "Coach"
+                {
+                    print("abckjkllkhl")
+                    self.topFinishesStackView.isHidden = true
+                    self.topthreefinishesBtn.isHidden = true
+                    self.topfinishesHeight.constant = 0
+                    
+                }
                 self.didPressDownArrow = true
                 self.btnUndo.isHidden = true
                 self.btnLoc.isHidden = true
                 self.btnHifi.isHidden = true
                 self.imageBackground.isHidden = true
-                self.topFinishesStackView.isHidden = false
+//                self.topFinishesStackView.isHidden = false
+//                self.topFinishesStackView.isHidden = false
+//                self.topthreefinishesBtn.isHidden = false
+//                self.topfinishesHeight.constant = 40
                 var point = CGPoint()
                 if UIDevice.current.userInterfaceIdiom == .phone {
                     let screenSize = UIScreen.main.bounds.size;
@@ -533,6 +561,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
                 let point = CGPoint(x: 0, y: 0)
                 self.bpscrollview.contentOffset = point
                 self.bpscrollview.isScrollEnabled=false
+                self.calendar.isHidden = true
             }
             
             if let view:CardView = self.cardView.viewForCard(at: 0) as? CardView {
@@ -545,21 +574,48 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
 //            self.cardView.reloadCardsInIndexRange(range)
 //            self.cardView.reloadData()
             
-        }, completion: nil)
-    }
+        },completion: { (comlete) in
+            if self.didPressDownArrow {
+                if userType == "Coach"
+                {
+                    print("abckjkllkhl")
+                    self.topFinishesStackView.isHidden = true
+                    self.topthreefinishesBtn.isHidden = true
+                    self.topfinishesHeight.constant = 0
+                    
+                }else{
+                    self.topFinishesStackView.isHidden = false
+                    self.topthreefinishesBtn.isHidden = false
+                    self.topfinishesHeight.constant = 75
+                }
+
+                self.calendar.isHidden = false
+            }
+            })
+        }
     
     
     @objc func moveDownScroll(sender:UIButton) {
         print("khghghgh")
-        
-        if UserDefaults.standard.string(forKey: "userType") == "Coach"
-        {
-            print("abckjkllkhl")
-            self.topFinishesStackView.isHidden = true
-            self.topthreefinishesBtn.isHidden = true
-            self.topfinishesHeight.constant = 0
+        let index = sender.tag
+        var usertypeAtIndexCard = String()
+        if selectedType == "Search"  || selectedType == "invitePartner" {
+            //||
+            let  data : SearchUserModel
+            data = SwipeCardArray[index] as! SearchUserModel
+            usertypeAtIndexCard = data.userType
         }
-       moveCardView()
+        else if selectedType == "BlueBp" || selectedType == "BlueBp-New"{
+            let data : SubscriptionUserModel
+            data = SwipeCardArray[index] as! SubscriptionUserModel
+            usertypeAtIndexCard = (data.connectedUser?.userType) ?? ""
+        }
+        else{
+            let  data : ConnectedUserModel
+            data = SwipeCardArray[index] as! ConnectedUserModel
+            usertypeAtIndexCard = (data.connectedUser?.userType) ?? ""
+        }
+       moveCardView(userType: usertypeAtIndexCard)
     }
  
     @objc func flagBtnClick(sender:UIButton) {
@@ -1180,6 +1236,7 @@ extension BPCardsVC: KolodaViewDataSource {
             }
             view.flagBtn.tag = index
              view.flagBtn.addTarget(self, action: #selector(flagBtnClick(sender:)), for: UIControlEvents.touchUpInside)
+            view.moveDown.tag = index
             view.moveDown.addTarget(self, action:#selector(moveDownScroll(sender:)), for: UIControlEvents.touchUpInside)
         
             

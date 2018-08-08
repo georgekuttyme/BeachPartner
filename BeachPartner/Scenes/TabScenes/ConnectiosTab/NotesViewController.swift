@@ -50,8 +50,7 @@ class NotesViewController: BeachPartnerViewController, UITableViewDataSource, UI
         
         cell?.noteTextView.text = note.note
         cell?.noteTextView.delegate = self
-      
-
+        cell?.saveBtn.setImage(UIImage(named: "tick_notes_disabled"), for: .normal)
         cell?.deleteNotesBtn.tag = indexPath.row+200000
         cell?.deleteNotesBtn.addTarget(self, action:#selector(deleteBtnClicked(sender:)), for: UIControlEvents.touchUpInside)
         
@@ -76,7 +75,7 @@ class NotesViewController: BeachPartnerViewController, UITableViewDataSource, UI
         
         let indexPath = IndexPath(row: index, section: 0)
         let cell = notesTableview.cellForRow(at: indexPath) as! NotesCell
-        
+        cell.saveBtn.setImage(UIImage(named: "tick - notes"), for: .normal)
         guard let updatedNote = cell.noteTextView.text, updatedNote.count > 0 else { return }
         
         updateNote(withId: note.noteId, noteString: updatedNote)
@@ -265,12 +264,18 @@ class NotesViewController: BeachPartnerViewController, UITableViewDataSource, UI
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+      
+        let indexPath = IndexPath(row: 0, section: 0)
+        let cell = notesTableview.cellForRow(at: indexPath) as! NotesCell
+        cell.saveBtn.setImage(UIImage(named: "tick - notes"), for: .normal)
         let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
         return newText.count <= 128
+        
     }
     
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         self.activeTextField = textView
+        
         let pointInTable:CGPoint = textView.superview!.convert(textView.frame.origin, to: notesTableview)
         var contentOffset:CGPoint = notesTableview.contentOffset
         contentOffset.y  = pointInTable.y - 150
