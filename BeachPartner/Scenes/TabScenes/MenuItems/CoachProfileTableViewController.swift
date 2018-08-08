@@ -870,6 +870,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
                 UserDefaults.standard.set(accRespModel.location , forKey: "location")
                 UserDefaults.standard.set(accRespModel.id, forKey: "bP_userProfileId")
                 self.alert(message: "User profile updated successfully! ")
+                UserDefaults.standard.set(1, forKey: "NewUser")
                 ActivityIndicatorView.hiding()
                 DispatchQueue.main.async {
                     let image = UIImage(named: "edit_btn_1x") as UIImage?

@@ -138,9 +138,14 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
                 
                 return
             }
-//            if updateFcmTokenModel.status == {
-//                
-//            }
+            if updateFcmTokenModel.message == "error.http.500" {
+                UserDefaults.standard.set("0", forKey: "isLoggedIn")
+                UserDefaults.standard.set("", forKey: "locationInitial")
+                UserDefaults.standard.set("", forKey: "ageCategory")
+                UserDefaults.standard.set("", forKey: "minAge")
+                UserDefaults.standard.set("", forKey: "maxAge")
+                self.setUpLoginUI()
+            }
             UserDefaults.standard.set(updateFcmTokenModel.city , forKey: "locationInitial")
             print("& ** &\n ",updateFcmTokenModel," \n& ** &")
         }, errorResult: { (error) in
@@ -828,7 +833,7 @@ extension LoginViewController: AppUpdateViewControllerDelegate {
                         print("--- minor ---")
                     }
                     
-                    if accRespModel.userProfile == nil{
+                    if accRespModel.profileUpdated == false{
                         UserDefaults.standard.set(0, forKey: "NewUser")
                     }else{
                         UserDefaults.standard.set(1, forKey: "NewUser")

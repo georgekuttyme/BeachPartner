@@ -30,6 +30,7 @@ struct AccountRespModel:SafeMappable {
     var phoneNumber: String = ""
     var userType: String = ""
     var videoUrl: String = ""
+    var profileUpdated = Bool()
     var userProfile: UserProfile?
     
     init() {
@@ -65,7 +66,7 @@ struct AccountRespModel:SafeMappable {
         userType <- map.property("userType")
         
         userProfile = map.relation("userProfile")
-        
+        profileUpdated <- map.property("profileUpdated")
     }
     
     
