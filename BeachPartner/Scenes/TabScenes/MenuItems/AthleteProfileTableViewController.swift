@@ -433,7 +433,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.shareDataDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             if(item == "Profile Image"){
 //                 if(self.userImageView.image != nil){
-                print(self.userImageView.image ?? "nothingg","\n\n\n\n")
+                print(self.imageUrl,"\n\n\n\n")
                 if(self.imageUrl != ""){
                     let imageToShare = [ self.userImageView.image! ]
                     let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
@@ -1633,7 +1633,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     
     func uploadProfileVideo(profileVideo:NSData){
         let profilePic = UIImage()
-        APIManager.callServer(withBusy: BusyScreen(isShow: true, text: "Preparing video ...")).updateAtheleteProfilePicAndVideo(userimage: profilePic, videoData: profileVideo, sucessResult: { (responseModel) in
+        APIManager.callServer(withBusy: BusyScreen(isShow: true, text: "Saving...")).updateAtheleteProfilePicAndVideo(userimage: profilePic, videoData: profileVideo, sucessResult: { (responseModel) in
             
             guard let updationResult = responseModel as? UpdateProfileImageVideoModel else{
                 return
@@ -1644,6 +1644,8 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
                 print("profileVideoUrl",updationResult.profileVideoUrl)
                 
                 self.userData.videoUrl = updationResult.profileVideoUrl
+                self.videoUrl = updationResult.profileVideoUrl
+                self.alert(message: "Profile video updated successfully! ")
              //   self.userData.imageUrl = updationResult.profileImgUrl
             }
              self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
@@ -1656,7 +1658,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
     
     func uploadProfilePic(profilePic:UIImage){
          let profileVideo = NSData()
-        APIManager.callServer(withBusy: BusyScreen(isShow: true, text: "Preparing Image ...")).updateAtheleteProfilePicAndVideo(userimage: profilePic, videoData: profileVideo, sucessResult: { (responseModel) in
+        APIManager.callServer(withBusy: BusyScreen(isShow: true, text: "Saving...")).updateAtheleteProfilePicAndVideo(userimage: profilePic, videoData: profileVideo, sucessResult: { (responseModel) in
             guard let updationResult = responseModel as? UpdateProfileImageVideoModel else{
                 return
             }
@@ -1664,6 +1666,8 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             if(updationResult != nil){
                 print("n.n.n.n")
                 self.userData.imageUrl = updationResult.profileImgUrl
+                self.imageUrl = updationResult.profileImgUrl
+                self.alert(message: "Profile Image updated successfully! ")
             }
               self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
         }) { (error) in
