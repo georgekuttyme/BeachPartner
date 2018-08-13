@@ -127,11 +127,14 @@ class HighFiveViewController: BeachPartnerViewController,UITableViewDelegate,UIT
         cell.highfiveView.layer.borderWidth = 1
         cell.highfiveView.dropShadow()
         cell.timeLbl.text =  (connectedUser?.createdDate) ?? ""
-        
-        if let imageUrl = URL(string: (connectedUser?.imageUrl) ?? "") {
-            cell.profileImage.sd_setIndicatorStyle(.whiteLarge)
-            cell.profileImage.sd_setShowActivityIndicatorView(true)
-            cell.profileImage.sd_setImage(with: imageUrl, placeholderImage:#imageLiteral(resourceName: "user"))
+        if connectedUser?.imageUrl == ""{
+            cell.profileImage.image = UIImage(named: "user")
+        }else{
+            if let imageUrl = URL(string: (connectedUser?.imageUrl) ?? "") {
+                cell.profileImage.sd_setIndicatorStyle(.whiteLarge)
+                cell.profileImage.sd_setShowActivityIndicatorView(true)
+                cell.profileImage.sd_setImage(with: imageUrl, placeholderImage:#imageLiteral(resourceName: "user"))
+            }
         }
         
         cell.highfiveImage.image = UIImage(named:"highfive")!

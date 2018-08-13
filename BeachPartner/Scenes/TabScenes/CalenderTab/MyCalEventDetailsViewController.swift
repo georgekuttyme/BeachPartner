@@ -195,11 +195,14 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
                 let partner = eventInvitation?.invitations?.first
                 cell?.nameLabel.text = partner?.invitorName
                 cell?.statusLabel.text = "Organizer"
-                
-                if let imageUrl = URL(string: (partner?.invitorimageURL)!) {
-                    cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
-                    cell?.profileImageView.sd_setShowActivityIndicatorView(true)
-                    cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                if partner?.invitorimageURL == ""{
+                    cell?.profileImageView.image = UIImage(named: "user")
+                }else{
+                    if let imageUrl = URL(string: (partner?.invitorimageURL)!) {
+                        cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
+                        cell?.profileImageView.sd_setShowActivityIndicatorView(true)
+                        cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                    }
                 }
                 cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
                 cell?.profileImageView.clipsToBounds = true
@@ -223,11 +226,14 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
                     let partner = eventInvitation?.invitations?.first?.partners![(eventInvitation?.invitations?.first?.partners?.count)! - 1]
                     cell?.nameLabel.text = partner?.partnerName
                     cell?.statusLabel.text = ""
-                    
-                    if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
-                        cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
-                        cell?.profileImageView.sd_setShowActivityIndicatorView(true)
-                        cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                    if partner?.partnerImageURL == ""{
+                        cell?.profileImageView.image = UIImage(named: "user")
+                    }else{
+                        if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
+                            cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
+                            cell?.profileImageView.sd_setShowActivityIndicatorView(true)
+                            cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                        }
                     }
                     cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
                     cell?.profileImageView.clipsToBounds = true
@@ -243,11 +249,14 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
                     let partner = eventInvitation?.invitations?.first?.partners![indexPath.row - 1]
                     cell?.nameLabel.text = partner?.partnerName
                     cell?.statusLabel.text = ""
-                    
-                    if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
-                        cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
-                        cell?.profileImageView.sd_setShowActivityIndicatorView(true)
-                        cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                    if partner?.partnerImageURL == ""{
+                        cell?.profileImageView.image = UIImage(named: "user")
+                    }else{
+                        if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
+                            cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
+                            cell?.profileImageView.sd_setShowActivityIndicatorView(true)
+                            cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                        }
                     }
                     cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
                     cell?.profileImageView.clipsToBounds = true
@@ -265,11 +274,14 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
             let partner = eventInvitation?.invitations?.first?.partners![indexPath.row]
             cell?.nameLabel.text = partner?.partnerName
             cell?.statusLabel.text = ""
-            
-            if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
-                cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
-                cell?.profileImageView.sd_setShowActivityIndicatorView(true)
-                cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+            if partner?.partnerImageURL == ""{
+                cell?.profileImageView.image = UIImage(named: "user")
+            }else{
+                if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
+                    cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
+                    cell?.profileImageView.sd_setShowActivityIndicatorView(true)
+                    cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                }
             }
             cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
             cell?.profileImageView.clipsToBounds = true

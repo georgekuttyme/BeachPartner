@@ -869,7 +869,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
                 self.imagePickerController.delegate = self
                 self.imagePickerController.mediaTypes = [kUTTypeMovie as String]
-                self.imagePickerController.allowsEditing = true
+                self.imagePickerController.allowsEditing = false
                 self.imagePickerController.videoMaximumDuration = 30.0
                 self.showImagePicker(sourceType: UIImagePickerControllerSourceType.camera)
             } else {
@@ -1299,12 +1299,15 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
                 self.userData = accRespModel
                 print("bP_userId", accRespModel.id )
                 print("accRespimageUrl", accRespModel.videoUrl)
-                
-                if let imageUrl = URL(string: accRespModel.imageUrl) {
-                    self.userImageView.sd_setIndicatorStyle(.whiteLarge)
-                    self.userImageView.sd_setShowActivityIndicatorView(true)
-                    self.userImageView.sd_setImage(with: imageUrl, placeholderImage:  #imageLiteral(resourceName: "user"))
-                     self.imageUrl = accRespModel.imageUrl
+                if accRespModel.imageUrl == ""{
+                    self.userImageView.image = UIImage(named: "user")
+                }else{
+                    if let imageUrl = URL(string: accRespModel.imageUrl) {
+                        self.userImageView.sd_setIndicatorStyle(.whiteLarge)
+                        self.userImageView.sd_setShowActivityIndicatorView(true)
+                        self.userImageView.sd_setImage(with: imageUrl, placeholderImage:  #imageLiteral(resourceName: "user"))
+                         self.imageUrl = accRespModel.imageUrl
+                    }
                 }
                 
                 self.videoUrl = accRespModel.videoUrl
@@ -1359,12 +1362,15 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
                 self.userData = accRespModel
                 print("bP_userId", accRespModel.id )
                 print("accRespimageUrl", accRespModel.videoUrl)
-                
-                if let imageUrl = URL(string: accRespModel.imageUrl) {
-                    self.userImageView.sd_setIndicatorStyle(.whiteLarge)
-                    self.userImageView.sd_setShowActivityIndicatorView(true)
-                    self.userImageView.sd_setImage(with: imageUrl, placeholderImage:  #imageLiteral(resourceName: "user"))
-                    self.imageUrl = accRespModel.imageUrl
+                if accRespModel.imageUrl == ""{
+                    self.userImageView.image = UIImage(named: "user")
+                }else{
+                    if let imageUrl = URL(string: accRespModel.imageUrl) {
+                        self.userImageView.sd_setIndicatorStyle(.whiteLarge)
+                        self.userImageView.sd_setShowActivityIndicatorView(true)
+                        self.userImageView.sd_setImage(with: imageUrl, placeholderImage:  #imageLiteral(resourceName: "user"))
+                        self.imageUrl = accRespModel.imageUrl
+                    }
                 }
                 
                 self.videoUrl = accRespModel.videoUrl

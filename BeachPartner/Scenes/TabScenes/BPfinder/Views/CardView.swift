@@ -96,11 +96,16 @@ class CardView: UIView {
 extension CardView {
     
     func displayDataOnCard(displayData data:ConnectedUserModel.ConnectedUser) {
-        
-        if let imageUrl = URL(string: data.imageUrl) {
-            self.imageView.sd_setIndicatorStyle(.whiteLarge)
-            self.imageView.sd_setShowActivityIndicatorView(true)
-            self.imageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+        if data.imageUrl == ""{
+            self.imageView.image = UIImage(named: "user")
+        }
+        else
+        {
+            if let imageUrl = URL(string: data.imageUrl) {
+                self.imageView.sd_setIndicatorStyle(.whiteLarge)
+                self.imageView.sd_setShowActivityIndicatorView(true)
+                self.imageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+            }
         }
          self.muteButton.isHidden = true
         self.nameLabel.text = data.firstName + " " + data.lastName  + "," + " " + String(data.age )
@@ -108,11 +113,16 @@ extension CardView {
     }
     
     func displaySubscribeDataOnCard(displayData data:SubscriptionUserModel) {
-
-        if let imageUrl = URL(string: (data.connectedUser?.imageUrl)!) {
-            self.imageView.sd_setIndicatorStyle(.whiteLarge)
-            self.imageView.sd_setShowActivityIndicatorView(true)
-            self.imageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+        if data.connectedUser?.imageUrl == ""{
+            self.imageView.image = UIImage(named: "user")
+        }
+        else
+        {
+            if let imageUrl = URL(string: (data.connectedUser?.imageUrl)!) {
+                self.imageView.sd_setIndicatorStyle(.whiteLarge)
+                self.imageView.sd_setShowActivityIndicatorView(true)
+                self.imageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+            }
         }
         self.muteButton.isHidden = true
         var name = String()
@@ -127,11 +137,16 @@ extension CardView {
     }
     
     func displaySearchDetailsOnCard(displayData data:SearchUserModel) {
-        
-        if let imageUrl = URL(string: data.imageUrl) {
-            self.imageView.sd_setIndicatorStyle(.whiteLarge)
-            self.imageView.sd_setShowActivityIndicatorView(true)
-            self.imageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+        if data.imageUrl == ""{
+            self.imageView.image = UIImage(named: "user")
+        }
+        else
+        {
+            if let imageUrl = URL(string: data.imageUrl) {
+                self.imageView.sd_setIndicatorStyle(.whiteLarge)
+                self.imageView.sd_setShowActivityIndicatorView(true)
+                self.imageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+            }
         }
         self.muteButton.isHidden = true
 //        let ageValue = getAgeValue(dob: data.doblong)

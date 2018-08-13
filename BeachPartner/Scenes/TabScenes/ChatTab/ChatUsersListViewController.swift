@@ -170,13 +170,14 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
                 latestMsgDic.updateValue(channelData[channelData.keys[index]]!["text"] as! String, forKey: "text")
                 //                latestMsgDic.updateValue(channelData[channelData.keys[index]]!["profileImg"] as? String ?? "", forKey: "profileImg")
                 latestMsgDic.updateValue(channelData[channelData.keys[index]]!["date"] as! String, forKey: "date")
-                
+                print(channelData[channelData.keys[index]]!["sender_id"] as! String,"==== > ",channelData[channelData.keys[index]]!["receiver_id"] as! String)
                 let senderId = channelData[channelData.keys[index]]!["sender_id"] as! String
                 let receiverId = channelData[channelData.keys[index]]!["receiver_id"] as! String
                 var isActiveUser = Bool ()
-                
+                print(bP_userId," id -------> ",id,"-----------------")
                 for connectedUser in self.activeUsers {
                     let userId = String(connectedUser.connectedUser?.userId ?? 0)
+                    print(userId," senderId --> ",senderId," receiverId --> ",receiverId,"")
                     if userId == senderId || userId == receiverId {
                         if bP_userId == senderId || bP_userId == receiverId {
                             latestMsgDic.updateValue(connectedUser.connectedUser?.firstName ?? "", forKey: "sender_name")
@@ -325,10 +326,17 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
             
             cell.timeLbl.isHidden = true
             cell.statusImage.isHidden = true
-            if let imageUrl = URL(string: (self.recentChatList[indexPath.row]["profileImg"])!) {
-                cell.profileImage.sd_setIndicatorStyle(.whiteLarge)
-                cell.profileImage.sd_setShowActivityIndicatorView(true)
-                cell.profileImage.sd_setImage(with: imageUrl, placeholderImage:#imageLiteral(resourceName: "user"))
+            let image = self.recentChatList[indexPath.row]["profileImg"]
+            if image == ""{
+                cell.profileImage.image = UIImage(named: "user")
+            }
+            else
+            {
+                if let imageUrl = URL(string: (self.recentChatList[indexPath.row]["profileImg"])!) {
+                    cell.profileImage.sd_setIndicatorStyle(.whiteLarge)
+                    cell.profileImage.sd_setShowActivityIndicatorView(true)
+                    cell.profileImage.sd_setImage(with: imageUrl, placeholderImage:#imageLiteral(resourceName: "user"))
+                }
             }
             cell.profileImgBtn.tag = indexPath.row+600000
             cell.profileImgBtn.addTarget(self, action: #selector(didSelectItemAtIndex), for: .touchUpInside)

@@ -55,7 +55,7 @@ class CoachViewController: UIViewController,UICollectionViewDataSource , UIColle
         APIManager.callServer.blockConnectedUser(id: id,sucessResult: { (responseModel) in
             
             ActivityIndicatorView.hiding()
-            guard let resp = responseModel as? ConnectedUserModelArray else {
+            guard let resp = responseModel as? ConnectedUserModel else {
                 return
             }
             DispatchQueue.main.async {
@@ -88,7 +88,7 @@ class CoachViewController: UIViewController,UICollectionViewDataSource , UIColle
         APIManager.callServer.unBlockConnectedUser(id: id, sucessResult: { (responseModel) in
             
             ActivityIndicatorView.hiding()
-            guard let resp = responseModel as? ConnectedUserModelArray else {
+            guard let resp = responseModel as? ConnectedUserModel else {
                 return
             }
             print("User UnBlocked======", id)
@@ -139,10 +139,14 @@ class CoachViewController: UIViewController,UICollectionViewDataSource , UIColle
         let lastName = connectedUser?.lastName ?? ""
         cell?.nameLbl.text = firstName + " " + lastName
         cell?.ageLbl.text = String(connectedUser?.age ?? 0)
-        if let imageUrl = URL(string: (connectedUser?.imageUrl)!) {
-            cell?.profileImgView.sd_setIndicatorStyle(.whiteLarge)
-            cell?.profileImgView.sd_setShowActivityIndicatorView(true)
-            cell?.profileImgView.sd_setImage(with: imageUrl, placeholderImage:#imageLiteral(resourceName: "user"))
+        if connectedUser?.imageUrl == ""{
+            cell?.profileImgView.image = UIImage(named: "user")
+        }else{
+            if let imageUrl = URL(string: (connectedUser?.imageUrl)!) {
+                cell?.profileImgView.sd_setIndicatorStyle(.whiteLarge)
+                cell?.profileImgView.sd_setShowActivityIndicatorView(true)
+                cell?.profileImgView.sd_setImage(with: imageUrl, placeholderImage:#imageLiteral(resourceName: "user"))
+            }
         }
         cell?.profileImgView.layer.cornerRadius = (cell?.profileImgView.frame.size.width)!/2
         cell?.profileImgView.clipsToBounds = true

@@ -473,20 +473,20 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             print("====dfhfdghvbhj====")
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MessageCollectionViewCell", for: indexPath) as! MessageCollectionViewCell
             self.titleOfChat.removeAll()
-            if let imageUrl = URL(string: (self.recentChatList[indexPath.row]["profileImg"])!) {
-                print("hdgh  ",self.recentChatList)
-                cell.messageUserProfille.sd_setIndicatorStyle(.whiteLarge)
-                cell.messageUserProfille.sd_setShowActivityIndicatorView(true)
-                cell.messageUserProfille.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
-                
+            let image = self.recentChatList[indexPath.row]["profileImg"]
+            if image == ""{
+                cell.messageUserProfille.image = UIImage(named: "user")
             }
-            
-            if let imageUrl = URL(string: (self.recentChatList[indexPath.row]["profileImg"])!) {
-                cell.messageUserProfille.sd_setIndicatorStyle(.whiteLarge)
-                cell.messageUserProfille.sd_setShowActivityIndicatorView(true)
-                cell.messageUserProfille.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+            else
+            {
+                if let imageUrl = URL(string: (self.recentChatList[indexPath.row]["profileImg"])!) {
+                    print("hdgh  ",self.recentChatList)
+                    cell.messageUserProfille.sd_setIndicatorStyle(.whiteLarge)
+                    cell.messageUserProfille.sd_setShowActivityIndicatorView(true)
+                    cell.messageUserProfille.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                }
             }
-            
+
             cell.messageUserProfille.layer.cornerRadius = cell.messageUserProfille.frame.size.width/2
             cell.messageUserProfille.clipsToBounds = true
             cell.messageUserProfille.layer.borderColor = UIColor.lightGray.cgColor

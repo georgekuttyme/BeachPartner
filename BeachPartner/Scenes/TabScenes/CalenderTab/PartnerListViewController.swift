@@ -61,11 +61,14 @@ class PartnerListViewController: UIViewController, UITableViewDataSource, UITabl
                 
                 cell?.nameLabel.text = invitation?.invitorName
                 cell?.statusLabel.text = "Organizer"
-                
-                if let imageUrl = URL(string: (invitation?.invitorimageURL)!) {
-                    cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
-                    cell?.profileImageView.sd_setShowActivityIndicatorView(true)
-                    cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                if invitation?.invitorimageURL == ""{
+                    cell?.profileImageView.image = UIImage(named: "user")
+                }else{
+                    if let imageUrl = URL(string: (invitation?.invitorimageURL)!) {
+                        cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
+                        cell?.profileImageView.sd_setShowActivityIndicatorView(true)
+                        cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                    }
                 }
                 cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
                 cell?.profileImageView.clipsToBounds = true
@@ -81,11 +84,14 @@ class PartnerListViewController: UIViewController, UITableViewDataSource, UITabl
                     cell?.nameLabel.text = partner?.partnerName
                     cell?.statusLabel.text = partner?.invitationStatus
                     print("index->",indexPath.row,"  ",index,"\n\n")
-                    if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
-                        cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
-                        cell?.profileImageView.sd_setShowActivityIndicatorView(true)
-                        cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
-                        
+                    if partner?.partnerImageURL == ""{
+                        cell?.profileImageView.image = UIImage(named: "user")
+                    }else{
+                        if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
+                            cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
+                            cell?.profileImageView.sd_setShowActivityIndicatorView(true)
+                            cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                        }
                     }
                     cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
                     cell?.profileImageView.clipsToBounds = true
@@ -96,10 +102,14 @@ class PartnerListViewController: UIViewController, UITableViewDataSource, UITabl
                     cell?.nameLabel.text = partner?.partnerName
                     cell?.statusLabel.text = partner?.invitationStatus
                     print("index->",indexPath.row,"  ",index,"\n\n")
-                    if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
-                        cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
-                        cell?.profileImageView.sd_setShowActivityIndicatorView(true)
-                        cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                    if partner?.partnerImageURL == ""{
+                        cell?.profileImageView.image = UIImage(named: "user")
+                    }else{
+                        if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
+                            cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
+                            cell?.profileImageView.sd_setShowActivityIndicatorView(true)
+                            cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                        }
                     }
                     cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
                     cell?.profileImageView.clipsToBounds = true
@@ -114,11 +124,14 @@ class PartnerListViewController: UIViewController, UITableViewDataSource, UITabl
             if let partner = invitation?.partners![index]{
                 cell?.nameLabel.text = partner.partnerName
                 cell?.statusLabel.text = partner.invitationStatus
-                
-                if let imageUrl = URL(string: (partner.partnerImageURL)) {
-                    cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
-                    cell?.profileImageView.sd_setShowActivityIndicatorView(true)
-                    cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                if partner.partnerImageURL == ""{
+                    cell?.profileImageView.image = UIImage(named: "user")
+                }else{
+                    if let imageUrl = URL(string: (partner.partnerImageURL)) {
+                        cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
+                        cell?.profileImageView.sd_setShowActivityIndicatorView(true)
+                        cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                    }
                 }
                 cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
                 cell?.profileImageView.clipsToBounds = true
