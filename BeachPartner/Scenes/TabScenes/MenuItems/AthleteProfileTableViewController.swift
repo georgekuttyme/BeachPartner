@@ -233,7 +233,7 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.videoView?.pause()
         self.videoView?.refreshPlayer()
         if self.editclicked{
-            let alert = UIAlertController(title: "Are you sure you want to discard this changes?", message: "You cannot undo this action", preferredStyle: .alert)
+             let alert = UIAlertController(title: "You have unsaved changes", message: "Are you sure you want to discard the changes?", preferredStyle: .alert)
             let actionButton = UIAlertAction(title: "Save", style: .cancel) { (action) in
                 let image = UIImage(named: "edit_btn_1x") as UIImage?
                 self.editProfileBtn.setImage(image, for: .normal)
