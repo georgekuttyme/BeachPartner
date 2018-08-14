@@ -65,6 +65,7 @@ class EventDetailsViewController: BeachPartnerViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController!.navigationBar.tintColor = UIColor.clearColor
         if isFromHomeTab{
             if (eventId != nil){
                 getAllEvents(eventId: eventId!)
