@@ -121,6 +121,9 @@
 		843F356C2084F8CE00E268D6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843F356B2084F8CE00E268D6 /* GoogleService-Info.plist */; };
 		844984212099A0E100B8FD37 /* MutualLikesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844984202099A0E100B8FD37 /* MutualLikesViewController.swift */; };
 		844F70502090BC01004F3005 /* noteResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844F704F2090BC01004F3005 /* noteResponseModel.swift */; };
+		8455C5112122E65E00469F06 /* ThankyouForYourPurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455C5102122E65E00469F06 /* ThankyouForYourPurchaseViewController.swift */; };
+		8455C5132122F82D00469F06 /* yourSubscriptionWillExpireViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455C5122122F82D00469F06 /* yourSubscriptionWillExpireViewController.swift */; };
+		8455C5152123017A00469F06 /* StartandEndDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455C5142123017A00469F06 /* StartandEndDateViewController.swift */; };
 		8459CEB721006BD200DCEC93 /* FlagRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459CEB621006BD200DCEC93 /* FlagRespModel.swift */; };
 		845B7908208B4A5200DF1F1F /* AthleteProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845B7907208B4A5200DF1F1F /* AthleteProfileTableViewController.swift */; };
 		845BD6A32089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BD6A22089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift */; };
@@ -272,6 +275,9 @@
 		843F356B2084F8CE00E268D6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		844984202099A0E100B8FD37 /* MutualLikesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutualLikesViewController.swift; sourceTree = "<group>"; };
 		844F704F2090BC01004F3005 /* noteResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noteResponseModel.swift; sourceTree = "<group>"; };
+		8455C5102122E65E00469F06 /* ThankyouForYourPurchaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThankyouForYourPurchaseViewController.swift; sourceTree = "<group>"; };
+		8455C5122122F82D00469F06 /* yourSubscriptionWillExpireViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = yourSubscriptionWillExpireViewController.swift; sourceTree = "<group>"; };
+		8455C5142123017A00469F06 /* StartandEndDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartandEndDateViewController.swift; sourceTree = "<group>"; };
 		8459CEB621006BD200DCEC93 /* FlagRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagRespModel.swift; sourceTree = "<group>"; };
 		845B7907208B4A5200DF1F1F /* AthleteProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AthleteProfileTableViewController.swift; sourceTree = "<group>"; };
 		845BD6A22089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllEventsBetweenResponseModel.swift; sourceTree = "<group>"; };
@@ -878,6 +884,9 @@
 				FFEBEB5F20BEA79A00521041 /* SubscriptionTypeViewController.swift */,
 				FFD93D6C20C1257E00747472 /* AddonsViewController.swift */,
 				FF4F50FF20C82013002707DC /* Subscription.swift */,
+				8455C5102122E65E00469F06 /* ThankyouForYourPurchaseViewController.swift */,
+				8455C5122122F82D00469F06 /* yourSubscriptionWillExpireViewController.swift */,
+				8455C5142123017A00469F06 /* StartandEndDateViewController.swift */,
 			);
 			path = SubscriptionScenes;
 			sourceTree = "<group>";
@@ -1087,6 +1096,7 @@
 				3B689A14204937880075128E /* BlueBPCollectionViewCell.swift in Sources */,
 				3B689A1C20493DA20075128E /* IntrestedPeopleCollectionViewCell.swift in Sources */,
 				8459CEB721006BD200DCEC93 /* FlagRespModel.swift in Sources */,
+				8455C5152123017A00469F06 /* StartandEndDateViewController.swift in Sources */,
 				5E0543AB2081C0C3002744D8 /* SubscriptionUserModel.swift in Sources */,
 				3BC8F914205B91A50086333E /* CalenderViewController.swift in Sources */,
 				3BC8F903205AE4C50086333E /* PopUpOneViewController.swift in Sources */,
@@ -1163,6 +1173,7 @@
 				3B89E60B2072BD9C008DAFE0 /* CenterViewFlowLayout.swift in Sources */,
 				3BAD58752068CCC60076DFD8 /* AuthModule.swift in Sources */,
 				3B1B705D2065617300C3FB57 /* MyCalViewController.swift in Sources */,
+				8455C5112122E65E00469F06 /* ThankyouForYourPurchaseViewController.swift in Sources */,
 				3BC8F909205AE6450086333E /* PopUpParentDelegate.swift in Sources */,
 				3B0DEE9D206D0A1100686609 /* DataModel.swift in Sources */,
 				3BC8F905205AE4DE0086333E /* PopUpParentDetailsViewController.swift in Sources */,
@@ -1191,6 +1202,7 @@
 				3B1B70592063780D00C3FB57 /* HomeTabViewController.swift in Sources */,
 				3BF0B1BA205BC1000043CFB2 /* CustomCell.swift in Sources */,
 				8D65CAEA20CE95230008CD7F /* UpdateFcmTokenRespModel.swift in Sources */,
+				8455C5132122F82D00469F06 /* yourSubscriptionWillExpireViewController.swift in Sources */,
 				FF32756A20BFE355009345B1 /* GetSubscriptionPlanModel.swift in Sources */,
 				5E102A702108FAF7004C9300 /* PaymentRequestModel.swift in Sources */,
 				3B0DEE92206D095500686609 /* CardView.swift in Sources */,
