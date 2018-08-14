@@ -25,10 +25,12 @@ class CoachViewController: UIViewController,UICollectionViewDataSource , UIColle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        toastCoachLbl.isHidden = true
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        toastCoachLbl.isHidden = true
         self.getConnections()
     }
     
@@ -225,18 +227,6 @@ class CoachViewController: UIViewController,UICollectionViewDataSource , UIColle
                 return Bool(user.connectedUser?.userType == "Coach")
             })
             
-            self.collectionView.reloadData()
-            if self.connectedUsers.count == 0{
-                self.toastCoachLbl.isHidden = false
-                self.toastCoachLbl.text = "You have no connections yet"
-                self.toastCoachLbl.textColor = UIColor.gray
-                
-            }else{
-                self.toastCoachLbl.isHidden = true
-                
-            }
-            ActivityIndicatorView.hiding()
-            
             self.getBlockedConnections()
             
         }, errorResult: { (error) in
@@ -269,9 +259,13 @@ class CoachViewController: UIViewController,UICollectionViewDataSource , UIColle
             
             if self.connectedUsers.count > 0 {
                 self.collectionView.isHidden = false
+                self.toastCoachLbl.isHidden = true
                 self.collectionView.reloadData()
             }
             else{
+                  self.toastCoachLbl.isHidden = false
+                self.toastCoachLbl.text = "You have no connections yet"
+                self.toastCoachLbl.textColor = UIColor.gray
                 self.collectionView.isHidden = true
             }
             ActivityIndicatorView.hiding()
