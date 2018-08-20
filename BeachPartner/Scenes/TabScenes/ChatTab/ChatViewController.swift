@@ -45,13 +45,16 @@ class ChatViewController: JSQMessagesViewController {
             
             if  let data        = snapshot.value as? [String: String],
                 let id          = data["sender_id"],
-              //  let name        = data["sender_name"],
+                let msgDate        = data["date"],
                 let text        = data["text"],
                 !text.isEmpty
             {
-//                let chatDate = Date(timeIntervalSince1970: TimeInterval(event.date/1000))
-//                if let message = JSQMessage(senderId: id, senderDisplayName: "", date: , text: text)
-                    if let message = JSQMessage(senderId: id, displayName: "", text: text)
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"//this your string date format
+                dateFormatter.timeZone = TimeZone(identifier: "UTC")
+                let dateForChat = dateFormatter.date(from: msgDate)
+                if let message = JSQMessage(senderId: id, senderDisplayName: "", date: dateForChat, text: text)
+//                    if let message = JSQMessage(senderId: id, displayName: "", text: text)
                 {
                     self?.messages.append(message)
                     self?.finishReceivingMessage()
@@ -118,15 +121,7 @@ class ChatViewController: JSQMessagesViewController {
                 userName = userName + lastName
             }
             title = "Messages with " + userName
-            
-//            let userName = String(describing: UserDefaults.standard.value(forKey: "bP_userName") ?? "")
-//            let ChatuserName = self.recentChatDic["receiver_name"]!
-//            if userName == ChatuserName {
-//                title = "Messages with " + self.recentChatDic["sender_name"]!
-//            }
-//            else{
-//               title = "Messages with " + self.recentChatDic["receiver_name"]!
-//            }
+
         }
          else{
             print("\n\n\n\n///////",connectedUserModel.first ?? " Null")
@@ -166,7 +161,13 @@ class ChatViewController: JSQMessagesViewController {
     }
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAt indexPath: IndexPath!) -> NSAttributedString!
     {
-        return messages[indexPath.item].senderId == senderId ? nil : NSAttributedString(string: messages[indexPath.item].senderDisplayName)
+        print(messages[indexPath.item])
+        let chatDate = messages[indexPath.item].date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"//this your string date format
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+        let dateForChat = dateFormatter.string(from: chatDate!)
+        return NSAttributedString(string: dateForChat)
     }
 
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAt indexPath: IndexPath!) -> CGFloat
@@ -193,9 +194,12 @@ class ChatViewController: JSQMessagesViewController {
             profileImg = String ((connectedUserModelOfFirstElement?.connectedUser?.imageUrl)!)
         }
         // code change
+        let timestamp = NSDate().timeIntervalSince1970
+        let mDate = Date(timeIntervalSince1970: timestamp)
         let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let nameOfMonth = dateFormatter.string(from: date)
+        let nameOfMonth = dateFormatter.string(from: mDate)
         let chatDate:String = String (describing: nameOfMonth)
         let databaseRoot = Database.database().reference(withPath: "messages")
         let databaseChats  = databaseRoot.child(userChatID)
@@ -222,4 +226,3 @@ class ChatViewController: JSQMessagesViewController {
 
 }
 //let timestamp = NSDate().timeIntervalSince1970     let date = Date(timeIntervalSince1970: timestamp)
-//https://learnappmaking.com/chat-app-ios-firebase-swift-xcode/?approval#approval
