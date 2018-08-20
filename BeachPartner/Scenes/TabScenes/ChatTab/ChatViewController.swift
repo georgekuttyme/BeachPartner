@@ -49,7 +49,9 @@ class ChatViewController: JSQMessagesViewController {
                 let text        = data["text"],
                 !text.isEmpty
             {
-                if let message = JSQMessage(senderId: id, displayName: "", text: text)
+//                let chatDate = Date(timeIntervalSince1970: TimeInterval(event.date/1000))
+//                if let message = JSQMessage(senderId: id, senderDisplayName: "", date: , text: text)
+                    if let message = JSQMessage(senderId: id, displayName: "", text: text)
                 {
                     self?.messages.append(message)
                     self?.finishReceivingMessage()
@@ -190,8 +192,11 @@ class ChatViewController: JSQMessagesViewController {
             receiver_id = String((connectedUserModelOfFirstElement?.connectedUser?.userId ?? 0))
             profileImg = String ((connectedUserModelOfFirstElement?.connectedUser?.imageUrl)!)
         }
-        
-        let chatDate:String = String (describing: date!)
+        // code change
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let nameOfMonth = dateFormatter.string(from: date)
+        let chatDate:String = String (describing: nameOfMonth)
         let databaseRoot = Database.database().reference(withPath: "messages")
         let databaseChats  = databaseRoot.child(userChatID)
         let ref = databaseChats.childByAutoId()
@@ -216,4 +221,5 @@ class ChatViewController: JSQMessagesViewController {
     }
 
 }
-
+//let timestamp = NSDate().timeIntervalSince1970     let date = Date(timeIntervalSince1970: timestamp)
+//https://learnappmaking.com/chat-app-ios-firebase-swift-xcode/?approval#approval
