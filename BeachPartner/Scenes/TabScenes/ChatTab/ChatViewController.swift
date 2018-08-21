@@ -16,7 +16,9 @@ class ChatViewController: JSQMessagesViewController {
     var recentChatDic:[String:String]!
     var messages = [JSQMessage]()
     var connectedUserModel = [ConnectedUserModel]()
-    
+    let dateFormatter = DateFormatter()
+    let formatter = DateFormatter()
+    var itemIndexpath = NSIndexPath()
     lazy var outgoingBubble: JSQMessagesBubbleImage = {
         return JSQMessagesBubbleImageFactory()!.outgoingMessagesBubbleImage(with: UIColor(red: 65/255, green: 78/255, blue: 140/255, alpha: 1))
     }()
@@ -32,6 +34,13 @@ class ChatViewController: JSQMessagesViewController {
         self.navigationController!.navigationBar.topItem!.title = ""
         
         super.viewDidLoad()
+        
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        formatter.timeZone = TimeZone(identifier: "UTC")
+        formatter.dateFormat = "hh:mm a"
+        formatter.amSymbol = "AM"
+        formatter.pmSymbol = "PM"
         userChatID = creatreChatId()
         configUser()
         inputToolbar.contentView.leftBarButtonItem = nil
@@ -49,10 +58,7 @@ class ChatViewController: JSQMessagesViewController {
                 let text        = data["text"],
                 !text.isEmpty
             {
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"//this your string date format
-                dateFormatter.timeZone = TimeZone(identifier: "UTC")
-                let dateForChat = dateFormatter.date(from: msgDate)
+                let dateForChat = self?.dateFormatter.date(from: msgDate)
                 if let message = JSQMessage(senderId: id, senderDisplayName: "", date: dateForChat, text: text)
 //                    if let message = JSQMessage(senderId: id, displayName: "", text: text)
                 {
@@ -159,26 +165,63 @@ class ChatViewController: JSQMessagesViewController {
     {
         return nil
     }
-    override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAt indexPath: IndexPath!) -> NSAttributedString!
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForCellBottomLabelAt indexPath: IndexPath!) -> NSAttributedString!
     {
         print(messages[indexPath.item])
         let chatDate = messages[indexPath.item].date
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"//this your string date format
-        dateFormatter.timeZone = TimeZone(identifier: "UTC")
         let dateForChat = dateFormatter.string(from: chatDate!)
-        return NSAttributedString(string: dateForChat)
+        let temp = dateFormatter.date(from: dateForChat)
+        formatter.timeZone = TimeZone(identifier: "UTC")
+        formatter.dateFormat = "hh:mm a"
+        formatter.amSymbol = "AM"
+        formatter.pmSymbol = "PM"
+        let showDate = formatter.string(from: temp!)
+        return NSAttributedString(string: showDate)
+    }
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAt indexPath: IndexPath!) -> NSAttributedString!
+    {
+        itemIndexpath = indexPath! as NSIndexPath
+        print(messages[indexPath.item])
+        let chatDate = messages[indexPath.item].date
+        let dateForChat = dateFormatter.string(from: chatDate!)
+        let temp = dateFormatter.date(from: dateForChat)
+        formatter.timeZone = TimeZone(identifier: "UTC")
+        formatter.dateFormat = "dd-MMM-yyyy"
+        let showDate = formatter.string(from: temp!)
+        return NSAttributedString(string: showDate)
+        if firstMessageOfTheDay() {
+            return NSAttributedString(string: showDate)
+        }else {
+            return nil
+        }
+    }
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellTopLabelAt indexPath: IndexPath!) -> CGFloat
+    {
+        return 40
+    }
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellBottomLabelAt indexPath: IndexPath!) -> CGFloat
+    {
+        return 20
+    }
+    func firstMessageOfTheDay() -> Bool {
+        print(itemIndexpath)
+        let messageDate = messages[itemIndexpath.item].date
+        guard let previouseMessageDate = messages[itemIndexpath.item - 1].date else {
+            return true // because there is no previous message so we need to show the date
+        }
+        let day = Calendar.current.component(.day, from: messageDate!)
+        let previouseDay = Calendar.current.component(.day, from: previouseMessageDate)
+        if day == previouseDay {
+            return false
+        } else {
+            return true
+        }
     }
 
-    override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAt indexPath: IndexPath!) -> CGFloat
-    {
-        return 15
-    }
-    
   // MARK: - Send button Action
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!)
     {
-     //   let ref = Constants.refs.databaseChats.childByAutoId()
+
         var receiver_name:String!
         var receiver_id:String!
         var profileImg:String!
@@ -193,12 +236,8 @@ class ChatViewController: JSQMessagesViewController {
             receiver_id = String((connectedUserModelOfFirstElement?.connectedUser?.userId ?? 0))
             profileImg = String ((connectedUserModelOfFirstElement?.connectedUser?.imageUrl)!)
         }
-        // code change
-        let timestamp = NSDate().timeIntervalSince1970
-        let mDate = Date(timeIntervalSince1970: timestamp)
-        let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone(identifier: "UTC")
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+
+        let mDate = Date()
         let nameOfMonth = dateFormatter.string(from: mDate)
         let chatDate:String = String (describing: nameOfMonth)
         let databaseRoot = Database.database().reference(withPath: "messages")
@@ -225,4 +264,3 @@ class ChatViewController: JSQMessagesViewController {
     }
 
 }
-//let timestamp = NSDate().timeIntervalSince1970     let date = Date(timeIntervalSince1970: timestamp)
