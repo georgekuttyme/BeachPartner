@@ -172,7 +172,7 @@ class ChatViewController: JSQMessagesViewController {
 
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAt indexPath: IndexPath!) -> CGFloat
     {
-        return messages[indexPath.item].senderId == senderId ? 0 : 15
+        return 15
     }
     
   // MARK: - Send button Action
