@@ -211,7 +211,7 @@ extension SubscriptionTypeViewController: UITableViewDataSource, UITableViewDele
         let plan = subscriptionPlans[indexPath.row]
         cell.subscriptionTypeLabel.text = plan.name
        // cell.subscriptionTypeLabel.adjustsFontSizeToFitWidth = true
-        
+        print(Subscription.current.activeSubscriptionPlan?.planName)
         if plan.code == Subscription.current.activeSubscriptionPlan?.planName {
             cell.statusLabel.text = "Current Plan"
             cell.radioButton.isHidden = true

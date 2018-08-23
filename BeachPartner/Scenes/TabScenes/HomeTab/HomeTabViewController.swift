@@ -114,12 +114,13 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
 
     func expiryPopup(){
         if let days = Subscription.current.activeSubscriptionPlan?.remainingDays{
-            if days<31{
+            if days<6{
                 let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "yourSubscriptionWillExpireViewController") as! yourSubscriptionWillExpireViewController
                 vc.modalTransitionStyle = .crossDissolve
                 vc.modalPresentationStyle = .overFullScreen
                 vc.remainingDays = days
+                 vc.delegate = self
                 self.present(vc, animated: true, completion: nil)
             }
         }

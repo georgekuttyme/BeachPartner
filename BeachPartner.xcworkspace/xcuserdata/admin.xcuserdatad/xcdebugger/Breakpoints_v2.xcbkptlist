@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/SubscriptionScenes/AddonsViewController.swift"
-            timestampString = "556706797.547379"
+            timestampString = "556713684.721603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "130"
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/SubscriptionScenes/ThankyouForYourPurchaseViewController.swift"
-            timestampString = "556706797.547448"
+            timestampString = "556713684.721707"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "26"
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/SubscriptionScenes/SubscriptionViewController.swift"
-            timestampString = "556706797.547502"
+            timestampString = "556713684.721781"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "264"
@@ -90,7 +90,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/SubscriptionScenes/yourSubscriptionWillExpireViewController.swift"
-            timestampString = "556706797.547592"
+            timestampString = "556713684.721916"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "45"
@@ -105,13 +105,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BeachPartner/Scenes/TabScenes/HomeTab/HomeTabViewController.swift"
-            timestampString = "556706797.547645"
+            filePath = "BeachPartner/Scenes/TabScenes/HomeTab/CompletionDelegate.swift"
+            timestampString = "556713684.721979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
-            landmarkName = "actionCompleted(isCompleted:)"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
+            landmarkName = "CompletionDelegate"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/SubscriptionScenes/SubscriptionTypeViewController.swift"
+            timestampString = "556713684.722044"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
+            landmarkName = "didTapProceedButton(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -122,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/Scenes/TabScenes/HomeTab/HomeTabViewController.swift"
-            timestampString = "556706809.301036"
+            timestampString = "556713684.722096"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -137,13 +153,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BeachPartner/Scenes/TabScenes/HomeTab/HomeTabViewController.swift"
-            timestampString = "556706817.1253639"
+            filePath = "BeachPartner/SubscriptionScenes/SubscriptionTypeViewController.swift"
+            timestampString = "556713684.7221431"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
-            landmarkName = "expiryPopup()"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
+            landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -153,14 +169,78 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BeachPartner/Scenes/TabScenes/HomeTab/CompletionDelegate.swift"
-            timestampString = "556706962.2219141"
+            filePath = "BeachPartner/SubscriptionScenes/Subscription.swift"
+            timestampString = "556713050.891112"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "12"
-            endingLineNumber = "12"
-            landmarkName = "CompletionDelegate"
-            landmarkType = "5">
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "getUsersActivePlans()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/SubscriptionScenes/SubscriptionViewController.swift"
+            timestampString = "556713684.722205"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
+            landmarkName = "getPaymentSummaryInitial(planID:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachPartner.SubscriptionViewController.getPaymentSummaryInitial(planID: Swift.Int) -&gt; ()"
+                  moduleName = "BeachPartner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/projects/bp-ios/BeachPartner/SubscriptionScenes/SubscriptionViewController.swift"
+                  timestampString = "556713685.09527"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "241"
+                  endingLineNumber = "241"
+                  offsetFromSymbolStart = "92">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Tailor.SafeMappable&gt;) -&gt; () in BeachPartner.SubscriptionViewController.getPaymentSummaryInitial(planID: Swift.Int) -&gt; ()"
+                  moduleName = "BeachPartner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/projects/bp-ios/BeachPartner/SubscriptionScenes/SubscriptionViewController.swift"
+                  timestampString = "556713685.098044"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "242"
+                  endingLineNumber = "242"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/SubscriptionScenes/StartandEndDateViewController.swift"
+            timestampString = "556713684.7222691"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "setupUI()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
