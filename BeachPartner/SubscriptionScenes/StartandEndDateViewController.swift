@@ -28,6 +28,8 @@ class StartandEndDateViewController: UIViewController {
     @IBOutlet weak var amountPaidLbl: UILabel!
     @IBOutlet weak var amount_PaidLbl: UILabel!
     @IBOutlet weak var straightLineview: UIView!
+    
+    @IBOutlet weak var cutView: UIView!
     var paymentModel : GetSummaryPayment?
     var isFrom = String()
     override func viewDidLoad() {
@@ -44,11 +46,11 @@ class StartandEndDateViewController: UIViewController {
    
     func setupUI(){
         if self.paymentModel?.userRegistered == "NO" && isFrom == "Subscription"{
-//            self.cutView.ishidden = true
+         self.cutView.isHidden = true
         }else{
             self.subscription_FeeLbl.text = "$\(self.paymentModel?.monthlyCharge ?? 0)"
-            self.straightLineview.isHidden = true
-//            self.cutView.ishidden = false
+            self.straightLineview.isHidden = false
+          self.cutView.isHidden = false
         }
         self.subscription_FeeLbl.text = "$\(self.paymentModel?.monthlyCharge ?? 0)"
         self.amount_PaidLbl.text = "$\(self.paymentModel?.payableAmount ?? 0)"
