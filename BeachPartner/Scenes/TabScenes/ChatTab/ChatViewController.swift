@@ -18,7 +18,6 @@ class ChatViewController: JSQMessagesViewController {
     var connectedUserModel = [ConnectedUserModel]()
     let dateFormatter = DateFormatter()
     let formatter = DateFormatter()
-    var itemIndexpath = NSIndexPath()
     lazy var outgoingBubble: JSQMessagesBubbleImage = {
         return JSQMessagesBubbleImageFactory()!.outgoingMessagesBubbleImage(with: UIColor(red: 65/255, green: 78/255, blue: 140/255, alpha: 1))
     }()
@@ -26,18 +25,18 @@ class ChatViewController: JSQMessagesViewController {
     lazy var incomingBubble: JSQMessagesBubbleImage = {
         return JSQMessagesBubbleImageFactory()!.incomingMessagesBubbleImage(with: UIColor(red: 155/255, green: 164/255, blue: 204/255, alpha: 1))
     }()
-
-   
-// MARK: - View Property's
+    
+    
+    // MARK: - View Property's
     override func viewDidLoad() {
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController!.navigationBar.topItem!.title = ""
         
         super.viewDidLoad()
         
-        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+        //        dateFormatter.timeZone = TimeZone(identifier: "UTC")
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        formatter.timeZone = TimeZone(identifier: "UTC")
+        //        formatter.timeZone = TimeZone(identifier: "UTC")
         formatter.dateFormat = "hh:mm a"
         formatter.amSymbol = "AM"
         formatter.pmSymbol = "PM"
@@ -59,11 +58,19 @@ class ChatViewController: JSQMessagesViewController {
                 !text.isEmpty
             {
                 let dateForChat = self?.dateFormatter.date(from: msgDate)
-                if let message = JSQMessage(senderId: id, senderDisplayName: "", date: dateForChat, text: text)
-//                    if let message = JSQMessage(senderId: id, displayName: "", text: text)
-                {
-                    self?.messages.append(message)
-                    self?.finishReceivingMessage()
+                if dateForChat != nil{
+                    if let message = JSQMessage(senderId: id, senderDisplayName: "", date: dateForChat, text: text)
+                        //                    if let message = JSQMessage(senderId: id, displayName: "", text: text)
+                    {
+                        self?.messages.append(message)
+                        self?.finishReceivingMessage()
+                    }
+                }else{
+                    if let message = JSQMessage(senderId: id, displayName: "", text: text)
+                    {
+                        self?.messages.append(message)
+                        self?.finishReceivingMessage()
+                    }
                 }
             }
         })
@@ -79,7 +86,7 @@ class ChatViewController: JSQMessagesViewController {
         super.viewDidAppear(animated)
         
     }
-
+    
     
     @IBAction func didTapBackButton(_ sender: Any) {
         self.view.endEditing(true)
@@ -88,14 +95,14 @@ class ChatViewController: JSQMessagesViewController {
     // MARK: - User configuration
     
     func creatreChatId() -> String {
-         var ChatID = String()
+        var ChatID = String()
         if chatType == "recentChat"  {
             ChatID = self.recentChatDic["chatId"]!
-        return ChatID
+            return ChatID
         }
         let bP_userId =  Int( UserDefaults.standard.string(forKey: "bP_userId") ?? "")
         
-//        let chatUserId = connectedUserModel[0].connectedUser?.userId ?? 0
+        //        let chatUserId = connectedUserModel[0].connectedUser?.userId ?? 0
         let connectedUserModelOfFirstElement = connectedUserModel.first
         let chatUserId = connectedUserModelOfFirstElement?.connectedUser?.userId ?? 0
         if bP_userId!<chatUserId {
@@ -105,18 +112,18 @@ class ChatViewController: JSQMessagesViewController {
             ChatID = String(chatUserId)+"-"+UserDefaults.standard.string(forKey: "bP_userId")!
         }
         
-       return ChatID
+        return ChatID
     }
     
     func configUser()  {
         
-         let defaults = UserDefaults.standard
+        let defaults = UserDefaults.standard
         senderId = UserDefaults.standard.string(forKey: "bP_userId") ?? ""
         senderDisplayName = UserDefaults.standard.string(forKey: "bP_userName") ?? ""
         defaults.set(senderDisplayName, forKey: "jsq_name")
         defaults.set(senderId, forKey: "jsq_id")
         defaults.synchronize()
-         if chatType == "recentChat"  {
+        if chatType == "recentChat"  {
             
             
             var userName = ""
@@ -127,9 +134,9 @@ class ChatViewController: JSQMessagesViewController {
                 userName = userName + lastName
             }
             title = "Messages with " + userName
-
+            
         }
-         else{
+        else{
             print("\n\n\n\n///////",connectedUserModel.first ?? " Null")
             let connectedUserModelOfFirstElement = connectedUserModel.first
             
@@ -171,7 +178,7 @@ class ChatViewController: JSQMessagesViewController {
         let chatDate = messages[indexPath.item].date
         let dateForChat = dateFormatter.string(from: chatDate!)
         let temp = dateFormatter.date(from: dateForChat)
-        formatter.timeZone = TimeZone(identifier: "UTC")
+        //        formatter.timeZone = TimeZone(identifier: "UTC")
         formatter.dateFormat = "hh:mm a"
         formatter.amSymbol = "AM"
         formatter.pmSymbol = "PM"
@@ -180,48 +187,57 @@ class ChatViewController: JSQMessagesViewController {
     }
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAt indexPath: IndexPath!) -> NSAttributedString!
     {
-        itemIndexpath = indexPath! as NSIndexPath
-        print(messages[indexPath.item])
+        print(messages[indexPath.item],indexPath.item)
         let chatDate = messages[indexPath.item].date
         let dateForChat = dateFormatter.string(from: chatDate!)
         let temp = dateFormatter.date(from: dateForChat)
-        formatter.timeZone = TimeZone(identifier: "UTC")
+        //        formatter.timeZone = TimeZone(identifier: "UTC")
         formatter.dateFormat = "dd-MMM-yyyy"
         let showDate = formatter.string(from: temp!)
-        return NSAttributedString(string: showDate)
-        if firstMessageOfTheDay() {
-            return NSAttributedString(string: showDate)
-        }else {
+        var previouseMessageDate : Date
+        if indexPath.item == 0 {
+            if messages.count == 1 {
+                previouseMessageDate = messages[indexPath.item].date
+            }else {
+                previouseMessageDate = messages[indexPath.item + 1].date
+            }
+        }
+        else {
+            previouseMessageDate = messages[indexPath.item - 1].date
+        }
+        
+        let day = Calendar.current.component(.day, from: chatDate!)
+        let previouseDay = Calendar.current.component(.day, from: previouseMessageDate)
+        if day == previouseDay {
             return nil
+        }
+        else {
+            let today = Calendar.current.isDateInToday(temp!)
+            let yesterday = Calendar.current.isDateInYesterday(temp!)
+            if today{
+                return NSAttributedString(string: "Today")
+            }
+            else if yesterday {
+                return NSAttributedString(string: "Yesterday")
+            }
+            else{
+                return NSAttributedString(string: showDate)
+            }
         }
     }
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellTopLabelAt indexPath: IndexPath!) -> CGFloat
     {
-        return 40
+        return 25
     }
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellBottomLabelAt indexPath: IndexPath!) -> CGFloat
     {
         return 20
     }
-    func firstMessageOfTheDay() -> Bool {
-        print(itemIndexpath)
-        let messageDate = messages[itemIndexpath.item].date
-        guard let previouseMessageDate = messages[itemIndexpath.item - 1].date else {
-            return true // because there is no previous message so we need to show the date
-        }
-        let day = Calendar.current.component(.day, from: messageDate!)
-        let previouseDay = Calendar.current.component(.day, from: previouseMessageDate)
-        if day == previouseDay {
-            return false
-        } else {
-            return true
-        }
-    }
-
-  // MARK: - Send button Action
+    
+    
+    // MARK: - Send button Action
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!)
     {
-
         var receiver_name:String!
         var receiver_id:String!
         var profileImg:String!
@@ -231,19 +247,20 @@ class ChatViewController: JSQMessagesViewController {
             profileImg = self.recentChatDic["profileImg"]!
         }
         else{
-             let connectedUserModelOfFirstElement = connectedUserModel.first
+            let connectedUserModelOfFirstElement = connectedUserModel.first
             receiver_name = String((connectedUserModelOfFirstElement?.connectedUser?.firstName ?? ""))
             receiver_id = String((connectedUserModelOfFirstElement?.connectedUser?.userId ?? 0))
             profileImg = String ((connectedUserModelOfFirstElement?.connectedUser?.imageUrl)!)
         }
-
+        
         let mDate = Date()
+        //        dateFormatter.timeZone = TimeZone(identifier: "UTC")
         let nameOfMonth = dateFormatter.string(from: mDate)
         let chatDate:String = String (describing: nameOfMonth)
         let databaseRoot = Database.database().reference(withPath: "messages")
         let databaseChats  = databaseRoot.child(userChatID)
         let ref = databaseChats.childByAutoId()
-       
+        
         let message = ["sender_id": senderId, "sender_name": senderDisplayName, "text": text, "receiver_id":receiver_id, "receiver_name": receiver_name, "date":chatDate,"profileImg":profileImg]
         ref.setValue(message)
         finishSendingMessage()
@@ -255,12 +272,13 @@ class ChatViewController: JSQMessagesViewController {
         if parent == nil
         {
             self.navigationController!.navigationBar.topItem!.title = "Connections"
-           self.tabBarController?.tabBar.isHidden = false
-           
+            self.tabBarController?.tabBar.isHidden = false
+            
         }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
 }
+
