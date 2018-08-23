@@ -16,6 +16,7 @@ class ThankyouForYourPurchaseViewController: UIViewController {
     @IBOutlet weak var okBtn: UIButton!
     @IBOutlet weak var priceLbl: UILabel!
     @IBOutlet weak var thankyouLbl: UILabel!
+    @IBOutlet weak var transactionLbl: UILabel!
     var transactionId = String()
     var status = String()
     var amount = Float()
@@ -35,7 +36,8 @@ class ThankyouForYourPurchaseViewController: UIViewController {
     func loadUI() {
         if status == "SUCCESS"{
             self.imageIcon.image = UIImage(named: "icon_tick")!
-            self.thankyouLbl.text = message + "Transaction : " + "\(transactionId)"
+            self.thankyouLbl.text = message 
+            self.transactionLbl.text = "Transaction : " +  transactionId
             self.priceLbl.text = "$\(amount)"
         }else{
             self.imageIcon.image = UIImage(named: "icon_sad")!
