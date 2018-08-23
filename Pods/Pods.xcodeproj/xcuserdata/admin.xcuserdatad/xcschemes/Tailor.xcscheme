@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D4D4906565E0845795258D57EAD21972"
+               BlueprintIdentifier = "576E5FF97C14773B32605B8F8D36A4FD"
                BlueprintName = "Tailor"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "Tailor.framework">

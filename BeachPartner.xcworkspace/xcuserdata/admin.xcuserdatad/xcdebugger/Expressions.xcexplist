@@ -3,10 +3,16 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "InvitePartnerViewController.tableView(_:cellForRowAt:):InvitePartnerViewController.swift">
+         contextName = "closure #1 in StartandEndDateViewController.getPaymentSummaryInitial():StartandEndDateViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in APIManager.forRegistration(email:password:location:deviceId:dob:firstName:gender:lastName:mobileNo:userType:sucessResult:errorResult:):AuthModule.swift">
+      </ContextState>
+      <ContextState
+         contextName = "SubscriptionViewController.didTapActionButton(_:):SubscriptionViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "cell?.addBtn.isHidden">
+               value = "self.totalAmount">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -20,6 +26,17 @@
                value = "subscriptionPlans">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "InvitePartnerViewController.tableView(_:cellForRowAt:):InvitePartnerViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "cell?.addBtn.isHidden">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in LoginViewController.makeLoginRequest():LoginViewController.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

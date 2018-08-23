@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import InitialsImageView
 
 class MyCalEventDetailsViewController: UIViewController {
 
@@ -195,9 +196,12 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
                 let partner = eventInvitation?.invitations?.first
                 cell?.nameLabel.text = partner?.invitorName
                 cell?.statusLabel.text = "Organizer"
-                if partner?.invitorimageURL == ""{
-                    cell?.profileImageView.image = UIImage(named: "user")
-                }else{
+                let username = partner?.invitorName
+                let image = partner?.invitorimageURL
+                if image == "" || image == "null"{
+                    cell?.profileImageView.setImageForName(string: username!, circular: true, textAttributes: nil)
+                }
+                else{
                     if let imageUrl = URL(string: (partner?.invitorimageURL)!) {
                         cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
                         cell?.profileImageView.sd_setShowActivityIndicatorView(true)
@@ -226,8 +230,10 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
                     let partner = eventInvitation?.invitations?.first?.partners![(eventInvitation?.invitations?.first?.partners?.count)! - 1]
                     cell?.nameLabel.text = partner?.partnerName
                     cell?.statusLabel.text = ""
-                    if partner?.partnerImageURL == ""{
-                        cell?.profileImageView.image = UIImage(named: "user")
+                    let username = partner?.partnerName
+                    let image = partner?.partnerImageURL
+                    if image == "" || image == "null"{
+                        cell?.profileImageView.setImageForName(string: username!, circular: true, textAttributes: nil)
                     }else{
                         if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
                             cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
@@ -249,8 +255,10 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
                     let partner = eventInvitation?.invitations?.first?.partners![indexPath.row - 1]
                     cell?.nameLabel.text = partner?.partnerName
                     cell?.statusLabel.text = ""
-                    if partner?.partnerImageURL == ""{
-                        cell?.profileImageView.image = UIImage(named: "user")
+                    let username = partner?.partnerName
+                    let image = partner?.partnerImageURL
+                    if image == "" || image == "null"{
+                        cell?.profileImageView.setImageForName(string: username!, circular: true, textAttributes: nil)
                     }else{
                         if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
                             cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
@@ -274,8 +282,10 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
             let partner = eventInvitation?.invitations?.first?.partners![indexPath.row]
             cell?.nameLabel.text = partner?.partnerName
             cell?.statusLabel.text = ""
-            if partner?.partnerImageURL == ""{
-                cell?.profileImageView.image = UIImage(named: "user")
+            let username = partner?.partnerName
+            let image = partner?.partnerImageURL
+            if image == "" || image == "null"{
+                cell?.profileImageView.setImageForName(string: username!, circular: true, textAttributes: nil)
             }else{
                 if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
                     cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)

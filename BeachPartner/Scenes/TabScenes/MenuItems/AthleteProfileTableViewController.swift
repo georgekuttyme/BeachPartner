@@ -13,7 +13,7 @@ import AVFoundation
 import AVKit
 import MobileCoreServices
 import Floaty
-
+import InitialsImageView
 class AthleteProfileTableViewController: UITableViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate {
     
     @IBOutlet weak var shareLbl: UILabel!
@@ -1299,8 +1299,10 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
                 self.userData = accRespModel
                 print("bP_userId", accRespModel.id )
                 print("accRespimageUrl", accRespModel.videoUrl)
-                if accRespModel.imageUrl == ""{
-                    self.userImageView.image = UIImage(named: "user")
+                let username = accRespModel.firstName + " " + accRespModel.lastName
+                let image = accRespModel.imageUrl
+                if image == "" || image == "null"{
+                    self.userImageView.setImageForName(string: username, circular: true, textAttributes: nil)
                 }else{
                     if let imageUrl = URL(string: accRespModel.imageUrl) {
                         self.userImageView.sd_setIndicatorStyle(.whiteLarge)
@@ -1362,8 +1364,10 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
                 self.userData = accRespModel
                 print("bP_userId", accRespModel.id )
                 print("accRespimageUrl", accRespModel.videoUrl)
-                if accRespModel.imageUrl == ""{
-                    self.userImageView.image = UIImage(named: "user")
+                let username = accRespModel.firstName + " " + accRespModel.lastName
+                let image = accRespModel.imageUrl
+                if image == "" || image == "null"{
+                    self.userImageView.setImageForName(string: username, circular: true, textAttributes: nil)
                 }else{
                     if let imageUrl = URL(string: accRespModel.imageUrl) {
                         self.userImageView.sd_setIndicatorStyle(.whiteLarge)

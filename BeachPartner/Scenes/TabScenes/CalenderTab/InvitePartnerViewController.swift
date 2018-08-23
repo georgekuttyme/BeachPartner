@@ -9,7 +9,7 @@
 import UIKit
 import DropDown
 import XLPagerTabStrip
-
+import InitialsImageView
 class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,IndicatorInfoProvider,UISearchResultsUpdating {
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -334,8 +334,8 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
             cell?.nameLbl.text = name
             print("||||| ",connectedUser.imageUrl,"  ",connectedUser.firstName)
             let image = connectedUser.imageUrl
-            if image == ""{
-                cell?.profileImage.image = UIImage(named: "user")
+            if image == "" || image == "null"{
+                cell?.profileImage.setImageForName(string: name, circular: true, textAttributes: nil)
             }else{
                 if let imageUrl = URL(string: image){
                     cell?.profileImage.sd_setIndicatorStyle(.whiteLarge)

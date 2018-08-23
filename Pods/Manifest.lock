@@ -8,29 +8,27 @@ PODS:
   - Bolts/AppLinks (1.9.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.9.0)
-  - Braintree/Apple-Pay (4.15.0):
+  - Braintree/Card (4.17.0):
     - Braintree/Core
-  - Braintree/Card (4.15.0):
-    - Braintree/Core
-  - Braintree/Core (4.15.0)
-  - Braintree/PaymentFlow (4.15.0):
+  - Braintree/Core (4.17.0)
+  - Braintree/PaymentFlow (4.17.0):
     - Braintree/Card
     - Braintree/Core
-  - Braintree/PayPal (4.15.0):
+  - Braintree/PayPal (4.17.0):
     - Braintree/Core
     - Braintree/PayPalOneTouch
-  - Braintree/PayPalDataCollector (4.15.0):
+  - Braintree/PayPalDataCollector (4.17.0):
     - Braintree/Core
     - Braintree/PayPalUtils
-  - Braintree/PayPalOneTouch (4.15.0):
+  - Braintree/PayPalOneTouch (4.17.0):
     - Braintree/Core
     - Braintree/PayPalDataCollector
     - Braintree/PayPalUtils
-  - Braintree/PayPalUtils (4.15.0)
-  - Braintree/UnionPay (4.15.0):
+  - Braintree/PayPalUtils (4.17.0)
+  - Braintree/UnionPay (4.17.0):
     - Braintree/Card
     - Braintree/Core
-  - Braintree/Venmo (4.15.0):
+  - Braintree/Venmo (4.17.0):
     - Braintree/Core
     - Braintree/PayPalDataCollector
   - BraintreeDropIn (6.1.0):
@@ -104,6 +102,7 @@ PODS:
     - "GoogleToolboxForMac/NSString+URLArguments (= 2.1.4)"
   - "GoogleToolboxForMac/NSString+URLArguments (2.1.4)"
   - GTMSessionFetcher/Core (1.1.15)
+  - InitialsImageView (0.2.0)
   - JSQMessagesViewController (7.3.5):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
@@ -134,7 +133,6 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.5)
   - AlamofireImage (~> 3.3)
-  - Braintree/Apple-Pay
   - Braintree/PayPal
   - Braintree/Venmo
   - BraintreeDropIn
@@ -147,6 +145,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - Floaty (~> 4.0.0)
   - FSCalendar
+  - InitialsImageView
   - JSQMessagesViewController
   - Koloda (~> 4.3.1)
   - libPhoneNumber-iOS (~> 0.8)
@@ -161,7 +160,7 @@ DEPENDENCIES:
   - XLPagerTabStrip (from `https://github.com/KelvinJin/XLPagerTabStrip`, branch `swift3`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Alamofire
     - AlamofireImage
     - Bolts
@@ -182,6 +181,7 @@ SPEC REPOS:
     - FSCalendar
     - GoogleToolboxForMac
     - GTMSessionFetcher
+    - InitialsImageView
     - JSQMessagesViewController
     - JSQSystemSoundPlayer
     - Koloda
@@ -212,7 +212,7 @@ SPEC CHECKSUMS:
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
   AlamofireImage: 2e784dc5d00f04903a52c1d169181469c805c3df
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
-  Braintree: 5f10816f455ffd79c411e6d22a177846971f3677
+  Braintree: 9681cef8240c8ad9e67493d5c19418041e6c259a
   BraintreeDropIn: 2e8bba4facf6cc925176637030454d8308223b95
   DropDown: 75562633a203f57a917021b4edb96c76f293b0ec
   FBSDKCoreKit: 54db4c581123745d25a9f7c1608020b3aeabd118
@@ -229,6 +229,7 @@ SPEC CHECKSUMS:
   FSCalendar: a04b09f16f811bc92e82f3cf852a15225233b9d5
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   GTMSessionFetcher: 5fa5b80fd20e439ef5f545fb2cb3ca6c6714caa2
+  InitialsImageView: 5f524ccb8856ea2ef891ac42adcae53f7669aceb
   JSQMessagesViewController: 6587f56aedbcb150a8ba1d968e1ef58b1bc758b7
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   Koloda: 0d39b2aa188ccd1fac48d752acaf9802e683c625
@@ -246,6 +247,6 @@ SPEC CHECKSUMS:
   Toast-Swift: ba0b01b095aada709d915f9beb1d38184a2721c3
   XLPagerTabStrip: 87b8b705f9a7178e76a063ffaa2d70045944a965
 
-PODFILE CHECKSUM: 8936fced8ecc01a7c25ed521e782a18e562697e0
+PODFILE CHECKSUM: c7406f0eee9aaabf73bf34d2d0cb52a2bdab2398
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3

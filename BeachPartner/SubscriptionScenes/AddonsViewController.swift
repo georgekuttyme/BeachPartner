@@ -19,7 +19,7 @@ class AddonsViewController: UIViewController {
     var readMoreButtonTitle: String = "Read more"
     var addonPlans = [SubscriptionPlanModel]()
     var transactionId:String = ""
-    
+    var paymentModel : GetSummaryPayment?
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -35,8 +35,16 @@ class AddonsViewController: UIViewController {
         super.viewDidLoad()
         viewCustomization()
         getAllAddonPlans()
-        
+         NotificationCenter.default.addObserver(self, selector: #selector(requestForSubscribe(notification:)), name:NSNotification.Name(rawValue: "requestforpayment"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(exitPopup(notification:)), name:NSNotification.Name(rawValue: "dismissAdd-ons"), object: nil)
     }
+    
+    @objc func exitPopup(notification: NSNotification){
+        self.dismiss(animated: false,completion: nil)
+         
+    }
+        
+    
     
     private func viewCustomization(){
 
@@ -101,11 +109,15 @@ class AddonsViewController: UIViewController {
     
     // MARK:- Payment services
     
-    func requestForSubscribe(planId:Int, amount:Int)  {
+     @objc func requestForSubscribe(notification: NSNotification)  {
+        guard let plan:SubscriptionPlanModel = addonPlans[selectedIndex] else {
+            return
+        }
         ActivityIndicatorView.addActivityOnView(tableView.superview)
         ActivityIndicatorView.show("Loading...")
-        
-        APIManager.callServer.requestForPaymentPaln(planId: planId, amount: amount, sucessResult: { (responseModel) in
+        let planId = plan.id
+        let amount = plan.monthlycharge
+        APIManager.callServer.requestForPaymentPaln(planId: planId, amount: Int(amount), sucessResult: { (responseModel) in
             
             ActivityIndicatorView.hiding()
             guard let paymentDetailsModel = responseModel as? PaymentModel else {
@@ -115,7 +127,7 @@ class AddonsViewController: UIViewController {
             if paymentDetailsModel.status == "SUCCESS"
             {
                 self.transactionId = paymentDetailsModel.transactionId
-                self.requestForNonce(clientToken: paymentDetailsModel.clientToken, palnAmount: String(amount))
+                self.requestForNonce(clientToken: paymentDetailsModel.clientToken, palnAmount: String(describing: amount))
             }
             
         }) { (errorMessage) in
@@ -163,11 +175,7 @@ class AddonsViewController: UIViewController {
             }
             if paymentDetailsModel.status == "SUCCESS"
             {
-                let refreshAlert = UIAlertController(title: "Payment Success", message: "Successfully changed your plan.Please Log out for switch current plan", preferredStyle: UIAlertControllerStyle.alert)
-                refreshAlert.addAction(UIAlertAction(title: "Log Out", style: .default, handler: { (action: UIAlertAction!) in
-                    self.timoutLogoutAction()
-                }))
-                self.present(refreshAlert, animated: true, completion: nil)
+                self.paymentSuccessPopup(status: paymentDetailsModel.status, transactionId: paymentDetailsModel.transactionId)
             }
             
         }) { (errorMessage) in
@@ -178,7 +186,17 @@ class AddonsViewController: UIViewController {
             self.alert(message: errorString)
         }
     }
-
+    func paymentSuccessPopup(status:String,transactionId:String){
+        let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ThankyouForYourPurchaseViewController") as! ThankyouForYourPurchaseViewController
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .overFullScreen
+        vc.transactionId = transactionId
+        vc.status = status
+        vc.isFrom = "Add-ons"
+//        vc.amount = self.totalAmount
+        self.present(vc, animated: true, completion: nil)
+    }
     
 // MARK: -- Button Actions
     
@@ -190,10 +208,40 @@ class AddonsViewController: UIViewController {
         guard let plan:SubscriptionPlanModel? = addonPlans[selectedIndex] else {
             return
         }
+        
+        getPaymentSummaryInitial(planID:(plan?.id)!)
         print(addonPlans[selectedIndex],selectedIndex)
-        requestForSubscribe(planId: (plan?.id)!, amount: Int((plan?.monthlycharge)!))
+//        requestForSubscribe(planId: (plan?.id)!, amount: Int((plan?.monthlycharge)!))
     }
-    
+    func getPaymentSummaryInitial(planID:Int){
+        ActivityIndicatorView.show("Loading...")
+        APIManager.callServer.getPaymentSummary(planId:planID,sucessResult: { (responseModel) in
+            ActivityIndicatorView.hiding()
+            guard let paymentRespModel = responseModel as? GetSummaryPayment else {
+                print("Rep model does not match")
+                return
+            }
+            print(paymentRespModel)
+            self.paymentModel = paymentRespModel
+            ActivityIndicatorView.hiding()
+            self.paymentInitialPopup()
+        }, errorResult: { (error) in
+            ActivityIndicatorView.hiding()
+            guard let errorString  = error else {
+                return
+            }
+            self.alert(message: errorString)
+        })
+    }
+    func paymentInitialPopup(){
+        let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "StartandEndDateViewController") as! StartandEndDateViewController
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .overFullScreen
+        vc.paymentModel = self.paymentModel
+        vc.isFrom = "Add-ons"
+        self.present(vc, animated: true, completion: nil)
+    }
     @objc private func showPlanDetails(sender: UIButton) {
         if selectedReadMoreIndex == sender.tag-1000 {
             readMoreClicked = !readMoreClicked

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import InitialsImageView
 class PartnerListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var containerView: UIView!
@@ -61,9 +61,12 @@ class PartnerListViewController: UIViewController, UITableViewDataSource, UITabl
                 
                 cell?.nameLabel.text = invitation?.invitorName
                 cell?.statusLabel.text = "Organizer"
-                if invitation?.invitorimageURL == ""{
-                    cell?.profileImageView.image = UIImage(named: "user")
-                }else{
+                let username = invitation?.invitorName
+                let image = invitation?.invitorimageURL
+                if image == "" || image == "null"{
+                    cell?.profileImageView.setImageForName(string: username!, circular: true, textAttributes: nil)
+                }
+                else{
                     if let imageUrl = URL(string: (invitation?.invitorimageURL)!) {
                         cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
                         cell?.profileImageView.sd_setShowActivityIndicatorView(true)
@@ -84,8 +87,10 @@ class PartnerListViewController: UIViewController, UITableViewDataSource, UITabl
                     cell?.nameLabel.text = partner?.partnerName
                     cell?.statusLabel.text = partner?.invitationStatus
                     print("index->",indexPath.row,"  ",index,"\n\n")
-                    if partner?.partnerImageURL == ""{
-                        cell?.profileImageView.image = UIImage(named: "user")
+                    let username = partner?.partnerName
+                    let image = partner?.partnerImageURL
+                    if image == "" || image == "null"{
+                        cell?.profileImageView.setImageForName(string: username!, circular: true, textAttributes: nil)
                     }else{
                         if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
                             cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
@@ -102,8 +107,10 @@ class PartnerListViewController: UIViewController, UITableViewDataSource, UITabl
                     cell?.nameLabel.text = partner?.partnerName
                     cell?.statusLabel.text = partner?.invitationStatus
                     print("index->",indexPath.row,"  ",index,"\n\n")
-                    if partner?.partnerImageURL == ""{
-                        cell?.profileImageView.image = UIImage(named: "user")
+                    let username = partner?.partnerName
+                    let image = partner?.partnerImageURL
+                    if image == "" || image == "null"{
+                        cell?.profileImageView.setImageForName(string: username!, circular: true, textAttributes: nil)
                     }else{
                         if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
                             cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
@@ -124,8 +131,10 @@ class PartnerListViewController: UIViewController, UITableViewDataSource, UITabl
             if let partner = invitation?.partners![index]{
                 cell?.nameLabel.text = partner.partnerName
                 cell?.statusLabel.text = partner.invitationStatus
-                if partner.partnerImageURL == ""{
-                    cell?.profileImageView.image = UIImage(named: "user")
+                let username = partner.partnerName
+                let image = partner.partnerImageURL
+                if image == "" || image == "null"{
+                    cell?.profileImageView.setImageForName(string: username, circular: true, textAttributes: nil)
                 }else{
                     if let imageUrl = URL(string: (partner.partnerImageURL)) {
                         cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)

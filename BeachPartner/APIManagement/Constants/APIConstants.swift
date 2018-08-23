@@ -134,6 +134,8 @@ struct ApiMethods {
     
     static let paymentResponse   = "/payment/payment-response"
     
+    static let paymentSummary   = "/payment/get-payment-summary"
+    
     
 }
 struct ApiResponseStatus {

@@ -36,7 +36,13 @@ class SubscriptionTypeViewController: UIViewController {
         super.viewDidLoad()
         getAllSubscriptionPlans()
         viewCustomization()
+        NotificationCenter.default.addObserver(self, selector: #selector(exitPopup(notification:)), name:NSNotification.Name(rawValue: "dismiss-action"), object: nil)
+
     }
+    @objc func exitPopup(notification: NSNotification){
+        self.dismiss(animated: false,completion: nil)
+    }
+
     private func viewCustomization(){
 
         tableView.estimatedRowHeight = 200.0

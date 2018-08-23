@@ -10,6 +10,7 @@ import SDWebImage
 import UIKit
 import AlamofireImage
 import FSCalendar
+import InitialsImageView
 
 
 protocol BPCardsVCDelegate {
@@ -266,8 +267,9 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BlueBPCollectionViewCell", for: indexPath) as! BlueBPCollectionViewCell
             let image = blueBpData.connectedUser?.imageUrl
-            if image == ""{
-                cell.imageView.image = UIImage(named: "user")
+            let username = (blueBpData.connectedUser?.firstName)! + " " + (blueBpData.connectedUser?.lastName)!
+            if image == "" || image == "null"{
+                cell.imageView.setImageForName(string: username, circular: true, textAttributes: nil)
             }else{
                 if let imageUrl = URL(string: (blueBpData.connectedUser?.imageUrl)!) {
                     cell.imageView.sd_setIndicatorStyle(.whiteLarge)
@@ -741,8 +743,9 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
                 
                 self.userData = accRespModel
                 let image = accRespModel.imageUrl
-                if image == ""{
-                    self.imgProfile.image = UIImage(named: "user")
+                let username = accRespModel.firstName + " " + accRespModel.lastName
+                if image == "" || image == "null"{
+                    self.imgProfile.setImageForName(string: username, circular: true, textAttributes: nil)
                 }else{
                     if let imageUrl = URL(string: accRespModel.imageUrl) {
                         self.imgProfile.sd_setIndicatorStyle(.whiteLarge)

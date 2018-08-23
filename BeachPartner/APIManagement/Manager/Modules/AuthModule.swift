@@ -230,14 +230,15 @@ extension APIManager{
 
         APIClient.doRequest.inPost(method:ApiMethods.Login, params: params as! [String : String], sucess: { (response) in
             
-            //            APIManager.printOnDebug(response: "\(response)")
+                        APIManager.printOnDebug(response: "\(response)")
             
             
             let jsonDict = response! as! JSONDictionary
-            
+            print(jsonDict)
             do {
                 
                 let loginModel = try LoginRespModel(jsonDict)
+                 print(loginModel)
                 sucessResult(loginModel)
                 return
             } catch {
@@ -1685,6 +1686,36 @@ extension APIManager{
             return
         }
         
+    }
+    public func getPaymentSummary(planId:Int,sucessResult:@escaping resultClosure,errorResult:@escaping errorClosure) {
+    
+        let params = [String:String]()
+        
+        APIGetClient.doGetRequest.inGet(method:ApiMethods.paymentSummary + "/\(planId)", params: params, sucess: { (response) in
+            
+            APIManager.printOnDebug(response: " Resppp1111 : \(response)")
+            
+            
+            let jsonDict = response!;
+            print(jsonDict)
+            do {
+                
+                let accRespModel = try GetSummaryPayment(jsonDict as! [String : Any])
+                sucessResult(accRespModel)
+                return
+            } catch {
+                print("Catched")
+                errorResult(error.localizedDescription)
+                APIManager.printOnDebug(response: "error:\(error.localizedDescription)")
+                return
+            }
+            
+        }) { (error) in
+            self.busyOff()
+            errorResult(error?.localizedDescription)
+            APIManager.printOnDebug(response: "error:\(error?.localizedDescription)")
+            return
+        }
     }
     
     

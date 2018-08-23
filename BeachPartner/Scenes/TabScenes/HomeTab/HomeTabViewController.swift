@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 //import DropDown
+import InitialsImageView
 
 class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegate, UICollectionViewDataSource,UITabBarControllerDelegate {
     var loggedInUserId = 0
@@ -404,10 +405,10 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             let blueBpData = subscribedBlueBpUsers[indexPath.row].connectedUser
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BlueBPCollectionViewCell", for: indexPath) as! BlueBPCollectionViewCell
-            
+            let name = (blueBpData?.firstName)! + " " + (blueBpData?.lastName)!
             let image = blueBpData?.imageUrl
-            if image == ""{
-                cell.imageView.image = UIImage(named: "user")
+            if image == "" || image == "null"{
+                cell.imageView.setImageForName(string: name, circular: true, textAttributes: nil)
             }else{
                 if let imageUrl = URL(string: (blueBpData?.imageUrl)!) {
                     cell.imageView.sd_setIndicatorStyle(.whiteLarge)
@@ -473,9 +474,16 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             print("====dfhfdghvbhj====")
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MessageCollectionViewCell", for: indexPath) as! MessageCollectionViewCell
             self.titleOfChat.removeAll()
+            var username = String()
             let image = self.recentChatList[indexPath.row]["profileImg"]
-            if image == ""{
-                cell.messageUserProfille.image = UIImage(named: "user")
+            if let fName = self.recentChatList[indexPath.row]["sender_name"] {
+                username = fName
+            }
+            if let lName = self.recentChatList[indexPath.row]["sender_lastName"] {
+                username = titleOfChat + " " + lName
+            }
+            if image == "" || image == "null"{
+                cell.messageUserProfille.setImageForName(string: username, circular: true, textAttributes: nil)
             }
             else
             {

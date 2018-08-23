@@ -35,5 +35,6 @@ target 'BeachPartner' do
  pod 'Braintree/PayPal'
  pod 'Braintree/Venmo'
  # pod 'Braintree/Apple-Pay'
+pod "InitialsImageView"
 
 end

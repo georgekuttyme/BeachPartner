@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import InitialsImageView
 class CoachViewController: UIViewController,UICollectionViewDataSource , UICollectionViewDelegate  {
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -139,11 +139,14 @@ class CoachViewController: UIViewController,UICollectionViewDataSource , UIColle
         
         let firstName = connectedUser?.firstName ?? ""
         let lastName = connectedUser?.lastName ?? ""
-        cell?.nameLbl.text = firstName + " " + lastName
+        let username = firstName + " " + lastName
+        cell?.nameLbl.text = username
         cell?.ageLbl.text = String(connectedUser?.age ?? 0)
-        if connectedUser?.imageUrl == ""{
-            cell?.profileImgView.image = UIImage(named: "user")
-        }else{
+        let image = connectedUser?.imageUrl
+        if image == "" || image == "null"{
+            cell?.profileImgView.setImageForName(string: username, circular: true, textAttributes: nil)
+        }
+        else{
             if let imageUrl = URL(string: (connectedUser?.imageUrl)!) {
                 cell?.profileImgView.sd_setIndicatorStyle(.whiteLarge)
                 cell?.profileImgView.sd_setShowActivityIndicatorView(true)

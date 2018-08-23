@@ -9,6 +9,7 @@
 import UIKit
 import Floaty
 import Firebase
+import InitialsImageView
 
 class RecentChatCell: UITableViewCell {
 
@@ -302,9 +303,11 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
             
             cell.timeLbl.isHidden = true
             cell.statusImage.isHidden = true
-            if self.filterConnectedusers[indexPath.row]["profileImg"] == ""{
-                cell.profileImage.image = UIImage(named: "user")
-            }else{
+            let image = self.filterConnectedusers[indexPath.row]["profileImg"]
+            if image == "" || image == "null"{
+                cell.profileImage.setImageForName(string: userName, circular: true, textAttributes: nil)
+            }
+            else{
                 if let imageUrl = URL(string: (self.filterConnectedusers[indexPath.row]["profileImg"])!) {
                     cell.profileImage.sd_setIndicatorStyle(.whiteLarge)
                     cell.profileImage.sd_setShowActivityIndicatorView(true)
@@ -327,8 +330,8 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
             cell.timeLbl.isHidden = true
             cell.statusImage.isHidden = true
             let image = self.recentChatList[indexPath.row]["profileImg"]
-            if image == ""{
-                cell.profileImage.image = UIImage(named: "user")
+            if image == "" || image == "null"{
+                cell.profileImage.setImageForName(string: userName, circular: true, textAttributes: nil)
             }
             else
             {

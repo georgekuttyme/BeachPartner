@@ -127,6 +127,7 @@
 		8459CEB721006BD200DCEC93 /* FlagRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459CEB621006BD200DCEC93 /* FlagRespModel.swift */; };
 		845B7908208B4A5200DF1F1F /* AthleteProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845B7907208B4A5200DF1F1F /* AthleteProfileTableViewController.swift */; };
 		845BD6A32089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BD6A22089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift */; };
+		8461855D212D4F1F0032DFE7 /* GetSummaryRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461855C212D4F1F0032DFE7 /* GetSummaryRespModel.swift */; };
 		846C010420EB386B0030490A /* updateCityRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846C010320EB386B0030490A /* updateCityRespModel.swift */; };
 		8D0B143820FF113700913156 /* ParentConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0B143720FF113700913156 /* ParentConfirmationViewController.swift */; };
 		8D4B786520ABFE430025F7F7 /* GetAllUserEventsRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4B786420ABFE430025F7F7 /* GetAllUserEventsRespModel.swift */; };
@@ -281,6 +282,7 @@
 		8459CEB621006BD200DCEC93 /* FlagRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagRespModel.swift; sourceTree = "<group>"; };
 		845B7907208B4A5200DF1F1F /* AthleteProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AthleteProfileTableViewController.swift; sourceTree = "<group>"; };
 		845BD6A22089A2BD005CFE65 /* GetAllEventsBetweenResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllEventsBetweenResponseModel.swift; sourceTree = "<group>"; };
+		8461855C212D4F1F0032DFE7 /* GetSummaryRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSummaryRespModel.swift; sourceTree = "<group>"; };
 		8464C58F2084ACDA001FC8E5 /* BeachPartner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BeachPartner.entitlements; sourceTree = "<group>"; };
 		846C010320EB386B0030490A /* updateCityRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = updateCityRespModel.swift; sourceTree = "<group>"; };
 		8D0B143720FF113700913156 /* ParentConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentConfirmationViewController.swift; sourceTree = "<group>"; };
@@ -652,6 +654,7 @@
 				8D65CAEB20CE95580008CD7F /* CheckAppVersionRespModel.swift */,
 				8459CEB621006BD200DCEC93 /* FlagRespModel.swift */,
 				5E102A6F2108FAF7004C9300 /* PaymentRequestModel.swift */,
+				8461855C212D4F1F0032DFE7 /* GetSummaryRespModel.swift */,
 			);
 			path = AuthModels;
 			sourceTree = "<group>";
@@ -1017,6 +1020,7 @@
 				"${BUILT_PRODUCTS_DIR}/Floaty/Floaty.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/InitialsImageView/InitialsImageView.framework",
 				"${BUILT_PRODUCTS_DIR}/JSQMessagesViewController/JSQMessagesViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
@@ -1048,6 +1052,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Floaty.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InitialsImageView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQMessagesViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQSystemSoundPlayer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Koloda.framework",
@@ -1125,6 +1130,7 @@
 				3BC8F901205AE4010086333E /* PopUpOneDelegate.swift in Sources */,
 				FFABE2B920ADC7080029C3A0 /* MyCalEventDetailsViewController.swift in Sources */,
 				3B6899EE20491B550075128E /* WLMAssetPoolExtensions.swift in Sources */,
+				8461855D212D4F1F0032DFE7 /* GetSummaryRespModel.swift in Sources */,
 				3B0DEE98206D09DA00686609 /* WLMPlayer+NSObject+safeObserver.swift in Sources */,
 				8D65CAEC20CE95580008CD7F /* CheckAppVersionRespModel.swift in Sources */,
 				D69A1981207388F100497B7C /* HighFiveViewController.swift in Sources */,

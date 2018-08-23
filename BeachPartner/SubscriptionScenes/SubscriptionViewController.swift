@@ -45,7 +45,8 @@ class SubscriptionViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var actionButton: UIButton!
     @IBOutlet weak var buyNowBtn: UIButton!
-    
+    var totalAmount = Float()
+    var paymentModel : GetSummaryPayment?
 // MARK: -- View Properties
     
     override func viewDidLoad() {
@@ -54,8 +55,16 @@ class SubscriptionViewController: UIViewController {
         setupView()
         loadData()
         setupTableView()
+        NotificationCenter.default.addObserver(self, selector: #selector(requestForSubscribe(notification:)), name:NSNotification.Name(rawValue: "request-for-payment"), object: nil)
+         NotificationCenter.default.addObserver(self, selector: #selector(exitPopup(notification:)), name:NSNotification.Name(rawValue: "dismiss"), object: nil)
+
     }
-    
+    @objc func exitPopup(notification: NSNotification){
+        self.dismiss(animated: false){
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "dismiss-action"), object: nil)
+        }
+    }
+
     private func setupView() {
         
         guard let subscriptionPlan = subscriptionPlan else {
@@ -117,11 +126,17 @@ class SubscriptionViewController: UIViewController {
 
 // MARK:- Payment services
     
-    func requestForSubscribe(planId:Int, amount:Int)  {
+
+    @objc func requestForSubscribe(notification: NSNotification){
+        guard let subscriptionPlan = subscriptionPlan else {
+            return
+        }
+        let planId = subscriptionPlan.id
+        let amount = subscriptionPlan.monthlycharge
         ActivityIndicatorView.addActivityOnView(tableView.superview)
         ActivityIndicatorView.show("Loading...")
         
-        APIManager.callServer.requestForPaymentPaln(planId: planId, amount: amount, sucessResult: { (responseModel) in
+        APIManager.callServer.requestForPaymentPaln(planId: planId, amount: Int(amount), sucessResult: { (responseModel) in
            
             ActivityIndicatorView.hiding()
             guard let paymentDetailsModel = responseModel as? PaymentModel else {
@@ -156,15 +171,8 @@ class SubscriptionViewController: UIViewController {
                 return
             }
             print(paymentDetailsModel)
-            if paymentDetailsModel.status == "SUCCESS"
-            {
-                let refreshAlert = UIAlertController(title: "Payment Success", message: "Successfully changed your plan.Please Log out for switch current plan", preferredStyle: UIAlertControllerStyle.alert)
-                refreshAlert.addAction(UIAlertAction(title: "Log Out", style: .default, handler: { (action: UIAlertAction!) in
-                    self.timoutLogoutAction()
-                }))
-                self.present(refreshAlert, animated: true, completion: nil)
-            }
-            
+                self.paymentSuccessPopup(status: paymentDetailsModel.status, transactionId: paymentDetailsModel.transactionId)
+      
         }) { (errorMessage) in
             ActivityIndicatorView.hiding()
             guard let errorString  = errorMessage else {
@@ -172,6 +180,17 @@ class SubscriptionViewController: UIViewController {
             }
             self.alert(message: errorString)
         }
+    }
+    
+    func paymentSuccessPopup(status:String,transactionId:String){
+        let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ThankyouForYourPurchaseViewController") as! ThankyouForYourPurchaseViewController
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .overFullScreen
+        vc.transactionId = transactionId
+        vc.status = status
+        vc.amount = self.totalAmount
+        self.present(vc, animated: true, completion: nil)
     }
 
     //MARK:- BrainTreeServices
@@ -205,13 +224,47 @@ class SubscriptionViewController: UIViewController {
         guard let subscriptionPlan = subscriptionPlan else {
             return
         }
-        requestForSubscribe(planId: subscriptionPlan.id, amount:subscriptionPlan.registrationFee)
+        getPaymentSummaryInitial(planID: subscriptionPlan.id)
+        let charge = subscriptionPlan.monthlycharge
+        let regamt = subscriptionPlan.registrationFee
+        self.totalAmount = (Float(regamt) + charge)
+        
     }
     
     @IBAction func didTapBackButton(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
+    func getPaymentSummaryInitial(planID:Int){
+        ActivityIndicatorView.show("Loading...")
+        APIManager.callServer.getPaymentSummary(planId:planID,sucessResult: { (responseModel) in
+            ActivityIndicatorView.hiding()
+            guard let paymentRespModel = responseModel as? GetSummaryPayment else {
+                print("Rep model does not match")
+                return
+            }
+            print(paymentRespModel)
+            self.paymentModel = paymentRespModel
+            ActivityIndicatorView.hiding()
+            self.paymentInitialPopup()
+        }, errorResult: { (error) in
+            ActivityIndicatorView.hiding()
+            guard let errorString  = error else {
+                return
+            }
+            self.alert(message: errorString)
+        })
+    }
+    func paymentInitialPopup(){
+        let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "StartandEndDateViewController") as! StartandEndDateViewController
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .overFullScreen
+        vc.paymentModel = self.paymentModel
+        vc.isFrom = "Subscription"
+        self.present(vc, animated: true, completion: nil)
+    }
 }
+
 
 // MARK: -- Tableview Properties
 

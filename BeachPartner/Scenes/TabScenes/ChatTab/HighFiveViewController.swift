@@ -9,6 +9,7 @@
 import UIKit
 //import DropDown
 import Floaty
+import InitialsImageView
 
 class HighfiveCell: UITableViewCell {
     
@@ -127,8 +128,9 @@ class HighFiveViewController: BeachPartnerViewController,UITableViewDelegate,UIT
         cell.highfiveView.layer.borderWidth = 1
         cell.highfiveView.dropShadow()
         cell.timeLbl.text =  (connectedUser?.createdDate) ?? ""
-        if connectedUser?.imageUrl == ""{
-            cell.profileImage.image = UIImage(named: "user")
+        let image = connectedUser?.imageUrl
+        if image == "" || image == "null"{
+            cell.profileImage.setImageForName(string: name, circular: true, textAttributes: nil)
         }else{
             if let imageUrl = URL(string: (connectedUser?.imageUrl) ?? "") {
                 cell.profileImage.sd_setIndicatorStyle(.whiteLarge)
