@@ -58,7 +58,7 @@ class StartandEndDateViewController: UIViewController {
             self.amountPaidHeight.constant = 35.0
             self.registrationFeeHeight.constant = 35.0
             self.registrationFee_height.constant = 35.0
-        self.bottomViewHeight.constant = 140.0
+            self.bottomViewHeight.constant = 140.0
             self.straightLineview.isHidden = false
           
         }else if isFrom == "Add-ons"{
@@ -66,24 +66,22 @@ class StartandEndDateViewController: UIViewController {
             self.straightLineview.isHidden = true
             self.registrationFeeLbl.isHidden = true
             self.registration_FeeLbl.isHidden = true
-            self.amountPaidLbl.isHidden = true
-            self.amount_PaidLbl.isHidden = true
-            self.amountPaid_Height.constant = 0
-            self.amountPaidHeight.constant = 0
+            self.amountPaid_Height.constant = 35.0
+            self.amountPaidHeight.constant = 35.0
             self.registrationFeeHeight.constant = 0
             self.registrationFee_height.constant = 0
-           self.bottomViewHeight.constant = 200.0
-            self.straightLineview.isHidden = true
-          
+            self.bottomViewHeight.constant = 200.0
+            self.straightLineview.isHidden = false
+
             
         }else{
             self.cutView.isHidden = true
-            self.amountPaid_Height.constant = 0
-            self.amountPaidHeight.constant = 0
+            self.amountPaid_Height.constant = 35.0
+            self.amountPaidHeight.constant = 35.0
             self.registrationFeeHeight.constant = 0
             self.registrationFee_height.constant = 0
-           self.bottomViewHeight.constant = 200.0
-            self.straightLineview.isHidden = true
+            self.bottomViewHeight.constant = 200.0
+            self.straightLineview.isHidden = false
           
         }
         self.subscription_FeeLbl.text = "$\(self.paymentModel?.monthlyCharge ?? 0)"
