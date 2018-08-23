@@ -229,7 +229,7 @@ class SubscriptionViewController: UIViewController {
         getPaymentSummaryInitial(planID: subscriptionPlan.id)
         let charge = subscriptionPlan.monthlycharge
         let regamt = subscriptionPlan.registrationFee
-        self.totalAmount = (Float(regamt) + charge)
+//        self.totalAmount = (Float(regamt) + charge)
         
     }
     
@@ -246,6 +246,7 @@ class SubscriptionViewController: UIViewController {
             }
             print(paymentRespModel)
             self.paymentModel = paymentRespModel
+            self.totalAmount = paymentRespModel.payableAmount
             ActivityIndicatorView.hiding()
             self.paymentInitialPopup()
         }, errorResult: { (error) in

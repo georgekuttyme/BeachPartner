@@ -20,7 +20,7 @@ class AddonsViewController: UIViewController {
     var addonPlans = [SubscriptionPlanModel]()
     var transactionId:String = ""
     var paymentModel : GetSummaryPayment?
-    
+    var totalAmount: Float?
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subTitleLabel: UILabel!
@@ -175,6 +175,7 @@ class AddonsViewController: UIViewController {
             }
             if paymentDetailsModel.status == "SUCCESS"
             {
+                
                 self.paymentSuccessPopup(status: paymentDetailsModel.status, transactionId: paymentDetailsModel.transactionId,message:paymentDetailsModel.message,amount:paymentDetailsModel.paymentAmount)
             }
             
@@ -224,6 +225,7 @@ class AddonsViewController: UIViewController {
             }
             print(paymentRespModel)
             self.paymentModel = paymentRespModel
+            self.totalAmount = paymentRespModel.payableAmount
             ActivityIndicatorView.hiding()
             self.paymentInitialPopup()
         }, errorResult: { (error) in

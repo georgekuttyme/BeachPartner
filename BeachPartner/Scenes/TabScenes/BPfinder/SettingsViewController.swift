@@ -70,9 +70,11 @@ class SettingsViewController: UIViewController {
             
             if self.couachSwitch.isOn {
                 paramString = "includeCoach=true"
+                UserDefaults.standard.set("1", forKey: "includeCoaches")
             }
             else{
                  paramString = "includeCoach=false"
+                UserDefaults.standard.set("0", forKey: "includeCoaches")
             }
             
             var gender = self.showMeLbl.text
@@ -172,15 +174,15 @@ class SettingsViewController: UIViewController {
     
     @objc func switchValueChange(sender: UISwitch) {
         
-        if Subscription.current.supportForFunctionality(featureId: BenefitType.CoachLikeVisibility) == false {
-            let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: SubscriptionTypeViewController.identifier) as! SubscriptionTypeViewController
-            vc.benefitCode = BenefitType.CoachLikeVisibility
-            self.present(vc, animated: true, completion: nil)
-            
-            sender.isOn = false
-            return
-        }
+//        if Subscription.current.supportForFunctionality(featureId: BenefitType.CoachLikeVisibility) == false {
+//            let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
+//            let vc = storyboard.instantiateViewController(withIdentifier: SubscriptionTypeViewController.identifier) as! SubscriptionTypeViewController
+//            vc.benefitCode = BenefitType.CoachLikeVisibility
+//            self.present(vc, animated: true, completion: nil)
+        
+//            sender.isOn = false
+//            return
+//        }
     }
     
     func customView() {
