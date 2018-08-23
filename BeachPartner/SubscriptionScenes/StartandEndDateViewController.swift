@@ -28,8 +28,11 @@ class StartandEndDateViewController: UIViewController {
     @IBOutlet weak var amountPaidLbl: UILabel!
     @IBOutlet weak var amount_PaidLbl: UILabel!
     @IBOutlet weak var straightLineview: UIView!
-    
+    @IBOutlet weak var registrationFeeHeight: NSLayoutConstraint!
+    @IBOutlet weak var registrationFee_height: NSLayoutConstraint!
     @IBOutlet weak var cutView: UIView!
+    @IBOutlet weak var amountPaidHeight: NSLayoutConstraint!
+    @IBOutlet weak var amountPaid_Height: NSLayoutConstraint!
     var paymentModel : GetSummaryPayment?
     var isFrom = String()
     override func viewDidLoad() {
@@ -48,6 +51,12 @@ class StartandEndDateViewController: UIViewController {
         print(self.paymentModel?.userRegistered)
         if self.paymentModel?.userRegistered == "NO" && isFrom == "Subscription"{
          self.cutView.isHidden = true
+            self.amountPaid_Height.constant = 35.0
+            self.amountPaidHeight.constant = 35.0
+            self.registrationFeeHeight.constant = 35.0
+            self.registrationFee_height.constant = 35.0
+            self.straightLineview.isHidden = false
+          
         }else if isFrom == "Add-ons"{
             self.cutView.isHidden = true
             self.straightLineview.isHidden = true
@@ -55,8 +64,20 @@ class StartandEndDateViewController: UIViewController {
             self.registration_FeeLbl.isHidden = true
             self.amountPaidLbl.isHidden = true
             self.amount_PaidLbl.isHidden = true
+            self.amountPaid_Height.constant = 0
+            self.amountPaidHeight.constant = 0
+            self.registrationFeeHeight.constant = 0
+            self.registrationFee_height.constant = 0
+            self.straightLineview.isHidden = true
+            
         }else{
             self.cutView.isHidden = false
+            self.amountPaid_Height.constant = 0
+            self.amountPaidHeight.constant = 0
+            self.registrationFeeHeight.constant = 0
+            self.registrationFee_height.constant = 0
+            self.straightLineview.isHidden = true
+          
         }
         self.subscription_FeeLbl.text = "$\(self.paymentModel?.monthlyCharge ?? 0)"
         self.amount_PaidLbl.text = "$\(self.paymentModel?.payableAmount ?? 0)"
