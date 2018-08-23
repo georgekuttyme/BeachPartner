@@ -200,12 +200,12 @@ extension SubscriptionTypeViewController: UITableViewDataSource, UITableViewDele
             fatalError("Cell not found")
         }
         print ("---> \n\n\n\n ",subscriptionPlans[indexPath.row].name)
-//        if subscriptionPlans[indexPath.row].name == "FREE"{
-//            cell.readmoreButton.isHidden = true
-//            cell.readmoreButton.isEnabled = false
-//            cell.readmoreButton.setTitleColor(UIColor.white, for: .normal)
-//
-//        }
+        if subscriptionPlans[indexPath.row].name == "FREE"{
+            cell.priceLabel.isHidden = true
+        }
+        else {
+            cell.priceLabel.isHidden = false
+        }
         cell.selectionStyle = .none
         
         let plan = subscriptionPlans[indexPath.row]
