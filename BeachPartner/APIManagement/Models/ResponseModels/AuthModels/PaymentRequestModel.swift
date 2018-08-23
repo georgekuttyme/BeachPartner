@@ -14,11 +14,13 @@ struct PaymentModel:SafeMappable {
     var status : String = ""
     var clientToken : String = ""
     var transactionId : String = ""
+    var paymentAmount : Float = 0
     
     init(_ map: [String : Any]) throws {
         message <- map.property("message")
         status <- map.property("status")
         clientToken <- map.property("clientToken")
         transactionId <- map.property("transactionId")
+        paymentAmount <- map.property("paymentAmount")
     }
 }

@@ -56,7 +56,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     var tournamentRequestSentViewActive = false
     var titleOfChat = String()
     var partners = String()
-    
+    var daysToExpiry : Int = 0
     fileprivate let formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM-dd-yyyy"
@@ -98,8 +98,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             }
         }
         
-        Subscription.current.getAllSubscriptionPlans()
-        Subscription.current.getUsersActivePlans()
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(tapOnPush(notification:)), name:NSNotification.Name(rawValue: "foreground-pushNotification"), object: nil)
         
@@ -109,6 +108,14 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         NotificationCenter.default.addObserver(self, selector: #selector(tapOnAccepted(notification:)), name:NSNotification.Name(rawValue: "ACCEPTED-pushNotification"), object: nil)
     }
 
+    func expiryPopup(){
+        let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "yourSubscriptionWillExpireViewController") as! yourSubscriptionWillExpireViewController
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .overFullScreen
+        vc.remainingDays = 3
+        self.present(vc, animated: true, completion: nil)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         let image : UIImage = UIImage(named: "BP.png")!
@@ -122,6 +129,8 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         }
         getAllUserEventsList()
         getAllTournamentRequests()
+        Subscription.current.getAllSubscriptionPlans()
+        Subscription.current.getUsersActivePlans()
        
     }
     

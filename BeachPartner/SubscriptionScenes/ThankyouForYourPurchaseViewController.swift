@@ -20,9 +20,11 @@ class ThankyouForYourPurchaseViewController: UIViewController {
     var status = String()
     var amount = Float()
     var isFrom = String()
+    var message = String()
     override func viewDidLoad() {
         super.viewDidLoad()
         loadUI()
+        print(isFrom,message)
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,12 +35,12 @@ class ThankyouForYourPurchaseViewController: UIViewController {
     func loadUI() {
         if status == "SUCCESS"{
             self.imageIcon.image = UIImage(named: "icon_tick")!
-            self.thankyouLbl.text = "Thank you for your purchase\n" + "Transaction : " + "\(transactionId)"
+            self.thankyouLbl.text = message + "Transaction : " + "\(transactionId)"
             self.priceLbl.text = "$\(amount)"
         }else{
             self.imageIcon.image = UIImage(named: "icon_sad")!
-            self.thankyouLbl.text = "Transaction cancelled!!!"
-            self.priceLbl.text = "FAILED"
+            self.thankyouLbl.text = message
+            self.priceLbl.text = status
             self.youHaveBeenChargedLbl.isHidden = true
 
         }

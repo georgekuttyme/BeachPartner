@@ -44,18 +44,15 @@ class StartandEndDateViewController: UIViewController {
    
     func setupUI(){
         if self.paymentModel?.userRegistered == "NO" && isFrom == "Subscription"{
-            self.registration_FeeLbl.text = "$\(self.paymentModel?.regFee ?? 0)"
-            self.subscription_FeeLbl.text = "$\(self.paymentModel?.monthlyCharge ?? 0)"
-            self.amount_PaidLbl.text = "$\(self.paymentModel?.payableAmount ?? 0)"
-
+//            self.cutView.ishidden = true
         }else{
             self.subscription_FeeLbl.text = "$\(self.paymentModel?.monthlyCharge ?? 0)"
-            self.registration_FeeLbl.isHidden = true
-            self.amount_PaidLbl.isHidden = true
-            self.amountPaidLbl.isHidden = true
-            self.registrationFeeLbl.isHidden = true
             self.straightLineview.isHidden = true
+//            self.cutView.ishidden = false
         }
+        self.subscription_FeeLbl.text = "$\(self.paymentModel?.monthlyCharge ?? 0)"
+        self.amount_PaidLbl.text = "$\(self.paymentModel?.payableAmount ?? 0)"
+        self.registration_FeeLbl.text = "$\(self.paymentModel?.regFee ?? 0)"
         self.start_DateLbl.text = self.paymentModel?.startDate
         self.end_DateLbl.text = self.paymentModel?.endDate
         self.subscriptionTypeLbl.text = self.paymentModel?.planCode

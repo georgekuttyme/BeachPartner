@@ -171,7 +171,7 @@ class SubscriptionViewController: UIViewController {
                 return
             }
             print(paymentDetailsModel)
-                self.paymentSuccessPopup(status: paymentDetailsModel.status, transactionId: paymentDetailsModel.transactionId)
+            self.paymentSuccessPopup(status: paymentDetailsModel.status, transactionId: paymentDetailsModel.transactionId,message:paymentDetailsModel.message,amount: paymentDetailsModel.paymentAmount)
       
         }) { (errorMessage) in
             ActivityIndicatorView.hiding()
@@ -182,14 +182,16 @@ class SubscriptionViewController: UIViewController {
         }
     }
     
-    func paymentSuccessPopup(status:String,transactionId:String){
+    func paymentSuccessPopup(status:String,transactionId:String,message:String,amount:Float){
         let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ThankyouForYourPurchaseViewController") as! ThankyouForYourPurchaseViewController
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overFullScreen
         vc.transactionId = transactionId
         vc.status = status
-        vc.amount = self.totalAmount
+        vc.amount = amount
+        vc.isFrom = "Subscription"
+        vc.message = message
         self.present(vc, animated: true, completion: nil)
     }
 

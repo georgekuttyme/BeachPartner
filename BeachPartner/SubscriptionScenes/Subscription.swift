@@ -7,7 +7,6 @@
 //
 
 import Foundation
-
 class Subscription {
     
     static let current = Subscription()

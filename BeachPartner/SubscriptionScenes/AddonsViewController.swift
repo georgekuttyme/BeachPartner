@@ -175,7 +175,7 @@ class AddonsViewController: UIViewController {
             }
             if paymentDetailsModel.status == "SUCCESS"
             {
-                self.paymentSuccessPopup(status: paymentDetailsModel.status, transactionId: paymentDetailsModel.transactionId)
+                self.paymentSuccessPopup(status: paymentDetailsModel.status, transactionId: paymentDetailsModel.transactionId,message:paymentDetailsModel.message,amount:paymentDetailsModel.paymentAmount)
             }
             
         }) { (errorMessage) in
@@ -186,7 +186,7 @@ class AddonsViewController: UIViewController {
             self.alert(message: errorString)
         }
     }
-    func paymentSuccessPopup(status:String,transactionId:String){
+    func paymentSuccessPopup(status:String,transactionId:String,message:String,amount:Float){
         let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ThankyouForYourPurchaseViewController") as! ThankyouForYourPurchaseViewController
         vc.modalTransitionStyle = .crossDissolve
@@ -194,7 +194,8 @@ class AddonsViewController: UIViewController {
         vc.transactionId = transactionId
         vc.status = status
         vc.isFrom = "Add-ons"
-//        vc.amount = self.totalAmount
+        vc.message = message
+        vc.amount = amount
         self.present(vc, animated: true, completion: nil)
     }
     

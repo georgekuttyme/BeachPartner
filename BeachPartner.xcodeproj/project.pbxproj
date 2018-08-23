@@ -118,10 +118,10 @@
 		5EFAFE232097609100256B1B /* CommmonWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFAFE222097609100256B1B /* CommmonWebViewController.swift */; };
 		83DBB7AF05BDAD7316DD54BD /* Pods_BeachPartner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4E87914ED5BC1C1ECF86DA1 /* Pods_BeachPartner.framework */; };
 		8427705F2093594B0056CBF6 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8427705E2093594B0056CBF6 /* HelpViewController.swift */; };
+		843B79BD212E8F0300B49273 /* ThankyouForYourPurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B79BC212E8F0300B49273 /* ThankyouForYourPurchaseViewController.swift */; };
 		843F356C2084F8CE00E268D6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843F356B2084F8CE00E268D6 /* GoogleService-Info.plist */; };
 		844984212099A0E100B8FD37 /* MutualLikesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844984202099A0E100B8FD37 /* MutualLikesViewController.swift */; };
 		844F70502090BC01004F3005 /* noteResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844F704F2090BC01004F3005 /* noteResponseModel.swift */; };
-		8455C5112122E65E00469F06 /* ThankyouForYourPurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455C5102122E65E00469F06 /* ThankyouForYourPurchaseViewController.swift */; };
 		8455C5132122F82D00469F06 /* yourSubscriptionWillExpireViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455C5122122F82D00469F06 /* yourSubscriptionWillExpireViewController.swift */; };
 		8455C5152123017A00469F06 /* StartandEndDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455C5142123017A00469F06 /* StartandEndDateViewController.swift */; };
 		8459CEB721006BD200DCEC93 /* FlagRespModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459CEB621006BD200DCEC93 /* FlagRespModel.swift */; };
@@ -273,10 +273,10 @@
 		5EFAFE222097609100256B1B /* CommmonWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommmonWebViewController.swift; sourceTree = "<group>"; };
 		6C906053FF45337829E56422 /* Pods-BeachPartner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeachPartner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeachPartner/Pods-BeachPartner.debug.xcconfig"; sourceTree = "<group>"; };
 		8427705E2093594B0056CBF6 /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
+		843B79BC212E8F0300B49273 /* ThankyouForYourPurchaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThankyouForYourPurchaseViewController.swift; sourceTree = "<group>"; };
 		843F356B2084F8CE00E268D6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		844984202099A0E100B8FD37 /* MutualLikesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutualLikesViewController.swift; sourceTree = "<group>"; };
 		844F704F2090BC01004F3005 /* noteResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noteResponseModel.swift; sourceTree = "<group>"; };
-		8455C5102122E65E00469F06 /* ThankyouForYourPurchaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThankyouForYourPurchaseViewController.swift; sourceTree = "<group>"; };
 		8455C5122122F82D00469F06 /* yourSubscriptionWillExpireViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = yourSubscriptionWillExpireViewController.swift; sourceTree = "<group>"; };
 		8455C5142123017A00469F06 /* StartandEndDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartandEndDateViewController.swift; sourceTree = "<group>"; };
 		8459CEB621006BD200DCEC93 /* FlagRespModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagRespModel.swift; sourceTree = "<group>"; };
@@ -887,7 +887,7 @@
 				FFEBEB5F20BEA79A00521041 /* SubscriptionTypeViewController.swift */,
 				FFD93D6C20C1257E00747472 /* AddonsViewController.swift */,
 				FF4F50FF20C82013002707DC /* Subscription.swift */,
-				8455C5102122E65E00469F06 /* ThankyouForYourPurchaseViewController.swift */,
+				843B79BC212E8F0300B49273 /* ThankyouForYourPurchaseViewController.swift */,
 				8455C5122122F82D00469F06 /* yourSubscriptionWillExpireViewController.swift */,
 				8455C5142123017A00469F06 /* StartandEndDateViewController.swift */,
 			);
@@ -1167,6 +1167,7 @@
 				3B0DEE88206D05BA00686609 /* AGVideoPlayerView.swift in Sources */,
 				3B5D9960206E368E001ED515 /* RangeSeekSlider.swift in Sources */,
 				3B60279E2049706F006B108A /* Constants.swift in Sources */,
+				843B79BD212E8F0300B49273 /* ThankyouForYourPurchaseViewController.swift in Sources */,
 				3B6899ED20491B550075128E /* WLMPoolLongMemory.swift in Sources */,
 				3B6899EC20491B550075128E /* WLMPoolShortMemory.swift in Sources */,
 				845B7908208B4A5200DF1F1F /* AthleteProfileTableViewController.swift in Sources */,
@@ -1179,7 +1180,6 @@
 				3B89E60B2072BD9C008DAFE0 /* CenterViewFlowLayout.swift in Sources */,
 				3BAD58752068CCC60076DFD8 /* AuthModule.swift in Sources */,
 				3B1B705D2065617300C3FB57 /* MyCalViewController.swift in Sources */,
-				8455C5112122E65E00469F06 /* ThankyouForYourPurchaseViewController.swift in Sources */,
 				3BC8F909205AE6450086333E /* PopUpParentDelegate.swift in Sources */,
 				3B0DEE9D206D0A1100686609 /* DataModel.swift in Sources */,
 				3BC8F905205AE4DE0086333E /* PopUpParentDetailsViewController.swift in Sources */,

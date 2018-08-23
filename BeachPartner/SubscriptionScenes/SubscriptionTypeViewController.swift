@@ -71,9 +71,10 @@ class SubscriptionTypeViewController: UIViewController {
         ActivityIndicatorView.show("Loading...")
         APIManager.callServer.getAllSubscriptionPlans(sucessResult: { (responseModel) in
             
-            ActivityIndicatorView.hiding()
+            
             
             guard let subscriptionPlansModel = responseModel as? GetSubscriptionPlansRespModelArray else {
+                ActivityIndicatorView.hiding()
                 print("Rep model does not match")
                 return
             }
@@ -96,6 +97,7 @@ class SubscriptionTypeViewController: UIViewController {
                     self.tableView.reloadData()
                 }
             }
+            ActivityIndicatorView.hiding()
         }) { (errorMessage) in
             ActivityIndicatorView.hiding()
             guard let errorString  = errorMessage else {
