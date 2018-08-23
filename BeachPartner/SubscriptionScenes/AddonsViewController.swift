@@ -173,6 +173,7 @@ class AddonsViewController: UIViewController {
                 print("Rep model does not match")
                 return
             }
+    
             if paymentDetailsModel.status == "SUCCESS"
             {
                 
@@ -196,7 +197,7 @@ class AddonsViewController: UIViewController {
         vc.status = status
         vc.isFrom = "Add-ons"
         vc.message = message
-        vc.amount = amount
+        vc.amount = self.totalAmount!
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -225,7 +226,7 @@ class AddonsViewController: UIViewController {
             }
             print(paymentRespModel)
             self.paymentModel = paymentRespModel
-            self.totalAmount = paymentRespModel.payableAmount
+            self.totalAmount = paymentRespModel.monthlyCharge
             ActivityIndicatorView.hiding()
             self.paymentInitialPopup()
         }, errorResult: { (error) in

@@ -40,7 +40,11 @@ class SubscriptionTypeViewController: UIViewController {
 
     }
     @objc func exitPopup(notification: NSNotification){
-        self.dismiss(animated: false,completion: nil)
+        self.dismiss(animated: false){
+            let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
+            let secondViewController = storyboard.instantiateViewController(withIdentifier: "tabbarcontroller") as! TabBarController
+            self.present(secondViewController, animated: true, completion: nil)
+        }
     }
 
     private func viewCustomization(){

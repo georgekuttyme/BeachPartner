@@ -114,7 +114,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
 
     func expiryPopup(){
         if let days = Subscription.current.activeSubscriptionPlan?.remainingDays{
-            if days<6{
+            if days<6 && days != 0{
                 let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "yourSubscriptionWillExpireViewController") as! yourSubscriptionWillExpireViewController
                 vc.modalTransitionStyle = .crossDissolve
@@ -144,7 +144,8 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         }
         getAllUserEventsList()
         getAllTournamentRequests()
-    
+        Subscription.current.getAllSubscriptionPlans()
+        Subscription.current.getUsersActivePlans()
        
     }
     
@@ -274,10 +275,10 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     
     
     @IBAction func tournamentRequestsSentBtnClicked(_ sender: UIButton) {
-        if Subscription.current.supportForFunctionality(featureId: BenefitType.PlayerLikeVisibility) == false {
+        if Subscription.current.supportForFunctionality(featureId: BenefitType.MyCalendar) == false {
             let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: SubscriptionTypeViewController.identifier) as! SubscriptionTypeViewController
-            vc.benefitCode = BenefitType.PlayerLikeVisibility
+            vc.benefitCode = BenefitType.MyCalendar
             self.present(vc, animated: true, completion: nil)
             return
         }else{
@@ -343,10 +344,10 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             return
         }
         if tournamentRequestSentViewActive {
-            if Subscription.current.supportForFunctionality(featureId: BenefitType.PlayerLikeVisibility) == false {
+            if Subscription.current.supportForFunctionality(featureId: BenefitType.MyCalendar) == false {
                 let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: SubscriptionTypeViewController.identifier) as! SubscriptionTypeViewController
-                vc.benefitCode = BenefitType.PlayerLikeVisibility
+                vc.benefitCode = BenefitType.MyCalendar
                 self.present(vc, animated: true, completion: nil)
                 return
             }else{
