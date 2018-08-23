@@ -33,9 +33,9 @@ class StartandEndDateViewController: UIViewController {
     @IBOutlet weak var cutView: UIView!
     @IBOutlet weak var amountPaidHeight: NSLayoutConstraint!
     @IBOutlet weak var amountPaid_Height: NSLayoutConstraint!
-    
+
     @IBOutlet weak var bottomViewHeight: NSLayoutConstraint!
-    
+
     var paymentModel : GetSummaryPayment?
     var isFrom = String()
     override func viewDidLoad() {
@@ -82,7 +82,6 @@ class StartandEndDateViewController: UIViewController {
             self.registrationFee_height.constant = 0
             self.bottomViewHeight.constant = 200.0
             self.straightLineview.isHidden = false
-          
         }
         self.subscription_FeeLbl.text = "$\(self.paymentModel?.monthlyCharge ?? 0)"
         self.amount_PaidLbl.text = "$\(self.paymentModel?.payableAmount ?? 0)"

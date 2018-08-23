@@ -9,6 +9,7 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
+<<<<<<< HEAD
             filePath = "BeachPartner/Scenes/TabScenes/HomeTab/HomeTabViewController.swift"
             timestampString = "556723856.044238"
             startingColumnNumber = "9223372036854775807"
@@ -16,6 +17,31 @@
             startingLineNumber = "278"
             endingLineNumber = "278"
             landmarkName = "tournamentRequestsSentBtnClicked(_:)"
+=======
+            filePath = "BeachPartner/SubscriptionScenes/AddonsViewController.swift"
+            timestampString = "556701837.535722"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
+            landmarkName = "requestForSubscribe(notification:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/Scenes/TabScenes/HomeTab/HomeTabViewController.swift"
+            timestampString = "556701837.5359319"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
+            landmarkName = "viewWillAppear(_:)"
+>>>>>>> f8352e45d06b7841b07b9655b9e8f04c7b9b2a4d
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -51,6 +77,7 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+<<<<<<< HEAD
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
@@ -147,5 +174,7 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+=======
+>>>>>>> f8352e45d06b7841b07b9655b9e8f04c7b9b2a4d
    </Breakpoints>
 </Bucket>
