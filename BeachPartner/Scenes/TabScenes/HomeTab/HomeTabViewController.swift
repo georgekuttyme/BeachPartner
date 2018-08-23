@@ -11,7 +11,8 @@ import Firebase
 //import DropDown
 import InitialsImageView
 
-class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegate, UICollectionViewDataSource,UITabBarControllerDelegate {
+class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegate, UICollectionViewDataSource,UITabBarControllerDelegate,CompletionDelegate {
+   
     var loggedInUserId = 0
     private lazy var channelRef: DatabaseReference = Database.database().reference().child("messages")
     private var channelRefHandle: DatabaseHandle?
@@ -75,6 +76,8 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             self.loggedInUserId =  Int(id)!
         }
         self.tabBarController?.delegate = self
+        Subscription.current.getAllSubscriptionPlans()
+        Subscription.current.getUsersActivePlans()
         self.getUsersListforBlueBp()
         self.getNewUsersList()
         self.getBlockedConnections()
@@ -98,7 +101,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             }
         }
         
-        
+        self.expiryPopup()
         
         NotificationCenter.default.addObserver(self, selector: #selector(tapOnPush(notification:)), name:NSNotification.Name(rawValue: "foreground-pushNotification"), object: nil)
         
@@ -106,17 +109,28 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         
         NotificationCenter.default.addObserver(self, selector: #selector(tapOnActive(notification:)), name:NSNotification.Name(rawValue: "ACTIVE-pushNotification"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(tapOnAccepted(notification:)), name:NSNotification.Name(rawValue: "ACCEPTED-pushNotification"), object: nil)
+      
     }
 
     func expiryPopup(){
+        if let days = Subscription.current.activeSubscriptionPlan?.remainingDays{
+            if days<31{
+                let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "yourSubscriptionWillExpireViewController") as! yourSubscriptionWillExpireViewController
+                vc.modalTransitionStyle = .crossDissolve
+                vc.modalPresentationStyle = .overFullScreen
+                vc.remainingDays = days
+                self.present(vc, animated: true, completion: nil)
+            }
+        }
+        
+    }
+    func actionCompleted(isCompleted: Bool) {
         let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "yourSubscriptionWillExpireViewController") as! yourSubscriptionWillExpireViewController
-        vc.modalTransitionStyle = .crossDissolve
-        vc.modalPresentationStyle = .overFullScreen
-        vc.remainingDays = 3
+        let vc = storyboard.instantiateViewController(withIdentifier: "SubscriptionTypeViewController") as! SubscriptionTypeViewController
         self.present(vc, animated: true, completion: nil)
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         let image : UIImage = UIImage(named: "BP.png")!
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
@@ -129,8 +143,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         }
         getAllUserEventsList()
         getAllTournamentRequests()
-        Subscription.current.getAllSubscriptionPlans()
-        Subscription.current.getUsersActivePlans()
+    
        
     }
     

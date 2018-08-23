@@ -119,6 +119,7 @@
 		83DBB7AF05BDAD7316DD54BD /* Pods_BeachPartner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4E87914ED5BC1C1ECF86DA1 /* Pods_BeachPartner.framework */; };
 		8427705F2093594B0056CBF6 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8427705E2093594B0056CBF6 /* HelpViewController.swift */; };
 		843B79BD212E8F0300B49273 /* ThankyouForYourPurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B79BC212E8F0300B49273 /* ThankyouForYourPurchaseViewController.swift */; };
+		843B79BF212EA95F00B49273 /* CompletionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B79BE212EA95F00B49273 /* CompletionDelegate.swift */; };
 		843F356C2084F8CE00E268D6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843F356B2084F8CE00E268D6 /* GoogleService-Info.plist */; };
 		844984212099A0E100B8FD37 /* MutualLikesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844984202099A0E100B8FD37 /* MutualLikesViewController.swift */; };
 		844F70502090BC01004F3005 /* noteResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844F704F2090BC01004F3005 /* noteResponseModel.swift */; };
@@ -274,6 +275,7 @@
 		6C906053FF45337829E56422 /* Pods-BeachPartner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeachPartner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeachPartner/Pods-BeachPartner.debug.xcconfig"; sourceTree = "<group>"; };
 		8427705E2093594B0056CBF6 /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		843B79BC212E8F0300B49273 /* ThankyouForYourPurchaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThankyouForYourPurchaseViewController.swift; sourceTree = "<group>"; };
+		843B79BE212EA95F00B49273 /* CompletionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionDelegate.swift; sourceTree = "<group>"; };
 		843F356B2084F8CE00E268D6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		844984202099A0E100B8FD37 /* MutualLikesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutualLikesViewController.swift; sourceTree = "<group>"; };
 		844F704F2090BC01004F3005 /* noteResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noteResponseModel.swift; sourceTree = "<group>"; };
@@ -564,6 +566,7 @@
 				3B689A1920493DA10075128E /* IntrestedPeopleCollectionViewCell.swift */,
 				3B689A1A20493DA20075128E /* MessageCollectionViewCell.swift */,
 				3B689A1820493DA10075128E /* UpcomingTournamentCollectionViewCell.swift */,
+				843B79BE212EA95F00B49273 /* CompletionDelegate.swift */,
 			);
 			path = HomeTab;
 			sourceTree = "<group>";
@@ -1100,6 +1103,7 @@
 				5EFA2E48207E6D4F00212B45 /* ChatUsersListViewController.swift in Sources */,
 				3B689A14204937880075128E /* BlueBPCollectionViewCell.swift in Sources */,
 				3B689A1C20493DA20075128E /* IntrestedPeopleCollectionViewCell.swift in Sources */,
+				843B79BF212EA95F00B49273 /* CompletionDelegate.swift in Sources */,
 				8459CEB721006BD200DCEC93 /* FlagRespModel.swift in Sources */,
 				8455C5152123017A00469F06 /* StartandEndDateViewController.swift in Sources */,
 				5E0543AB2081C0C3002744D8 /* SubscriptionUserModel.swift in Sources */,

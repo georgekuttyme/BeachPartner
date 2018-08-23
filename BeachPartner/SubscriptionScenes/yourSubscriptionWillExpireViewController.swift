@@ -18,8 +18,10 @@ class yourSubscriptionWillExpireViewController: UIViewController {
     @IBOutlet weak var yesBtn: UIButton!
     var remainingDays: Int = 0
     var titleString :NSString = ""
+    weak var delegate: CompletionDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         loadUI()
         // Do any additional setup after loading the view.
     }
@@ -40,9 +42,7 @@ class yourSubscriptionWillExpireViewController: UIViewController {
 
     @IBAction func yesBtnClicked(_ sender: Any) {
         self.dismiss(animated: true){
-            let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "SubscriptionTypeViewController") as! SubscriptionTypeViewController
-            self.present(vc, animated: true, completion: nil)
+           self.delegate?.actionCompleted(isCompleted: true)
         }
         
     }

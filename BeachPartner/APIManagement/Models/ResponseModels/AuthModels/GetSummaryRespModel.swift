@@ -29,7 +29,7 @@ struct GetSummaryPayment : SafeMappable{
         message <- map.property("message")
         planCode <- map.property("planCode")
         startDate <- map.property("startDate")
-        userRegistered <- map.property("userRegistered")
+        userRegistered <- map.property("regFeePaid")
         payableAmount <- map.property("payableAmount")
         status <- map.property("status")
     }
