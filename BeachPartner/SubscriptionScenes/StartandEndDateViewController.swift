@@ -33,6 +33,9 @@ class StartandEndDateViewController: UIViewController {
     @IBOutlet weak var cutView: UIView!
     @IBOutlet weak var amountPaidHeight: NSLayoutConstraint!
     @IBOutlet weak var amountPaid_Height: NSLayoutConstraint!
+    
+    @IBOutlet weak var bottomViewHeight: NSLayoutConstraint!
+    
     var paymentModel : GetSummaryPayment?
     var isFrom = String()
     override func viewDidLoad() {
@@ -55,6 +58,7 @@ class StartandEndDateViewController: UIViewController {
             self.amountPaidHeight.constant = 35.0
             self.registrationFeeHeight.constant = 35.0
             self.registrationFee_height.constant = 35.0
+        self.bottomViewHeight.constant = 140.0
             self.straightLineview.isHidden = false
           
         }else if isFrom == "Add-ons"{
@@ -68,14 +72,17 @@ class StartandEndDateViewController: UIViewController {
             self.amountPaidHeight.constant = 0
             self.registrationFeeHeight.constant = 0
             self.registrationFee_height.constant = 0
+           self.bottomViewHeight.constant = 200.0
             self.straightLineview.isHidden = true
+          
             
         }else{
-            self.cutView.isHidden = false
+            self.cutView.isHidden = true
             self.amountPaid_Height.constant = 0
             self.amountPaidHeight.constant = 0
             self.registrationFeeHeight.constant = 0
             self.registrationFee_height.constant = 0
+           self.bottomViewHeight.constant = 200.0
             self.straightLineview.isHidden = true
           
         }

@@ -1223,6 +1223,7 @@
                         <outlet property="amountPaid_Height" destination="cB8-ok-0Jb" id="Z0m-4U-DkZ"/>
                         <outlet property="amount_PaidLbl" destination="fin-BW-LSx" id="rz9-3o-Jnt"/>
                         <outlet property="backgroundView" destination="b4n-zW-uhg" id="JUZ-QD-wZ4"/>
+                        <outlet property="bottomViewHeight" destination="nZR-ZB-Eog" id="02C-fH-2Nq"/>
                         <outlet property="cancelBtn" destination="lhu-vp-GlN" id="opX-rf-9eY"/>
                         <outlet property="cutView" destination="V6f-kK-VF4" id="MOY-YA-jqo"/>
                         <outlet property="endDateLbl" destination="hxI-Xi-7of" id="5JK-QQ-dVl"/>
