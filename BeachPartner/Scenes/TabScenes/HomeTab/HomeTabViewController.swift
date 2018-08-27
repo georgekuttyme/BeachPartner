@@ -275,10 +275,10 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     
     
     @IBAction func tournamentRequestsSentBtnClicked(_ sender: UIButton) {
-        if Subscription.current.supportForFunctionality(featureId: BenefitType.MyCalendar) == false {
+        if Subscription.current.supportForFunctionality(featureId: BenefitType.MasterCalendar) == false {
             let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: SubscriptionTypeViewController.identifier) as! SubscriptionTypeViewController
-            vc.benefitCode = BenefitType.MyCalendar
+            vc.benefitCode = BenefitType.MasterCalendar
             self.present(vc, animated: true, completion: nil)
             return
         }else{
