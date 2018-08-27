@@ -170,6 +170,8 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
             return
         }
         
+        didTapMyTeamHeaderButton(sender: sender)
+        
         let index = sender.tag-200000
         let user = isFiltering() ? filteredConnectedUsers[index] : connectedUsers[index]
         myTeam.append(user)
@@ -200,10 +202,12 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
         
         refreshAlert.addAction(UIAlertAction(title: "NO", style: .default, handler: { (action: UIAlertAction!) in
             print("Handle NO logic here")
+            self.didTapMyTeamHeaderButton(sender: sender)
         }))
         
         refreshAlert.addAction(UIAlertAction(title: "YES", style: .default, handler: { (action: UIAlertAction!) in
             print("Handle YES Logic here")
+            self.didTapMyTeamHeaderButton(sender: sender)
             
             
             self.connectedUsers.append(user)

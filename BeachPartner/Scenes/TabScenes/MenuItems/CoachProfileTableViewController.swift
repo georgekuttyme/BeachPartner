@@ -374,41 +374,14 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
             self.editUserImageBtn.isHidden = false
             self.editUserImageBtn.isUserInteractionEnabled = true
             editclicked = true
-            self.editProfileTxtBtn.setTitle("Save profile", for: UIControlState.normal)
-            self.tableView.reloadData()
-        }
-        else {
-            let image = UIImage(named: "edit_btn_1x") as UIImage?
-            editProfileBtn.setImage(image, for: .normal)
-            self.editUserImageBtn.isHidden = true
-            self.editUserImageBtn.isUserInteractionEnabled = false
-            editclicked = false
             self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
             self.tableView.reloadData()
         }
+        
     }
     @IBAction func editProfileTxtBtnClicked(_ sender: Any) {
-        
-        let image = UIImage(named: "edit_btn_active_1x") as UIImage?
-        editProfileBtn.setImage(image, for: .normal)
-        if (self.editUserImageBtn.isHidden) {
-            self.editUserImageBtn.isHidden = false
-            self.editUserImageBtn.isUserInteractionEnabled = true
-            editclicked = true
-            self.editProfileTxtBtn.setTitle("Save profile", for: UIControlState.normal)
-            self.tableView.reloadData()
-        }
-        else {
-            let image = UIImage(named: "edit_btn_1x") as UIImage?
-            editProfileBtn.setImage(image, for: .normal)
-            self.editUserImageBtn.isHidden = true
-            self.editUserImageBtn.isUserInteractionEnabled = false
-            editclicked = false
-            self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
-            self.tableView.reloadData()
-        }
+      
     }
-    
     
     func saveData(){
         //        var isValidated = false
