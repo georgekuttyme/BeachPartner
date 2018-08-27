@@ -26,12 +26,17 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeachPartner/Scenes/TabScenes/HomeTab/HomeTabViewController.swift"
+<<<<<<< HEAD
             timestampString = "557324766.306073"
+=======
+            timestampString = "557054042.469937"
+>>>>>>> resolved#36
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "132"
             endingLineNumber = "132"
             landmarkName = "actionCompleted(isCompleted:)"
+<<<<<<< HEAD
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -64,6 +69,8 @@
             startingLineNumber = "1669"
             endingLineNumber = "1669"
             landmarkName = "PaymentResponse(nonce:transactionId:sucessResult:errorResult:)"
+=======
+>>>>>>> resolved#36
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -73,6 +80,7 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
+<<<<<<< HEAD
             filePath = "BeachPartner/Scenes/TabScenes/CalenderTab/InvitePartnerViewController.swift"
             timestampString = "557054042.470132"
             startingColumnNumber = "9223372036854775807"
@@ -144,6 +152,15 @@
             startingLineNumber = "101"
             endingLineNumber = "101"
             landmarkName = "viewDidLoad()"
+=======
+            filePath = "BeachPartner/APIManagement/Manager/Modules/AuthModule.swift"
+            timestampString = "556701837.536317"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1640"
+            endingLineNumber = "1640"
+            landmarkName = "requestForPaymentPaln(planId:amount:sucessResult:errorResult:)"
+>>>>>>> resolved#36
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -153,6 +170,7 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
+<<<<<<< HEAD
             filePath = "BeachPartner/Scenes/TabScenes/CalenderTab/MyCalEventDetailsViewController.swift"
             timestampString = "557324766.3070281"
             startingColumnNumber = "9223372036854775807"
@@ -176,6 +194,15 @@
             startingLineNumber = "337"
             endingLineNumber = "337"
             landmarkName = "noteBtnPressed(sender:)"
+=======
+            filePath = "BeachPartner/APIManagement/Manager/Modules/AuthModule.swift"
+            timestampString = "556701837.536366"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1669"
+            endingLineNumber = "1669"
+            landmarkName = "PaymentResponse(nonce:transactionId:sucessResult:errorResult:)"
+>>>>>>> resolved#36
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -185,6 +212,7 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
+<<<<<<< HEAD
             filePath = "BeachPartner/Scenes/TabScenes/CalenderTab/MyCalEventDetailsViewController.swift"
             timestampString = "557324766.307906"
             startingColumnNumber = "9223372036854775807"
@@ -192,6 +220,15 @@
             startingLineNumber = "333"
             endingLineNumber = "333"
             landmarkName = "noteBtnPressed(sender:)"
+=======
+            filePath = "BeachPartner/Scenes/TabScenes/CalenderTab/InvitePartnerViewController.swift"
+            timestampString = "557054042.470132"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
+            landmarkName = "didTapAddButton(sender:)"
+>>>>>>> resolved#36
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -201,6 +238,7 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
+<<<<<<< HEAD
             filePath = "BeachPartner/Scenes/TabScenes/CalenderTab/MyCalEventDetailsViewController.swift"
             timestampString = "557324766.308268"
             startingColumnNumber = "9223372036854775807"
@@ -208,6 +246,15 @@
             startingLineNumber = "338"
             endingLineNumber = "338"
             landmarkName = "noteBtnPressed(sender:)"
+=======
+            filePath = "BeachPartner/Scenes/TabScenes/CalenderTab/InvitePartnerViewController.swift"
+            timestampString = "557054042.4707921"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
+            landmarkName = "didTapAddButton(sender:)"
+>>>>>>> resolved#36
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
