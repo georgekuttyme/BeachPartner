@@ -100,8 +100,9 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
                 messageContainerView.backgroundColor = UIColor(patternImage: bgImage)
             }
         }
-        
-        self.expiryPopup()
+        if UserDefaults.standard.string(forKey: "userType") != "Coach"{
+            self.expiryPopup()
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(tapOnPush(notification:)), name:NSNotification.Name(rawValue: "foreground-pushNotification"), object: nil)
         
@@ -275,7 +276,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     
     
     @IBAction func tournamentRequestsSentBtnClicked(_ sender: UIButton) {
-        if Subscription.current.supportForFunctionality(featureId: BenefitType.MyCalendar) == false {
+        if Subscription.current.supportForFunctionality(featureId: BenefitType.MyCalendar) == false && UserDefaults.standard.string(forKey: "userType") != "Coach"{
             let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: SubscriptionTypeViewController.identifier) as! SubscriptionTypeViewController
             vc.benefitCode = BenefitType.MyCalendar
@@ -297,7 +298,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     
     @IBAction func btnLikesClicked(_ sender: Any) {
        
-        if Subscription.current.supportForFunctionality(featureId: BenefitType.PlayerLikeVisibility) == false {
+        if Subscription.current.supportForFunctionality(featureId: BenefitType.PlayerLikeVisibility) == false && UserDefaults.standard.string(forKey: "userType") != "Coach"{
             let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: SubscriptionTypeViewController.identifier) as! SubscriptionTypeViewController
             vc.benefitCode = BenefitType.PlayerLikeVisibility
@@ -344,7 +345,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             return
         }
         if tournamentRequestSentViewActive {
-            if Subscription.current.supportForFunctionality(featureId: BenefitType.MyCalendar) == false {
+            if Subscription.current.supportForFunctionality(featureId: BenefitType.MyCalendar) == false && UserDefaults.standard.string(forKey: "userType") != "Coach"{
                 let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: SubscriptionTypeViewController.identifier) as! SubscriptionTypeViewController
                 vc.benefitCode = BenefitType.MyCalendar

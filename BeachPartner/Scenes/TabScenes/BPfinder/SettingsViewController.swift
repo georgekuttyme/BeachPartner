@@ -36,10 +36,10 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var videoView: UIView!
     @IBAction func selectLocClicked(_ sender: Any) {
         
-        if Subscription.current.supportForFunctionality(featureId: BenefitType.PassportSearch) == true {
+        if Subscription.current.supportForFunctionality(featureId: BenefitType.PassportSearch) == true || UserDefaults.standard.string(forKey: "userType") == "Coach"{
             dropDown.show()
         }
-        else if Subscription.current.statusOfAddOn(addOnId: AddOnType.TempPassport) == true {
+        else if Subscription.current.statusOfAddOn(addOnId: AddOnType.TempPassport) == true || UserDefaults.standard.string(forKey: "userType") == "Coach"{
             dropDown.show()
         }
         else {
@@ -249,7 +249,7 @@ class SettingsViewController: UIViewController {
         }
         
         
-        if Subscription.current.supportForFunctionality(featureId: BenefitType.CoachLikeVisibility) == true {
+        if Subscription.current.supportForFunctionality(featureId: BenefitType.CoachLikeVisibility) == true || UserDefaults.standard.string(forKey: "userType") == "Coach"{
             
             let includeCoaches = UserDefaults.standard.string(forKey: "includeCoaches")
             if(includeCoaches == "1" ) {
