@@ -110,9 +110,11 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         
         NotificationCenter.default.addObserver(self, selector: #selector(tapOnActive(notification:)), name:NSNotification.Name(rawValue: "ACTIVE-pushNotification"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(tapOnAccepted(notification:)), name:NSNotification.Name(rawValue: "ACCEPTED-pushNotification"), object: nil)
-      
+      NotificationCenter.default.addObserver(self, selector: #selector(popupexit(notification:)), name:NSNotification.Name(rawValue: "popupexit"), object: nil)
     }
-
+    @objc func popupexit(notification: NSNotification) {
+        self.tabBarController?.selectedIndex = 0
+    }
     func expiryPopup(){
         if let days = Subscription.current.activeSubscriptionPlan?.remainingDays{
             if days<6 && days != 0{
@@ -132,7 +134,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
         let vc = storyboard.instantiateViewController(withIdentifier: "SubscriptionTypeViewController") as! SubscriptionTypeViewController
         self.present(vc, animated: true, completion: nil)
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         let image : UIImage = UIImage(named: "BP.png")!
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
@@ -432,6 +434,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BlueBPCollectionViewCell", for: indexPath) as! BlueBPCollectionViewCell
             let name = (blueBpData?.firstName)! + " " + (blueBpData?.lastName)!
             let image = blueBpData?.imageUrl
+            
             if image == "" || image == "null"{
                 cell.imageView.setImageForName(string: name, circular: true, textAttributes: nil)
             }else{
