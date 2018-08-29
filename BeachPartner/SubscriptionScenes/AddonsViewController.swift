@@ -226,7 +226,7 @@ class AddonsViewController: UIViewController {
             }
             print(paymentRespModel)
             self.paymentModel = paymentRespModel
-            self.totalAmount = paymentRespModel.monthlyCharge
+            self.totalAmount = paymentRespModel.payableAmount
             ActivityIndicatorView.hiding()
             self.paymentInitialPopup()
         }, errorResult: { (error) in

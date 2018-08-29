@@ -43,7 +43,9 @@ class SubscriptionTypeViewController: UIViewController {
         self.dismiss(animated: false){
             let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
             let secondViewController = storyboard.instantiateViewController(withIdentifier: "tabbarcontroller") as! TabBarController
-            self.present(secondViewController, animated: true, completion: nil)
+            self.present(secondViewController, animated: true){
+                self.tabBarController?.selectedIndex = 0
+            }
         }
     }
 

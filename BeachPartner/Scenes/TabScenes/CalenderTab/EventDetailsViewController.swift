@@ -219,18 +219,8 @@ class EventDetailsViewController: BeachPartnerViewController {
         
         if isFromHomeTab {
             generalEventDetailsView.isHidden = true
-            
-//            if  eventInvitation.invitations?.first?.eventStatus == "Registered" || eventInvitation.invitations?.first?.eventStatus == "Expired" {
-//                self.viewPartnersButton.isEnabled = true
-//                self.viewPartnersButton.alpha = 1.0
-//                self.invitePartnerButton.isEnabled = false
-//                self.invitePartnerButton.alpha = 0.6
-//                
-//                self.athleteGoingButton.isEnabled = false
-//                self.athleteGoingButton.alpha = 0.6
-//                self.athleteGoingButton.setTitleColor(.lightGray, for: .normal)
-//            }
-           
+            self.viewPartnersButton.isEnabled = true
+            self.viewPartnersButton.alpha = 1.0
         }
         
         if UserDefaults.standard.string(forKey: "userType") == "Coach" {

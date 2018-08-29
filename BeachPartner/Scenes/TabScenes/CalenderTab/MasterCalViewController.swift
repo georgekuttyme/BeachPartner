@@ -66,7 +66,7 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
         
         tableHeaderLabel.text = titleForEventTable(date: Date())
         
-        if Subscription.current.supportForFunctionality(featureId: BenefitType.MasterCalendar) == false {
+        if Subscription.current.supportForFunctionality(featureId: BenefitType.MasterCalendar) == false && UserDefaults.standard.string(forKey: "userType") != "Coach"{
             masterCalTableVIew.isHidden = true
             getAllEvents()
         }
@@ -76,7 +76,7 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewWillAppear(animated)
         self.navigationController!.navigationBar.topItem!.title = "Master Calendar"
         
-        if Subscription.current.supportForFunctionality(featureId: BenefitType.MasterCalendar) == true {
+        if Subscription.current.supportForFunctionality(featureId: BenefitType.MasterCalendar) == true || UserDefaults.standard.string(forKey: "userType") == "Coach"{
             if filterParams == nil {
                 getAllEvents()
             }
@@ -341,7 +341,7 @@ class MasterCalViewController: UIViewController, UITableViewDelegate, UITableVie
         
         tableHeaderLabel.text = titleForEventTable(date: date)
         
-        if Subscription.current.supportForFunctionality(featureId: BenefitType.MasterCalendar) == false {
+        if Subscription.current.supportForFunctionality(featureId: BenefitType.MasterCalendar) == false && UserDefaults.standard.string(forKey: "userType") != "Coach"{
             
             masterCalTableVIew.isHidden = true
             
