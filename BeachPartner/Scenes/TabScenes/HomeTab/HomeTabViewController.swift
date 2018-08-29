@@ -14,7 +14,7 @@ import InitialsImageView
 class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegate, UICollectionViewDataSource,UITabBarControllerDelegate,CompletionDelegate {
    
     var loggedInUserId = 0
-    private lazy var channelRef: DatabaseReference = Database.database().reference().child("messages")
+    private lazy var channelRef: DatabaseReference = Database.database().reference().child("test-messages")
     private var channelRefHandle: DatabaseHandle?
     
     @IBOutlet weak var topUserListCollectionView: UICollectionView!
@@ -278,10 +278,10 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     
     
     @IBAction func tournamentRequestsSentBtnClicked(_ sender: UIButton) {
-        if Subscription.current.supportForFunctionality(featureId: BenefitType.MyCalendar) == false && UserDefaults.standard.string(forKey: "userType") != "Coach"{
+        if Subscription.current.supportForFunctionality(featureId: BenefitType.MasterCalendar) == false && UserDefaults.standard.string(forKey: "userType") != "Coach"{
             let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: SubscriptionTypeViewController.identifier) as! SubscriptionTypeViewController
-            vc.benefitCode = BenefitType.MyCalendar
+            vc.benefitCode = BenefitType.MasterCalendar
             self.present(vc, animated: true, completion: nil)
             return
         }else{
@@ -347,10 +347,10 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             return
         }
         if tournamentRequestSentViewActive {
-            if Subscription.current.supportForFunctionality(featureId: BenefitType.MyCalendar) == false && UserDefaults.standard.string(forKey: "userType") != "Coach"{
+            if Subscription.current.supportForFunctionality(featureId: BenefitType.MasterCalendar) == false && UserDefaults.standard.string(forKey: "userType") != "Coach"{
                 let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: SubscriptionTypeViewController.identifier) as! SubscriptionTypeViewController
-                vc.benefitCode = BenefitType.MyCalendar
+                vc.benefitCode = BenefitType.MasterCalendar
                 self.present(vc, animated: true, completion: nil)
                 return
             }else{

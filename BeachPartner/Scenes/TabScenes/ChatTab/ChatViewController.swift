@@ -49,7 +49,7 @@ class ChatViewController: JSQMessagesViewController {
         collectionView.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
         collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
         
-        let databaseRoot = Database.database().reference(withPath: "messages")
+        let databaseRoot = Database.database().reference(withPath: "test-messages")
         let databaseChats  = databaseRoot.child(userChatID)
         let query = databaseChats.queryLimited(toLast: 5050)
         _ = query.observe(.childAdded, with: { [weak self] snapshot in
@@ -189,8 +189,33 @@ class ChatViewController: JSQMessagesViewController {
         formatter.dateFormat = "hh:mm a"
         formatter.amSymbol = "AM"
         formatter.pmSymbol = "PM"
-        let showDate = formatter.string(from: temp!)
+        let showDate1 = formatter.string(from: temp!)
+        let showDate = UTCToLocal(date: showDate1)
         return NSAttributedString(string: showDate)
+    }
+    func localToUTC(date:String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss a"
+        dateFormatter.calendar = NSCalendar.current
+        dateFormatter.timeZone = TimeZone.current
+        
+        let dt = dateFormatter.date(from: date)
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss a"
+        
+        return dateFormatter.string(from: dt!)
+    }
+    
+    func UTCToLocal(date:String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm a"
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        
+        let dt = dateFormatter.date(from: date)
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.dateFormat = "hh:mm a"
+        
+        return dateFormatter.string(from: dt!)
     }
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAt indexPath: IndexPath!) -> NSAttributedString!
     {
@@ -259,9 +284,10 @@ class ChatViewController: JSQMessagesViewController {
         }
         
         let mDate = Date()
-        let nameOfMonth = dateFormatter.string(from: mDate)
+        let nameOfMonth1 = dateFormatter.string(from: mDate)
+        let nameOfMonth = localToUTC(date: nameOfMonth1)
         let chatDate:String = String (describing: nameOfMonth)
-        let databaseRoot = Database.database().reference(withPath: "messages")
+        let databaseRoot = Database.database().reference(withPath: "test-messages")
         let databaseChats  = databaseRoot.child(userChatID)
         let ref = databaseChats.childByAutoId()
         
