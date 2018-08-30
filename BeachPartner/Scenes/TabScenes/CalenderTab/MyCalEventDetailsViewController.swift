@@ -329,7 +329,7 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
         let storyboard = UIStoryboard(name: "ConnectionsTabBar", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "NotesViewController") as! NotesViewController
         if index == 0 {
-            if let partnerId = eventInvitation?.invitations?.first?.invitorId {
+            if let partnerId = eventInvitation?.invitations?.first?.partners![index].partnerId {
                 vc.toId = partnerId
             }
         }
