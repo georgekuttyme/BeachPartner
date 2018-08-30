@@ -185,12 +185,7 @@ class ChatViewController: JSQMessagesViewController {
         print(messages[indexPath.item])
         let chatDate = messages[indexPath.item].date
         let dateForChat = dateFormatter.string(from: chatDate!)
-        let temp = dateFormatter.date(from: dateForChat)
-        formatter.dateFormat = "hh:mm a"
-        formatter.amSymbol = "AM"
-        formatter.pmSymbol = "PM"
-        let showDate1 = formatter.string(from: temp!)
-        let showDate = UTCToLocal(date: showDate1)
+        let showDate = UTCToLocal(UTCDateString: "\(dateForChat)")
         return NSAttributedString(string: showDate)
     }
     func localToUTC(date:String) -> String {
@@ -205,18 +200,19 @@ class ChatViewController: JSQMessagesViewController {
         
         return dateFormatter.string(from: dt!)
     }
-    
-    func UTCToLocal(date:String) -> String {
+    func UTCToLocal(UTCDateString: String) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "hh:mm a"
-        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-        
-        let dt = dateFormatter.date(from: date)
-        dateFormatter.timeZone = TimeZone.current
-        dateFormatter.dateFormat = "hh:mm a"
-        
-        return dateFormatter.string(from: dt!)
+        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss a" //Input Format
+        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
+        let UTCDate = dateFormatter.date(from: UTCDateString)
+        dateFormatter.dateFormat = "hh:mm a" // Output Format
+        let localTimezone = TimeZone.current.identifier
+        dateFormatter.timeZone = NSTimeZone(name: localTimezone) as TimeZone!
+        let UTCToCurrentFormat = dateFormatter.string(from: UTCDate!)
+        print(NSTimeZone.local," ++ ",TimeZone.current,"    ",UTCDateString," ++ ",UTCToCurrentFormat," ++ ",TimeZone.current.identifier,"   --",NSTimeZone(name: localTimezone) as TimeZone!)
+        return UTCToCurrentFormat
     }
+
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAt indexPath: IndexPath!) -> NSAttributedString!
     {
         print(messages[indexPath.item],indexPath.item)
