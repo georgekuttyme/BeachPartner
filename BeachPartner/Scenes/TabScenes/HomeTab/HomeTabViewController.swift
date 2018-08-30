@@ -503,21 +503,23 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             print("====dfhfdghvbhj====")
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MessageCollectionViewCell", for: indexPath) as! MessageCollectionViewCell
             self.titleOfChat.removeAll()
+            var imageUrl = URL(string:"")
             var username = String()
             let image = self.recentChatList[indexPath.row]["profileImg"]
             if let fName = self.recentChatList[indexPath.row]["sender_name"] {
                 username = fName
             }
             if let lName = self.recentChatList[indexPath.row]["sender_lastName"] {
-                username = titleOfChat + " " + lName
+                username = username + " " + lName
             }
             if image == "" || image == "null"{
                 cell.messageUserProfille.setImageForName(string: username, circular: true, textAttributes: nil)
             }
             else
             {
-                if let imageUrl = URL(string: (self.recentChatList[indexPath.row]["profileImg"])!) {
+                    imageUrl = URL(string: (self.recentChatList[indexPath.row]["profileImg"]!))
                     print("hdgh  ",self.recentChatList)
+                if imageUrl != nil{
                     cell.messageUserProfille.sd_setIndicatorStyle(.whiteLarge)
                     cell.messageUserProfille.sd_setShowActivityIndicatorView(true)
                     cell.messageUserProfille.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
