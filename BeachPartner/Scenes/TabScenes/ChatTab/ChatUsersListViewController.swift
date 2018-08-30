@@ -295,6 +295,7 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
         print(displayType,"LLLLL")
         if displayType == "search" {
             var userName = ""
+            var imageUrl = URL(string:"")
             if let firstName = self.filterConnectedusers[indexPath.row]["sender_name"] {
                 userName = firstName + " "
             }
@@ -311,7 +312,8 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
                 cell.profileImage.setImageForName(string: userName, circular: true, textAttributes: nil)
             }
             else{
-                if let imageUrl = URL(string: (self.filterConnectedusers[indexPath.row]["profileImg"])!) {
+                imageUrl = URL(string: (self.filterConnectedusers[indexPath.row]["profileImg"])!)
+                if imageUrl != nil {
                     cell.profileImage.sd_setIndicatorStyle(.whiteLarge)
                     cell.profileImage.sd_setShowActivityIndicatorView(true)
                     cell.profileImage.sd_setImage(with: imageUrl, placeholderImage:#imageLiteral(resourceName: "user"))
@@ -321,6 +323,7 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
             cell.profileImgBtn.addTarget(self, action: #selector(didSelectItemAtIndex), for: .touchUpInside)
         }else{
             var userName = ""
+            var imageUrl = URL(string:"")
             if let firstName = self.recentChatList[indexPath.row]["sender_name"] {
                 userName = firstName + " "
             }
@@ -338,11 +341,10 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
             }
             else
             {
-                if let imageUrl = URL(string: (self.recentChatList[indexPath.row]["profileImg"])!) {
-                    cell.profileImage.sd_setIndicatorStyle(.whiteLarge)
-                    cell.profileImage.sd_setShowActivityIndicatorView(true)
-                    cell.profileImage.sd_setImage(with: imageUrl, placeholderImage:#imageLiteral(resourceName: "user"))
-                }
+                imageUrl = URL(string: (self.recentChatList[indexPath.row]["profileImg"])!)
+                cell.profileImage.sd_setIndicatorStyle(.whiteLarge)
+                cell.profileImage.sd_setShowActivityIndicatorView(true)
+                cell.profileImage.sd_setImage(with: imageUrl, placeholderImage:#imageLiteral(resourceName: "user"))
             }
             cell.profileImgBtn.tag = indexPath.row+600000
             cell.profileImgBtn.addTarget(self, action: #selector(didSelectItemAtIndex), for: .touchUpInside)
