@@ -51,7 +51,7 @@ class ChatViewController: JSQMessagesViewController {
         
         let databaseRoot = Database.database().reference(withPath: "test-messages")
         let databaseChats  = databaseRoot.child(userChatID)
-        let query = databaseChats.queryLimited(toLast: 5050)
+        let query = databaseChats
         _ = query.observe(.childAdded, with: { [weak self] snapshot in
             
             if  let data        = snapshot.value as? [String: String],
@@ -185,10 +185,10 @@ class ChatViewController: JSQMessagesViewController {
         print(messages[indexPath.item])
         let chatDate = messages[indexPath.item].date
         let dateForChat = dateFormatter.string(from: chatDate!)
-        let showDate = UTCToLocal(UTCDateString: "\(dateForChat)")
+        let showDate = utcToLocal(utcDateString: "\(dateForChat)")
         return NSAttributedString(string: showDate)
     }
-    func localToUTC(date:String) -> String {
+    func localToUtc(date:String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss a"
         dateFormatter.calendar = NSCalendar.current
@@ -200,16 +200,17 @@ class ChatViewController: JSQMessagesViewController {
         
         return dateFormatter.string(from: dt!)
     }
-    func UTCToLocal(UTCDateString: String) -> String {
+    func utcToLocal(utcDateString: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss a" //Input Format
         dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
-        let UTCDate = dateFormatter.date(from: UTCDateString)
+        
+        let UTCDate = dateFormatter.date(from: utcDateString)
         dateFormatter.dateFormat = "hh:mm a" // Output Format
         let localTimezone = TimeZone.current.identifier
         dateFormatter.timeZone = NSTimeZone(name: localTimezone) as TimeZone!
         let UTCToCurrentFormat = dateFormatter.string(from: UTCDate!)
-        print(NSTimeZone.local," ++ ",TimeZone.current,"    ",UTCDateString," ++ ",UTCToCurrentFormat," ++ ",TimeZone.current.identifier,"   --",NSTimeZone(name: localTimezone) as TimeZone!)
+    
         return UTCToCurrentFormat
     }
 
@@ -281,7 +282,7 @@ class ChatViewController: JSQMessagesViewController {
         
         let mDate = Date()
         let nameOfMonth1 = dateFormatter.string(from: mDate)
-        let nameOfMonth = localToUTC(date: nameOfMonth1)
+        let nameOfMonth = localToUtc(date: nameOfMonth1)
         let chatDate:String = String (describing: nameOfMonth)
         let databaseRoot = Database.database().reference(withPath: "test-messages")
         let databaseChats  = databaseRoot.child(userChatID)
