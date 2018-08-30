@@ -32,7 +32,7 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
     var selectedIndexItem = ""
     var displayType = ""
     @IBOutlet weak var toastLbl: UILabel!
-    private lazy var channelRef: DatabaseReference = Database.database().reference().child("messages")
+    private lazy var channelRef: DatabaseReference = Database.database().reference().child("test-messages")
     private var channelRefHandle: DatabaseHandle?
     var recentChatList = [[String:String]]()
     var activeUsers = [ConnectedUserModel]()

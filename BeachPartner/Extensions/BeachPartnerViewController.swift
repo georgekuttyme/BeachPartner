@@ -28,7 +28,12 @@ class BeachPartnerViewController: UIViewController {
         self.dropDown.anchorView = menuButton // UIView or UIBarButtonItem
         // The list of items to display. Can be changed dynamically
         //        self.dropDown.direction = .bottom
-        self.dropDown.dataSource = ["My Profile","Settings","Subscription","Add-Ons","Feedback","Help","Log Out"]
+        if UserDefaults.standard.string(forKey: "userType") == "Coach"{
+            self.dropDown.dataSource = ["My Profile","Settings","Feedback","Help","Log Out"]
+        }else{
+            self.dropDown.dataSource = ["My Profile","Settings","Subscription","Add-Ons","Feedback","Help","Log Out"]
+        }
+        
         
         self.dropDown.bottomOffset = CGPoint(x: 20, y:30)
         self.dropDown.width = 150

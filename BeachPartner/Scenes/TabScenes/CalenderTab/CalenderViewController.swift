@@ -44,15 +44,14 @@ class CalenderViewController: BeachPartnerViewController {
     // MARK:- Actions
     
     @objc private func showFilterView() {
-        
-        if Subscription.current.supportForFunctionality(featureId: BenefitType.EventSearch) == false {
-            let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: SubscriptionTypeViewController.identifier) as! SubscriptionTypeViewController
-            vc.benefitCode = BenefitType.EventSearch
-            self.present(vc, animated: true, completion: nil)
-            return
-        }
-        
+     
+            if Subscription.current.supportForFunctionality(featureId: BenefitType.EventSearch) == false && UserDefaults.standard.string(forKey: "userType") != "Coach"{
+                let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: SubscriptionTypeViewController.identifier) as! SubscriptionTypeViewController
+                vc.benefitCode = BenefitType.EventSearch
+                self.present(vc, animated: true, completion: nil)
+                return
+            }
         performSegue(withIdentifier: "FilterViewSegue", sender: self)
     }
     

@@ -52,7 +52,7 @@ class StartandEndDateViewController: UIViewController {
    
     func setupUI(){
         print(self.paymentModel?.userRegistered)
-        if self.paymentModel?.userRegistered == "NO" && isFrom == "Subscription"{
+        if self.paymentModel?.userRegistered == "NO"{
          self.cutView.isHidden = true
             self.amountPaid_Height.constant = 35.0
             self.amountPaidHeight.constant = 35.0
@@ -61,19 +61,6 @@ class StartandEndDateViewController: UIViewController {
             self.bottomViewHeight.constant = 140.0
             self.straightLineview.isHidden = false
           
-        }else if isFrom == "Add-ons"{
-            self.cutView.isHidden = true
-            self.straightLineview.isHidden = true
-            self.registrationFeeLbl.isHidden = true
-            self.registration_FeeLbl.isHidden = true
-            self.amountPaid_Height.constant = 35.0
-            self.amountPaidHeight.constant = 35.0
-            self.registrationFeeHeight.constant = 0
-            self.registrationFee_height.constant = 0
-            self.bottomViewHeight.constant = 200.0
-            self.straightLineview.isHidden = false
-
-            
         }else{
             self.cutView.isHidden = true
             self.amountPaid_Height.constant = 35.0

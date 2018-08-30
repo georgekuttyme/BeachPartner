@@ -138,7 +138,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
                 
                 return
             }
-            if updateFcmTokenModel.message == "error.http.500" {
+            if updateFcmTokenModel.message == "error.http.500" || updateFcmTokenModel.title == "User not found"  {
                 UserDefaults.standard.set("0", forKey: "isLoggedIn")
                 UserDefaults.standard.set("", forKey: "locationInitial")
                 UserDefaults.standard.set("", forKey: "ageCategory")

@@ -202,7 +202,7 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
     
     @IBAction func undoBtnCLicked(_ sender: Any) {
         
-        if Subscription.current.supportForFunctionality(featureId: BenefitType.UndoSwipe) == false {
+        if Subscription.current.supportForFunctionality(featureId: BenefitType.UndoSwipe) == false && UserDefaults.standard.string(forKey: "userType") != "Coach"{
             let storyboard = UIStoryboard(name: "Subscription", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: SubscriptionTypeViewController.identifier) as! SubscriptionTypeViewController
             vc.benefitCode = BenefitType.UndoSwipe
