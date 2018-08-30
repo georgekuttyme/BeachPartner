@@ -23,7 +23,7 @@ class RecentChatCell: UITableViewCell {
 }
 
 class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegate,UITableViewDataSource,UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
- 
+    var selectedTabViewController:Int!
     var filterConnectedusers = [[String:String]]()
     var searchController : UISearchController!
     var rightBarButtonItem: UIBarButtonItem!
@@ -48,7 +48,7 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
         
         
         self.navigationItem.setHidesBackButton(true, animated:false);
-        self.title = "Messages"
+        self.navigationItem.title = "Messages"
         self.toastLbl.isHidden = true
         
         self.hideKeyboardWhenTappedAround()
@@ -58,17 +58,19 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
         floaty.paddingY = 85
         floaty.buttonColor = UIColor.navigationBarTintColor
         floaty.plusColor = UIColor.white
-        floaty.addItem("", icon: UIImage(named: "highfive")!,handler: { item in
-            self.navigationController?.popViewController(animated: false);
+        floaty.addItem("", icon: UIImage(named: "chat")!,handler: { item in
             floaty.close()
         })
-        floaty.addItem("", icon: UIImage(named: "chat")!,handler: { item in
+        floaty.addItem("", icon: UIImage(named: "highfive")!,handler: { item in
+            let favoritesVC = self.storyboard?.instantiateViewController(withIdentifier: "HighFiveViewController") as! HighFiveViewController
+            self.navigationController?.pushViewController(favoritesVC, animated: false)
             floaty.close()
         })
         self.view.addSubview(floaty)
         ActivityIndicatorView.show("Loading...")
          self.tblChatList.delegate = self
         self.tblChatList.dataSource = self
+        selectedTabViewController = 4
     }
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -130,6 +132,7 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
         }
     }
     override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.title = ""
         if displayType == "search"{
             self.searchBtn.tintColor = UIColor.white
             self.searchBtn.isEnabled = true
@@ -138,7 +141,7 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
             self.displayType = ""
             self.tblChatList.reloadData()
         }
-        self.title = "Messages"
+//        self.title = "Messages"
         self.getBlockedConnections()
     }
     

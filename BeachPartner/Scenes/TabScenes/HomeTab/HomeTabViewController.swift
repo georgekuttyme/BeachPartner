@@ -153,7 +153,8 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
     }
     
     @objc func tapOnPush(notification: NSNotification) {
-        self.tabBarController?.selectedIndex = 4
+        let favoritesVC = self.storyboard?.instantiateViewController(withIdentifier: "HighFiveViewController") as! HighFiveViewController
+        self.navigationController?.pushViewController(favoritesVC, animated: false)
     }
     
     @objc func tapOnHome(notification: NSNotification) {

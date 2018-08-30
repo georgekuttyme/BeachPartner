@@ -23,7 +23,6 @@ class HighfiveCell: UITableViewCell {
 class HighFiveViewController: BeachPartnerViewController,UITableViewDelegate,UITableViewDataSource {
     var isCallHifiview:Bool = false
     var connectedUsers = [ConnectedUserModel]()
-    var selectedTabViewController:Int!
     weak var currentViewController: UIViewController?
     @IBOutlet weak var tblHighFiveList: UITableView!
     @IBOutlet weak var menuBtn: UIBarButtonItem!
@@ -34,7 +33,7 @@ class HighFiveViewController: BeachPartnerViewController,UITableViewDelegate,UIT
         super.viewDidLoad()
         self.toastLabel.isHidden = true
         
-        
+        self.navigationItem.setHidesBackButton(true, animated:false);
         self.hideKeyboardWhenTappedAround()
         
         
@@ -44,17 +43,14 @@ class HighFiveViewController: BeachPartnerViewController,UITableViewDelegate,UIT
         floaty.buttonColor = UIColor.navigationBarTintColor
         floaty.plusColor = UIColor.white
         
-        floaty.addItem("", icon: UIImage(named: "highfive")!,handler: { item in
+        floaty.addItem("", icon: UIImage(named: "chat")!,handler: { item in
             self.navigationController?.popViewController(animated: false);
             floaty.close()
         })
-        floaty.addItem("", icon: UIImage(named: "chat")!,handler: { item in
-            let favoritesVC = self.storyboard?.instantiateViewController(withIdentifier: "ChatUsersListViewController") as! ChatUsersListViewController
-            self.navigationController?.pushViewController(favoritesVC, animated: false)
+        floaty.addItem("", icon: UIImage(named: "highfive")!,handler: { item in
             floaty.close()
         })
         self.view.addSubview(floaty)
-        selectedTabViewController = 4
         isCallHifiview = true
 
         // Do any additional setup after loading the view. 55
@@ -64,6 +60,7 @@ class HighFiveViewController: BeachPartnerViewController,UITableViewDelegate,UIT
         super.viewWillAppear(animated)
         
         self.navigationItem.title = "High Five"
+        self.navigationItem.setHidesBackButton(true, animated:false);
         self.getHifiList()
     }
     override func viewDidAppear(_ animated: Bool) {
