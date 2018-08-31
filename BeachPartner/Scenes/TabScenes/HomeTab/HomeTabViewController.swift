@@ -436,13 +436,18 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             let name = (blueBpData?.firstName)! + " " + (blueBpData?.lastName)!
             let image = blueBpData?.imageUrl
             
-            if image == "" || image == "null"{
-                cell.imageView.setImageForName(string: name, circular: true, textAttributes: nil)
-            }else{
-                if let imageUrl = URL(string: (blueBpData?.imageUrl)!) {
-                    cell.imageView.sd_setIndicatorStyle(.whiteLarge)
-                    cell.imageView.sd_setShowActivityIndicatorView(true)
-                    cell.imageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+            if blueBpData?.userStatus == "Flagged"{
+                cell.imageView.image = UIImage(named:"user")
+            }
+            else{
+                if image == "" || image == "null"{
+                    cell.imageView.setImageForName(string: name, circular: true, textAttributes: nil)
+                }else{
+                    if let imageUrl = URL(string: (blueBpData?.imageUrl)!) {
+                        cell.imageView.sd_setIndicatorStyle(.whiteLarge)
+                        cell.imageView.sd_setShowActivityIndicatorView(true)
+                        cell.imageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                    }
                 }
             }
             cell.imageView.layer.cornerRadius = cell.imageView.frame.size.width/2
@@ -506,23 +511,28 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
             var imageUrl = URL(string:"")
             var username = String()
             let image = self.recentChatList[indexPath.row]["profileImg"]
+            let status = self.recentChatList[indexPath.row]["status"]
             if let fName = self.recentChatList[indexPath.row]["sender_name"] {
                 username = fName
             }
             if let lName = self.recentChatList[indexPath.row]["sender_lastName"] {
                 username = username + " " + lName
             }
-            if image == "" || image == "null"{
-                cell.messageUserProfille.setImageForName(string: username, circular: true, textAttributes: nil)
-            }
-            else
-            {
-                    imageUrl = URL(string: (self.recentChatList[indexPath.row]["profileImg"]!))
-                    print("hdgh  ",self.recentChatList)
-                if imageUrl != nil{
-                    cell.messageUserProfille.sd_setIndicatorStyle(.whiteLarge)
-                    cell.messageUserProfille.sd_setShowActivityIndicatorView(true)
-                    cell.messageUserProfille.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+            if status == "Flagged"{
+                cell.messageUserProfille.image = UIImage(named:"user")
+            }else {
+                if image == "" || image == "null"{
+                    cell.messageUserProfille.setImageForName(string: username, circular: true, textAttributes: nil)
+                }
+                else
+                {
+                        imageUrl = URL(string: (self.recentChatList[indexPath.row]["profileImg"]!))
+                        print("hdgh  ",self.recentChatList)
+                    if imageUrl != nil{
+                        cell.messageUserProfille.sd_setIndicatorStyle(.whiteLarge)
+                        cell.messageUserProfille.sd_setShowActivityIndicatorView(true)
+                        cell.messageUserProfille.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                    }
                 }
             }
 
@@ -798,6 +808,7 @@ class HomeTabViewController: BeachPartnerViewController, UICollectionViewDelegat
                             latestMsgDic.updateValue(connectedUser.connectedUser?.firstName ?? "", forKey: "sender_name")
                             latestMsgDic.updateValue(connectedUser.connectedUser?.lastName ?? "", forKey: "sender_lastName")
                             latestMsgDic.updateValue(connectedUser.connectedUser?.imageUrl ?? "", forKey: "profileImg")
+                            latestMsgDic.updateValue(connectedUser.connectedUser?.userStatus ?? "", forKey: "status")
                             isActiveUser = true
                             break
                         }

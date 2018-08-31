@@ -388,8 +388,7 @@ class SettingsViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.title = "Settings"
-        
-        customView()
+
     }
     
     func getUsersSwipeCard(endPoint:String)  {

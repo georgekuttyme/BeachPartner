@@ -126,13 +126,19 @@ class HighFiveViewController: BeachPartnerViewController,UITableViewDelegate,UIT
         cell.highfiveView.dropShadow()
         cell.timeLbl.text =  (connectedUser?.createdDate) ?? ""
         let image = connectedUser?.imageUrl
-        if image == "" || image == "null"{
-            cell.profileImage.setImageForName(string: name, circular: true, textAttributes: nil)
-        }else{
-            if let imageUrl = URL(string: (connectedUser?.imageUrl) ?? "") {
-                cell.profileImage.sd_setIndicatorStyle(.whiteLarge)
-                cell.profileImage.sd_setShowActivityIndicatorView(true)
-                cell.profileImage.sd_setImage(with: imageUrl, placeholderImage:#imageLiteral(resourceName: "user"))
+        let status = connectedUser?.userStatus
+        if status == "Flagged"{
+            cell.profileImage.image = UIImage(named:"user")
+        }
+        else{
+            if image == "" || image == "null"{
+                cell.profileImage.setImageForName(string: name, circular: true, textAttributes: nil)
+            }else{
+                if let imageUrl = URL(string: (connectedUser?.imageUrl) ?? "") {
+                    cell.profileImage.sd_setIndicatorStyle(.whiteLarge)
+                    cell.profileImage.sd_setShowActivityIndicatorView(true)
+                    cell.profileImage.sd_setImage(with: imageUrl, placeholderImage:#imageLiteral(resourceName: "user"))
+                }
             }
         }
         
