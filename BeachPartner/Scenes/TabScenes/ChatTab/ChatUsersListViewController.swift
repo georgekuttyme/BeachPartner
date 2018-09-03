@@ -59,6 +59,7 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
         floaty.buttonColor = UIColor.navigationBarTintColor
         floaty.plusColor = UIColor.white
         floaty.addItem("", icon: UIImage(named: "chat")!,handler: { item in
+            self.getBlockedConnections()
             floaty.close()
         })
         floaty.addItem("", icon: UIImage(named: "highfive")!,handler: { item in
@@ -142,6 +143,7 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
             self.tblChatList.reloadData()
         }
 //        self.title = "Messages"
+        ActivityIndicatorView.show("Loading...")
         self.getBlockedConnections()
     }
     
@@ -203,7 +205,7 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
                 
                 if isActiveUser {
                     self.recentChatList.insert(latestMsgDic, at: 0)
-                    self.tblChatList .reloadData()
+                    self.tblChatList.reloadData()
                 }
                 
             }
@@ -212,7 +214,7 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
     }
     
     func getBlockedConnections() {
-        
+        ActivityIndicatorView.show("Loading...")
         APIManager.callServer.getUserConnectionList(status:"status=Active&showReceived=false",sucessResult: { (responseModel) in
             guard let connectedUserModelArray = responseModel as? ConnectedUserModelArray else {
                 return
@@ -223,12 +225,12 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
                 self.activeUsers.append(connectedUser)
             }
             
-           
-            
             DispatchQueue.main.async {
                 self.recentChatList.removeAll()
                 self.observeChannels()
             }
+            self.tblChatList.reloadData()
+            ActivityIndicatorView.hiding()
             print("activeUsers--->            ", self.recentChatList,"          ___________________")
         }, errorResult: { (error) in
             //                stopLoading()
@@ -262,7 +264,7 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
             return self.filterConnectedusers.count
         }
         else{
-            if self.activeUsers.count > 0 {
+            if self.recentChatList.count > 0 {
                 self.toastLbl.isHidden = true
             }
             else {
@@ -381,9 +383,8 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
         }
         let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
         let chatController = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
-        
         print(recentChats[indexPath.row])
-        
+        print("unfiltered  -- ",self.activeUsers,"\n\n\n\n")
         chatController.recentChatDic = recentChats[indexPath.row]
         chatController.chatType = "recentChat"
         let navigationController = UINavigationController(rootViewController: chatController)

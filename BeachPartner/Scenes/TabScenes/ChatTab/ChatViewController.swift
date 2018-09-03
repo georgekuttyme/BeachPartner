@@ -124,7 +124,7 @@ class ChatViewController: JSQMessagesViewController {
     }
     
     func configUser()  {
-        
+        print(self.recentChatDic)
         let defaults = UserDefaults.standard
         senderId = UserDefaults.standard.string(forKey: "bP_userId") ?? ""
         senderDisplayName = UserDefaults.standard.string(forKey: "bP_userName") ?? ""
@@ -268,10 +268,18 @@ class ChatViewController: JSQMessagesViewController {
         var receiver_name:String!
         var receiver_id:String!
         var profileImg:String!
+        print(self.recentChatDic)
         if chatType == "recentChat"  {
-            receiver_name = self.recentChatDic["receiver_name"]!
-            receiver_id = self.recentChatDic["receiver_id"]!
-            profileImg = self.recentChatDic["profileImg"]!
+            if Int(self.recentChatDic["receiver_id"]!) != Int(UserDefaults.standard.string(forKey: "bP_userId")!){
+                receiver_name = self.recentChatDic["receiver_name"]!
+                receiver_id = self.recentChatDic["receiver_id"]!
+                profileImg = self.recentChatDic["profileImg"]!
+            }else{
+                receiver_name = self.recentChatDic["sender_name"]!
+                receiver_id = self.recentChatDic["sender_id"]!
+                profileImg = self.recentChatDic["profileImg"]!
+            }
+            
         }
         else{
             let connectedUserModelOfFirstElement = connectedUserModel.first
