@@ -214,7 +214,7 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
                 cell?.profileImageView.layer.borderColor = UIColor.navigationBarTintColor.cgColor
                 cell?.profileImageView.layer.borderWidth = 1.5
                 
-                cell?.noteButton.tag = indexPath.row+300000
+                cell?.noteButton.tag = (partner?.invitorId)!+300000
                 cell?.noteButton.addTarget(self, action: #selector(noteBtnPressed), for: .touchUpInside)
                 
                 if partner?.invitorId == loggedInUserId {
@@ -247,7 +247,7 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
                     cell?.profileImageView.layer.borderColor = UIColor.navigationBarTintColor.cgColor
                     cell?.profileImageView.layer.borderWidth = 1.5
                     
-                    cell?.noteButton.tag = indexPath.row+300000
+                    cell?.noteButton.tag = (partner?.partnerId)!+300000
                     cell?.noteButton.addTarget(self, action: #selector(noteBtnPressed), for: .touchUpInside)
                 }
                 else {
@@ -272,7 +272,7 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
                     cell?.profileImageView.layer.borderColor = UIColor.navigationBarTintColor.cgColor
                     cell?.profileImageView.layer.borderWidth = 1.5
                     
-                    cell?.noteButton.tag = indexPath.row+300000
+                    cell?.noteButton.tag = (partner?.partnerId)!+300000
                     cell?.noteButton.addTarget(self, action: #selector(noteBtnPressed), for: .touchUpInside)
                     
                 }
@@ -299,7 +299,7 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
             cell?.profileImageView.layer.borderColor = UIColor.navigationBarTintColor.cgColor
             cell?.profileImageView.layer.borderWidth = 1.5
             
-            cell?.noteButton.tag = indexPath.row+300000
+            cell?.noteButton.tag = (partner?.partnerId)!+300000
             cell?.noteButton.addTarget(self, action: #selector(noteBtnPressed), for: .touchUpInside)
         }
         
@@ -328,16 +328,7 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
         
         let storyboard = UIStoryboard(name: "ConnectionsTabBar", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "NotesViewController") as! NotesViewController
-        if index == 0 {
-            if let partnerId = eventInvitation?.invitations?.first?.partners![index].partnerId {
-                vc.toId = partnerId
-            }
-        }
-        else {
-            if let partnerId = eventInvitation?.invitations?.first?.partners![index - 1].partnerId {
-                vc.toId = partnerId
-            }
-        }
+        vc.toId = index
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
