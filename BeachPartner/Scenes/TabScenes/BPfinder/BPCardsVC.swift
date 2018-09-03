@@ -268,13 +268,19 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BlueBPCollectionViewCell", for: indexPath) as! BlueBPCollectionViewCell
             let image = blueBpData.connectedUser?.imageUrl
             let username = (blueBpData.connectedUser?.firstName)! + " " + (blueBpData.connectedUser?.lastName)!
-            if image == "" || image == "null"{
-                cell.imageView.setImageForName(string: username, circular: true, textAttributes: nil)
-            }else{
-                if let imageUrl = URL(string: (blueBpData.connectedUser?.imageUrl)!) {
-                    cell.imageView.sd_setIndicatorStyle(.whiteLarge)
-                    cell.imageView.sd_setShowActivityIndicatorView(true)
-                    cell.imageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+            let status = blueBpData.connectedUser?.userStatus
+            if status == "Flagged"{
+                cell.imageView.image = UIImage(named:"user")
+            }
+            else{
+                if image == "" || image == "null"{
+                    cell.imageView.setImageForName(string: username, circular: true, textAttributes: nil)
+                }else{
+                    if let imageUrl = URL(string: (blueBpData.connectedUser?.imageUrl)!) {
+                        cell.imageView.sd_setIndicatorStyle(.whiteLarge)
+                        cell.imageView.sd_setShowActivityIndicatorView(true)
+                        cell.imageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                    }
                 }
             }
             cell.imageView.layer.cornerRadius = cell.imageView.frame.size.width/2
@@ -744,13 +750,19 @@ class BPCardsVC: UIViewController, UICollectionViewDelegate,UICollectionViewData
                 self.userData = accRespModel
                 let image = accRespModel.imageUrl
                 let username = accRespModel.firstName + " " + accRespModel.lastName
-                if image == "" || image == "null"{
-                    self.imgProfile.setImageForName(string: username, circular: true, textAttributes: nil)
-                }else{
-                    if let imageUrl = URL(string: accRespModel.imageUrl) {
-                        self.imgProfile.sd_setIndicatorStyle(.whiteLarge)
-                        self.imgProfile.sd_setShowActivityIndicatorView(true)
-                        self.imgProfile.sd_setImage(with: imageUrl, placeholderImage:  #imageLiteral(resourceName: "user"))
+                let status = accRespModel.userStatus
+                if status == "Flagged"{
+                    self.imgProfile.image = UIImage(named:"user")
+                }
+                else{
+                    if image == "" || image == "null"{
+                        self.imgProfile.setImageForName(string: username, circular: true, textAttributes: nil)
+                    }else{
+                        if let imageUrl = URL(string: accRespModel.imageUrl) {
+                            self.imgProfile.sd_setIndicatorStyle(.whiteLarge)
+                            self.imgProfile.sd_setShowActivityIndicatorView(true)
+                            self.imgProfile.sd_setImage(with: imageUrl, placeholderImage:  #imageLiteral(resourceName: "user"))
+                        }
                     }
                 }
             }else{

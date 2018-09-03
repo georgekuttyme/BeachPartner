@@ -73,14 +73,20 @@ class AthleteViewController: UIViewController,UICollectionViewDataSource , UICol
         cell?.nameLbl.text = username
         cell?.ageLbl.text = String(connectedUser?.age ?? 0)
         let image = connectedUser?.imageUrl
-        if image == "" || image == "null"{
-            cell?.profileImgView.setImageForName(string: username, circular: true, textAttributes: nil)
+        let status = connectedUser?.userStatus
+        if status == "Flagged"{
+            cell?.profileImgView.image = UIImage(named:"user")
         }
         else{
-            if let imageUrl = URL(string: (connectedUser?.imageUrl)!) {
-                cell?.profileImgView.sd_setIndicatorStyle(.whiteLarge)
-                cell?.profileImgView.sd_setShowActivityIndicatorView(true)
-                cell?.profileImgView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+            if image == "" || image == "null"{
+                cell?.profileImgView.setImageForName(string: username, circular: true, textAttributes: nil)
+            }
+            else{
+                if let imageUrl = URL(string: (connectedUser?.imageUrl)!) {
+                    cell?.profileImgView.sd_setIndicatorStyle(.whiteLarge)
+                    cell?.profileImgView.sd_setShowActivityIndicatorView(true)
+                    cell?.profileImgView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                }
             }
         }
         

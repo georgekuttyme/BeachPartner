@@ -31,9 +31,7 @@ extension UIViewController {
     func timoutLogoutAction(){
         UserDefaults.standard.set("0", forKey: "isLoggedIn")
         UserDefaults.standard.set("", forKey: "locationInitial")
-        UserDefaults.standard.set("", forKey: "ageCategory")
-        UserDefaults.standard.set("", forKey: "minAge")
-        UserDefaults.standard.set("", forKey: "maxAge")
+        
         let mainStoryBoard = UIStoryboard(name: "Login", bundle: nil)
         let loginViewController = mainStoryBoard.instantiateViewController(withIdentifier: "loginscene") as! LoginViewController
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
