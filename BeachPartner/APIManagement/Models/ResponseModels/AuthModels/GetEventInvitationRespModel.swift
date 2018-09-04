@@ -51,6 +51,7 @@ struct EventInvitation: SafeMappable {
     var invitorName: String = ""
     var invitorimageURL: String = ""
     var eventStatus: String = ""
+    var inviterStatus: String = ""
     var partners: [EventPartner]?
     
     init(_ map: [String : Any]) throws {
@@ -58,6 +59,7 @@ struct EventInvitation: SafeMappable {
         invitorName <- map.property("inviterName")
         invitorimageURL <- map.property("inviterImageUrl")
         eventStatus <- map.property("eventStatus")
+        inviterStatus <- map.property("inviterStatus")
         partners <- map.relations("partnerList")
     }
 }
@@ -67,12 +69,15 @@ struct EventPartner: SafeMappable {
     var partnerName: String = ""
     var partnerImageURL: String = ""
     var invitationStatus: String = ""
+    var partnerStatus: String = ""
     
     init(_ map: [String : Any]) throws {
         partnerId <- map.property("partnerUserId")
         partnerName <- map.property("partnerName")
         partnerImageURL <- map.property("partnerImageUrl")
         invitationStatus <- map.property("invitationStatus")
+        partnerStatus <- map.property("partnerStatus")
+        
     }
 }
 

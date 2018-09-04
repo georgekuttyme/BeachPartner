@@ -198,14 +198,19 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
                 cell?.statusLabel.text = "Organizer"
                 let username = partner?.invitorName
                 let image = partner?.invitorimageURL
-                if image == "" || image == "null"{
-                    cell?.profileImageView.setImageForName(string: username!, circular: true, textAttributes: nil)
-                }
-                else{
-                    if let imageUrl = URL(string: (partner?.invitorimageURL)!) {
-                        cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
-                        cell?.profileImageView.sd_setShowActivityIndicatorView(true)
-                        cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                let status = partner?.inviterStatus
+                if status == "Flagged"{
+                    cell?.profileImageView.image = UIImage(named:"user")
+                }else{
+                    if image == "" || image == "null"{
+                        cell?.profileImageView.setImageForName(string: username!, circular: true, textAttributes: nil)
+                    }
+                    else{
+                        if let imageUrl = URL(string: (partner?.invitorimageURL)!) {
+                            cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
+                            cell?.profileImageView.sd_setShowActivityIndicatorView(true)
+                            cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                        }
                     }
                 }
                 cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
@@ -232,13 +237,18 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
                     cell?.statusLabel.text = ""
                     let username = partner?.partnerName
                     let image = partner?.partnerImageURL
-                    if image == "" || image == "null"{
-                        cell?.profileImageView.setImageForName(string: username!, circular: true, textAttributes: nil)
+                    let status = partner?.partnerStatus
+                    if status == "Flagged"{
+                        cell?.profileImageView.image = UIImage(named:"user")
                     }else{
-                        if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
-                            cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
-                            cell?.profileImageView.sd_setShowActivityIndicatorView(true)
-                            cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                        if image == "" || image == "null"{
+                            cell?.profileImageView.setImageForName(string: username!, circular: true, textAttributes: nil)
+                        }else{
+                            if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
+                                cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
+                                cell?.profileImageView.sd_setShowActivityIndicatorView(true)
+                                cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                            }
                         }
                     }
                     cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
@@ -257,13 +267,18 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
                     cell?.statusLabel.text = ""
                     let username = partner?.partnerName
                     let image = partner?.partnerImageURL
-                    if image == "" || image == "null"{
-                        cell?.profileImageView.setImageForName(string: username!, circular: true, textAttributes: nil)
+                    let status = partner?.partnerStatus
+                    if status == "Flagged"{
+                        cell?.profileImageView.image = UIImage(named:"user")
                     }else{
-                        if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
-                            cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
-                            cell?.profileImageView.sd_setShowActivityIndicatorView(true)
-                            cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                        if image == "" || image == "null"{
+                            cell?.profileImageView.setImageForName(string: username!, circular: true, textAttributes: nil)
+                        }else{
+                            if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
+                                cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
+                                cell?.profileImageView.sd_setShowActivityIndicatorView(true)
+                                cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                            }
                         }
                     }
                     cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
@@ -284,13 +299,18 @@ extension MyCalEventDetailsViewController: UITableViewDataSource, UITableViewDel
             cell?.statusLabel.text = ""
             let username = partner?.partnerName
             let image = partner?.partnerImageURL
-            if image == "" || image == "null"{
-                cell?.profileImageView.setImageForName(string: username!, circular: true, textAttributes: nil)
+            let status = partner?.partnerStatus
+            if status == "Flagged"{
+                cell?.profileImageView.image = UIImage(named:"user")
             }else{
-                if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
-                    cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
-                    cell?.profileImageView.sd_setShowActivityIndicatorView(true)
-                    cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                if image == "" || image == "null"{
+                    cell?.profileImageView.setImageForName(string: username!, circular: true, textAttributes: nil)
+                }else{
+                    if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
+                        cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
+                        cell?.profileImageView.sd_setShowActivityIndicatorView(true)
+                        cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                    }
                 }
             }
             cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2

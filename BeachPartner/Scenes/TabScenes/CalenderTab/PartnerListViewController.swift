@@ -63,14 +63,19 @@ class PartnerListViewController: UIViewController, UITableViewDataSource, UITabl
                 cell?.statusLabel.text = "Organizer"
                 let username = invitation?.invitorName
                 let image = invitation?.invitorimageURL
-                if image == "" || image == "null"{
-                    cell?.profileImageView.setImageForName(string: username!, circular: true, textAttributes: nil)
-                }
-                else{
-                    if let imageUrl = URL(string: (invitation?.invitorimageURL)!) {
-                        cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
-                        cell?.profileImageView.sd_setShowActivityIndicatorView(true)
-                        cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                let status = invitation?.inviterStatus
+                if status == "Flagged"{
+                    cell?.profileImageView.image = UIImage(named:"user")
+                }else{
+                    if image == "" || image == "null"{
+                        cell?.profileImageView.setImageForName(string: username!, circular: true, textAttributes: nil)
+                    }
+                    else{
+                        if let imageUrl = URL(string: (invitation?.invitorimageURL)!) {
+                            cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
+                            cell?.profileImageView.sd_setShowActivityIndicatorView(true)
+                            cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                        }
                     }
                 }
                 cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
@@ -89,13 +94,18 @@ class PartnerListViewController: UIViewController, UITableViewDataSource, UITabl
                     print("index->",indexPath.row,"  ",index,"\n\n")
                     let username = partner?.partnerName
                     let image = partner?.partnerImageURL
-                    if image == "" || image == "null"{
-                        cell?.profileImageView.setImageForName(string: username!, circular: true, textAttributes: nil)
+                    let status = partner?.partnerStatus
+                    if status == "Flagged"{
+                        cell?.profileImageView.image = UIImage(named:"user")
                     }else{
-                        if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
-                            cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
-                            cell?.profileImageView.sd_setShowActivityIndicatorView(true)
-                            cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                        if image == "" || image == "null"{
+                            cell?.profileImageView.setImageForName(string: username!, circular: true, textAttributes: nil)
+                        }else{
+                            if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
+                                cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
+                                cell?.profileImageView.sd_setShowActivityIndicatorView(true)
+                                cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                            }
                         }
                     }
                     cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
@@ -109,13 +119,18 @@ class PartnerListViewController: UIViewController, UITableViewDataSource, UITabl
                     print("index->",indexPath.row,"  ",index,"\n\n")
                     let username = partner?.partnerName
                     let image = partner?.partnerImageURL
-                    if image == "" || image == "null"{
-                        cell?.profileImageView.setImageForName(string: username!, circular: true, textAttributes: nil)
+                    let status = partner?.partnerStatus
+                    if status == "Flagged"{
+                        cell?.profileImageView.image = UIImage(named:"user")
                     }else{
-                        if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
-                            cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
-                            cell?.profileImageView.sd_setShowActivityIndicatorView(true)
-                            cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                        if image == "" || image == "null"{
+                            cell?.profileImageView.setImageForName(string: username!, circular: true, textAttributes: nil)
+                        }else{
+                            if let imageUrl = URL(string: (partner?.partnerImageURL)!) {
+                                cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
+                                cell?.profileImageView.sd_setShowActivityIndicatorView(true)
+                                cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                            }
                         }
                     }
                     cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2
@@ -133,13 +148,18 @@ class PartnerListViewController: UIViewController, UITableViewDataSource, UITabl
                 cell?.statusLabel.text = partner.invitationStatus
                 let username = partner.partnerName
                 let image = partner.partnerImageURL
-                if image == "" || image == "null"{
-                    cell?.profileImageView.setImageForName(string: username, circular: true, textAttributes: nil)
+                let status = partner.partnerStatus
+                if status == "Flagged"{
+                    cell?.profileImageView.image = UIImage(named:"user")
                 }else{
-                    if let imageUrl = URL(string: (partner.partnerImageURL)) {
-                        cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
-                        cell?.profileImageView.sd_setShowActivityIndicatorView(true)
-                        cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                    if image == "" || image == "null"{
+                        cell?.profileImageView.setImageForName(string: username, circular: true, textAttributes: nil)
+                    }else{
+                        if let imageUrl = URL(string: (partner.partnerImageURL)) {
+                            cell?.profileImageView.sd_setIndicatorStyle(.whiteLarge)
+                            cell?.profileImageView.sd_setShowActivityIndicatorView(true)
+                            cell?.profileImageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                        }
                     }
                 }
                 cell?.profileImageView.layer.cornerRadius = (cell?.profileImageView?.frame.size.width)!/2

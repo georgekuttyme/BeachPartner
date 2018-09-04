@@ -176,16 +176,20 @@ class EventInvitationListViewController: UIViewController, UITableViewDataSource
         cell?.selectionStyle = .none
         
         let invitation = eventInvitation?.invitations![indexPath.row]
-        
-        
         cell?.nameLabel.text = invitation?.invitorName
-        if invitation?.invitorimageURL == ""{
-            cell?.profileImage.image = UIImage(named: "user")
+        let image = invitation?.invitorimageURL
+        let status = invitation?.inviterStatus
+        if status == "Flagged"{
+            cell?.profileImage.image = UIImage(named:"user")
         }else{
-            if let image = invitation?.invitorimageURL, let imageUrl = URL(string: image) {
-                cell?.profileImage.sd_setIndicatorStyle(.whiteLarge)
-                cell?.profileImage.sd_setShowActivityIndicatorView(true)
-                cell?.profileImage.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+            if image == "" || image == "null"{
+                cell?.profileImage.image = UIImage(named: "user")
+            }else{
+                if let imageUrl = URL(string: image!) {
+                    cell?.profileImage.sd_setIndicatorStyle(.whiteLarge)
+                    cell?.profileImage.sd_setShowActivityIndicatorView(true)
+                    cell?.profileImage.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                }
             }
         }
         
