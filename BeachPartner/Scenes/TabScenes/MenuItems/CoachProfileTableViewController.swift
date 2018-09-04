@@ -377,6 +377,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
             self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
             self.tableView.reloadData()
         }
+
     }
     @IBAction func editProfileTxtBtnClicked(_ sender: Any) {
       
@@ -392,9 +393,24 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
             firstNameTxtFld.errorText = "Empty!"
             firstNameTxtFld.showError()
         }else{
-            firstNameTxtFld.hideError()
-            self.userData.firstName = firstNameTxtFld.text!
-            currentValidation += 1
+            let firstNametxt = self.firstNameTxtFld.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            firstNameTxtFld.text = firstNametxt
+            if (firstNameTxtFld.text?.hasPrefix(" "))! {
+                firstNameTxtFld.shake()
+                firstNameTxtFld.errorText = "First name can’t start with whitespaces"
+                firstNameTxtFld.showError()
+            }
+            if let first = self.firstNameTxtFld.text, first.isValidName() {
+                self.userData.firstName = self.firstNameTxtFld.text!
+                currentValidation += 1
+                firstNameTxtFld.hideError()
+            }
+            else {
+                firstNameTxtFld.shake()
+                firstNameTxtFld.errorText = "No special characters allowed"
+                firstNameTxtFld.showError()
+            }
+           // currentValidation += 1
         }
         
         if lastNameTxtFld.isEmpty() {
@@ -402,9 +418,23 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
             lastNameTxtFld.errorText = "Empty!"
             lastNameTxtFld.showError()
         }else{
-            lastNameTxtFld.hideError()
-            self.userData.lastName = lastNameTxtFld.text!
-            currentValidation += 1
+            let lastNametxt = self.lastNameTxtFld.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            lastNameTxtFld.text = lastNametxt
+            if (lastNameTxtFld.text?.hasPrefix(""))!{
+               // lastNameTxtFld.shake()
+                lastNameTxtFld.errorText = "Last name can’t start with whitespaces"
+                lastNameTxtFld.showError()
+            }
+            if let last = self.lastNameTxtFld.text, last.isValidName() {
+                self.userData.lastName = self.lastNameTxtFld.text!
+                currentValidation += 1
+                lastNameTxtFld.hideError()
+            }
+            else {
+               lastNameTxtFld.shake()
+                lastNameTxtFld.errorText = "No special characters allowed"
+                lastNameTxtFld.showError()
+            }
         }
         
         if birthDateTxtFld.isEmpty() {
@@ -457,7 +487,9 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
             phoneTxtFld.showError()
         }
         else {
-            
+            let phonetxt = self.phoneTxtFld.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            phoneTxtFld.text = phonetxt
+        }
             if (phoneTxtFld.text?.count)! == 10  {
                 if phoneTxtFld.text == "0000000000"{
                     phoneTxtFld.shake()
@@ -475,7 +507,7 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
                 phoneTxtFld.errorText = "Please enter a valid mobile number"
                 phoneTxtFld.showError()
             }
-        }
+        
         
         self.userData.userProfile?.collage = collegeTxtFld.text ?? ""
         self.userData.userProfile?.description = descriptionTxtFld.text ?? ""
@@ -507,11 +539,10 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         self.userData.userProfile?.topFinishes = ""
         
         if sucessValidation == currentValidation {
-            
+            self.userName.text = self.firstNameTxtFld.text! + " " + self.lastNameTxtFld.text!
             self.updateUserInfo()
             
         }
-        
     }
     func getConnectedUserInfo(userId:Int){
         ActivityIndicatorView.show("Loading...")
@@ -833,9 +864,6 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
         APIManager.callServer.updateUserDetails(userData: self.userData, sucessResult: { (responseModel) in
             
             guard let accRespModel = responseModel as? AccountRespModel else{
-                //                    stopLoading()
-                
-                
                 return
             }
             
@@ -844,7 +872,24 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
                 UserDefaults.standard.set(accRespModel.id, forKey: "bP_userProfileId")
                 self.alert(message: "User profile updated successfully! ")
                 UserDefaults.standard.set(1, forKey: "NewUser")
-                ActivityIndicatorView.hiding()
+                let username = accRespModel.firstName + " " + accRespModel.lastName
+                let image = accRespModel.imageUrl
+                let status = accRespModel.userStatus
+                if status == "Flagged"{
+                    self.userImageView.image = UIImage(named:"user")
+                }
+                else{
+                    if image == "" || image == "null"{
+                        self.userImageView.setImageForName(string: username, circular: true, textAttributes: nil)
+                    }else{
+                        if let imageUrl = URL(string: accRespModel.imageUrl) {
+                            self.userImageView.sd_setIndicatorStyle(.whiteLarge)
+                            self.userImageView.sd_setShowActivityIndicatorView(true)
+                            self.userImageView.sd_setImage(with: imageUrl, placeholderImage:  #imageLiteral(resourceName: "user"))
+                        }
+                    }
+                }
+               
                 DispatchQueue.main.async {
                     let image = UIImage(named: "edit_btn_1x") as UIImage?
                     self.editProfileBtn.setImage(image, for: .normal)
@@ -853,15 +898,16 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
                     self.editclicked = false
                     
                     self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
-
+                    self.loadDataToUi(accResponseModel: accRespModel)
                     self.tableView.reloadData()
+                     ActivityIndicatorView.hiding()
                 }
             }else{
                 
                 ActivityIndicatorView.hiding()
                 
             }
-            
+             ActivityIndicatorView.hiding()
         }, errorResult: { (error) in
             //                stopLoading()
             guard let errorString  = error else {
