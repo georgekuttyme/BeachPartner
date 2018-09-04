@@ -718,21 +718,47 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             firstNameTxtFld.errorText = "Empty!"
             firstNameTxtFld.showError()
         }else{
-            firstNameTxtFld.hideError()
-            self.userData.firstName = firstNameTxtFld.text!
-            self.userName.text = self.userData.firstName
-            currentValidation += 1
-        }
+            let firstNametxt = self.firstNameTxtFld.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            firstNameTxtFld.text = firstNametxt
+            if (firstNameTxtFld.text?.hasPrefix(" "))! {
+                firstNameTxtFld.shake()
+                firstNameTxtFld.errorText = "First name can’t start with whitespaces"
+                firstNameTxtFld.showError()
+            }
+            if let first = self.firstNameTxtFld.text, first.isValidName() {
+                self.userData.firstName = self.firstNameTxtFld.text!
+                currentValidation += 1
+                firstNameTxtFld.hideError()
+            }
+            else {
+                firstNameTxtFld.shake()
+                firstNameTxtFld.errorText = "No special characters allowed"
+                firstNameTxtFld.showError()
+            }
         
-        if lastNameTxtFld.isEmpty() {
-            lastNameTxtFld.shake()
-            lastNameTxtFld.errorText = "Empty!"
-            lastNameTxtFld.showError()
-        }else{
-            lastNameTxtFld.hideError()
-            self.userData.lastName = lastNameTxtFld.text!
-            currentValidation += 1
-        }
+            if lastNameTxtFld.isEmpty() {
+                lastNameTxtFld.shake()
+                lastNameTxtFld.errorText = "Empty!"
+                lastNameTxtFld.showError()
+            }else{
+                let lastNametxt = self.lastNameTxtFld.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+                lastNameTxtFld.text = lastNametxt
+                if (lastNameTxtFld.text?.hasPrefix(""))!{
+                    lastNameTxtFld.errorText = "Last name can’t start with whitespaces"
+                    lastNameTxtFld.showError()
+                }
+                if let last = self.lastNameTxtFld.text, last.isValidName() {
+                    self.userData.lastName = self.lastNameTxtFld.text!
+                    currentValidation += 1
+                    lastNameTxtFld.hideError()
+                }
+                else {
+                    lastNameTxtFld.shake()
+                    lastNameTxtFld.errorText = "No special characters allowed"
+                    lastNameTxtFld.showError()
+                }
+            }
+            
         
         if birthDateTxtFld.isEmpty() {
             birthDateTxtFld.shake()
@@ -774,7 +800,9 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
             phoneTxtFld.showError()
         }
         else {
-            
+            let phonetxt = self.phoneTxtFld.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            phoneTxtFld.text = phonetxt
+            }
             if (phoneTxtFld.text?.count)! == 10  {
                 if phoneTxtFld.text == "0000000000"{
                     phoneTxtFld.shake()
