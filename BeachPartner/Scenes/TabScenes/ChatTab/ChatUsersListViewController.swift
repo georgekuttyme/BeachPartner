@@ -23,7 +23,7 @@ class RecentChatCell: UITableViewCell {
 }
 
 class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegate,UITableViewDataSource,UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
- 
+    var selectedTabViewController:Int!
     var filterConnectedusers = [[String:String]]()
     var searchController : UISearchController!
     var rightBarButtonItem: UIBarButtonItem!
@@ -32,7 +32,7 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
     var selectedIndexItem = ""
     var displayType = ""
     @IBOutlet weak var toastLbl: UILabel!
-    private lazy var channelRef: DatabaseReference = Database.database().reference().child("messages")
+    private lazy var channelRef: DatabaseReference = Database.database().reference().child("test-messages")
     private var channelRefHandle: DatabaseHandle?
     var recentChatList = [[String:String]]()
     var activeUsers = [ConnectedUserModel]()
@@ -48,7 +48,7 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
         
         
         self.navigationItem.setHidesBackButton(true, animated:false);
-        self.title = "Messages"
+        self.navigationItem.title = "Messages"
         self.toastLbl.isHidden = true
         
         self.hideKeyboardWhenTappedAround()
@@ -58,17 +58,20 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
         floaty.paddingY = 85
         floaty.buttonColor = UIColor.navigationBarTintColor
         floaty.plusColor = UIColor.white
-        floaty.addItem("", icon: UIImage(named: "highfive")!,handler: { item in
-            self.navigationController?.popViewController(animated: false);
+        floaty.addItem("", icon: UIImage(named: "chat")!,handler: { item in
+            self.getBlockedConnections()
             floaty.close()
         })
-        floaty.addItem("", icon: UIImage(named: "chat")!,handler: { item in
+        floaty.addItem("", icon: UIImage(named: "highfive")!,handler: { item in
+            let favoritesVC = self.storyboard?.instantiateViewController(withIdentifier: "HighFiveViewController") as! HighFiveViewController
+            self.navigationController?.pushViewController(favoritesVC, animated: false)
             floaty.close()
         })
         self.view.addSubview(floaty)
         ActivityIndicatorView.show("Loading...")
          self.tblChatList.delegate = self
         self.tblChatList.dataSource = self
+        selectedTabViewController = 4
     }
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -130,6 +133,7 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
         }
     }
     override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.title = ""
         if displayType == "search"{
             self.searchBtn.tintColor = UIColor.white
             self.searchBtn.isEnabled = true
@@ -138,7 +142,8 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
             self.displayType = ""
             self.tblChatList.reloadData()
         }
-        self.title = "Messages"
+//        self.title = "Messages"
+        ActivityIndicatorView.show("Loading...")
         self.getBlockedConnections()
     }
     
@@ -187,6 +192,7 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
                             latestMsgDic.updateValue(connectedUser.connectedUser?.lastName ?? "", forKey: "sender_lastName")
                             latestMsgDic.updateValue(connectedUser.connectedUser?.imageUrl ?? "", forKey: "profileImg")
                             latestMsgDic.updateValue(String(connectedUser.connectedUser?.age ?? 0), forKey: "age")
+                            latestMsgDic.updateValue(connectedUser.connectedUser?.userStatus ?? "", forKey: "status")
                             isActiveUser = true
                             break
                         }
@@ -199,7 +205,7 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
                 
                 if isActiveUser {
                     self.recentChatList.insert(latestMsgDic, at: 0)
-                    self.tblChatList .reloadData()
+                    self.tblChatList.reloadData()
                 }
                 
             }
@@ -208,7 +214,7 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
     }
     
     func getBlockedConnections() {
-        
+        ActivityIndicatorView.show("Loading...")
         APIManager.callServer.getUserConnectionList(status:"status=Active&showReceived=false",sucessResult: { (responseModel) in
             guard let connectedUserModelArray = responseModel as? ConnectedUserModelArray else {
                 return
@@ -219,12 +225,12 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
                 self.activeUsers.append(connectedUser)
             }
             
-           
-            
             DispatchQueue.main.async {
                 self.recentChatList.removeAll()
                 self.observeChannels()
             }
+            self.tblChatList.reloadData()
+            ActivityIndicatorView.hiding()
             print("activeUsers--->            ", self.recentChatList,"          ___________________")
         }, errorResult: { (error) in
             //                stopLoading()
@@ -258,7 +264,7 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
             return self.filterConnectedusers.count
         }
         else{
-            if self.activeUsers.count > 0 {
+            if self.recentChatList.count > 0 {
                 self.toastLbl.isHidden = true
             }
             else {
@@ -292,6 +298,8 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
         print(displayType,"LLLLL")
         if displayType == "search" {
             var userName = ""
+            var imageUrl = URL(string:"")
+            let status = self.filterConnectedusers[indexPath.row]["status"]
             if let firstName = self.filterConnectedusers[indexPath.row]["sender_name"] {
                 userName = firstName + " "
             }
@@ -304,20 +312,27 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
             cell.timeLbl.isHidden = true
             cell.statusImage.isHidden = true
             let image = self.filterConnectedusers[indexPath.row]["profileImg"]
-            if image == "" || image == "null"{
-                cell.profileImage.setImageForName(string: userName, circular: true, textAttributes: nil)
+            if status == "Flagged"{
+                cell.profileImage.image = UIImage(named:"user")
             }
             else{
-                if let imageUrl = URL(string: (self.filterConnectedusers[indexPath.row]["profileImg"])!) {
-                    cell.profileImage.sd_setIndicatorStyle(.whiteLarge)
-                    cell.profileImage.sd_setShowActivityIndicatorView(true)
-                    cell.profileImage.sd_setImage(with: imageUrl, placeholderImage:#imageLiteral(resourceName: "user"))
+                if image == "" || image == "null"{
+                    cell.profileImage.setImageForName(string: userName, circular: true, textAttributes: nil)
+                }
+                else{
+                    imageUrl = URL(string: (self.filterConnectedusers[indexPath.row]["profileImg"])!)
+                    if imageUrl != nil {
+                        cell.profileImage.sd_setIndicatorStyle(.whiteLarge)
+                        cell.profileImage.sd_setShowActivityIndicatorView(true)
+                        cell.profileImage.sd_setImage(with: imageUrl, placeholderImage:#imageLiteral(resourceName: "user"))
+                    }
                 }
             }
             cell.profileImgBtn.tag = indexPath.row+600000
             cell.profileImgBtn.addTarget(self, action: #selector(didSelectItemAtIndex), for: .touchUpInside)
         }else{
             var userName = ""
+            var imageUrl = URL(string:"")
             if let firstName = self.recentChatList[indexPath.row]["sender_name"] {
                 userName = firstName + " "
             }
@@ -330,12 +345,17 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
             cell.timeLbl.isHidden = true
             cell.statusImage.isHidden = true
             let image = self.recentChatList[indexPath.row]["profileImg"]
-            if image == "" || image == "null"{
-                cell.profileImage.setImageForName(string: userName, circular: true, textAttributes: nil)
+            let status = self.recentChatList[indexPath.row]["status"]
+            if status == "Flagged"{
+                cell.profileImage.image = UIImage(named:"user")
             }
-            else
-            {
-                if let imageUrl = URL(string: (self.recentChatList[indexPath.row]["profileImg"])!) {
+            else{
+                if image == "" || image == "null"{
+                    cell.profileImage.setImageForName(string: userName, circular: true, textAttributes: nil)
+                }
+                else
+                {
+                    imageUrl = URL(string: (self.recentChatList[indexPath.row]["profileImg"])!)
                     cell.profileImage.sd_setIndicatorStyle(.whiteLarge)
                     cell.profileImage.sd_setShowActivityIndicatorView(true)
                     cell.profileImage.sd_setImage(with: imageUrl, placeholderImage:#imageLiteral(resourceName: "user"))
@@ -363,9 +383,8 @@ class ChatUsersListViewController: BeachPartnerViewController,UITableViewDelegat
         }
         let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
         let chatController = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
-        
         print(recentChats[indexPath.row])
-        
+        print("unfiltered  -- ",self.activeUsers,"\n\n\n\n")
         chatController.recentChatDic = recentChats[indexPath.row]
         chatController.chatType = "recentChat"
         let navigationController = UINavigationController(rootViewController: chatController)

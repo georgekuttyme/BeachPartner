@@ -138,7 +138,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate{
                 
                 return
             }
-            if updateFcmTokenModel.message == "error.http.500" {
+            if updateFcmTokenModel.message == "error.http.500" || updateFcmTokenModel.title == "User not found"  {
                 UserDefaults.standard.set("0", forKey: "isLoggedIn")
                 UserDefaults.standard.set("", forKey: "locationInitial")
                 UserDefaults.standard.set("", forKey: "ageCategory")
@@ -812,26 +812,32 @@ extension LoginViewController: AppUpdateViewControllerDelegate {
                     return
                 }
                 print("+++ ** **  ",accRespModel)
-               
+              
                 
                 if(accRespModel.id != 0){
+                    if Int(UserDefaults.standard.string(forKey: "bP_userId")!) != accRespModel.id {
+                        UserDefaults.standard.set("", forKey: "ageCategory")
+                        UserDefaults.standard.set("", forKey: "minAge")
+                        UserDefaults.standard.set("", forKey: "maxAge")
+                        let age = accRespModel.age
+                        if age > 18 {
+                            UserDefaults.standard.set("19", forKey: "minAge")
+                            UserDefaults.standard.set("80", forKey: "maxAge")
+                            UserDefaults.standard.set("adult" , forKey: "ageCategory")
+                            print("*** adult ***")
+                        }else {
+                            UserDefaults.standard.set("5", forKey: "minAge")
+                            UserDefaults.standard.set("18", forKey: "maxAge")
+                            UserDefaults.standard.set("minor" , forKey: "ageCategory")
+                            print("--- minor ---")
+                        }
+                    }
                     UserDefaults.standard.set(accRespModel.location, forKey: "location")
                     UserDefaults.standard.set(accRespModel.city , forKey: "locationInitial")
                     UserDefaults.standard.set(accRespModel.userType, forKey: "userType")
                     print(accRespModel.city,"   &&&&&&", accRespModel.userProfile ?? " ")
                     
-                    let age = accRespModel.age
-                    if age > 18 {
-                        UserDefaults.standard.set("19", forKey: "minAge")
-                        UserDefaults.standard.set("80", forKey: "maxAge")
-                        UserDefaults.standard.set("adult" , forKey: "ageCategory")
-                        print("*** adult ***")
-                    }else {
-                        UserDefaults.standard.set("5", forKey: "minAge")
-                        UserDefaults.standard.set("18", forKey: "maxAge")
-                        UserDefaults.standard.set("minor" , forKey: "ageCategory")
-                        print("--- minor ---")
-                    }
+                    
                     
                     if accRespModel.profileUpdated == false{
                         UserDefaults.standard.set(0, forKey: "NewUser")

@@ -96,15 +96,24 @@ class CardView: UIView {
 extension CardView {
     
     func displayDataOnCard(displayData data:ConnectedUserModel.ConnectedUser) {
-        if data.imageUrl == ""{
-            self.imageView.image = UIImage(named: "user")
+        let status = data.userStatus
+        let image = data.imageUrl
+        let userName = (data.firstName) + " " + (data.lastName)
+        
+        if status == "Flagged"{
+            self.imageView.image = UIImage(named:"user")
         }
-        else
-        {
-            if let imageUrl = URL(string: data.imageUrl) {
-                self.imageView.sd_setIndicatorStyle(.whiteLarge)
-                self.imageView.sd_setShowActivityIndicatorView(true)
-                self.imageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+        else{
+            if image == "" || image == "null"{
+                self.imageView.setImageForName(string: userName, circular: false, textAttributes: nil)
+            }
+            else
+            {
+                if let imageUrl = URL(string: data.imageUrl) {
+                    self.imageView.sd_setIndicatorStyle(.whiteLarge)
+                    self.imageView.sd_setShowActivityIndicatorView(true)
+                    self.imageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                }
             }
         }
          self.muteButton.isHidden = true
@@ -113,15 +122,23 @@ extension CardView {
     }
     
     func displaySubscribeDataOnCard(displayData data:SubscriptionUserModel) {
-        if data.connectedUser?.imageUrl == ""{
-            self.imageView.image = UIImage(named: "user")
+        let status = data.connectedUser?.userStatus
+        let image = data.connectedUser?.imageUrl
+        let userName = (data.connectedUser?.firstName ?? "") + " " + (data.connectedUser?.lastName ?? "")
+        if status == "Flagged"{
+            self.imageView.image = UIImage(named:"user")
         }
-        else
-        {
-            if let imageUrl = URL(string: (data.connectedUser?.imageUrl)!) {
-                self.imageView.sd_setIndicatorStyle(.whiteLarge)
-                self.imageView.sd_setShowActivityIndicatorView(true)
-                self.imageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+        else{
+            if image == "" || image == "null"{
+                self.imageView.setImageForName(string: userName, circular: false, textAttributes: nil)
+            }
+            else
+            {
+                if let imageUrl = URL(string: (data.connectedUser?.imageUrl)!) {
+                    self.imageView.sd_setIndicatorStyle(.whiteLarge)
+                    self.imageView.sd_setShowActivityIndicatorView(true)
+                    self.imageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                }
             }
         }
         self.muteButton.isHidden = true
@@ -137,15 +154,23 @@ extension CardView {
     }
     
     func displaySearchDetailsOnCard(displayData data:SearchUserModel) {
-        if data.imageUrl == ""{
-            self.imageView.image = UIImage(named: "user")
+        let status = data.status
+        let image = data.imageUrl
+        let userName = (data.firstName) + " " + (data.lastName)
+        if status == "Flagged"{
+            self.imageView.image = UIImage(named:"user")
         }
-        else
-        {
-            if let imageUrl = URL(string: data.imageUrl) {
-                self.imageView.sd_setIndicatorStyle(.whiteLarge)
-                self.imageView.sd_setShowActivityIndicatorView(true)
-                self.imageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+        else{
+            if image == "" || image == "null"{
+                self.imageView.setImageForName(string: userName, circular: false, textAttributes: nil)
+            }
+            else
+            {
+                if let imageUrl = URL(string: data.imageUrl) {
+                    self.imageView.sd_setIndicatorStyle(.whiteLarge)
+                    self.imageView.sd_setShowActivityIndicatorView(true)
+                    self.imageView.sd_setImage(with: imageUrl, placeholderImage: #imageLiteral(resourceName: "user"))
+                }
             }
         }
         self.muteButton.isHidden = true

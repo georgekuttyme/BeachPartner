@@ -377,11 +377,13 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
             self.editProfileTxtBtn.setTitle("Edit profile", for: UIControlState.normal)
             self.tableView.reloadData()
         }
+
         
     }
     @IBAction func editProfileTxtBtnClicked(_ sender: Any) {
-      
+   
     }
+
     
     func saveData(){
         //        var isValidated = false
@@ -530,13 +532,19 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
                 print("accRespimageUrl", accRespModel.videoUrl)
                 let username = accRespModel.firstName + " " + accRespModel.lastName
                 let image = accRespModel.imageUrl
-                if image == "" || image == "null"{
-                    self.userImageView.setImageForName(string: username, circular: true, textAttributes: nil)
-                }else{
-                    if let imageUrl = URL(string: accRespModel.imageUrl) {
-                        self.userImageView.sd_setIndicatorStyle(.whiteLarge)
-                        self.userImageView.sd_setShowActivityIndicatorView(true)
-                        self.userImageView.sd_setImage(with: imageUrl, placeholderImage:  #imageLiteral(resourceName: "user"))
+                let status = accRespModel.userStatus
+                if status == "Flagged"{
+                    self.userImageView.image = UIImage(named:"user")
+                }
+                else{
+                    if image == "" || image == "null"{
+                        self.userImageView.setImageForName(string: username, circular: true, textAttributes: nil)
+                    }else{
+                        if let imageUrl = URL(string: accRespModel.imageUrl) {
+                            self.userImageView.sd_setIndicatorStyle(.whiteLarge)
+                            self.userImageView.sd_setShowActivityIndicatorView(true)
+                            self.userImageView.sd_setImage(with: imageUrl, placeholderImage:  #imageLiteral(resourceName: "user"))
+                        }
                     }
                 }
                 
@@ -887,17 +895,23 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
                 print("accRespimageUrl", accRespModel.videoUrl)
                 let username = accRespModel.firstName + " " + accRespModel.lastName
                 let image = accRespModel.imageUrl
-                if image == "" || image == "null"{
-                    self.userImageView.setImageForName(string: username, circular: true, textAttributes: nil)
-                }else{
-                    if let imageUrl = URL(string: accRespModel.imageUrl) {
-                        self.userImageView.sd_setIndicatorStyle(.whiteLarge)
-                        self.userImageView.sd_setShowActivityIndicatorView(true)
-                        self.userImageView.sd_setImage(with: imageUrl, placeholderImage:  #imageLiteral(resourceName: "user"))
-                        
-                        self.backgroundImageView.sd_setIndicatorStyle(.whiteLarge)
-                        self.backgroundImageView.sd_setShowActivityIndicatorView(true)
-                        self.backgroundImageView.sd_setImage(with: imageUrl, placeholderImage:  #imageLiteral(resourceName: "user"))
+                let status = accRespModel.userStatus
+                if status == "Flagged"{
+                    self.userImageView.image = UIImage(named:"user")
+                }
+                else{
+                    if image == "" || image == "null"{
+                        self.userImageView.setImageForName(string: username, circular: true, textAttributes: nil)
+                    }else{
+                        if let imageUrl = URL(string: accRespModel.imageUrl) {
+                            self.userImageView.sd_setIndicatorStyle(.whiteLarge)
+                            self.userImageView.sd_setShowActivityIndicatorView(true)
+                            self.userImageView.sd_setImage(with: imageUrl, placeholderImage:  #imageLiteral(resourceName: "user"))
+                            
+                            self.backgroundImageView.sd_setIndicatorStyle(.whiteLarge)
+                            self.backgroundImageView.sd_setShowActivityIndicatorView(true)
+                            self.backgroundImageView.sd_setImage(with: imageUrl, placeholderImage:  #imageLiteral(resourceName: "user"))
+                        }
                     }
                 }
                 

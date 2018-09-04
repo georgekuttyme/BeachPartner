@@ -31,6 +31,7 @@ struct AccountRespModel:SafeMappable {
     var userType: String = ""
     var videoUrl: String = ""
     var profileUpdated = Bool()
+    var userStatus: String = ""
     var userProfile: UserProfile?
     
     init() {
@@ -41,7 +42,7 @@ struct AccountRespModel:SafeMappable {
         activated <- map.property("activated")
         age  <- map.property("age")
         authToken  <- map.property("authToken")
-        
+        userStatus  <- map.property("status")
         city <- map.property("city")
         deviceId  <- map.property("deviceId")
         dob <- map.property("dob")
