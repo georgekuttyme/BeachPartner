@@ -884,6 +884,8 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
         self.userData.userProfile?.topFinishes = topfinishesVal
         if sucessValidation == currentValidation {
 
+            self.userName.text = self.firstNameTxtFld.text! + " " + self.lastNameTxtFld.text!
+            
             self.updateUserInfo()
             
         }
@@ -1278,6 +1280,23 @@ class AthleteProfileTableViewController: UITableViewController,UIImagePickerCont
                 UserDefaults.standard.set(accRespModel.id, forKey: "bP_userProfileId")
                 self.alert(message: "User profile updated successfully! ")
                 UserDefaults.standard.set(1, forKey: "NewUser")
+                let username = accRespModel.firstName + " " + accRespModel.lastName
+                let image = accRespModel.imageUrl
+                let status = accRespModel.userStatus
+                if status == "Flagged"{
+                    self.userImageView.image = UIImage(named:"user")
+                }
+                else{
+                    if image == "" || image == "null"{
+                        self.userImageView.setImageForName(string: username, circular: true, textAttributes: nil)
+                    }else{
+                        if let imageUrl = URL(string: accRespModel.imageUrl) {
+                            self.userImageView.sd_setIndicatorStyle(.whiteLarge)
+                            self.userImageView.sd_setShowActivityIndicatorView(true)
+                            self.userImageView.sd_setImage(with: imageUrl, placeholderImage:  #imageLiteral(resourceName: "user"))
+                        }
+                    }
+                }
                 ActivityIndicatorView.hiding()
                 DispatchQueue.main.async {
                 let image = UIImage(named: "edit_btn_1x") as UIImage?
