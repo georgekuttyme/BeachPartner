@@ -74,7 +74,20 @@ class FilterViewController: UIViewController {
                              "CoEd A",
                              "CoEd AA",
                              "CoEd AAA",
-                             "CoEd Open"]
+                             "CoEd Open",
+                             "CoEd 2's AA",
+                             "CoEd 2's A",
+                             "CoEd 2's BB",
+                             "CoEd 2's B",
+                             "L63CoEd AA",
+                             "CoEd A Late",
+                             "CoEd 4's BB Late",
+                             "CoEd 4's B Late",
+                             "CoEd 2's: A",
+                             "CoEd 2's A div",
+                             "CoEd 4's Rec",
+                             "CoEd 4's AA Late",
+                             "CoEd 4's A Late"]
     let yearList = [
                     "2018",
                     "2019",
