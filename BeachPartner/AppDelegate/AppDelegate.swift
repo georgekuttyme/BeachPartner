@@ -24,10 +24,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = UIColor.whiteColor
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.whiteColor]
         UINavigationBar.appearance().barTintColor = UIColor.navigationBarTintColor
-        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.whiteColor]
+
+        let attributes = [NSAttributedStringKey.font: UIFont(name: "Helvetica-Bold", size: 0.1)!, NSAttributedStringKey.foregroundColor:UIColor.clear]
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributes, for: .normal)
         let barButtonItemAppearance = UIBarButtonItem.appearance()
-        barButtonItemAppearance.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.clearColor], for: .normal)
+        barButtonItemAppearance.setTitleTextAttributes(attributes, for: .normal)
+        barButtonItemAppearance.setTitleTextAttributes(attributes, for: .highlighted)
 
         
         FirebaseApp.configure()

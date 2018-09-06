@@ -288,7 +288,7 @@ class FilterViewController: UIViewController {
         self.eventBtn.setTitle("Choose event type", for: UIControlState.normal)
         self.eventdropDown.selectRow(0)
         self.subTypesBtn.setTitle("Choose subtype", for: UIControlState.normal)
-        self.yearBtn.setTitle("Choose year", for: UIControlState.normal)
+        self.yearBtn.setTitle("2018", for: UIControlState.normal)
         self.yeardropDown.selectRow(0)
         self.monthBtn.setTitle("Choose month", for: UIControlState.normal)
         self.monthdropDown.selectRow(0)
