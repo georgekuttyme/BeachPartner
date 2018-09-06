@@ -85,7 +85,7 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
             eventId = eventInvitation.eventId
             eventStartDate = eventInvitation.eventStartDate
         }
-
+        myTeamHeaderButton.tag = 100
         myTeamHeaderButton.addTarget(self, action: #selector(didTapMyTeamHeaderButton(sender:)), for: .touchUpInside)
         
         getConnectionsList()
@@ -221,6 +221,7 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
     }
     
     @objc func didTapMyTeamHeaderButton(sender: UIButton) {
+        let tag = sender.tag
         
         if myteamHeight.constant == 1 {
             
@@ -234,7 +235,7 @@ class InvitePartnerViewController: UIViewController,UITableViewDataSource,UITabl
                 
             })
         }
-        else {
+        else if myteamHeight.constant != 1 && tag == 100 { 
             UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseIn, animations: {
                 self.myteamHeight.constant = 1
                 self.bottomview.isHidden = true
