@@ -380,9 +380,9 @@ class CoachProfileTableViewController: UITableViewController,UIImagePickerContro
 
     }
     @IBAction func editProfileTxtBtnClicked(_ sender: Any) {
-      
+
     }
-    
+
     func saveData(){
         //        var isValidated = false
         let sucessValidation = 6
