@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1241"
             endingLineNumber = "1241"
-            landmarkName = "tappedOn(_:)"
+            landmarkName = "kolodaDidRunOutOfCards(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -31,7 +31,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1000"
             endingLineNumber = "1000"
-            landmarkName = "koloda(_:didShowCardAt:)"
+            landmarkName = "getAllUserEvents(userId:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -47,7 +47,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "563"
             endingLineNumber = "563"
-            landmarkName = "flagBtnClick(sender:)"
+            landmarkName = "moveCardView(userType:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -79,7 +79,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1017"
             endingLineNumber = "1017"
-            landmarkName = "koloda(_:didShowCardAt:)"
+            landmarkName = "getAllUserEvents(userId:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -95,7 +95,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1075"
             endingLineNumber = "1075"
-            landmarkName = "koloda(_:didSwipeCardAt:in:)"
+            landmarkName = "calendar(_:didSelect:at:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -111,8 +111,86 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1173"
             endingLineNumber = "1173"
-            landmarkName = "koloda(_:viewForCardAt:)"
+            landmarkName = "koloda(_:draggedCardWithPercentage:in:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachPartner/APIManagement/Models/ResponseModels/AuthModels/GetTournamentRequestRespModel.swift"
+            timestampString = "557518580.101316"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
+            landmarkName = "GetTournamentRequestRespModel"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "variable initialization expression of BeachPartner.GetTournamentRequestRespModel.requestsReceived : Swift.Array&lt;BeachPartner.GetTournamentRequestRespModel.EventRequestReceived&gt;"
+                  moduleName = "BeachPartner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/george/Documents/Projects/Swift/Devops/bp-ios/BeachPartner/APIManagement/Models/ResponseModels/AuthModels/GetTournamentRequestRespModel.swift"
+                  timestampString = "557518780.774195"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachPartner.GetTournamentRequestRespModel.requestsReceived.getter : Swift.Array&lt;BeachPartner.GetTournamentRequestRespModel.EventRequestReceived&gt;"
+                  moduleName = "BeachPartner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/george/Documents/Projects/Swift/Devops/bp-ios/BeachPartner/APIManagement/Models/ResponseModels/AuthModels/GetTournamentRequestRespModel.swift"
+                  timestampString = "557518780.777"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "25">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachPartner.GetTournamentRequestRespModel.requestsReceived.setter : Swift.Array&lt;BeachPartner.GetTournamentRequestRespModel.EventRequestReceived&gt;"
+                  moduleName = "BeachPartner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/george/Documents/Projects/Swift/Devops/bp-ios/BeachPartner/APIManagement/Models/ResponseModels/AuthModels/GetTournamentRequestRespModel.swift"
+                  timestampString = "557518780.779326"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "59">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachPartner.GetTournamentRequestRespModel.init(Swift.Dictionary&lt;Swift.String, Any&gt;) throws -&gt; BeachPartner.GetTournamentRequestRespModel"
+                  moduleName = "BeachPartner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/george/Documents/Projects/Swift/Devops/bp-ios/BeachPartner/APIManagement/Models/ResponseModels/AuthModels/GetTournamentRequestRespModel.swift"
+                  timestampString = "557518780.782178"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "15">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

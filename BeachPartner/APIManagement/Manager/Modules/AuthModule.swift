@@ -1336,6 +1336,7 @@ extension APIManager{
         APIGetClient.doGetRequest.inGet(method: ApiMethods.EventInvitations, params: params, sucess: { (response) in
             
             let jsonDict = response! as! [String : Any]
+            print(jsonDict)
             
             do {
                 let accRespModel = try GetTournamentRequestRespModel(jsonDict)
